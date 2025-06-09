@@ -50,89 +50,89 @@ Organize the code in a modular way inside `/modules`. Each module has:
 ```
 /modules
   /<module-name>
-      /ui
-            components/
-                  views/
-                      /server
-                            procedures.ts
-                                schema.ts
-                                    types.ts
-                                    /server
-                                      /trpc
-                                          _app.ts  <-- merge and expose all procedures
-                                          ```
+    /ui
+      components/
+      views/
+    /server
+      procedures.ts
+    schema.ts
+    types.ts
+/server
+  /trpc
+    _app.ts  <-- merge and expose all procedures
+```
 
-                                          > 📌 Avoid server actions. All backend logic must reside in `procedures.ts` per module and registered inside `/server/trpc/_app.ts`.
+> 📌 Avoid server actions. All backend logic must reside in `procedures.ts` per module and be registered inside `/server/trpc/_app.ts`.
 
-                                          ---
+---
 
-                                          ## 🧩 Modules & Features
+## 🧩 Modules & Features
 
-                                          Each of the following modules should follow the directory structure above. Use **Zod** for schema validation, **Drizzle** for ORM, and **tRPC** for API routing.
+Each of the following modules should follow the directory structure above. Use **Zod** for schema validation, **Drizzle** for ORM, and **tRPC** for API routing.
 
-                                          ### 1. Accounts
-                                          - `initAccount()` — setup a user and link to Clerk org.
+### 1. Accounts
+- `initAccount()` — setup a user and link to Clerk org.
 
-                                          ### 2. Buildings
-                                          - CRUD operations using `procedures.ts`.
+### 2. Buildings
+- CRUD operations using `procedures.ts`.
 
-                                          ### 3. Units
-                                          - CRUD for apartment units under a building.
+### 3. Units
+- CRUD for apartment units under a building.
 
-                                          ### 4. Residents
-                                          - CRUD for residents, linked to units.
+### 4. Residents
+- CRUD for residents, linked to units.
 
-                                          ### 5. Incomes & Expenses
-                                          - Create/update/delete with fields like amount, description, month, year.
+### 5. Incomes & Expenses
+- Create/update/delete with fields like amount, description, month, year.
 
-                                          ### 6. Meetings
-                                          - Allow CRUD and participant management.
+### 6. Meetings
+- Allow CRUD and participant management.
 
-                                          ### 7. Dashboard
-                                          - Return aggregate metrics (e.g., `getLastMonthResidents`, `getExpensesSum`, `getIncomeSum`).
+### 7. Dashboard
+- Return aggregate metrics (e.g., `getLastMonthResidents`, `getExpensesSum`, `getIncomeSum`).
 
-                                          ---
+---
 
-                                          ## 🔐 Auth with Clerk
+## 🔐 Auth with Clerk
 
-                                          - Enable Clerk Organizations.
-                                          - Secure routes/pages with Clerk middleware.
-                                          - Use `userId` and `orgId` to scope data.
+- Enable Clerk Organizations.
+- Secure routes/pages with Clerk middleware.
+- Use `userId` and `orgId` to scope data.
 
-                                          ---
+---
 
-                                          ## 💸 Billing Logic
+## 💸 Billing Logic
 
-                                          - Monthly SaaS fee per organization manager.
-                                          - Allow residents to pay monthly fees online.
-                                          - Apply a % commission on each resident transaction.
-                                          - Integrate Stripe or any preferred payment processor.
+- Monthly SaaS fee per organization manager.
+- Allow residents to pay monthly fees online.
+- Apply a % commission on each resident transaction.
+- Integrate Stripe or any preferred payment processor.
 
-                                          ---
+---
 
-                                          ## 🌍 UI & Styling
+## 🌍 UI & Styling
 
-                                          - Use **TailwindCSS** for layout and styling.
-                                          - Use **shadcn/ui** for all components.
-                                          - UI folder must contain:
-                                            - `components/`: shared UI pieces
-                                              - `views/`: page-level views that combine components
+- Use **TailwindCSS** for layout and styling.
+- Use **shadcn/ui** for all components.
+- UI folder must contain:
+  - `components/`: shared UI pieces
+  - `views/`: page-level views that combine components
 
-                                              ---
+---
 
-                                              ## 🧠 Example Instruction for Copilot
+## 🧠 Example Instruction for Copilot
 
-                                              ```
-                                              Copilot, continue implementing the module `residents`:
-                                              - Create schema.ts with Zod validation for Resident
-                                              - Create types.ts with Resident types
-                                              - In procedures.ts, add CRUD tRPC procedures using Drizzle ORM
-                                              - Build UI views and reusable components under `ui`
-                                              - Register module in /server/trpc/_app.ts
-                                              ```
+```
+Copilot, continue implementing the module `residents`:
+- Create schema.ts with Zod validation for Resident
+- Create types.ts with Resident types
+- In procedures.ts, add CRUD tRPC procedures using Drizzle ORM
+- Build UI views and reusable components under `ui`
+- Register module in /server/trpc/_app.ts
+```
 
-                                              ---
+---
 
-                                              ## ✅ Copilot Prompt
+## ✅ Copilot Prompt
 
-                                              You are building a full SaaS app called "Syndik" to manage residential syndicates. Follow SYNDIK_APP_SPECS.md for complete architecture and instructions. Avoid using server actions. Use tRPC + Drizzle per module with shadcn UI. The logic for each domain (buildings, residents, etc.) is isolated in its own folder.
+You are building a full SaaS app called "Syndik" to manage residential syndicates. Follow SYNDIK_APP_SPECS.md for complete architecture and instructions. Avoid using server actions. Use tRPC + Drizzle per module with shadcn UI. The logic for each domain (buildings, residents, etc.) is isolated in its own folder.
