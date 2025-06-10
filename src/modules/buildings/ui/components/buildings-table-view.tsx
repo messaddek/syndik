@@ -109,6 +109,7 @@ export function BuildingsTableView({
       data={buildings}
       searchKey='name'
       searchPlaceholder='Search buildings...'
+      showSearch={true}
       showPagination={false}
     />
   );

@@ -113,7 +113,8 @@ export function ResidentsList() {
     setEditingResident(null);
   };
 
-  const getUnitInfo = (unitId: string) => {
+  const getUnitInfo = (unitId?: string | null) => {
+    if (!unitId) return null;
     return units?.find(u => u.id === unitId);
   }; // Extract residents data from paginated response
   const residents = (residentsData?.data ||
@@ -241,7 +242,9 @@ export function ResidentsList() {
                         </CardTitle>{' '}
                         <CardDescription className='flex items-center space-x-1'>
                           <MapPin className='h-3 w-3' />
-                          <span>Unit {unit?.unitNumber}</span>
+                          <span>
+                            Unit {unit?.unitNumber ?? 'No unit assigned'}
+                          </span>
                         </CardDescription>
                       </div>
                     </div>

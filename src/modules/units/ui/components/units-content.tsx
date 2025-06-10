@@ -25,6 +25,8 @@ import {
 import { useTRPC } from '@/trpc/client';
 import { useConfirm } from '@/hooks/use-confirm';
 import type { Unit } from '../../types';
+import type { Resident } from '@/modules/residents/types';
+import type { Income } from '@/modules/incomes/types';
 
 export function UnitsContent() {
   const trpc = useTRPC();
@@ -45,6 +47,22 @@ export function UnitsContent() {
     trpc.buildings.getAll.queryOptions({})
   );
   const buildings = buildingsData.data || [];
+
+  // Get residents data for all units
+  const { data: allResidentsData } = useQuery(
+    trpc.residents.getAll.queryOptions({})
+  );
+  const allResidents = (allResidentsData as { data: Resident[] })?.data || [];
+
+  // Get current month income data for all units
+  const currentMonth = new Date().getMonth() + 1;
+  const currentYear = new Date().getFullYear();
+  const { data: allIncomes = [] } = useQuery(
+    trpc.incomes.getAll.queryOptions({
+      month: currentMonth,
+      year: currentYear,
+    })
+  );
 
   const toggleOccupancy = useMutation(
     trpc.units.toggleOccupancy.mutationOptions({
@@ -90,6 +108,22 @@ export function UnitsContent() {
     return building?.name || 'Unknown Building';
   };
 
+  const getUnitResidentCount = (unitId: string) => {
+    return allResidents.filter(
+      (resident: Resident) => resident.unitId === unitId && resident.isActive
+    ).length;
+  };
+
+  const getUnitMonthlyIncome = (unitId: string) => {
+    const unitIncomes = (allIncomes as Income[]).filter(
+      (income: Income) => income.unitId === unitId
+    );
+    return unitIncomes.reduce(
+      (sum: number, income: Income) => sum + Number(income.amount),
+      0
+    );
+  };
+
   return (
     <>
       <div className='mb-4 flex items-center justify-between'>
@@ -126,6 +160,21 @@ export function UnitsContent() {
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
+                        onClick={() =>
+                          window.open(`/residents?unitId=${unit.id}`, '_blank')
+                        }
+                      >
+                        View residents
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() =>
+                          window.open(`/finances?unitId=${unit.id}`, '_blank')
+                        }
+                      >
+                        View income
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
                         onClick={() => handleDelete(unit.id)}
                         className='text-red-600'
                       >
@@ -159,6 +208,23 @@ export function UnitsContent() {
                   <span>Monthly Fee:</span>
                   <span>${unit.monthlyFee}</span>
                 </div>
+
+                {/* Relationship Information */}
+                <div className='mt-2 border-t pt-2'>
+                  <div className='flex justify-between text-sm'>
+                    <span>Active Residents:</span>
+                    <span className='font-medium'>
+                      {getUnitResidentCount(unit.id)}
+                    </span>
+                  </div>
+                  <div className='flex justify-between text-sm'>
+                    <span>This Month Income:</span>
+                    <span className='font-medium text-green-600'>
+                      ${getUnitMonthlyIncome(unit.id).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+
                 {unit.description && (
                   <p className='text-muted-foreground mt-2 text-sm'>
                     {unit.description}

@@ -13,9 +13,7 @@ import { units } from '../units/schema';
 
 export const residents = pgTable('residents', {
   id: uuid('id').defaultRandom().primaryKey(),
-  unitId: uuid('unit_id')
-    .notNull()
-    .references(() => units.id, { onDelete: 'cascade' }),
+  unitId: uuid('unit_id').references(() => units.id, { onDelete: 'cascade' }), // Optional relationship
   orgId: text('org_id').notNull(), // Clerk org ID
   firstName: text('first_name').notNull(),
   lastName: text('last_name').notNull(),
@@ -49,7 +47,7 @@ export const insertResidentSchema = createInsertSchema(residents).omit({
 });
 
 export const createResidentSchema = z.object({
-  unitId: z.string().uuid('Invalid unit ID'),
+  unitId: z.string().uuid('Invalid unit ID').optional(), // Made optional
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   email: z.string().email('Valid email is required'),

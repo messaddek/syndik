@@ -45,6 +45,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   searchKey?: string;
   searchPlaceholder?: string;
+  showSearch?: boolean;
   onRowClick?: (row: TData) => void;
   pagination?: PaginationInfo;
   onPageChange?: (page: number) => void;
@@ -57,6 +58,7 @@ export function DataTable<TData, TValue>({
   data,
   searchKey,
   searchPlaceholder = 'Search...',
+  showSearch = false,
   onRowClick,
   pagination,
   onPageChange,
@@ -106,7 +108,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className='w-full space-y-4'>
       <div className='flex items-center py-4'>
-        {searchKey && (
+        {showSearch && searchKey && (
           <Input
             placeholder={searchPlaceholder}
             value={

@@ -27,6 +27,7 @@ export const incomesRouter = createTRPCRouter({
         year: z.number().optional(),
         month: z.number().optional(),
         buildingId: z.string().uuid().optional(),
+        unitId: z.string().uuid().optional(), // Added unit filtering
       })
     )
     .query(async ({ ctx, input }) => {
@@ -42,6 +43,9 @@ export const incomesRouter = createTRPCRouter({
       }
       if (input.buildingId) {
         conditions.push(eq(incomes.buildingId, input.buildingId));
+      }
+      if (input.unitId) {
+        conditions.push(eq(incomes.unitId, input.unitId));
       }
 
       return await db
@@ -112,6 +116,7 @@ export const incomesRouter = createTRPCRouter({
         year: z.number(),
         month: z.number().optional(),
         buildingId: z.string().uuid().optional(),
+        unitId: z.string().uuid().optional(), // Added unit filtering
       })
     )
     .query(async ({ ctx, input }) => {
@@ -127,6 +132,9 @@ export const incomesRouter = createTRPCRouter({
       }
       if (input.buildingId) {
         conditions.push(eq(incomes.buildingId, input.buildingId));
+      }
+      if (input.unitId) {
+        conditions.push(eq(incomes.unitId, input.unitId));
       }
 
       const result = await db
