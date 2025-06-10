@@ -41,15 +41,11 @@ export const accountsRouter = createTRPCRouter({
   getCurrentAccount: protectedProcedure.query(async ({ ctx }) => {
     const { db, userId } = ctx;
 
-    console.log('Fetching account for user:', userId);
-
     const [account] = await db
       .select()
       .from(accounts)
       .where(eq(accounts.userId, userId))
       .limit(1);
-
-    console.log('Fetched account:', account);
 
     return account || null;
   }),
