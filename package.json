@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:all": "concurrently \"npm run dev:webhook\" \"npm run dev\"",
+    "dev:webhook": "\"C:/Users/MohammedESSADDEK/Downloads/ngrok\" http --url=terminally-tidy-loon.ngrok-free.app 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -78,6 +80,7 @@
     "recharts": "^2.15.3",
     "sonner": "^2.0.5",
     "superjson": "^2.2.2",
+    "svix": "^1.67.0",
     "tailwind-merge": "^3.3.0",
     "vaul": "^1.1.2",
     "zod": "^3.25.56"
@@ -88,6 +91,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.1.2",
     "drizzle-kit": "^0.31.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",

@@ -28,6 +28,10 @@ import { useTRPC } from '@/trpc/client';
 import { useQuery } from '@tanstack/react-query';
 import { SearchResultsSkeleton } from './search-skeleton';
 import { ModeToggle } from '@/components/mode-toggle';
+import {
+  OrganizationSwitcherResponsive,
+  OrganizationStatus,
+} from '@/modules/organizations';
 
 export function DashboardNavbar() {
   const { user, isLoaded } = useUser();
@@ -108,12 +112,18 @@ export function DashboardNavbar() {
             onClick={() => setOpen(true)}
           >
             <Search className='mr-2 h-4 w-4' />
-            Search buildings, units, residents...
+            Search buildings, units, residents...{' '}
             <kbd className='bg-muted pointer-events-none absolute top-2.5 right-2 hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex'>
               <span className='text-xs'>⌘</span>K
             </kbd>
           </Button>
         </div>{' '}
+        {/* Organization Switcher */}
+        <div className='md:max-w-xs md:min-w-[200px]'>
+          <OrganizationSwitcherResponsive className='w-full' />
+        </div>
+        {/* Organization Status */}
+        <OrganizationStatus />
         {/* User Menu */}
         <div className='flex items-center gap-4'>
           <ModeToggle />
