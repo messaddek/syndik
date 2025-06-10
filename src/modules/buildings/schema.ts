@@ -29,7 +29,7 @@ export const createBuildingSchema = z.object({
   address: z.string().min(1, 'Address is required'),
   city: z.string().min(1, 'City is required'),
   postalCode: z.string().min(1, 'Postal code is required'),
-  country: z.string().default('Morocco'),
-  totalUnits: z.number().min(1, 'Total units must be at least 1').default(1),
+  country: z.string().min(1, 'Country is required'),
+  totalUnits: z.number().min(1, 'Total units must be at least 1'),
   description: z.string().optional(),
 });

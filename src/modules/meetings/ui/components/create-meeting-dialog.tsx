@@ -5,14 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { ResponsiveDialog } from '@/components/responsive-dialog';
 import {
   Form,
   FormControl,
@@ -52,7 +45,7 @@ export function CreateMeetingDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data: buildings = [] } = useQuery(
-    trpc.buildings.getAll.queryOptions()
+    trpc.buildings.getAll.queryOptions({})
   );
 
   const form = useForm<CreateMeetingForm>({
@@ -75,8 +68,8 @@ export function CreateMeetingDialog({
         onSuccess?.();
         queryClient.invalidateQueries(trpc.meetings.getAll.queryOptions({}));
       },
-      onError: error => {
-        console.error('Failed to create meeting:', error);
+      onError: _error => {
+        // Handle error - could show toast notification
       },
     })
   );
@@ -96,51 +89,85 @@ export function CreateMeetingDialog({
   const tomorrowString = tomorrow.toISOString().slice(0, 16);
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='sm:max-w-[500px]'>
-        <DialogHeader>
-          <DialogTitle>Schedule New Meeting</DialogTitle>
-          <DialogDescription>
-            Create a new meeting for your syndicate. Fill in the details below.
-          </DialogDescription>
-        </DialogHeader>
+    <ResponsiveDialog
+      title='Schedule New Meeting'
+      description='Create a new meeting for your syndicate. Fill in the details below.'
+      open={open ?? false}
+      onOpenChange={onOpenChange ?? (() => {})}
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+          <FormField
+            control={form.control}
+            name='buildingId'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Building (Optional)</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder='Select building or leave empty for general meeting' />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {buildings.map(building => (
+                      <SelectItem key={building.id} value={building.id}>
+                        {building.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+          <FormField
+            control={form.control}
+            name='title'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Meeting Title</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder='e.g., Monthly Syndicate Meeting'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name='description'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description (Optional)</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder='Brief description of the meeting purpose...'
+                    className='resize-none'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className='grid grid-cols-2 gap-4'>
             <FormField
               control={form.control}
-              name='buildingId'
+              name='scheduledDate'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Building (Optional)</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder='Select building or leave empty for general meeting' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {buildings.map(building => (
-                        <SelectItem key={building.id} value={building.id}>
-                          {building.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name='title'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Meeting Title</FormLabel>
+                  <FormLabel>Date & Time</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='e.g., Monthly Syndicate Meeting'
+                      type='datetime-local'
+                      min={tomorrowString}
                       {...field}
                     />
                   </FormControl>
@@ -151,104 +178,66 @@ export function CreateMeetingDialog({
 
             <FormField
               control={form.control}
-              name='description'
+              name='location'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description (Optional)</FormLabel>
+                  <FormLabel>Location (Optional)</FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder='Brief description of the meeting purpose...'
-                      className='resize-none'
-                      {...field}
-                    />
+                    <Input placeholder='e.g., Community Room' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
 
-            <div className='grid grid-cols-2 gap-4'>
-              <FormField
-                control={form.control}
-                name='scheduledDate'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Date & Time</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='datetime-local'
-                        min={tomorrowString}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          <FormField
+            control={form.control}
+            name='maxParticipants'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Max Participants (Optional)</FormLabel>
+                <FormControl>
+                  <Input placeholder='e.g., 50' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-              <FormField
-                control={form.control}
-                name='location'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Location (Optional)</FormLabel>
-                    <FormControl>
-                      <Input placeholder='e.g., Community Room' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+          <FormField
+            control={form.control}
+            name='agenda'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Agenda (Optional)</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder='Meeting agenda and topics to discuss...'
+                    className='resize-none'
+                    rows={4}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name='maxParticipants'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Max Participants (Optional)</FormLabel>
-                  <FormControl>
-                    <Input placeholder='e.g., 50' {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name='agenda'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Agenda (Optional)</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder='Meeting agenda and topics to discuss...'
-                      className='resize-none'
-                      rows={4}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <DialogFooter>
-              <Button
-                type='button'
-                variant='outline'
-                onClick={() => onOpenChange?.(false)}
-              >
-                Cancel
-              </Button>
-              <Button type='submit' disabled={isSubmitting}>
-                {isSubmitting ? 'Scheduling...' : 'Schedule Meeting'}
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+          <div className='flex justify-end space-x-2 pt-4'>
+            <Button
+              type='button'
+              variant='outline'
+              onClick={() => onOpenChange?.(false)}
+            >
+              Cancel
+            </Button>
+            <Button type='submit' disabled={isSubmitting}>
+              {isSubmitting ? 'Scheduling...' : 'Schedule Meeting'}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </ResponsiveDialog>
   );
 }

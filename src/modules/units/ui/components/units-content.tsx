@@ -23,7 +23,7 @@ export function UnitsContent() {
   const { data: units = [] } = useQuery(trpc.units.getAll.queryOptions());
 
   const { data: buildings = [] } = useQuery(
-    trpc.buildings.getAll.queryOptions()
+    trpc.buildings.getAll.queryOptions({})
   );
 
   const toggleOccupancy = useMutation(

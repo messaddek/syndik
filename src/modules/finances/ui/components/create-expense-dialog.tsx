@@ -6,14 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { ResponsiveDialog } from '@/components/responsive-dialog';
 import {
   Form,
   FormControl,
@@ -52,7 +45,7 @@ export function CreateExpenseDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data: buildings = [] } = useQuery(
-    trpc.buildings.getAll.queryOptions()
+    trpc.buildings.getAll.queryOptions({})
   );
 
   const form = useForm<CreateExpenseForm>({
@@ -77,8 +70,8 @@ export function CreateExpenseDialog({
         onOpenChange?.(false);
         onSuccess?.();
       },
-      onError: error => {
-        console.error('Failed to create expense:', error);
+      onError: _error => {
+        // Handle error - could show toast notification
       },
     })
   );
@@ -93,52 +86,138 @@ export function CreateExpenseDialog({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='sm:max-w-[500px]'>
-        <DialogHeader>
-          <DialogTitle>Add New Expense</DialogTitle>
-          <DialogDescription>
-            Record a new expense transaction. Fill in the details below.
-          </DialogDescription>
-        </DialogHeader>
+    <ResponsiveDialog
+      title='Add New Expense'
+      description='Record a new expense transaction. Fill in the details below.'
+      open={open ?? false}
+      onOpenChange={onOpenChange ?? (() => {})}
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+          <FormField
+            control={form.control}
+            name='buildingId'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Building (Optional)</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder='Select building or leave empty for general expense' />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {buildings.map(building => (
+                      <SelectItem key={building.id} value={building.id}>
+                        {building.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+          <FormField
+            control={form.control}
+            name='description'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Input placeholder='e.g., Elevator maintenance' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className='grid grid-cols-2 gap-4'>
             <FormField
               control={form.control}
-              name='buildingId'
+              name='amount'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Building (Optional)</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <FormLabel>Amount ($)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='number'
+                      min='0'
+                      step='0.01'
+                      {...field}
+                      onChange={e => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name='category'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder='Select building or leave empty for general expense' />
+                        <SelectValue />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {buildings.map(building => (
-                        <SelectItem key={building.id} value={building.id}>
-                          {building.name}
-                        </SelectItem>
-                      ))}
+                      <SelectItem value='maintenance'>Maintenance</SelectItem>
+                      <SelectItem value='utilities'>Utilities</SelectItem>
+                      <SelectItem value='cleaning'>Cleaning</SelectItem>
+                      <SelectItem value='security'>Security</SelectItem>
+                      <SelectItem value='supplies'>Supplies</SelectItem>
+                      <SelectItem value='professional_services'>
+                        Professional Services
+                      </SelectItem>
+                      <SelectItem value='other'>Other</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
 
+          <FormField
+            control={form.control}
+            name='vendor'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Vendor (Optional)</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder='Who was paid for this expense?'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className='grid grid-cols-3 gap-4'>
             <FormField
               control={form.control}
-              name='description'
+              name='month'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Month</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='e.g., Elevator maintenance'
+                      type='number'
+                      min='1'
+                      max='12'
                       {...field}
+                      onChange={e => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
                   <FormMessage />
@@ -146,141 +225,20 @@ export function CreateExpenseDialog({
               )}
             />
 
-            <div className='grid grid-cols-2 gap-4'>
-              <FormField
-                control={form.control}
-                name='amount'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Amount ($)</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        min='0'
-                        step='0.01'
-                        {...field}
-                        onChange={e => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name='category'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value='maintenance'>Maintenance</SelectItem>
-                        <SelectItem value='utilities'>Utilities</SelectItem>
-                        <SelectItem value='cleaning'>Cleaning</SelectItem>
-                        <SelectItem value='security'>Security</SelectItem>
-                        <SelectItem value='supplies'>Supplies</SelectItem>
-                        <SelectItem value='professional_services'>
-                          Professional Services
-                        </SelectItem>
-                        <SelectItem value='other'>Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
             <FormField
               control={form.control}
-              name='vendor'
+              name='year'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Vendor (Optional)</FormLabel>
+                  <FormLabel>Year</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='Who was paid for this expense?'
+                      type='number'
+                      min='2020'
+                      max='2050'
                       {...field}
+                      onChange={e => field.onChange(Number(e.target.value))}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className='grid grid-cols-3 gap-4'>
-              <FormField
-                control={form.control}
-                name='month'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Month</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        min='1'
-                        max='12'
-                        {...field}
-                        onChange={e => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name='year'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Year</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        min='2020'
-                        max='2050'
-                        {...field}
-                        onChange={e => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name='paidDate'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Paid Date</FormLabel>
-                    <FormControl>
-                      <Input type='date' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name='receiptUrl'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Receipt URL (Optional)</FormLabel>
-                  <FormControl>
-                    <Input placeholder='https://...' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -289,37 +247,65 @@ export function CreateExpenseDialog({
 
             <FormField
               control={form.control}
-              name='notes'
+              name='paidDate'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notes (Optional)</FormLabel>
+                  <FormLabel>Paid Date</FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder='Additional notes about this expense...'
-                      className='resize-none'
-                      {...field}
-                    />
+                    <Input type='date' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
 
-            <DialogFooter>
-              <Button
-                type='button'
-                variant='outline'
-                onClick={() => onOpenChange?.(false)}
-              >
-                Cancel
-              </Button>
-              <Button type='submit' disabled={isSubmitting}>
-                {isSubmitting ? 'Creating...' : 'Create Expense'}
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+          <FormField
+            control={form.control}
+            name='receiptUrl'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Receipt URL (Optional)</FormLabel>
+                <FormControl>
+                  <Input placeholder='https://...' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name='notes'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Notes (Optional)</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder='Additional notes about this expense...'
+                    className='resize-none'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className='flex justify-end space-x-2 pt-4'>
+            <Button
+              type='button'
+              variant='outline'
+              onClick={() => onOpenChange?.(false)}
+            >
+              Cancel
+            </Button>
+            <Button type='submit' disabled={isSubmitting}>
+              {isSubmitting ? 'Creating...' : 'Create Expense'}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </ResponsiveDialog>
   );
 }

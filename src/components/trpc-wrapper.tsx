@@ -2,7 +2,6 @@
 
 import { Suspense, ReactNode } from 'react';
 import { TRPCErrorBoundary } from './trpc-error-boundary';
-import { LoadingFallback } from './loading-skeletons';
 
 interface TRPCWrapperProps {
   children: ReactNode;
@@ -19,7 +18,7 @@ interface TRPCWrapperProps {
  */
 export function TRPCWrapper({
   children,
-  fallback = <LoadingFallback />,
+  fallback,
   errorFallback,
 }: TRPCWrapperProps) {
   return (

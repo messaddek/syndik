@@ -6,6 +6,7 @@ import { incomesRouter } from '../../modules/incomes/server/procedures';
 import { expensesRouter } from '../../modules/expenses/server/procedures';
 import { meetingsRouter } from '../../modules/meetings/server/procedures';
 import { dashboardRouter } from '../../modules/dashboard/server/procedures';
+import { searchRouter } from '../../modules/search/server/procedures';
 import { createTRPCRouter } from '@/trpc/init';
 
 export const appRouter = createTRPCRouter({
@@ -17,6 +18,7 @@ export const appRouter = createTRPCRouter({
   expenses: expensesRouter,
   meetings: meetingsRouter,
   dashboard: dashboardRouter,
+  search: searchRouter,
 });
 
 export type AppRouter = typeof appRouter;

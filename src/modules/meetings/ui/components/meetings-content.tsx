@@ -39,7 +39,7 @@ export function MeetingsContent() {
   );
 
   const { data: buildings = [] } = useQuery(
-    trpc.buildings.getAll.queryOptions()
+    trpc.buildings.getAll.queryOptions({})
   );
 
   const completeMeeting = useMutation(

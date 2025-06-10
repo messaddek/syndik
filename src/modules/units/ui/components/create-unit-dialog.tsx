@@ -6,14 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { ResponsiveDialog } from '@/components/responsive-dialog';
 import {
   Form,
   FormControl,
@@ -50,7 +43,7 @@ export function CreateUnitDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data: buildings = [] } = useQuery(
-    trpc.buildings.getAll.queryOptions()
+    trpc.buildings.getAll.queryOptions({})
   );
 
   const form = useForm<CreateUnit>({
@@ -69,13 +62,13 @@ export function CreateUnitDialog({
   const createUnit = useMutation(
     trpc.units.create.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries(trpc.units.getAll.queryOptions());
+        queryClient.invalidateQueries(trpc.units.getAll.queryOptions({}));
         form.reset();
         onOpenChange?.(false);
         onSuccess?.();
       },
-      onError: error => {
-        console.error('Failed to create unit:', error);
+      onError: _error => {
+        // Handle error - could show toast notification
       },
     })
   );
@@ -90,178 +83,90 @@ export function CreateUnitDialog({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='sm:max-w-[425px]'>
-        <DialogHeader>
-          <DialogTitle>Add New Unit</DialogTitle>
-          <DialogDescription>
-            Create a new unit in your building. Fill in the details below.
-          </DialogDescription>
-        </DialogHeader>
+    <ResponsiveDialog
+      title='Add New Unit'
+      description='Create a new unit in your building. Fill in the details below.'
+      open={open ?? false}
+      onOpenChange={onOpenChange ?? (() => {})}
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+          <FormField
+            control={form.control}
+            name='buildingId'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Building</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder='Select a building' />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {buildings.map(building => (
+                      <SelectItem key={building.id} value={building.id}>
+                        {building.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+          <div className='grid grid-cols-2 gap-4'>
             <FormField
               control={form.control}
-              name='buildingId'
+              name='unitNumber'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Building</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder='Select a building' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {buildings.map(building => (
-                        <SelectItem key={building.id} value={building.id}>
-                          {building.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <FormLabel>Unit Number</FormLabel>
+                  <FormControl>
+                    <Input placeholder='e.g., 101' {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            <div className='grid grid-cols-2 gap-4'>
-              <FormField
-                control={form.control}
-                name='unitNumber'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Unit Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder='e.g., 101' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name='floor'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Floor</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        min='0'
-                        {...field}
-                        onChange={e => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className='grid grid-cols-2 gap-4'>
-              <FormField
-                control={form.control}
-                name='bedrooms'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Bedrooms</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        min='1'
-                        {...field}
-                        onChange={e => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name='bathrooms'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Bathrooms</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        min='1'
-                        {...field}
-                        onChange={e => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className='grid grid-cols-2 gap-4'>
-              <FormField
-                control={form.control}
-                name='area'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Area (m²)</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        min='0'
-                        step='0.01'
-                        placeholder='Optional'
-                        {...field}
-                        onChange={e =>
-                          field.onChange(
-                            e.target.value ? Number(e.target.value) : undefined
-                          )
-                        }
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name='monthlyFee'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Monthly Fee ($)</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        min='0'
-                        step='0.01'
-                        {...field}
-                        onChange={e => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
             <FormField
               control={form.control}
-              name='description'
+              name='floor'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Floor</FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder='Optional description or notes about this unit...'
-                      className='resize-none'
+                    <Input
+                      type='number'
+                      min='0'
                       {...field}
+                      onChange={e => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className='grid grid-cols-2 gap-4'>
+            <FormField
+              control={form.control}
+              name='bedrooms'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Bedrooms</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='number'
+                      min='1'
+                      {...field}
+                      onChange={e => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
                   <FormMessage />
@@ -269,21 +174,105 @@ export function CreateUnitDialog({
               )}
             />
 
-            <DialogFooter>
-              <Button
-                type='button'
-                variant='outline'
-                onClick={() => onOpenChange?.(false)}
-              >
-                Cancel
-              </Button>
-              <Button type='submit' disabled={isSubmitting}>
-                {isSubmitting ? 'Creating...' : 'Create Unit'}
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+            <FormField
+              control={form.control}
+              name='bathrooms'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Bathrooms</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='number'
+                      min='1'
+                      {...field}
+                      onChange={e => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className='grid grid-cols-2 gap-4'>
+            <FormField
+              control={form.control}
+              name='area'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Area (m²)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='number'
+                      min='0'
+                      step='0.01'
+                      placeholder='Optional'
+                      {...field}
+                      onChange={e =>
+                        field.onChange(
+                          e.target.value ? Number(e.target.value) : undefined
+                        )
+                      }
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name='monthlyFee'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Monthly Fee ($)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='number'
+                      min='0'
+                      step='0.01'
+                      {...field}
+                      onChange={e => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <FormField
+            control={form.control}
+            name='description'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder='Optional description or notes about this unit...'
+                    className='resize-none'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className='flex justify-end space-x-2 pt-4'>
+            <Button
+              type='button'
+              variant='outline'
+              onClick={() => onOpenChange?.(false)}
+            >
+              Cancel
+            </Button>
+            <Button type='submit' disabled={isSubmitting}>
+              {isSubmitting ? 'Creating...' : 'Create Unit'}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </ResponsiveDialog>
   );
 }

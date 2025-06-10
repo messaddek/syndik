@@ -1,4 +1,4 @@
-import { eq, and } from 'drizzle-orm';
+import { eq, and, ilike } from 'drizzle-orm';
 import { z } from 'zod';
 import { createTRPCRouter, orgProtectedProcedure } from '@/trpc/init';
 import { units, createUnitSchema, updateUnitSchema } from '../schema';
@@ -38,15 +38,27 @@ export const unitsRouter = createTRPCRouter({
         )
         .orderBy(units.floor, units.unitNumber);
     }),
-  getAll: orgProtectedProcedure.query(async ({ ctx }) => {
-    const { db, orgId } = ctx;
+  getAll: orgProtectedProcedure
+    .input(
+      z.object({
+        unitNumber: z.string().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { db, orgId } = ctx;
 
-    return await db
-      .select()
-      .from(units)
-      .where(eq(units.orgId, orgId))
-      .orderBy(units.floor, units.unitNumber);
-  }),
+      const conditions = [eq(units.orgId, orgId)];
+
+      if (input.unitNumber) {
+        conditions.push(ilike(units.unitNumber, `%${input.unitNumber}%`));
+      }
+
+      return await db
+        .select()
+        .from(units)
+        .where(and(...conditions))
+        .orderBy(units.floor, units.unitNumber);
+    }),
 
   getById: orgProtectedProcedure
     .input(z.object({ id: z.string().uuid() }))

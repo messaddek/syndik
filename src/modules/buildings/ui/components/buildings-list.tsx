@@ -1,7 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import { Button } from '../../../../components/ui/button';
 import {
   Card,
@@ -11,59 +15,37 @@ import {
   CardTitle,
 } from '../../../../components/ui/card';
 import { Badge } from '../../../../components/ui/badge';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../../../../components/ui/dialog';
-import { Input } from '../../../../components/ui/input';
-import { Label } from '../../../../components/ui/label';
-import { Textarea } from '../../../../components/ui/textarea';
-import { CreateBuilding, Building } from '../../types';
-import { useForm } from 'react-hook-form';
+import { Building } from '../../types';
 import { Plus, Building2, MapPin, Users } from 'lucide-react';
 import { useTRPC } from '@/trpc/client';
+import { BuildingForm } from './building-form';
+import { createBuildingSchema } from '../../schema';
+import { z } from 'zod';
+import { ResponsiveDialog } from '@/components/responsive-dialog';
+
+type BuildingFormData = z.infer<typeof createBuildingSchema>;
 
 export function BuildingsList() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
-  const { data: buildings, isLoading } = useQuery(
-    trpc.buildings.getAll.queryOptions()
+  const { data: buildings } = useSuspenseQuery(
+    trpc.buildings.getAll.queryOptions({})
   );
 
   const createMutation = useMutation(
     trpc.buildings.create.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions());
+        queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
         setIsCreateOpen(false);
-        reset();
       },
     })
   );
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<CreateBuilding>();
-
-  const onSubmit = (data: CreateBuilding) => {
+  const handleCreateBuilding = (data: BuildingFormData) => {
     createMutation.mutate(data);
   };
-
-  if (isLoading) {
-    return (
-      <div className='flex items-center justify-center py-12'>
-        <div className='text-lg'>Loading buildings...</div>
-      </div>
-    );
-  }
 
   return (
     <div className='space-y-6'>
@@ -72,126 +54,22 @@ export function BuildingsList() {
           <h2 className='text-2xl font-bold'>Buildings</h2>
           <p className='text-gray-600'>Manage your residential properties</p>
         </div>
-        <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-          <DialogTrigger asChild>
-            <Button>
-              <Plus className='mr-2 h-4 w-4' />
-              Add Building
-            </Button>
-          </DialogTrigger>
-          <DialogContent className='max-w-md'>
-            <DialogHeader>
-              <DialogTitle>Add New Building</DialogTitle>
-              <DialogDescription>
-                Create a new residential building in your syndicate
-              </DialogDescription>
-            </DialogHeader>
-            <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-              <div>
-                <Label htmlFor='name'>Building Name</Label>
-                <Input
-                  id='name'
-                  {...register('name', {
-                    required: 'Building name is required',
-                  })}
-                  placeholder='e.g., Sunset Towers'
-                />
-                {errors.name && (
-                  <p className='mt-1 text-sm text-red-600'>
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <Label htmlFor='address'>Address</Label>
-                <Input
-                  id='address'
-                  {...register('address', { required: 'Address is required' })}
-                  placeholder='Street address'
-                />
-                {errors.address && (
-                  <p className='mt-1 text-sm text-red-600'>
-                    {errors.address.message}
-                  </p>
-                )}
-              </div>
-
-              <div className='grid grid-cols-2 gap-4'>
-                <div>
-                  <Label htmlFor='city'>City</Label>
-                  <Input
-                    id='city'
-                    {...register('city', { required: 'City is required' })}
-                    placeholder='City'
-                  />
-                  {errors.city && (
-                    <p className='mt-1 text-sm text-red-600'>
-                      {errors.city.message}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <Label htmlFor='postalCode'>Postal Code</Label>
-                  <Input
-                    id='postalCode'
-                    {...register('postalCode', {
-                      required: 'Postal code is required',
-                    })}
-                    placeholder='12345'
-                  />
-                  {errors.postalCode && (
-                    <p className='mt-1 text-sm text-red-600'>
-                      {errors.postalCode.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <Label htmlFor='totalUnits'>Total Units</Label>
-                <Input
-                  id='totalUnits'
-                  type='number'
-                  {...register('totalUnits', {
-                    required: 'Total units is required',
-                    valueAsNumber: true,
-                    min: { value: 1, message: 'Must have at least 1 unit' },
-                  })}
-                  placeholder='20'
-                />
-                {errors.totalUnits && (
-                  <p className='mt-1 text-sm text-red-600'>
-                    {errors.totalUnits.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <Label htmlFor='description'>Description (Optional)</Label>
-                <Textarea
-                  id='description'
-                  {...register('description')}
-                  placeholder='Additional details about the building'
-                  rows={3}
-                />
-              </div>
-
-              <div className='flex justify-end space-x-2 pt-4'>
-                <Button
-                  type='button'
-                  variant='outline'
-                  onClick={() => setIsCreateOpen(false)}
-                >
-                  Cancel
-                </Button>
-                <Button type='submit' disabled={createMutation.isPending}>
-                  {createMutation.isPending ? 'Creating...' : 'Create Building'}
-                </Button>
-              </div>
-            </form>
-          </DialogContent>
-        </Dialog>
+        <Button onClick={() => setIsCreateOpen(true)}>
+          <Plus className='mr-2 h-4 w-4' />
+          Add Building
+        </Button>
+        <ResponsiveDialog
+          title='Add New Building'
+          description='Create a new residential building in your syndicate'
+          open={isCreateOpen}
+          onOpenChange={setIsCreateOpen}
+        >
+          <BuildingForm
+            onSubmit={handleCreateBuilding}
+            isLoading={createMutation.isPending}
+            onCancel={() => setIsCreateOpen(false)}
+          />
+        </ResponsiveDialog>
       </div>
 
       {buildings && buildings.length === 0 ? (

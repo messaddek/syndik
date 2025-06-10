@@ -21,7 +21,7 @@ export function IncomesList() {
   const { data: incomes = [] } = useQuery(trpc.incomes.getAll.queryOptions({}));
 
   const { data: buildings = [] } = useQuery(
-    trpc.buildings.getAll.queryOptions()
+    trpc.buildings.getAll.queryOptions({})
   );
 
   const deleteIncome = useMutation(

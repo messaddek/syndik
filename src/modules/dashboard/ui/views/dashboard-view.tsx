@@ -3,14 +3,14 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useUser } from '@clerk/nextjs';
 import { useTRPC } from '@/trpc/client';
-import { Button } from '../../../../components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../../../../components/ui/card';
+} from '@/components/ui/card';
 import {
   Building2,
   Users,
@@ -20,8 +20,8 @@ import {
   Calendar,
 } from 'lucide-react';
 import Link from 'next/link';
-import { LoadingFallback } from '../../../../components/loading-skeletons';
-import { AccountInitForm } from '../../../accounts/ui/components/account-init-form';
+import { AccountInitForm } from '@/modules/accounts/ui/components/account-init-form';
+import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
 
 interface Activity {
   id: string;
@@ -85,7 +85,7 @@ export function DashboardView() {
   };
 
   if (accountLoading || overviewLoading) {
-    return <LoadingFallback />;
+    return <DashboardSkeleton />;
   }
 
   // Get default values from Clerk user data

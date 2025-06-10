@@ -1,4 +1,4 @@
-import { and, eq } from 'drizzle-orm';
+import { and, eq, ilike } from 'drizzle-orm';
 import { z } from 'zod';
 import { createTRPCRouter, orgProtectedProcedure } from '@/trpc/init';
 import { buildings, createBuildingSchema } from '../schema';
@@ -20,15 +20,27 @@ export const buildingsRouter = createTRPCRouter({
       return newBuilding;
     }),
 
-  getAll: orgProtectedProcedure.query(async ({ ctx }) => {
-    const { db, orgId } = ctx;
+  getAll: orgProtectedProcedure
+    .input(
+      z.object({
+        name: z.string().nullish(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { db, orgId } = ctx;
 
-    return await db
-      .select()
-      .from(buildings)
-      .where(eq(buildings.orgId, orgId))
-      .orderBy(buildings.createdAt);
-  }),
+      const conditions = [eq(buildings.orgId, orgId)];
+
+      if (input.name) {
+        conditions.push(ilike(buildings.name, `%${input.name}%`));
+      }
+
+      return await db
+        .select()
+        .from(buildings)
+        .where(and(...conditions))
+        .orderBy(buildings.createdAt);
+    }),
 
   getById: orgProtectedProcedure
     .input(z.object({ id: z.string().uuid() }))

@@ -2,29 +2,11 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "ESLint: Restart",
+      "label": "Start Development Server",
       "type": "shell",
-      "command": "${command:eslint.restart}",
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "TypeScript: Restart",
-      "type": "shell",
-      "command": "${command:typescript.restartTsServer}",
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "silent", 
-        "focus": false,
-        "panel": "shared"
-      },
+      "command": "npm run dev",
+      "group": "serve",
+      "isBackground": true,
       "problemMatcher": []
     }
   ]
