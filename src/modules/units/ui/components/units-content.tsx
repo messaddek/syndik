@@ -11,15 +11,27 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus } from 'lucide-react';
+import { Plus, MoreHorizontal } from 'lucide-react';
 import { CreateUnitDialog } from './create-unit-dialog';
+import { EditUnitDialog } from './edit-unit-dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { useTRPC } from '@/trpc/client';
 import { useConfirm } from '@/hooks/use-confirm';
+import type { Unit } from '../../types';
 
 export function UnitsContent() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
+  const [editingUnit, setEditingUnit] = useState<Unit | undefined>();
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
@@ -55,11 +67,22 @@ export function UnitsContent() {
     await toggleOccupancy.mutateAsync({ id, isOccupied: !isOccupied });
   };
 
+  const handleEdit = (unit: Unit) => {
+    setEditingUnit(unit);
+    setShowEditDialog(true);
+  };
+
   const handleDelete = async (id: string) => {
     const confirmed = await confirm();
     if (confirmed) {
       await deleteUnit.mutateAsync({ id });
     }
+  };
+
+  const handleEditSuccess = () => {
+    queryClient.invalidateQueries(trpc.units.getAll.queryOptions({}));
+    setShowEditDialog(false);
+    setEditingUnit(undefined);
   };
 
   const getBuildingName = (buildingId: string) => {
@@ -81,15 +104,36 @@ export function UnitsContent() {
       </div>
       <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
         {units.map(unit => (
-          <Card key={unit.id}>
+          <Card key={unit.id} className='transition-shadow hover:shadow-lg'>
             <CardHeader>
               <div className='flex items-center justify-between'>
-                <CardTitle className='text-lg'>
-                  Unit {unit.unitNumber}
-                </CardTitle>
-                <Badge variant={unit.isOccupied ? 'default' : 'secondary'}>
-                  {unit.isOccupied ? 'Occupied' : 'Vacant'}
-                </Badge>
+                <CardTitle className='text-lg'>{unit.unitNumber}</CardTitle>
+                <div className='flex items-center gap-2'>
+                  <Badge variant={unit.isOccupied ? 'default' : 'secondary'}>
+                    {unit.isOccupied ? 'Occupied' : 'Vacant'}
+                  </Badge>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant='ghost' className='h-8 w-8 p-0'>
+                        <span className='sr-only'>Open menu</span>
+                        <MoreHorizontal className='h-4 w-4' />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align='end'>
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuItem onClick={() => handleEdit(unit)}>
+                        Edit unit
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => handleDelete(unit.id)}
+                        className='text-red-600'
+                      >
+                        Delete unit
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
               </div>
               <CardDescription>
                 {getBuildingName(unit.buildingId)} - Floor {unit.floor}
@@ -130,16 +174,9 @@ export function UnitsContent() {
                     handleToggleOccupancy(unit.id, unit.isOccupied)
                   }
                   disabled={toggleOccupancy.isPending}
+                  className='flex-1'
                 >
                   {unit.isOccupied ? 'Mark Vacant' : 'Mark Occupied'}
-                </Button>
-                <Button
-                  variant='destructive'
-                  size='sm'
-                  onClick={() => handleDelete(unit.id)}
-                  disabled={deleteUnit.isPending}
-                >
-                  Delete
                 </Button>
               </div>
             </CardContent>
@@ -168,6 +205,12 @@ export function UnitsContent() {
         onSuccess={() => {
           queryClient.invalidateQueries(trpc.units.getAll.queryOptions({}));
         }}
+      />
+      <EditUnitDialog
+        open={showEditDialog}
+        onOpenChange={setShowEditDialog}
+        onSuccess={handleEditSuccess}
+        unit={editingUnit}
       />
       <ConfirmDialog />
     </>

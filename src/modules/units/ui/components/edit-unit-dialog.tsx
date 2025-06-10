@@ -2,18 +2,21 @@
 
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import { UnitForm } from './unit-form';
+import type { Unit } from '../../types';
 
-interface CreateUnitDialogProps {
+interface EditUnitDialogProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   onSuccess?: () => void;
+  unit?: Unit;
 }
 
-export function CreateUnitDialog({
+export function EditUnitDialog({
   open,
   onOpenChange,
   onSuccess,
-}: CreateUnitDialogProps) {
+  unit,
+}: EditUnitDialogProps) {
   const handleSuccess = () => {
     onOpenChange?.(false);
     onSuccess?.();
@@ -25,12 +28,12 @@ export function CreateUnitDialog({
 
   return (
     <ResponsiveDialog
-      title='Add New Unit'
-      description='Create a new unit in your building. Fill in the details below.'
+      title='Edit Unit'
+      description='Update the unit details below.'
       open={open ?? false}
       onOpenChange={onOpenChange ?? (() => {})}
     >
-      <UnitForm onSuccess={handleSuccess} onCancel={handleCancel} />
+      <UnitForm unit={unit} onSuccess={handleSuccess} onCancel={handleCancel} />
     </ResponsiveDialog>
   );
 }
