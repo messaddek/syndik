@@ -16,16 +16,20 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { createBuildingSchema } from '../../schema';
+import { Building } from '../../types';
+import { useEffect } from 'react';
 
 type BuildingFormData = z.infer<typeof createBuildingSchema>;
 
 interface BuildingFormProps {
+  building?: Building | null;
   onSubmit: (data: BuildingFormData) => void;
   isLoading?: boolean;
   onCancel?: () => void;
 }
 
 export function BuildingForm({
+  building,
   onSubmit,
   isLoading,
   onCancel,
@@ -33,19 +37,46 @@ export function BuildingForm({
   const form = useForm<BuildingFormData>({
     resolver: zodResolver(createBuildingSchema),
     defaultValues: {
-      name: '',
-      address: '',
-      city: '',
-      postalCode: '',
-      country: 'Morocco',
-      totalUnits: 1,
-      description: '',
+      name: building?.name || '',
+      address: building?.address || '',
+      city: building?.city || '',
+      postalCode: building?.postalCode || '',
+      country: building?.country || 'Morocco',
+      totalUnits: building?.totalUnits || 1,
+      description: building?.description || '',
     },
   });
 
+  // Reset form when building changes
+  useEffect(() => {
+    if (building) {
+      form.reset({
+        name: building.name,
+        address: building.address,
+        city: building.city,
+        postalCode: building.postalCode,
+        country: building.country,
+        totalUnits: building.totalUnits,
+        description: building.description || '',
+      });
+    } else {
+      form.reset({
+        name: '',
+        address: '',
+        city: '',
+        postalCode: '',
+        country: 'Morocco',
+        totalUnits: 1,
+        description: '',
+      });
+    }
+  }, [building, form]);
+
   const handleSubmit = (values: BuildingFormData) => {
     onSubmit(values);
-    form.reset();
+    if (!building) {
+      form.reset();
+    }
   };
 
   return (
@@ -154,9 +185,15 @@ export function BuildingForm({
             <Button type='button' variant='outline' onClick={onCancel}>
               Cancel
             </Button>
-          )}
+          )}{' '}
           <Button type='submit' disabled={isLoading}>
-            {isLoading ? 'Creating...' : 'Create Building'}
+            {isLoading
+              ? building
+                ? 'Updating...'
+                : 'Creating...'
+              : building
+                ? 'Update Building'
+                : 'Create Building'}
           </Button>
         </div>
       </form>

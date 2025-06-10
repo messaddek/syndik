@@ -38,6 +38,7 @@ export function BuildingsList() {
     trpc.buildings.create.mutationOptions({
       onSuccess: () => {
         queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
         setIsCreateOpen(false);
       },
     })
@@ -72,7 +73,7 @@ export function BuildingsList() {
         </ResponsiveDialog>
       </div>
 
-      {buildings && buildings.length === 0 ? (
+      {buildings && buildings.data.length === 0 ? (
         <Card>
           <CardContent className='flex flex-col items-center justify-center py-12'>
             <Building2 className='mb-4 h-12 w-12 text-gray-400' />
@@ -88,7 +89,7 @@ export function BuildingsList() {
         </Card>
       ) : (
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-          {buildings?.map((building: Building) => (
+          {buildings?.data?.map((building: Building) => (
             <Card
               key={building.id}
               className='transition-shadow hover:shadow-lg'

@@ -13,18 +13,26 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Trash2, Edit, ExternalLink } from 'lucide-react';
 import { format } from 'date-fns';
+import { useConfirm } from '@/hooks/use-confirm';
 
 export function ExpensesList() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
+  // Confirmation dialog
+  const [ConfirmDialog, confirm] = useConfirm(
+    'Delete Expense',
+    'Are you sure you want to delete this expense record? This action cannot be undone.'
+  );
+
   const { data: expenses = [] } = useQuery(
     trpc.expenses.getAll.queryOptions({})
   );
 
-  const { data: buildings = [] } = useQuery(
+  const { data: buildingsData = { data: [] } } = useQuery(
     trpc.buildings.getAll.queryOptions({})
   );
+  const buildings = buildingsData.data || [];
 
   const deleteExpense = useMutation(
     trpc.expenses.delete.mutationOptions({
@@ -35,7 +43,8 @@ export function ExpensesList() {
   );
 
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this expense record?')) {
+    const confirmed = await confirm();
+    if (confirmed) {
       await deleteExpense.mutateAsync({ id });
     }
   };
@@ -138,6 +147,7 @@ export function ExpensesList() {
           </CardContent>
         </Card>
       ))}
+      <ConfirmDialog />
     </div>
   );
 }

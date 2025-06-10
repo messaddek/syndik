@@ -44,6 +44,8 @@ import {
   UserCheck,
   AlertTriangle,
 } from 'lucide-react';
+import { toast } from 'sonner';
+import { useConfirm } from '@/hooks/use-confirm';
 
 // Type for resident data coming from API (dates are serialized as strings)
 type SerializedResident = Omit<Resident, 'createdAt' | 'updatedAt'> & {
@@ -59,13 +61,19 @@ export function ResidentsList() {
   const queryClient = useQueryClient();
   const trpc = useTRPC();
 
+  // Confirmation dialog
+  const [ConfirmDialog, confirm] = useConfirm(
+    'Delete Resident',
+    'Are you sure you want to delete this resident? This action cannot be undone.'
+  );
+
   // Queries using proper tRPC patterns
   const { data: residentsData, isLoading: residentsLoading } = useQuery(
     trpc.residents.getAll.queryOptions({})
   );
 
   const { data: units, isLoading: unitsLoading } = useQuery(
-    trpc.units.getAll.queryOptions()
+    trpc.units.getAll.queryOptions({})
   );
 
   // Delete mutation only (create/update handled by ResidentForm)
@@ -73,6 +81,12 @@ export function ResidentsList() {
     trpc.residents.delete.mutationOptions({
       onSuccess: () => {
         queryClient.invalidateQueries(trpc.residents.getAll.queryOptions({}));
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
+      },
+      onError: error => {
+        toast.error(
+          `Failed to delete resident: ${error.message || 'Unknown error'}`
+        );
       },
     })
   );
@@ -83,12 +97,9 @@ export function ResidentsList() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this resident?')) {
-      try {
-        await deleteResident.mutateAsync({ id });
-      } catch (error) {
-        console.error('Failed to delete resident:', error);
-      }
+    const confirmed = await confirm();
+    if (confirmed) {
+      await deleteResident.mutateAsync({ id });
     }
   };
 
@@ -339,6 +350,7 @@ export function ResidentsList() {
           })}
         </div>
       )}
+      <ConfirmDialog />
     </div>
   );
 }

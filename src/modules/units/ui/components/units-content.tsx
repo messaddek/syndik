@@ -14,22 +14,31 @@ import { Badge } from '@/components/ui/badge';
 import { Plus } from 'lucide-react';
 import { CreateUnitDialog } from './create-unit-dialog';
 import { useTRPC } from '@/trpc/client';
+import { useConfirm } from '@/hooks/use-confirm';
 
 export function UnitsContent() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [showCreateDialog, setShowCreateDialog] = useState(false);
 
-  const { data: units = [] } = useQuery(trpc.units.getAll.queryOptions());
+  // Confirmation dialog
+  const [ConfirmDialog, confirm] = useConfirm(
+    'Delete Unit',
+    'Are you sure you want to delete this unit? This action cannot be undone.'
+  );
 
-  const { data: buildings = [] } = useQuery(
+  const { data: units = [] } = useQuery(trpc.units.getAll.queryOptions({}));
+
+  const { data: buildingsData = { data: [] } } = useQuery(
     trpc.buildings.getAll.queryOptions({})
   );
+  const buildings = buildingsData.data || [];
 
   const toggleOccupancy = useMutation(
     trpc.units.toggleOccupancy.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries(trpc.units.getAll.queryOptions());
+        queryClient.invalidateQueries(trpc.units.getAll.queryOptions({}));
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
       },
     })
   );
@@ -37,7 +46,8 @@ export function UnitsContent() {
   const deleteUnit = useMutation(
     trpc.units.delete.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries(trpc.units.getAll.queryOptions());
+        queryClient.invalidateQueries(trpc.units.getAll.queryOptions({}));
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
       },
     })
   );
@@ -46,7 +56,8 @@ export function UnitsContent() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this unit?')) {
+    const confirmed = await confirm();
+    if (confirmed) {
       await deleteUnit.mutateAsync({ id });
     }
   };
@@ -155,9 +166,10 @@ export function UnitsContent() {
         open={showCreateDialog}
         onOpenChange={setShowCreateDialog}
         onSuccess={() => {
-          queryClient.invalidateQueries(trpc.units.getAll.queryOptions());
+          queryClient.invalidateQueries(trpc.units.getAll.queryOptions({}));
         }}
       />
+      <ConfirmDialog />
     </>
   );
 }

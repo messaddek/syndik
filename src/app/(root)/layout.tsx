@@ -12,7 +12,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <SidebarProvider>
       <DashboardSidebar />
-      <main className='bg-muted flex h-screen w-screen flex-col'>
+      <main className='bg-muted/50 flex h-screen w-screen flex-col'>
         <DashboardNavbar />
         <div className='flex-1 overflow-auto'>
           <div className='mx-auto max-w-7xl py-6 sm:px-6 lg:px-8'>

@@ -17,3 +17,10 @@ export const RESIDENT_SORT_FIELDS = {
   EMAIL: 'email',
   MOVE_IN_DATE: 'moveInDate',
 } as const;
+
+export const BUILDING_SORT_FIELDS = {
+  NAME: 'name',
+  CITY: 'city',
+  TOTAL_UNITS: 'totalUnits',
+  CREATED_AT: 'createdAt',
+} as const;

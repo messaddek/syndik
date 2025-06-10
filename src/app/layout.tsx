@@ -3,8 +3,10 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { TRPCReactProvider } from '../trpc/client';
 import { NuqsAdapter } from 'nuqs/adapters/next';
+import { ThemeProvider } from '@/components/theme-provider';
 
 import './globals.css';
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,11 +31,21 @@ export default function RootLayout({
   return (
     <NuqsAdapter>
       <ClerkProvider>
-        <html lang='en'>
+        <html lang='en' suppressHydrationWarning>
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
-            <TRPCReactProvider>{children}</TRPCReactProvider>
+            <ThemeProvider
+              attribute='class'
+              defaultTheme='system'
+              enableSystem
+              disableTransitionOnChange
+            >
+              <TRPCReactProvider>
+                {children}
+                <Toaster />
+              </TRPCReactProvider>
+            </ThemeProvider>
           </body>
         </html>
       </ClerkProvider>

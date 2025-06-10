@@ -18,7 +18,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -45,16 +44,15 @@ export function DashboardSidebar() {
 
   return (
     <Sidebar>
+      {' '}
       <SidebarHeader>
         <Link href='/' className='flex items-center space-x-2 px-4 py-2'>
           <Building2 className='h-8 w-8 text-blue-600' />
-          <span className='text-xl font-bold text-gray-900'>Syndik</span>
+          <span className='text-foreground text-xl font-bold'>Syndik</span>
         </Link>
       </SidebarHeader>
-
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Main Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navigation.map(item => {
@@ -87,7 +85,6 @@ export function DashboardSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
       <SidebarFooter>
         <SidebarMenu>
           {footerNavigation.map(item => {

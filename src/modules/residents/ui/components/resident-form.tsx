@@ -37,6 +37,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import type { Resident } from '../../types';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   unitId: z.string().uuid('Invalid unit ID'),
@@ -73,14 +74,18 @@ export function ResidentForm({
   const queryClient = useQueryClient();
 
   const { data: units = [], isLoading: unitsLoading } = useQuery(
-    trpc.units.getAll.queryOptions()
+    trpc.units.getAll.queryOptions({})
   );
 
   const createMutation = useMutation(
     trpc.residents.create.mutationOptions({
       onSuccess: () => {
         queryClient.invalidateQueries(trpc.residents.getAll.queryOptions({}));
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
         onSuccess?.();
+      },
+      onError: error => {
+        toast.error(`Failed to create resident: ${error.message}`);
       },
     })
   );
@@ -89,7 +94,11 @@ export function ResidentForm({
     trpc.residents.update.mutationOptions({
       onSuccess: () => {
         queryClient.invalidateQueries(trpc.residents.getAll.queryOptions({}));
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
         onSuccess?.();
+      },
+      onError: error => {
+        toast.error(`Failed to update resident: ${error.message}`);
       },
     })
   );
@@ -112,25 +121,19 @@ export function ResidentForm({
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    try {
-      if (resident) {
-        await updateMutation.mutateAsync({
-          id: resident.id,
-          data: {
-            ...data,
-            moveOutDate: data.moveOutDate || undefined,
-          },
-        });
-      } else {
-        await createMutation.mutateAsync({
+    if (resident) {
+      await updateMutation.mutateAsync({
+        id: resident.id,
+        data: {
           ...data,
           moveOutDate: data.moveOutDate || undefined,
-        });
-      }
-    } catch (error) {
-      console.error('Error saving resident:', error);
-    } finally {
-      setIsSubmitting(false);
+        },
+      });
+    } else {
+      await createMutation.mutateAsync({
+        ...data,
+        moveOutDate: data.moveOutDate || undefined,
+      });
     }
   };
 

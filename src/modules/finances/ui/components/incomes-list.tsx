@@ -13,16 +13,24 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Trash2, Edit } from 'lucide-react';
 import { format } from 'date-fns';
+import { useConfirm } from '@/hooks/use-confirm';
 
 export function IncomesList() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
+  // Confirmation dialog
+  const [ConfirmDialog, confirm] = useConfirm(
+    'Delete Income',
+    'Are you sure you want to delete this income record? This action cannot be undone.'
+  );
+
   const { data: incomes = [] } = useQuery(trpc.incomes.getAll.queryOptions({}));
 
-  const { data: buildings = [] } = useQuery(
+  const { data: buildingsData = { data: [] } } = useQuery(
     trpc.buildings.getAll.queryOptions({})
   );
+  const buildings = buildingsData.data || [];
 
   const deleteIncome = useMutation(
     trpc.incomes.delete.mutationOptions({
@@ -33,7 +41,8 @@ export function IncomesList() {
   );
 
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this income record?')) {
+    const confirmed = await confirm();
+    if (confirmed) {
       await deleteIncome.mutateAsync({ id });
     }
   };
@@ -120,6 +129,7 @@ export function IncomesList() {
           </CardContent>
         </Card>
       ))}
+      <ConfirmDialog />
     </div>
   );
 }

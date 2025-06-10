@@ -44,9 +44,10 @@ export function CreateMeetingDialog({
   const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { data: buildings = [] } = useQuery(
+  const { data: buildingsData = { data: [] } } = useQuery(
     trpc.buildings.getAll.queryOptions({})
   );
+  const buildings = buildingsData.data || [];
 
   const form = useForm<CreateMeetingForm>({
     resolver: zodResolver(createMeetingSchema),

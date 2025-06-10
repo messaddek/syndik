@@ -42,9 +42,10 @@ export function CreateUnitDialog({
   const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { data: buildings = [] } = useQuery(
+  const { data: buildingsData = { data: [] } } = useQuery(
     trpc.buildings.getAll.queryOptions({})
   );
+  const buildings = buildingsData.data || [];
 
   const form = useForm<CreateUnit>({
     resolver: zodResolver(createUnitSchema),
@@ -63,6 +64,7 @@ export function CreateUnitDialog({
     trpc.units.create.mutationOptions({
       onSuccess: () => {
         queryClient.invalidateQueries(trpc.units.getAll.queryOptions({}));
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
         form.reset();
         onOpenChange?.(false);
         onSuccess?.();

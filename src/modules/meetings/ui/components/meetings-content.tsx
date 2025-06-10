@@ -24,11 +24,18 @@ import { format, isAfter } from 'date-fns';
 import { CreateMeetingDialog } from './create-meeting-dialog';
 import { Meeting } from '@/modules/meetings/types';
 import { useTRPC } from '@/trpc/client';
+import { useConfirm } from '@/hooks/use-confirm';
 
 export function MeetingsContent() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [showCreateDialog, setShowCreateDialog] = useState(false);
+
+  // Confirmation dialog
+  const [ConfirmDialog, confirm] = useConfirm(
+    'Delete Meeting',
+    'Are you sure you want to delete this meeting? This action cannot be undone.'
+  );
 
   const { data: allMeetings = [] } = useQuery(
     trpc.meetings.getAll.queryOptions({})
@@ -38,9 +45,10 @@ export function MeetingsContent() {
     trpc.meetings.getAll.queryOptions({ upcoming: true })
   );
 
-  const { data: buildings = [] } = useQuery(
+  const { data: buildingsData = { data: [] } } = useQuery(
     trpc.buildings.getAll.queryOptions({})
   );
+  const buildings = buildingsData.data || [];
 
   const completeMeeting = useMutation(
     trpc.meetings.update.mutationOptions({
@@ -66,7 +74,8 @@ export function MeetingsContent() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this meeting?')) {
+    const confirmed = await confirm();
+    if (confirmed) {
       await deleteMeeting.mutateAsync({ id });
     }
   };
@@ -337,6 +346,7 @@ export function MeetingsContent() {
           queryClient.invalidateQueries(trpc.meetings.getAll.queryOptions({}));
         }}
       />
+      <ConfirmDialog />
     </div>
   );
 }

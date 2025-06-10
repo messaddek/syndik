@@ -31,6 +31,8 @@ import { createResidentsColumns } from './residents-columns';
 import { RESIDENT_SORT_FIELDS } from '@/constants';
 import { ResidentForm } from './resident-form';
 import { useResidentsFilters } from '@/modules/residents';
+import { toast } from 'sonner';
+import { useConfirm } from '@/hooks/use-confirm';
 
 // Infer types from the actual data returned by tRPC
 type PaginationData = {
@@ -91,6 +93,13 @@ export function ResidentsDataTable({
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingResident, setEditingResident] =
     useState<ResidentWithUnit | null>(null);
+
+  // Confirmation dialog
+  const [ConfirmDialog, confirm] = useConfirm(
+    'Delete Resident',
+    'Are you sure you want to delete this resident? This action cannot be undone.'
+  );
+
   // URL state management with nuqs
   const [filters, setFilters] = useResidentsFilters(initialFilters);
 
@@ -118,11 +127,17 @@ export function ResidentsDataTable({
     })
   );
 
-  const { data: units = [] } = useQuery(trpc.units.getAll.queryOptions()); // Mutations
+  const { data: units = [] } = useQuery(trpc.units.getAll.queryOptions({})); // Mutations
   const deleteResident = useMutation(
     trpc.residents.delete.mutationOptions({
       onSuccess: () => {
         queryClient.invalidateQueries(trpc.residents.getAll.queryOptions({}));
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
+      },
+      onError: error => {
+        toast.error(
+          `Failed to delete resident: ${error.message || 'Unknown error'}`
+        );
       },
     })
   ); // Transform data to include unit information
@@ -143,12 +158,9 @@ export function ResidentsDataTable({
     setIsCreateDialogOpen(true);
   };
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this resident?')) {
-      try {
-        await deleteResident.mutateAsync({ id });
-      } catch (error) {
-        console.error('Failed to delete resident:', error);
-      }
+    const confirmed = await confirm();
+    if (confirmed) {
+      await deleteResident.mutateAsync({ id });
     }
   };
 
@@ -369,6 +381,7 @@ export function ResidentsDataTable({
         onPageChange={page => setFilters({ page })}
         onPageSizeChange={pageSize => setFilters({ pageSize, page: 1 })}
       />
+      <ConfirmDialog />
     </div>
   );
 }

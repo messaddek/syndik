@@ -44,9 +44,7 @@ export function CreateExpenseDialog({
   const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { data: buildings = [] } = useQuery(
-    trpc.buildings.getAll.queryOptions({})
-  );
+  const { data } = useQuery(trpc.buildings.getAll.queryOptions({}));
 
   const form = useForm<CreateExpenseForm>({
     resolver: zodResolver(createExpenseSchema),
@@ -107,7 +105,7 @@ export function CreateExpenseDialog({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {buildings.map(building => (
+                    {data?.data?.map(building => (
                       <SelectItem key={building.id} value={building.id}>
                         {building.name}
                       </SelectItem>

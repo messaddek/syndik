@@ -14,6 +14,7 @@ export const searchRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
+      console.log('Search input:', input);
       const { db, orgId } = ctx;
       const { query, limit } = input; // Search buildings
       const buildingsResults = await db
@@ -85,6 +86,12 @@ export const searchRouter = createTRPCRouter({
           )
         )
         .limit(limit);
+
+      console.log('Search results:', {
+        buildings: buildingsResults,
+        units: unitsResults,
+        residents: residentsResults,
+      });
 
       return {
         buildings: buildingsResults,
