@@ -68,15 +68,14 @@ export async function POST(request: NextRequest) {
       status: 400,
     });
   }
-
   // Handle the webhook
   try {
     switch (evt.type) {
       case 'organization.created':
-        // Organization creation doesn't require database action since we track via accounts
+        await handleOrganizationCreated(evt);
         break;
       case 'organization.updated':
-        // Organization updates don't require database action since we track via accounts
+        await handleOrganizationUpdated(evt);
         break;
       case 'organization.deleted':
         await handleOrganizationDeleted(evt);
@@ -99,6 +98,50 @@ export async function POST(request: NextRequest) {
   } catch (_error) {
     // Log processing error for debugging
     return new Response('Error processing webhook', { status: 500 });
+  }
+}
+
+async function handleOrganizationCreated(evt: ClerkWebhookEvent) {
+  const { id, name, slug } = evt.data;
+
+  if (!id || !name) {
+    return;
+  }
+
+  try {
+    // Update all accounts for this organization with the organization info
+    await db
+      .update(accounts)
+      .set({
+        organizationName: name,
+        organizationSlug: slug || null,
+        updatedAt: new Date(),
+      })
+      .where(eq(accounts.orgId, id));
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function handleOrganizationUpdated(evt: ClerkWebhookEvent) {
+  const { id, name, slug } = evt.data;
+
+  if (!id) {
+    return;
+  }
+
+  try {
+    // Update all accounts for this organization with the updated organization info
+    await db
+      .update(accounts)
+      .set({
+        organizationName: name || undefined,
+        organizationSlug: slug || undefined,
+        updatedAt: new Date(),
+      })
+      .where(eq(accounts.orgId, id));
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -144,6 +187,8 @@ async function handleMembershipCreated(evt: ClerkWebhookEvent) {
         public_user_data.email_addresses?.[0]?.email_address ||
         'unknown@example.com',
       role: role === 'org:admin' ? ('admin' as const) : ('manager' as const),
+      organizationName: organization.name || null,
+      organizationSlug: organization.slug || null,
     };
 
     if (existingAccount.length === 0) {
