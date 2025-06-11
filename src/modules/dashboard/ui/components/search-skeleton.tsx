@@ -7,7 +7,7 @@ export function SearchResultsSkeleton() {
     <>
       {/* Buildings skeleton */}
       <CommandGroup heading='Buildings'>
-        {[1, 2].map(i => (
+        {[1].map(i => (
           <CommandItem
             key={`building-${i}`}
             className='flex items-start gap-3 p-3'
@@ -27,7 +27,7 @@ export function SearchResultsSkeleton() {
 
       {/* Units skeleton */}
       <CommandGroup heading='Units'>
-        {[1, 2].map(i => (
+        {[1].map(i => (
           <CommandItem key={`unit-${i}`} className='flex items-start gap-3 p-3'>
             <Home className='mt-0.5 h-4 w-4 text-green-600' />
             <div className='flex-1 space-y-2'>
@@ -45,7 +45,7 @@ export function SearchResultsSkeleton() {
 
       {/* Residents skeleton */}
       <CommandGroup heading='Residents'>
-        {[1, 2].map(i => (
+        {[1].map(i => (
           <CommandItem
             key={`resident-${i}`}
             className='flex items-start gap-3 p-3'

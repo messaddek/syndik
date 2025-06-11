@@ -24,6 +24,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import type { Resident } from '../../types';
+import Link from 'next/link';
 
 interface ResidentWithUnit extends Resident {
   unit?: {
@@ -116,10 +117,13 @@ export function createResidentsColumns(
         );
       },
       cell: ({ row }) => (
-        <div className='flex items-center space-x-2'>
+        <Link
+          href={`/residents/${row.original.id}`}
+          className='flex items-center space-x-2 hover:underline'
+        >
           <User className='text-muted-foreground h-4 w-4' />
           <span className='font-medium'>{row.getValue('firstName')}</span>
-        </div>
+        </Link>
       ),
     },
     {

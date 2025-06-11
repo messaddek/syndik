@@ -27,6 +27,7 @@ import { useConfirm } from '@/hooks/use-confirm';
 import type { Unit } from '../../types';
 import type { Resident } from '@/modules/residents/types';
 import type { Income } from '@/modules/incomes/types';
+import Link from 'next/link';
 
 export function UnitsContent() {
   const trpc = useTRPC();
@@ -138,115 +139,124 @@ export function UnitsContent() {
       </div>
       <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
         {units.map(unit => (
-          <Card key={unit.id} className='transition-shadow hover:shadow-lg'>
-            <CardHeader>
-              <div className='flex items-center justify-between'>
-                <CardTitle className='text-lg'>{unit.unitNumber}</CardTitle>
-                <div className='flex items-center gap-2'>
-                  <Badge variant={unit.isOccupied ? 'default' : 'secondary'}>
-                    {unit.isOccupied ? 'Occupied' : 'Vacant'}
-                  </Badge>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant='ghost' className='h-8 w-8 p-0'>
-                        <span className='sr-only'>Open menu</span>
-                        <MoreHorizontal className='h-4 w-4' />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align='end'>
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem onClick={() => handleEdit(unit)}>
-                        Edit unit
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={() =>
-                          window.open(`/residents?unitId=${unit.id}`, '_blank')
-                        }
-                      >
-                        View residents
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() =>
-                          window.open(`/finances?unitId=${unit.id}`, '_blank')
-                        }
-                      >
-                        View income
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={() => handleDelete(unit.id)}
-                        className='text-red-600'
-                      >
-                        Delete unit
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </div>
-              <CardDescription>
-                {getBuildingName(unit.buildingId)} - Floor {unit.floor}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className='space-y-2'>
-                <div className='flex justify-between text-sm'>
-                  <span>Bedrooms:</span>
-                  <span>{unit.bedrooms}</span>
-                </div>
-                <div className='flex justify-between text-sm'>
-                  <span>Bathrooms:</span>
-                  <span>{unit.bathrooms}</span>
-                </div>
-                {unit.area && (
-                  <div className='flex justify-between text-sm'>
-                    <span>Area:</span>
-                    <span>{unit.area} m²</span>
-                  </div>
-                )}
-                <div className='flex justify-between text-sm font-medium'>
-                  <span>Monthly Fee:</span>
-                  <span>${unit.monthlyFee}</span>
-                </div>
-
-                {/* Relationship Information */}
-                <div className='mt-2 border-t pt-2'>
-                  <div className='flex justify-between text-sm'>
-                    <span>Active Residents:</span>
-                    <span className='font-medium'>
-                      {getUnitResidentCount(unit.id)}
-                    </span>
-                  </div>
-                  <div className='flex justify-between text-sm'>
-                    <span>This Month Income:</span>
-                    <span className='font-medium text-green-600'>
-                      ${getUnitMonthlyIncome(unit.id).toFixed(2)}
-                    </span>
+          <Link key={unit.id} href={`/units/${unit.id}`}>
+            <Card className='cursor-pointer transition-shadow hover:shadow-lg'>
+              <CardHeader>
+                <div className='flex items-center justify-between'>
+                  <CardTitle className='text-lg'>{unit.unitNumber}</CardTitle>
+                  <div className='flex items-center gap-2'>
+                    <Badge variant={unit.isOccupied ? 'default' : 'secondary'}>
+                      {unit.isOccupied ? 'Occupied' : 'Vacant'}
+                    </Badge>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant='ghost'
+                          className='h-8 w-8 p-0'
+                          onClick={e => e.preventDefault()}
+                        >
+                          <span className='sr-only'>Open menu</span>
+                          <MoreHorizontal className='h-4 w-4' />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align='end'>
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem onClick={() => handleEdit(unit)}>
+                          Edit unit
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          onClick={() =>
+                            window.open(
+                              `/residents?unitId=${unit.id}`,
+                              '_blank'
+                            )
+                          }
+                        >
+                          View residents
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() =>
+                            window.open(`/finances?unitId=${unit.id}`, '_blank')
+                          }
+                        >
+                          View income
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          onClick={() => handleDelete(unit.id)}
+                          className='text-red-600'
+                        >
+                          Delete unit
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 </div>
+                <CardDescription>
+                  {getBuildingName(unit.buildingId)} - Floor {unit.floor}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className='space-y-2'>
+                  <div className='flex justify-between text-sm'>
+                    <span>Bedrooms:</span>
+                    <span>{unit.bedrooms}</span>
+                  </div>
+                  <div className='flex justify-between text-sm'>
+                    <span>Bathrooms:</span>
+                    <span>{unit.bathrooms}</span>
+                  </div>
+                  {unit.area && (
+                    <div className='flex justify-between text-sm'>
+                      <span>Area:</span>
+                      <span>{unit.area} m²</span>
+                    </div>
+                  )}
+                  <div className='flex justify-between text-sm font-medium'>
+                    <span>Monthly Fee:</span>
+                    <span>${unit.monthlyFee}</span>
+                  </div>
 
-                {unit.description && (
-                  <p className='text-muted-foreground mt-2 text-sm'>
-                    {unit.description}
-                  </p>
-                )}
-              </div>
+                  {/* Relationship Information */}
+                  <div className='mt-2 border-t pt-2'>
+                    <div className='flex justify-between text-sm'>
+                      <span>Active Residents:</span>
+                      <span className='font-medium'>
+                        {getUnitResidentCount(unit.id)}
+                      </span>
+                    </div>
+                    <div className='flex justify-between text-sm'>
+                      <span>This Month Income:</span>
+                      <span className='font-medium text-green-600'>
+                        ${getUnitMonthlyIncome(unit.id).toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
 
-              <div className='mt-4 flex gap-2'>
-                <Button
-                  variant='outline'
-                  size='sm'
-                  onClick={() =>
-                    handleToggleOccupancy(unit.id, unit.isOccupied)
-                  }
-                  disabled={toggleOccupancy.isPending}
-                  className='flex-1'
-                >
-                  {unit.isOccupied ? 'Mark Vacant' : 'Mark Occupied'}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+                  {unit.description && (
+                    <p className='text-muted-foreground mt-2 text-sm'>
+                      {unit.description}
+                    </p>
+                  )}
+                </div>
+
+                <div className='mt-4 flex gap-2'>
+                  <Button
+                    variant='outline'
+                    size='sm'
+                    onClick={() =>
+                      handleToggleOccupancy(unit.id, unit.isOccupied)
+                    }
+                    disabled={toggleOccupancy.isPending}
+                    className='flex-1'
+                  >
+                    {unit.isOccupied ? 'Mark Vacant' : 'Mark Occupied'}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
       {units.length === 0 && (

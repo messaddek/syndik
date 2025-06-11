@@ -19,7 +19,6 @@ import {
   Calendar,
 } from 'lucide-react';
 import Link from 'next/link';
-import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
 
 interface Activity {
   id: string;
@@ -42,7 +41,7 @@ interface DashboardOverview {
 export function DashboardView() {
   const trpc = useTRPC();
 
-  const { data: overview, isLoading: overviewLoading } = useQuery(
+  const { data: overview } = useQuery(
     trpc.dashboard.getOverview.queryOptions()
   );
   const { data: recentActivity } = useQuery(
@@ -51,10 +50,6 @@ export function DashboardView() {
 
   const typedOverview = overview as DashboardOverview | undefined;
   const typedActivity = recentActivity as Activity[] | undefined;
-
-  if (overviewLoading) {
-    return <DashboardSkeleton />;
-  }
 
   return (
     <div className='space-y-6'>

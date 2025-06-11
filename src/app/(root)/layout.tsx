@@ -11,18 +11,18 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <OrganizationGuard>
-      <SidebarProvider>
-        <DashboardSidebar />
-        <main className='bg-muted/50 flex h-screen w-screen flex-col'>
-          <DashboardNavbar />
-          <div className='flex-1 overflow-auto'>
-            <div className='mx-auto max-w-7xl py-6 sm:px-6 lg:px-8'>
-              <div className='px-4 py-6 sm:px-0'>{children}</div>
+    <SidebarProvider>
+      <DashboardSidebar />
+      <main className='bg-muted/50 flex h-screen w-screen flex-col'>
+        <DashboardNavbar />
+        <div className='flex-1 overflow-auto'>
+          <div className='mx-auto max-w-7xl py-6 sm:px-6 lg:px-8'>
+            <div className='px-4 py-6 sm:px-0'>
+              <OrganizationGuard>{children}</OrganizationGuard>
             </div>
           </div>
-        </main>
-      </SidebarProvider>
-    </OrganizationGuard>
+        </div>
+      </main>
+    </SidebarProvider>
   );
 }

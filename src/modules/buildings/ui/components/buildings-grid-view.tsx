@@ -19,6 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
 
 interface BuildingsGridViewProps {
   buildings: Building[];
@@ -47,65 +48,72 @@ export function BuildingsGridView({
 
   return (
     <>
+      {' '}
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {buildings.map((building: Building) => (
-          <Card key={building.id} className='transition-shadow hover:shadow-lg'>
-            <CardHeader>
-              <div className='flex items-center justify-between'>
-                <CardTitle className='flex items-center'>
-                  <Building2 className='mr-2 h-5 w-5' />
-                  {building.name}
-                </CardTitle>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant='ghost' className='h-8 w-8 p-0'>
-                      <span className='sr-only'>Open menu</span>
-                      <MoreHorizontal className='h-4 w-4' />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align='end'>
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => onEdit(building)}>
-                      Edit building
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={() => onDelete(building)}
-                      className='text-red-600'
-                    >
-                      Delete building
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-              <CardDescription className='flex items-center'>
-                <MapPin className='mr-1 h-4 w-4' />
-                {building.city}, {building.country}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className='space-y-3'>
+          <Link key={building.id} href={`/buildings/${building.id}`}>
+            <Card className='cursor-pointer transition-shadow hover:shadow-lg'>
+              <CardHeader>
                 <div className='flex items-center justify-between'>
-                  <span className='text-sm text-gray-600'>Total Units</span>
-                  <Badge variant='secondary'>
-                    <Users className='mr-1 h-3 w-3' />
-                    {building.totalUnits}
-                  </Badge>
+                  <CardTitle className='flex items-center'>
+                    <Building2 className='mr-2 h-5 w-5' />
+                    {building.name}
+                  </CardTitle>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant='ghost'
+                        className='h-8 w-8 p-0'
+                        onClick={e => e.preventDefault()}
+                      >
+                        <span className='sr-only'>Open menu</span>
+                        <MoreHorizontal className='h-4 w-4' />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align='end'>
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuItem onClick={() => onEdit(building)}>
+                        Edit building
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => onDelete(building)}
+                        className='text-red-600'
+                      >
+                        Delete building
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
-                <p className='line-clamp-2 text-sm text-gray-600'>
-                  {building.description || 'No description provided'}
-                </p>
-                <div className='flex space-x-2 pt-2'>
-                  <Button variant='outline' size='sm' className='flex-1'>
-                    View Details
-                  </Button>
-                  <Button variant='outline' size='sm' className='flex-1'>
-                    Manage Units
-                  </Button>
+                <CardDescription className='flex items-center'>
+                  <MapPin className='mr-1 h-4 w-4' />
+                  {building.city}, {building.country}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className='space-y-3'>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-sm text-gray-600'>Total Units</span>
+                    <Badge variant='secondary'>
+                      <Users className='mr-1 h-3 w-3' />
+                      {building.totalUnits}
+                    </Badge>
+                  </div>
+                  <p className='line-clamp-2 text-sm text-gray-600'>
+                    {building.description || 'No description provided'}
+                  </p>
+                  <div className='flex space-x-2 pt-2'>
+                    <Button variant='outline' size='sm' className='flex-1'>
+                      View Details
+                    </Button>
+                    <Button variant='outline' size='sm' className='flex-1'>
+                      Manage Units
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </>

@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Trash2, Edit, ExternalLink } from 'lucide-react';
 import { format } from 'date-fns';
 import { useConfirm } from '@/hooks/use-confirm';
+import Link from 'next/link';
 
 export function ExpensesList() {
   const trpc = useTRPC();
@@ -92,8 +93,17 @@ export function ExpensesList() {
               <div>
                 <CardTitle className='text-lg'>{expense.description}</CardTitle>
                 <CardDescription>
-                  {getBuildingName(expense.buildingId)} •{' '}
-                  {format(new Date(expense.paidDate), 'MMM dd, yyyy')}
+                  {expense.buildingId ? (
+                    <Link
+                      href={`/buildings/${expense.buildingId}`}
+                      className='text-blue-600 hover:underline'
+                    >
+                      {getBuildingName(expense.buildingId)}
+                    </Link>
+                  ) : (
+                    getBuildingName(expense.buildingId)
+                  )}{' '}
+                  • {format(new Date(expense.paidDate), 'MMM dd, yyyy')}
                   {expense.vendor && ` • ${expense.vendor}`}
                 </CardDescription>
               </div>

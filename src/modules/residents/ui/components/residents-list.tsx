@@ -46,6 +46,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useConfirm } from '@/hooks/use-confirm';
+import Link from 'next/link';
 
 // Type for resident data coming from API (dates are serialized as strings)
 type SerializedResident = Omit<Resident, 'createdAt' | 'updatedAt'> & {
@@ -228,127 +229,136 @@ export function ResidentsList() {
           {filteredResidents?.map(resident => {
             const unit = getUnitInfo(resident.unitId);
             return (
-              <Card
-                key={resident.id}
-                className='transition-shadow hover:shadow-md'
-              >
-                <CardHeader className='pb-3'>
-                  <div className='flex items-center justify-between'>
-                    <div className='flex items-center space-x-2'>
-                      <User className='h-5 w-5 text-blue-500' />
-                      <div>
-                        <CardTitle className='text-lg'>
-                          {resident.firstName} {resident.lastName}
-                        </CardTitle>{' '}
-                        <CardDescription className='flex items-center space-x-1'>
-                          <MapPin className='h-3 w-3' />
-                          <span>
-                            Unit {unit?.unitNumber ?? 'No unit assigned'}
-                          </span>
-                        </CardDescription>
+              <Link key={resident.id} href={`/residents/${resident.id}`}>
+                <Card className='cursor-pointer transition-shadow hover:shadow-md'>
+                  <CardHeader className='pb-3'>
+                    <div className='flex items-center justify-between'>
+                      <div className='flex items-center space-x-2'>
+                        <User className='h-5 w-5 text-blue-500' />
+                        <div>
+                          <CardTitle className='text-lg'>
+                            {resident.firstName} {resident.lastName}
+                          </CardTitle>{' '}
+                          <CardDescription className='flex items-center space-x-1'>
+                            <MapPin className='h-3 w-3' />
+                            <span>
+                              Unit {unit?.unitNumber ?? 'No unit assigned'}
+                            </span>
+                          </CardDescription>
+                        </div>
+                      </div>
+                      <div className='flex space-x-1'>
+                        <Button
+                          variant='ghost'
+                          size='sm'
+                          onClick={e => {
+                            e.preventDefault();
+                            handleEdit(resident);
+                          }}
+                        >
+                          <Edit className='h-4 w-4' />
+                        </Button>
+                        <Button
+                          variant='ghost'
+                          size='sm'
+                          onClick={e => {
+                            e.preventDefault();
+                            handleDelete(resident.id);
+                          }}
+                        >
+                          <Trash2 className='h-4 w-4' />
+                        </Button>
                       </div>
                     </div>
-                    <div className='flex space-x-1'>
-                      <Button
-                        variant='ghost'
-                        size='sm'
-                        onClick={() => handleEdit(resident)}
+                  </CardHeader>
+                  <CardContent className='space-y-3'>
+                    <div className='flex items-center justify-between'>
+                      <Badge
+                        variant={resident.isOwner ? 'default' : 'secondary'}
                       >
-                        <Edit className='h-4 w-4' />
-                      </Button>
-                      <Button
-                        variant='ghost'
-                        size='sm'
-                        onClick={() => handleDelete(resident.id)}
+                        {resident.isOwner ? (
+                          <>
+                            <UserCheck className='mr-1 h-3 w-3' />
+                            Owner
+                          </>
+                        ) : (
+                          <>
+                            <User className='mr-1 h-3 w-3' />
+                            Tenant
+                          </>
+                        )}
+                      </Badge>
+                      <Badge
+                        variant={resident.isActive ? 'default' : 'destructive'}
                       >
-                        <Trash2 className='h-4 w-4' />
-                      </Button>
+                        {resident.isActive ? 'Active' : 'Inactive'}
+                      </Badge>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent className='space-y-3'>
-                  <div className='flex items-center justify-between'>
-                    <Badge variant={resident.isOwner ? 'default' : 'secondary'}>
-                      {resident.isOwner ? (
-                        <>
-                          <UserCheck className='mr-1 h-3 w-3' />
-                          Owner
-                        </>
-                      ) : (
-                        <>
-                          <User className='mr-1 h-3 w-3' />
-                          Tenant
-                        </>
-                      )}
-                    </Badge>
-                    <Badge
-                      variant={resident.isActive ? 'default' : 'destructive'}
-                    >
-                      {resident.isActive ? 'Active' : 'Inactive'}
-                    </Badge>
-                  </div>
 
-                  <Separator />
+                    <Separator />
 
-                  <div className='space-y-2 text-sm'>
-                    <div className='flex items-center space-x-2'>
-                      <Mail className='h-4 w-4 text-gray-500' />
-                      <span className='truncate'>{resident.email}</span>
-                    </div>
-                    {resident.phone && (
+                    <div className='space-y-2 text-sm'>
                       <div className='flex items-center space-x-2'>
-                        <Phone className='h-4 w-4 text-gray-500' />
-                        <span>{resident.phone}</span>
+                        <Mail className='h-4 w-4 text-gray-500' />
+                        <span className='truncate'>{resident.email}</span>
                       </div>
-                    )}{' '}
-                    <div className='flex items-center space-x-2'>
-                      <Calendar className='h-4 w-4 text-gray-500' />
-                      <span>
-                        Moved in:{' '}
-                        {new Date(resident.moveInDate).toLocaleDateString()}
-                      </span>
-                    </div>
-                    {resident.moveOutDate && (
+                      {resident.phone && (
+                        <div className='flex items-center space-x-2'>
+                          <Phone className='h-4 w-4 text-gray-500' />
+                          <span>{resident.phone}</span>
+                        </div>
+                      )}{' '}
                       <div className='flex items-center space-x-2'>
-                        <Calendar className='h-4 w-4 text-red-500' />
+                        <Calendar className='h-4 w-4 text-gray-500' />
                         <span>
-                          Moving out:{' '}
-                          {new Date(resident.moveOutDate).toLocaleDateString()}
+                          Moved in:{' '}
+                          {new Date(resident.moveInDate).toLocaleDateString()}
                         </span>
                       </div>
-                    )}
-                  </div>
+                      {resident.moveOutDate && (
+                        <div className='flex items-center space-x-2'>
+                          <Calendar className='h-4 w-4 text-red-500' />
+                          <span>
+                            Moving out:{' '}
+                            {new Date(
+                              resident.moveOutDate
+                            ).toLocaleDateString()}
+                          </span>
+                        </div>
+                      )}
+                    </div>
 
-                  {resident.emergencyContact && (
-                    <>
-                      <Separator />
-                      <div className='text-sm'>
-                        <p className='font-medium'>Emergency Contact:</p>
-                        <p className='text-gray-600'>
-                          {resident.emergencyContact}
-                        </p>
-                        {resident.emergencyPhone && (
+                    {resident.emergencyContact && (
+                      <>
+                        <Separator />
+                        <div className='text-sm'>
+                          <p className='font-medium'>Emergency Contact:</p>
                           <p className='text-gray-600'>
-                            {resident.emergencyPhone}
+                            {resident.emergencyContact}
                           </p>
-                        )}
-                      </div>
-                    </>
-                  )}
+                          {resident.emergencyPhone && (
+                            <p className='text-gray-600'>
+                              {resident.emergencyPhone}
+                            </p>
+                          )}
+                        </div>
+                      </>
+                    )}
 
-                  {resident.notes && (
-                    <>
-                      <Separator />
-                      <div className='text-sm'>
-                        <p className='font-medium'>Notes:</p>
-                        <p className='line-clamp-2 text-gray-600'>
-                          {resident.notes}
-                        </p>
-                      </div>
-                    </>
-                  )}
-                </CardContent>
-              </Card>
+                    {resident.notes && (
+                      <>
+                        <Separator />
+                        <div className='text-sm'>
+                          <p className='font-medium'>Notes:</p>
+                          <p className='line-clamp-2 text-gray-600'>
+                            {resident.notes}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </CardContent>
+                </Card>
+              </Link>
             );
           })}
         </div>

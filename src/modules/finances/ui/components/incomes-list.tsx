@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Trash2, Edit } from 'lucide-react';
 import { format } from 'date-fns';
 import { useConfirm } from '@/hooks/use-confirm';
+import Link from 'next/link';
 
 export function IncomesList() {
   const trpc = useTRPC();
@@ -88,8 +89,17 @@ export function IncomesList() {
               <div>
                 <CardTitle className='text-lg'>{income.description}</CardTitle>
                 <CardDescription>
-                  {getBuildingName(income.buildingId)} •{' '}
-                  {format(new Date(income.receivedDate), 'MMM dd, yyyy')}
+                  {income.buildingId ? (
+                    <Link
+                      href={`/buildings/${income.buildingId}`}
+                      className='text-blue-600 hover:underline'
+                    >
+                      {getBuildingName(income.buildingId)}
+                    </Link>
+                  ) : (
+                    getBuildingName(income.buildingId)
+                  )}{' '}
+                  • {format(new Date(income.receivedDate), 'MMM dd, yyyy')}
                 </CardDescription>
               </div>
               <div className='flex items-center gap-2'>

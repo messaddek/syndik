@@ -104,11 +104,11 @@ export function DashboardNavbar() {
       <SidebarTrigger className='-ml-1' />
       <Separator orientation='vertical' className='mr-2 h-4' />
       <div className='flex flex-1 items-center justify-between'>
-        {/* Search Command */}
+        {/* Search Command */}{' '}
         <div className='max-w-md flex-1'>
           <Button
             variant='outline'
-            className='text-muted-foreground w-full justify-start'
+            className='text-muted-foreground relative w-full justify-start'
             onClick={() => setOpen(true)}
           >
             <Search className='mr-2 h-4 w-4' />
@@ -117,7 +117,7 @@ export function DashboardNavbar() {
               <span className='text-xs'>⌘</span>K
             </kbd>
           </Button>
-        </div>{' '}
+        </div>
         {/* Organization Switcher */}
         <div className='md:max-w-xs md:min-w-[200px]'>
           <OrganizationSwitcherResponsive className='w-full' />

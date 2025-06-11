@@ -14,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
 
 interface BuildingsTableViewProps {
   buildings: Building[];
@@ -31,10 +32,13 @@ export function BuildingsTableView({
       accessorKey: 'name',
       header: 'Name',
       cell: ({ row }) => (
-        <div className='flex items-center space-x-2'>
+        <Link
+          href={`/buildings/${row.original.id}`}
+          className='flex items-center space-x-2 hover:underline'
+        >
           <Building2 className='h-4 w-4 text-blue-600' />
           <span className='font-medium'>{row.getValue('name')}</span>
-        </div>
+        </Link>
       ),
     },
     {

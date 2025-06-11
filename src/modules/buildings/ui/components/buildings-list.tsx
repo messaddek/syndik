@@ -22,6 +22,7 @@ import { BuildingForm } from './building-form';
 import { createBuildingSchema } from '../../schema';
 import { z } from 'zod';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
+import Link from 'next/link';
 
 type BuildingFormData = z.infer<typeof createBuildingSchema>;
 
@@ -90,43 +91,42 @@ export function BuildingsList() {
       ) : (
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
           {buildings?.data?.map((building: Building) => (
-            <Card
-              key={building.id}
-              className='transition-shadow hover:shadow-lg'
-            >
-              <CardHeader>
-                <CardTitle className='flex items-center'>
-                  <Building2 className='mr-2 h-5 w-5' />
-                  {building.name}
-                </CardTitle>
-                <CardDescription className='flex items-center'>
-                  <MapPin className='mr-1 h-4 w-4' />
-                  {building.city}, {building.country}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className='space-y-3'>
-                  <div className='flex items-center justify-between'>
-                    <span className='text-sm text-gray-600'>Total Units</span>
-                    <Badge variant='secondary'>
-                      <Users className='mr-1 h-3 w-3' />
-                      {building.totalUnits}
-                    </Badge>
+            <Link key={building.id} href={`/buildings/${building.id}`}>
+              <Card className='cursor-pointer transition-shadow hover:shadow-lg'>
+                <CardHeader>
+                  <CardTitle className='flex items-center'>
+                    <Building2 className='mr-2 h-5 w-5' />
+                    {building.name}
+                  </CardTitle>
+                  <CardDescription className='flex items-center'>
+                    <MapPin className='mr-1 h-4 w-4' />
+                    {building.city}, {building.country}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className='space-y-3'>
+                    <div className='flex items-center justify-between'>
+                      <span className='text-sm text-gray-600'>Total Units</span>
+                      <Badge variant='secondary'>
+                        <Users className='mr-1 h-3 w-3' />
+                        {building.totalUnits}
+                      </Badge>
+                    </div>
+                    <p className='line-clamp-2 text-sm text-gray-600'>
+                      {building.description || 'No description provided'}
+                    </p>
+                    <div className='flex space-x-2 pt-2'>
+                      <Button variant='outline' size='sm' className='flex-1'>
+                        View Details
+                      </Button>
+                      <Button variant='outline' size='sm' className='flex-1'>
+                        Manage Units
+                      </Button>
+                    </div>
                   </div>
-                  <p className='line-clamp-2 text-sm text-gray-600'>
-                    {building.description || 'No description provided'}
-                  </p>
-                  <div className='flex space-x-2 pt-2'>
-                    <Button variant='outline' size='sm' className='flex-1'>
-                      View Details
-                    </Button>
-                    <Button variant='outline' size='sm' className='flex-1'>
-                      Manage Units
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       )}

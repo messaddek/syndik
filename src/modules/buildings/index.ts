@@ -5,3 +5,5 @@ export {
   buildingsFilterSearchParams,
 } from './params';
 export { BuildingsView } from './ui/components/buildings-view';
+export { BuildingView } from './ui/components/building-view';
+export { BuildingViewSkeleton } from './ui/components/building-view-skeleton';

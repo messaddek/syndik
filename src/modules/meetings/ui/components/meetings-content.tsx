@@ -25,6 +25,7 @@ import { CreateMeetingDialog } from './create-meeting-dialog';
 import { Meeting } from '@/modules/meetings/types';
 import { useTRPC } from '@/trpc/client';
 import { useConfirm } from '@/hooks/use-confirm';
+import Link from 'next/link';
 
 export function MeetingsContent() {
   const trpc = useTRPC();
@@ -137,7 +138,16 @@ export function MeetingsContent() {
       <CardContent>
         <div className='space-y-2'>
           <p className='text-muted-foreground text-sm'>
-            {getBuildingName(meeting.buildingId)}
+            {meeting.buildingId ? (
+              <Link
+                href={`/buildings/${meeting.buildingId}`}
+                className='text-blue-600 hover:underline'
+              >
+                {getBuildingName(meeting.buildingId)}
+              </Link>
+            ) : (
+              getBuildingName(meeting.buildingId)
+            )}
           </p>
 
           {meeting.description && (
