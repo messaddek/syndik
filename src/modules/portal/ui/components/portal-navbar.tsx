@@ -1,15 +1,26 @@
 'use client';
 
-import { Search } from 'lucide-react';
+import { Search, Building2, LayoutDashboard } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Separator } from '@/components/ui/separator';
 import { NotificationDropdown } from '@/modules/notifications/ui/components/notification-dropdown';
 import { useRealtimeNotifications } from '@/modules/notifications/hooks/use-realtime-notifications';
+import { OrgSwitcher } from '@/components/org-switcher';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { ModeToggle } from '@/components/mode-toggle';
 
 export function PortalNavbar() {
   // Initialize real-time notifications
   useRealtimeNotifications();
+  const router = useRouter();
+
+  const handleDashboardAccess = () => {
+    // Navigate to org-redirect which will handle role-based routing
+    router.push('/org-redirect');
+  };
 
   return (
     <header className='flex h-16 shrink-0 items-center gap-2 border-b px-4'>
@@ -26,10 +37,36 @@ export function PortalNavbar() {
               className='pl-9'
             />
           </div>
-        </div>
+        </div>{' '}
+        {/* Organization Switcher & Navigation */}
+        <div className='flex items-center gap-3'>
+          {/* Organization Switcher - Desktop */}
+          <div className='hidden md:block'>
+            <OrgSwitcher appearance='compact' />
+          </div>
 
-        {/* Notifications */}
-        <div className='flex items-center gap-2'>
+          {/* Dashboard Access Button */}
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={handleDashboardAccess}
+            className='hidden items-center gap-2 sm:flex'
+          >
+            <LayoutDashboard className='h-4 w-4' />
+            <span>Dashboard</span>
+          </Button>
+
+          {/* Mobile Organization Switcher */}
+          <div className='block md:hidden'>
+            <Button variant='outline' size='sm' asChild className='w-auto px-2'>
+              <Link href='/org-switcher'>
+                <Building2 className='h-4 w-4' />
+              </Link>
+            </Button>
+          </div>
+
+          <ModeToggle />
+          {/* Notifications */}
           <NotificationDropdown />
         </div>
       </div>

@@ -1,28 +1,17 @@
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { trpc, getQueryClient } from '@/trpc/server';
+import { Suspense } from 'react';
 import { SettingsContent } from './settings-content';
+import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
+import { DashboardSkeleton } from '@/components/loading-skeletons';
 
-export default async function SettingsPage() {
-  // Prefetch data on the server
-  const queryClient = getQueryClient();
-  // Prefetch all the data that the settings page needs
+// Force dynamic rendering to avoid prerendering issues with auth context
+export const dynamic = 'force-dynamic';
 
-  void queryClient.prefetchQuery(
-    trpc.accounts.getCurrentAccount.queryOptions()
-  );
-  void queryClient.prefetchQuery(
-    trpc.organizations.getCurrentOrganization.queryOptions()
-  );
-  void queryClient.prefetchQuery(
-    trpc.organizations.getStatistics.queryOptions()
-  );
-  void queryClient.prefetchQuery(
-    trpc.accounts.getUserPreferences.queryOptions()
-  );
-
+export default function SettingsPage() {
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <SettingsContent />
-    </HydrationBoundary>
+    <TRPCErrorBoundary>
+      <Suspense fallback={<DashboardSkeleton />}>
+        <SettingsContent />
+      </Suspense>
+    </TRPCErrorBoundary>
   );
 }

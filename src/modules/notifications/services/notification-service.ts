@@ -4,7 +4,7 @@ import { CreateNotification } from '../schema';
 import {
   broadcastNotification,
   broadcastToOrganization,
-} from '@/app/api/notifications/stream/route';
+} from '@/lib/notification-stream';
 
 export class NotificationService {
   /**

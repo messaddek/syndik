@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuth, useUser } from '@clerk/nextjs';
+import { useAuth } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { useRouter } from 'next/navigation';
@@ -9,7 +9,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
   const { userId, orgId } = useAuth();
-  const { user } = useUser();
   const router = useRouter();
   const trpc = useTRPC();
 
@@ -17,10 +16,12 @@ export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
     data: account,
     isLoading,
     error,
-  } = useQuery(trpc.accounts.getCurrentAccount.queryOptions(), {
-    enabled: !!(userId && orgId),
-    retry: false,
-  });
+  } = useQuery(
+    trpc.accounts.getCurrentAccount.queryOptions(undefined, {
+      enabled: !!(userId && orgId),
+      retry: false,
+    })
+  );
 
   useEffect(() => {
     if (!userId || !orgId) {

@@ -14,7 +14,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Building2, ChevronDown, Loader2 } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { OrganizationSwitcherCustom } from './organization-switcher';
 
 interface OrganizationSwitcherResponsiveProps {

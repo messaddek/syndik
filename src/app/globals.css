@@ -159,4 +159,146 @@
   .dark [data-sidebar='menu-button'][data-active='true'] svg {
     color: var(--sidebar-accent-foreground) !important;
   }
+
+  /* Organization Switcher Text Visibility Fixes */
+  .org-switcher-wrapper.dark-theme
+    [class*='organizationPreview']
+    [class*='mainIdentifier'],
+  .dark
+    .org-switcher-wrapper
+    [class*='organizationPreview']
+    [class*='mainIdentifier'],
+  .dark [class*='organizationPreview'] [class*='mainIdentifier'] {
+    color: #f8fafc !important;
+  }
+
+  .org-switcher-wrapper.light-theme
+    [class*='organizationPreview']
+    [class*='mainIdentifier'],
+  .light
+    .org-switcher-wrapper
+    [class*='organizationPreview']
+    [class*='mainIdentifier'],
+  [class*='organizationPreview'] [class*='mainIdentifier'] {
+    color: #1e293b !important;
+  }
+
+  .org-switcher-wrapper.dark-theme
+    [class*='organizationPreview']
+    [class*='secondaryIdentifier'],
+  .dark
+    .org-switcher-wrapper
+    [class*='organizationPreview']
+    [class*='secondaryIdentifier'],
+  .dark [class*='organizationPreview'] [class*='secondaryIdentifier'] {
+    color: #94a3b8 !important;
+  }
+
+  .org-switcher-wrapper.light-theme
+    [class*='organizationPreview']
+    [class*='secondaryIdentifier'],
+  .light
+    .org-switcher-wrapper
+    [class*='organizationPreview']
+    [class*='secondaryIdentifier'],
+  [class*='organizationPreview'] [class*='secondaryIdentifier'] {
+    color: #64748b !important;
+  }
+
+  /* Additional Clerk organization switcher overrides */
+  .dark [class*='cl-organizationPreview__mainIdentifier'] {
+    color: #f8fafc !important;
+  }
+
+  .dark [class*='cl-organizationPreview__secondaryIdentifier'] {
+    color: #94a3b8 !important;
+  }
+
+  [class*='cl-organizationPreview__mainIdentifier'] {
+    color: #1e293b !important;
+  }
+
+  [class*='cl-organizationPreview__secondaryIdentifier'] {
+    color: #64748b !important;
+  }
+
+  /* Ensure organization switcher trigger text is visible */
+  .dark [class*='organizationSwitcher'] [class*='organizationPreview'] * {
+    color: #f8fafc !important;
+  }
+
+  [class*='organizationSwitcher'] [class*='organizationPreview'] * {
+    color: #1e293b !important;
+  }
+
+  /* Organization Switcher Action Button Text Fixes */
+  /* Manage and Create Organization button text visibility */
+  .dark [class*='cl-organizationSwitcherPopoverActionButton'] {
+    color: #f8fafc !important;
+  }
+
+  .dark [class*='cl-organizationSwitcherPopoverActionButton']:hover {
+    color: #ffffff !important;
+    background-color: #334155 !important;
+  }
+
+  [class*='cl-organizationSwitcherPopoverActionButton'] {
+    color: #1e293b !important;
+  }
+
+  [class*='cl-organizationSwitcherPopoverActionButton']:hover {
+    color: #0f172a !important;
+    background-color: #f1f5f9 !important;
+  }
+
+  /* Specific targeting for manage and create organization buttons */
+  .dark .cl-organizationSwitcherPopoverActionButton__manageOrganization,
+  .dark .cl-organizationSwitcherPopoverActionButton__createOrganization {
+    color: #f8fafc !important;
+  }
+
+  .dark .cl-organizationSwitcherPopoverActionButton__manageOrganization:hover,
+  .dark .cl-organizationSwitcherPopoverActionButton__createOrganization:hover {
+    color: #ffffff !important;
+    background-color: #334155 !important;
+  }
+
+  .cl-organizationSwitcherPopoverActionButton__manageOrganization,
+  .cl-organizationSwitcherPopoverActionButton__createOrganization {
+    color: #1e293b !important;
+  }
+
+  .cl-organizationSwitcherPopoverActionButton__manageOrganization:hover,
+  .cl-organizationSwitcherPopoverActionButton__createOrganization:hover {
+    color: #0f172a !important;
+    background-color: #f1f5f9 !important;
+  }
+
+  /* Additional high-specificity overrides for button text */
+  .dark button[class*='cl-organizationSwitcherPopoverActionButton'] {
+    color: #f8fafc !important;
+  }
+
+  .dark button[class*='cl-organizationSwitcherPopoverActionButton']:hover {
+    color: #ffffff !important;
+    background-color: #334155 !important;
+  }
+
+  button[class*='cl-organizationSwitcherPopoverActionButton'] {
+    color: #1e293b !important;
+  }
+
+  button[class*='cl-organizationSwitcherPopoverActionButton']:hover {
+    color: #0f172a !important;
+    background-color: #f1f5f9 !important;
+  }
+
+  /* Override any text color inheritance */
+  .dark [class*='cl-organizationSwitcherPopoverActionButton'] * {
+    color: inherit !important;
+  }
+
+  [class*='cl-organizationSwitcherPopoverActionButton'] * {
+    color: inherit !important;
+  }
 }

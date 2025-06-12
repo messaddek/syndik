@@ -12,7 +12,7 @@ import {
   Bell,
 } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Sidebar,
   SidebarContent,
@@ -24,6 +24,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const navigation = [
@@ -43,6 +44,11 @@ const footerNavigation = [
 
 export function DashboardSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handlePortalAccess = () => {
+    router.push('/org-redirect?target=portal');
+  };
 
   return (
     <Sidebar>
@@ -86,8 +92,19 @@ export function DashboardSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-      </SidebarContent>
+      </SidebarContent>{' '}
       <SidebarFooter>
+        <div className='px-4 pb-2'>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={handlePortalAccess}
+            className='flex w-full items-center gap-2'
+          >
+            <Home className='h-4 w-4' />
+            <span>Resident Portal</span>
+          </Button>
+        </div>
         <SidebarMenu>
           {footerNavigation.map(item => {
             const Icon = item.icon;

@@ -148,9 +148,10 @@ export function DashboardNavbar() {
                     onClick={() => {
                       // eslint-disable-next-line no-console
                       console.log(
-                        '🏠 Dashboard Navbar - Resident Portal clicked, navigating to /portal'
+                        '🏠 Dashboard Navbar - Resident Portal clicked, navigating to /org-redirect for role check'
                       );
-                      router.push('/portal');
+                      // Use org-redirect for intelligent routing
+                      router.push('/org-redirect?target=portal');
                     }}
                   />
                 </UserButton.MenuItems>

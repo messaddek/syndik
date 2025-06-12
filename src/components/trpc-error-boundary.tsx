@@ -70,6 +70,7 @@ export function TRPCErrorBoundary({
       FallbackComponent={fallback || DefaultErrorFallback}
       onError={(error, errorInfo) => {
         // Log error to monitoring service
+
         console.error('tRPC Error Boundary caught an error:', error, errorInfo);
       }}
     >

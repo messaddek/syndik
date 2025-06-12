@@ -9,6 +9,7 @@ import {
   Calendar,
   FileText,
   Bell,
+  LayoutDashboard,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -24,7 +25,9 @@ import {
 } from '@/components/ui/sidebar';
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { OrgSwitcher } from '@/components/org-switcher';
 
 const navigationItems = [
   {
@@ -61,11 +64,16 @@ const navigationItems = [
 
 export function PortalSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleDashboardAccess = () => {
+    router.push('/org-redirect');
+  };
 
   return (
     <Sidebar>
       <SidebarHeader className='border-b p-4'>
-        <div className='flex items-center gap-2'>
+        <div className='mb-3 flex items-center gap-2'>
           <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white'>
             <Home className='h-4 w-4' />
           </div>
@@ -74,6 +82,22 @@ export function PortalSidebar() {
             <p className='text-muted-foreground text-xs'>Resident Portal</p>
           </div>
         </div>
+
+        {/* Organization Switcher */}
+        <div className='mb-3'>
+          <OrgSwitcher appearance='sidebar' />
+        </div>
+
+        {/* Dashboard Access Button */}
+        <Button
+          variant='outline'
+          size='sm'
+          onClick={handleDashboardAccess}
+          className='flex w-full items-center gap-2'
+        >
+          <LayoutDashboard className='h-4 w-4' />
+          <span>Access Dashboard</span>
+        </Button>
       </SidebarHeader>
 
       <SidebarContent>

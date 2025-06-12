@@ -21,7 +21,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { formatDistanceToNow } from 'date-fns';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -170,8 +169,19 @@ export function ResidentNotifications() {
       page: 1,
       pageSize: 50,
       isRead: activeTab === 'unread' ? false : undefined,
-      category: categoryFilter !== 'all' ? (categoryFilter as any) : undefined,
-      priority: priorityFilter !== 'all' ? (priorityFilter as any) : undefined,
+      category:
+        categoryFilter !== 'all'
+          ? (categoryFilter as
+              | 'financial'
+              | 'maintenance'
+              | 'community'
+              | 'system'
+              | 'general')
+          : undefined,
+      priority:
+        priorityFilter !== 'all'
+          ? (priorityFilter as 'low' | 'normal' | 'high' | 'urgent')
+          : undefined,
     })
   );
 

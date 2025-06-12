@@ -29,7 +29,7 @@ const eslintConfig = [
 
       // Additional strict rules that will show as errors in editor
       'react-hooks/exhaustive-deps': 'error',
-      'no-console': 'warn',
+      'no-console': 'off',
       'prefer-const': 'error',
       'no-var': 'error',
 

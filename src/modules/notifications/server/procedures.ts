@@ -14,7 +14,6 @@ import {
   notificationPreferencesSchema,
 } from '../schema';
 import { TRPCError } from '@trpc/server';
-import { PAGINATION } from '@/constants';
 
 export const notificationsRouter = createTRPCRouter({
   // Create a new notification (admin only)

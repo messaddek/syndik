@@ -1,8 +1,6 @@
 import { NextRequest } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
-
-// Store active connections
-const connections = new Map<string, ReadableStreamDefaultController>();
+import { addConnection, removeConnection } from '@/lib/notification-stream';
 
 export async function GET(request: NextRequest) {
   const { userId, orgId } = await auth();
@@ -14,7 +12,7 @@ export async function GET(request: NextRequest) {
   const stream = new ReadableStream({
     start(controller) {
       // Store the connection
-      connections.set(userId, controller);
+      addConnection(userId, controller);
 
       // Send initial connection confirmation
       controller.enqueue(
@@ -28,27 +26,28 @@ export async function GET(request: NextRequest) {
             `data: ${JSON.stringify({ type: 'heartbeat', timestamp: Date.now() })}\n\n`
           );
         } catch (error) {
+          console.error('Error sending heartbeat:', error);
           clearInterval(heartbeat);
-          connections.delete(userId);
+          removeConnection(userId);
         }
       }, 30000); // 30 seconds
 
       // Clean up on close
       request.signal.addEventListener('abort', () => {
         clearInterval(heartbeat);
-        connections.delete(userId);
+        removeConnection(userId);
         try {
           controller.close();
         } catch (error) {
+          console.error('Error closing controller:', error);
           // Controller already closed
         }
       });
     },
     cancel() {
-      connections.delete(userId);
+      removeConnection(userId);
     },
   });
-
   return new Response(stream, {
     headers: {
       'Content-Type': 'text/event-stream',
@@ -59,60 +58,4 @@ export async function GET(request: NextRequest) {
       'Access-Control-Allow-Headers': 'Cache-Control',
     },
   });
-}
-
-// Helper function to broadcast notifications to connected clients
-export function broadcastNotification(userId: string, notification: any) {
-  const controller = connections.get(userId);
-  if (controller) {
-    try {
-      controller.enqueue(
-        `data: ${JSON.stringify({
-          type: 'new_notification',
-          notification,
-          timestamp: Date.now(),
-        })}\n\n`
-      );
-    } catch (error) {
-      // Connection closed, remove it
-      connections.delete(userId);
-    }
-  }
-}
-
-// Helper function to broadcast to all users in an organization
-export function broadcastToOrganization(orgId: string, notification: any) {
-  for (const [userId, controller] of connections.entries()) {
-    // In a real app, you'd want to check if the user belongs to the org
-    // For now, we'll broadcast to all connected users
-    try {
-      controller.enqueue(
-        `data: ${JSON.stringify({
-          type: 'new_notification',
-          notification,
-          timestamp: Date.now(),
-        })}\n\n`
-      );
-    } catch (error) {
-      connections.delete(userId);
-    }
-  }
-}
-
-// Helper function to notify about read status changes
-export function broadcastReadStatus(userId: string, notificationId: string) {
-  const controller = connections.get(userId);
-  if (controller) {
-    try {
-      controller.enqueue(
-        `data: ${JSON.stringify({
-          type: 'notification_read',
-          notificationId,
-          timestamp: Date.now(),
-        })}\n\n`
-      );
-    } catch (error) {
-      connections.delete(userId);
-    }
-  }
 }
