@@ -9,6 +9,7 @@ import {
   BarChart3,
   Settings,
   HelpCircle,
+  Bell,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -32,6 +33,7 @@ const navigation = [
   { name: 'Residents', href: '/residents', icon: Users },
   { name: 'Finances', href: '/finances', icon: TrendingUp },
   { name: 'Meetings', href: '/meetings', icon: Calendar },
+  { name: 'Notifications', href: '/notifications', icon: Bell },
 ];
 
 const footerNavigation = [

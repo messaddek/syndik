@@ -7,6 +7,7 @@ export * from '../modules/incomes/schema';
 export * from '../modules/expenses/schema';
 export * from '../modules/meetings/schema';
 export * from '../modules/announcements/schema';
+export * from '../modules/notifications/schema';
 export * from '../modules/portal/schema';
 
 // Define all relations here to avoid circular imports

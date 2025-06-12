@@ -9,6 +9,7 @@ import { dashboardRouter } from '../../modules/dashboard/server/procedures';
 import { searchRouter } from '../../modules/search/server/procedures';
 import { organizationsRouter } from '../../modules/organizations/server/procedures';
 import { announcementsRouter } from '../../modules/announcements/server/procedures';
+import { notificationsRouter } from '../../modules/notifications/server/procedures';
 import { portalRouter } from '../../modules/portal/server/procedures';
 import { createTRPCRouter } from '@/trpc/init';
 
@@ -23,6 +24,7 @@ export const appRouter = createTRPCRouter({
   dashboard: dashboardRouter,
   search: searchRouter,
   announcements: announcementsRouter,
+  notifications: notificationsRouter,
   organizations: organizationsRouter,
   portal: portalRouter,
 });

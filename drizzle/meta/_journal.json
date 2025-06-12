@@ -15,6 +15,13 @@
       "when": 1749661383966,
       "tag": "0001_married_meteorite",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1749687404064,
+      "tag": "0002_mixed_mesmero",
+      "breakpoints": true
     }
   ]
 }

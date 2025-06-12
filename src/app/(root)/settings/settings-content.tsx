@@ -48,6 +48,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from 'sonner';
+import { NotificationSettings } from '@/modules/notifications';
 
 export function SettingsContent() {
   const { user } = useUser();
@@ -341,7 +342,6 @@ export function SettingsContent() {
                 </CardContent>
               </Card>
             </TabsContent>
-
             {/* Syndicate Tab */}
             <TabsContent value='syndicate' className='space-y-6'>
               <Card>
@@ -445,144 +445,11 @@ export function SettingsContent() {
                   </Button>
                 </CardContent>
               </Card>
-            </TabsContent>
-
-            {/* Notifications Tab */}
+            </TabsContent>{' '}
+            {/* Notifications Tab - Integrated with new notification system */}
             <TabsContent value='notifications' className='space-y-6'>
-              <Card>
-                <CardHeader>
-                  <CardTitle className='flex items-center gap-2'>
-                    <Bell className='h-5 w-5' />
-                    Notification Preferences
-                  </CardTitle>
-                  <CardDescription>
-                    Choose how you want to receive notifications and updates.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className='space-y-6'>
-                  <div className='space-y-4'>
-                    <div className='flex items-center justify-between'>
-                      <div className='space-y-0.5'>
-                        <Label className='text-base'>Email Notifications</Label>
-                        <div className='text-sm text-gray-500'>
-                          Receive important updates via email
-                        </div>
-                      </div>
-                      <Switch
-                        checked={notifications.emailNotifications}
-                        onCheckedChange={checked =>
-                          setNotifications(prev => ({
-                            ...prev,
-                            emailNotifications: checked,
-                          }))
-                        }
-                      />
-                    </div>
-
-                    <div className='flex items-center justify-between'>
-                      <div className='space-y-0.5'>
-                        <Label className='text-base'>SMS Notifications</Label>
-                        <div className='text-sm text-gray-500'>
-                          Get urgent alerts via text message
-                        </div>
-                      </div>
-                      <Switch
-                        checked={notifications.smsNotifications}
-                        onCheckedChange={checked =>
-                          setNotifications(prev => ({
-                            ...prev,
-                            smsNotifications: checked,
-                          }))
-                        }
-                      />
-                    </div>
-
-                    <div className='flex items-center justify-between'>
-                      <div className='space-y-0.5'>
-                        <Label className='text-base'>Push Notifications</Label>
-                        <div className='text-sm text-gray-500'>
-                          Browser and mobile app notifications
-                        </div>
-                      </div>
-                      <Switch
-                        checked={notifications.pushNotifications}
-                        onCheckedChange={checked =>
-                          setNotifications(prev => ({
-                            ...prev,
-                            pushNotifications: checked,
-                          }))
-                        }
-                      />
-                    </div>
-
-                    <Separator />
-
-                    <div className='flex items-center justify-between'>
-                      <div className='space-y-0.5'>
-                        <Label className='text-base'>Weekly Reports</Label>
-                        <div className='text-sm text-gray-500'>
-                          Summary of syndicate activities
-                        </div>
-                      </div>
-                      <Switch
-                        checked={notifications.weeklyReports}
-                        onCheckedChange={checked =>
-                          setNotifications(prev => ({
-                            ...prev,
-                            weeklyReports: checked,
-                          }))
-                        }
-                      />
-                    </div>
-
-                    <div className='flex items-center justify-between'>
-                      <div className='space-y-0.5'>
-                        <Label className='text-base'>Maintenance Alerts</Label>
-                        <div className='text-sm text-gray-500'>
-                          New requests and status updates
-                        </div>
-                      </div>
-                      <Switch
-                        checked={notifications.maintenanceAlerts}
-                        onCheckedChange={checked =>
-                          setNotifications(prev => ({
-                            ...prev,
-                            maintenanceAlerts: checked,
-                          }))
-                        }
-                      />
-                    </div>
-
-                    <div className='flex items-center justify-between'>
-                      <div className='space-y-0.5'>
-                        <Label className='text-base'>Financial Updates</Label>
-                        <div className='text-sm text-gray-500'>
-                          Budget changes and payment reminders
-                        </div>
-                      </div>
-                      <Switch
-                        checked={notifications.financialUpdates}
-                        onCheckedChange={checked =>
-                          setNotifications(prev => ({
-                            ...prev,
-                            financialUpdates: checked,
-                          }))
-                        }
-                      />
-                    </div>
-                  </div>
-
-                  <Button
-                    onClick={handleSave}
-                    className='flex items-center gap-2'
-                  >
-                    <Save className='h-4 w-4' />
-                    Save Preferences
-                  </Button>
-                </CardContent>
-              </Card>
+              <NotificationSettings />
             </TabsContent>
-
             {/* Security Tab */}
             <TabsContent value='security' className='space-y-6'>
               <Card>
@@ -724,7 +591,6 @@ export function SettingsContent() {
                 </CardContent>
               </Card>
             </TabsContent>
-
             {/* Billing Tab */}
             <TabsContent value='billing' className='space-y-6'>
               <Card>
@@ -812,7 +678,6 @@ export function SettingsContent() {
                 </CardContent>
               </Card>
             </TabsContent>
-
             {/* Preferences Tab */}
             <TabsContent value='preferences' className='space-y-6'>
               <Card>

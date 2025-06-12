@@ -8,6 +8,7 @@ import {
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
 import { OrganizationGuard, RoleGuard } from '@/modules/organizations';
+import { NotificationProvider } from '@/modules/notifications';
 
 export default async function PortalLayout({
   children,
@@ -29,23 +30,24 @@ export default async function PortalLayout({
     );
     redirect('/sign-in');
   }
-
   return (
     <TRPCErrorBoundary>
       <SidebarProvider>
-        <div className='flex min-h-screen w-full'>
-          <PortalSidebar />
-          <div className='flex flex-1 flex-col'>
-            <PortalNavbar />
-            <main className='flex-1 p-6'>
-              <OrganizationGuard>
-                <RoleGuard allowedRoles={['member']} redirectTo='/dashboard'>
-                  <ResidentAccessGuard>{children}</ResidentAccessGuard>
-                </RoleGuard>
-              </OrganizationGuard>
-            </main>
+        <NotificationProvider>
+          <div className='flex min-h-screen w-full'>
+            <PortalSidebar />
+            <div className='flex flex-1 flex-col'>
+              <PortalNavbar />
+              <main className='flex-1 p-6'>
+                <OrganizationGuard>
+                  <RoleGuard allowedRoles={['member']} redirectTo='/dashboard'>
+                    <ResidentAccessGuard>{children}</ResidentAccessGuard>
+                  </RoleGuard>
+                </OrganizationGuard>
+              </main>
+            </div>
           </div>
-        </div>
+        </NotificationProvider>
       </SidebarProvider>
     </TRPCErrorBoundary>
   );

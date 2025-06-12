@@ -45,6 +45,7 @@ const navigationItems = [
     title: 'Community',
     items: [
       { title: 'Announcements', url: '/portal/announcements', icon: Bell },
+      { title: 'Notifications', url: '/portal/notifications', icon: Bell },
       { title: 'Messages', url: '/portal/messages', icon: MessageSquare },
       { title: 'Meetings', url: '/portal/meetings', icon: Calendar },
     ],
