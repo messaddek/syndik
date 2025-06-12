@@ -18,11 +18,11 @@ export const accountsRouter = createTRPCRouter({
         throw new Error('Organization is required');
       }
 
-      // Check if account already exists
+      // Check if account already exists for this user in this organization
       const existingAccount = await db
         .select()
         .from(accounts)
-        .where(eq(accounts.userId, userId))
+        .where(and(eq(accounts.userId, userId), eq(accounts.orgId, orgId)))
         .limit(1);
 
       if (existingAccount.length > 0) {
@@ -45,12 +45,16 @@ export const accountsRouter = createTRPCRouter({
     }),
 
   getCurrentAccount: protectedProcedure.query(async ({ ctx }) => {
-    const { db, userId } = ctx;
+    const { db, userId, orgId } = ctx;
+
+    if (!orgId) {
+      return null;
+    }
 
     const [account] = await db
       .select()
       .from(accounts)
-      .where(eq(accounts.userId, userId))
+      .where(and(eq(accounts.userId, userId), eq(accounts.orgId, orgId)))
       .limit(1);
 
     return account || null;
@@ -59,7 +63,11 @@ export const accountsRouter = createTRPCRouter({
   updateAccount: protectedProcedure
     .input(updateAccountSchema)
     .mutation(async ({ ctx, input }) => {
-      const { db, userId } = ctx;
+      const { db, userId, orgId } = ctx;
+
+      if (!orgId) {
+        throw new Error('Organization is required');
+      }
 
       const [updatedAccount] = await db
         .update(accounts)
@@ -67,7 +75,7 @@ export const accountsRouter = createTRPCRouter({
           ...input,
           updatedAt: new Date(),
         })
-        .where(eq(accounts.userId, userId))
+        .where(and(eq(accounts.userId, userId), eq(accounts.orgId, orgId)))
         .returning();
 
       return updatedAccount;

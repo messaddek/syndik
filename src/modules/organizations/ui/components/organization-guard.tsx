@@ -7,6 +7,7 @@ import { AccountInitForm } from '@/modules/accounts/ui/components/account-init-f
 import { useTRPC } from '@/trpc/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
+import { usePathname } from 'next/navigation';
 
 interface OrganizationGuardProps {
   children: React.ReactNode;
@@ -15,8 +16,19 @@ interface OrganizationGuardProps {
 export function OrganizationGuard({ children }: OrganizationGuardProps) {
   const { organization, isLoaded: orgLoaded } = useOrganization();
   const { user, isLoaded: userLoaded } = useUser();
+  const pathname = usePathname();
   const trpc = useTRPC();
   const queryClient = useQueryClient();
+  // Determine default role based on current route
+  const isPortalRoute = pathname.startsWith('/portal');
+  const defaultRole = isPortalRoute ? 'member' : 'manager';
+
+  // eslint-disable-next-line no-console
+  console.log('🛡️ OrganizationGuard - Pathname:', pathname);
+  // eslint-disable-next-line no-console
+  console.log('🛡️ OrganizationGuard - Is portal route:', isPortalRoute);
+  // eslint-disable-next-line no-console
+  console.log('🛡️ OrganizationGuard - Default role:', defaultRole);
 
   // Check if user has an account
   const { data: account, isLoading: accountLoading } = useQuery(
@@ -55,13 +67,12 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
   if (!organization) {
     return <OrganizationSwitcherCustom />;
   }
-
   // If user has organization but no account, show account initialization
   if (!account) {
     const handleInitializeAccount = (data: {
       name: string;
       email: string;
-      role: 'manager' | 'admin';
+      role: 'manager' | 'admin' | 'member';
     }) => {
       initializeAccount.mutate(data);
     };
@@ -80,7 +91,7 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
             <h1 className='animate-in fade-in mb-3 text-3xl font-bold text-gray-900 delay-300 duration-500 dark:text-white'>
               Welcome to Syndik
             </h1>
-            <p className='animate-in fade-in text-lg leading-relaxed text-gray-600 delay-400 duration-500 dark:text-gray-300'>
+            <p className='animate-in fade-in delay-400 text-lg leading-relaxed text-gray-600 duration-500 dark:text-gray-300'>
               Complete your account setup to start managing your residential
               syndicate efficiently
             </p>
@@ -91,6 +102,7 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
               isLoading={initializeAccount.isPending}
               defaultName={defaultName}
               defaultEmail={defaultEmail}
+              defaultRole={defaultRole}
             />
           </div>
         </div>

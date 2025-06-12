@@ -17,8 +17,10 @@ import {
   TrendingUp,
   TrendingDown,
   Calendar,
+  Mail,
 } from 'lucide-react';
 import Link from 'next/link';
+import { BulkInviteDialog } from '@/modules/residents';
 
 interface Activity {
   id: string;
@@ -46,6 +48,9 @@ export function DashboardView() {
   );
   const { data: recentActivity } = useQuery(
     trpc.dashboard.getRecentActivity.queryOptions({ limit: 5 })
+  );
+  const { data: portalStats } = useQuery(
+    trpc.dashboard.getPortalStats.queryOptions()
   );
 
   const typedOverview = overview as DashboardOverview | undefined;
@@ -121,7 +126,7 @@ export function DashboardView() {
       </div>
 
       {/* Financial Summary */}
-      <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+      <div className='grid grid-cols-1 gap-6 lg:grid-cols-3'>
         <Card>
           <CardHeader>
             <CardTitle>Monthly Financial Summary</CardTitle>
@@ -147,6 +152,41 @@ export function DashboardView() {
                   className={`text-sm font-bold ${(typedOverview?.netIncome || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}
                 >
                   ${typedOverview?.netIncome?.toFixed(2) || '0.00'}
+                </span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Portal Statistics</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className='space-y-4'>
+              <div className='flex items-center justify-between'>
+                <span className='text-sm font-medium'>Total Residents</span>
+                <span className='text-sm font-bold'>
+                  {portalStats?.totalResidents || 0}
+                </span>
+              </div>
+              <div className='flex items-center justify-between'>
+                <span className='text-sm font-medium'>Portal Access</span>
+                <span className='text-sm font-bold text-blue-600'>
+                  {portalStats?.invitedCount || 0}
+                </span>
+              </div>
+              <div className='flex items-center justify-between'>
+                <span className='text-sm font-medium'>Not Invited</span>
+                <span className='text-sm font-bold text-amber-600'>
+                  {portalStats?.uninvitedCount || 0}
+                </span>
+              </div>
+              <hr />
+              <div className='flex items-center justify-between'>
+                <span className='text-sm font-medium'>Invitation Rate</span>
+                <span className='text-sm font-bold text-purple-600'>
+                  {portalStats?.invitationRate || 0}%
                 </span>
               </div>
             </div>
@@ -211,14 +251,18 @@ export function DashboardView() {
                 <span className='text-sm'>Add Building</span>
               </Button>
             </Link>
-            <Button variant='outline' className='flex h-20 w-full flex-col'>
-              <Users className='mb-2 h-6 w-6' />
-              <span className='text-sm'>Add Resident</span>
-            </Button>
-            <Button variant='outline' className='flex h-20 w-full flex-col'>
-              <TrendingUp className='mb-2 h-6 w-6' />
-              <span className='text-sm'>Record Income</span>
-            </Button>
+            <Link href='/residents'>
+              <Button variant='outline' className='flex h-20 w-full flex-col'>
+                <Users className='mb-2 h-6 w-6' />
+                <span className='text-sm'>Add Resident</span>
+              </Button>
+            </Link>
+            <BulkInviteDialog>
+              <Button variant='outline' className='flex h-20 w-full flex-col'>
+                <Mail className='mb-2 h-6 w-6' />
+                <span className='text-sm'>Invite Residents</span>
+              </Button>
+            </BulkInviteDialog>
             <Button variant='outline' className='flex h-20 w-full flex-col'>
               <Calendar className='mb-2 h-6 w-6' />
               <span className='text-sm'>Schedule Meeting</span>

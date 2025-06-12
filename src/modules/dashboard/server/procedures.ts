@@ -7,6 +7,7 @@ import { residents } from '../../residents/schema';
 import { incomes } from '../../incomes/schema';
 import { expenses } from '../../expenses/schema';
 import { meetings } from '../../meetings/schema';
+import { users } from '../../accounts/schema';
 
 export const dashboardRouter = createTRPCRouter({
   getOverview: orgProtectedProcedure.query(async ({ ctx }) => {
@@ -186,4 +187,40 @@ export const dashboardRouter = createTRPCRouter({
 
       return monthlyData;
     }),
+
+  getPortalStats: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, orgId } = ctx;
+
+    // Get total active residents
+    const [totalActiveResidents] = await db
+      .select({ count: count() })
+      .from(residents)
+      .where(and(eq(residents.orgId, orgId), eq(residents.isActive, true)));
+
+    // Get residents with portal access (have user records)
+    const [invitedResidents] = await db
+      .select({ count: count() })
+      .from(residents)
+      .innerJoin(users, eq(users.residentId, residents.id))
+      .where(
+        and(
+          eq(residents.orgId, orgId),
+          eq(residents.isActive, true),
+          eq(users.orgId, orgId)
+        )
+      );
+
+    const totalResidents = totalActiveResidents?.count || 0;
+    const invitedCount = invitedResidents?.count || 0;
+    const uninvitedCount = totalResidents - invitedCount;
+    const invitationRate =
+      totalResidents > 0 ? (invitedCount / totalResidents) * 100 : 0;
+
+    return {
+      totalResidents,
+      invitedCount,
+      uninvitedCount,
+      invitationRate: Number(invitationRate.toFixed(1)),
+    };
+  }),
 });

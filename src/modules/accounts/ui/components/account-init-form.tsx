@@ -23,11 +23,12 @@ interface AccountInitFormProps {
   onSubmit: (data: {
     name: string;
     email: string;
-    role: 'manager' | 'admin';
+    role: 'manager' | 'admin' | 'member';
   }) => void;
   isLoading: boolean;
   defaultName?: string;
   defaultEmail?: string;
+  defaultRole?: 'manager' | 'admin' | 'member';
 }
 
 export function AccountInitForm({
@@ -35,10 +36,11 @@ export function AccountInitForm({
   isLoading,
   defaultName = '',
   defaultEmail = '',
+  defaultRole = 'member',
 }: AccountInitFormProps) {
   const [name, setName] = useState(defaultName);
   const [email, setEmail] = useState(defaultEmail);
-  const [role, setRole] = useState<'manager' | 'admin'>('manager');
+  const [role, setRole] = useState<'manager' | 'admin' | 'member'>(defaultRole);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,14 +90,21 @@ export function AccountInitForm({
             <Label htmlFor='role'>Role</Label>
             <Select
               value={role}
-              onValueChange={(value: 'manager' | 'admin') => setRole(value)}
+              onValueChange={(value: 'manager' | 'admin' | 'member') =>
+                setRole(value)
+              }
             >
               <SelectTrigger>
                 <SelectValue placeholder='Select your role' />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value='manager'>Manager</SelectItem>
-                <SelectItem value='admin'>Administrator</SelectItem>
+                <SelectItem value='member'>Member (Portal Access)</SelectItem>
+                <SelectItem value='manager'>
+                  Manager (Dashboard Access)
+                </SelectItem>
+                <SelectItem value='admin'>
+                  Administrator (Full Access)
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>

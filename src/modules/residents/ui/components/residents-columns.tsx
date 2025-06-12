@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import type { Resident } from '../../types';
 import Link from 'next/link';
+import { ResidentInviteButton } from './resident-invite-button';
 
 interface ResidentWithUnit extends Resident {
   unit?: {
@@ -45,34 +46,37 @@ interface ColumnActionsProps {
 
 function ColumnActions({ resident, onEdit, onDelete }: ColumnActionsProps) {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant='ghost' className='h-8 w-8 p-0'>
-          <span className='sr-only'>Open menu</span>
-          <MoreHorizontal className='h-4 w-4' />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'>
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuItem
-          onClick={() => navigator.clipboard.writeText(resident.email)}
-        >
-          Copy email
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => onEdit(resident)}>
-          <Edit className='mr-2 h-4 w-4' />
-          Edit resident
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => onDelete(resident.id)}
-          className='text-destructive'
-        >
-          <Trash2 className='mr-2 h-4 w-4' />
-          Delete resident
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className='flex items-center space-x-1'>
+      <ResidentInviteButton resident={resident} />
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant='ghost' className='h-8 w-8 p-0'>
+            <span className='sr-only'>Open menu</span>
+            <MoreHorizontal className='h-4 w-4' />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align='end'>
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem
+            onClick={() => navigator.clipboard.writeText(resident.email)}
+          >
+            Copy email
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => onEdit(resident)}>
+            <Edit className='mr-2 h-4 w-4' />
+            Edit resident
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onDelete(resident.id)}
+            className='text-destructive'
+          >
+            <Trash2 className='mr-2 h-4 w-4' />
+            Delete resident
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 }
 

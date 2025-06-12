@@ -8,7 +8,7 @@ export const accounts = pgTable('accounts', {
   orgId: text('org_id').notNull(), // Clerk org ID
   name: text('name').notNull(),
   email: text('email').notNull(),
-  role: text('role').notNull().default('manager'), // manager, admin
+  role: text('role').notNull().default('manager'), // manager, admin, member
   isActive: boolean('is_active').notNull().default(true),
   // Organization information stored directly in account
   organizationName: text('organization_name'), // Synced from Clerk organization
@@ -49,7 +49,7 @@ export const insertUserSchema = createInsertSchema(users).omit({
 export const initAccountSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.string().email('Valid email is required'),
-  role: z.enum(['manager', 'admin']).default('manager'),
+  role: z.enum(['manager', 'admin', 'member']).default('manager'),
   organizationName: z.string().optional(),
   organizationSlug: z.string().optional(),
 });

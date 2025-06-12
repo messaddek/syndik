@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Webhook } from 'svix';
 import { db } from '@/lib/db';
 import { eq, and } from 'drizzle-orm';
-import { accounts } from '@/lib/schema';
+import { accounts, users, residents } from '@/lib/schema';
 
 const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
 
@@ -31,6 +31,13 @@ interface ClerkWebhookEvent {
       email_addresses?: Array<{ email_address: string }>;
     };
     role?: string;
+    invitation?: {
+      id: string;
+      public_metadata?: {
+        residentId?: string;
+        invitationType?: string;
+      };
+    };
   };
 }
 
@@ -157,7 +164,7 @@ async function handleOrganizationDeleted(evt: ClerkWebhookEvent) {
 }
 
 async function handleMembershipCreated(evt: ClerkWebhookEvent) {
-  const { organization, public_user_data, role } = evt.data;
+  const { organization, public_user_data, role, invitation } = evt.data;
 
   if (!organization?.id || !public_user_data?.user_id || !role) {
     return;
@@ -186,7 +193,7 @@ async function handleMembershipCreated(evt: ClerkWebhookEvent) {
       email:
         public_user_data.email_addresses?.[0]?.email_address ||
         'unknown@example.com',
-      role: role === 'org:admin' ? ('admin' as const) : ('manager' as const),
+      role: role === 'org:admin' ? ('admin' as const) : ('member' as const),
       organizationName: organization.name || null,
       organizationSlug: organization.slug || null,
     };
@@ -203,6 +210,74 @@ async function handleMembershipCreated(evt: ClerkWebhookEvent) {
           updatedAt: new Date(),
         })
         .where(eq(accounts.id, existingAccount[0].id));
+    }
+
+    // Handle resident linking if this was a resident invitation
+    if (
+      invitation?.public_metadata?.residentId &&
+      invitation.public_metadata.invitationType === 'resident_portal'
+    ) {
+      const residentId = invitation.public_metadata.residentId;
+
+      // Verify resident exists and belongs to this organization
+      const [resident] = await db
+        .select()
+        .from(residents)
+        .where(
+          and(
+            eq(residents.id, residentId),
+            eq(residents.orgId, organization.id)
+          )
+        )
+        .limit(1);
+
+      if (resident) {
+        // Check if user record already exists
+        const existingUser = await db
+          .select()
+          .from(users)
+          .where(
+            and(
+              eq(users.userId, public_user_data.user_id),
+              eq(users.orgId, organization.id)
+            )
+          )
+          .limit(1);
+
+        const userRecord = {
+          userId: public_user_data.user_id,
+          orgId: organization.id,
+          name: userData.name,
+          email: userData.email,
+          residentId: residentId,
+          isActive: true,
+        };
+
+        if (existingUser.length === 0) {
+          // Create new user record with resident link
+          await db.insert(users).values(userRecord);
+        } else {
+          // Update existing user record with resident link
+          await db
+            .update(users)
+            .set({
+              ...userRecord,
+              updatedAt: new Date(),
+            })
+            .where(eq(users.id, existingUser[0].id));
+        }
+
+        // Optionally sync email if different
+        if (resident.email !== userData.email) {
+          await db
+            .update(residents)
+            .set({
+              email: userData.email,
+              updatedAt: new Date(),
+            })
+            .where(eq(residents.id, residentId));
+        }
+      }
     }
   } catch (error) {
     throw error;
@@ -221,7 +296,7 @@ async function handleMembershipUpdated(evt: ClerkWebhookEvent) {
     await db
       .update(accounts)
       .set({
-        role: role === 'org:admin' ? 'admin' : 'manager',
+        role: role === 'org:admin' ? 'admin' : 'member',
         updatedAt: new Date(),
       })
       .where(

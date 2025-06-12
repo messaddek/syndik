@@ -11,18 +11,12 @@ export const organizationsRouter = createTRPCRouter({
   hasOrganization: protectedProcedure.query(async ({ ctx }) => {
     const { orgId } = ctx;
 
-    if (!orgId) {
-      return false;
+    // If Clerk provides orgId, user has an organization
+    if (orgId) {
+      return true;
     }
 
-    // Check if any account exists for this organization
-    const accountsInOrg = await db
-      .select()
-      .from(accounts)
-      .where(eq(accounts.orgId, orgId))
-      .limit(1);
-
-    return accountsInOrg.length > 0;
+    return false;
   }), // Get current organization info from account data
   getCurrentOrganization: protectedProcedure.query(async ({ ctx }) => {
     const { orgId } = ctx;

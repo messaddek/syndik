@@ -22,6 +22,7 @@ import {
   Phone,
   Mail,
   Calendar,
+  HomeIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useTRPC } from '@/trpc/client';
@@ -138,7 +139,22 @@ export function DashboardNavbar() {
                     avatarBox: 'h-8 w-8',
                   },
                 }}
-              />
+              >
+                {' '}
+                <UserButton.MenuItems>
+                  <UserButton.Action
+                    label='Resident Portal'
+                    labelIcon={<HomeIcon className='size-3' />}
+                    onClick={() => {
+                      // eslint-disable-next-line no-console
+                      console.log(
+                        '🏠 Dashboard Navbar - Resident Portal clicked, navigating to /portal'
+                      );
+                      router.push('/portal');
+                    }}
+                  />
+                </UserButton.MenuItems>
+              </UserButton>
             </div>
           ) : (
             <div className='h-8 w-8 animate-pulse rounded-full bg-gray-200 dark:bg-gray-700' />
