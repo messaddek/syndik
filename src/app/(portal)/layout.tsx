@@ -8,7 +8,7 @@ import {
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
 import { OrganizationGuard, RoleGuard } from '@/modules/organizations';
-import { NotificationProvider } from '@/modules/notifications';
+import { NotificationProvider } from '@/modules/notifications/providers/notification-provider';
 
 export default async function PortalLayout({
   children,

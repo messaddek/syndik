@@ -48,7 +48,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from 'sonner';
-import { NotificationSettings } from '@/modules/notifications';
+import { NotificationSettings } from '@/modules/notifications/ui/views/notification-settings';
 
 export function SettingsContent() {
   const { user } = useUser();
@@ -59,9 +59,7 @@ export function SettingsContent() {
   const [currentTab, setCurrentTab] = useQueryState('tab', {
     defaultValue: 'profile',
     shallow: false,
-  });
-
-  // Fetch real data from tRPC
+  }); // Fetch real data from tRPC
   const { data: account, isLoading: accountLoading } = useQuery(
     trpc.accounts.getCurrentAccount.queryOptions()
   );
@@ -73,11 +71,10 @@ export function SettingsContent() {
   const { data: statistics } = useQuery(
     trpc.organizations.getStatistics.queryOptions()
   );
+
   const { data: userPreferences, isLoading: preferencesLoading } = useQuery(
     trpc.accounts.getUserPreferences.queryOptions()
-  );
-
-  // Update preferences mutation
+  ); // Update preferences mutation
   const updatePreferencesMutation = useMutation(
     trpc.accounts.updateUserPreferences.mutationOptions({
       onSuccess: () => {

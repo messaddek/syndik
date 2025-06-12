@@ -6,14 +6,19 @@ export default async function SettingsPage() {
   // Prefetch data on the server
   const queryClient = getQueryClient();
   // Prefetch all the data that the settings page needs
-  await Promise.all([
-    queryClient.prefetchQuery(trpc.accounts.getCurrentAccount.queryOptions()),
-    queryClient.prefetchQuery(
-      trpc.organizations.getCurrentOrganization.queryOptions()
-    ),
-    queryClient.prefetchQuery(trpc.organizations.getStatistics.queryOptions()),
-    queryClient.prefetchQuery(trpc.accounts.getUserPreferences.queryOptions()),
-  ]);
+
+  void queryClient.prefetchQuery(
+    trpc.accounts.getCurrentAccount.queryOptions()
+  );
+  void queryClient.prefetchQuery(
+    trpc.organizations.getCurrentOrganization.queryOptions()
+  );
+  void queryClient.prefetchQuery(
+    trpc.organizations.getStatistics.queryOptions()
+  );
+  void queryClient.prefetchQuery(
+    trpc.accounts.getUserPreferences.queryOptions()
+  );
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

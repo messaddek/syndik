@@ -47,7 +47,6 @@ export function NotificationSettings() {
       enabled: false,
     },
   });
-
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 

@@ -13,12 +13,12 @@ export {
   useNotifications,
 } from './providers/notification-provider';
 
-// Services
-export { NotificationService } from './services/notification-service';
-
-// Types
+// Types (safe to export as they're just type definitions)
 export type {
   Notification,
   CreateNotification,
   NotificationPreferences,
 } from './schema';
+
+// Note: NotificationService is not exported here to avoid server-only imports
+// Import it directly from './services/notification-service' in server components
