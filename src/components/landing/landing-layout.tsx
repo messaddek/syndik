@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -14,6 +14,7 @@ import {
   Linkedin,
   Instagram,
   BookOpen,
+  ChevronUp,
 } from 'lucide-react';
 import { useUser, UserButton } from '@clerk/nextjs';
 import { Button } from '../ui/button';
@@ -37,8 +38,26 @@ export function LandingLayout({ children }: LandingLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isSubscribing, setIsSubscribing] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const pathname = usePathname();
   const { isSignedIn } = useUser();
+
+  // Handle scroll for back-to-top button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,8 +73,8 @@ export function LandingLayout({ children }: LandingLayoutProps) {
   };
   return (
     <div className='min-h-screen bg-white'>
-      {/* Header */}
-      <header className='border-b bg-white shadow-sm'>
+      {/* Header - Fixed */}
+      <header className='fixed top-0 right-0 left-0 z-50 border-b bg-white/95 shadow-sm backdrop-blur-sm'>
         <nav
           className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'
           aria-label='Top'
@@ -207,9 +226,19 @@ export function LandingLayout({ children }: LandingLayoutProps) {
             </div>
           )}
         </nav>
-      </header>{' '}
+      </header>
       {/* Main Content */}
-      <main>{children}</main>
+      <main className='pt-[73px]'>{children}</main>
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <Button
+          onClick={scrollToTop}
+          className='fixed right-6 bottom-6 z-40 rounded-lg bg-blue-600 p-3 text-white shadow-lg transition-all duration-200 hover:scale-110 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none'
+          aria-label='Back to top'
+        >
+          <ChevronUp className='h-5 w-5' />
+        </Button>
+      )}
       {/* Footer */}
       <footer className='relative overflow-hidden border-t bg-gray-800 text-white'>
         {/* Background gradient */}

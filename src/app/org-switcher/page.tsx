@@ -78,7 +78,6 @@ export default function OrgSwitcherPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className='flex flex-col items-center p-6'>
-            {' '}
             <OrganizationList
               afterSelectOrganizationUrl='/org-redirect'
               afterCreateOrganizationUrl='/org-redirect'
@@ -101,11 +100,6 @@ export default function OrgSwitcherPage() {
                 variables: {
                   colorPrimary: '#3b82f6',
                   colorTextOnPrimaryBackground: '#ffffff',
-                  colorBackground: 'hsl(var(--background))',
-                  colorText: 'hsl(var(--foreground))',
-                  colorTextSecondary: 'hsl(var(--muted-foreground))',
-                  colorInputBackground: 'hsl(var(--background))',
-                  colorInputText: 'hsl(var(--foreground))',
                 },
               }}
             />

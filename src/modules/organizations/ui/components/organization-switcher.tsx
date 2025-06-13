@@ -63,14 +63,14 @@ export const OrganizationSwitcherCustom = ({
                     formFieldInputShowPasswordButton:
                       'text-muted-foreground hover:text-foreground',
                   },
-                  variables: {
-                    colorBackground: 'hsl(var(--background))',
-                    colorText: 'hsl(var(--foreground))',
-                    colorTextSecondary: 'hsl(var(--muted-foreground))',
-                    colorInputBackground: 'hsl(var(--background))',
-                    colorInputText: 'hsl(var(--foreground))',
-                    colorPrimary: 'hsl(var(--primary))',
-                  },
+                  // variables: {
+                  //   colorBackground: 'hsl(var(--background))',
+                  //   colorText: 'hsl(var(--foreground))',
+                  //   colorTextSecondary: 'hsl(var(--muted-foreground))',
+                  //   colorInputBackground: 'hsl(var(--background))',
+                  //   colorInputText: 'hsl(var(--foreground))',
+                  //   colorPrimary: 'hsl(var(--primary))',
+                  // },
                 }}
                 routing='hash'
                 afterCreateOrganizationUrl='/dashboard'
@@ -106,14 +106,14 @@ export const OrganizationSwitcherCustom = ({
               'text-foreground hover:bg-accent hover:text-accent-foreground',
           },
           variables: {
-            colorPrimary: 'hsl(var(--primary))',
-            colorTextOnPrimaryBackground: 'hsl(var(--primary-foreground))',
-            colorBackground: 'hsl(var(--background))',
-            colorText: 'hsl(var(--foreground))',
-            colorTextSecondary: 'hsl(var(--muted-foreground))',
-            colorInputBackground: 'hsl(var(--background))',
-            colorInputText: 'hsl(var(--foreground))',
-            borderRadius: '0.375rem',
+            // colorPrimary: 'hsl(var(--primary))',
+            // colorTextOnPrimaryBackground: 'hsl(var(--primary-foreground))',
+            // colorBackground: 'hsl(var(--background))',
+            // colorText: 'hsl(var(--foreground))',
+            // colorTextSecondary: 'hsl(var(--muted-foreground))',
+            // colorInputBackground: 'hsl(var(--background))',
+            // colorInputText: 'hsl(var(--foreground))',
+            // borderRadius: '0.375rem',
           },
         }}
         createOrganizationMode='modal'

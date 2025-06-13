@@ -40,7 +40,9 @@ export function DashboardNavbar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
   const router = useRouter();
-  const trpc = useTRPC(); // Debounce search query
+  const trpc = useTRPC();
+
+  // Debounce search query
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchQuery(searchQuery);
@@ -124,8 +126,7 @@ export function DashboardNavbar() {
           <OrganizationSwitcherResponsive className='w-full' />
         </div>
         {/* Organization Status */}
-        <OrganizationStatus />
-        {/* User Menu */}
+        <OrganizationStatus /> {/* User Menu */}
         <div className='flex items-center gap-4'>
           <ModeToggle />
           {isLoaded && user ? (
@@ -140,11 +141,10 @@ export function DashboardNavbar() {
                   },
                 }}
               >
-                {' '}
                 <UserButton.MenuItems>
                   <UserButton.Action
                     label='Resident Portal'
-                    labelIcon={<HomeIcon className='size-3' />}
+                    labelIcon={<HomeIcon className='size-3.5' />}
                     onClick={() => {
                       console.log(
                         '🏠 Dashboard Navbar - Resident Portal clicked, navigating to /org-redirect for role check'

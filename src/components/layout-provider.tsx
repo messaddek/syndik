@@ -22,7 +22,6 @@ const geistMono = Geist_Mono({
 // Inner component that uses theme
 const InnerLayoutProvider = ({ children }: { children: React.ReactNode }) => {
   const { resolvedTheme } = useTheme();
-
   return (
     <ClerkProvider
       appearance={{
@@ -30,6 +29,16 @@ const InnerLayoutProvider = ({ children }: { children: React.ReactNode }) => {
         layout: {
           privacyPageUrl: '/privacy',
           termsPageUrl: '/terms',
+        },
+        variables: {
+          // Override problematic CSS variables with actual color values
+          colorPrimary: resolvedTheme === 'dark' ? '#3b82f6' : '#2563eb',
+          colorBackground: resolvedTheme === 'dark' ? '#0a0a0a' : '#ffffff',
+          colorText: resolvedTheme === 'dark' ? '#fafafa' : '#0a0a0a',
+          colorTextSecondary: resolvedTheme === 'dark' ? '#a1a1aa' : '#71717a',
+          colorDanger: '#ef4444',
+          colorSuccess: '#22c55e',
+          colorWarning: '#f59e0b',
         },
       }}
     >

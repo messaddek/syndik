@@ -4,6 +4,7 @@ import { unitsRouter } from '../../modules/units/server/procedures';
 import { residentsRouter } from '../../modules/residents/server/procedures';
 import { incomesRouter } from '../../modules/incomes/server/procedures';
 import { expensesRouter } from '../../modules/expenses/server/procedures';
+import { financesRouter } from '../../modules/finances/server/procedures';
 import { meetingsRouter } from '../../modules/meetings/server/procedures';
 import { dashboardRouter } from '../../modules/dashboard/server/procedures';
 import { searchRouter } from '../../modules/search/server/procedures';
@@ -21,6 +22,7 @@ export const appRouter = createTRPCRouter({
   residents: residentsRouter,
   incomes: incomesRouter,
   expenses: expensesRouter,
+  finances: financesRouter,
   meetings: meetingsRouter,
   dashboard: dashboardRouter,
   search: searchRouter,

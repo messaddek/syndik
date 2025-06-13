@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { OrganizationQuota } from '@/components/organization-quota';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
@@ -91,9 +92,12 @@ export function DashboardSidebar() {
               })}
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup>{' '}
       </SidebarContent>{' '}
       <SidebarFooter>
+        <div className='border-t px-4 py-3'>
+          <OrganizationQuota />
+        </div>
         <div className='px-4 pb-2'>
           <Button
             variant='outline'

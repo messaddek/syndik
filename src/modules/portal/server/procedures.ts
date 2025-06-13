@@ -1,4 +1,4 @@
-import { eq, and, gte, or, isNull } from 'drizzle-orm';
+import { eq, and, gte, or, isNull, count } from 'drizzle-orm';
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -10,6 +10,7 @@ import { units } from '@/modules/units/schema';
 import { buildings } from '@/modules/buildings/schema';
 import { meetings } from '@/modules/meetings/schema';
 import { announcements } from '@/modules/announcements/schema';
+import { notifications } from '@/modules/notifications/schema';
 import { residentSetupSchema, residentProfileUpdateSchema } from '../schema';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
@@ -363,5 +364,219 @@ export const portalRouter = createTRPCRouter({
       return updatedResident;
     }),
 
-  // ...existing code...
+  // Get resident dashboard data
+  getResidentDashboard: protectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    if (!orgId) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Organization access required',
+      });
+    }
+
+    // Get resident info linked to user
+    const user = await db
+      .select({
+        resident: residents,
+        unit: units,
+        building: buildings,
+      })
+      .from(users)
+      .leftJoin(residents, eq(users.residentId, residents.id))
+      .leftJoin(units, eq(residents.unitId, units.id))
+      .leftJoin(buildings, eq(units.buildingId, buildings.id))
+      .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
+      .limit(1);
+
+    if (!user.length || !user[0].resident) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Resident profile not found',
+      });
+    }
+
+    const residentData = user[0];
+
+    // Get recent announcements
+    const recentAnnouncements = await db
+      .select()
+      .from(announcements)
+      .where(
+        and(
+          eq(announcements.orgId, orgId),
+          eq(announcements.isPublished, true),
+          or(
+            isNull(announcements.buildingId),
+            residentData.unit?.buildingId
+              ? eq(announcements.buildingId, residentData.unit.buildingId)
+              : isNull(announcements.buildingId)
+          )
+        )
+      )
+      .orderBy(announcements.publishedAt)
+      .limit(5);
+
+    // Get upcoming meetings
+    const upcomingMeetings = await db
+      .select()
+      .from(meetings)
+      .where(
+        and(
+          eq(meetings.orgId, orgId),
+          gte(meetings.scheduledDate, new Date()),
+          or(
+            isNull(meetings.buildingId),
+            residentData.unit?.buildingId
+              ? eq(meetings.buildingId, residentData.unit.buildingId)
+              : isNull(meetings.buildingId)
+          )
+        )
+      )
+      .orderBy(meetings.scheduledDate)
+      .limit(3);
+
+    return {
+      resident: residentData.resident,
+      unit: residentData.unit,
+      building: residentData.building,
+      announcements: recentAnnouncements,
+      upcomingMeetings: upcomingMeetings,
+    };
+  }),
+
+  // Submit maintenance request
+  submitMaintenanceRequest: protectedProcedure
+    .input(
+      z.object({
+        title: z.string().min(1),
+        description: z.string().min(1),
+        priority: z.enum(['low', 'normal', 'high', 'urgent']).default('normal'),
+        category: z.string().min(1),
+        location: z.string().optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { db, userId, orgId } = ctx;
+
+      if (!orgId) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'Organization access required',
+        });
+      }
+
+      // Get resident info
+      const user = await db
+        .select({
+          resident: residents,
+          unit: units,
+          building: buildings,
+        })
+        .from(users)
+        .leftJoin(residents, eq(users.residentId, residents.id))
+        .leftJoin(units, eq(residents.unitId, units.id))
+        .leftJoin(buildings, eq(units.buildingId, buildings.id))
+        .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
+        .limit(1);
+
+      if (!user.length || !user[0].resident) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Resident profile not found',
+        });
+      }
+
+      // Create notification for maintenance request
+      const [notification] = await db
+        .insert(notifications)
+        .values({
+          orgId,
+          residentId: user[0].resident.id,
+          type: 'maintenance_request',
+          title: `New Maintenance Request: ${input.title}`,
+          message: `${input.description} - Priority: ${input.priority}`,
+          priority: input.priority,
+          category: 'maintenance',
+          metadata: {
+            requestType: 'maintenance',
+            unitId: user[0].unit?.id,
+            buildingId: user[0].building?.id,
+            location: input.location,
+            category: input.category,
+          },
+        })
+        .returning();
+
+      return {
+        success: true,
+        notificationId: notification.id,
+        message: 'Maintenance request submitted successfully',
+      };
+    }),
+
+  // Get resident notifications
+  getResidentNotifications: protectedProcedure
+    .input(
+      z.object({
+        page: z.number().min(1).default(1),
+        pageSize: z.number().min(1).max(50).default(20),
+        isRead: z.boolean().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { db, userId, orgId } = ctx;
+      const { page, pageSize, isRead } = input;
+
+      if (!orgId) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'Organization access required',
+        });
+      }
+
+      // Get resident ID
+      const user = await db
+        .select({ residentId: users.residentId })
+        .from(users)
+        .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
+        .limit(1);
+
+      if (!user.length || !user[0].residentId) {
+        return { notifications: [], total: 0 };
+      }
+
+      const conditions = [
+        eq(notifications.orgId, orgId),
+        or(
+          eq(notifications.userId, userId),
+          eq(notifications.residentId, user[0].residentId)
+        ),
+      ];
+
+      if (isRead !== undefined) {
+        conditions.push(eq(notifications.isRead, isRead));
+      }
+
+      const offset = (page - 1) * pageSize;
+
+      const [notificationsList, [{ total }]] = await Promise.all([
+        db
+          .select()
+          .from(notifications)
+          .where(and(...conditions))
+          .orderBy(notifications.createdAt)
+          .limit(pageSize)
+          .offset(offset),
+        db
+          .select({ total: count() })
+          .from(notifications)
+          .where(and(...conditions)),
+      ]);
+
+      return {
+        notifications: notificationsList,
+        total: total || 0,
+      };
+    }),
 });
