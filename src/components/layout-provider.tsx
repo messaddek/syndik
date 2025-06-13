@@ -1,6 +1,6 @@
 'use client';
 
-import { ThemeProvider } from '@/components/theme-provider';
+import { ConditionalThemeProvider } from '@/components/conditional-theme-provider';
 import { TRPCReactProvider } from '@/trpc/client';
 import { ClerkProvider } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
@@ -19,34 +19,40 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
+// Inner component that uses theme
+const InnerLayoutProvider = ({ children }: { children: React.ReactNode }) => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <NuqsAdapter>
-      <ThemeProvider
-        attribute='class'
-        defaultTheme='system'
-        enableSystem
-        disableTransitionOnChange
-      >
-        <ClerkProvider
-          appearance={{
-            baseTheme: resolvedTheme === 'dark' ? dark : undefined,
-          }}
+    <ClerkProvider
+      appearance={{
+        baseTheme: resolvedTheme === 'dark' ? dark : undefined,
+        layout: {
+          privacyPageUrl: '/privacy',
+          termsPageUrl: '/terms',
+        },
+      }}
+    >
+      <html lang='en' suppressHydrationWarning>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <html lang='en' suppressHydrationWarning>
-            <body
-              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
-              <TRPCReactProvider>
-                {children}
-                <Toaster />
-              </TRPCReactProvider>
-            </body>
-          </html>
-        </ClerkProvider>
-      </ThemeProvider>
+          <TRPCReactProvider>
+            {children}
+            <Toaster />
+          </TRPCReactProvider>
+        </body>
+      </html>
+    </ClerkProvider>
+  );
+};
+
+export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <NuqsAdapter>
+      <ConditionalThemeProvider>
+        <InnerLayoutProvider>{children}</InnerLayoutProvider>
+      </ConditionalThemeProvider>
     </NuqsAdapter>
   );
 };

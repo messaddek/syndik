@@ -3,9 +3,20 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Building2, Menu, X } from 'lucide-react';
+import {
+  Building2,
+  Menu,
+  X,
+  Mail,
+  Send,
+  Twitter,
+  Facebook,
+  Linkedin,
+  Instagram,
+} from 'lucide-react';
 import { useUser, UserButton } from '@clerk/nextjs';
 import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import { cn } from '../../lib/utils';
 
 const navigation = [
@@ -23,9 +34,23 @@ interface LandingLayoutProps {
 
 export function LandingLayout({ children }: LandingLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
   const pathname = usePathname();
   const { isSignedIn } = useUser();
 
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setIsSubscribing(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setIsSubscribing(false);
+    setEmail('');
+    // You can add actual newsletter API integration here
+    alert('Thank you for subscribing to our newsletter!');
+  };
   return (
     <div className='min-h-screen bg-white'>
       {/* Header */}
@@ -159,45 +184,133 @@ export function LandingLayout({ children }: LandingLayoutProps) {
             </div>
           )}
         </nav>
-      </header>
-
+      </header>{' '}
       {/* Main Content */}
       <main>{children}</main>
-
       {/* Footer */}
-      <footer className='border-t bg-gray-50'>
-        <div className='mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8'>
-          <div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
-            {/* Logo and description */}
-            <div className='md:col-span-1'>
-              <div className='mb-4 flex items-center space-x-2'>
-                <Building2 className='h-6 w-6 text-blue-600' />
-                <span className='text-lg font-bold text-gray-900'>Syndik</span>
-              </div>
-              <p className='text-sm text-gray-600'>
-                Modern SaaS platform for managing residential syndicates with
-                ease and efficiency.
+      <footer className='relative overflow-hidden border-t bg-gray-800 text-white'>
+        {/* Background gradient */}
+        <div
+          className='pointer-events-none absolute inset-x-0 -top-40 -z-50 transform-gpu overflow-hidden blur-3xl sm:-top-80'
+          aria-hidden='true'
+        >
+          <div
+            className='relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]'
+            style={{
+              clipPath:
+                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+            }}
+          />
+        </div>
+        <div className='relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
+          {/* Newsletter Section */}
+          <div className='mb-12 text-center'>
+            <div className='mx-auto max-w-2xl'>
+              <Mail className='mx-auto mb-4 h-12 w-12 text-blue-400' />
+              <h2 className='mb-4 text-3xl font-bold text-white'>
+                Stay Updated with Syndik
+              </h2>{' '}
+              <p className='mb-8 text-lg text-blue-100'>
+                Get the latest updates on new features, syndicate management
+                tips, and industry insights delivered to your inbox.
+              </p>{' '}
+              <form
+                onSubmit={handleNewsletterSubmit}
+                className='mx-auto flex max-w-md gap-3'
+              >
+                <Input
+                  type='email'
+                  placeholder='Enter your email address'
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  required
+                  className='flex-1 border-blue-300/30 bg-white/10 text-white backdrop-blur-sm placeholder:text-blue-100 focus:border-blue-300'
+                />{' '}
+                <Button
+                  type='submit'
+                  disabled={isSubscribing || !email.trim()}
+                  className='border border-white/30 bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 disabled:opacity-50'
+                >
+                  {isSubscribing ? (
+                    <>
+                      <div className='mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent' />
+                      Subscribing...
+                    </>
+                  ) : (
+                    <>
+                      <Send className='mr-2 h-4 w-4' />
+                      Subscribe
+                    </>
+                  )}
+                </Button>
+              </form>{' '}
+              <p className='mt-3 text-xs text-blue-200'>
+                No spam, unsubscribe at any time. Read our{' '}
+                <Link href='/privacy' className='underline hover:text-white'>
+                  Privacy Policy
+                </Link>
               </p>
+            </div>
+          </div>
+          <div className='grid grid-cols-1 gap-8 md:grid-cols-5'>
+            {/* Logo and description */}
+            <div className='md:col-span-2'>
+              <div className='mb-6 flex items-center space-x-2'>
+                <Building2 className='h-8 w-8 text-blue-400' />
+                <span className='text-2xl font-bold text-white'>Syndik</span>
+              </div>{' '}
+              <p className='mb-6 text-blue-100'>
+                Modern SaaS platform for managing residential syndicates with
+                ease and efficiency. Streamline your property management,
+                enhance resident communication, and boost operational
+                efficiency.
+              </p>
+              {/* Social Media Links */}
+              <div className='flex space-x-4'>
+                <a
+                  href='#'
+                  className='rounded-full bg-white/10 p-2 text-blue-200 backdrop-blur-sm transition-colors hover:bg-white/20 hover:text-white'
+                >
+                  <Twitter className='h-5 w-5' />
+                </a>{' '}
+                <a
+                  href='#'
+                  className='rounded-full bg-white/10 p-2 text-blue-200 backdrop-blur-sm transition-colors hover:bg-white/20 hover:text-white'
+                >
+                  <Facebook className='h-5 w-5' />
+                </a>
+                <a
+                  href='#'
+                  className='rounded-full bg-white/10 p-2 text-blue-200 backdrop-blur-sm transition-colors hover:bg-white/20 hover:text-white'
+                >
+                  <Linkedin className='h-5 w-5' />
+                </a>
+                <a
+                  href='#'
+                  className='rounded-full bg-white/10 p-2 text-blue-200 backdrop-blur-sm transition-colors hover:bg-white/20 hover:text-white'
+                >
+                  <Instagram className='h-5 w-5' />
+                </a>
+              </div>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h3 className='mb-4 text-sm font-semibold text-gray-900'>
-                Product
-              </h3>
-              <ul className='space-y-2'>
+              <h3 className='mb-6 text-lg font-semibold text-white'>Product</h3>
+              <ul className='space-y-3'>
                 <li>
+                  {' '}
                   <Link
                     href='/about'
-                    className='text-sm text-gray-600 hover:text-blue-600'
+                    className='text-blue-100 transition-colors hover:text-white'
                   >
-                    About
+                    About Us
                   </Link>
                 </li>
                 <li>
                   <Link
                     href='/pricing'
-                    className='text-sm text-gray-600 hover:text-blue-600'
+                    className='text-blue-100 transition-colors hover:text-white'
                   >
                     Pricing
                   </Link>
@@ -205,9 +318,17 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                 <li>
                   <Link
                     href='/faq'
-                    className='text-sm text-gray-600 hover:text-blue-600'
+                    className='text-blue-100 transition-colors hover:text-white'
                   >
                     FAQ
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/demo'
+                    className='text-blue-100 transition-colors hover:text-white'
+                  >
+                    Request Demo
                   </Link>
                 </li>
               </ul>
@@ -215,14 +336,13 @@ export function LandingLayout({ children }: LandingLayoutProps) {
 
             {/* Support */}
             <div>
-              <h3 className='mb-4 text-sm font-semibold text-gray-900'>
-                Support
-              </h3>
-              <ul className='space-y-2'>
+              <h3 className='mb-6 text-lg font-semibold text-white'>Support</h3>
+              <ul className='space-y-3'>
+                {' '}
                 <li>
                   <Link
                     href='/help'
-                    className='text-sm text-gray-600 hover:text-blue-600'
+                    className='text-blue-100 transition-colors hover:text-white'
                   >
                     Help Center
                   </Link>
@@ -230,7 +350,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                 <li>
                   <Link
                     href='/terms'
-                    className='text-sm text-gray-600 hover:text-blue-600'
+                    className='text-blue-100 transition-colors hover:text-white'
                   >
                     Terms of Service
                   </Link>
@@ -238,24 +358,33 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                 <li>
                   <a
                     href='mailto:support@syndik.com'
-                    className='text-sm text-gray-600 hover:text-blue-600'
+                    className='text-blue-100 transition-colors hover:text-white'
                   >
                     Contact Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='tel:+1-800-SYNDIK'
+                    className='text-blue-100 transition-colors hover:text-white'
+                  >
+                    Phone Support
                   </a>
                 </li>
               </ul>
             </div>
 
-            {/* Legal */}
+            {/* Legal & Resources */}
             <div>
-              <h3 className='mb-4 text-sm font-semibold text-gray-900'>
-                Legal
+              <h3 className='mb-6 text-lg font-semibold text-white'>
+                Legal & Resources
               </h3>
-              <ul className='space-y-2'>
+              <ul className='space-y-3'>
+                {' '}
                 <li>
                   <Link
                     href='/privacy'
-                    className='text-sm text-gray-600 hover:text-blue-600'
+                    className='text-blue-100 transition-colors hover:text-white'
                   >
                     Privacy Policy
                   </Link>
@@ -263,20 +392,60 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                 <li>
                   <Link
                     href='/terms'
-                    className='text-sm text-gray-600 hover:text-blue-600'
+                    className='text-blue-100 transition-colors hover:text-white'
                   >
                     Terms & Conditions
                   </Link>
                 </li>
+                <li>
+                  <a
+                    href='#'
+                    className='text-blue-100 transition-colors hover:text-white'
+                  >
+                    Security
+                  </a>
+                </li>{' '}
+                <li>
+                  <Link
+                    href='/user-guide'
+                    className='text-blue-100 transition-colors hover:text-white'
+                  >
+                    User Guide
+                  </Link>
+                </li>
               </ul>
             </div>
+          </div>{' '}
+          {/* Bottom section */}
+          <div className='mt-12 border-t border-white/20 pt-8'>
+            <div className='flex flex-col items-center justify-between md:flex-row'>
+              <p className='text-blue-200'>
+                © 2025 Syndik. All rights reserved.
+              </p>
+              <div className='mt-4 flex items-center space-x-6 md:mt-0'>
+                <p className='text-sm text-blue-200'>
+                  Made with ❤️ for property managers worldwide
+                </p>
+                <div className='flex items-center space-x-4 text-sm text-blue-200'>
+                  <span>🔒 SOC 2 Certified</span>
+                  <span>🛡️ GDPR Compliant</span>
+                </div>
+              </div>
+            </div>{' '}
           </div>
-
-          <div className='mt-8 border-t border-gray-200 pt-8'>
-            <p className='text-center text-sm text-gray-600'>
-              © 2025 Syndik. All rights reserved.
-            </p>
-          </div>
+        </div>
+        {/* Background gradient bottom */}
+        <div
+          className='pointer-events-none absolute inset-x-0 top-[calc(100%-13rem)] -z-50 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]'
+          aria-hidden='true'
+        >
+          <div
+            className='relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]'
+            style={{
+              clipPath:
+                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+            }}
+          />{' '}
         </div>
       </footer>
     </div>
