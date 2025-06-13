@@ -23,11 +23,10 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
   const isPortalRoute = pathname.startsWith('/portal');
   const defaultRole = isPortalRoute ? 'member' : 'manager';
 
-  // eslint-disable-next-line no-console
   console.log('🛡️ OrganizationGuard - Pathname:', pathname);
-  // eslint-disable-next-line no-console
+
   console.log('🛡️ OrganizationGuard - Is portal route:', isPortalRoute);
-  // eslint-disable-next-line no-console
+
   console.log('🛡️ OrganizationGuard - Default role:', defaultRole);
 
   // Check if user has an account
@@ -91,7 +90,7 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
             <h1 className='animate-in fade-in mb-3 text-3xl font-bold text-gray-900 delay-300 duration-500 dark:text-white'>
               Welcome to Syndik
             </h1>
-            <p className='animate-in fade-in delay-400 text-lg leading-relaxed text-gray-600 duration-500 dark:text-gray-300'>
+            <p className='animate-in fade-in text-lg leading-relaxed text-gray-600 delay-400 duration-500 dark:text-gray-300'>
               Complete your account setup to start managing your residential
               syndicate efficiently
             </p>

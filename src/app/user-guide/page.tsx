@@ -1,36 +1,89 @@
+/* Enhanced User Guide Page with Analytics Integration */
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { LandingLayout } from '@/components/landing/landing-layout';
+import { getArticlesByCategory } from '@/modules/articles/static-articles';
 import {
-  Building2,
   Users,
   FileText,
   CreditCard,
   MessageSquare,
-  Settings,
   Search,
   BookOpen,
-  Video,
-  Download,
-  ExternalLink,
   ChevronRight,
   Star,
   Clock,
   CheckCircle,
-  Phone,
   Mail,
   MessageCircle,
+  TrendingUp,
+  Building2,
+  Settings,
 } from 'lucide-react';
+import { useTRPC } from '@/trpc/client';
+import { useQuery } from '@tanstack/react-query';
 
 const UserGuidePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [popularArticles, setPopularArticles] = useState([
+    // Fallback data while loading - using actual article data
+    {
+      slug: 'creating-your-first-property',
+      title: 'Creating Your First Property',
+      views: '2.1k',
+      rating: 4.9,
+      category: 'getting-started',
+      readTime: 5,
+    },
+    {
+      slug: 'adding-new-residents',
+      title: 'Adding New Residents',
+      views: '1.8k',
+      rating: 4.8,
+      category: 'resident-management',
+      readTime: 5,
+    },
+    {
+      slug: 'setting-up-rent-collection',
+      title: 'Setting Up Rent Collection',
+      views: '1.5k',
+      rating: 4.7,
+      category: 'financial-management',
+      readTime: 7,
+    },
+    {
+      slug: 'tracking-maintenance-requests',
+      title: 'Tracking Maintenance Requests',
+      views: '1.3k',
+      rating: 4.8,
+      category: 'maintenance',
+      readTime: 5,
+    },
+  ]);
 
+  const trpc = useTRPC();
+
+  // Fetch real popular articles from analytics
+  const { data: analyticsPopularArticles, isLoading } = useQuery(
+    trpc.articles.getPopularArticles.queryOptions({
+      limit: 4,
+      timeframe: 'month',
+    })
+  );
+
+  // Update popular articles when data loads
+  useEffect(() => {
+    if (analyticsPopularArticles && analyticsPopularArticles.length > 0) {
+      setPopularArticles(analyticsPopularArticles);
+    }
+  }, [analyticsPopularArticles]);
   const guides = [
     {
       id: 'getting-started',
@@ -38,30 +91,12 @@ const UserGuidePage = () => {
       description: 'Essential setup and first steps',
       icon: BookOpen,
       color: 'bg-blue-500',
-      articles: [
-        {
-          title: 'Creating Your First Property',
-          time: '5 min',
-          popular: true,
-          slug: 'creating-your-first-property',
-        },
-        {
-          title: 'Setting Up User Accounts',
-          time: '3 min',
-          popular: true,
-          slug: 'setting-up-user-accounts',
-        },
-        {
-          title: 'Understanding Roles & Permissions',
-          time: '7 min',
-          slug: 'understanding-roles-permissions',
-        },
-        {
-          title: 'Initial Configuration Guide',
-          time: '10 min',
-          slug: 'initial-configuration-guide',
-        },
-      ],
+      articles: getArticlesByCategory('getting-started').map(article => ({
+        title: article.title,
+        time: `${article.readTime} min`,
+        popular: article.popular,
+        slug: article.slug,
+      })),
     },
     {
       id: 'property-management',
@@ -69,59 +104,25 @@ const UserGuidePage = () => {
       description: 'Managing properties and units',
       icon: Building2,
       color: 'bg-emerald-500',
-      articles: [
-        {
-          title: 'Adding New Properties',
-          time: '4 min',
-          popular: true,
-          slug: 'adding-new-properties',
-        },
-        {
-          title: 'Unit Management & Organization',
-          time: '6 min',
-          slug: 'unit-management-organization',
-        },
-        {
-          title: 'Property Information Updates',
-          time: '3 min',
-          slug: 'property-information-updates',
-        },
-        {
-          title: 'Document Management System',
-          time: '8 min',
-          slug: 'document-management-system',
-        },
-      ],
+      articles: getArticlesByCategory('property-management').map(article => ({
+        title: article.title,
+        time: `${article.readTime} min`,
+        popular: article.popular,
+        slug: article.slug,
+      })),
     },
     {
       id: 'resident-management',
       title: 'Resident Management',
-      description: 'Managing tenants and residents',
+      description: 'Managing tenants and leases',
       icon: Users,
       color: 'bg-purple-500',
-      articles: [
-        {
-          title: 'Adding New Residents',
-          time: '5 min',
-          popular: true,
-          slug: 'adding-new-residents',
-        },
-        {
-          title: 'Lease Agreement Management',
-          time: '8 min',
-          slug: 'lease-agreement-management',
-        },
-        {
-          title: 'Resident Communication Tools',
-          time: '6 min',
-          slug: 'resident-communication-tools',
-        },
-        {
-          title: 'Move-in/Move-out Process',
-          time: '10 min',
-          slug: 'move-in-move-out-process',
-        },
-      ],
+      articles: getArticlesByCategory('resident-management').map(article => ({
+        title: article.title,
+        time: `${article.readTime} min`,
+        popular: article.popular,
+        slug: article.slug,
+      })),
     },
     {
       id: 'financial-management',
@@ -129,29 +130,12 @@ const UserGuidePage = () => {
       description: 'Rent, payments, and accounting',
       icon: CreditCard,
       color: 'bg-orange-500',
-      articles: [
-        {
-          title: 'Setting Up Rent Collection',
-          time: '7 min',
-          popular: true,
-          slug: 'setting-up-rent-collection',
-        },
-        {
-          title: 'Processing Payments',
-          time: '4 min',
-          slug: 'processing-payments',
-        },
-        {
-          title: 'Generating Financial Reports',
-          time: '6 min',
-          slug: 'generating-financial-reports',
-        },
-        {
-          title: 'Late Payment Management',
-          time: '5 min',
-          slug: 'late-payment-management',
-        },
-      ],
+      articles: getArticlesByCategory('financial-management').map(article => ({
+        title: article.title,
+        time: `${article.readTime} min`,
+        popular: article.popular,
+        slug: article.slug,
+      })),
     },
     {
       id: 'maintenance',
@@ -159,98 +143,26 @@ const UserGuidePage = () => {
       description: 'Work orders and maintenance tracking',
       icon: Settings,
       color: 'bg-red-500',
-      articles: [
-        {
-          title: 'Creating Work Orders',
-          time: '4 min',
-          slug: 'creating-work-orders',
-        },
-        {
-          title: 'Tracking Maintenance Requests',
-          time: '5 min',
-          popular: true,
-          slug: 'tracking-maintenance-requests',
-        },
-        {
-          title: 'Vendor Management',
-          time: '7 min',
-          slug: 'vendor-management',
-        },
-        {
-          title: 'Preventive Maintenance Setup',
-          time: '9 min',
-          slug: 'preventive-maintenance-setup',
-        },
-      ],
+      articles: getArticlesByCategory('maintenance').map(article => ({
+        title: article.title,
+        time: `${article.readTime} min`,
+        popular: article.popular,
+        slug: article.slug,
+      })),
     },
     {
       id: 'communication',
       title: 'Communication',
-      description: 'Messaging and notifications',
+      description: 'Announcements and notifications',
       icon: MessageSquare,
       color: 'bg-indigo-500',
-      articles: [
-        {
-          title: 'Sending Announcements',
-          time: '3 min',
-          popular: true,
-          slug: 'sending-announcements',
-        },
-        {
-          title: 'Individual Messaging',
-          time: '2 min',
-          slug: 'individual-messaging',
-        },
-        {
-          title: 'Notification Settings',
-          time: '4 min',
-          slug: 'notification-settings',
-        },
-        { title: 'Email Templates', time: '6 min', slug: 'email-templates' },
-      ],
+      articles: getArticlesByCategory('communication').map(article => ({
+        title: article.title,
+        time: `${article.readTime} min`,
+        popular: article.popular,
+        slug: article.slug,
+      })),
     },
-  ];
-
-  const quickActions = [
-    {
-      title: 'Video Tutorials',
-      icon: Video,
-      description: 'Watch step-by-step guides',
-    },
-    {
-      title: 'Download Mobile App',
-      icon: Download,
-      description: 'Get our mobile app',
-    },
-    {
-      title: 'Contact Support',
-      icon: Phone,
-      description: 'Get help from our team',
-    },
-    {
-      title: 'Community Forum',
-      icon: MessageCircle,
-      description: 'Connect with other users',
-    },
-  ];
-
-  const popularArticles = [
-    {
-      title: 'How to Set Up Automatic Rent Collection',
-      views: '2.1k',
-      rating: 4.9,
-    },
-    {
-      title: 'Managing Multiple Properties Efficiently',
-      views: '1.8k',
-      rating: 4.8,
-    },
-    {
-      title: 'Best Practices for Tenant Communication',
-      views: '1.5k',
-      rating: 4.7,
-    },
-    { title: 'Setting Up Maintenance Workflows', views: '1.3k', rating: 4.8 },
   ];
 
   const filteredGuides = guides.filter(
@@ -261,273 +173,209 @@ const UserGuidePage = () => {
         article.title.toLowerCase().includes(searchQuery.toLowerCase())
       )
   );
+
   return (
     <LandingLayout>
       <div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100'>
         {/* Header */}
         <div className='border-b bg-white'>
           <div className='mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
-            {' '}
             <div className='text-center'>
-              <div>
-                <h1 className='mb-4 text-4xl font-bold text-gray-900'>
-                  User Guide & Documentation
-                </h1>
-                <p className='mx-auto mb-8 max-w-3xl text-xl text-gray-600'>
-                  Everything you need to master Syndik and streamline your
-                  property management
-                </p>
+              <h1 className='mb-4 text-4xl font-bold text-gray-900'>
+                User Guide & Documentation
+              </h1>
+              <p className='mx-auto mb-8 max-w-3xl text-xl text-gray-600'>
+                Everything you need to master Syndik and streamline your
+                property management
+              </p>
 
-                <div className='relative mx-auto max-w-2xl'>
-                  <Search className='absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform text-gray-400' />
-                  <Input
-                    type='text'
-                    placeholder='Search guides, tutorials, and documentation...'
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
-                    className='py-3 pr-4 pl-12 text-lg'
-                  />
-                </div>
+              {/* Search */}
+              <div className='relative mx-auto max-w-lg'>
+                <Search className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400' />
+                <Input
+                  type='text'
+                  placeholder='Search articles...'
+                  className='pl-10'
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                />
               </div>
             </div>
           </div>
         </div>
 
         <div className='mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8'>
-          <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
+          <div className='grid gap-8 lg:grid-cols-3'>
             {/* Main Content */}
-            <div className='lg:col-span-3'>
-              {' '}
-              {/* Quick Actions */}
+            <div className='lg:col-span-2'>
+              {/* Popular Articles Section with Analytics */}
               <div className='mb-12'>
-                <h2 className='mb-6 text-2xl font-bold text-gray-900'>
-                  Quick Actions
-                </h2>
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
-                  {quickActions.map((action, index) => (
+                <div className='mb-6 flex items-center justify-between'>
+                  <div className='flex items-center gap-2'>
+                    <TrendingUp className='h-5 w-5 text-orange-500' />
+                    <h2 className='text-2xl font-bold text-gray-900'>
+                      Popular Articles
+                      {isLoading && (
+                        <span className='ml-2 text-sm text-gray-500'>
+                          (Loading real-time data...)
+                        </span>
+                      )}
+                    </h2>
+                  </div>
+                  <Badge variant='secondary' className='text-xs'>
+                    Updated in real-time
+                  </Badge>
+                </div>
+                <div className='grid gap-4 sm:grid-cols-2'>
+                  {popularArticles.map((article, index) => (
                     <Card
-                      key={index}
-                      className='group cursor-pointer transition-all duration-300 hover:shadow-lg'
+                      key={article.slug}
+                      className='group transition-all duration-200 hover:shadow-lg'
                     >
-                      <CardContent className='p-6 text-center'>
-                        <action.icon className='text-primary mx-auto mb-3 h-8 w-8 transition-transform group-hover:scale-110' />
-                        <h3 className='mb-2 font-semibold text-gray-900'>
-                          {action.title}
-                        </h3>
-                        <p className='text-sm text-gray-600'>
-                          {action.description}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  ))}{' '}
-                </div>{' '}
-              </div>
-              {/* Guide Categories */}
-              <div>
-                <h2 className='mb-6 text-2xl font-bold text-gray-900'>
-                  User Guides
-                </h2>
-                <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
-                  {filteredGuides.map(guide => (
-                    <Card
-                      key={guide.id}
-                      className='transition-all duration-300 hover:shadow-lg'
-                    >
-                      <CardHeader>
-                        <div className='flex items-center space-x-3'>
-                          <div className={`${guide.color} rounded-lg p-2`}>
-                            <guide.icon className='h-6 w-6 text-white' />
-                          </div>
-                          <div>
-                            <CardTitle className='text-lg'>
-                              {guide.title}
-                            </CardTitle>
-                            <p className='text-sm text-gray-600'>
-                              {guide.description}
-                            </p>
+                      <CardContent className='p-4'>
+                        <div className='mb-2 flex items-start justify-between'>
+                          <Badge variant='outline' className='mb-2 text-xs'>
+                            #{index + 1} Most Popular
+                          </Badge>
+                          <div className='flex items-center gap-1 text-sm text-gray-500'>
+                            <Star className='h-3 w-3 fill-yellow-400 text-yellow-400' />
+                            {article.rating}
                           </div>
                         </div>
-                      </CardHeader>
-                      <CardContent>
-                        {' '}
-                        <div className='space-y-3'>
-                          {' '}
-                          {guide.articles.map((article, index) => (
-                            <Link
-                              key={index}
-                              href={`/user-guide/${guide.id}/${article.slug}`}
-                              className='group flex cursor-pointer items-center justify-between rounded-lg bg-gray-50 p-3 transition-colors hover:bg-gray-100'
-                            >
-                              <div className='flex items-center space-x-3'>
-                                <FileText className='h-4 w-4 text-gray-400' />
-                                <div>
-                                  <div className='flex items-center space-x-2'>
-                                    <span className='text-sm font-medium text-gray-900'>
-                                      {article.title}
-                                    </span>
-                                    {article.popular && (
-                                      <Badge
-                                        variant='secondary'
-                                        className='text-xs'
-                                      >
-                                        Popular
-                                      </Badge>
-                                    )}
-                                  </div>
-                                  <div className='flex items-center space-x-1 text-xs text-gray-500'>
-                                    <Clock className='h-3 w-3' />
-                                    <span>{article.time}</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <ChevronRight className='h-4 w-4 text-gray-400 transition-colors group-hover:text-gray-600' />
-                            </Link>
-                          ))}
+                        <h3 className='mb-2 font-semibold text-gray-900 transition-colors group-hover:text-blue-600'>
+                          <Link
+                            href={`/user-guide/${article.category}/${article.slug}`}
+                          >
+                            {article.title}
+                          </Link>
+                        </h3>
+                        <div className='flex items-center justify-between text-sm text-gray-500'>
+                          <div className='flex items-center gap-3'>
+                            <span className='flex items-center gap-1'>
+                              👁️ {article.views}
+                            </span>
+                            <span className='flex items-center gap-1'>
+                              <Clock className='h-3 w-3' />
+                              {article.readTime} min
+                            </span>
+                          </div>
+                          <ChevronRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
                         </div>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
               </div>
-            </div>
-            {/* Sidebar */}{' '}
-            <div className='lg:col-span-1'>
-              <div className='space-y-6'>
-                {/* Popular Articles */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className='flex items-center space-x-2 text-lg'>
-                      <Star className='h-5 w-5 text-yellow-500' />
-                      <span>Popular Articles</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className='space-y-4'>
-                      {popularArticles.map((article, index) => (
-                        <div
-                          key={index}
-                          className='cursor-pointer rounded-lg p-2 transition-colors hover:bg-gray-50'
-                        >
-                          <h4 className='mb-1 text-sm font-medium text-gray-900'>
-                            {article.title}
-                          </h4>
-                          <div className='flex items-center justify-between text-xs text-gray-500'>
-                            <span>{article.views} views</span>
-                            <div className='flex items-center space-x-1'>
-                              <Star className='h-3 w-3 fill-current text-yellow-400' />
-                              <span>{article.rating}</span>
-                            </div>
+
+              {/* Guide Categories */}
+              <div className='space-y-8'>
+                {filteredGuides.map(guide => {
+                  const IconComponent = guide.icon;
+                  return (
+                    <Card key={guide.id} className='overflow-hidden'>
+                      <CardHeader className='bg-gradient-to-r from-gray-50 to-gray-100'>
+                        <div className='flex items-center gap-4'>
+                          <div className={`rounded-lg p-3 ${guide.color}`}>
+                            <IconComponent className='h-6 w-6 text-white' />
+                          </div>
+                          <div>
+                            <CardTitle className='text-xl'>
+                              {guide.title}
+                            </CardTitle>
+                            <p className='text-gray-600'>{guide.description}</p>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Need Help */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className='text-lg'>Need More Help?</CardTitle>
-                  </CardHeader>
-                  <CardContent className='space-y-4'>
-                    <Button
-                      variant='outline'
-                      className='w-full justify-start'
-                      size='sm'
-                    >
-                      <Phone className='mr-2 h-4 w-4' />
-                      Schedule a Call
-                    </Button>
-                    <Button
-                      variant='outline'
-                      className='w-full justify-start'
-                      size='sm'
-                    >
-                      <Mail className='mr-2 h-4 w-4' />
-                      Email Support
-                    </Button>
-                    <Button
-                      variant='outline'
-                      className='w-full justify-start'
-                      size='sm'
-                    >
-                      <MessageCircle className='mr-2 h-4 w-4' />
-                      Live Chat
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                {/* Status */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className='text-lg'>System Status</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className='flex items-center space-x-2'>
-                      <CheckCircle className='h-5 w-5 text-green-500' />
-                      <span className='text-sm font-medium text-gray-900'>
-                        All systems operational
-                      </span>
-                    </div>
-                    <p className='mt-2 text-xs text-gray-500'>
-                      Last updated: 2 minutes ago{' '}
-                    </p>
-                  </CardContent>
-                </Card>
+                      </CardHeader>
+                      <CardContent className='p-6'>
+                        <div className='grid gap-3 sm:grid-cols-2'>
+                          {guide.articles.map(article => (
+                            <Link
+                              key={article.slug}
+                              href={`/user-guide/${guide.id}/${article.slug}`}
+                              className='group flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-gray-50'
+                            >
+                              <div className='flex items-center gap-3'>
+                                <FileText className='h-4 w-4 text-gray-400' />
+                                <span className='font-medium text-gray-900 group-hover:text-blue-600'>
+                                  {article.title}
+                                </span>
+                                {article.popular && (
+                                  <Badge
+                                    variant='secondary'
+                                    className='text-xs'
+                                  >
+                                    Popular
+                                  </Badge>
+                                )}
+                              </div>
+                              <div className='flex items-center gap-2 text-sm text-gray-500'>
+                                <Clock className='h-3 w-3' />
+                                {article.time}
+                                <ChevronRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
               </div>
             </div>
-          </div>{' '}
-          {/* Additional Resources */}
-          <div className='mt-16'>
-            <Card>
-              <CardHeader>
-                <CardTitle className='text-xl'>Additional Resources</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
-                  <div className='text-center'>
-                    <Video className='text-primary mx-auto mb-3 h-8 w-8' />
-                    <h3 className='mb-2 font-semibold text-gray-900'>
-                      Video Library
-                    </h3>
-                    <p className='mb-4 text-sm text-gray-600'>
-                      Watch comprehensive video tutorials covering all features
-                    </p>
-                    <Button variant='outline' size='sm'>
-                      <ExternalLink className='mr-2 h-4 w-4' />
-                      View Videos
-                    </Button>
-                  </div>
-                  <div className='text-center'>
-                    <Download className='text-primary mx-auto mb-3 h-8 w-8' />
-                    <h3 className='mb-2 font-semibold text-gray-900'>
-                      Downloads
-                    </h3>
-                    <p className='mb-4 text-sm text-gray-600'>
-                      Get our mobile apps, templates, and quick reference guides
-                    </p>
-                    <Button variant='outline' size='sm'>
-                      <Download className='mr-2 h-4 w-4' />
-                      Download Center
-                    </Button>
-                  </div>
-                  <div className='text-center'>
-                    <MessageCircle className='text-primary mx-auto mb-3 h-8 w-8' />
-                    <h3 className='mb-2 font-semibold text-gray-900'>
-                      Community
-                    </h3>
-                    <p className='mb-4 text-sm text-gray-600'>
-                      Connect with other property managers and share best
-                      practices
-                    </p>
-                    <Button variant='outline' size='sm'>
-                      <ExternalLink className='mr-2 h-4 w-4' />
-                      Join Community
-                    </Button>
-                  </div>
-                </div>{' '}
-              </CardContent>
-            </Card>
+
+            {/* Sidebar */}
+            <div className='space-y-6'>
+              {/* Quick Actions */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className='flex items-center gap-2'>
+                    <CheckCircle className='h-5 w-5 text-green-500' />
+                    Quick Start
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className='space-y-3'>
+                  <Button asChild className='w-full'>
+                    <Link href='/user-guide/getting-started/creating-your-first-property'>
+                      Create Your First Property
+                    </Link>
+                  </Button>
+                  <Button asChild variant='outline' className='w-full'>
+                    <Link href='/user-guide/getting-started/setting-up-user-accounts'>
+                      Set Up User Accounts
+                    </Link>
+                  </Button>
+                  <Button asChild variant='outline' className='w-full'>
+                    <Link href='/user-guide/resident-management/adding-new-residents'>
+                      Add Your First Resident
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Support */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className='flex items-center gap-2'>
+                    <MessageCircle className='h-5 w-5 text-blue-500' />
+                    Need Help?
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className='space-y-3'>
+                  <Button asChild variant='outline' className='w-full'>
+                    <Link href='/help'>
+                      <Mail className='mr-2 h-4 w-4' />
+                      Contact Support
+                    </Link>
+                  </Button>
+                  <Button asChild variant='outline' className='w-full'>
+                    <Link href='/faq'>
+                      <FileText className='mr-2 h-4 w-4' />
+                      View FAQ
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>

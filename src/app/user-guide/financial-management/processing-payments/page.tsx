@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { LandingLayout } from '@/components/landing/landing-layout';
 import {
   Clock,
   Users,
@@ -16,6 +15,7 @@ import {
   Smartphone,
   Calendar,
 } from 'lucide-react';
+import ArticleLayout from '@/modules/articles/components/article-layout';
 
 const ProcessingPaymentsPage = () => {
   const tableOfContents = [
@@ -47,7 +47,10 @@ const ProcessingPaymentsPage = () => {
   ];
 
   return (
-    <LandingLayout>
+    <ArticleLayout
+      articleSlug='processing-payments'
+      title='Processing Payments'
+    >
       <div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100'>
         <div className='mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
           {/* Breadcrumb */}
@@ -756,7 +759,7 @@ const ProcessingPaymentsPage = () => {
           </div>
         </div>
       </div>
-    </LandingLayout>
+    </ArticleLayout>
   );
 };
 

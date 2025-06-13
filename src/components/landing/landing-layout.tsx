@@ -13,6 +13,7 @@ import {
   Facebook,
   Linkedin,
   Instagram,
+  BookOpen,
 } from 'lucide-react';
 import { useUser, UserButton } from '@clerk/nextjs';
 import { Button } from '../ui/button';
@@ -84,6 +85,13 @@ export function LandingLayout({ children }: LandingLayoutProps) {
             </div>{' '}
             {/* CTA Buttons */}
             <div className='hidden items-center space-x-4 md:flex'>
+              {' '}
+              <Button variant='ghost' size='sm' asChild>
+                <Link href='/user-guide'>
+                  <BookOpen className='h-4 w-4' />
+                  <span className='sr-only'>User Guide</span>
+                </Link>
+              </Button>
               {isSignedIn ? (
                 <>
                   <Button variant='ghost' size='sm' asChild>
@@ -123,11 +131,10 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                 )}
               </Button>
             </div>
-          </div>
-
+          </div>{' '}
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <div className='md:hidden'>
+            <div className='animate-in slide-in-from-top-5 duration-200 md:hidden'>
               <div className='space-y-1 pt-2 pb-3'>
                 {navigation.map(item => (
                   <Link
@@ -143,6 +150,22 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                   </Link>
                 ))}
                 <div className='space-y-2 px-3 py-2'>
+                  {/* User Guide Button */}
+                  <Button
+                    variant='ghost'
+                    size='sm'
+                    className='w-full justify-start'
+                    asChild
+                  >
+                    <Link
+                      href='/user-guide'
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <BookOpen className='mr-2 h-4 w-4' />
+                      User Guide
+                    </Link>
+                  </Button>
+
                   {isSignedIn ? (
                     <>
                       <Button

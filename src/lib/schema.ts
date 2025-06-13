@@ -9,6 +9,7 @@ export * from '../modules/meetings/schema';
 export * from '../modules/announcements/schema';
 export * from '../modules/notifications/schema';
 export * from '../modules/portal/schema';
+export * from '../modules/articles/schema';
 
 // Define all relations here to avoid circular imports
 import { relations } from 'drizzle-orm';

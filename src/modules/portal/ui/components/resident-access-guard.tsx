@@ -32,11 +32,8 @@ export function ResidentAccessGuard({
 
   // Debug logging
   if (typeof window !== 'undefined') {
-    // eslint-disable-next-line no-console
     console.log('🏠 ResidentAccessGuard - Loading:', isLoading);
-    // eslint-disable-next-line no-console
     console.log('🏠 ResidentAccessGuard - Error:', error);
-    // eslint-disable-next-line no-console
     console.log('🏠 ResidentAccessGuard - Access Info:', accessInfo);
   }
 
@@ -52,7 +49,6 @@ export function ResidentAccessGuard({
   }
 
   if (error || !accessInfo?.hasAccess) {
-    // eslint-disable-next-line no-console
     console.log(
       '🚫 ResidentAccessGuard - Access denied. Error:',
       error,

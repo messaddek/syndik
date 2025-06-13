@@ -146,7 +146,6 @@ export function DashboardNavbar() {
                     label='Resident Portal'
                     labelIcon={<HomeIcon className='size-3' />}
                     onClick={() => {
-                      // eslint-disable-next-line no-console
                       console.log(
                         '🏠 Dashboard Navbar - Resident Portal clicked, navigating to /org-redirect for role check'
                       );

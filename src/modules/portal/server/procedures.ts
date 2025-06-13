@@ -108,7 +108,6 @@ export const portalRouter = createTRPCRouter({
   getCurrentResident: orgProtectedProcedure.query(async ({ ctx }) => {
     const { db, userId, orgId } = ctx;
 
-    // eslint-disable-next-line no-console
     console.log('🏠 getCurrentResident - UserId:', userId, 'OrgId:', orgId);
 
     // Get user record
@@ -118,7 +117,6 @@ export const portalRouter = createTRPCRouter({
       .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
       .limit(1);
 
-    // eslint-disable-next-line no-console
     console.log('🏠 getCurrentResident - User record:', user);
 
     if (!user || !user.residentId) {
@@ -138,7 +136,6 @@ export const portalRouter = createTRPCRouter({
       .where(and(eq(residents.id, user.residentId), eq(residents.orgId, orgId)))
       .limit(1);
 
-    // eslint-disable-next-line no-console
     console.log('🏠 getCurrentResident - Resident info:', residentInfo);
 
     if (residentInfo.length === 0) {
@@ -150,7 +147,6 @@ export const portalRouter = createTRPCRouter({
       ...residentInfo[0],
     };
 
-    // eslint-disable-next-line no-console
     console.log('🏠 getCurrentResident - Final result:', result);
 
     return result;
