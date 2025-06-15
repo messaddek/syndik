@@ -7,8 +7,8 @@ import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
 import { LandingLayout } from '@/components/landing/landing-layout';
+import { ArticleSearch } from '@/components/articles/article-search';
 import { getArticlesByCategory } from '@/modules/articles/static-articles';
 import { useTranslations, useLocale } from 'next-intl';
 import {
@@ -16,7 +16,6 @@ import {
   FileText,
   CreditCard,
   MessageSquare,
-  Search,
   BookOpen,
   ChevronRight,
   Star,
@@ -32,7 +31,6 @@ import { useTRPC } from '@/trpc/client';
 import { useQuery } from '@tanstack/react-query';
 
 const UserGuidePage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const t = useTranslations('userGuide');
   const locale = useLocale();
   // Helper function to get the correct word for minutes based on locale
@@ -181,15 +179,6 @@ const UserGuidePage = () => {
     },
   ];
 
-  const filteredGuides = guides.filter(
-    guide =>
-      guide.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      guide.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      guide.articles.some(article =>
-        article.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-  );
-
   return (
     <LandingLayout>
       <div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100'>
@@ -202,17 +191,15 @@ const UserGuidePage = () => {
               </h1>
               <p className='mx-auto mb-8 max-w-3xl text-xl text-gray-600'>
                 {t('subtitle')}
-              </p>
-
+              </p>{' '}
               {/* Search */}
-              <div className='relative mx-auto max-w-lg'>
-                <Search className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400' />
-                <Input
-                  type='text'
-                  placeholder={t('searchPlaceholder')}
-                  className='pl-10'
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
+              <div className='mx-auto max-w-lg'>
+                <ArticleSearch
+                  onResults={count => {
+                    // Optional: Can be used to show result count
+                    console.log(`Found ${count} articles`);
+                  }}
+                  className='w-full'
                 />
               </div>
             </div>
@@ -284,10 +271,10 @@ const UserGuidePage = () => {
                     </Card>
                   ))}
                 </div>
-              </div>
+              </div>{' '}
               {/* Guide Categories */}
               <div className='space-y-8'>
-                {filteredGuides.map(guide => {
+                {guides.map(guide => {
                   const IconComponent = guide.icon;
                   return (
                     <Card key={guide.id} className='overflow-hidden'>

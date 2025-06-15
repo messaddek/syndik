@@ -1184,6 +1184,12 @@
       "readTime": "دقيقة",
       "readTimeMinutes": "دقائق",
       "numberMostPopular": "#{number} الأكثر شعبية"
+    },
+    "search": {
+      "resultsCount": "تم العثور على {count} نتائج",
+      "noResults": "لم يتم العثور على مقالات",
+      "suggestions": "جرب هذه الاقتراحات:",
+      "minChars": "اكتب حرفين على الأقل للبحث"
     }
   },
   "articles": {

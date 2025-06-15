@@ -1185,6 +1185,12 @@
       "readTime": "min",
       "readTimeMinutes": "min",
       "numberMostPopular": "#{number} Le Plus Populaire"
+    },
+    "search": {
+      "resultsCount": "{count} résultats trouvés",
+      "noResults": "Aucun article trouvé",
+      "suggestions": "Essayez ces suggestions :",
+      "minChars": "Tapez au moins 2 caractères pour rechercher"
     }
   },
   "articles": {
