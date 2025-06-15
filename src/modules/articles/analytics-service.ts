@@ -105,13 +105,11 @@ export class ArticleAnalyticsService {
     const views = viewStats[0];
     const ratings = ratingStats[0];
 
-    if (!views || views.totalViews === 0) return null;
-
-    // Calculate popularity score (you can adjust this algorithm)
+    if (!views || views.totalViews === 0) return null; // Calculate popularity score (you can adjust this algorithm)
     const popularityScore = this.calculatePopularityScore({
       totalViews: views.totalViews,
       uniqueViews: views.uniqueViews,
-      averageRating: ratings.averageRating || 0,
+      averageRating: Number(ratings.averageRating) || 0,
       ratingCount: ratings.ratingCount || 0,
       averageReadPercentage: views.averageReadPercentage || 0,
     });
@@ -120,7 +118,7 @@ export class ArticleAnalyticsService {
       slug: articleSlug,
       totalViews: views.totalViews,
       uniqueViews: views.uniqueViews,
-      averageRating: ratings.averageRating || 0,
+      averageRating: Number(ratings.averageRating) || 0,
       ratingCount: ratings.ratingCount || 0,
       averageReadTime: views.averageReadTime || 0,
       averageReadPercentage: views.averageReadPercentage || 0,
@@ -164,8 +162,20 @@ export class ArticleAnalyticsService {
       .groupBy(articleViews.articleSlug)
       .orderBy(desc(sql`count(*)`)) // Order by total views
       .limit(limit);
+    const results = await popularityQuery;
 
-    const results = await popularityQuery; // Map to PopularArticle format with static metadata
+    // Debug logging to understand the data types
+    if (results.length > 0) {
+      console.log('First result:', results[0]);
+      console.log(
+        'averageRating type:',
+        typeof results[0].averageRating,
+        'value:',
+        results[0].averageRating
+      );
+    }
+
+    // Map to PopularArticle format with static metadata
     const popularArticles: PopularArticle[] = [];
 
     for (const result of results) {
@@ -174,12 +184,13 @@ export class ArticleAnalyticsService {
 
       // Filter by category if specified
       if (category && staticData.category !== category) continue;
-
       popularArticles.push({
         slug: result.articleSlug,
         title: staticData.title,
         views: this.formatViewCount(result.totalViews),
-        rating: Number((result.averageRating || 0).toFixed(1)),
+        rating: Number(
+          parseFloat(String(result.averageRating || 0)).toFixed(1)
+        ),
         category: staticData.category,
         readTime: staticData.readTime,
       });

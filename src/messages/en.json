@@ -1058,5 +1058,268 @@
         "certified": "SOC 2 Certified"
       }
     }
+  },
+  "userGuide": {
+    "title": "User Guide & Documentation",
+    "subtitle": "Everything you need to master Syndik and streamline your property management",
+    "searchPlaceholder": "Search articles...",
+    "popularArticles": {
+      "title": "Popular Articles",
+      "loadingData": "(Loading real-time data...)",
+      "updatedRealTime": "Updated in real-time",
+      "mostPopular": "Most Popular",
+      "views": "views",
+      "rating": "rating"
+    },
+    "articleTitles": {
+      "creating-your-first-property": "Creating Your First Property",
+      "setting-up-user-accounts": "Setting Up User Accounts",
+      "understanding-roles-permissions": "Understanding Roles & Permissions",
+      "initial-configuration-guide": "Initial Configuration Guide",
+      "adding-new-properties": "Adding New Properties",
+      "property-information-management": "Property Information Management",
+      "unit-management-organization": "Unit Management & Organization",
+      "maintenance-request-handling": "Maintenance Request Handling",
+      "adding-new-residents": "Adding New Residents",
+      "lease-agreements-management": "Lease Agreements Management",
+      "resident-communication-tools": "Resident Communication Tools",
+      "handling-resident-requests": "Handling Resident Requests",
+      "rent-collection-payment-tracking": "Rent Collection & Payment Tracking",
+      "generating-financial-reports": "Generating Financial Reports",
+      "expense-management-tracking": "Expense Management & Tracking",
+      "budgeting-forecasting-tools": "Budgeting & Forecasting Tools",
+      "system-settings-configuration": "System Settings & Configuration",
+      "user-preferences-customization": "User Preferences & Customization",
+      "data-backup-security": "Data Backup & Security",
+      "integration-third-party-tools": "Integration with Third-Party Tools",
+      "property-information-updates": "Property Information Updates",
+      "document-management-system": "Document Management System",
+      "lease-agreement-management": "Lease Agreement Management",
+      "move-in-move-out-process": "Move-in/Move-out Process",
+      "setting-up-rent-collection": "Setting Up Rent Collection",
+      "processing-payments": "Processing Payments",
+      "late-payment-management": "Late Payment Management",
+      "creating-work-orders": "Creating Work Orders",
+      "tracking-maintenance-requests": "Tracking Maintenance Requests",
+      "vendor-management": "Vendor Management",
+      "preventive-maintenance-setup": "Preventive Maintenance Setup",
+      "sending-announcements": "Sending Announcements",
+      "individual-messaging": "Individual Messaging",
+      "notification-settings": "Notification Settings",
+      "email-templates": "Email Templates"
+    },
+    "articleDescriptions": {
+      "creating-your-first-property": "Essential setup and first steps for property creation",
+      "setting-up-user-accounts": "Create and manage user accounts for your team",
+      "understanding-roles-permissions": "Learn about user roles and permission management",
+      "initial-configuration-guide": "Complete system setup and configuration",
+      "adding-new-properties": "Add and configure new properties in your portfolio",
+      "property-information-management": "Manage detailed property information and settings",
+      "unit-management-organization": "Organize and manage individual units within properties",
+      "maintenance-request-handling": "Process and track maintenance requests efficiently",
+      "adding-new-residents": "Add new residents and set up their accounts",
+      "lease-agreements-management": "Create and manage lease agreements",
+      "resident-communication-tools": "Communicate effectively with residents",
+      "handling-resident-requests": "Process and respond to resident requests",
+      "rent-collection-payment-tracking": "Track rent payments and manage collections",
+      "generating-financial-reports": "Create comprehensive financial reports",
+      "expense-management-tracking": "Track and categorize property expenses",
+      "budgeting-forecasting-tools": "Plan budgets and forecast financial performance",
+      "system-settings-configuration": "Configure system-wide settings and preferences",
+      "user-preferences-customization": "Customize user experience and preferences",
+      "data-backup-security": "Secure your data with backup and security measures",
+      "integration-third-party-tools": "Connect with external tools and services",
+      "property-information-updates": "Keep property information current and accurate",
+      "document-management-system": "Organize and manage property-related documents",
+      "lease-agreement-management": "Create, edit, and manage tenant lease agreements",
+      "move-in-move-out-process": "Streamline resident move-in and move-out procedures",
+      "setting-up-rent-collection": "Configure automated rent collection systems",
+      "processing-payments": "Handle and process resident payments efficiently",
+      "late-payment-management": "Manage late payments and collections",
+      "creating-work-orders": "Create and assign maintenance work orders",
+      "tracking-maintenance-requests": "Monitor and manage maintenance requests from residents",
+      "vendor-management": "Manage relationships with maintenance vendors",
+      "preventive-maintenance-setup": "Set up scheduled preventive maintenance programs",
+      "sending-announcements": "Communicate effectively with all residents",
+      "individual-messaging": "Send direct messages to specific residents",
+      "notification-settings": "Configure notification preferences and settings",
+      "email-templates": "Create and manage email templates for common communications"
+    },
+    "categories": {
+      "gettingStarted": {
+        "title": "Getting Started",
+        "description": "Essential setup and first steps"
+      },
+      "propertyManagement": {
+        "title": "Property Management",
+        "description": "Managing properties and units"
+      },
+      "residentManagement": {
+        "title": "Resident Management",
+        "description": "Managing tenants and leases"
+      },
+      "financialManagement": {
+        "title": "Financial Management",
+        "description": "Rent, payments, and accounting"
+      },
+      "maintenance": {
+        "title": "Maintenance & Requests",
+        "description": "Work orders and maintenance tracking"
+      },
+      "communication": {
+        "title": "Communication",
+        "description": "Announcements and notifications"
+      }
+    },
+    "sidebar": {
+      "quickStart": "Quick Start",
+      "createFirstProperty": "Create Your First Property",
+      "setupUserAccounts": "Set Up User Accounts",
+      "addFirstResident": "Add Your First Resident",
+      "needHelp": "Need Help?",
+      "contactSupport": "Contact Support",
+      "viewFaq": "View FAQ"
+    },
+    "common": {
+      "popular": "Popular",
+      "readTime": "min",
+      "readTimeMinutes": "min",
+      "numberMostPopular": "#{number} Most Popular"
+    }
+  },
+  "articles": {
+    "navigation": {
+      "userGuide": "User Guide",
+      "gettingStarted": "Getting Started",
+      "propertyManagement": "Property Management",
+      "residentManagement": "Resident Management",
+      "financialManagement": "Financial Management",
+      "maintenance": "Maintenance",
+      "communication": "Communication"
+    },
+    "common": {
+      "overview": "Overview",
+      "nextSteps": "Next Steps",
+      "relatedArticles": "Related Articles",
+      "whatYoullLearn": "What You'll Learn",
+      "tableOfContents": "Table of Contents",
+      "readTime": "min read",
+      "category": "Category",
+      "tags": "Tags",
+      "popular": "Popular"
+    },
+    "creatingYourFirstProperty": {
+      "title": "Creating Your First Property",
+      "description": "Learn how to add your first property to Syndik and get started with property management. This guide will walk you through the complete process of creating a property and setting it up for success.",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Creating your first property is an important step in setting up your property management system. This guide will walk you through the entire process, from navigation to configuration, ensuring you have all the necessary information to get started.",
+          "whatYoullLearn": [
+            "How to navigate to the property creation form",
+            "Required information for creating a property",
+            "Best practices for property setup",
+            "How to configure initial property settings"
+          ]
+        },
+        "step1": {
+          "title": "Step 1: Navigate to Properties",
+          "content": "Once you're logged into your Syndik dashboard, follow these steps to create your first property:",
+          "steps": [
+            "Click on 'Buildings' in the main navigation menu",
+            "Look for the 'Add Building' button in the top-right corner",
+            "Click 'Add Building' to open the property creation form"
+          ],
+          "proTip": {
+            "title": "Pro Tip",
+            "content": "Make sure you have all property documents ready before starting, including property deeds, building permits, and any existing tenant information."
+          }
+        },
+        "step2": {
+          "title": "Step 2: Fill in Property Details",
+          "content": "The property creation form requires the following information. Make sure to fill in all required fields accurately:",
+          "requiredFields": {
+            "title": "Required Fields",
+            "fields": [
+              "Property Name",
+              "Street Address",
+              "City",
+              "State/Province",
+              "Postal Code",
+              "Property Type"
+            ]
+          },
+          "optionalFields": {
+            "title": "Optional Fields",
+            "fields": [
+              "Property Description",
+              "Year Built",
+              "Total Square Footage",
+              "Parking Spaces",
+              "Amenities",
+              "Property Manager"
+            ]
+          }
+        },
+        "step3": {
+          "title": "Step 3: Configure Property Settings",
+          "content": "After entering the basic details, configure these important settings to ensure smooth operations:",
+          "settings": [
+            {
+              "title": "Rent Collection Settings",
+              "description": "Set up default rent collection preferences, payment methods, and due dates that will apply to all units in this property."
+            },
+            {
+              "title": "Communication Preferences",
+              "description": "Choose how residents can contact management and receive notifications (email, SMS, in-app notifications)."
+            },
+            {
+              "title": "Maintenance Settings",
+              "description": "Configure maintenance request workflows, assign default maintenance staff, and set priority levels."
+            }
+          ]
+        },
+        "nextSteps": {
+          "title": "Next Steps",
+          "content": "Congratulations! You've created your first property. Here's what to do next:",
+          "actions": [
+            {
+              "title": "Manage Units",
+              "description": "Learn how to add and organize units within your property.",
+              "href": "/user-guide/property-management/unit-management-organization"
+            },
+            {
+              "title": "Add Residents",
+              "description": "Start adding residents to your property units.",
+              "href": "/user-guide/resident-management/adding-new-residents"
+            }
+          ]
+        },
+        "sidebar": {
+          "tableOfContents": "Table of Contents",
+          "relatedArticles": "Related Articles",
+          "needHelp": "Need Help?",
+          "contactSupport": "Contact Support",
+          "joinCommunity": "Join Community",
+          "relatedArticlesList": [
+            {
+              "title": "Setting Up User Accounts",
+              "href": "/user-guide/getting-started/setting-up-user-accounts",
+              "time": "3 min"
+            },
+            {
+              "title": "Understanding Roles & Permissions",
+              "href": "/user-guide/getting-started/understanding-roles-permissions",
+              "time": "7 min"
+            },
+            {
+              "title": "Initial Configuration Guide",
+              "href": "/user-guide/getting-started/initial-configuration-guide",
+              "time": "10 min"
+            }
+          ]
+        }
+      }
+    }
   }
 }

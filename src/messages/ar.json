@@ -1057,5 +1057,268 @@
         "certified": "معتمد SOC 2"
       }
     }
+  },
+  "userGuide": {
+    "title": "دليل المستخدم والوثائق",
+    "subtitle": "كل ما تحتاجه لإتقان سينديك وتبسيط إدارة العقارات الخاصة بك",
+    "searchPlaceholder": "البحث في المقالات...",
+    "popularArticles": {
+      "title": "المقالات الشائعة",
+      "loadingData": "(تحميل البيانات في الوقت الفعلي...)",
+      "updatedRealTime": "محدث في الوقت الفعلي",
+      "mostPopular": "الأكثر شعبية",
+      "views": "مشاهدات",
+      "rating": "التقييم"
+    },
+    "articleTitles": {
+      "creating-your-first-property": "إنشاء أول عقار لك",
+      "setting-up-user-accounts": "إعداد حسابات المستخدمين",
+      "understanding-roles-permissions": "فهم الأدوار والصلاحيات",
+      "initial-configuration-guide": "دليل التكوين الأولي",
+      "adding-new-properties": "إضافة عقارات جديدة",
+      "property-information-management": "إدارة معلومات العقارات",
+      "unit-management-organization": "إدارة وتنظيم الوحدات",
+      "maintenance-request-handling": "التعامل مع طلبات الصيانة",
+      "adding-new-residents": "إضافة سكان جدد",
+      "lease-agreements-management": "إدارة عقود الإيجار",
+      "resident-communication-tools": "أدوات التواصل مع السكان",
+      "handling-resident-requests": "التعامل مع طلبات السكان",
+      "rent-collection-payment-tracking": "تحصيل الإيجار وتتبع المدفوعات",
+      "generating-financial-reports": "إنشاء التقارير المالية",
+      "expense-management-tracking": "إدارة وتتبع المصروفات",
+      "budgeting-forecasting-tools": "أدوات الميزانية والتنبؤ",
+      "system-settings-configuration": "تكوين إعدادات النظام",
+      "user-preferences-customization": "تخصيص تفضيلات المستخدم",
+      "data-backup-security": "النسخ الاحتياطي وأمان البيانات",
+      "integration-third-party-tools": "التكامل مع الأدوات الخارجية",
+      "property-information-updates": "تحديث معلومات العقارات",
+      "document-management-system": "نظام إدارة الوثائق",
+      "lease-agreement-management": "إدارة عقود الإيجار",
+      "move-in-move-out-process": "عملية الدخول والخروج",
+      "setting-up-rent-collection": "إعداد تحصيل الإيجار",
+      "processing-payments": "معالجة المدفوعات",
+      "late-payment-management": "إدارة التأخير في السداد",
+      "creating-work-orders": "إنشاء أوامر العمل",
+      "tracking-maintenance-requests": "تتبع طلبات الصيانة",
+      "vendor-management": "إدارة الموردين",
+      "preventive-maintenance-setup": "إعداد الصيانة الوقائية",
+      "sending-announcements": "إرسال الإعلانات",
+      "individual-messaging": "المراسلة الفردية",
+      "notification-settings": "إعدادات الإشعارات",
+      "email-templates": "قوالب البريد الإلكتروني"
+    },
+    "articleDescriptions": {
+      "creating-your-first-property": "الإعداد الأساسي والخطوات الأولى لإنشاء العقار",
+      "setting-up-user-accounts": "إنشاء وإدارة حسابات المستخدمين لفريقك",
+      "understanding-roles-permissions": "تعلم إدارة أدوار المستخدمين والصلاحيات",
+      "initial-configuration-guide": "إعداد وتكوين النظام بالكامل",
+      "adding-new-properties": "إضافة وتكوين عقارات جديدة في محفظتك",
+      "property-information-management": "إدارة معلومات العقارات التفصيلية والإعدادات",
+      "unit-management-organization": "تنظيم وإدارة الوحدات الفردية داخل العقارات",
+      "maintenance-request-handling": "معالجة وتتبع طلبات الصيانة بكفاءة",
+      "adding-new-residents": "إضافة سكان جدد وإعداد حساباتهم",
+      "lease-agreements-management": "إنشاء وإدارة عقود الإيجار",
+      "resident-communication-tools": "التواصل بفعالية مع السكان",
+      "handling-resident-requests": "معالجة والرد على طلبات السكان",
+      "rent-collection-payment-tracking": "تتبع مدفوعات الإيجار وإدارة التحصيلات",
+      "generating-financial-reports": "إنشاء تقارير مالية شاملة",
+      "expense-management-tracking": "تتبع وتصنيف مصروفات العقارات",
+      "budgeting-forecasting-tools": "تخطيط الميزانيات والتنبؤ بالأداء المالي",
+      "system-settings-configuration": "تكوين الإعدادات والتفضيلات على مستوى النظام",
+      "user-preferences-customization": "تخصيص تجربة المستخدم والتفضيلات",
+      "data-backup-security": "تأمين بياناتك بإجراءات النسخ الاحتياطي والأمان",
+      "integration-third-party-tools": "الاتصال بالأدوات والخدمات الخارجية",
+      "property-information-updates": "الحفاظ على معلومات العقارات محدثة ودقيقة",
+      "document-management-system": "تنظيم وإدارة الوثائق المتعلقة بالعقارات",
+      "lease-agreement-management": "إنشاء وتعديل وإدارة عقود إيجار المستأجرين",
+      "move-in-move-out-process": "تبسيط إجراءات دخول وخروج السكان",
+      "setting-up-rent-collection": "تكوين أنظمة تحصيل الإيجار الآلية",
+      "processing-payments": "التعامل مع ومعالجة مدفوعات السكان بكفاءة",
+      "late-payment-management": "إدارة المدفوعات المتأخرة والتحصيلات",
+      "creating-work-orders": "إنشاء وتعيين أوامر عمل الصيانة",
+      "tracking-maintenance-requests": "مراقبة وإدارة طلبات الصيانة من السكان",
+      "vendor-management": "إدارة العلاقات مع موردي الصيانة",
+      "preventive-maintenance-setup": "إعداد برامج الصيانة الوقائية المجدولة",
+      "sending-announcements": "التواصل بفعالية مع جميع السكان",
+      "individual-messaging": "إرسال رسائل مباشرة لسكان محددين",
+      "notification-settings": "تكوين تفضيلات وإعدادات الإشعارات",
+      "email-templates": "إنشاء وإدارة قوالب البريد الإلكتروني للتواصل المعتاد"
+    },
+    "categories": {
+      "gettingStarted": {
+        "title": "البدء",
+        "description": "الإعداد الأساسي والخطوات الأولى"
+      },
+      "propertyManagement": {
+        "title": "إدارة العقارات",
+        "description": "إدارة العقارات والوحدات"
+      },
+      "residentManagement": {
+        "title": "إدارة السكان",
+        "description": "إدارة المستأجرين وعقود الإيجار"
+      },
+      "financialManagement": {
+        "title": "الإدارة المالية",
+        "description": "الإيجارات والمدفوعات والمحاسبة"
+      },
+      "maintenance": {
+        "title": "الصيانة والطلبات",
+        "description": "أوامر العمل وتتبع الصيانة"
+      },
+      "communication": {
+        "title": "التواصل",
+        "description": "الإعلانات والإشعارات"
+      }
+    },
+    "sidebar": {
+      "quickStart": "البدء السريع",
+      "createFirstProperty": "إنشاء أول عقار لك",
+      "setupUserAccounts": "إعداد حسابات المستخدمين",
+      "addFirstResident": "إضافة أول ساكن لك",
+      "needHelp": "تحتاج مساعدة؟",
+      "contactSupport": "اتصل بالدعم",
+      "viewFaq": "عرض الأسئلة الشائعة"
+    },
+    "common": {
+      "popular": "شائع",
+      "readTime": "دقيقة",
+      "readTimeMinutes": "دقائق",
+      "numberMostPopular": "#{number} الأكثر شعبية"
+    }
+  },
+  "articles": {
+    "navigation": {
+      "userGuide": "دليل المستخدم",
+      "gettingStarted": "البدء",
+      "propertyManagement": "إدارة العقارات",
+      "residentManagement": "إدارة السكان",
+      "financialManagement": "الإدارة المالية",
+      "maintenance": "الصيانة",
+      "communication": "التواصل"
+    },
+    "common": {
+      "overview": "نظرة عامة",
+      "nextSteps": "الخطوات التالية",
+      "relatedArticles": "مقالات ذات صلة",
+      "whatYoullLearn": "ما ستتعلمه",
+      "tableOfContents": "جدول المحتويات",
+      "readTime": "دقيقة قراءة",
+      "category": "الفئة",
+      "tags": "العلامات",
+      "popular": "شائع"
+    },
+    "creatingYourFirstProperty": {
+      "title": "إنشاء أول عقار لك",
+      "description": "تعلم كيفية إضافة أول عقار لك إلى سينديك والبدء في إدارة العقارات. سيرشدك هذا الدليل خلال العملية الكاملة لإنشاء عقار وإعداده للنجاح.",
+      "sections": {
+        "overview": {
+          "title": "نظرة عامة",
+          "content": "إنشاء أول عقار لك خطوة مهمة في إعداد نظام إدارة العقارات الخاص بك. سيرشدك هذا الدليل خلال العملية بأكملها، من التنقل إلى التكوين، مما يضمن حصولك على جميع المعلومات اللازمة للبدء.",
+          "whatYoullLearn": [
+            "كيفية التنقل إلى نموذج إنشاء العقار",
+            "المعلومات المطلوبة لإنشاء عقار",
+            "أفضل الممارسات لإعداد العقار",
+            "كيفية تكوين إعدادات العقار الأولية"
+          ]
+        },
+        "step1": {
+          "title": "الخطوة 1: التنقل إلى العقارات",
+          "content": "بمجرد تسجيل الدخول إلى لوحة تحكم سينديك، اتبع هذه الخطوات لإنشاء أول عقار لك:",
+          "steps": [
+            "انقر على 'المباني' في قائمة التنقل الرئيسية",
+            "ابحث عن زر 'إضافة مبنى' في الزاوية العلوية اليمنى",
+            "انقر على 'إضافة مبنى' لفتح نموذج إنشاء العقار"
+          ],
+          "proTip": {
+            "title": "نصيحة محترف",
+            "content": "تأكد من جاهزية جميع وثائق العقار قبل البدء، بما في ذلك سندات الملكية وتصاريح البناء وأي معلومات عن المستأجرين الحاليين."
+          }
+        },
+        "step2": {
+          "title": "الخطوة 2: ملء تفاصيل العقار",
+          "content": "يتطلب نموذج إنشاء العقار المعلومات التالية. تأكد من ملء جميع الحقول المطلوبة بدقة:",
+          "requiredFields": {
+            "title": "الحقول المطلوبة",
+            "fields": [
+              "اسم العقار",
+              "عنوان الشارع",
+              "المدينة",
+              "الولاية/المحافظة",
+              "الرمز البريدي",
+              "نوع العقار"
+            ]
+          },
+          "optionalFields": {
+            "title": "الحقول الاختيارية",
+            "fields": [
+              "وصف العقار",
+              "سنة البناء",
+              "إجمالي المساحة",
+              "أماكن الركن",
+              "الخدمات",
+              "مدير العقار"
+            ]
+          }
+        },
+        "step3": {
+          "title": "الخطوة 3: تكوين إعدادات العقار",
+          "content": "بعد إدخال التفاصيل الأساسية، قم بتكوين هذه الإعدادات المهمة لضمان سير العمليات بسلاسة:",
+          "settings": [
+            {
+              "title": "إعدادات تحصيل الإيجار",
+              "description": "اعداد تفضيلات تحصيل الإيجار الافتراضية وطرق الدفع ومواعيد الاستحقاق التي ستطبق على جميع الوحدات في هذا العقار."
+            },
+            {
+              "title": "تفضيلات التواصل",
+              "description": "اختر كيف يمكن للسكان التواصل مع الإدارة وتلقي الإشعارات (البريد الإلكتروني، الرسائل النصية، الإشعارات داخل التطبيق)."
+            },
+            {
+              "title": "إعدادات الصيانة",
+              "description": "تكوين سير عمل طلبات الصيانة وتعيين فريق الصيانة الافتراضي وتحديد مستويات الأولوية."
+            }
+          ]
+        },
+        "nextSteps": {
+          "title": "الخطوات التالية",
+          "content": "تهانينا! لقد أنشأت أول عقار لك. إليك ما يجب فعله بعد ذلك:",
+          "actions": [
+            {
+              "title": "إدارة الوحدات",
+              "description": "تعلم كيفية إضافة وتنظيم الوحدات داخل عقارك.",
+              "href": "/user-guide/property-management/unit-management-organization"
+            },
+            {
+              "title": "إضافة السكان",
+              "description": "ابدأ في إضافة السكان إلى وحدات عقارك.",
+              "href": "/user-guide/resident-management/adding-new-residents"
+            }
+          ]
+        },
+        "sidebar": {
+          "tableOfContents": "جدول المحتويات",
+          "relatedArticles": "مقالات ذات صلة",
+          "needHelp": "تحتاج مساعدة؟",
+          "contactSupport": "اتصل بالدعم",
+          "joinCommunity": "انضم للمجتمع",
+          "relatedArticlesList": [
+            {
+              "title": "إعداد حسابات المستخدمين",
+              "href": "/user-guide/getting-started/setting-up-user-accounts",
+              "time": "3 دقائق"
+            },
+            {
+              "title": "فهم الأدوار والصلاحيات",
+              "href": "/user-guide/getting-started/understanding-roles-permissions",
+              "time": "7 دقائق"
+            },
+            {
+              "title": "دليل التكوين الأولي",
+              "href": "/user-guide/getting-started/initial-configuration-guide",
+              "time": "10 دقائق"
+            }
+          ]
+        }
+      }
+    }
   }
 }

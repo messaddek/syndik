@@ -5,6 +5,12 @@ import { Link } from '@/i18n/navigation';
 import { Twitter, Facebook, Linkedin, Instagram } from 'lucide-react';
 import Image from 'next/image';
 import { Newsletter } from './newsletter';
+import { Gabarito } from 'next/font/google';
+
+const gabarito = Gabarito({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+});
 
 export function LandingFooter() {
   const tFooter = useTranslations('footer');
@@ -33,13 +39,17 @@ export function LandingFooter() {
           <div className='md:col-span-2'>
             <div className='mb-6 flex items-center space-x-2'>
               <Image
-                src='/logo.svg'
+                src='/logo-white.svg'
                 alt='Syndik Logo'
-                width={32}
-                height={32}
-                className='h-8 w-8'
+                width={48}
+                height={48}
+                className='h-12 w-12'
               />
-              <span className='text-2xl font-bold text-white'>Syndik</span>
+              <span
+                className={`text-2xl font-bold text-white ${gabarito.className}`}
+              >
+                syndik.ma
+              </span>
             </div>
             <p className='mb-6 text-blue-100'>{tFooter('description')}</p>
             {/* Social Media Links */}

@@ -1058,5 +1058,268 @@
         "certified": "Certifié SOC 2"
       }
     }
+  },
+  "userGuide": {
+    "title": "Guide Utilisateur & Documentation",
+    "subtitle": "Tout ce dont vous avez besoin pour maîtriser Syndik et rationaliser votre gestion immobilière",
+    "searchPlaceholder": "Rechercher des articles...",
+    "popularArticles": {
+      "title": "Articles Populaires",
+      "loadingData": "(Chargement des données en temps réel...)",
+      "updatedRealTime": "Mis à jour en temps réel",
+      "mostPopular": "Plus Populaire",
+      "views": "vues",
+      "rating": "notation"
+    },
+    "articleTitles": {
+      "creating-your-first-property": "Créer Votre Première Propriété",
+      "setting-up-user-accounts": "Configuration des Comptes Utilisateur",
+      "understanding-roles-permissions": "Comprendre les Rôles et Permissions",
+      "initial-configuration-guide": "Guide de Configuration Initiale",
+      "adding-new-properties": "Ajouter de Nouvelles Propriétés",
+      "property-information-management": "Gestion des Informations de Propriété",
+      "unit-management-organization": "Gestion et Organisation des Unités",
+      "maintenance-request-handling": "Traitement des Demandes de Maintenance",
+      "adding-new-residents": "Ajouter de Nouveaux Résidents",
+      "lease-agreements-management": "Gestion des Contrats de Bail",
+      "resident-communication-tools": "Outils de Communication avec les Résidents",
+      "handling-resident-requests": "Traitement des Demandes des Résidents",
+      "rent-collection-payment-tracking": "Collecte de Loyer et Suivi des Paiements",
+      "generating-financial-reports": "Génération de Rapports Financiers",
+      "expense-management-tracking": "Gestion et Suivi des Dépenses",
+      "budgeting-forecasting-tools": "Outils de Budgétisation et de Prévision",
+      "system-settings-configuration": "Configuration des Paramètres Système",
+      "user-preferences-customization": "Personnalisation des Préférences Utilisateur",
+      "data-backup-security": "Sauvegarde et Sécurité des Données",
+      "integration-third-party-tools": "Intégration avec des Outils Tiers",
+      "property-information-updates": "Mises à Jour des Informations de Propriété",
+      "document-management-system": "Système de Gestion de Documents",
+      "lease-agreement-management": "Gestion des Contrats de Bail",
+      "move-in-move-out-process": "Processus d'Entrée/Sortie",
+      "setting-up-rent-collection": "Configuration de la Collecte de Loyer",
+      "processing-payments": "Traitement des Paiements",
+      "late-payment-management": "Gestion des Retards de Paiement",
+      "creating-work-orders": "Création d'Ordres de Travail",
+      "tracking-maintenance-requests": "Suivi des Demandes de Maintenance",
+      "vendor-management": "Gestion des Fournisseurs",
+      "preventive-maintenance-setup": "Configuration de la Maintenance Préventive",
+      "sending-announcements": "Envoi d'Annonces",
+      "individual-messaging": "Messagerie Individuelle",
+      "notification-settings": "Paramètres de Notification",
+      "email-templates": "Modèles d'E-mail"
+    },
+    "articleDescriptions": {
+      "creating-your-first-property": "Configuration essentielle et premières étapes pour la création de propriété",
+      "setting-up-user-accounts": "Créer et gérer les comptes utilisateur pour votre équipe",
+      "understanding-roles-permissions": "Apprendre la gestion des rôles et permissions utilisateur",
+      "initial-configuration-guide": "Configuration et installation complète du système",
+      "adding-new-properties": "Ajouter et configurer de nouvelles propriétés dans votre portefeuille",
+      "property-information-management": "Gérer les informations détaillées et paramètres des propriétés",
+      "unit-management-organization": "Organiser et gérer les unités individuelles dans les propriétés",
+      "maintenance-request-handling": "Traiter et suivre efficacement les demandes de maintenance",
+      "adding-new-residents": "Ajouter de nouveaux résidents et configurer leurs comptes",
+      "lease-agreements-management": "Créer et gérer les contrats de bail",
+      "resident-communication-tools": "Communiquer efficacement avec les résidents",
+      "handling-resident-requests": "Traiter et répondre aux demandes des résidents",
+      "rent-collection-payment-tracking": "Suivre les paiements de loyer et gérer les collectes",
+      "generating-financial-reports": "Créer des rapports financiers complets",
+      "expense-management-tracking": "Suivre et catégoriser les dépenses immobilières",
+      "budgeting-forecasting-tools": "Planifier les budgets et prévoir les performances financières",
+      "system-settings-configuration": "Configurer les paramètres et préférences système",
+      "user-preferences-customization": "Personnaliser l'expérience et les préférences utilisateur",
+      "data-backup-security": "Sécuriser vos données avec des mesures de sauvegarde et de sécurité",
+      "integration-third-party-tools": "Se connecter avec des outils et services externes",
+      "property-information-updates": "Maintenir les informations de propriété à jour et précises",
+      "document-management-system": "Organiser et gérer les documents liés aux propriétés",
+      "lease-agreement-management": "Créer, modifier et gérer les contrats de bail des locataires",
+      "move-in-move-out-process": "Rationaliser les procédures d'entrée et de sortie des résidents",
+      "setting-up-rent-collection": "Configurer les systèmes de collecte de loyer automatisés",
+      "processing-payments": "Traiter efficacement les paiements des résidents",
+      "late-payment-management": "Gérer les retards de paiement et les recouvrements",
+      "creating-work-orders": "Créer et assigner des ordres de travail de maintenance",
+      "tracking-maintenance-requests": "Surveiller et gérer les demandes de maintenance des résidents",
+      "vendor-management": "Gérer les relations avec les fournisseurs de maintenance",
+      "preventive-maintenance-setup": "Configurer des programmes de maintenance préventive planifiés",
+      "sending-announcements": "Communiquer efficacement avec tous les résidents",
+      "individual-messaging": "Envoyer des messages directs à des résidents spécifiques",
+      "notification-settings": "Configurer les préférences et paramètres de notification",
+      "email-templates": "Créer et gérer des modèles d'e-mail pour les communications courantes"
+    },
+    "categories": {
+      "gettingStarted": {
+        "title": "Commencer",
+        "description": "Configuration essentielle et premières étapes"
+      },
+      "propertyManagement": {
+        "title": "Gestion des Propriétés",
+        "description": "Gestion des propriétés et des unités"
+      },
+      "residentManagement": {
+        "title": "Gestion des Résidents",
+        "description": "Gestion des locataires et des baux"
+      },
+      "financialManagement": {
+        "title": "Gestion Financière",
+        "description": "Loyers, paiements et comptabilité"
+      },
+      "maintenance": {
+        "title": "Maintenance et Demandes",
+        "description": "Ordres de travail et suivi de la maintenance"
+      },
+      "communication": {
+        "title": "Communication",
+        "description": "Annonces et notifications"
+      }
+    },
+    "sidebar": {
+      "quickStart": "Démarrage Rapide",
+      "createFirstProperty": "Créer Votre Première Propriété",
+      "setupUserAccounts": "Configurer les Comptes Utilisateurs",
+      "addFirstResident": "Ajouter Votre Premier Résident",
+      "needHelp": "Besoin d'Aide ?",
+      "contactSupport": "Contacter le Support",
+      "viewFaq": "Voir la FAQ"
+    },
+    "common": {
+      "popular": "Populaire",
+      "readTime": "min",
+      "readTimeMinutes": "min",
+      "numberMostPopular": "#{number} Le Plus Populaire"
+    }
+  },
+  "articles": {
+    "navigation": {
+      "userGuide": "Guide Utilisateur",
+      "gettingStarted": "Commencer",
+      "propertyManagement": "Gestion des Propriétés",
+      "residentManagement": "Gestion des Résidents",
+      "financialManagement": "Gestion Financière",
+      "maintenance": "Maintenance",
+      "communication": "Communication"
+    },
+    "common": {
+      "overview": "Aperçu",
+      "nextSteps": "Prochaines Étapes",
+      "relatedArticles": "Articles Connexes",
+      "whatYoullLearn": "Ce Que Vous Apprendrez",
+      "tableOfContents": "Table des Matières",
+      "readTime": "min de lecture",
+      "category": "Catégorie",
+      "tags": "Étiquettes",
+      "popular": "Populaire"
+    },
+    "creatingYourFirstProperty": {
+      "title": "Créer Votre Première Propriété",
+      "description": "Apprenez à ajouter votre première propriété à Syndik et commencez la gestion immobilière. Ce guide vous accompagnera tout au long du processus complet de création d'une propriété et de sa configuration pour le succès.",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Créer votre première propriété est une étape importante dans la configuration de votre système de gestion immobilière. Ce guide vous accompagnera tout au long du processus, de la navigation à la configuration, en vous assurant d'avoir toutes les informations nécessaires pour commencer.",
+          "whatYoullLearn": [
+            "Comment naviguer vers le formulaire de création de propriété",
+            "Informations requises pour créer une propriété",
+            "Meilleures pratiques pour la configuration de propriété",
+            "Comment configurer les paramètres initiaux de propriété"
+          ]
+        },
+        "step1": {
+          "title": "Étape 1 : Naviguer vers les Propriétés",
+          "content": "Une fois connecté à votre tableau de bord Syndik, suivez ces étapes pour créer votre première propriété :",
+          "steps": [
+            "Cliquez sur 'Immeubles' dans le menu de navigation principal",
+            "Recherchez le bouton 'Ajouter un immeuble' dans le coin supérieur droit",
+            "Cliquez sur 'Ajouter un immeuble' pour ouvrir le formulaire de création de propriété"
+          ],
+          "proTip": {
+            "title": "Conseil Pro",
+            "content": "Assurez-vous d'avoir tous les documents de propriété prêts avant de commencer, y compris les actes de propriété, les permis de construire et toute information sur les locataires existants."
+          }
+        },
+        "step2": {
+          "title": "Étape 2 : Remplir les Détails de la Propriété",
+          "content": "Le formulaire de création de propriété nécessite les informations suivantes. Assurez-vous de remplir tous les champs requis avec précision :",
+          "requiredFields": {
+            "title": "Champs Requis",
+            "fields": [
+              "Nom de la Propriété",
+              "Adresse de Rue",
+              "Ville",
+              "État/Province",
+              "Code Postal",
+              "Type de Propriété"
+            ]
+          },
+          "optionalFields": {
+            "title": "Champs Optionnels",
+            "fields": [
+              "Description de la Propriété",
+              "Année de Construction",
+              "Surface Totale",
+              "Places de Parking",
+              "Équipements",
+              "Gestionnaire de Propriété"
+            ]
+          }
+        },
+        "step3": {
+          "title": "Étape 3 : Configurer les Paramètres de Propriété",
+          "content": "Après avoir saisi les détails de base, configurez ces paramètres importants pour assurer un fonctionnement fluide :",
+          "settings": [
+            {
+              "title": "Paramètres de Collecte de Loyer",
+              "description": "Configurez les préférences par défaut pour la collecte de loyer, les méthodes de paiement et les dates d'échéance qui s'appliqueront à toutes les unités de cette propriété."
+            },
+            {
+              "title": "Préférences de Communication",
+              "description": "Choisissez comment les résidents peuvent contacter la gestion et recevoir des notifications (email, SMS, notifications in-app)."
+            },
+            {
+              "title": "Paramètres de Maintenance",
+              "description": "Configurez les flux de travail des demandes de maintenance, assignez le personnel de maintenance par défaut et définissez les niveaux de priorité."
+            }
+          ]
+        },
+        "nextSteps": {
+          "title": "Prochaines Étapes",
+          "content": "Félicitations ! Vous avez créé votre première propriété. Voici quoi faire ensuite :",
+          "actions": [
+            {
+              "title": "Gérer les Logements",
+              "description": "Apprenez à ajouter et organiser les logements dans votre propriété.",
+              "href": "/user-guide/property-management/unit-management-organization"
+            },
+            {
+              "title": "Ajouter des Résidents",
+              "description": "Commencez à ajouter des résidents à vos logements.",
+              "href": "/user-guide/resident-management/adding-new-residents"
+            }
+          ]
+        },
+        "sidebar": {
+          "tableOfContents": "Table des Matières",
+          "relatedArticles": "Articles Connexes",
+          "needHelp": "Besoin d'Aide ?",
+          "contactSupport": "Contacter le Support",
+          "joinCommunity": "Rejoindre la Communauté",
+          "relatedArticlesList": [
+            {
+              "title": "Configuration des Comptes Utilisateur",
+              "href": "/user-guide/getting-started/setting-up-user-accounts",
+              "time": "3 min"
+            },
+            {
+              "title": "Comprendre les Rôles et Permissions",
+              "href": "/user-guide/getting-started/understanding-roles-permissions",
+              "time": "7 min"
+            },
+            {
+              "title": "Guide de Configuration Initiale",
+              "href": "/user-guide/getting-started/initial-configuration-guide",
+              "time": "10 min"
+            }
+          ]
+        }
+      }
+    }
   }
 }
