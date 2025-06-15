@@ -5,7 +5,6 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { XIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { useDirection } from '@/hooks/use-direction';
 
 function Dialog({
   ...props
@@ -55,8 +54,6 @@ function DialogContent({
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean;
 }) {
-  const isRtl = useDirection();
-
   return (
     <DialogPortal data-slot='dialog-portal'>
       <DialogOverlay />
@@ -73,8 +70,7 @@ function DialogContent({
           <DialogPrimitive.Close
             data-slot='dialog-close'
             className={cn(
-              "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-              isRtl ? 'left-4' : 'right-4'
+              "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none rtl:right-auto rtl:left-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
             )}
           >
             <XIcon />
@@ -87,14 +83,12 @@ function DialogContent({
 }
 
 function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
-  const isRtl = useDirection();
   return (
     <div
       data-slot='dialog-header'
       className={cn(
-        'flex flex-col gap-2 text-center sm:text-left',
-        className,
-        isRtl && 'sm:text-right'
+        'flex flex-col gap-2 text-center sm:text-left rtl:sm:text-right',
+        className
       )}
       {...props}
     />
@@ -102,15 +96,12 @@ function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 function DialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
-  const isRtl = useDirection();
-
   return (
     <div
       data-slot='dialog-footer'
       className={cn(
-        'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end',
-        className,
-        isRtl && 'sm:flex-row-reverse'
+        'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end rtl:sm:flex-row-reverse',
+        className
       )}
       {...props}
     />

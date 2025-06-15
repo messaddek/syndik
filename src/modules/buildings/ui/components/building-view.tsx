@@ -26,13 +26,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import { BuildingForm } from './building-form';
-import { createBuildingSchema } from '../../schema';
-import { z } from 'zod';
 import { useConfirm } from '@/hooks/use-confirm';
 import { useTranslations } from 'next-intl';
 import { useDirection } from '@/hooks/use-direction';
-
-type BuildingFormData = z.infer<typeof createBuildingSchema>;
 
 interface BuildingViewProps {
   id: string;
@@ -72,26 +68,11 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
       pagination: { page: 1, pageSize: 10, total: 0, totalPages: 0 },
     },
   } = useSuspenseQuery(trpc.residents.getAll.queryOptions({}));
-
   // Filter residents for this building
   const buildingResidents =
     (allResidents.data || []).filter((resident: { unitId: string | null }) =>
       units.some(unit => unit.id === resident.unitId)
     ) || [];
-
-  // Update mutation
-  const updateMutation = useMutation(
-    trpc.buildings.update.mutationOptions({
-      onSuccess: () => {
-        queryClient.invalidateQueries(
-          trpc.buildings.getById.queryOptions({ id })
-        );
-        queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
-        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
-        setIsEditDialogOpen(false);
-      },
-    })
-  );
 
   // Delete mutation
   const deleteMutation = useMutation(
@@ -103,13 +84,6 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
       },
     })
   );
-
-  const handleUpdateBuilding = (data: BuildingFormData) => {
-    updateMutation.mutate({
-      id,
-      data,
-    });
-  };
 
   const handleDeleteBuilding = async () => {
     const confirmed = await confirm();
@@ -132,10 +106,15 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
   return (
     <>
       <div className='space-y-6'>
-        {/* Header */}{' '}
-        <div className='flex items-center justify-between'>
-          <div className='flex items-center gap-x-2'>
-            <Button variant='ghost' size='sm' asChild>
+        {/* Header */}
+        <div className='flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0'>
+          <div className='flex flex-col space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:gap-x-2'>
+            <Button
+              variant='ghost'
+              size='sm'
+              asChild
+              className='self-start sm:self-auto'
+            >
               <Link href='/buildings' className='gap-x-2'>
                 <ArrowLeft className='h-4 w-4 rtl:rotate-180' />
                 {t('backToBuildings')}
@@ -143,30 +122,42 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
             </Button>
             <div>
               <div className={`flex items-center gap-x-2`}>
-                <Building2 className='h-6 w-6 text-blue-600' />
-                <h1 className='text-3xl font-bold'>{building.name}</h1>
+                <Building2 className='h-5 w-5 text-blue-600 sm:h-6 sm:w-6' />
+                <h1 className='text-xl font-bold sm:text-3xl'>
+                  {building.name}
+                </h1>
               </div>
               <div
-                className={`text-muted-foreground mt-1 flex items-center space-x-1`}
+                className={`text-muted-foreground mt-1 flex items-center space-x-1 text-sm`}
               >
-                <MapPin className='h-4 w-4' />
-                <span>
+                <MapPin className='h-3 w-3 sm:h-4 sm:w-4' />
+                <span className='truncate'>
                   {building.address}, {building.city}, {building.country}
                 </span>
               </div>
             </div>
           </div>
-          <div className={`flex items-center space-x-2`}>
-            <Button variant='outline' onClick={() => setIsEditDialogOpen(true)}>
+          <div
+            className={`flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2`}
+          >
+            <Button
+              variant='outline'
+              onClick={() => setIsEditDialogOpen(true)}
+              className='w-full sm:w-auto'
+            >
               <div className='flex items-center gap-x-2'>
                 <Edit className='h-4 w-4' />
-                {tCommon('edit')}
+                <span className='sm:inline'>{tCommon('edit')}</span>
               </div>
             </Button>
-            <Button variant='destructive' onClick={handleDeleteBuilding}>
+            <Button
+              variant='destructive'
+              onClick={handleDeleteBuilding}
+              className='w-full sm:w-auto'
+            >
               <div className='flex items-center gap-x-2'>
                 <Trash2 className='h-4 w-4' />
-                {tCommon('delete')}
+                <span className='sm:inline'>{tCommon('delete')}</span>
               </div>
             </Button>
           </div>
@@ -174,7 +165,6 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
         {/* Overview Cards */}
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           <Card>
-            {' '}
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
                 {t('totalUnits')}
@@ -190,7 +180,6 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
           </Card>
 
           <Card>
-            {' '}
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
                 {t('occupiedUnits')}
@@ -206,7 +195,6 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
           </Card>
 
           <Card>
-            {' '}
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
                 {t('totalResidents')}
@@ -224,7 +212,6 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
           </Card>
 
           <Card>
-            {' '}
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
                 {t('postalCode')}
@@ -242,14 +229,12 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
         {/* Building Details */}
         <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
           <Card>
-            {' '}
             <CardHeader>
               <CardTitle>{t('buildingInformation')}</CardTitle>
               <CardDescription>{t('buildingInfoDescription')}</CardDescription>
             </CardHeader>
             <CardContent className='space-y-4'>
               <div className='grid grid-cols-2 gap-4'>
-                {' '}
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
                     {t('address')}
@@ -292,14 +277,13 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                 </p>
               </div>
             </CardContent>
-          </Card>{' '}
+          </Card>
           <Card>
             <CardHeader>
               <CardTitle>{t('quickActions')}</CardTitle>
               <CardDescription>{t('quickActionsDescription')}</CardDescription>
             </CardHeader>
             <CardContent className='space-y-3'>
-              {' '}
               <Button className='w-full justify-start' asChild>
                 <Link
                   href={`/units?buildingId=${id}`}
@@ -341,7 +325,6 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
         {/* Units Overview */}
         {units.length > 0 && (
           <Card>
-            {' '}
             <CardHeader>
               <CardTitle>{t('unitsOverview')}</CardTitle>
               <CardDescription>
@@ -354,7 +337,6 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                   <Link key={unit.id} href={`/units/${unit.id}`}>
                     <Card className='transition-shadow hover:shadow-md'>
                       <CardHeader className='pb-3'>
-                        {' '}
                         <div className='flex items-center justify-between'>
                           <CardTitle className='text-lg'>
                             {t('unitNumber', { number: unit.unitNumber })}
@@ -370,7 +352,6 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        {' '}
                         <div className='space-y-2 text-sm'>
                           <div className='flex justify-between'>
                             <span>{t('bedrooms')}</span>
@@ -385,7 +366,7 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                     </Card>
                   </Link>
                 ))}
-              </div>{' '}
+              </div>
               {units.length > 6 && (
                 <div className='mt-4 text-center'>
                   <Button variant='outline' asChild>
@@ -398,7 +379,7 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
             </CardContent>
           </Card>
         )}
-      </div>{' '}
+      </div>
       {/* Edit Dialog */}
       <ResponsiveDialog
         title={t('editBuilding')}
@@ -408,8 +389,7 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
       >
         <BuildingForm
           building={building}
-          onSubmit={handleUpdateBuilding}
-          isLoading={updateMutation.isPending}
+          onSuccess={() => setIsEditDialogOpen(false)}
           onCancel={() => setIsEditDialogOpen(false)}
         />
       </ResponsiveDialog>

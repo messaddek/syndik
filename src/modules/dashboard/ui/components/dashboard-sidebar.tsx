@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import {
   Building2,
@@ -29,13 +29,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { OrganizationQuota } from '@/components/organization-quota';
-import { rtlClassMap, rtlClass } from '@/lib/rtl-utils';
-import { type Locale } from '@/i18n/config';
 
 export function DashboardSidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const locale = useLocale() as Locale;
   const t = useTranslations('navigation');
   const tCommon = useTranslations('common');
 
@@ -59,16 +56,7 @@ export function DashboardSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        {' '}
-        <Link
-          href='/'
-          className={cn(
-            'flex items-center px-4 py-2',
-            rtlClassMap.ml(locale, '0'),
-            rtlClass(locale, 'space-x-2', 'space-x-2 space-x-reverse')
-          )}
-        >
-          {' '}
+        <Link href='/' className='flex items-center space-x-2 px-4 py-2'>
           <Image
             src='/logo.svg'
             alt={tCommon('logoAlt')}
@@ -76,6 +64,7 @@ export function DashboardSidebar() {
             height={64}
             className='size-16'
           />
+          <span className='text-lg font-semibold text-gray-900'>syndik.ma</span>
         </Link>
       </SidebarHeader>
       <SidebarContent>
@@ -113,12 +102,12 @@ export function DashboardSidebar() {
               })}
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>{' '}
-      </SidebarContent>{' '}
+        </SidebarGroup>
+      </SidebarContent>
       <SidebarFooter>
         <div className='border-t px-4 py-3'>
           <OrganizationQuota />
-        </div>{' '}
+        </div>
         <div className='px-4 pb-2'>
           <Button
             variant='outline'

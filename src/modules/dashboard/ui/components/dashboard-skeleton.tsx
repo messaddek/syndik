@@ -6,7 +6,15 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Building2, Users, Home, TrendingUp, Calendar } from 'lucide-react';
+import {
+  Building2,
+  Users,
+  Home,
+  TrendingUp,
+  Calendar,
+  BarChart3,
+  PieChart,
+} from 'lucide-react';
 
 export function DashboardSkeleton() {
   return (
@@ -31,13 +39,76 @@ export function DashboardSkeleton() {
           </Card>
         ))}
       </div>
+      {/* Chart Zones */}
+      <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+        {/* Financial Trend Chart */}
+        <Card>
+          <CardHeader>
+            <div className='flex items-center justify-between'>
+              <div className='flex items-center gap-3'>
+                <Skeleton className='h-5 w-32' />
+                <Skeleton className='h-5 w-20' />
+              </div>
+              <div className='flex items-center space-x-2'>
+                <TrendingUp className='h-4 w-4 text-gray-400' />
+                <Skeleton className='h-4 w-24' />
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className='space-y-4'>
+              {/* Chart skeleton */}
+              <div className='flex h-[300px] w-full items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800'>
+                <BarChart3 className='h-8 w-8 text-gray-400' />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
+        {/* Occupancy Trend Chart */}
+        <Card>
+          <CardHeader>
+            <div className='flex items-center justify-between'>
+              <div className='flex items-center gap-3'>
+                <Skeleton className='h-5 w-32' />
+                <Skeleton className='h-5 w-20' />
+              </div>
+              <div className='flex items-center space-x-2'>
+                <TrendingUp className='h-4 w-4 text-gray-400' />
+                <Skeleton className='h-4 w-24' />
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className='space-y-4'>
+              {/* Stats skeleton */}
+              <div className='grid grid-cols-2 gap-4'>
+                <div className='text-center'>
+                  <Skeleton className='mx-auto mb-1 h-8 w-16' />
+                  <Skeleton className='mx-auto h-3 w-20' />
+                </div>
+                <div className='text-center'>
+                  <Skeleton className='mx-auto mb-1 h-8 w-16' />
+                  <Skeleton className='mx-auto h-3 w-20' />
+                </div>
+              </div>
+              {/* Chart skeleton */}
+              <div className='flex h-[300px] w-full items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800'>
+                <PieChart className='h-8 w-8 text-gray-400' />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
       {/* Financial Summary and Recent Activity */}
       <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+        {' '}
         {/* Financial Summary Card */}
         <Card>
           <CardHeader>
-            <CardTitle>Monthly Financial Summary</CardTitle>
+            <CardTitle>
+              <Skeleton className='h-6 w-48' />
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className='space-y-4'>
@@ -50,11 +121,12 @@ export function DashboardSkeleton() {
             </div>
           </CardContent>
         </Card>
-
         {/* Recent Activity Card */}
         <Card>
           <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
+            <CardTitle>
+              <Skeleton className='h-6 w-32' />
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className='space-y-3'>
@@ -77,14 +149,15 @@ export function DashboardSkeleton() {
             </div>
           </CardContent>
         </Card>
-      </div>
-
+      </div>{' '}
       {/* Quick Actions */}
       <Card>
         <CardHeader>
-          <CardTitle>Quick Actions</CardTitle>
+          <CardTitle>
+            <Skeleton className='h-6 w-32' />
+          </CardTitle>
           <CardDescription>
-            Common tasks to manage your residential syndicates
+            <Skeleton className='h-4 w-64' />
           </CardDescription>
         </CardHeader>
         <CardContent>

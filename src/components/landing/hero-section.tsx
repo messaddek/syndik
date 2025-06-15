@@ -445,7 +445,7 @@ export function SecuritySection() {
         <div className='mt-16 text-center'>
           <div className='inline-flex items-center space-x-6 rounded-lg bg-gray-800 px-6 py-4'>
             <Shield className='h-8 w-8 text-blue-400' />
-            <div className='text-left'>
+            <div className='text-left rtl:text-right'>
               <div className='text-sm font-medium text-white'>
                 Security Certified
               </div>

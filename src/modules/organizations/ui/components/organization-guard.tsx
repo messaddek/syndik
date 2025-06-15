@@ -10,7 +10,7 @@ import { BuildingViewSkeleton } from '@/modules/buildings/ui/components/building
 import { BuildingsListSkeleton } from '@/modules/buildings/ui/components/buildings-skeleton';
 import { UnitViewSkeleton } from '@/modules/units/ui/components/unit-view-skeleton';
 import { ResidentViewSkeleton } from '@/modules/residents/ui/components/resident-view-skeleton';
-import { DashboardSkeleton } from '@/components/loading-skeletons';
+import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
 import { Skeleton } from '@/components/ui/skeleton';
 import { usePathname } from 'next/navigation';
 

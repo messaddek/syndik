@@ -1,21 +1,21 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
-import { ResidentForm } from './resident-form';
+import { BuildingForm } from './building-form';
+import { useTranslations } from 'next-intl';
 
-interface CreateResidentDialogProps {
+interface CreateBuildingDialogProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   onSuccess?: () => void;
 }
 
-export function CreateResidentDialog({
+export function CreateBuildingDialog({
   open,
   onOpenChange,
   onSuccess,
-}: CreateResidentDialogProps) {
-  const t = useTranslations('residents.form');
+}: CreateBuildingDialogProps) {
+  const t = useTranslations('buildings');
 
   const handleSuccess = () => {
     onOpenChange?.(false);
@@ -28,12 +28,12 @@ export function CreateResidentDialog({
 
   return (
     <ResponsiveDialog
-      title={t('addTitle')}
-      description={t('description')}
+      title={t('addBuilding')}
+      description={t('addBuildingDescription')}
       open={open ?? false}
       onOpenChange={onOpenChange ?? (() => {})}
     >
-      <ResidentForm onSuccess={handleSuccess} onCancel={handleCancel} />
+      <BuildingForm onSuccess={handleSuccess} onCancel={handleCancel} />
     </ResponsiveDialog>
   );
 }

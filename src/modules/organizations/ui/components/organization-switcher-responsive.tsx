@@ -91,7 +91,7 @@ export const OrganizationSwitcherResponsive = ({
           <div className={className}>
             <OrganizationSwitcherCustom />
           </div>
-        </TooltipTrigger>{' '}
+        </TooltipTrigger>
         <TooltipContent side='bottom' sideOffset={5}>
           <p>Switch organizations</p>
         </TooltipContent>

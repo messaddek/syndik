@@ -1,0 +1,9 @@
+export { HeroSection } from './hero-section';
+export { StatsSection } from './stats-section';
+export { FeaturesSection } from './features-section';
+export { HowItWorksSection } from './how-it-works-section';
+export { BenefitsSection } from './benefits-section';
+export { SecuritySection } from './security-section';
+export { TestimonialsSection } from './testimonials-section';
+export { PricingPreviewSection } from './pricing-preview-section';
+export { CTASection } from './cta-section';

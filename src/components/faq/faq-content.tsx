@@ -12,7 +12,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import {
-  CommandDialog,
+  CommandResponsiveDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -298,9 +298,14 @@ export function FAQContent() {
             <X className='size-4' />
           </Button>
         )}
-      </div>
+      </div>{' '}
       {/* Command Menu Dialog */}
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandResponsiveDialog
+        open={open}
+        onOpenChange={setOpen}
+        title='Search FAQs'
+        description='Search through frequently asked questions'
+      >
         <CommandInput
           placeholder='Search FAQs...'
           value={commandQuery}
@@ -350,7 +355,7 @@ export function FAQContent() {
             );
           })}
         </CommandList>
-      </CommandDialog>
+      </CommandResponsiveDialog>
       {/* Category Pills */}
       <div className='mb-8 flex flex-wrap justify-center gap-2 px-1 sm:px-0'>
         <button

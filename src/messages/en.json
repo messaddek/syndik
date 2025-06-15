@@ -74,6 +74,107 @@
     "notifications": "Notifications",
     "userGuide": "User Guide"
   },
+  "residents": {
+    "title": "Residents",
+    "subtitle": "Manage residents and their unit assignments",
+    "addNew": "Add New Resident",
+    "addResident": "Add Resident",
+    "editResident": "Edit Resident",
+    "deleteResident": "Delete Resident",
+    "viewResident": "View Resident",
+    "noResidents": "No residents found. Add your first resident to get started.",
+    "noResidentsFiltered": "No residents found for the selected unit.",
+    "totalResidents": "Total Residents",
+    "activeResidents": "Active Residents",
+    "allUnits": "All units",
+    "clearFilter": "Clear Filter",
+    "filterByUnit": "Filter by Unit:",
+    "loadingUnits": "Loading units...",
+    "noUnitsAvailable": "No units available",
+    "form": {
+      "title": "Resident Information",
+      "addTitle": "Add New Resident",
+      "editTitle": "Edit Resident",
+      "description": "Add a new resident to your building management system.",
+      "editDescription": "Update resident information and unit assignment.",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "John",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Doe",
+      "email": "Email",
+      "emailPlaceholder": "john.doe@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "unit": "Unit",
+      "unitPlaceholder": "Select a unit",
+      "owner": "Owner",
+      "ownerDescription": "Check if this resident is the owner of the unit",
+      "moveInDate": "Move In Date",
+      "moveInDatePlaceholder": "Pick a date",
+      "moveOutDate": "Move Out Date",
+      "moveOutDatePlaceholder": "Pick a date (optional)",
+      "emergencyContact": "Emergency Contact",
+      "emergencyContactPlaceholder": "Contact person name",
+      "emergencyPhone": "Emergency Phone",
+      "emergencyPhonePlaceholder": "+1 (555) 987-6543",
+      "notes": "Notes",
+      "notesPlaceholder": "Additional information about the resident...",
+      "submit": "Save Resident",
+      "submitting": "Saving...",
+      "cancel": "Cancel",
+      "validation": {
+        "firstNameRequired": "First name is required",
+        "lastNameRequired": "Last name is required",
+        "emailRequired": "Valid email is required",
+        "unitRequired": "Please select a unit",
+        "invalidDate": "Invalid date",
+        "invalidMoveInDate": "Invalid move-in date",
+        "moveOutBeforeMoveIn": "Move-out date cannot be before move-in date"
+      }
+    },
+    "details": {
+      "personalInfo": "Personal Information",
+      "contactInfo": "Contact Information",
+      "residencyInfo": "Residency Information",
+      "emergencyInfo": "Emergency Contact",
+      "additionalInfo": "Additional Information",
+      "unitAssignment": "Unit Assignment",
+      "ownerStatus": "Owner",
+      "tenantStatus": "Tenant",
+      "moveInDate": "Move In",
+      "moveOutDate": "Move Out",
+      "duration": "Duration",
+      "currentResident": "Current Resident",
+      "formerResident": "Former Resident"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "view": "View Details",
+      "invite": "Send Portal Invitation",
+      "resendInvite": "Resend Invitation",
+      "bulkInvite": "Bulk Invite",
+      "export": "Export List"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "invited": "Invited",
+      "notInvited": "Not Invited",
+      "portalAccess": "Portal Access"
+    },
+    "messages": {
+      "deleteConfirm": "Are you sure you want to delete this resident? This action cannot be undone.",
+      "deleteSuccess": "Resident deleted successfully",
+      "deleteError": "Failed to delete resident",
+      "createSuccess": "Resident created successfully",
+      "createError": "Failed to create resident",
+      "updateSuccess": "Resident updated successfully",
+      "updateError": "Failed to update resident",
+      "inviteSuccess": "Portal invitation sent successfully",
+      "inviteError": "Failed to send portal invitation"
+    }
+  },
   "footer": {
     "newsletter": {
       "title": "Stay Updated with Syndik",
@@ -214,6 +315,142 @@
       "content": "These terms are effective as of January 1, 2025. By continuing to use Syndik after this date, you agree to be bound by these terms."
     }
   },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "Privacy & Data Protection",
+    "lastUpdated": "Last updated: January 1, 2025",
+    "readCarefully": "We're committed to protecting your privacy and being transparent about how we handle your data.",
+    "tableOfContents": "Table of Contents",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "content": "Syndik (\"we,\" \"our,\" or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our residential syndicate management platform."
+      },
+      "informationCollect": {
+        "title": "2. Information We Collect",
+        "personalInfoTitle": "Personal Information",
+        "personalInfoContent": "We collect information you provide directly to us, such as:",
+        "personalInfoItems": [
+          "Name, email address, phone number",
+          "Syndicate and property information",
+          "Financial and payment information",
+          "Communication preferences",
+          "Account credentials and profile information"
+        ],
+        "usageInfoTitle": "Usage Information",
+        "usageInfoContent": "We automatically collect certain information about your use of our Service:",
+        "usageInfoItems": [
+          "IP address and device information",
+          "Browser type and operating system",
+          "Pages visited and features used",
+          "Time and date of access",
+          "Referring website addresses"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. How We Use Your Information",
+        "content": "We use the information we collect to:",
+        "purposes": [
+          "Provide, maintain, and improve our Service",
+          "Process transactions and send related information",
+          "Send administrative and support communications",
+          "Respond to comments, questions, and customer service requests",
+          "Monitor and analyze usage patterns and trends",
+          "Personalize your experience"
+        ]
+      },
+      "sharingDisclosure": {
+        "title": "4. Information Sharing and Disclosure",
+        "content": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:",
+        "circumstances": [
+          "Service providers who assist us in operating our platform",
+          "Legal compliance and protection of rights",
+          "Business transfers or acquisitions",
+          "With your explicit consent"
+        ]
+      },
+      "dataSecurity": {
+        "title": "5. Data Security",
+        "content": "We implement appropriate technical and organizational measures to protect your personal information:",
+        "technicalTitle": "Technical Measures",
+        "technicalMeasures": [
+          "Encryption of data in transit and at rest",
+          "Access controls and authentication mechanisms",
+          "Regular security assessments and updates"
+        ],
+        "organizationalTitle": "Organizational Measures",
+        "organizationalMeasures": [
+          "Employee training on data protection",
+          "Incident response procedures",
+          "Regular compliance audits"
+        ]
+      },
+      "dataRetention": {
+        "title": "6. Data Retention",
+        "content": "We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, comply with legal obligations, resolve disputes, and enforce agreements.",
+        "retentionPeriods": [
+          "Account information: Retained while your account is active",
+          "Transaction records: Retained for 7 years for tax and legal purposes",
+          "Communication logs: Retained for 2 years",
+          "Usage analytics: Anonymized after 12 months"
+        ]
+      },
+      "yourRights": {
+        "title": "7. Your Rights and Choices",
+        "content": "Depending on your location, you may have certain rights regarding your personal information:",
+        "rights": [
+          "Access and receive a copy of your personal information",
+          "Correct inaccurate or incomplete information",
+          "Delete your personal information",
+          "Object to or restrict certain processing activities",
+          "Data portability (receive your data in a structured format)",
+          "Withdraw consent at any time"
+        ]
+      },
+      "cookies": {
+        "title": "8. Cookies and Tracking Technologies",
+        "content": "We use cookies and similar tracking technologies to enhance your experience on our platform:",
+        "cookieTypes": [
+          "Essential cookies: Required for basic platform functionality",
+          "Performance cookies: Help us understand how you use our service",
+          "Functional cookies: Remember your preferences and settings",
+          "Marketing cookies: Used to deliver relevant advertisements"
+        ],
+        "manageCookies": "You can manage your cookie preferences through your browser settings or our cookie preference center."
+      },
+      "international": {
+        "title": "9. International Data Transfers",
+        "content": "Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place:",
+        "safeguards": [
+          "Standard contractual clauses approved by regulatory authorities",
+          "Adequacy decisions by relevant data protection authorities",
+          "Binding corporate rules for intra-group transfers",
+          "Your explicit consent for specific transfers"
+        ]
+      },
+      "children": {
+        "title": "10. Children's Privacy",
+        "content": "Our Service is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information promptly."
+      },
+      "changes": {
+        "title": "11. Changes to This Privacy Policy",
+        "content": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"last updated\" date. For material changes, we will provide additional notice through email or prominent website notification."
+      },
+      "contact": {
+        "title": "12. Contact Us",
+        "content": "If you have any questions about this Privacy Policy, please contact us:",
+        "emailTitle": "Email",
+        "phoneTitle": "Phone",
+        "addressTitle": "Address",
+        "email": "privacy@syndik.com",
+        "phone": "+1-800-SYNDIK",
+        "address": "[Company Address]"
+      }
+    },
+    "acknowledgment": {
+      "content": "By using Syndik, you acknowledge that you have read and understood this Privacy Policy."
+    }
+  },
   "auth": {
     "signIn": "Sign In",
     "signUp": "Sign Up",
@@ -237,19 +474,59 @@
     "quickActions": "Quick Actions",
     "addBuilding": "Add Building",
     "addResident": "Add Resident",
-    "createAnnouncement": "Create Announcement"
+    "createAnnouncement": "Create Announcement",
+    "buildings": "Buildings",
+    "units": "Units",
+    "residents": "Residents",
+    "totalManagedProperties": "Total managed properties",
+    "occupancyRateText": "occupancy rate",
+    "activeResidents": "Active residents",
+    "thisMonth": "This month",
+    "monthlyFinancialSummary": "Monthly Financial Summary",
+    "income": "Income",
+    "expenses": "Expenses",
+    "portalStatistics": "Portal Statistics",
+    "portalAccess": "Portal Access",
+    "notInvited": "Not Invited",
+    "invitationRate": "Invitation Rate",
+    "noRecentActivity": "No recent activity",
+    "newResident": "New resident",
+    "meetingScheduled": "Meeting scheduled",
+    "quickActionsDescription": "Common tasks to manage your residential syndicates",
+    "inviteResidents": "Invite Residents",
+    "scheduleMeeting": "Schedule Meeting",
+    "trends": "Financial Trends",
+    "trendsDescription": "Income, expenses, and net profit trends over the last 6 months",
+    "occupancy": "Occupancy Trends",
+    "occupancyDescription": "Occupancy rate evolution over the last 12 months",
+    "financialTrends": "Financial Overview",
+    "occupancyTrends": "Occupancy Rate",
+    "currentRate": "Current",
+    "averageRate": "Average"
   },
   "buildings": {
     "title": "Buildings",
     "addBuilding": "Add Building",
+    "addBuildingDescription": "Create a new building in your management system. Fill in the details below.",
+    "buildingCreated": "Building created successfully",
+    "errorCreatingBuilding": "Error creating building",
     "editBuilding": "Edit Building",
+    "editBuildingDescription": "Update the building information below.",
+    "buildingUpdated": "Building updated successfully",
+    "errorUpdatingBuilding": "Error updating building",
     "deleteBuilding": "Delete Building",
     "buildingName": "Building Name",
     "buildingAddress": "Building Address",
     "city": "City",
     "totalUnits": "Total Units",
     "createdAt": "Created At",
-    "noBuildings": "No buildings found",
+    "noBuildings": "No buildings yet",
+    "noBuildingsDescription": "Start by adding your first residential building to manage.",
+    "addFirstBuilding": "Add Your First Building",
+    "manageBuildingProperties": "Manage your residential properties",
+    "viewDetails": "View Details",
+    "manageUnits": "Manage Units",
+    "noDescription": "No description provided",
     "confirmDelete": "Are you sure you want to delete this building?",
     "search": "Search buildings...",
     "filter": "Filter",
@@ -329,22 +606,6 @@
     "activeResidents": "Active Residents",
     "thisMonthIncome": "This Month Income",
     "confirmDelete": "Are you sure you want to delete this unit? This action cannot be undone."
-  },
-  "residents": {
-    "title": "Residents",
-    "addResident": "Add Resident",
-    "editResident": "Edit Resident",
-    "deleteResident": "Delete Resident",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "phone": "Phone",
-    "unit": "Unit",
-    "isOwner": "Owner",
-    "moveInDate": "Move In Date",
-    "owner": "Owner",
-    "tenant": "Tenant",
-    "noResidents": "No residents found"
   },
   "finances": {
     "title": "Finances",
@@ -498,5 +759,304 @@
     "created": "Created successfully",
     "updated": "Updated successfully",
     "deleted": "Deleted successfully"
+  },
+  "landing": {
+    "hero": {
+      "title": "Manage Your Residential Syndicate",
+      "titleHighlight": "Effortlessly",
+      "description": "Streamline property management, track finances, organize meetings, and enhance resident communication with our comprehensive SaaS platform designed specifically for residential syndicates.",
+      "getStartedFree": "Get Started Free",
+      "watchDemo": "Watch Demo"
+    },
+    "stats": {
+      "title": "Trusted by thousands of residential syndicates worldwide",
+      "subtitle": "Join the growing community of property managers who rely on Syndik",
+      "syndicates": {
+        "value": "2,500+",
+        "label": "Residential Syndicates",
+        "description": "Trust Syndik"
+      },
+      "units": {
+        "value": "50,000+",
+        "label": "Units Managed",
+        "description": "Across our platform"
+      },
+      "transactions": {
+        "value": "$2.5M+",
+        "label": "Monthly Transactions",
+        "description": "Processed securely"
+      },
+      "satisfaction": {
+        "value": "98%",
+        "label": "User Satisfaction",
+        "description": "Rating from users"
+      }
+    },
+    "features": {
+      "subtitle": "Everything you need",
+      "title": "Comprehensive Syndicate Management",
+      "description": "All the tools you need to manage your residential syndicate efficiently, from financial tracking to resident communication.",
+      "buildingManagement": {
+        "title": "Building Management",
+        "description": "Efficiently manage multiple buildings, units, and common areas with detailed tracking and maintenance schedules."
+      },
+      "residentPortal": {
+        "title": "Resident Portal",
+        "description": "Provide residents with a dedicated portal to view announcements, submit requests, and communicate effectively."
+      },
+      "financialTracking": {
+        "title": "Financial Tracking",
+        "description": "Monitor income, expenses, budgets, and generate comprehensive financial reports with ease."
+      },
+      "secureCompliant": {
+        "title": "Secure & Compliant",
+        "description": "Enterprise-grade security with role-based access control and compliance with data protection regulations."
+      },
+      "meetingManagement": {
+        "title": "Meeting Management",
+        "description": "Schedule meetings, track attendance, manage agendas, and maintain detailed minutes and voting records."
+      },
+      "automatedWorkflows": {
+        "title": "Automated Workflows",
+        "description": "Streamline routine tasks with automated notifications, reminders, and approval processes."
+      }
+    },
+    "howItWorks": {
+      "subtitle": "How it works",
+      "title": "Get started in minutes",
+      "description": "Setting up your syndicate management system is quick and easy with our guided setup process.",
+      "steps": {
+        "signUp": {
+          "title": "Sign Up & Setup",
+          "description": "Create your account and configure your syndicate profile with building details and resident information."
+        },
+        "invite": {
+          "title": "Invite Residents",
+          "description": "Send invitations to residents and board members to join your syndicate portal with role-based access."
+        },
+        "manage": {
+          "title": "Manage & Track",
+          "description": "Start managing finances, scheduling meetings, and communicating with residents from one central hub."
+        },
+        "grow": {
+          "title": "Grow & Scale",
+          "description": "Expand your syndicate management with advanced features and integrations as your needs grow."
+        }
+      }
+    },
+    "benefits": {
+      "subtitle": "Benefits",
+      "title": "Why syndicates choose Syndik",
+      "description": "Discover the tangible benefits that make Syndik the preferred choice for residential syndicate management.",
+      "saveTime": {
+        "title": "Save Time",
+        "description": "Reduce administrative overhead by up to 70% with automated workflows and streamlined processes.",
+        "metric": "70% faster"
+      },
+      "reduceCosts": {
+        "title": "Reduce Costs",
+        "description": "Lower operational costs through efficient resource management and reduced manual labor.",
+        "metric": "$5K+ saved annually"
+      },
+      "improveCommunication": {
+        "title": "Improve Communication",
+        "description": "Enhance resident satisfaction with transparent communication and instant notifications.",
+        "metric": "95% satisfaction rate"
+      },
+      "betterOrganization": {
+        "title": "Better Organization",
+        "description": "Keep all documents, meetings, and financial records organized and easily accessible.",
+        "metric": "100% digital records"
+      }
+    },
+    "security": {
+      "subtitle": "Security",
+      "title": "Enterprise-grade security you can trust",
+      "description": "Your syndicate data is protected by the same security measures used by Fortune 500 companies.",
+      "features": {
+        "encryption": {
+          "title": "End-to-End Encryption",
+          "description": "All data is encrypted in transit and at rest using industry-standard AES-256 encryption."
+        },
+        "roleBasedAccess": {
+          "title": "Role-Based Access",
+          "description": "Granular permission controls ensure users only access information relevant to their role."
+        },
+        "gdprCompliant": {
+          "title": "GDPR Compliant",
+          "description": "Full compliance with European data protection regulations and privacy standards."
+        },
+        "regularBackups": {
+          "title": "Regular Backups",
+          "description": "Automated daily backups with point-in-time recovery to ensure your data is always safe."
+        },
+        "soc2Certified": {
+          "title": "SOC 2 Certified",
+          "description": "Independently audited security controls meeting the highest industry standards."
+        },
+        "monitoring": {
+          "title": "24/7 Monitoring",
+          "description": "Continuous security monitoring and threat detection to protect against cyber threats."
+        }
+      },
+      "certificationLabel": "Security Certified",
+      "certificationText": "ISO 27001, SOC 2 Type II, GDPR"
+    },
+    "testimonials": {
+      "subtitle": "Testimonials",
+      "title": "Loved by syndicate managers worldwide",
+      "description": "See what property managers and syndicate boards are saying about Syndik.",
+      "reviews": [
+        {
+          "content": "Syndik has transformed how we manage our residential complex. The automated workflows and resident portal have significantly improved our efficiency and resident satisfaction.",
+          "author": {
+            "name": "Marie Dubois",
+            "role": "Syndicate President",
+            "company": "Les Jardins de Paris"
+          }
+        },
+        {
+          "content": "The financial tracking features are exceptional. We can now generate detailed reports in minutes instead of hours, and the transparency has improved trust among residents.",
+          "author": {
+            "name": "Ahmed Hassan",
+            "role": "Property Manager",
+            "company": "Marina Bay Residences"
+          }
+        },
+        {
+          "content": "Customer support is outstanding. The team helped us migrate all our data seamlessly and provided training that made adoption smooth for all our board members.",
+          "author": {
+            "name": "Sarah Johnson",
+            "role": "Board Secretary",
+            "company": "Riverside Commons"
+          }
+        }
+      ]
+    },
+    "pricing": {
+      "badge": "Trusted by 2,500+ property managers",
+      "title": "Choose Your Perfect Plan",
+      "description": "Start with our 14-day free trial. No credit card required. Cancel anytime.",
+      "guarantees": {
+        "support": "All plans include 24/7 support",
+        "uptime": "99.9% uptime SLA",
+        "gdpr": "GDPR compliant"
+      },
+      "billing": {
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "period": {
+          "month": "/month",
+          "year": "/year"
+        },
+        "discount": {
+          "save": "Save 20%",
+          "message": "when you switch to yearly billing!",
+          "saving": "You're saving 20%",
+          "yearlyMessage": "with yearly billing!"
+        }
+      },
+      "plans": {
+        "starter": {
+          "name": "Starter",
+          "price": "$49",
+          "period": "/month",
+          "description": "Perfect for small syndicates",
+          "features": [
+            "Up to 25 units",
+            "Basic financial tracking",
+            "Resident portal",
+            "Email support",
+            "14-day free trial"
+          ]
+        },
+        "professional": {
+          "name": "Professional",
+          "price": "$99",
+          "period": "/month",
+          "description": "For growing syndicates",
+          "features": [
+            "Up to 100 units",
+            "Advanced reporting",
+            "Meeting management",
+            "Priority support",
+            "Custom workflows",
+            "Analytics dashboard"
+          ],
+          "popular": "⭐ Most Popular"
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "price": "Custom",
+          "description": "For large syndicate groups",
+          "features": [
+            "Unlimited units",
+            "Custom integrations",
+            "Dedicated support",
+            "Advanced security",
+            "Training included",
+            "White-label options"
+          ]
+        }
+      },
+      "buttons": {
+        "startTrial": "Start Free Trial",
+        "contactSales": "Contact Sales"
+      },
+      "noCreditCard": "No credit card required",
+      "additionalFeatures": {
+        "enterpriseSecurity": {
+          "title": "Enterprise Security",
+          "description": "SOC 2 certified with end-to-end encryption"
+        },
+        "globalAvailability": {
+          "title": "Global Availability",
+          "description": "Available in 25+ countries worldwide"
+        },
+        "awardWinning": {
+          "title": "Award Winning",
+          "description": "Best Property Management Software 2024"
+        }
+      },
+      "customSolution": {
+        "title": "Need a custom solution?",
+        "description": "We offer tailored plans for large enterprises with specific requirements, including custom integrations, dedicated support, and white-label options.",
+        "link": "Contact our sales team"
+      }
+    },
+    "cta": {
+      "badge": "Join 2,500+ syndicates already using Syndik",
+      "title": "Transform Your Syndicate",
+      "titleHighlight": "Management Today",
+      "description": "Stop juggling spreadsheets, emails, and paperwork. Start managing your residential syndicate like a pro with our all-in-one platform.",
+      "buttons": {
+        "startTrial": "Start Free Trial",
+        "watchDemo": "Watch Demo"
+      },
+      "trustIndicators": {
+        "freeTrial": {
+          "title": "14 Days",
+          "subtitle": "Free Trial"
+        },
+        "noSetupFee": {
+          "title": "No Setup Fee",
+          "subtitle": "Get Started Instantly"
+        },
+        "support": {
+          "title": "24/7 Support",
+          "subtitle": "We're Here to Help"
+        }
+      },
+      "guarantee": {
+        "title": "Risk-Free Guarantee",
+        "description": "No credit card required • Cancel anytime • Money-back guarantee • ",
+        "link": "View pricing details"
+      },
+      "socialProof": {
+        "rating": "4.9/5 on G2",
+        "award": "Best Property Management 2024",
+        "certified": "SOC 2 Certified"
+      }
+    }
   }
 }

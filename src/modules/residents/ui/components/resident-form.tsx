@@ -5,12 +5,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
-import { CalendarIcon } from 'lucide-react';
-import { format } from 'date-fns';
+import { useTranslations } from 'next-intl';
 
 import { useTRPC } from '@/trpc/client';
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import { DatePicker } from '@/components/ui/date-picker';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
@@ -22,11 +21,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { PhoneInput } from '@/components/ui/phone-input';
 import {
   Select,
   SelectContent,
@@ -35,27 +30,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { cn } from '@/lib/utils';
 import type { Resident } from '../../types';
 import { toast } from 'sonner';
-
-const formSchema = z.object({
-  unitId: z.string().uuid('Invalid unit ID'),
-  firstName: z.string().min(1, 'First name is required'),
-  lastName: z.string().min(1, 'Last name is required'),
-  email: z.string().email('Valid email is required'),
-  phone: z.string().optional(),
-  isOwner: z.boolean(),
-  moveInDate: z
-    .string()
-    .refine(date => !isNaN(Date.parse(date)), 'Invalid move-in date'),
-  moveOutDate: z.string().optional().nullable(),
-  emergencyContact: z.string().optional(),
-  emergencyPhone: z.string().optional(),
-  notes: z.string().optional(),
-});
-
-type FormData = z.infer<typeof formSchema>;
 
 interface ResidentFormProps {
   resident?: Resident;
@@ -69,9 +45,34 @@ export function ResidentForm({
   onCancel,
 }: ResidentFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const t = useTranslations('residents.form');
 
   const trpc = useTRPC();
   const queryClient = useQueryClient();
+
+  // Create dynamic schema with translated messages
+  const createFormSchema = () =>
+    z.object({
+      unitId: z.string().uuid(t('validation.unitRequired')),
+      firstName: z.string().min(1, t('validation.firstNameRequired')),
+      lastName: z.string().min(1, t('validation.lastNameRequired')),
+      email: z.string().email(t('validation.emailRequired')),
+      phone: z.string().optional(),
+      isOwner: z.boolean(),
+      moveInDate: z
+        .string()
+        .refine(
+          date => !isNaN(Date.parse(date)),
+          t('validation.invalidMoveInDate')
+        ),
+      moveOutDate: z.string().optional().nullable(),
+      emergencyContact: z.string().optional(),
+      emergencyPhone: z.string().optional(),
+      notes: z.string().optional(),
+    });
+
+  const formSchema = createFormSchema();
+  type FormData = z.infer<typeof formSchema>;
 
   const { data: units = [], isLoading: unitsLoading } = useQuery(
     trpc.units.getAll.queryOptions({})
@@ -146,11 +147,13 @@ export function ResidentForm({
             name='firstName'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>First Name</FormLabel>
+                <FormLabel>{t('firstName')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='John' {...field} />
+                  <Input placeholder={t('firstNamePlaceholder')} {...field} />
                 </FormControl>
-                <FormMessage />
+                <div className='min-h-[20px]'>
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -160,11 +163,13 @@ export function ResidentForm({
             name='lastName'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Last Name</FormLabel>
+                <FormLabel>{t('lastName')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='Doe' {...field} />
+                  <Input placeholder={t('lastNamePlaceholder')} {...field} />
                 </FormControl>
-                <FormMessage />
+                <div className='min-h-[20px]'>
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -176,15 +181,17 @@ export function ResidentForm({
             name='email'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('email')}</FormLabel>
                 <FormControl>
                   <Input
                     type='email'
-                    placeholder='john.doe@example.com'
+                    placeholder={t('emailPlaceholder')}
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <div className='min-h-[20px]'>
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -194,11 +201,13 @@ export function ResidentForm({
             name='phone'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone</FormLabel>
+                <FormLabel>{t('phone')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='+1 (555) 123-4567' {...field} />
+                  <PhoneInput placeholder={t('phonePlaceholder')} {...field} />
                 </FormControl>
-                <FormMessage />
+                <div className='min-h-[20px]'>
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -209,17 +218,21 @@ export function ResidentForm({
           name='unitId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Unit</FormLabel>
+              <FormLabel>{t('unit')}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder='Select a unit' />
+                    <SelectValue placeholder={t('unitPlaceholder')} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   {unitsLoading ? (
-                    <SelectItem value='' disabled>
-                      Loading units...
+                    <SelectItem value='loading' disabled>
+                      {t('loadingUnits')}
+                    </SelectItem>
+                  ) : units.length === 0 ? (
+                    <SelectItem value='no-units' disabled>
+                      {t('noUnitsAvailable')}
                     </SelectItem>
                   ) : (
                     units.map(unit => (
@@ -247,10 +260,8 @@ export function ResidentForm({
                 />
               </FormControl>
               <div className='space-y-1 leading-none'>
-                <FormLabel>Owner</FormLabel>
-                <FormDescription>
-                  Check if this resident is the owner of the unit
-                </FormDescription>
+                <FormLabel>{t('owner')}</FormLabel>
+                <FormDescription>{t('ownerDescription')}</FormDescription>
               </div>
             </FormItem>
           )}
@@ -262,42 +273,16 @@ export function ResidentForm({
             name='moveInDate'
             render={({ field }) => (
               <FormItem className='flex flex-col'>
-                <FormLabel>Move In Date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={'outline'}
-                        className={cn(
-                          'w-full pl-3 text-left font-normal',
-                          !field.value && 'text-muted-foreground'
-                        )}
-                      >
-                        {field.value ? (
-                          format(new Date(field.value), 'PPP')
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className='w-auto p-0' align='start'>
-                    <Calendar
-                      mode='single'
-                      selected={field.value ? new Date(field.value) : undefined}
-                      onSelect={date => {
-                        field.onChange(
-                          date ? date.toISOString().split('T')[0] : ''
-                        );
-                      }}
-                      disabled={date =>
-                        date > new Date() || date < new Date('1900-01-01')
-                      }
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
+                <FormLabel>{t('moveInDate')}</FormLabel>
+                <FormControl>
+                  <DatePicker
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder={t('moveInDatePlaceholder')}
+                    maxDate={new Date()}
+                    minDate={new Date('1900-01-01')}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -308,40 +293,15 @@ export function ResidentForm({
             name='moveOutDate'
             render={({ field }) => (
               <FormItem className='flex flex-col'>
-                <FormLabel>Move Out Date (Optional)</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={'outline'}
-                        className={cn(
-                          'w-full pl-3 text-left font-normal',
-                          !field.value && 'text-muted-foreground'
-                        )}
-                      >
-                        {field.value ? (
-                          format(new Date(field.value), 'PPP')
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className='w-auto p-0' align='start'>
-                    <Calendar
-                      mode='single'
-                      selected={field.value ? new Date(field.value) : undefined}
-                      onSelect={date => {
-                        field.onChange(
-                          date ? date.toISOString().split('T')[0] : ''
-                        );
-                      }}
-                      disabled={date => date < new Date('1900-01-01')}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
+                <FormLabel>{t('moveOutDate')}</FormLabel>
+                <FormControl>
+                  <DatePicker
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder={t('moveOutDatePlaceholder')}
+                    minDate={new Date('1900-01-01')}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -354,11 +314,16 @@ export function ResidentForm({
             name='emergencyContact'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Emergency Contact</FormLabel>
+                <FormLabel>{t('emergencyContact')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='Jane Doe' {...field} />
+                  <Input
+                    placeholder={t('emergencyContactPlaceholder')}
+                    {...field}
+                  />
                 </FormControl>
-                <FormMessage />
+                <div className='min-h-[20px]'>
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -368,11 +333,16 @@ export function ResidentForm({
             name='emergencyPhone'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Emergency Phone</FormLabel>
+                <FormLabel>{t('emergencyPhone')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='+1 (555) 987-6543' {...field} />
+                  <PhoneInput
+                    placeholder={t('emergencyPhonePlaceholder')}
+                    {...field}
+                  />
                 </FormControl>
-                <FormMessage />
+                <div className='min-h-[20px]'>
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -383,10 +353,10 @@ export function ResidentForm({
           name='notes'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Notes</FormLabel>
+              <FormLabel>{t('notes')}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder='Additional notes about the resident...'
+                  placeholder={t('notesPlaceholder')}
                   className='resize-none'
                   rows={3}
                   {...field}
@@ -399,10 +369,10 @@ export function ResidentForm({
 
         <div className='flex justify-end space-x-2'>
           <Button type='button' variant='outline' onClick={onCancel}>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button type='submit' disabled={isSubmitting}>
-            {isSubmitting ? 'Saving...' : resident ? 'Update' : 'Create'}
+            {isSubmitting ? t('submitting') : t('submit')}
           </Button>
         </div>
       </form>

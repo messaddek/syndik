@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { SettingsContent } from './settings-content';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
-import { DashboardSkeleton } from '@/components/loading-skeletons';
+import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
 
 // Force dynamic rendering to avoid prerendering issues with auth context
 export const dynamic = 'force-dynamic';

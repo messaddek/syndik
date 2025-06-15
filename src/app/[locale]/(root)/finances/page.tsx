@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
-import { DashboardSkeleton } from '@/components/loading-skeletons';
+import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
 import { FinancesContent } from '@/modules/finances/ui/components/finances-content';
 
 export default function FinancesPage() {

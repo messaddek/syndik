@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { ResidentsView } from '@/modules/residents';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
-import { DashboardSkeleton } from '@/components/loading-skeletons';
+import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
 import { transformResidentsParams } from '@/modules/residents';
 
 type ResidentsPageProps = {

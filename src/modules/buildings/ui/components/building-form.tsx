@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,25 +21,28 @@ import { createBuildingSchema } from '../../schema';
 import { Building } from '../../types';
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { useTRPC } from '@/trpc/client';
+import { toast } from 'sonner';
 
 type BuildingFormData = z.infer<typeof createBuildingSchema>;
 
 interface BuildingFormProps {
   building?: Building | null;
-  onSubmit: (data: BuildingFormData) => void;
-  isLoading?: boolean;
+  onSuccess?: () => void;
   onCancel?: () => void;
 }
 
 export function BuildingForm({
   building,
-  onSubmit,
-  isLoading,
+  onSuccess,
   onCancel,
 }: BuildingFormProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const t = useTranslations('buildings');
   const tCommon = useTranslations('common');
-
+  const trpc = useTRPC();
+  const queryClient = useQueryClient();
+  const isEditing = !!building;
   const form = useForm<BuildingFormData>({
     resolver: zodResolver(createBuildingSchema),
     defaultValues: {
@@ -50,6 +55,44 @@ export function BuildingForm({
       description: building?.description || '',
     },
   });
+
+  const createBuilding = useMutation(
+    trpc.buildings.create.mutationOptions({
+      onSuccess: () => {
+        toast.success(t('buildingCreated'));
+        queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
+        queryClient.invalidateQueries({
+          queryKey: trpc.dashboard.getOverview.queryKey(),
+        });
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
+        form.reset();
+        onSuccess?.();
+      },
+      onError: error => {
+        toast.error(error.message || t('errorCreatingBuilding'));
+      },
+    })
+  );
+
+  const updateBuilding = useMutation(
+    trpc.buildings.update.mutationOptions({
+      onSuccess: () => {
+        toast.success(t('buildingUpdated'));
+        queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
+        queryClient.invalidateQueries(
+          trpc.buildings.getById.queryOptions({ id: building!.id })
+        );
+        queryClient.invalidateQueries({
+          queryKey: trpc.dashboard.getOverview.queryKey(),
+        });
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
+        onSuccess?.();
+      },
+      onError: error => {
+        toast.error(error.message || t('errorUpdatingBuilding'));
+      },
+    })
+  );
 
   // Reset form when building changes
   useEffect(() => {
@@ -75,11 +118,19 @@ export function BuildingForm({
       });
     }
   }, [building, form]);
-
-  const handleSubmit = (values: BuildingFormData) => {
-    onSubmit(values);
-    if (!building) {
-      form.reset();
+  const handleSubmit = async (values: BuildingFormData) => {
+    setIsSubmitting(true);
+    try {
+      if (isEditing && building) {
+        await updateBuilding.mutateAsync({
+          id: building.id,
+          data: values,
+        });
+      } else {
+        await createBuilding.mutateAsync(values);
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -184,8 +235,8 @@ export function BuildingForm({
               {tCommon('cancel')}
             </Button>
           )}{' '}
-          <Button type='submit' disabled={isLoading}>
-            {isLoading
+          <Button type='submit' disabled={isSubmitting}>
+            {isSubmitting
               ? building
                 ? tCommon('saving')
                 : tCommon('saving')

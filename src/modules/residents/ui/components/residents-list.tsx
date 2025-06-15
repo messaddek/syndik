@@ -58,7 +58,7 @@ export function ResidentsList() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingResident, setEditingResident] =
     useState<SerializedResident | null>(null);
-  const [selectedUnitId, setSelectedUnitId] = useState<string>('');
+  const [selectedUnitId, setSelectedUnitId] = useState<string>('all');
   const queryClient = useQueryClient();
   const trpc = useTRPC();
 
@@ -122,9 +122,10 @@ export function ResidentsList() {
     []) as unknown as SerializedResident[];
 
   // Filter residents by selected unit
-  const filteredResidents = selectedUnitId
-    ? residents.filter(r => r.unitId === selectedUnitId)
-    : residents;
+  const filteredResidents =
+    selectedUnitId && selectedUnitId !== 'all'
+      ? residents.filter(r => r.unitId === selectedUnitId)
+      : residents;
 
   // Loading state
   if (residentsLoading || unitsLoading) {
@@ -194,7 +195,7 @@ export function ResidentsList() {
               <SelectValue placeholder='All units' />
             </SelectTrigger>{' '}
             <SelectContent>
-              <SelectItem value=''>All units</SelectItem>
+              <SelectItem value='all'>All units</SelectItem>
               {units?.map(unit => (
                 <SelectItem key={unit.id} value={unit.id}>
                   Unit {unit.unitNumber}
@@ -203,11 +204,11 @@ export function ResidentsList() {
             </SelectContent>
           </Select>
         </div>
-        {selectedUnitId && (
+        {selectedUnitId && selectedUnitId !== 'all' && (
           <Button
             variant='outline'
             size='sm'
-            onClick={() => setSelectedUnitId('')}
+            onClick={() => setSelectedUnitId('all')}
           >
             Clear Filter
           </Button>
@@ -219,7 +220,7 @@ export function ResidentsList() {
         <Alert>
           <AlertTriangle className='h-4 w-4' />
           <AlertDescription>
-            {selectedUnitId
+            {selectedUnitId && selectedUnitId !== 'all'
               ? 'No residents found for the selected unit.'
               : 'No residents found. Add your first resident to get started.'}
           </AlertDescription>

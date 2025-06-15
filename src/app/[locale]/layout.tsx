@@ -4,20 +4,15 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { isRtlLocale, type Locale } from '@/i18n/config';
-import { Almarai, Geist, Geist_Mono } from 'next/font/google';
+import { Almarai, Gabarito } from 'next/font/google';
 import { cn } from '@/lib/utils';
 
 import '../globals.css';
 import { LayoutProvider } from '@/components/layout-provider';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const gabarito = Gabarito({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700', '800', '900'],
 });
 
 const almarai = Almarai({
@@ -57,7 +52,7 @@ export default async function LocaleLayout({
     <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'}>
       <body
         className={cn(
-          locale !== 'ar' && `${geistSans.variable} ${geistMono.variable}`,
+          locale !== 'ar' && `${gabarito.className}`,
           locale === 'ar' && almarai.className,
           'antialiased'
         )}

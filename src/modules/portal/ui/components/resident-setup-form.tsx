@@ -22,6 +22,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { PhoneInput } from '@/components/ui/phone-input';
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -113,7 +114,6 @@ export function ResidentSetupForm() {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name='email'
@@ -136,8 +136,7 @@ export function ResidentSetupForm() {
                     </p>
                   </FormItem>
                 )}
-              />
-
+              />{' '}
               <FormField
                 control={form.control}
                 name='phone'
@@ -148,13 +147,12 @@ export function ResidentSetupForm() {
                       Phone Number (Optional)
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder='+1 (555) 123-4567' {...field} />
+                      <PhoneInput placeholder='+1 (555) 123-4567' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name='unitId'
@@ -172,11 +170,15 @@ export function ResidentSetupForm() {
                         <SelectTrigger>
                           <SelectValue placeholder='Select your unit' />
                         </SelectTrigger>
-                      </FormControl>
+                      </FormControl>{' '}
                       <SelectContent>
                         {unitsLoading ? (
-                          <SelectItem value='' disabled>
+                          <SelectItem value='loading' disabled>
                             Loading units...
+                          </SelectItem>
+                        ) : availableUnits.length === 0 ? (
+                          <SelectItem value='no-units' disabled>
+                            No units available
                           </SelectItem>
                         ) : (
                           availableUnits.map(({ unit, building }) => (
@@ -196,7 +198,6 @@ export function ResidentSetupForm() {
                   </FormItem>
                 )}
               />
-
               <Button
                 type='submit'
                 className='w-full'

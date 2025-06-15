@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { BuildingsView, loadBuildingsSearchParams } from '@/modules/buildings';
 import { getQueryClient, trpc } from '@/trpc/server';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
-import { DashboardSkeleton } from '@/components/loading-skeletons';
+import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
 
 type BuildingsPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

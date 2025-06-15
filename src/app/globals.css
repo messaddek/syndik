@@ -381,4 +381,13 @@ body.ltr {
   [data-slot='sidebar-gap'] {
     transition: width 0.2s ease-in-out !important;
   }
+
+  /* Force Clerk organization switcher to align right in RTL */
+  [dir='rtl'] .cl-organizationSwitcherPopoverActionButton__manageOrganization {
+    left: 10px !important;
+  }
+
+  [dir='rtl'] .cl-organizationPreview__organizationSwitcherActiveOrganization {
+    margin-right: -10px !important;
+  }
 }

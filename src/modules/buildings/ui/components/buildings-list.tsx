@@ -1,11 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  useMutation,
-  useQueryClient,
-  useSuspenseQuery,
-} from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { Button } from '../../../../components/ui/button';
 import {
   Card,
@@ -16,75 +12,60 @@ import {
 } from '../../../../components/ui/card';
 import { Badge } from '../../../../components/ui/badge';
 import { Building } from '../../types';
-import { Plus, Building2, MapPin, Users } from 'lucide-react';
+import { Plus, Building2, MapPin, Users, Edit } from 'lucide-react';
 import { useTRPC } from '@/trpc/client';
-import { BuildingForm } from './building-form';
-import { createBuildingSchema } from '../../schema';
-import { z } from 'zod';
-import { ResponsiveDialog } from '@/components/responsive-dialog';
 import { Link } from '@/i18n/routing';
-
-type BuildingFormData = z.infer<typeof createBuildingSchema>;
+import { CreateBuildingDialog } from './create-building-dialog';
+import { EditBuildingDialog } from './edit-building-dialog';
+import { useTranslations } from 'next-intl';
 
 export function BuildingsList() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [editingBuilding, setEditingBuilding] = useState<Building | null>(null);
+  const t = useTranslations('buildings');
   const trpc = useTRPC();
-  const queryClient = useQueryClient();
 
   const { data: buildings } = useSuspenseQuery(
     trpc.buildings.getAll.queryOptions({})
   );
 
-  const createMutation = useMutation(
-    trpc.buildings.create.mutationOptions({
-      onSuccess: () => {
-        queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
-        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
-        setIsCreateOpen(false);
-      },
-    })
-  );
-
-  const handleCreateBuilding = (data: BuildingFormData) => {
-    createMutation.mutate(data);
-  };
-
   return (
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
         <div>
-          <h2 className='text-2xl font-bold'>Buildings</h2>
-          <p className='text-gray-600'>Manage your residential properties</p>
+          <h2 className='text-2xl font-bold'>{t('title')}</h2>
+          <p className='text-gray-600'>{t('manageBuildingProperties')}</p>
         </div>
         <Button onClick={() => setIsCreateOpen(true)}>
           <Plus className='mr-2 h-4 w-4' />
-          Add Building
+          {t('addBuilding')}
         </Button>
-        <ResponsiveDialog
-          title='Add New Building'
-          description='Create a new residential building in your syndicate'
-          open={isCreateOpen}
-          onOpenChange={setIsCreateOpen}
-        >
-          <BuildingForm
-            onSubmit={handleCreateBuilding}
-            isLoading={createMutation.isPending}
-            onCancel={() => setIsCreateOpen(false)}
-          />
-        </ResponsiveDialog>
       </div>
+
+      <CreateBuildingDialog
+        open={isCreateOpen}
+        onOpenChange={setIsCreateOpen}
+      />
+
+      {editingBuilding && (
+        <EditBuildingDialog
+          building={editingBuilding}
+          open={!!editingBuilding}
+          onOpenChange={open => !open && setEditingBuilding(null)}
+        />
+      )}
 
       {buildings && buildings.data.length === 0 ? (
         <Card>
           <CardContent className='flex flex-col items-center justify-center py-12'>
             <Building2 className='mb-4 h-12 w-12 text-gray-400' />
-            <h3 className='mb-2 text-lg font-semibold'>No buildings yet</h3>
+            <h3 className='mb-2 text-lg font-semibold'>{t('noBuildings')}</h3>
             <p className='mb-4 text-center text-gray-600'>
-              Start by adding your first residential building to manage.
+              {t('noBuildingsDescription')}
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className='mr-2 h-4 w-4' />
-              Add Your First Building
+              {t('addFirstBuilding')}
             </Button>
           </CardContent>
         </Card>
@@ -106,21 +87,34 @@ export function BuildingsList() {
                 <CardContent>
                   <div className='space-y-3'>
                     <div className='flex items-center justify-between'>
-                      <span className='text-sm text-gray-600'>Total Units</span>
+                      <span className='text-sm text-gray-600'>
+                        {t('totalUnits')}
+                      </span>
                       <Badge variant='secondary'>
                         <Users className='mr-1 h-3 w-3' />
                         {building.totalUnits}
                       </Badge>
                     </div>
                     <p className='line-clamp-2 text-sm text-gray-600'>
-                      {building.description || 'No description provided'}
+                      {building.description || t('noDescription')}
                     </p>
                     <div className='flex space-x-2 pt-2'>
                       <Button variant='outline' size='sm' className='flex-1'>
-                        View Details
+                        {t('viewDetails')}
                       </Button>
                       <Button variant='outline' size='sm' className='flex-1'>
-                        Manage Units
+                        {t('manageUnits')}
+                      </Button>
+                      <Button
+                        variant='outline'
+                        size='sm'
+                        onClick={e => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setEditingBuilding(building);
+                        }}
+                      >
+                        <Edit className='h-3 w-3' />
                       </Button>
                     </div>
                   </div>

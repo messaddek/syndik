@@ -74,6 +74,107 @@
     "notifications": "Notifications",
     "userGuide": "Guide utilisateur"
   },
+  "residents": {
+    "title": "Résidents",
+    "subtitle": "Gérer les résidents et leurs affectations de logements",
+    "addNew": "Ajouter un nouveau résident",
+    "addResident": "Ajouter un résident",
+    "editResident": "Modifier le résident",
+    "deleteResident": "Supprimer le résident",
+    "viewResident": "Voir le résident",
+    "noResidents": "Aucun résident trouvé. Ajoutez votre premier résident pour commencer.",
+    "noResidentsFiltered": "Aucun résident trouvé pour le logement sélectionné.",
+    "totalResidents": "Total des résidents",
+    "activeResidents": "Résidents actifs",
+    "allUnits": "Tous les logements",
+    "clearFilter": "Effacer le filtre",
+    "filterByUnit": "Filtrer par logement :",
+    "loadingUnits": "Chargement des logements...",
+    "noUnitsAvailable": "Aucun logement disponible",
+    "form": {
+      "title": "Informations du résident",
+      "addTitle": "Ajouter un nouveau résident",
+      "editTitle": "Modifier le résident",
+      "description": "Ajouter un nouveau résident à votre système de gestion d'immeuble.",
+      "editDescription": "Mettre à jour les informations du résident et l'affectation du logement.",
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "Jean",
+      "lastName": "Nom de famille",
+      "lastNamePlaceholder": "Dupont",
+      "email": "E-mail",
+      "emailPlaceholder": "jean.dupont@exemple.com",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+33 1 23 45 67 89",
+      "unit": "Logement",
+      "unitPlaceholder": "Sélectionner un logement",
+      "owner": "Propriétaire",
+      "ownerDescription": "Cochez si ce résident est propriétaire du logement",
+      "moveInDate": "Date d'emménagement",
+      "moveInDatePlaceholder": "Choisir une date",
+      "moveOutDate": "Date de déménagement",
+      "moveOutDatePlaceholder": "Choisir une date (optionnel)",
+      "emergencyContact": "Contact d'urgence",
+      "emergencyContactPlaceholder": "Nom de la personne de contact",
+      "emergencyPhone": "Téléphone d'urgence",
+      "emergencyPhonePlaceholder": "+33 1 98 76 54 32",
+      "notes": "Notes",
+      "notesPlaceholder": "Informations supplémentaires sur le résident...",
+      "submit": "Enregistrer le résident",
+      "submitting": "Enregistrement...",
+      "cancel": "Annuler",
+      "validation": {
+        "firstNameRequired": "Le prénom est requis",
+        "lastNameRequired": "Le nom de famille est requis",
+        "emailRequired": "Un e-mail valide est requis",
+        "unitRequired": "Veuillez sélectionner un logement",
+        "invalidDate": "Date invalide",
+        "invalidMoveInDate": "Date d'emménagement invalide",
+        "moveOutBeforeMoveIn": "La date de déménagement ne peut pas être antérieure à la date d'emménagement"
+      }
+    },
+    "details": {
+      "personalInfo": "Informations personnelles",
+      "contactInfo": "Informations de contact",
+      "residencyInfo": "Informations de résidence",
+      "emergencyInfo": "Contact d'urgence",
+      "additionalInfo": "Informations supplémentaires",
+      "unitAssignment": "Affectation du logement",
+      "ownerStatus": "Propriétaire",
+      "tenantStatus": "Locataire",
+      "moveInDate": "Emménagement",
+      "moveOutDate": "Déménagement",
+      "duration": "Durée",
+      "currentResident": "Résident actuel",
+      "formerResident": "Ancien résident"
+    },
+    "actions": {
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "view": "Voir les détails",
+      "invite": "Envoyer une invitation au portail",
+      "resendInvite": "Renvoyer l'invitation",
+      "bulkInvite": "Invitation en masse",
+      "export": "Exporter la liste"
+    },
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif",
+      "invited": "Invité",
+      "notInvited": "Non invité",
+      "portalAccess": "Accès au portail"
+    },
+    "messages": {
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce résident ? Cette action ne peut pas être annulée.",
+      "deleteSuccess": "Résident supprimé avec succès",
+      "deleteError": "Échec de la suppression du résident",
+      "createSuccess": "Résident créé avec succès",
+      "createError": "Échec de la création du résident",
+      "updateSuccess": "Résident mis à jour avec succès",
+      "updateError": "Échec de la mise à jour du résident",
+      "inviteSuccess": "Invitation au portail envoyée avec succès",
+      "inviteError": "Échec de l'envoi de l'invitation au portail"
+    }
+  },
   "footer": {
     "newsletter": {
       "title": "Restez informé avec Syndik",
@@ -214,6 +315,142 @@
       "content": "Ces conditions sont effectives depuis le 1er janvier 2025. En continuant à utiliser Syndik après cette date, vous acceptez d'être lié par ces conditions."
     }
   },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "subtitle": "Confidentialité et protection des données",
+    "lastUpdated": "Dernière mise à jour : 1er janvier 2025",
+    "readCarefully": "Nous nous engageons à protéger votre vie privée et à être transparents sur la façon dont nous traitons vos données.",
+    "tableOfContents": "Table des matières",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "content": "Syndik (\"nous\", \"notre\" ou \"nos\") s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre plateforme de gestion de syndics résidentiels."
+      },
+      "informationCollect": {
+        "title": "2. Informations que nous collectons",
+        "personalInfoTitle": "Informations personnelles",
+        "personalInfoContent": "Nous collectons les informations que vous nous fournissez directement, telles que :",
+        "personalInfoItems": [
+          "Nom, adresse e-mail, numéro de téléphone",
+          "Informations sur le syndicat et la propriété",
+          "Informations financières et de paiement",
+          "Préférences de communication",
+          "Identifiants de compte et informations de profil"
+        ],
+        "usageInfoTitle": "Informations d'utilisation",
+        "usageInfoContent": "Nous collectons automatiquement certaines informations sur votre utilisation de notre service :",
+        "usageInfoItems": [
+          "Adresse IP et informations sur l'appareil",
+          "Type de navigateur et système d'exploitation",
+          "Pages visitées et fonctionnalités utilisées",
+          "Heure et date d'accès",
+          "Adresses des sites Web de référence"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. Comment nous utilisons vos informations",
+        "content": "Nous utilisons les informations que nous collectons pour :",
+        "purposes": [
+          "Fournir, maintenir et améliorer notre service",
+          "Traiter les transactions et envoyer les informations connexes",
+          "Envoyer des communications administratives et de support",
+          "Répondre aux commentaires, questions et demandes de service client",
+          "Surveiller et analyser les modèles et tendances d'utilisation",
+          "Personnaliser votre expérience"
+        ]
+      },
+      "sharingDisclosure": {
+        "title": "4. Partage et divulgation d'informations",
+        "content": "Nous ne vendons, n'échangeons ou ne transférons pas vos informations personnelles à des tiers sans votre consentement, sauf dans les circonstances suivantes :",
+        "circumstances": [
+          "Prestataires de services qui nous aident à exploiter notre plateforme",
+          "Conformité légale et protection des droits",
+          "Transferts d'entreprise ou acquisitions",
+          "Avec votre consentement explicite"
+        ]
+      },
+      "dataSecurity": {
+        "title": "5. Sécurité des données",
+        "content": "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations personnelles :",
+        "technicalTitle": "Mesures techniques",
+        "technicalMeasures": [
+          "Chiffrement des données en transit et au repos",
+          "Contrôles d'accès et mécanismes d'authentification",
+          "Évaluations de sécurité et mises à jour régulières"
+        ],
+        "organizationalTitle": "Mesures organisationnelles",
+        "organizationalMeasures": [
+          "Formation des employés sur la protection des données",
+          "Procédures de réponse aux incidents",
+          "Audits de conformité réguliers"
+        ]
+      },
+      "dataRetention": {
+        "title": "6. Conservation des données",
+        "content": "Nous conservons vos informations personnelles uniquement le temps nécessaire pour remplir les objectifs décrits dans cette politique de confidentialité, nous conformer aux obligations légales, résoudre les litiges et faire respecter les accords.",
+        "retentionPeriods": [
+          "Informations de compte : Conservées tant que votre compte est actif",
+          "Enregistrements de transactions : Conservés pendant 7 ans à des fins fiscales et légales",
+          "Journaux de communication : Conservés pendant 2 ans",
+          "Analyses d'utilisation : Anonymisées après 12 mois"
+        ]
+      },
+      "yourRights": {
+        "title": "7. Vos droits et choix",
+        "content": "Selon votre localisation, vous pouvez avoir certains droits concernant vos informations personnelles :",
+        "rights": [
+          "Accéder et recevoir une copie de vos informations personnelles",
+          "Corriger des informations inexactes ou incomplètes",
+          "Supprimer vos informations personnelles",
+          "Vous opposer à certaines activités de traitement ou les restreindre",
+          "Portabilité des données (recevoir vos données dans un format structuré)",
+          "Retirer votre consentement à tout moment"
+        ]
+      },
+      "cookies": {
+        "title": "8. Cookies et technologies de suivi",
+        "content": "Nous utilisons des cookies et des technologies de suivi similaires pour améliorer votre expérience sur notre plateforme :",
+        "cookieTypes": [
+          "Cookies essentiels : Requis pour les fonctionnalités de base de la plateforme",
+          "Cookies de performance : Nous aident à comprendre comment vous utilisez notre service",
+          "Cookies fonctionnels : Se souviennent de vos préférences et paramètres",
+          "Cookies marketing : Utilisés pour diffuser des publicités pertinentes"
+        ],
+        "manageCookies": "Vous pouvez gérer vos préférences de cookies via les paramètres de votre navigateur ou notre centre de préférences de cookies."
+      },
+      "international": {
+        "title": "9. Transferts internationaux de données",
+        "content": "Vos informations peuvent être transférées vers et traitées dans des pays autres que le vôtre. Nous nous assurons que des garanties appropriées sont en place :",
+        "safeguards": [
+          "Clauses contractuelles types approuvées par les autorités réglementaires",
+          "Décisions d'adéquation par les autorités compétentes de protection des données",
+          "Règles d'entreprise contraignantes pour les transferts intra-groupe",
+          "Votre consentement explicite pour des transferts spécifiques"
+        ]
+      },
+      "children": {
+        "title": "10. Confidentialité des enfants",
+        "content": "Notre service n'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 13 ans. Si nous apprenons que nous avons collecté des informations personnelles d'un enfant de moins de 13 ans, nous prendrons des mesures pour supprimer ces informations rapidement."
+      },
+      "changes": {
+        "title": "11. Modifications de cette politique de confidentialité",
+        "content": "Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique de confidentialité sur cette page et en mettant à jour la date de \"dernière mise à jour\". Pour les changements importants, nous fournirons un avis supplémentaire par e-mail ou notification proéminente sur le site Web."
+      },
+      "contact": {
+        "title": "12. Nous contacter",
+        "content": "Si vous avez des questions sur cette politique de confidentialité, veuillez nous contacter :",
+        "emailTitle": "E-mail",
+        "phoneTitle": "Téléphone",
+        "addressTitle": "Adresse",
+        "email": "privacy@syndik.com",
+        "phone": "+1-800-SYNDIK",
+        "address": "[Adresse de l'entreprise]"
+      }
+    },
+    "acknowledgment": {
+      "content": "En utilisant Syndik, vous reconnaissez avoir lu et compris cette politique de confidentialité."
+    }
+  },
   "auth": {
     "signIn": "Se connecter",
     "signUp": "S'inscrire",
@@ -237,19 +474,59 @@
     "quickActions": "Actions rapides",
     "addBuilding": "Ajouter un immeuble",
     "addResident": "Ajouter un résident",
-    "createAnnouncement": "Créer une annonce"
+    "createAnnouncement": "Créer une annonce",
+    "buildings": "Immeubles",
+    "units": "Logements",
+    "residents": "Résidents",
+    "totalManagedProperties": "Propriétés gérées au total",
+    "occupancyRateText": "taux d'occupation",
+    "activeResidents": "Résidents actifs",
+    "thisMonth": "Ce mois-ci",
+    "monthlyFinancialSummary": "Résumé financier mensuel",
+    "income": "Revenus",
+    "expenses": "Dépenses",
+    "portalStatistics": "Statistiques du portail",
+    "portalAccess": "Accès au portail",
+    "notInvited": "Non invités",
+    "invitationRate": "Taux d'invitation",
+    "noRecentActivity": "Aucune activité récente",
+    "newResident": "Nouveau résident",
+    "meetingScheduled": "Réunion programmée",
+    "quickActionsDescription": "Tâches courantes pour gérer vos syndicats résidentiels",
+    "inviteResidents": "Inviter des résidents",
+    "scheduleMeeting": "Programmer une réunion",
+    "trends": "Tendances financières",
+    "trendsDescription": "Tendances des revenus, dépenses et bénéfices nets sur les 6 derniers mois",
+    "occupancy": "Tendances d'occupation",
+    "occupancyDescription": "Évolution du taux d'occupation sur les 12 derniers mois",
+    "financialTrends": "Vue d'ensemble financière",
+    "occupancyTrends": "Taux d'occupation",
+    "currentRate": "Actuel",
+    "averageRate": "Moyenne"
   },
   "buildings": {
     "title": "Immeubles",
     "addBuilding": "Ajouter un immeuble",
+    "addBuildingDescription": "Créer un nouveau bâtiment dans votre système de gestion. Remplissez les détails ci-dessous.",
+    "buildingCreated": "Immeuble créé avec succès",
+    "errorCreatingBuilding": "Erreur lors de la création de l'immeuble",
     "editBuilding": "Modifier l'immeuble",
+    "editBuildingDescription": "Mettre à jour les informations de l'immeuble ci-dessous.",
+    "buildingUpdated": "Immeuble mis à jour avec succès",
+    "errorUpdatingBuilding": "Erreur lors de la mise à jour de l'immeuble",
     "deleteBuilding": "Supprimer l'immeuble",
     "buildingName": "Nom de l'immeuble",
     "buildingAddress": "Adresse de l'immeuble",
     "city": "Ville",
     "totalUnits": "Total des logements",
     "createdAt": "Créé le",
-    "noBuildings": "Aucun immeuble trouvé",
+    "noBuildings": "Aucun immeuble pour l'instant",
+    "noBuildingsDescription": "Commencez par ajouter votre premier immeuble résidentiel à gérer.",
+    "addFirstBuilding": "Ajouter votre premier immeuble",
+    "manageBuildingProperties": "Gérez vos propriétés résidentielles",
+    "viewDetails": "Voir les détails",
+    "manageUnits": "Gérer les logements",
+    "noDescription": "Aucune description fournie",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet immeuble ?",
     "search": "Rechercher des immeubles...",
     "filter": "Filtrer",
@@ -329,22 +606,6 @@
     "activeResidents": "Résidents Actifs",
     "thisMonthIncome": "Revenus de ce Mois",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce logement ? Cette action ne peut pas être annulée."
-  },
-  "residents": {
-    "title": "Résidents",
-    "addResident": "Ajouter un résident",
-    "editResident": "Modifier le résident",
-    "deleteResident": "Supprimer le résident",
-    "firstName": "Prénom",
-    "lastName": "Nom de famille",
-    "email": "E-mail",
-    "phone": "Téléphone",
-    "unit": "Logement",
-    "isOwner": "Propriétaire",
-    "moveInDate": "Date d'emménagement",
-    "owner": "Propriétaire",
-    "tenant": "Locataire",
-    "noResidents": "Aucun résident trouvé"
   },
   "finances": {
     "title": "Finances",
@@ -498,5 +759,304 @@
     "created": "Créé avec succès",
     "updated": "Mis à jour avec succès",
     "deleted": "Supprimé avec succès"
+  },
+  "landing": {
+    "hero": {
+      "title": "Gérez Votre Syndicat Résidentiel",
+      "titleHighlight": "Facilement",
+      "description": "Rationalisez la gestion immobilière, suivez les finances, organisez les réunions et améliorez la communication avec les résidents grâce à notre plateforme SaaS complète conçue spécifiquement pour les syndicats résidentiels.",
+      "getStartedFree": "Commencer Gratuitement",
+      "watchDemo": "Voir la Démo"
+    },
+    "stats": {
+      "title": "Fait confiance par des milliers de syndicats résidentiels dans le monde entier",
+      "subtitle": "Rejoignez la communauté croissante de gestionnaires immobiliers qui font confiance à Syndik",
+      "syndicates": {
+        "value": "2 500+",
+        "label": "Syndicats Résidentiels",
+        "description": "Font confiance à Syndik"
+      },
+      "units": {
+        "value": "50 000+",
+        "label": "Logements Gérés",
+        "description": "Sur notre plateforme"
+      },
+      "transactions": {
+        "value": "2,5M€+",
+        "label": "Transactions Mensuelles",
+        "description": "Traitées en sécurité"
+      },
+      "satisfaction": {
+        "value": "98%",
+        "label": "Satisfaction Utilisateur",
+        "description": "Note des utilisateurs"
+      }
+    },
+    "features": {
+      "subtitle": "Tout ce dont vous avez besoin",
+      "title": "Gestion Complète de Syndicat",
+      "description": "Tous les outils dont vous avez besoin pour gérer efficacement votre syndicat résidentiel, du suivi financier à la communication avec les résidents.",
+      "buildingManagement": {
+        "title": "Gestion d'Immeubles",
+        "description": "Gérez efficacement plusieurs bâtiments, logements et espaces communs avec un suivi détaillé et des plannings de maintenance."
+      },
+      "residentPortal": {
+        "title": "Portail Résident",
+        "description": "Offrez aux résidents un portail dédié pour consulter les annonces, soumettre des demandes et communiquer efficacement."
+      },
+      "financialTracking": {
+        "title": "Suivi Financier",
+        "description": "Surveillez les revenus, les dépenses, les budgets et générez des rapports financiers complets facilement."
+      },
+      "secureCompliant": {
+        "title": "Sécurisé et Conforme",
+        "description": "Sécurité de niveau entreprise avec contrôle d'accès basé sur les rôles et conformité aux réglementations de protection des données."
+      },
+      "meetingManagement": {
+        "title": "Gestion des Réunions",
+        "description": "Planifiez des réunions, suivez la participation, gérez les ordres du jour et maintenez des procès-verbaux et des votes détaillés."
+      },
+      "automatedWorkflows": {
+        "title": "Flux de Travail Automatisés",
+        "description": "Rationalisez les tâches routinières avec des notifications automatisées, des rappels et des processus d'approbation."
+      }
+    },
+    "howItWorks": {
+      "subtitle": "Comment ça marche",
+      "title": "Commencez en quelques minutes",
+      "description": "La configuration de votre système de gestion de syndicat est rapide et facile avec notre processus de configuration guidée.",
+      "steps": {
+        "signUp": {
+          "title": "Inscription et Configuration",
+          "description": "Créez votre compte et configurez votre profil de syndicat avec les détails du bâtiment et les informations des résidents."
+        },
+        "invite": {
+          "title": "Inviter les Résidents",
+          "description": "Envoyez des invitations aux résidents et aux membres du conseil pour rejoindre votre portail de syndicat avec accès basé sur les rôles."
+        },
+        "manage": {
+          "title": "Gérer et Suivre",
+          "description": "Commencez à gérer les finances, planifier les réunions et communiquer avec les résidents depuis un hub central."
+        },
+        "grow": {
+          "title": "Grandir et Évoluer",
+          "description": "Développez votre gestion de syndicat avec des fonctionnalités avancées et des intégrations selon vos besoins."
+        }
+      }
+    },
+    "benefits": {
+      "subtitle": "Avantages",
+      "title": "Pourquoi les syndicats choisissent Syndik",
+      "description": "Découvrez les avantages tangibles qui font de Syndik le choix préféré pour la gestion de syndicats résidentiels.",
+      "saveTime": {
+        "title": "Gagner du Temps",
+        "description": "Réduisez les frais administratifs jusqu'à 70% avec des flux de travail automatisés et des processus rationalisés.",
+        "metric": "70% plus rapide"
+      },
+      "reduceCosts": {
+        "title": "Réduire les Coûts",
+        "description": "Diminuez les coûts opérationnels grâce à une gestion efficace des ressources et à la réduction du travail manuel.",
+        "metric": "5K€+ économisés/an"
+      },
+      "improveCommunication": {
+        "title": "Améliorer la Communication",
+        "description": "Améliorez la satisfaction des résidents avec une communication transparente et des notifications instantanées.",
+        "metric": "95% de satisfaction"
+      },
+      "betterOrganization": {
+        "title": "Meilleure Organisation",
+        "description": "Gardez tous les documents, réunions et dossiers financiers organisés et facilement accessibles.",
+        "metric": "100% numérique"
+      }
+    },
+    "security": {
+      "subtitle": "Sécurité",
+      "title": "Sécurité de niveau entreprise en qui vous pouvez avoir confiance",
+      "description": "Vos données de syndicat sont protégées par les mêmes mesures de sécurité utilisées par les entreprises du Fortune 500.",
+      "features": {
+        "encryption": {
+          "title": "Chiffrement de Bout en Bout",
+          "description": "Toutes les données sont chiffrées en transit et au repos en utilisant le chiffrement AES-256 standard de l'industrie."
+        },
+        "roleBasedAccess": {
+          "title": "Accès Basé sur les Rôles",
+          "description": "Des contrôles de permissions granulaires garantissent que les utilisateurs n'accèdent qu'aux informations pertinentes à leur rôle."
+        },
+        "gdprCompliant": {
+          "title": "Conforme RGPD",
+          "description": "Conformité totale avec les réglementations européennes de protection des données et les normes de confidentialité."
+        },
+        "regularBackups": {
+          "title": "Sauvegardes Régulières",
+          "description": "Sauvegardes quotidiennes automatisées avec récupération ponctuelle pour garantir que vos données sont toujours sûres."
+        },
+        "soc2Certified": {
+          "title": "Certifié SOC 2",
+          "description": "Contrôles de sécurité audités indépendamment répondant aux normes industrielles les plus élevées."
+        },
+        "monitoring": {
+          "title": "Surveillance 24/7",
+          "description": "Surveillance de sécurité continue et détection de menaces pour protéger contre les cybermenaces."
+        }
+      },
+      "certificationLabel": "Certifié Sécurité",
+      "certificationText": "ISO 27001, SOC 2 Type II, RGPD"
+    },
+    "testimonials": {
+      "subtitle": "Témoignages",
+      "title": "Apprécié par les gestionnaires de syndicats du monde entier",
+      "description": "Découvrez ce que disent les gestionnaires immobiliers et les conseils de syndicats à propos de Syndik.",
+      "reviews": [
+        {
+          "content": "Syndik a transformé la façon dont nous gérons notre complexe résidentiel. Les flux de travail automatisés et le portail résident ont considérablement amélioré notre efficacité et la satisfaction des résidents.",
+          "author": {
+            "name": "Marie Dubois",
+            "role": "Présidente du Syndicat",
+            "company": "Les Jardins de Paris"
+          }
+        },
+        {
+          "content": "Les fonctionnalités de suivi financier sont exceptionnelles. Nous pouvons maintenant générer des rapports détaillés en quelques minutes au lieu de plusieurs heures, et la transparence a amélioré la confiance entre les résidents.",
+          "author": {
+            "name": "Ahmed Hassan",
+            "role": "Gestionnaire Immobilier",
+            "company": "Marina Bay Residences"
+          }
+        },
+        {
+          "content": "Le support client est exceptionnel. L'équipe nous a aidés à migrer toutes nos données de manière transparente et a fourni une formation qui a rendu l'adoption fluide pour tous nos membres du conseil.",
+          "author": {
+            "name": "Sarah Johnson",
+            "role": "Secrétaire du Conseil",
+            "company": "Riverside Commons"
+          }
+        }
+      ]
+    },
+    "pricing": {
+      "badge": "Fait confiance par 2 500+ gestionnaires immobiliers",
+      "title": "Choisissez Votre Plan Parfait",
+      "description": "Commencez avec notre essai gratuit de 14 jours. Aucune carte de crédit requise. Annulez à tout moment.",
+      "guarantees": {
+        "support": "Tous les plans incluent un support 24/7",
+        "uptime": "SLA de disponibilité à 99,9%",
+        "gdpr": "Conforme RGPD"
+      },
+      "billing": {
+        "monthly": "Mensuel",
+        "yearly": "Annuel",
+        "period": {
+          "month": "/mois",
+          "year": "/an"
+        },
+        "discount": {
+          "save": "Économisez 20%",
+          "message": "en passant à la facturation annuelle !",
+          "saving": "Vous économisez 20%",
+          "yearlyMessage": "avec la facturation annuelle !"
+        }
+      },
+      "plans": {
+        "starter": {
+          "name": "Débutant",
+          "price": "49€",
+          "period": "/mois",
+          "description": "Parfait pour les petits syndicats",
+          "features": [
+            "Jusqu'à 25 logements",
+            "Suivi financier de base",
+            "Portail résident",
+            "Support par e-mail",
+            "Essai gratuit de 14 jours"
+          ]
+        },
+        "professional": {
+          "name": "Professionnel",
+          "price": "99€",
+          "period": "/mois",
+          "description": "Pour les syndicats en croissance",
+          "features": [
+            "Jusqu'à 100 logements",
+            "Rapports avancés",
+            "Gestion des réunions",
+            "Support prioritaire",
+            "Flux de travail personnalisés",
+            "Tableau de bord analytique"
+          ],
+          "popular": "⭐ Le Plus Populaire"
+        },
+        "enterprise": {
+          "name": "Entreprise",
+          "price": "Sur mesure",
+          "description": "Pour les grands groupes de syndicats",
+          "features": [
+            "Logements illimités",
+            "Intégrations personnalisées",
+            "Support dédié",
+            "Sécurité avancée",
+            "Formation incluse",
+            "Options marque blanche"
+          ]
+        }
+      },
+      "buttons": {
+        "startTrial": "Commencer l'Essai Gratuit",
+        "contactSales": "Contacter les Ventes"
+      },
+      "noCreditCard": "Aucune carte de crédit requise",
+      "additionalFeatures": {
+        "enterpriseSecurity": {
+          "title": "Sécurité Entreprise",
+          "description": "Certifié SOC 2 avec chiffrement de bout en bout"
+        },
+        "globalAvailability": {
+          "title": "Disponibilité Mondiale",
+          "description": "Disponible dans plus de 25 pays"
+        },
+        "awardWinning": {
+          "title": "Primé",
+          "description": "Meilleur logiciel de gestion immobilière 2024"
+        }
+      },
+      "customSolution": {
+        "title": "Besoin d'une solution personnalisée ?",
+        "description": "Nous offrons des plans sur mesure pour les grandes entreprises avec des exigences spécifiques, incluant des intégrations personnalisées, un support dédié et des options marque blanche.",
+        "link": "Contactez notre équipe de vente"
+      }
+    },
+    "cta": {
+      "badge": "Rejoignez 2 500+ syndicats qui utilisent déjà Syndik",
+      "title": "Transformez Votre Syndicat",
+      "titleHighlight": "Gestion Aujourd'hui",
+      "description": "Arrêtez de jongler avec les feuilles de calcul, les e-mails et la paperasse. Commencez à gérer votre syndicat résidentiel comme un pro avec notre plateforme tout-en-un.",
+      "buttons": {
+        "startTrial": "Commencer l'Essai Gratuit",
+        "watchDemo": "Voir la Démo"
+      },
+      "trustIndicators": {
+        "freeTrial": {
+          "title": "14 Jours",
+          "subtitle": "Essai Gratuit"
+        },
+        "noSetupFee": {
+          "title": "Pas de Frais d'Installation",
+          "subtitle": "Commencez Instantanément"
+        },
+        "support": {
+          "title": "Support 24/7",
+          "subtitle": "Nous Sommes Là pour Vous Aider"
+        }
+      },
+      "guarantee": {
+        "title": "Garantie Sans Risque",
+        "description": "Aucune carte de crédit requise • Annulez à tout moment • Garantie de remboursement • ",
+        "link": "Voir les détails des tarifs"
+      },
+      "socialProof": {
+        "rating": "4,9/5 sur G2",
+        "award": "Meilleure Gestion Immobilière 2024",
+        "certified": "Certifié SOC 2"
+      }
+    }
   }
 }

@@ -45,7 +45,6 @@ export const OrganizationSwitcherCustom = ({
               </DialogDescription>
             </DialogHeader>
             <div className='pt-4'>
-              {' '}
               <CreateOrganization
                 appearance={{
                   elements: {
@@ -89,37 +88,41 @@ export const OrganizationSwitcherCustom = ({
           elements: {
             rootBox: 'w-full',
             organizationSwitcherTrigger:
-              'flex items-center gap-2 w-full justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent hover:text-accent-foreground transition-colors text-foreground',
+              'flex items-center gap-2 w-full justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent hover:text-accent-foreground transition-colors text-foreground rtl:flex-row-reverse rtl:justify-between',
+
             organizationSwitcherTriggerIcon:
-              'h-4 w-4 shrink-0 text-muted-foreground',
-            organizationPreview: 'flex items-center gap-2 min-w-0 flex-1',
+              'h-4 w-4 shrink-0 text-muted-foreground rtl:rotate-180 rtl:order-first',
+
+            organizationPreview:
+              'flex items-center gap-2 min-w-0 flex-1 rtl:flex-row-reverse rtl:text-right',
+
             organizationPreviewAvatarBox: 'h-6 w-6 shrink-0',
-            organizationPreviewTextContainer: 'flex flex-col min-w-0 flex-1',
+
+            organizationPreviewTextContainer:
+              'flex flex-col min-w-0 flex-1 rtl:items-end',
+
             organizationPreviewMainIdentifier:
-              'text-sm font-medium truncate text-foreground',
+              'text-sm font-medium truncate text-foreground rtl:text-right',
+
             organizationPreviewSecondaryIdentifier:
-              'text-xs text-muted-foreground truncate',
+              'text-xs text-muted-foreground truncate rtl:text-right',
+
             organizationSwitcherPopoverCard:
-              'w-64 bg-background border border-border',
-            organizationSwitcherPopoverActions: 'border-t border-border pt-2',
+              'w-64 bg-background border border-border rtl:text-right',
+
+            organizationSwitcherPopoverActions:
+              'border-t border-border pt-2 rtl:text-right',
+
             organizationSwitcherPopoverActionButton:
-              'text-foreground hover:bg-accent hover:text-accent-foreground',
+              'text-foreground hover:bg-accent hover:text-accent-foreground text-start rtl:text-right rtl:pl-3 rtl:pr-2',
           },
           variables: {
-            // colorPrimary: 'hsl(var(--primary))',
-            // colorTextOnPrimaryBackground: 'hsl(var(--primary-foreground))',
-            // colorBackground: 'hsl(var(--background))',
-            // colorText: 'hsl(var(--foreground))',
-            // colorTextSecondary: 'hsl(var(--muted-foreground))',
-            // colorInputBackground: 'hsl(var(--background))',
-            // colorInputText: 'hsl(var(--foreground))',
-            // borderRadius: '0.375rem',
+            // Customize colors or border radius if needed
           },
         }}
         createOrganizationMode='modal'
         hidePersonal
       />
-
       {/* Create Organization Dialog */}
       <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
         <DialogContent className='max-w-md'>
@@ -134,7 +137,6 @@ export const OrganizationSwitcherCustom = ({
             </DialogDescription>
           </DialogHeader>
           <div className='pt-4'>
-            {' '}
             <CreateOrganization
               appearance={{
                 elements: {

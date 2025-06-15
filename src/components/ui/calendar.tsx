@@ -7,9 +7,19 @@ import {
   ChevronRightIcon,
 } from 'lucide-react';
 import { DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker';
+import { useLocale } from 'next-intl';
+import { ar, enUS, fr } from 'date-fns/locale';
 
 import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
+import { type Locale } from '@/i18n/config';
+
+// Locale mapping for date-fns
+const localeMap = {
+  en: enUS,
+  fr: fr,
+  ar: ar,
+} as const;
 
 function Calendar({
   className,
@@ -23,10 +33,13 @@ function Calendar({
 }: React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>['variant'];
 }) {
+  const locale = useLocale() as Locale;
+  const dateLocale = localeMap[locale];
   const defaultClassNames = getDefaultClassNames();
 
   return (
     <DayPicker
+      locale={dateLocale}
       showOutsideDays={showOutsideDays}
       className={cn(
         'bg-background group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
@@ -35,7 +48,7 @@ function Calendar({
       captionLayout={captionLayout}
       formatters={{
         formatMonthDropdown: date =>
-          date.toLocaleString('default', { month: 'short' }),
+          date.toLocaleString(locale, { month: 'short' }),
         ...formatters,
       }}
       classNames={{
@@ -133,16 +146,31 @@ function Calendar({
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === 'left') {
             return (
-              <ChevronLeftIcon className={cn('size-4', className)} {...props} />
+              <>
+                <ChevronLeftIcon
+                  className={cn('size-4 rtl:hidden', className)}
+                  {...props}
+                />
+                <ChevronRightIcon
+                  className={cn('hidden size-4 rtl:block', className)}
+                  {...props}
+                />
+              </>
             );
           }
 
           if (orientation === 'right') {
             return (
-              <ChevronRightIcon
-                className={cn('size-4', className)}
-                {...props}
-              />
+              <>
+                <ChevronRightIcon
+                  className={cn('size-4 rtl:hidden', className)}
+                  {...props}
+                />
+                <ChevronLeftIcon
+                  className={cn('hidden size-4 rtl:block', className)}
+                  {...props}
+                />
+              </>
             );
           }
 
@@ -173,6 +201,7 @@ function CalendarDayButton({
   modifiers,
   ...props
 }: React.ComponentProps<typeof DayButton>) {
+  const locale = useLocale() as Locale;
   const defaultClassNames = getDefaultClassNames();
 
   const ref = React.useRef<HTMLButtonElement>(null);
@@ -185,7 +214,7 @@ function CalendarDayButton({
       ref={ref}
       variant='ghost'
       size='icon'
-      data-day={day.date.toLocaleDateString()}
+      data-day={day.date.toLocaleDateString(locale)}
       data-selected-single={
         modifiers.selected &&
         !modifiers.range_start &&

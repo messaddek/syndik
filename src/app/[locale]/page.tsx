@@ -1,5 +1,5 @@
-import { LandingLayout } from '@/components/landing/landing-layout';
 import {
+  LandingLayout,
   HeroSection,
   FeaturesSection,
   CTASection,
@@ -9,7 +9,7 @@ import {
   BenefitsSection,
   SecuritySection,
   PricingPreviewSection,
-} from '@/components/landing/hero-section';
+} from '@/components/landing';
 
 export default function Home() {
   return (
