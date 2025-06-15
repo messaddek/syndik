@@ -71,7 +71,148 @@
     "settings": "Settings",
     "portal": "Resident Portal",
     "logout": "Logout",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "userGuide": "User Guide"
+  },
+  "footer": {
+    "newsletter": {
+      "title": "Stay Updated with Syndik",
+      "description": "Get the latest updates on new features, syndicate management tips, and industry insights delivered to your inbox.",
+      "placeholder": "Enter your email address",
+      "subscribe": "Subscribe",
+      "subscribing": "Subscribing...",
+      "disclaimer": "No spam, unsubscribe at any time. Read our",
+      "privacyPolicy": "Privacy Policy",
+      "successMessage": "Thank you for subscribing to our newsletter!"
+    },
+    "description": "Modern SaaS platform for managing residential syndicates with ease and efficiency. Streamline your property management, enhance resident communication, and boost operational efficiency.",
+    "sections": {
+      "product": "Product",
+      "support": "Support",
+      "legalResources": "Legal & Resources"
+    },
+    "links": {
+      "aboutUs": "About Us",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "requestDemo": "Request Demo",
+      "helpCenter": "Help Center",
+      "termsOfService": "Terms of Service",
+      "contactUs": "Contact Us",
+      "phoneSupport": "Phone Support",
+      "privacyPolicy": "Privacy Policy",
+      "termsConditions": "Terms & Conditions",
+      "security": "Security",
+      "userGuide": "User Guide"
+    },
+    "copyright": "© 2025 Syndik. All rights reserved.",
+    "madeWith": "Made with ❤️ for property managers worldwide",
+    "certifications": {
+      "soc2": "🔒 SOC 2 Certified",
+      "gdpr": "🛡️ GDPR Compliant"
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "subtitle": "Terms & Conditions",
+    "lastUpdated": "Last updated: January 1, 2025",
+    "readCarefully": "Please read these terms carefully before using our service.",
+    "tableOfContents": "Table of Contents",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "content": "By accessing and using Syndik (\"we,\" \"our,\" or \"us\"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service."
+      },
+      "description": {
+        "title": "2. Description of Service",
+        "content": "Syndik is a comprehensive SaaS platform designed for residential syndicate management, providing:",
+        "features": [
+          "Property and building management",
+          "Financial tracking and reporting",
+          "Resident communication tools",
+          "Meeting and voting management",
+          "Document storage and sharing",
+          "Maintenance request system"
+        ]
+      },
+      "userAccounts": {
+        "title": "3. User Accounts",
+        "content": "When you create an account with us, you must provide information that is accurate, complete, and current at all times.",
+        "responsibilities": [
+          "Maintain the security of your password",
+          "Accept responsibility for all activities under your account",
+          "Notify us immediately of any unauthorized use",
+          "Do not share your account credentials"
+        ]
+      },
+      "acceptableUse": {
+        "title": "4. Acceptable Use Policy",
+        "content": "You may use our service only for lawful purposes and in accordance with these Terms.",
+        "prohibitedTitle": "Prohibited Activities",
+        "prohibited": [
+          "Violate any applicable federal, state, local, or international law",
+          "Transmit any material that is defamatory, offensive, or otherwise objectionable",
+          "Interfere with or disrupt the service or servers",
+          "Attempt to gain unauthorized access to other accounts"
+        ],
+        "dataMisuseTitle": "Data Misuse",
+        "dataMisuse": [
+          "Unauthorized data scraping",
+          "Sharing credentials with third parties",
+          "Attempting to breach security",
+          "Reverse engineering the platform"
+        ]
+      },
+      "payment": {
+        "title": "5. Payment and Billing",
+        "content": "Some services may require payment. Payment terms will be clearly displayed before you make any purchase.",
+        "details": [
+          "All fees are non-refundable except as required by law",
+          "You authorize us to charge your payment method",
+          "Subscription fees are billed in advance",
+          "Price changes will be communicated 30 days in advance"
+        ]
+      },
+      "privacy": {
+        "title": "6. Privacy and Data Protection",
+        "content": "Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your information when you use our service."
+      },
+      "intellectualProperty": {
+        "title": "7. Intellectual Property",
+        "content": "The service and its original content, features, and functionality are and will remain the exclusive property of Syndik and its licensors."
+      },
+      "limitationLiability": {
+        "title": "8. Limitation of Liability",
+        "content": "In no event shall Syndik, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages.",
+        "importantNotice": "Important Notice:",
+        "additionalContent": "Our total liability to you for any claim arising from these terms or your use of the service shall not exceed the amount you paid us in the twelve months preceding the claim."
+      },
+      "termination": {
+        "title": "9. Termination",
+        "content": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms."
+      },
+      "modifications": {
+        "title": "10. Modifications",
+        "content": "We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days notice."
+      },
+      "governingLaw": {
+        "title": "11. Governing Law",
+        "content": "These Terms shall be interpreted and governed by the laws of the jurisdiction in which Syndik operates, without regard to its conflict of law provisions."
+      },
+      "contact": {
+        "title": "12. Contact Information",
+        "content": "If you have any questions about these Terms, please contact us:",
+        "emailSupportTitle": "Email Support",
+        "phoneAddressTitle": "Phone & Address",
+        "email": "legal@syndik.com",
+        "phone": "+1-800-SYNDIK",
+        "address": "Syndik Legal Department, 123 Business Street, City, Country"
+      }
+    },
+    "effectiveDate": {
+      "title": "Effective Date:",
+      "content": "These terms are effective as of January 1, 2025. By continuing to use Syndik after this date, you agree to be bound by these terms."
+    }
   },
   "auth": {
     "signIn": "Sign In",

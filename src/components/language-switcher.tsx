@@ -3,13 +3,14 @@
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config';
+import { ChevronDownIcon } from 'lucide-react';
 
 export function LanguageSwitcher() {
   const locale = useLocale() as Locale;
@@ -23,25 +24,26 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <Select value={locale} onValueChange={handleLanguageChange}>
-      <SelectTrigger className='w-32'>
-        <SelectValue>
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger asChild>
+        <Button variant='outline' className='w-32'>
           <div className='flex items-center gap-2'>
             <span>{localeFlags[locale]}</span>
             <span className='hidden sm:inline'>{localeNames[locale]}</span>
+            <ChevronDownIcon className='ml-auto h-4 w-4 rtl:mr-auto rtl:ml-0' />
           </div>
-        </SelectValue>
-      </SelectTrigger>
-      <SelectContent>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
         {locales.map(loc => (
-          <SelectItem key={loc} value={loc}>
+          <DropdownMenuItem key={loc} onClick={() => handleLanguageChange(loc)}>
             <div className='flex items-center gap-2'>
               <span>{localeFlags[loc]}</span>
               <span>{localeNames[loc]}</span>
             </div>
-          </SelectItem>
+          </DropdownMenuItem>
         ))}
-      </SelectContent>
-    </Select>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

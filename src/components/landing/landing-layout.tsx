@@ -36,6 +36,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
   const { isSignedIn } = useUser();
   const t = useTranslations('navigation');
   const tCommon = useTranslations('common');
+  const tFooter = useTranslations('footer');
 
   const navigation = [
     { name: t('home'), href: '/' },
@@ -73,7 +74,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
     setIsSubscribing(false);
     setEmail('');
     // You can add actual newsletter API integration here
-    alert('Thank you for subscribing to our newsletter!');
+    alert(tFooter('newsletter.successMessage'));
   };
   return (
     <div className='min-h-screen bg-white'>
@@ -115,11 +116,11 @@ export function LandingLayout({ children }: LandingLayoutProps) {
             </div>{' '}
             {/* CTA Buttons */}
             <div className='hidden items-center space-x-4 md:flex'>
-              <LanguageDropdown />
+              <LanguageDropdown />{' '}
               <Button variant='ghost' size='sm' asChild>
                 <Link href='/user-guide'>
                   <BookOpen className='h-4 w-4' />
-                  <span className='sr-only'>User Guide</span>
+                  <span className='sr-only'>{t('userGuide')}</span>
                 </Link>
               </Button>
               {isSignedIn ? (
@@ -183,8 +184,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                   {/* Language Dropdown for Mobile */}
                   <div className='flex justify-center py-2'>
                     <LanguageDropdown />
-                  </div>
-
+                  </div>{' '}
                   {/* User Guide Button */}
                   <Button
                     variant='ghost'
@@ -197,10 +197,9 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <BookOpen className='mr-2 h-4 w-4' />
-                      User Guide
+                      {t('userGuide')}
                     </Link>
                   </Button>
-
                   {isSignedIn ? (
                     <>
                       <Button
@@ -271,16 +270,16 @@ export function LandingLayout({ children }: LandingLayoutProps) {
           />
         </div>
         <div className='relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
+          {' '}
           {/* Newsletter Section */}
           <div className='mb-12 text-center'>
             <div className='mx-auto max-w-2xl'>
               <Mail className='mx-auto mb-4 h-12 w-12 text-blue-400' />
               <h2 className='mb-4 text-3xl font-bold text-white'>
-                Stay Updated with Syndik
+                {tFooter('newsletter.title')}
               </h2>{' '}
               <p className='mb-8 text-lg text-blue-100'>
-                Get the latest updates on new features, syndicate management
-                tips, and industry insights delivered to your inbox.
+                {tFooter('newsletter.description')}
               </p>{' '}
               <form
                 onSubmit={handleNewsletterSubmit}
@@ -288,7 +287,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
               >
                 <Input
                   type='email'
-                  placeholder='Enter your email address'
+                  placeholder={tFooter('newsletter.placeholder')}
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   required
@@ -302,25 +301,26 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                   {isSubscribing ? (
                     <>
                       <div className='mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent' />
-                      Subscribing...
+                      {tFooter('newsletter.subscribing')}
                     </>
                   ) : (
                     <>
                       <Send className='mr-2 h-4 w-4' />
-                      Subscribe
+                      {tFooter('newsletter.subscribe')}
                     </>
                   )}
                 </Button>
               </form>{' '}
               <p className='mt-3 text-xs text-blue-200'>
-                No spam, unsubscribe at any time. Read our{' '}
+                {tFooter('newsletter.disclaimer')}{' '}
                 <Link href='/privacy' className='underline hover:text-white'>
-                  Privacy Policy
+                  {tFooter('newsletter.privacyPolicy')}
                 </Link>
               </p>
             </div>
           </div>
           <div className='grid grid-cols-1 gap-8 md:grid-cols-5'>
+            {' '}
             {/* Logo and description */}
             <div className='md:col-span-2'>
               {' '}
@@ -334,12 +334,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                 />
                 <span className='text-2xl font-bold text-white'>Syndik</span>
               </div>{' '}
-              <p className='mb-6 text-blue-100'>
-                Modern SaaS platform for managing residential syndicates with
-                ease and efficiency. Streamline your property management,
-                enhance resident communication, and boost operational
-                efficiency.
-              </p>
+              <p className='mb-6 text-blue-100'>{tFooter('description')}</p>
               {/* Social Media Links */}
               <div className='flex space-x-4'>
                 <a
@@ -367,11 +362,12 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                   <Instagram className='h-5 w-5' />
                 </a>
               </div>
-            </div>
-
+            </div>{' '}
             {/* Quick Links */}
             <div>
-              <h3 className='mb-6 text-lg font-semibold text-white'>Product</h3>
+              <h3 className='mb-6 text-lg font-semibold text-white'>
+                {tFooter('sections.product')}
+              </h3>
               <ul className='space-y-3'>
                 <li>
                   {' '}
@@ -379,7 +375,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='/about'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    About Us
+                    {tFooter('links.aboutUs')}
                   </Link>
                 </li>
                 <li>
@@ -387,7 +383,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='/pricing'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    Pricing
+                    {tFooter('links.pricing')}
                   </Link>
                 </li>
                 <li>
@@ -395,7 +391,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='/faq'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    FAQ
+                    {tFooter('links.faq')}
                   </Link>
                 </li>
                 <li>
@@ -403,15 +399,16 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='/demo'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    Request Demo
+                    {tFooter('links.requestDemo')}
                   </Link>
                 </li>
               </ul>
-            </div>
-
+            </div>{' '}
             {/* Support */}
             <div>
-              <h3 className='mb-6 text-lg font-semibold text-white'>Support</h3>
+              <h3 className='mb-6 text-lg font-semibold text-white'>
+                {tFooter('sections.support')}
+              </h3>
               <ul className='space-y-3'>
                 {' '}
                 <li>
@@ -419,7 +416,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='/help'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    Help Center
+                    {tFooter('links.helpCenter')}
                   </Link>
                 </li>
                 <li>
@@ -427,7 +424,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='/terms'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    Terms of Service
+                    {tFooter('links.termsOfService')}
                   </Link>
                 </li>
                 <li>
@@ -435,7 +432,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='mailto:support@syndik.com'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    Contact Us
+                    {tFooter('links.contactUs')}
                   </a>
                 </li>
                 <li>
@@ -443,16 +440,15 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='tel:+1-800-SYNDIK'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    Phone Support
+                    {tFooter('links.phoneSupport')}
                   </a>
                 </li>
               </ul>
-            </div>
-
+            </div>{' '}
             {/* Legal & Resources */}
             <div>
               <h3 className='mb-6 text-lg font-semibold text-white'>
-                Legal & Resources
+                {tFooter('sections.legalResources')}
               </h3>
               <ul className='space-y-3'>
                 {' '}
@@ -461,7 +457,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='/privacy'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    Privacy Policy
+                    {tFooter('links.privacyPolicy')}
                   </Link>
                 </li>
                 <li>
@@ -469,7 +465,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='/terms'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    Terms & Conditions
+                    {tFooter('links.termsConditions')}
                   </Link>
                 </li>
                 <li>
@@ -477,7 +473,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='#'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    Security
+                    {tFooter('links.security')}
                   </a>
                 </li>{' '}
                 <li>
@@ -485,7 +481,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                     href='/user-guide'
                     className='text-blue-100 transition-colors hover:text-white'
                   >
-                    User Guide
+                    {tFooter('links.userGuide')}
                   </Link>
                 </li>
               </ul>
@@ -494,16 +490,12 @@ export function LandingLayout({ children }: LandingLayoutProps) {
           {/* Bottom section */}
           <div className='mt-12 border-t border-white/20 pt-8'>
             <div className='flex flex-col items-center justify-between md:flex-row'>
-              <p className='text-blue-200'>
-                © 2025 Syndik. All rights reserved.
-              </p>
+              <p className='text-blue-200'>{tFooter('copyright')}</p>
               <div className='mt-4 flex items-center space-x-6 md:mt-0'>
-                <p className='text-sm text-blue-200'>
-                  Made with ❤️ for property managers worldwide
-                </p>
+                <p className='text-sm text-blue-200'>{tFooter('madeWith')}</p>
                 <div className='flex items-center space-x-4 text-sm text-blue-200'>
-                  <span>🔒 SOC 2 Certified</span>
-                  <span>🛡️ GDPR Compliant</span>
+                  <span>{tFooter('certifications.soc2')}</span>
+                  <span>{tFooter('certifications.gdpr')}</span>
                 </div>
               </div>
             </div>{' '}

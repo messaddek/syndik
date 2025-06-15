@@ -71,7 +71,148 @@
     "settings": "Paramètres",
     "portal": "Portail Résident",
     "logout": "Déconnexion",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "userGuide": "Guide utilisateur"
+  },
+  "footer": {
+    "newsletter": {
+      "title": "Restez informé avec Syndik",
+      "description": "Recevez les dernières mises à jour sur les nouvelles fonctionnalités, les conseils de gestion de syndic et les informations du secteur directement dans votre boîte mail.",
+      "placeholder": "Entrez votre adresse email",
+      "subscribe": "S'abonner",
+      "subscribing": "Abonnement en cours...",
+      "disclaimer": "Pas de spam, désabonnement à tout moment. Lisez notre",
+      "privacyPolicy": "Politique de confidentialité",
+      "successMessage": "Merci de vous être abonné à notre newsletter !"
+    },
+    "description": "Plateforme SaaS moderne pour gérer les syndicats résidentiels avec facilité et efficacité. Rationalisez votre gestion immobilière, améliorez la communication avec les résidents et boostez l'efficacité opérationnelle.",
+    "sections": {
+      "product": "Produit",
+      "support": "Support",
+      "legalResources": "Légal et Ressources"
+    },
+    "links": {
+      "aboutUs": "À propos de nous",
+      "pricing": "Tarifs",
+      "faq": "FAQ",
+      "requestDemo": "Demander une démo",
+      "helpCenter": "Centre d'aide",
+      "termsOfService": "Conditions de service",
+      "contactUs": "Nous contacter",
+      "phoneSupport": "Support téléphonique",
+      "privacyPolicy": "Politique de confidentialité",
+      "termsConditions": "Conditions générales",
+      "security": "Sécurité",
+      "userGuide": "Guide utilisateur"
+    },
+    "copyright": "© 2025 Syndik. Tous droits réservés.",
+    "madeWith": "Fait avec ❤️ pour les gestionnaires immobiliers du monde entier",
+    "certifications": {
+      "soc2": "🔒 Certifié SOC 2",
+      "gdpr": "🛡️ Conforme RGPD"
+    }
+  },
+  "terms": {
+    "title": "Conditions de service",
+    "subtitle": "Conditions générales",
+    "lastUpdated": "Dernière mise à jour : 1er janvier 2025",
+    "readCarefully": "Veuillez lire attentivement ces conditions avant d'utiliser notre service.",
+    "tableOfContents": "Table des matières",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptation des conditions",
+        "content": "En accédant et en utilisant Syndik (\"nous\", \"notre\" ou \"nos\"), vous acceptez et vous engagez à être lié par les termes et provisions de cet accord. Si vous n'acceptez pas de respecter ce qui précède, veuillez ne pas utiliser ce service."
+      },
+      "description": {
+        "title": "2. Description du service",
+        "content": "Syndik est une plateforme SaaS complète conçue pour la gestion de syndicats résidentiels, fournissant :",
+        "features": [
+          "Gestion de propriétés et d'immeubles",
+          "Suivi et rapports financiers",
+          "Outils de communication avec les résidents",
+          "Gestion des réunions et votes",
+          "Stockage et partage de documents",
+          "Système de demandes de maintenance"
+        ]
+      },
+      "userAccounts": {
+        "title": "3. Comptes utilisateur",
+        "content": "Lorsque vous créez un compte chez nous, vous devez fournir des informations exactes, complètes et à jour en permanence.",
+        "responsibilities": [
+          "Maintenir la sécurité de votre mot de passe",
+          "Accepter la responsabilité de toutes les activités sous votre compte",
+          "Nous notifier immédiatement de toute utilisation non autorisée",
+          "Ne pas partager vos identifiants de compte"
+        ]
+      },
+      "acceptableUse": {
+        "title": "4. Politique d'utilisation acceptable",
+        "content": "Vous ne pouvez utiliser notre service qu'à des fins légales et conformément à ces Conditions.",
+        "prohibitedTitle": "Activités interdites",
+        "prohibited": [
+          "Violer toute loi fédérale, étatique, locale ou internationale applicable",
+          "Transmettre tout matériel diffamatoire, offensant ou autrement répréhensible",
+          "Interférer avec ou perturber le service ou les serveurs",
+          "Tenter d'obtenir un accès non autorisé à d'autres comptes"
+        ],
+        "dataMisuseTitle": "Mauvaise utilisation des données",
+        "dataMisuse": [
+          "Extraction de données non autorisée",
+          "Partage d'identifiants avec des tiers",
+          "Tentative de violation de la sécurité",
+          "Rétro-ingénierie de la plateforme"
+        ]
+      },
+      "payment": {
+        "title": "5. Paiement et facturation",
+        "content": "Certains services peuvent nécessiter un paiement. Les conditions de paiement seront clairement affichées avant tout achat.",
+        "details": [
+          "Tous les frais sont non remboursables sauf si requis par la loi",
+          "Vous nous autorisez à débiter votre méthode de paiement",
+          "Les frais d'abonnement sont facturés à l'avance",
+          "Les changements de prix seront communiqués 30 jours à l'avance"
+        ]
+      },
+      "privacy": {
+        "title": "6. Confidentialité et protection des données",
+        "content": "Votre confidentialité est importante pour nous. Notre Politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre service."
+      },
+      "intellectualProperty": {
+        "title": "7. Propriété intellectuelle",
+        "content": "Le service et son contenu original, ses fonctionnalités et sa fonctionnalité sont et resteront la propriété exclusive de Syndik et de ses concédants de licence."
+      },
+      "limitationLiability": {
+        "title": "8. Limitation de responsabilité",
+        "content": "En aucun cas Syndik, ni ses directeurs, employés, partenaires, agents, fournisseurs ou affiliés, ne seront responsables de dommages indirects, accessoires, spéciaux, consécutifs ou punitifs.",
+        "importantNotice": "Avis important :",
+        "additionalContent": "Notre responsabilité totale envers vous pour toute réclamation découlant de ces conditions ou de votre utilisation du service ne doit pas dépasser le montant que vous nous avez payé au cours des douze mois précédant la réclamation."
+      },
+      "termination": {
+        "title": "9. Résiliation",
+        "content": "Nous pouvons résilier ou suspendre votre compte immédiatement, sans préavis ni responsabilité, pour quelque raison que ce soit, y compris sans limitation si vous violez les Conditions."
+      },
+      "modifications": {
+        "title": "10. Modifications",
+        "content": "Nous nous réservons le droit, à notre seule discrétion, de modifier ou remplacer ces Conditions à tout moment. Si une révision est importante, nous essaierons de fournir un préavis d'au moins 30 jours."
+      },
+      "governingLaw": {
+        "title": "11. Droit applicable",
+        "content": "Ces Conditions seront interprétées et régies par les lois de la juridiction dans laquelle Syndik opère, sans égard à ses dispositions de conflit de lois."
+      },
+      "contact": {
+        "title": "12. Informations de contact",
+        "content": "Si vous avez des questions concernant ces Conditions, veuillez nous contacter :",
+        "emailSupportTitle": "Support par email",
+        "phoneAddressTitle": "Téléphone et adresse",
+        "email": "legal@syndik.com",
+        "phone": "+1-800-SYNDIK",
+        "address": "Département juridique Syndik, 123 Rue des Affaires, Ville, Pays"
+      }
+    },
+    "effectiveDate": {
+      "title": "Date d'entrée en vigueur :",
+      "content": "Ces conditions sont effectives depuis le 1er janvier 2025. En continuant à utiliser Syndik après cette date, vous acceptez d'être lié par ces conditions."
+    }
   },
   "auth": {
     "signIn": "Se connecter",

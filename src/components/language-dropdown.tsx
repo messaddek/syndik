@@ -24,7 +24,7 @@ export function LanguageDropdown() {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' size='sm' className='flex items-center gap-2'>
           <Globe className='h-4 w-4' />
