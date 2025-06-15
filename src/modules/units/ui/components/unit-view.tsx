@@ -21,8 +21,8 @@ import {
   DollarSign,
   Bed,
 } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link } from '@/i18n/routing';
+import { useRouter } from '@/i18n/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { ResponsiveDialog } from '@/components/responsive-dialog';

@@ -1,28 +1,7 @@
-import { LandingLayout } from '@/components/landing/landing-layout';
-import {
-  HeroSection,
-  FeaturesSection,
-  CTASection,
-  StatsSection,
-  TestimonialsSection,
-  HowItWorksSection,
-  BenefitsSection,
-  SecuritySection,
-  PricingPreviewSection,
-} from '@/components/landing/hero-section';
+import { redirect } from 'next/navigation';
+import { routing } from '@/i18n/routing';
 
-export default function Home() {
-  return (
-    <LandingLayout>
-      <HeroSection />
-      <StatsSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <BenefitsSection />
-      <SecuritySection />
-      <TestimonialsSection />
-      <PricingPreviewSection />
-      <CTASection />
-    </LandingLayout>
-  );
+export default function RootPage() {
+  // Redirect to default locale
+  redirect(`/${routing.defaultLocale}`);
 }

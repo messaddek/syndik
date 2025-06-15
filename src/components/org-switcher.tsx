@@ -3,7 +3,7 @@
 import { OrganizationSwitcher } from '@clerk/nextjs';
 import { useOrganization } from '@clerk/nextjs';
 import { Building2, ChevronDown } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useClerkAppearance } from '@/hooks/use-clerk-appearance';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';

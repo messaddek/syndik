@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useTranslations } from 'next-intl';
 
 interface PaginationInfo {
   page: number;
@@ -39,6 +40,8 @@ export function DataTablePagination<TData>({
   onPageChange,
   onPageSizeChange,
 }: DataTablePaginationProps<TData>) {
+  const tTable = useTranslations('table');
+  const tPagination = useTranslations('pagination');
   const isServerSide = !!pagination;
 
   const currentPage = isServerSide
@@ -105,11 +108,11 @@ export function DataTablePagination<TData>({
   return (
     <div className='flex items-center justify-between px-2'>
       <div className='text-muted-foreground flex-1 text-sm'>
-        {selectedRows} of {totalRows} row(s) selected.
+        {tTable('selected', { count: selectedRows, total: totalRows })}
       </div>
       <div className='flex items-center space-x-6 lg:space-x-8'>
         <div className='flex items-center space-x-2'>
-          <p className='text-sm font-medium'>Rows per page</p>
+          <p className='text-sm font-medium'>{tPagination('rowsPerPage')}</p>
           <Select
             value={`${currentPageSize}`}
             onValueChange={handlePageSizeChange}
@@ -127,7 +130,7 @@ export function DataTablePagination<TData>({
           </Select>
         </div>
         <div className='flex w-[100px] items-center justify-center text-sm font-medium'>
-          Page {currentPage} of {totalPages}
+          {tPagination('page')} {currentPage} {tPagination('of')} {totalPages}
         </div>
         <div className='flex items-center space-x-2'>
           <Button
@@ -136,7 +139,7 @@ export function DataTablePagination<TData>({
             onClick={handleFirstPage}
             disabled={!canPreviousPage}
           >
-            <span className='sr-only'>Go to first page</span>
+            <span className='sr-only'>{tPagination('first')}</span>
             <ChevronsLeft className='h-4 w-4' />
           </Button>
           <Button
@@ -145,7 +148,7 @@ export function DataTablePagination<TData>({
             onClick={handlePreviousPage}
             disabled={!canPreviousPage}
           >
-            <span className='sr-only'>Go to previous page</span>
+            <span className='sr-only'>{tPagination('previous')}</span>
             <ChevronLeft className='h-4 w-4' />
           </Button>
           <Button
@@ -154,7 +157,7 @@ export function DataTablePagination<TData>({
             onClick={handleNextPage}
             disabled={!canNextPage}
           >
-            <span className='sr-only'>Go to next page</span>
+            <span className='sr-only'>{tPagination('next')}</span>
             <ChevronRight className='h-4 w-4' />
           </Button>
           <Button
@@ -163,7 +166,7 @@ export function DataTablePagination<TData>({
             onClick={handleLastPage}
             disabled={!canNextPage}
           >
-            <span className='sr-only'>Go to last page</span>
+            <span className='sr-only'>{tPagination('last')}</span>
             <ChevronsRight className='h-4 w-4' />
           </Button>
         </div>

@@ -6,8 +6,8 @@ import { useTRPC } from '@/trpc/client';
 import { useQuery } from '@tanstack/react-query';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
-
+import { useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 interface OrganizationQuotaProps {
   showTitle?: boolean;
   className?: string;
@@ -19,6 +19,8 @@ export function OrganizationQuota({
 }: OrganizationQuotaProps) {
   const router = useRouter();
   const trpc = useTRPC();
+  const t = useTranslations('organizations');
+  const tCommon = useTranslations('common');
   const {
     data: usage,
     isLoading,
@@ -69,14 +71,15 @@ export function OrganizationQuota({
         <div className='flex items-center gap-2'>
           <Building2 className='text-muted-foreground h-4 w-4' />
           <span className='text-muted-foreground text-sm font-medium'>
-            Residences
+            {t('residences')}
           </span>
         </div>
       )}
 
       <div className='space-y-2'>
+        {' '}
         <div className='flex justify-between text-sm'>
-          <span className='text-muted-foreground'>Used</span>
+          <span className='text-muted-foreground'>{t('used')}</span>
           <span className='font-medium'>
             {usage.currentCount} / {usage.maxAllowed}
           </span>
@@ -113,7 +116,7 @@ export function OrganizationQuota({
                 className='h-6 px-2 text-xs text-blue-600 hover:bg-blue-50 hover:text-blue-700'
               >
                 <Plus className='mr-1 h-3 w-3' />
-                Add
+                {tCommon('add')}
               </Button>
             )}
             {(isNearLimit || isAtLimit) && (
@@ -128,17 +131,17 @@ export function OrganizationQuota({
                 }`}
               >
                 <ArrowUp className='mr-1 h-3 w-3' />
-                Upgrade
+                {t('upgrade')}
               </Button>
             )}
           </div>
         </div>{' '}
         {usage.remaining > 0 ? (
           <p className='text-muted-foreground text-xs'>
-            {usage.remaining} more available
+            {usage.remaining} {t('moreAvailable')}
           </p>
         ) : (
-          <p className='text-xs text-red-600'>Plan limit reached</p>
+          <p className='text-xs text-red-600'>{t('planLimitReached')}</p>
         )}
       </div>
     </div>

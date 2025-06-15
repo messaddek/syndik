@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Trash2, Edit, ExternalLink } from 'lucide-react';
 import { format } from 'date-fns';
 import { useConfirm } from '@/hooks/use-confirm';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 export function ExpensesList() {
   const trpc = useTRPC();

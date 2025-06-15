@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { usePathname } from 'next/navigation';
 import {
-  Building2,
   Menu,
   X,
   Mail,
@@ -20,15 +20,8 @@ import { useUser, UserButton } from '@clerk/nextjs';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { cn } from '../../lib/utils';
-
-const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'FAQ', href: '/faq' },
-  { name: 'Help', href: '/help' },
-  { name: 'Terms', href: '/terms' },
-];
+import Image from 'next/image';
+import { LanguageDropdown } from '../language-dropdown';
 
 interface LandingLayoutProps {
   children: React.ReactNode;
@@ -41,6 +34,17 @@ export function LandingLayout({ children }: LandingLayoutProps) {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const pathname = usePathname();
   const { isSignedIn } = useUser();
+  const t = useTranslations('navigation');
+  const tCommon = useTranslations('common');
+
+  const navigation = [
+    { name: t('home'), href: '/' },
+    { name: t('about'), href: '/about' },
+    { name: t('pricing'), href: '/pricing' },
+    { name: t('faq'), href: '/faq' },
+    { name: t('help'), href: '/help' },
+    { name: t('terms'), href: '/terms' },
+  ];
 
   // Handle scroll for back-to-top button
   useEffect(() => {
@@ -73,18 +77,25 @@ export function LandingLayout({ children }: LandingLayoutProps) {
   };
   return (
     <div className='min-h-screen bg-white'>
-      {/* Header - Fixed */}
+      {/* Header - Fixed */}{' '}
       <header className='fixed top-0 right-0 left-0 z-50 border-b bg-white/95 shadow-sm backdrop-blur-sm'>
         <nav
           className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'
           aria-label='Top'
         >
+          {' '}
           <div className='flex w-full items-center justify-between py-4'>
             {/* Logo */}
             <div className='flex items-center'>
               <Link href='/' className='flex items-center space-x-2'>
-                <Building2 className='h-8 w-8 text-blue-600' />
-                <span className='text-2xl font-bold text-gray-900'>Syndik</span>
+                <Image
+                  src='/logo.svg'
+                  alt='Syndik Logo'
+                  width={64}
+                  height={64}
+                  className='size-16'
+                />
+                {/* <span className='text-2xl font-bold text-gray-900'>Syndik</span> */}
               </Link>
             </div>
             {/* Desktop Navigation */}
@@ -104,7 +115,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
             </div>{' '}
             {/* CTA Buttons */}
             <div className='hidden items-center space-x-4 md:flex'>
-              {' '}
+              <LanguageDropdown />
               <Button variant='ghost' size='sm' asChild>
                 <Link href='/user-guide'>
                   <BookOpen className='h-4 w-4' />
@@ -114,7 +125,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
               {isSignedIn ? (
                 <>
                   <Button variant='ghost' size='sm' asChild>
-                    <Link href='/dashboard'>Dashboard</Link>
+                    <Link href='/dashboard'>{t('dashboard')}</Link>
                   </Button>
                   <UserButton
                     afterSignOutUrl='/'
@@ -128,10 +139,10 @@ export function LandingLayout({ children }: LandingLayoutProps) {
               ) : (
                 <>
                   <Button variant='ghost' size='sm' asChild>
-                    <Link href='/sign-in'>Sign In</Link>
+                    <Link href='/sign-in'>{tCommon('signIn')}</Link>
                   </Button>
                   <Button size='sm' asChild>
-                    <Link href='/sign-up'>Get Started</Link>
+                    <Link href='/sign-up'>{tCommon('getStarted')}</Link>
                   </Button>
                 </>
               )}
@@ -167,8 +178,13 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                   >
                     {item.name}
                   </Link>
-                ))}
+                ))}{' '}
                 <div className='space-y-2 px-3 py-2'>
+                  {/* Language Dropdown for Mobile */}
+                  <div className='flex justify-center py-2'>
+                    <LanguageDropdown />
+                  </div>
+
                   {/* User Guide Button */}
                   <Button
                     variant='ghost'
@@ -193,7 +209,7 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                         className='w-full'
                         asChild
                       >
-                        <Link href='/dashboard'>Dashboard</Link>
+                        <Link href='/dashboard'>{t('dashboard')}</Link>
                       </Button>
                       <div className='flex items-center justify-center pt-2'>
                         <UserButton
@@ -214,10 +230,10 @@ export function LandingLayout({ children }: LandingLayoutProps) {
                         className='w-full'
                         asChild
                       >
-                        <Link href='/sign-in'>Sign In</Link>
+                        <Link href='/sign-in'>{tCommon('signIn')}</Link>
                       </Button>
                       <Button size='sm' className='w-full' asChild>
-                        <Link href='/sign-up'>Get Started</Link>
+                        <Link href='/sign-up'>{tCommon('getStarted')}</Link>
                       </Button>
                     </>
                   )}
@@ -307,8 +323,15 @@ export function LandingLayout({ children }: LandingLayoutProps) {
           <div className='grid grid-cols-1 gap-8 md:grid-cols-5'>
             {/* Logo and description */}
             <div className='md:col-span-2'>
+              {' '}
               <div className='mb-6 flex items-center space-x-2'>
-                <Building2 className='h-8 w-8 text-blue-400' />
+                <Image
+                  src='/logo.svg'
+                  alt='Syndik Logo'
+                  width={32}
+                  height={32}
+                  className='h-8 w-8'
+                />
                 <span className='text-2xl font-bold text-white'>Syndik</span>
               </div>{' '}
               <p className='mb-6 text-blue-100'>

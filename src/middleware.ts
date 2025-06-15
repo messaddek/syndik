@@ -1,36 +1,60 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
 const isPublicRoute = createRouteMatcher([
+  // Root redirects
   '/',
-  '/about',
-  '/pricing',
-  '/faq',
-  '/help',
-  '/terms',
-  '/privacy',
+  // Localized public routes
+  '/:locale',
+  '/:locale/about',
+  '/:locale/pricing',
+  '/:locale/faq',
+  '/:locale/help',
+  '/:locale/terms',
+  '/:locale/privacy',
+  '/:locale/sign-in(.*)',
+  '/:locale/sign-up(.*)',
+  // Non-localized special routes
   '/sign-in(.*)',
   '/sign-up(.*)',
+  '/org-switcher',
+  '/org-redirect',
+  // API routes
   '/api/webhooks/clerk',
 ]);
 
-// const isPortalRoute = createRouteMatcher(['/portal(.*)']);
-// const isAdminRoute = createRouteMatcher([
-//   '/dashboard(.*)',
-//   '/buildings(.*)',
-//   '/units(.*)',
-//   '/residents(.*)',
-//   '/meetings(.*)',
-//   '/finances(.*)',
-//   '/settings(.*)',
-// ]);
+// Create the next-intl middleware
+const intlMiddleware = createMiddleware(routing);
 
 export default clerkMiddleware(async (auth, req) => {
+  const { pathname } = req.nextUrl;
+
+  // Skip intl middleware for non-localized special routes
+  if (
+    pathname.startsWith('/sign-in') ||
+    pathname.startsWith('/sign-up') ||
+    pathname.startsWith('/org-switcher') ||
+    pathname.startsWith('/org-redirect') ||
+    pathname.startsWith('/api/')
+  ) {
+    // Only protect routes that are not public
+    if (!isPublicRoute(req)) {
+      await auth.protect();
+    }
+
+    return;
+  }
+
+  // Apply internationalization for all other requests
+  const response = intlMiddleware(req);
+
+  // Only protect routes that are not public
   if (!isPublicRoute(req)) {
     await auth.protect();
   }
 
-  // Role-based routing will be handled in layout components
-  // since we need to access the database to check user roles
+  return response;
 });
 
 export const config = {

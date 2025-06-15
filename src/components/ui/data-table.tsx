@@ -32,6 +32,9 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { DataTablePagination } from './data-table-pagination';
+import { useLocale, useTranslations } from 'next-intl';
+import { isRtlLocale, Locale } from '@/i18n/config';
+import { cn } from '@/lib/utils';
 
 interface PaginationInfo {
   page: number;
@@ -57,7 +60,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   searchKey,
-  searchPlaceholder = 'Search...',
+  searchPlaceholder,
   showSearch = false,
   onRowClick,
   pagination,
@@ -65,6 +68,10 @@ export function DataTable<TData, TValue>({
   onPageSizeChange,
   showPagination = true,
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations('table');
+  const locale = useLocale() as Locale;
+  const isRtl = isRtlLocale(locale);
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -72,6 +79,9 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+
+  // Use translated placeholder if none provided
+  const placeholder = searchPlaceholder || t('search');
   const table = useReactTable({
     data,
     columns,
@@ -107,10 +117,10 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className='w-full space-y-4'>
-      <div className='flex items-center py-4'>
+      <div className='flex items-center gap-x-2 py-4'>
         {showSearch && searchKey && (
           <Input
-            placeholder={searchPlaceholder}
+            placeholder={placeholder}
             value={
               (table.getColumn(searchKey)?.getFilterValue() as string) ?? ''
             }
@@ -122,8 +132,8 @@ export function DataTable<TData, TValue>({
         )}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant='outline' className='ml-auto'>
-              Columns <ChevronDown className='ml-2 h-4 w-4' />
+            <Button variant='outline' className=''>
+              {t('columns')} <ChevronDown className='h-4 w-4' />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
@@ -138,7 +148,9 @@ export function DataTable<TData, TValue>({
                     checked={column.getIsVisible()}
                     onCheckedChange={value => column.toggleVisibility(!!value)}
                   >
-                    {column.id}
+                    {typeof column.columnDef.header === 'string'
+                      ? column.columnDef.header
+                      : column.id}
                   </DropdownMenuCheckboxItem>
                 );
               })}
@@ -152,7 +164,10 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className={cn(isRtl && 'text-right')}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -192,7 +207,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No results.
+                  {t('noResults')}
                 </TableCell>
               </TableRow>
             )}

@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations, useLocale } from 'next-intl';
+import Image from 'next/image';
 import {
   Building2,
   Users,
@@ -11,8 +13,8 @@ import {
   HelpCircle,
   Bell,
 } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { Link, usePathname, useRouter } from '@/i18n/routing';
+
 import {
   Sidebar,
   SidebarContent,
@@ -27,37 +29,53 @@ import {
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { OrganizationQuota } from '@/components/organization-quota';
-
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
-  { name: 'Buildings', href: '/buildings', icon: Building2 },
-  { name: 'Units', href: '/units', icon: Home },
-  { name: 'Residents', href: '/residents', icon: Users },
-  { name: 'Finances', href: '/finances', icon: TrendingUp },
-  { name: 'Meetings', href: '/meetings', icon: Calendar },
-  { name: 'Notifications', href: '/notifications', icon: Bell },
-];
-
-const footerNavigation = [
-  { name: 'Settings', href: '/settings', icon: Settings },
-  { name: 'Help', href: '/help', icon: HelpCircle },
-];
+import { rtlClassMap, rtlClass } from '@/lib/rtl-utils';
+import { type Locale } from '@/i18n/config';
 
 export function DashboardSidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale() as Locale;
+  const t = useTranslations('navigation');
+  const tCommon = useTranslations('common');
+
+  const navigation = [
+    { name: t('dashboard'), href: '/dashboard', icon: BarChart3 },
+    { name: t('buildings'), href: '/buildings', icon: Building2 },
+    { name: t('units'), href: '/units', icon: Home },
+    { name: t('residents'), href: '/residents', icon: Users },
+    { name: t('finances'), href: '/finances', icon: TrendingUp },
+    { name: t('meetings'), href: '/meetings', icon: Calendar },
+    { name: t('notifications'), href: '/notifications', icon: Bell },
+  ];
+  const footerNavigation = [
+    { name: t('settings'), href: '/settings', icon: Settings },
+    { name: t('help'), href: '/help', icon: HelpCircle },
+  ];
 
   const handlePortalAccess = () => {
     router.push('/org-redirect?target=portal');
   };
-
   return (
     <Sidebar>
-      {' '}
       <SidebarHeader>
-        <Link href='/' className='flex items-center space-x-2 px-4 py-2'>
-          <Building2 className='h-8 w-8 text-blue-600' />
-          <span className='text-foreground text-xl font-bold'>Syndik</span>
+        {' '}
+        <Link
+          href='/'
+          className={cn(
+            'flex items-center px-4 py-2',
+            rtlClassMap.ml(locale, '0'),
+            rtlClass(locale, 'space-x-2', 'space-x-2 space-x-reverse')
+          )}
+        >
+          {' '}
+          <Image
+            src='/logo.svg'
+            alt={tCommon('logoAlt')}
+            width={64}
+            height={64}
+            className='size-16'
+          />
         </Link>
       </SidebarHeader>
       <SidebarContent>
@@ -66,6 +84,9 @@ export function DashboardSidebar() {
             <SidebarMenu>
               {navigation.map(item => {
                 const Icon = item.icon;
+
+                // Remove locale prefix from pathname for comparison
+
                 const isActive =
                   pathname === item.href ||
                   pathname.startsWith(item.href + '/');
@@ -97,16 +118,16 @@ export function DashboardSidebar() {
       <SidebarFooter>
         <div className='border-t px-4 py-3'>
           <OrganizationQuota />
-        </div>
+        </div>{' '}
         <div className='px-4 pb-2'>
           <Button
             variant='outline'
             size='sm'
             onClick={handlePortalAccess}
-            className='flex w-full items-center gap-2'
+            className={cn('flex w-full items-center', 'gap-2')}
           >
             <Home className='h-4 w-4' />
-            <span>Resident Portal</span>
+            <span>{tCommon('residentPortal')}</span>
           </Button>
         </div>
         <SidebarMenu>

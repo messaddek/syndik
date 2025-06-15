@@ -20,7 +20,7 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import { MessageCircle, Book, Shield, LucideIcon } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 

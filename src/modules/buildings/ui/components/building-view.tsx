@@ -20,8 +20,8 @@ import {
   Edit,
   Trash2,
 } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link } from '@/i18n/routing';
+import { useRouter } from '@/i18n/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
@@ -29,6 +29,8 @@ import { BuildingForm } from './building-form';
 import { createBuildingSchema } from '../../schema';
 import { z } from 'zod';
 import { useConfirm } from '@/hooks/use-confirm';
+import { useTranslations } from 'next-intl';
+import { useDirection } from '@/hooks/use-direction';
 
 type BuildingFormData = z.infer<typeof createBuildingSchema>;
 
@@ -42,11 +44,16 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
   const trpc = useTRPC();
   const router = useRouter();
   const queryClient = useQueryClient();
+  // Translation hooks
+  const t = useTranslations('buildings');
+  const tCommon = useTranslations('common');
+  const isRtl = useDirection();
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Building',
-    'Are you sure you want to delete this building? This action cannot be undone and will also delete all associated units and residents.'
+    t('deleteBuilding'),
+    t('confirmDelete'),
+    true
   );
 
   // Fetch building data
@@ -110,11 +117,10 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
       deleteMutation.mutate({ id });
     }
   };
-
   if (!building) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <p className='text-muted-foreground'>Building not found</p>
+        <p className='text-muted-foreground'>{t('buildingNotFound')}</p>
       </div>
     );
   }
@@ -126,21 +132,23 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
   return (
     <>
       <div className='space-y-6'>
-        {/* Header */}
+        {/* Header */}{' '}
         <div className='flex items-center justify-between'>
-          <div className='flex items-center space-x-4'>
+          <div className='flex items-center gap-x-2'>
             <Button variant='ghost' size='sm' asChild>
-              <Link href='/buildings'>
-                <ArrowLeft className='mr-2 h-4 w-4' />
-                Back to Buildings
+              <Link href='/buildings' className='gap-x-2'>
+                <ArrowLeft className='h-4 w-4 rtl:rotate-180' />
+                {t('backToBuildings')}
               </Link>
             </Button>
             <div>
-              <div className='flex items-center space-x-2'>
+              <div className={`flex items-center gap-x-2`}>
                 <Building2 className='h-6 w-6 text-blue-600' />
                 <h1 className='text-3xl font-bold'>{building.name}</h1>
               </div>
-              <div className='text-muted-foreground mt-1 flex items-center space-x-1'>
+              <div
+                className={`text-muted-foreground mt-1 flex items-center space-x-1`}
+              >
                 <MapPin className='h-4 w-4' />
                 <span>
                   {building.address}, {building.city}, {building.country}
@@ -148,52 +156,60 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
               </div>
             </div>
           </div>
-          <div className='flex items-center space-x-2'>
+          <div className={`flex items-center space-x-2`}>
             <Button variant='outline' onClick={() => setIsEditDialogOpen(true)}>
-              <Edit className='mr-2 h-4 w-4' />
-              Edit
+              <div className='flex items-center gap-x-2'>
+                <Edit className='h-4 w-4' />
+                {tCommon('edit')}
+              </div>
             </Button>
             <Button variant='destructive' onClick={handleDeleteBuilding}>
-              <Trash2 className='mr-2 h-4 w-4' />
-              Delete
+              <div className='flex items-center gap-x-2'>
+                <Trash2 className='h-4 w-4' />
+                {tCommon('delete')}
+              </div>
             </Button>
           </div>
         </div>
-
         {/* Overview Cards */}
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           <Card>
+            {' '}
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>Total Units</CardTitle>
+              <CardTitle className='text-sm font-medium'>
+                {t('totalUnits')}
+              </CardTitle>
               <Home className='text-muted-foreground h-4 w-4' />
             </CardHeader>
             <CardContent>
               <div className='text-2xl font-bold'>{building.totalUnits}</div>
               <p className='text-muted-foreground text-xs'>
-                {units.length} units configured
+                {t('unitsConfigured', { count: units.length })}
               </p>
             </CardContent>
           </Card>
 
           <Card>
+            {' '}
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Occupied Units
+                {t('occupiedUnits')}
               </CardTitle>
               <Users className='text-muted-foreground h-4 w-4' />
             </CardHeader>
             <CardContent>
               <div className='text-2xl font-bold'>{occupiedUnits}</div>
               <p className='text-muted-foreground text-xs'>
-                {occupancyRate.toFixed(1)}% occupancy rate
+                {t('occupancyRate', { rate: occupancyRate.toFixed(1) })}
               </p>
             </CardContent>
           </Card>
 
           <Card>
+            {' '}
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Total Residents
+                {t('totalResidents')}
               </CardTitle>
               <Users className='text-muted-foreground h-4 w-4' />
             </CardHeader>
@@ -201,54 +217,60 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
               <div className='text-2xl font-bold'>
                 {buildingResidents.length}
               </div>
-              <p className='text-muted-foreground text-xs'>Active residents</p>
+              <p className='text-muted-foreground text-xs'>
+                {t('activeResidents')}
+              </p>
             </CardContent>
           </Card>
 
           <Card>
+            {' '}
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>Postal Code</CardTitle>
+              <CardTitle className='text-sm font-medium'>
+                {t('postalCode')}
+              </CardTitle>
               <MapPin className='text-muted-foreground h-4 w-4' />
             </CardHeader>
             <CardContent>
               <div className='text-2xl font-bold'>{building.postalCode}</div>
-              <p className='text-muted-foreground text-xs'>Location code</p>
+              <p className='text-muted-foreground text-xs'>
+                {t('locationCode')}
+              </p>
             </CardContent>
           </Card>
         </div>
-
         {/* Building Details */}
         <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
           <Card>
+            {' '}
             <CardHeader>
-              <CardTitle>Building Information</CardTitle>
-              <CardDescription>
-                Detailed information about this building
-              </CardDescription>
+              <CardTitle>{t('buildingInformation')}</CardTitle>
+              <CardDescription>{t('buildingInfoDescription')}</CardDescription>
             </CardHeader>
             <CardContent className='space-y-4'>
               <div className='grid grid-cols-2 gap-4'>
+                {' '}
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Address
+                    {t('address')}
                   </p>
                   <p className='text-sm'>{building.address}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    City
+                    {t('city')}
                   </p>
                   <p className='text-sm'>{building.city}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Country
+                    {t('country')}
                   </p>
                   <p className='text-sm'>{building.country}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Postal Code
+                    {t('postalCode')}
                   </p>
                   <p className='text-sm'>{building.postalCode}</p>
                 </div>
@@ -270,20 +292,21 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                 </p>
               </div>
             </CardContent>
-          </Card>
-
+          </Card>{' '}
           <Card>
             <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
-              <CardDescription>
-                Manage this building and its units
-              </CardDescription>
+              <CardTitle>{t('quickActions')}</CardTitle>
+              <CardDescription>{t('quickActionsDescription')}</CardDescription>
             </CardHeader>
             <CardContent className='space-y-3'>
+              {' '}
               <Button className='w-full justify-start' asChild>
-                <Link href={`/units?buildingId=${id}`}>
-                  <Home className='mr-2 h-4 w-4' />
-                  View All Units
+                <Link
+                  href={`/units?buildingId=${id}`}
+                  className={`flex items-center ${isRtl ? 'gap-x-reverse gap-x-2' : 'gap-x-2'}`}
+                >
+                  <Home className='h-4 w-4' />
+                  {t('viewAllUnits')}
                 </Link>
               </Button>
               <Button
@@ -291,9 +314,12 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                 className='w-full justify-start'
                 asChild
               >
-                <Link href={`/residents?buildingId=${id}`}>
-                  <Users className='mr-2 h-4 w-4' />
-                  View Residents
+                <Link
+                  href={`/residents?buildingId=${id}`}
+                  className={`flex items-center ${isRtl ? 'gap-x-reverse gap-x-2' : 'gap-x-2'}`}
+                >
+                  <Users className='h-4 w-4' />
+                  {t('viewResidents')}
                 </Link>
               </Button>
               <Button
@@ -301,22 +327,25 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                 className='w-full justify-start'
                 asChild
               >
-                <Link href={`/finances?buildingId=${id}`}>
-                  <Building2 className='mr-2 h-4 w-4' />
-                  View Finances
+                <Link
+                  href={`/finances?buildingId=${id}`}
+                  className={`flex items-center ${isRtl ? 'gap-x-reverse gap-x-2' : 'gap-x-2'}`}
+                >
+                  <Building2 className='h-4 w-4' />
+                  {t('viewFinances')}
                 </Link>
               </Button>
             </CardContent>
           </Card>
         </div>
-
         {/* Units Overview */}
         {units.length > 0 && (
           <Card>
+            {' '}
             <CardHeader>
-              <CardTitle>Units Overview</CardTitle>
+              <CardTitle>{t('unitsOverview')}</CardTitle>
               <CardDescription>
-                Recent units in this building ({units.length} total)
+                {t('unitsOverviewDescription', { count: units.length })}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -325,26 +354,30 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                   <Link key={unit.id} href={`/units/${unit.id}`}>
                     <Card className='transition-shadow hover:shadow-md'>
                       <CardHeader className='pb-3'>
+                        {' '}
                         <div className='flex items-center justify-between'>
                           <CardTitle className='text-lg'>
-                            Unit {unit.unitNumber}
+                            {t('unitNumber', { number: unit.unitNumber })}
                           </CardTitle>
                           <Badge
                             variant={unit.isOccupied ? 'default' : 'secondary'}
                           >
-                            {unit.isOccupied ? 'Occupied' : 'Vacant'}
+                            {unit.isOccupied ? t('occupied') : t('vacant')}
                           </Badge>
                         </div>
-                        <CardDescription>Floor {unit.floor}</CardDescription>
+                        <CardDescription>
+                          {t('floor', { floor: unit.floor })}
+                        </CardDescription>
                       </CardHeader>
                       <CardContent>
+                        {' '}
                         <div className='space-y-2 text-sm'>
                           <div className='flex justify-between'>
-                            <span>Bedrooms:</span>
+                            <span>{t('bedrooms')}</span>
                             <span>{unit.bedrooms}</span>
                           </div>
                           <div className='flex justify-between'>
-                            <span>Monthly Fee:</span>
+                            <span>{t('monthlyFee')}</span>
                             <span>${unit.monthlyFee}</span>
                           </div>
                         </div>
@@ -352,12 +385,12 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                     </Card>
                   </Link>
                 ))}
-              </div>
+              </div>{' '}
               {units.length > 6 && (
                 <div className='mt-4 text-center'>
                   <Button variant='outline' asChild>
                     <Link href={`/units?buildingId=${id}`}>
-                      View All {units.length} Units
+                      {t('viewAllUnitsCount', { count: units.length })}
                     </Link>
                   </Button>
                 </div>
@@ -365,12 +398,11 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
             </CardContent>
           </Card>
         )}
-      </div>
-
+      </div>{' '}
       {/* Edit Dialog */}
       <ResponsiveDialog
-        title='Edit Building'
-        description='Update the building information'
+        title={t('editBuilding')}
+        description={t('buildingInfoDescription')}
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
       >
@@ -381,7 +413,6 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
           onCancel={() => setIsEditDialogOpen(false)}
         />
       </ResponsiveDialog>
-
       <ConfirmDialog />
     </>
   );

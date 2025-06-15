@@ -18,6 +18,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { createBuildingSchema } from '../../schema';
 import { Building } from '../../types';
 import { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 type BuildingFormData = z.infer<typeof createBuildingSchema>;
 
@@ -34,6 +35,9 @@ export function BuildingForm({
   isLoading,
   onCancel,
 }: BuildingFormProps) {
+  const t = useTranslations('buildings');
+  const tCommon = useTranslations('common');
+
   const form = useForm<BuildingFormData>({
     resolver: zodResolver(createBuildingSchema),
     defaultValues: {
@@ -82,43 +86,42 @@ export function BuildingForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-4'>
+        {' '}
         <FormField
           control={form.control}
           name='name'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Building Name</FormLabel>
+              <FormLabel>{t('buildingName')}</FormLabel>
               <FormControl>
-                <Input placeholder='e.g., Sunset Towers' {...field} />
+                <Input placeholder={t('namePlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
-        />
-
+        />{' '}
         <FormField
           control={form.control}
           name='address'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Address</FormLabel>
+              <FormLabel>{t('buildingAddress')}</FormLabel>
               <FormControl>
-                <Input placeholder='Street address' {...field} />
+                <Input placeholder={t('addressPlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-
         <div className='grid grid-cols-2 gap-4'>
           <FormField
             control={form.control}
             name='city'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>City</FormLabel>
+                <FormLabel>{t('city')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='City' {...field} />
+                  <Input placeholder={t('cityPlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -130,22 +133,21 @@ export function BuildingForm({
             name='postalCode'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Postal Code</FormLabel>
+                <FormLabel>{t('postalCode')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='12345' {...field} />
+                  <Input placeholder={t('postalCodePlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-        </div>
-
+        </div>{' '}
         <FormField
           control={form.control}
           name='totalUnits'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Total Units</FormLabel>
+              <FormLabel>{t('totalUnits')}</FormLabel>
               <FormControl>
                 <Input
                   type='number'
@@ -158,42 +160,38 @@ export function BuildingForm({
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name='description'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>{t('description')}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder='Additional details about the building'
+                  placeholder={t('descriptionPlaceholder')}
                   rows={3}
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
-                Optional description for the building
-              </FormDescription>
+              <FormDescription>{t('description')}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-
         <div className='flex justify-end space-x-2 pt-4'>
           {onCancel && (
             <Button type='button' variant='outline' onClick={onCancel}>
-              Cancel
+              {tCommon('cancel')}
             </Button>
           )}{' '}
           <Button type='submit' disabled={isLoading}>
             {isLoading
               ? building
-                ? 'Updating...'
-                : 'Creating...'
+                ? tCommon('saving')
+                : tCommon('saving')
               : building
-                ? 'Update Building'
-                : 'Create Building'}
+                ? t('editBuilding')
+                : t('addBuilding')}
           </Button>
         </div>
       </form>

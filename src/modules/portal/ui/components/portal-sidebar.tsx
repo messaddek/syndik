@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import {
   Home,
   CreditCard,
@@ -24,47 +25,76 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { UserButton } from '@clerk/nextjs';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { OrgSwitcher } from '@/components/org-switcher';
 
-const navigationItems = [
-  {
-    title: 'Overview',
-    items: [
-      { title: 'Dashboard', url: '/portal', icon: Home },
-      { title: 'My Unit', url: '/portal/unit', icon: Home },
-    ],
-  },
-  {
-    title: 'Financial',
-    items: [
-      { title: 'Payments', url: '/portal/payments', icon: CreditCard },
-      { title: 'Statements', url: '/portal/statements', icon: FileText },
-    ],
-  },
-  {
-    title: 'Community',
-    items: [
-      { title: 'Announcements', url: '/portal/announcements', icon: Bell },
-      { title: 'Notifications', url: '/portal/notifications', icon: Bell },
-      { title: 'Messages', url: '/portal/messages', icon: MessageSquare },
-      { title: 'Meetings', url: '/portal/meetings', icon: Calendar },
-    ],
-  },
-  {
-    title: 'Account',
-    items: [
-      { title: 'Profile', url: '/portal/profile', icon: User },
-      { title: 'Settings', url: '/portal/settings', icon: Settings },
-    ],
-  },
-];
-
 export function PortalSidebar() {
+  const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+
+  const navigationItems = [
+    {
+      title: t('portal.overview'),
+      items: [
+        { title: t('navigation.dashboard'), url: '/portal', icon: Home },
+        { title: t('portal.myUnit'), url: '/portal/unit', icon: Home },
+      ],
+    },
+    {
+      title: t('portal.financial'),
+      items: [
+        {
+          title: t('portal.payments'),
+          url: '/portal/payments',
+          icon: CreditCard,
+        },
+        {
+          title: t('portal.statements'),
+          url: '/portal/statements',
+          icon: FileText,
+        },
+      ],
+    },
+    {
+      title: t('portal.community'),
+      items: [
+        {
+          title: t('portal.announcements'),
+          url: '/portal/announcements',
+          icon: Bell,
+        },
+        {
+          title: t('portal.notifications'),
+          url: '/portal/notifications',
+          icon: Bell,
+        },
+        {
+          title: t('portal.messages'),
+          url: '/portal/messages',
+          icon: MessageSquare,
+        },
+        {
+          title: t('portal.meetings'),
+          url: '/portal/meetings',
+          icon: Calendar,
+        },
+      ],
+    },
+    {
+      title: t('portal.account'),
+      items: [
+        { title: t('portal.profile'), url: '/portal/profile', icon: User },
+        {
+          title: t('common.settings'),
+          url: '/portal/settings',
+          icon: Settings,
+        },
+      ],
+    },
+  ];
 
   const handleDashboardAccess = () => {
     router.push('/org-redirect');
@@ -76,10 +106,10 @@ export function PortalSidebar() {
         <div className='mb-3 flex items-center gap-2'>
           <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white'>
             <Home className='h-4 w-4' />
-          </div>
+          </div>{' '}
           <div>
             <h2 className='text-lg font-semibold'>Syndik</h2>
-            <p className='text-muted-foreground text-xs'>Resident Portal</p>
+            <p className='text-muted-foreground text-xs'>{t('portal.title')}</p>
           </div>
         </div>
 
@@ -96,7 +126,7 @@ export function PortalSidebar() {
           className='flex w-full items-center gap-2'
         >
           <LayoutDashboard className='h-4 w-4' />
-          <span>Access Dashboard</span>
+          <span>{t('portal.accessDashboard')}</span>
         </Button>
       </SidebarHeader>
 
@@ -126,8 +156,12 @@ export function PortalSidebar() {
         <div className='flex items-center gap-3'>
           <UserButton afterSignOutUrl='/' />
           <div className='min-w-0 flex-1'>
-            <p className='truncate text-sm font-medium'>Resident Account</p>
-            <p className='text-muted-foreground text-xs'>Portal Access</p>
+            <p className='truncate text-sm font-medium'>
+              {t('portal.residentAccount')}
+            </p>
+            <p className='text-muted-foreground text-xs'>
+              {t('portal.portalAccess')}
+            </p>
           </div>
         </div>
       </SidebarFooter>

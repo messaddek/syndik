@@ -113,6 +113,50 @@
   --sidebar-ring: oklch(0.488 0.243 264.376);
 }
 
+/* Direction and RTL support */
+html[dir='rtl'] {
+  direction: rtl;
+}
+
+html[dir='ltr'] {
+  direction: ltr;
+}
+
+body.rtl {
+  direction: rtl;
+}
+
+body.ltr {
+  direction: ltr;
+}
+
+/* Smooth transitions for directional changes */
+* {
+  transition:
+    margin 0.2s ease-in-out,
+    padding 0.2s ease-in-out;
+}
+
+/* RTL-specific sidebar adjustments */
+[data-radix-direction='rtl'] [data-sidebar] {
+  right: 0;
+  left: auto;
+}
+
+[data-radix-direction='ltr'] [data-sidebar] {
+  left: 0;
+  right: auto;
+}
+
+/* Text alignment for RTL */
+[data-radix-direction='rtl'] {
+  text-align: right;
+}
+
+[data-radix-direction='ltr'] {
+  text-align: left;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -300,5 +344,41 @@
 
   [class*='cl-organizationSwitcherPopoverActionButton'] * {
     color: inherit !important;
+  }
+
+  /* Prevent sidebar flashing during hydration */
+  [data-slot='sidebar-container'] {
+    /* Ensure smooth transitions only after hydration */
+    transition:
+      left 0.3s ease-in-out,
+      right 0.3s ease-in-out,
+      width 0.2s ease-in-out !important;
+  }
+
+  /* Prevent layout shift during direction changes */
+  html:not([data-hydrated]) [data-slot='sidebar-container'] {
+    transition: none !important;
+  }
+
+  /* Mark as hydrated after initial load - enhanced transitions for language switching */
+  html[data-hydrated] [data-slot='sidebar-container'] {
+    transition:
+      left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      right 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      width 0.2s ease-in-out !important;
+  }
+
+  /* Enhanced transition when direction changes */
+  body.rtl [data-slot='sidebar-container'],
+  body.ltr [data-slot='sidebar-container'] {
+    transition:
+      left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      width 0.2s ease-in-out !important;
+  }
+
+  /* Smooth gap transition for sidebar */
+  [data-slot='sidebar-gap'] {
+    transition: width 0.2s ease-in-out !important;
   }
 }

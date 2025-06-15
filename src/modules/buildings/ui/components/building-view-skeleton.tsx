@@ -1,29 +1,44 @@
+'use client';
+
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { ArrowLeft, Building2, Home, Users, MapPin } from 'lucide-react';
+import { useDirection } from '@/hooks/use-direction';
 
 export function BuildingViewSkeleton() {
+  const isRtl = useDirection();
+
   return (
     <div className='space-y-6'>
       {/* Header */}
       <div className='flex items-center justify-between'>
-        <div className='flex items-center space-x-4'>
-          <div className='flex items-center space-x-2'>
-            <ArrowLeft className='h-4 w-4' />
+        <div
+          className={`flex items-center ${isRtl ? 'space-x-4 space-x-reverse' : 'space-x-4'}`}
+        >
+          <div
+            className={`flex items-center ${isRtl ? 'space-x-2 space-x-reverse' : 'space-x-2'}`}
+          >
+            <ArrowLeft className='h-4 w-4 rtl:rotate-180' />
             <Skeleton className='h-4 w-24' />
           </div>
           <div>
-            <div className='flex items-center space-x-2'>
+            <div
+              className={`flex items-center ${isRtl ? 'space-x-2 space-x-reverse' : 'space-x-2'}`}
+            >
               <Building2 className='h-6 w-6 text-blue-600' />
               <Skeleton className='h-8 w-48' />
             </div>
-            <div className='mt-1 flex items-center space-x-1'>
+            <div
+              className={`mt-1 flex items-center ${isRtl ? 'space-x-1 space-x-reverse' : 'space-x-1'}`}
+            >
               <MapPin className='h-4 w-4' />
               <Skeleton className='h-4 w-64' />
             </div>
           </div>
         </div>
-        <div className='flex items-center space-x-2'>
+        <div
+          className={`flex items-center ${isRtl ? 'space-x-2 space-x-reverse' : 'space-x-2'}`}
+        >
           <Skeleton className='h-9 w-20' />
           <Skeleton className='h-9 w-20' />
         </div>

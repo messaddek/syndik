@@ -1,29 +1,26 @@
 'use client';
 
 import { ConditionalThemeProvider } from '@/components/conditional-theme-provider';
+import { DynamicDirectionProvider } from '@/components/dynamic-direction-provider';
 import { TRPCReactProvider } from '@/trpc/client';
 import { ClerkProvider } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
 import { useTheme } from 'next-themes';
 import { NuqsAdapter } from 'nuqs/adapters/next';
 import { Toaster } from 'sonner';
-import { Geist, Geist_Mono } from 'next/font/google';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+import { useLocale } from 'next-intl';
+import { Locale } from '@/i18n/config';
+import { arSA, enUS, frFR } from '@clerk/localizations';
 
 // Inner component that uses theme
 const InnerLayoutProvider = ({ children }: { children: React.ReactNode }) => {
   const { resolvedTheme } = useTheme();
+  const locale = useLocale() as Locale;
+  const clerkLocale = locale === 'ar' ? arSA : locale === 'fr' ? frFR : enUS;
+
   return (
     <ClerkProvider
+      localization={clerkLocale} // Set default locale for Clerk
       appearance={{
         baseTheme: resolvedTheme === 'dark' ? dark : undefined,
         layout: {
@@ -42,16 +39,10 @@ const InnerLayoutProvider = ({ children }: { children: React.ReactNode }) => {
         },
       }}
     >
-      <html lang='en' suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <TRPCReactProvider>
-            {children}
-            <Toaster />
-          </TRPCReactProvider>
-        </body>
-      </html>
+      <TRPCReactProvider>
+        {children}
+        <Toaster />
+      </TRPCReactProvider>
     </ClerkProvider>
   );
 };
@@ -59,9 +50,11 @@ const InnerLayoutProvider = ({ children }: { children: React.ReactNode }) => {
 export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <NuqsAdapter>
-      <ConditionalThemeProvider>
-        <InnerLayoutProvider>{children}</InnerLayoutProvider>
-      </ConditionalThemeProvider>
+      <DynamicDirectionProvider>
+        <ConditionalThemeProvider>
+          <InnerLayoutProvider>{children}</InnerLayoutProvider>
+        </ConditionalThemeProvider>
+      </DynamicDirectionProvider>
     </NuqsAdapter>
   );
 };

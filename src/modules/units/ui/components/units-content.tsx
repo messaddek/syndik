@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -27,9 +28,10 @@ import { useConfirm } from '@/hooks/use-confirm';
 import type { Unit } from '../../types';
 import type { Resident } from '@/modules/residents/types';
 import type { Income } from '@/modules/incomes/types';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 export function UnitsContent() {
+  const t = useTranslations();
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [showCreateDialog, setShowCreateDialog] = useState(false);
@@ -38,8 +40,8 @@ export function UnitsContent() {
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Unit',
-    'Are you sure you want to delete this unit? This action cannot be undone.'
+    t('units.deleteUnit'),
+    t('units.confirmDelete')
   );
 
   const { data: units = [] } = useQuery(trpc.units.getAll.queryOptions({}));
@@ -106,7 +108,7 @@ export function UnitsContent() {
 
   const getBuildingName = (buildingId: string) => {
     const building = buildings.find(b => b.id === buildingId);
-    return building?.name || 'Unknown Building';
+    return building?.name || t('units.unknownBuilding');
   };
 
   const getUnitResidentCount = (unitId: string) => {
@@ -129,12 +131,14 @@ export function UnitsContent() {
     <>
       <div className='mb-4 flex items-center justify-between'>
         <div>
-          <h2 className='text-2xl font-bold'>Units Management</h2>
-          <p className='text-muted-foreground'>{units.length} total units</p>
+          <h2 className='text-2xl font-bold'>{t('units.title')}</h2>
+          <p className='text-muted-foreground'>
+            {units.length} {t('units.totalUnits')}
+          </p>
         </div>
         <Button onClick={() => setShowCreateDialog(true)}>
           <Plus className='mr-2 h-4 w-4' />
-          Add Unit
+          {t('units.addUnit')}
         </Button>
       </div>
       <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
@@ -146,7 +150,9 @@ export function UnitsContent() {
                   <CardTitle className='text-lg'>{unit.unitNumber}</CardTitle>
                   <div className='flex items-center gap-2'>
                     <Badge variant={unit.isOccupied ? 'default' : 'secondary'}>
-                      {unit.isOccupied ? 'Occupied' : 'Vacant'}
+                      {unit.isOccupied
+                        ? t('units.occupied')
+                        : t('units.vacant')}
                     </Badge>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -155,14 +161,16 @@ export function UnitsContent() {
                           className='h-8 w-8 p-0'
                           onClick={e => e.preventDefault()}
                         >
-                          <span className='sr-only'>Open menu</span>
+                          <span className='sr-only'>{t('units.openMenu')}</span>
                           <MoreHorizontal className='h-4 w-4' />
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align='end'>
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuLabel>
+                          {t('common.actions')}
+                        </DropdownMenuLabel>
                         <DropdownMenuItem onClick={() => handleEdit(unit)}>
-                          Edit unit
+                          {t('units.editUnit')}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
@@ -173,61 +181,62 @@ export function UnitsContent() {
                             )
                           }
                         >
-                          View residents
+                          {t('units.viewResidents')}
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() =>
                             window.open(`/finances?unitId=${unit.id}`, '_blank')
                           }
                         >
-                          View income
+                          {t('units.viewIncome')}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
                           onClick={() => handleDelete(unit.id)}
                           className='text-red-600'
                         >
-                          Delete unit
+                          {t('units.deleteUnit')}
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
                 </div>
                 <CardDescription>
-                  {getBuildingName(unit.buildingId)} - Floor {unit.floor}
+                  {getBuildingName(unit.buildingId)} - {t('units.floor')}{' '}
+                  {unit.floor}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className='space-y-2'>
                   <div className='flex justify-between text-sm'>
-                    <span>Bedrooms:</span>
+                    <span>{t('units.bedrooms')}:</span>
                     <span>{unit.bedrooms}</span>
                   </div>
                   <div className='flex justify-between text-sm'>
-                    <span>Bathrooms:</span>
+                    <span>{t('units.bathrooms')}:</span>
                     <span>{unit.bathrooms}</span>
                   </div>
                   {unit.area && (
                     <div className='flex justify-between text-sm'>
-                      <span>Area:</span>
+                      <span>{t('units.area')}:</span>
                       <span>{unit.area} m²</span>
                     </div>
                   )}
                   <div className='flex justify-between text-sm font-medium'>
-                    <span>Monthly Fee:</span>
+                    <span>{t('units.monthlyFee')}:</span>
                     <span>${unit.monthlyFee}</span>
                   </div>
 
                   {/* Relationship Information */}
                   <div className='mt-2 border-t pt-2'>
                     <div className='flex justify-between text-sm'>
-                      <span>Active Residents:</span>
+                      <span>{t('units.activeResidents')}:</span>
                       <span className='font-medium'>
                         {getUnitResidentCount(unit.id)}
                       </span>
                     </div>
                     <div className='flex justify-between text-sm'>
-                      <span>This Month Income:</span>
+                      <span>{t('units.thisMonthIncome')}:</span>
                       <span className='font-medium text-green-600'>
                         ${getUnitMonthlyIncome(unit.id).toFixed(2)}
                       </span>

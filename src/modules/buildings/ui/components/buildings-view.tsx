@@ -28,8 +28,10 @@ import { BuildingsGridView } from './buildings-grid-view';
 import { BuildingsTableView } from './buildings-table-view';
 import { createBuildingSchema } from '../../schema';
 import { z } from 'zod';
+import { useDirection } from '@/hooks/use-direction';
 import { BUILDING_SORT_FIELDS, SORT_ORDERS } from '@/constants';
 import { useConfirm } from '@/hooks/use-confirm';
+import { useTranslations } from 'next-intl';
 
 type BuildingFormData = z.infer<typeof createBuildingSchema>;
 
@@ -53,10 +55,12 @@ const SimplePagination = ({
   totalPages: number;
   onPageChange: (page: number) => void;
 }) => {
+  const t = useTranslations('pagination');
+
   return (
     <div className='flex items-center justify-between border-t pt-4'>
       <div className='text-muted-foreground text-sm'>
-        Showing page {currentPage} of {totalPages}
+        {t('showingPage', { page: currentPage, total: totalPages })}
       </div>
       <div className='flex items-center space-x-2'>
         <Button
@@ -65,7 +69,7 @@ const SimplePagination = ({
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
         >
-          Previous
+          {t('previous')}
         </Button>
         <span className='text-sm font-medium'>
           {currentPage} / {totalPages}
@@ -76,7 +80,7 @@ const SimplePagination = ({
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
         >
-          Next
+          {t('next')}
         </Button>
       </div>
     </div>
@@ -98,14 +102,18 @@ type BuildingsViewProps = {
 export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingBuilding, setEditingBuilding] = useState<Building | null>(null);
+  // Translation hooks
+  const t = useTranslations('buildings');
+  const tCommon = useTranslations('common');
+  const isRtl = useDirection();
 
   // URL state management with nuqs
   const [filters, setFilters] = useBuildingsFilters(initialFilters);
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Building',
-    'Are you sure you want to delete this building? This action cannot be undone.'
+    t('deleteBuilding'),
+    t('confirmDelete')
   );
 
   // Initialize tRPC client
@@ -203,23 +211,24 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
 
   return (
     <div className='space-y-6'>
+      {' '}
       {/* Header */}
       <div className='flex items-center justify-between'>
         <div>
-          <h2 className='text-2xl font-bold'>Buildings</h2>
-          <p className='text-gray-600'>Manage your residential properties</p>
+          <h2 className='text-2xl font-bold'>{t('title')}</h2>
+          <p className='text-gray-600'>{t('buildingDetails')}</p>
         </div>
         <Button onClick={() => setIsCreateDialogOpen(true)}>
           <Plus className='mr-2 h-4 w-4' />
-          Add Building
+          {t('addBuilding')}
         </Button>
-      </div>
+      </div>{' '}
       {/* Filters */}
       <Card>
         <CardHeader>
           <CardTitle className='flex items-center space-x-2'>
             <Filter className='h-5 w-5' />
-            <span>Filters</span>
+            <span>{t('filter')}</span>
             {hasActiveFilters && (
               <Badge variant='secondary' className='ml-2'>
                 {[filters.search, filters.city].filter(Boolean).length} active
@@ -231,13 +240,15 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
           <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
             {/* Search */}
             <div className='space-y-2'>
-              <Label htmlFor='search'>Search</Label>
+              <Label htmlFor='search'>{tCommon('search')}</Label>{' '}
               <div className='relative'>
-                <Search className='text-muted-foreground absolute top-2.5 left-2 h-4 w-4' />
+                <Search
+                  className={`text-muted-foreground absolute top-2.5 h-4 w-4 ${isRtl ? 'right-2' : 'left-2'}`}
+                />
                 <Input
                   id='search'
-                  placeholder='Search buildings...'
-                  className='pl-8'
+                  placeholder={t('search')}
+                  className={isRtl ? 'pr-8' : 'pl-8'}
                   value={filters.search}
                   onChange={e =>
                     setFilters({ search: e.target.value, page: 1 })
@@ -248,7 +259,7 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
 
             {/* City Filter */}
             <div className='space-y-2'>
-              <Label htmlFor='city'>City</Label>
+              <Label htmlFor='city'>{t('city')}</Label>
               <Select
                 value={filters.city}
                 onValueChange={value =>
@@ -256,10 +267,10 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
                 }
               >
                 <SelectTrigger>
-                  <SelectValue placeholder='All cities' />
+                  <SelectValue placeholder={t('allCities')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value='all'>All cities</SelectItem>
+                  <SelectItem value='all'>{t('allCities')}</SelectItem>
                   {uniqueCities.map(city => (
                     <SelectItem key={city} value={city}>
                       {city}
@@ -275,11 +286,11 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
               <p className='text-muted-foreground text-sm'>
                 {(buildingsData as unknown as BuildingQueryResult)?.pagination
                   ?.total || 0}{' '}
-                building(s) found
+                {t('building')}(s) found
               </p>
               <Button variant='outline' size='sm' onClick={clearFilters}>
                 <X className='mr-2 h-4 w-4' />
-                Clear filters
+                {t('clearFilters')}
               </Button>
             </div>
           )}
@@ -296,14 +307,14 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
             className='flex items-center gap-2'
           >
             <Grid3X3 className='h-4 w-4' />
-            Grid
+            {t('gridView')}
           </TabsTrigger>
           <TabsTrigger
             value={BUILDING_VIEWS.TABLE}
             className='flex items-center gap-2'
           >
             <Table className='h-4 w-4' />
-            Table
+            {t('tableView')}
           </TabsTrigger>
         </TabsList>
         <div className='space-y-4'>
@@ -312,7 +323,7 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
               buildings={buildingsWithData}
               onEdit={setEditingBuilding}
               onDelete={handleDeleteBuilding}
-            />
+            />{' '}
             {/* Pagination for Grid View */}
             <SimplePagination
               currentPage={filters.page || 1}
@@ -328,7 +339,7 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
               buildings={buildingsWithData}
               onEdit={setEditingBuilding}
               onDelete={handleDeleteBuilding}
-            />
+            />{' '}
             {/* Pagination for Table View */}
             <SimplePagination
               currentPage={filters.page || 1}
@@ -340,14 +351,12 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
             />
           </TabsContent>
         </div>
-      </Tabs>
+      </Tabs>{' '}
       {/* Create/Edit Dialog */}
       <ResponsiveDialog
-        title={editingBuilding ? 'Edit Building' : 'Add New Building'}
+        title={editingBuilding ? t('editBuilding') : t('addBuilding')}
         description={
-          editingBuilding
-            ? 'Update the building information'
-            : 'Create a new residential building in your syndicate'
+          editingBuilding ? t('basicInformation') : t('buildingDetails')
         }
         open={isCreateDialogOpen || !!editingBuilding}
         onOpenChange={open => {

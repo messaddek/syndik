@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useUser, UserButton } from '@clerk/nextjs';
+import { useTranslations } from 'next-intl';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
@@ -24,11 +25,12 @@ import {
   Calendar,
   HomeIcon,
 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { useTRPC } from '@/trpc/client';
 import { useQuery } from '@tanstack/react-query';
 import { SearchResultsSkeleton } from './search-skeleton';
 import { ModeToggle } from '@/components/mode-toggle';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import {
   OrganizationSwitcherResponsive,
   OrganizationStatus,
@@ -36,6 +38,7 @@ import {
 
 export function DashboardNavbar() {
   const { user, isLoaded } = useUser();
+  const t = useTranslations('common');
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
@@ -111,12 +114,12 @@ export function DashboardNavbar() {
         <div className='max-w-md flex-1'>
           <Button
             variant='outline'
-            className='text-muted-foreground relative w-full justify-start'
+            className='text-muted-foreground relative w-full justify-start space-x-2'
             onClick={() => setOpen(true)}
           >
-            <Search className='mr-2 h-4 w-4' />
-            Search buildings, units, residents...{' '}
-            <kbd className='bg-muted pointer-events-none absolute top-2.5 right-2 hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex'>
+            <Search className='h-4 w-4' />
+            {t('navbarSearch')}
+            <kbd className='bg-muted pointer-events-none absolute top-2.5 right-2 hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex rtl:right-auto rtl:left-2'>
               <span className='text-xs'>⌘</span>K
             </kbd>
           </Button>
@@ -128,11 +131,13 @@ export function DashboardNavbar() {
         {/* Organization Status */}
         <OrganizationStatus /> {/* User Menu */}
         <div className='flex items-center gap-4'>
+          <LanguageSwitcher />
           <ModeToggle />
           {isLoaded && user ? (
             <div className='flex items-center space-x-4'>
+              {' '}
               <span className='hidden text-sm text-gray-600 sm:block dark:text-gray-300'>
-                Welcome, {user.firstName}!
+                {t('welcome')}, {user.firstName}!
               </span>
               <UserButton
                 appearance={{
@@ -165,13 +170,13 @@ export function DashboardNavbar() {
       {/* Command Dialog */}
       <CommandDialog open={open} onOpenChange={handleDialogOpenChange}>
         <CommandInput
-          placeholder='Search buildings, units, residents...'
+          placeholder={t('navbarSearch')}
           value={searchQuery}
           onValueChange={setSearchQuery}
         />
         <CommandList>
           {searchQuery.length === 0 && (
-            <CommandEmpty>Start typing to search...</CommandEmpty>
+            <CommandEmpty>{t('searchHint')}</CommandEmpty>
           )}
           {searchQuery.length > 0 && debouncedSearchQuery.length === 0 && (
             <SearchResultsSkeleton />

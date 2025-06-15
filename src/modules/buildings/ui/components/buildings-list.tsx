@@ -22,7 +22,7 @@ import { BuildingForm } from './building-form';
 import { createBuildingSchema } from '../../schema';
 import { z } from 'zod';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 type BuildingFormData = z.infer<typeof createBuildingSchema>;
 

@@ -25,7 +25,7 @@ import {
   Loader2,
   ArrowLeft,
 } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { toast } from 'sonner';
 import { Skeleton } from '@/components/ui/skeleton';
 

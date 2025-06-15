@@ -1,15 +1,10 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { useUser } from '@clerk/nextjs';
-import {
-  Loader2,
-  Building2,
-  Users,
-  ArrowRight,
-  AlertCircle,
-} from 'lucide-react';
+import Image from 'next/image';
+import { Loader2, Users, ArrowRight, AlertCircle } from 'lucide-react';
 import { useTRPC } from '@/trpc/client';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -145,9 +140,16 @@ export function OrgRedirectClient({
         <div className='rounded-2xl bg-white p-8 text-center shadow-xl'>
           {/* Logo/Icon */}
           <div className='mb-6 flex justify-center'>
+            {' '}
             <div className='relative'>
               <div className='flex h-16 w-16 items-center justify-center rounded-full bg-blue-100'>
-                <Building2 className='h-8 w-8 text-blue-600' />
+                <Image
+                  src='/logo.svg'
+                  alt='Syndik Logo'
+                  width={32}
+                  height={32}
+                  className='h-8 w-8'
+                />
               </div>
               <div className='absolute -right-1 -bottom-1 flex h-6 w-6 items-center justify-center rounded-full bg-green-500'>
                 <Users className='h-3 w-3 text-white' />

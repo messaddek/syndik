@@ -46,7 +46,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useConfirm } from '@/hooks/use-confirm';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 // Type for resident data coming from API (dates are serialized as strings)
 type SerializedResident = Omit<Resident, 'createdAt' | 'updatedAt'> & {

@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
+import { useTranslations } from 'next-intl';
 import {
   Card,
   CardContent,
@@ -22,10 +23,11 @@ import {
   Phone,
   Building,
 } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export function PortalDashboard() {
+  const t = useTranslations();
   const trpc = useTRPC();
 
   // Use the new resident profile procedure that works with user linking
@@ -46,9 +48,7 @@ export function PortalDashboard() {
   if (!residentProfile) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <p className='text-muted-foreground'>
-          Unable to load resident information
-        </p>
+        <p className='text-muted-foreground'>{t('errors.generic')}</p>
       </div>
     );
   }
@@ -60,21 +60,21 @@ export function PortalDashboard() {
       <div className='flex items-center justify-between'>
         <div>
           <h1 className='text-3xl font-bold'>
-            Welcome back, {resident.firstName}!
+            {t('common.welcome')}, {resident.firstName}!
           </h1>
-          <p className='text-muted-foreground'>
-            Here&apos;s what&apos;s happening in your building today.
-          </p>
+          <p className='text-muted-foreground'>{t('portal.welcomeMessage')}</p>
         </div>
         <Badge variant='secondary' className='text-sm'>
-          {resident?.isOwner ? 'Owner' : 'Tenant'}
+          {resident?.isOwner ? t('residents.owner') : t('residents.tenant')}
         </Badge>
       </div>
       {/* Quick Stats */}
       <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Next Payment</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('portal.nextPayment')}
+            </CardTitle>
             <CreditCard className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
@@ -82,32 +82,38 @@ export function PortalDashboard() {
               ${dashboardData?.nextPayment?.amount?.toFixed(2) || '0.00'}
             </div>
             <p className='text-muted-foreground text-xs'>
-              Due{' '}
+              {t('portal.due')}{' '}
               {dashboardData?.nextPayment?.dueDate
                 ? new Date(
                     dashboardData.nextPayment.dueDate
                   ).toLocaleDateString()
-                : 'Not available'}
+                : t('portal.notAvailable')}
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Announcements</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('navigation.announcements')}
+            </CardTitle>
             <Bell className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
             <div className='text-2xl font-bold'>
               {dashboardData?.announcementsCount || 0}
             </div>
-            <p className='text-muted-foreground text-xs'>New this week</p>
+            <p className='text-muted-foreground text-xs'>
+              {t('portal.newThisWeek')}
+            </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Next Meeting</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('portal.nextMeeting')}
+            </CardTitle>
             <Calendar className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
@@ -119,25 +125,28 @@ export function PortalDashboard() {
                     month: 'short',
                     day: 'numeric',
                   })
-                : 'None'}
+                : t('portal.none')}
             </div>
             <p className='text-muted-foreground text-xs'>
-              {dashboardData?.upcomingMeeting?.title || 'No meetings scheduled'}
+              {dashboardData?.upcomingMeeting?.title ||
+                t('portal.noMeetingsScheduled')}
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Unit Status</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('portal.unitStatus')}
+            </CardTitle>
             <Home className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
             <div className='text-2xl font-bold'>Active</div>
             <p className='text-muted-foreground text-xs'>
               {dashboardData?.residentStatus?.isActive
-                ? 'Current resident'
-                : 'Moved out'}
+                ? t('portal.currentResident')
+                : t('portal.movedOut')}
             </p>
           </CardContent>
         </Card>
@@ -148,34 +157,36 @@ export function PortalDashboard() {
           <CardHeader>
             <CardTitle className='flex items-center gap-2'>
               <Home className='h-5 w-5' />
-              Unit Information
+              {t('portal.unitInformation')}
             </CardTitle>
-            <CardDescription>Your current residence details</CardDescription>
+            <CardDescription>
+              {t('portal.unitInformationDescription')}
+            </CardDescription>
           </CardHeader>
           <CardContent className='space-y-4'>
             {unit && (
               <div className='grid grid-cols-2 gap-4'>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Unit Number
+                    {t('portal.unitNumber')}
                   </p>
                   <p className='text-lg font-semibold'>{unit.unitNumber}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Floor
+                    {t('portal.floor')}
                   </p>
                   <p className='text-lg font-semibold'>{unit.floor}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Bedrooms
+                    {t('portal.bedrooms')}
                   </p>
                   <p className='text-lg font-semibold'>{unit.bedrooms}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Bathrooms
+                    {t('portal.bathrooms')}
                   </p>
                   <p className='text-lg font-semibold'>{unit.bathrooms}</p>
                 </div>
@@ -187,7 +198,7 @@ export function PortalDashboard() {
                 <div className='mb-2 flex items-center gap-2'>
                   <Building className='text-muted-foreground h-4 w-4' />
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Building
+                    {t('portal.building')}
                   </p>
                 </div>
                 <p className='font-semibold'>{building.name}</p>
@@ -198,7 +209,7 @@ export function PortalDashboard() {
             )}
 
             <Button asChild className='w-full'>
-              <Link href='/portal/unit'>View Full Details</Link>
+              <Link href='/portal/unit'>{t('portal.viewFullDetails')}</Link>
             </Button>
           </CardContent>
         </Card>
@@ -208,10 +219,10 @@ export function PortalDashboard() {
           <CardHeader>
             <CardTitle className='flex items-center gap-2'>
               <User className='h-5 w-5' />
-              Profile Information
+              {t('portal.profileInformation')}
             </CardTitle>
             <CardDescription>
-              Your contact details and account info
+              {t('portal.profileInformationDescription')}
             </CardDescription>
           </CardHeader>{' '}
           <CardContent className='space-y-4'>
@@ -220,7 +231,9 @@ export function PortalDashboard() {
                 <Mail className='text-muted-foreground h-4 w-4' />
                 <div>
                   <p className='text-sm font-medium'>{resident.email}</p>
-                  <p className='text-muted-foreground text-xs'>Email Address</p>
+                  <p className='text-muted-foreground text-xs'>
+                    {t('portal.emailAddress')}
+                  </p>
                 </div>
               </div>
 
@@ -230,7 +243,7 @@ export function PortalDashboard() {
                   <div>
                     <p className='text-sm font-medium'>{resident.phone}</p>
                     <p className='text-muted-foreground text-xs'>
-                      Phone Number
+                      {t('portal.phoneNumber')}
                     </p>
                   </div>
                 </div>
@@ -240,16 +253,18 @@ export function PortalDashboard() {
                 <MapPin className='text-muted-foreground h-4 w-4' />
                 <div>
                   <p className='text-sm font-medium'>
-                    Moved in{' '}
+                    {t('portal.movedIn')}{' '}
                     {new Date(resident?.moveInDate || '').toLocaleDateString()}
                   </p>
-                  <p className='text-muted-foreground text-xs'>Move-in Date</p>
+                  <p className='text-muted-foreground text-xs'>
+                    {t('portal.moveInDate')}
+                  </p>
                 </div>
               </div>
             </div>
 
             <Button asChild variant='outline' className='w-full'>
-              <Link href='/portal/profile'>Edit Profile</Link>
+              <Link href='/portal/profile'>{t('portal.editProfile')}</Link>
             </Button>
           </CardContent>
         </Card>
@@ -257,9 +272,9 @@ export function PortalDashboard() {
       {/* Quick Actions */}
       <Card>
         <CardHeader>
-          <CardTitle>Quick Actions</CardTitle>
+          <CardTitle>{t('portal.quickActions')}</CardTitle>
           <CardDescription>
-            Common tasks and important information
+            {t('portal.quickActionsDescription')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -270,7 +285,7 @@ export function PortalDashboard() {
                 className='flex flex-col items-center gap-2'
               >
                 <CreditCard className='h-6 w-6' />
-                <span>Make Payment</span>
+                <span>{t('portal.makePayment')}</span>
               </Link>
             </Button>
 
@@ -280,7 +295,7 @@ export function PortalDashboard() {
                 className='flex flex-col items-center gap-2'
               >
                 <Bell className='h-6 w-6' />
-                <span>View Announcements</span>
+                <span>{t('navigation.announcements')}</span>
               </Link>
             </Button>
 
@@ -290,7 +305,7 @@ export function PortalDashboard() {
                 className='flex flex-col items-center gap-2'
               >
                 <Calendar className='h-6 w-6' />
-                <span>Meeting Info</span>
+                <span>{t('portal.meetingInfo')}</span>
               </Link>
             </Button>
 
@@ -300,7 +315,7 @@ export function PortalDashboard() {
                 className='flex flex-col items-center gap-2'
               >
                 <Mail className='h-6 w-6' />
-                <span>Contact Management</span>
+                <span>{t('portal.contactManagement')}</span>
               </Link>
             </Button>
           </div>

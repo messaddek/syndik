@@ -25,7 +25,7 @@ import { CreateMeetingDialog } from './create-meeting-dialog';
 import { Meeting } from '@/modules/meetings/types';
 import { useTRPC } from '@/trpc/client';
 import { useConfirm } from '@/hooks/use-confirm';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 export function MeetingsContent() {
   const trpc = useTRPC();

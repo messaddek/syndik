@@ -2,11 +2,14 @@ import { JSX, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
+import { useTranslations } from 'next-intl';
 
 export const useConfirm = (
   title: string,
-  description: string
+  description: string,
+  isDestructive: boolean = false
 ): [() => JSX.Element, () => Promise<unknown>] => {
+  const t = useTranslations('common');
   const [promise, setPromise] = useState<{
     resolve: (value: boolean) => void;
   } | null>(null);
@@ -48,10 +51,14 @@ export const useConfirm = (
           className='w-full lg:w-auto'
           onClick={handleCancel}
         >
-          Cancel
+          {t('cancel')}
         </Button>
-        <Button className='w-full lg:w-auto' onClick={handleConfirm}>
-          Confirm
+        <Button
+          className='w-full lg:w-auto'
+          onClick={handleConfirm}
+          variant={isDestructive ? 'destructive' : undefined}
+        >
+          {t('confirm')}
         </Button>
       </div>
     </ResponsiveDialog>

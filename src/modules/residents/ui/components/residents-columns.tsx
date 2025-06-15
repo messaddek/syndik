@@ -24,7 +24,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import type { Resident } from '../../types';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { ResidentInviteButton } from './resident-invite-button';
 
 interface ResidentWithUnit extends Resident {

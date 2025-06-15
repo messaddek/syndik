@@ -8,8 +8,8 @@ import { Separator } from '@/components/ui/separator';
 import { NotificationDropdown } from '@/modules/notifications/ui/components/notification-dropdown';
 import { useRealtimeNotifications } from '@/modules/notifications/hooks/use-realtime-notifications';
 import { OrgSwitcher } from '@/components/org-switcher';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useRouter } from '@/i18n/navigation';
+import { Link } from '@/i18n/routing';
 import { ModeToggle } from '@/components/mode-toggle';
 
 export function PortalNavbar() {

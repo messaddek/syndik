@@ -16,8 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Notification } from '@/lib/schema';
-import { useRouter } from 'next/navigation';
-
+import { useRouter } from '@/i18n/navigation';
 const priorityColors = {
   low: 'bg-gray-100 text-gray-700',
   normal: 'bg-blue-100 text-blue-700',

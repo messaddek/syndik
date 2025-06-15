@@ -14,7 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 interface BuildingsTableViewProps {
   buildings: Building[];
@@ -27,10 +28,13 @@ export function BuildingsTableView({
   onEdit,
   onDelete,
 }: BuildingsTableViewProps) {
+  const t = useTranslations('buildings');
+  const tCommon = useTranslations('common');
+
   const columns: ColumnDef<Building>[] = [
     {
       accessorKey: 'name',
-      header: 'Name',
+      header: t('buildingName'),
       cell: ({ row }) => (
         <Link
           href={`/buildings/${row.original.id}`}
@@ -43,7 +47,7 @@ export function BuildingsTableView({
     },
     {
       accessorKey: 'address',
-      header: 'Address',
+      header: t('buildingAddress'),
       cell: ({ row }) => (
         <div className='flex items-center space-x-1'>
           <MapPin className='h-3 w-3 text-gray-500' />
@@ -53,11 +57,11 @@ export function BuildingsTableView({
     },
     {
       accessorKey: 'city',
-      header: 'City',
+      header: t('city'),
     },
     {
       accessorKey: 'totalUnits',
-      header: 'Total Units',
+      header: t('totalUnits'),
       cell: ({ row }) => (
         <Badge variant='secondary'>
           <Users className='mr-1 h-3 w-3' />
@@ -67,12 +71,12 @@ export function BuildingsTableView({
     },
     {
       accessorKey: 'description',
-      header: 'Description',
+      header: t('description'),
       cell: ({ row }) => {
         const description = row.getValue('description') as string;
         return (
           <span className='text-sm text-gray-600'>
-            {description || 'No description'}
+            {description || t('description')}
           </span>
         );
       },
@@ -90,16 +94,16 @@ export function BuildingsTableView({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end'>
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuLabel>{tCommon('actions')}</DropdownMenuLabel>
               <DropdownMenuItem onClick={() => onEdit(building)}>
-                Edit building
-              </DropdownMenuItem>
+                {t('editBuilding')}
+              </DropdownMenuItem>{' '}
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={() => onDelete(building)}
                 className='text-red-600'
               >
-                Delete building
+                {t('deleteBuilding')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -112,7 +116,7 @@ export function BuildingsTableView({
       columns={columns}
       data={buildings}
       searchKey='name'
-      searchPlaceholder='Search buildings...'
+      searchPlaceholder={t('search')}
       showSearch={true}
       showPagination={false}
     />
