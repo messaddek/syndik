@@ -466,7 +466,17 @@
     "recentActivity": "Recent Activity",
     "newResident": "New Resident",
     "meetingScheduled": "Meeting Scheduled",
-    "noRecentActivity": "No recent activity"
+    "noRecentActivity": "No recent activity",
+    "quickActions": "Quick Actions",
+    "quickActionsDescription": "Perform common actions quickly from here.",
+    "addBuilding": "Add Building",
+    "addResident": "Add Resident",
+    "inviteResidents": "Invite Residents",
+    "scheduleMeeting": "Schedule Meeting",
+    "trends": "Trends",
+    "trendsDescription": "See financial and occupancy trends.",
+    "occupancy": "Occupancy",
+    "occupancyDescription": "View occupancy rates and history."
   },
   "errors": {
     "generic": "An error occurred. Please try again."
@@ -799,6 +809,30 @@
     "upgrade": "Upgrade",
     "moreAvailable": "more available",
     "planLimitReached": "Plan limit reached"
+  },
+  "orgSwitcher": {
+    "title": "Select Organization",
+    "description": "Choose an organization to access its management dashboard or resident portal. Your role determines what features you can access.",
+    "cards": {
+      "managers": {
+        "title": "Property Managers & Admins",
+        "description": "Access the full management dashboard with all administrative features",
+        "redirect": "Will be redirected to"
+      },
+      "residents": {
+        "title": "Residents & Members",
+        "description": "Access the resident portal with personalized information and services",
+        "redirect": "Will be redirected to"
+      }
+    },
+    "organizationList": {
+      "title": "Your Organizations",
+      "description": "Select an organization to continue"
+    },
+    "footer": {
+      "text": "Don't see your organization? Contact your property manager for an invitation."
+    },
+    "logoAlt": "Syndik Logo"
   },
   "pagination": {
     "previous": "Previous",

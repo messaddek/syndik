@@ -18,5 +18,15 @@
   "recentActivity": "Recent Activity",
   "newResident": "New Resident",
   "meetingScheduled": "Meeting Scheduled",
-  "noRecentActivity": "No recent activity"
+  "noRecentActivity": "No recent activity",
+  "quickActions": "Quick Actions",
+  "quickActionsDescription": "Perform common actions quickly from here.",
+  "addBuilding": "Add Building",
+  "addResident": "Add Resident",
+  "inviteResidents": "Invite Residents",
+  "scheduleMeeting": "Schedule Meeting",
+  "trends": "Trends",
+  "trendsDescription": "See financial and occupancy trends.",
+  "occupancy": "Occupancy",
+  "occupancyDescription": "View occupancy rates and history."
 }
