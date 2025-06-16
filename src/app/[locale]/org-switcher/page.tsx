@@ -43,7 +43,6 @@ export default function OrgSwitcherPage() {
         {/* Instructions Cards */}
         <div className='mb-8 grid gap-6 md:grid-cols-2'>
           <Card className='border-blue-200 bg-blue-50/50 dark:bg-blue-900/20'>
-            {' '}
             <CardHeader>
               <CardTitle className='flex items-center text-blue-700 dark:text-blue-300'>
                 <Users className='mr-2 h-5 w-5' />
