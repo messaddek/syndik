@@ -898,7 +898,7 @@
       "starter": {
         "name": "Starter",
         "description": "Perfect for small property managers just getting started.",
-        "price": "$29",
+        "price": "$49",
         "period": "/month",
         "features": [
           "Up to 50 units",
@@ -915,7 +915,7 @@
       "professional": {
         "name": "Professional",
         "description": "Everything you need to manage medium-sized portfolios efficiently.",
-        "price": "$79",
+        "price": "$99",
         "period": "/month",
         "features": [
           "Up to 500 units",
