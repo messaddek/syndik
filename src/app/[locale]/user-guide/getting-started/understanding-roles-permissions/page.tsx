@@ -205,7 +205,7 @@ const UnderstandingRolesPermissionsPage = () => {
                       <Card className='border-blue-200 bg-blue-50'>
                         <CardHeader className='pb-3'>
                           <CardTitle className='flex items-center space-x-2 text-lg'>
-                            <Settings className='h-5 w-5 text-blue-600' />
+                            <Settings className='text-primary h-5 w-5' />
                             <span>Property Manager</span>
                             <Badge variant='outline' className='ml-2'>
                               Mid Level
@@ -596,7 +596,7 @@ const UnderstandingRolesPermissionsPage = () => {
                         <a
                           key={item.id}
                           href={`#${item.id}`}
-                          className={`block text-sm transition-colors hover:text-blue-600 ${
+                          className={`hover:text-primary block text-sm transition-colors ${
                             item.level === 2
                               ? 'pl-4 text-gray-600'
                               : 'font-medium text-gray-700'

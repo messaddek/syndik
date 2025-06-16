@@ -1,0 +1,89 @@
+{
+  "title": "Bâtiments",
+  "subtitle": "Gérer votre portefeuille immobilier",
+  "addNew": "Ajouter un nouveau bâtiment",
+  "addBuilding": "Ajouter un bâtiment",
+  "addBuildingDescription": "Ajoutez un nouveau bâtiment à votre résidence.",
+  "editBuilding": "Modifier le bâtiment",
+  "deleteBuilding": "Supprimer le bâtiment",
+  "viewBuilding": "Voir le bâtiment",
+  "noBuildings": "Aucun bâtiment trouvé. Ajoutez votre premier bâtiment pour commencer.",
+  "totalBuildings": "Total des bâtiments",
+  "activeBuildings": "Bâtiments actifs",
+  "buildingDetails": "Détails du bâtiment",
+  "units": "Unités",
+  "gridView": "Vue en grille",
+  "tableView": "Vue en tableau",
+  "search": "Rechercher des bâtiments...",
+  "filter": "Filtrer",
+  "allCities": "Toutes les villes",
+  "clearFilters": "Effacer les filtres",
+  "building": "bâtiment",
+  "form": {
+    "title": "Informations du bâtiment",
+    "addTitle": "Ajouter un nouveau bâtiment",
+    "editTitle": "Modifier le bâtiment",
+    "description": "Ajouter un nouveau bâtiment à votre portefeuille.",
+    "editDescription": "Mettre à jour les informations et détails du bâtiment.",
+    "name": "Nom du bâtiment",
+    "address": "Adresse",
+    "city": "Ville",
+    "postalCode": "Code postal",
+    "country": "Pays",
+    "totalUnits": "Total des unités",
+    "floors": "Nombre d'étages",
+    "buildingType": "Type de bâtiment",
+    "constructionYear": "Année de construction",
+    "buildingDescription": "Description",
+    "placeholders": {
+      "name": "Entrez le nom du bâtiment",
+      "address": "Entrez l'adresse du bâtiment",
+      "city": "Entrez la ville",
+      "postalCode": "Entrez le code postal",
+      "description": "Entrez la description du bâtiment (optionnel)"
+    },
+    "descriptions": {
+      "buildingDescription": "Fournissez des détails supplémentaires sur le bâtiment (optionnel)"
+    }
+  },
+  "actions": {
+    "add": "Ajouter un bâtiment",
+    "edit": "Modifier le bâtiment",
+    "delete": "Supprimer le bâtiment",
+    "view": "Voir le bâtiment",
+    "manage": "Gérer le bâtiment"
+  },
+  "status": {
+    "active": "Actif",
+    "inactive": "Inactif",
+    "maintenance": "En maintenance",
+    "occupied": "Occupé",
+    "vacant": "Vacant"
+  },
+  "details": {
+    "overview": "Aperçu",
+    "units": "Unités",
+    "residents": "Résidents",
+    "maintenance": "Maintenance",
+    "financials": "Finances"
+  },
+  "table": {
+    "columns": {
+      "name": "Nom",
+      "address": "Adresse",
+      "city": "Ville",
+      "totalUnits": "Total des unités",
+      "description": "Description",
+      "actions": "Actions"
+    }
+  },
+  "messages": {
+    "buildingCreated": "Bâtiment créé avec succès",
+    "buildingUpdated": "Bâtiment mis à jour avec succès",
+    "buildingDeleted": "Bâtiment supprimé avec succès",
+    "errorCreatingBuilding": "Échec de la création du bâtiment",
+    "errorUpdatingBuilding": "Échec de la mise à jour du bâtiment",
+    "errorDeletingBuilding": "Échec de la suppression du bâtiment",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce bâtiment ? Cette action ne peut pas être annulée."
+  }
+}

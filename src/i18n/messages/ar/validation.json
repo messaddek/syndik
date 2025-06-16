@@ -1,0 +1,7 @@
+{
+  "unitRequired": "يرجى اختيار وحدة",
+  "firstNameRequired": "الاسم الأول مطلوب",
+  "lastNameRequired": "اسم العائلة مطلوب",
+  "emailRequired": "يرجى إدخال عنوان بريد إلكتروني صالح",
+  "invalidMoveInDate": "تاريخ الانتقال للسكن لا يمكن أن يكون في المستقبل"
+}

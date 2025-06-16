@@ -63,9 +63,11 @@ export function PortalDashboard() {
             {t('common.welcome')}, {resident.firstName}!
           </h1>
           <p className='text-muted-foreground'>{t('portal.welcomeMessage')}</p>
-        </div>
+        </div>{' '}
         <Badge variant='secondary' className='text-sm'>
-          {resident?.isOwner ? t('residents.owner') : t('residents.tenant')}
+          {resident?.isOwner
+            ? t('residents.ownerStatus')
+            : t('residents.tenantStatus')}
         </Badge>
       </div>
       {/* Quick Stats */}

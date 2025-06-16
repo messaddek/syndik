@@ -1,0 +1,89 @@
+{
+  "title": "Buildings",
+  "subtitle": "Manage your building portfolio",
+  "addNew": "Add New Building",
+  "addBuilding": "Add Building",
+  "addBuildingDescription": "Add a new building to your residence.",
+  "editBuilding": "Edit Building",
+  "deleteBuilding": "Delete Building",
+  "viewBuilding": "View Building",
+  "noBuildings": "No buildings found. Add your first building to get started.",
+  "totalBuildings": "Total Buildings",
+  "activeBuildings": "Active Buildings",
+  "buildingDetails": "Building Details",
+  "units": "Units",
+  "gridView": "Grid View",
+  "tableView": "Table View",
+  "search": "Search buildings...",
+  "filter": "Filter",
+  "allCities": "All Cities",
+  "clearFilters": "Clear Filters",
+  "building": "building",
+  "form": {
+    "title": "Building Information",
+    "addTitle": "Add New Building",
+    "editTitle": "Edit Building",
+    "description": "Add a new building to your portfolio.",
+    "editDescription": "Update building information and details.",
+    "name": "Building Name",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal Code",
+    "country": "Country",
+    "totalUnits": "Total Units",
+    "floors": "Number of Floors",
+    "buildingType": "Building Type",
+    "constructionYear": "Construction Year",
+    "buildingDescription": "Description",
+    "placeholders": {
+      "name": "Enter building name",
+      "address": "Enter building address",
+      "city": "Enter city",
+      "postalCode": "Enter postal code",
+      "description": "Enter building description (optional)"
+    },
+    "descriptions": {
+      "buildingDescription": "Provide additional details about the building (optional)"
+    }
+  },
+  "actions": {
+    "add": "Add Building",
+    "edit": "Edit Building",
+    "delete": "Delete Building",
+    "view": "View Building",
+    "manage": "Manage Building"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "maintenance": "Under Maintenance",
+    "occupied": "Occupied",
+    "vacant": "Vacant"
+  },
+  "details": {
+    "overview": "Overview",
+    "units": "Units",
+    "residents": "Residents",
+    "maintenance": "Maintenance",
+    "financials": "Financials"
+  },
+  "table": {
+    "columns": {
+      "name": "Name",
+      "address": "Address",
+      "city": "City",
+      "totalUnits": "Total Units",
+      "description": "Description",
+      "actions": "Actions"
+    }
+  },
+  "messages": {
+    "buildingCreated": "Building created successfully",
+    "buildingUpdated": "Building updated successfully",
+    "buildingDeleted": "Building deleted successfully",
+    "errorCreatingBuilding": "Failed to create building",
+    "errorUpdatingBuilding": "Failed to update building",
+    "errorDeletingBuilding": "Failed to delete building",
+    "confirmDelete": "Are you sure you want to delete this building? This action cannot be undone."
+  }
+}

@@ -184,7 +184,7 @@ export function ResidentPortal() {
         <Card>
           <CardContent className='p-6'>
             <div className='flex items-center space-x-4'>
-              <Home className='h-8 w-8 text-blue-600' />
+              <Home className='text-primary h-8 w-8' />
               <div>
                 <p className='text-sm font-medium text-gray-600'>Your Unit</p>
                 <p className='text-xl font-bold'>
@@ -292,7 +292,7 @@ export function ResidentPortal() {
                   key={meeting.id}
                   className='flex items-center space-x-3 rounded-lg bg-gray-50 p-3'
                 >
-                  <Calendar className='h-5 w-5 text-blue-600' />
+                  <Calendar className='text-primary h-5 w-5' />
                   <div className='flex-1'>
                     <h4 className='font-medium'>{meeting.title}</h4>
                     <p className='text-sm text-gray-600'>

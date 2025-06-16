@@ -137,8 +137,11 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
             Manage residents and their unit assignments
           </p>
         </div>
-        <Button onClick={() => setIsCreateDialogOpen(true)}>
-          <Plus className='mr-2 h-4 w-4' />
+        <Button
+          onClick={() => setIsCreateDialogOpen(true)}
+          className='flex items-center space-x-2'
+        >
+          <Plus className='h-4 w-4' />
           Add Resident
         </Button>
       </div>

@@ -1,0 +1,162 @@
+{
+  "hero": {
+    "title": "Simple, Transparent Pricing",
+    "description": "Choose the perfect plan for your syndicate. All plans include our core features with 24/7 support."
+  },
+  "badge": "Simple, Transparent Pricing",
+  "title": "Choose Your Plan",
+  "description": "Start with our free trial and scale as you grow. No hidden fees, no surprises.",
+  "guarantees": {
+    "support": "24/7 Premium Support",
+    "uptime": "99.9% Uptime SLA",
+    "gdpr": "GDPR Compliant"
+  },
+  "billing": {
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "period": {
+      "month": "/month",
+      "year": "/year"
+    },
+    "discount": {
+      "save": "Save 20%",
+      "message": "Switch to yearly billing and save 20%",
+      "saving": "You're saving 20%",
+      "yearlyMessage": "with yearly billing - that's 2 months free!"
+    }
+  },
+  "buttons": {
+    "startTrial": "Start Free Trial",
+    "contactSales": "Contact Sales"
+  },
+  "noCreditCard": "No credit card required",
+  "plans": {
+    "popular": "Most Popular",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect for small property managers just getting started.",
+      "price": "$29",
+      "period": "/month",
+      "features": [
+        "Up to 50 units",
+        "Resident portal",
+        "Basic maintenance tracking",
+        "Online rent collection",
+        "Email support",
+        "Mobile app access",
+        "Document storage",
+        "Basic reporting"
+      ],
+      "cta": "Start Free Trial"
+    },
+    "professional": {
+      "name": "Professional",
+      "description": "Everything you need to manage medium-sized portfolios efficiently.",
+      "price": "$79",
+      "period": "/month",
+      "features": [
+        "Up to 500 units",
+        "Everything in Starter",
+        "Advanced maintenance workflows",
+        "Financial reporting & analytics",
+        "Mass communication tools",
+        "Vendor management",
+        "Custom branding",
+        "Phone & chat support",
+        "API access",
+        "Advanced integrations"
+      ],
+      "cta": "Start Free Trial",
+      "popular": "Most Popular"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "description": "Advanced features for large-scale property management operations.",
+      "price": "Custom",
+      "period": "",
+      "features": [
+        "Unlimited units",
+        "Everything in Professional",
+        "White-label solution",
+        "Custom integrations",
+        "Dedicated account manager",
+        "SLA guarantees",
+        "Advanced security features",
+        "Custom reporting",
+        "On-site training",
+        "Priority support"
+      ],
+      "cta": "Contact Sales"
+    }
+  },
+  "allPlansInclude": {
+    "title": "All Plans Include",
+    "description": "Every Syndik plan comes with these essential features to help you manage your syndicate effectively.",
+    "features": [
+      "Resident Management",
+      "Financial Tracking",
+      "Meeting Scheduler",
+      "Document Management",
+      "Communication Tools",
+      "Mobile Access",
+      "Data Security",
+      "24/7 Support"
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "Is there a free trial?",
+        "answer": "Yes! We offer a 14-day free trial for all our plans. No credit card required to get started."
+      },
+      {
+        "question": "Can I change plans later?",
+        "answer": "Absolutely. You can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept all major credit cards, bank transfers, and can set up custom payment arrangements for enterprise customers."
+      },
+      {
+        "question": "Is my data secure?",
+        "answer": "Yes, we use enterprise-grade security measures including encryption, regular backups, and comply with all data protection regulations."
+      },
+      {
+        "question": "Do you offer discounts for annual billing?",
+        "answer": "Yes, we offer a 20% discount when you choose annual billing for any of our plans."
+      }
+    ]
+  },
+  "additionalFeatures": {
+    "enterpriseSecurity": {
+      "title": "Enterprise Security",
+      "description": "Advanced security features and compliance for large organizations."
+    },
+    "globalAvailability": {
+      "title": "Global Availability",
+      "description": "Available worldwide with multi-language and multi-currency support."
+    },
+    "dedicatedSupport": {
+      "title": "Dedicated Support",
+      "description": "Get priority support with dedicated account management."
+    },
+    "awardWinning": {
+      "title": "Award-winning Solution",
+      "description": "Recognized as the best property management platform by the industry."
+    }
+  },
+  "customSolution": {
+    "title": "Need a Custom Solution?",
+    "description": "Contact our team to discuss your specific needs and get a tailored quote.",
+    "link": "Contact Sales"
+  },
+  "cta": {
+    "title": "Ready to Get Started?",
+    "description": "Start your free trial today and see how Syndik can transform your syndicate management.",
+    "buttons": {
+      "startTrial": "Start Free Trial",
+      "contactSales": "Contact Sales"
+    }
+  }
+}

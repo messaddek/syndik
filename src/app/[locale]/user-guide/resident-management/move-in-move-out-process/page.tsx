@@ -118,7 +118,7 @@ const MoveInMoveOutProcessPage = () => {
                     </p>
                     <div className='rounded-lg bg-blue-50 p-4'>
                       <div className='flex items-start space-x-3'>
-                        <Lightbulb className='mt-0.5 h-5 w-5 text-blue-600' />
+                        <Lightbulb className='text-primary mt-0.5 h-5 w-5' />
                         <div>
                           <h4 className='font-medium text-blue-900'>
                             Key Components

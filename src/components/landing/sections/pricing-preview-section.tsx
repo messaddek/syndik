@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 export function PricingPreviewSection() {
-  const t = useTranslations('landing.pricing');
+  const t = useTranslations('pricing');
   const [isYearly, setIsYearly] = useState(false);
 
   // Get features arrays from translations
@@ -123,7 +123,7 @@ export function PricingPreviewSection() {
                 className={cn(
                   'rounded-full px-6 py-2 text-sm font-medium transition-all duration-200',
                   !isYearly
-                    ? 'bg-blue-600 text-white shadow-sm'
+                    ? 'bg-primary text-white shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
                 )}
               >
@@ -134,7 +134,7 @@ export function PricingPreviewSection() {
                 className={cn(
                   'rounded-full px-6 py-2 text-sm font-medium transition-all duration-200',
                   isYearly
-                    ? 'bg-blue-600 text-white shadow-sm'
+                    ? 'bg-primary text-white shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
                 )}
               >
@@ -206,7 +206,7 @@ export function PricingPreviewSection() {
                       className={`rounded-full bg-gradient-to-br p-3 ${plan.popular ? 'from-blue-100 to-indigo-100' : 'from-gray-100 to-gray-200'} shadow-sm`}
                     >
                       <plan.icon
-                        className={`h-6 w-6 ${plan.popular ? 'text-blue-600' : 'text-gray-600'}`}
+                        className={`h-6 w-6 ${plan.popular ? 'text-primary' : 'text-gray-600'}`}
                       />
                     </div>
                   </div>
@@ -281,7 +281,7 @@ export function PricingPreviewSection() {
         {/* Additional features highlight */}
         <div className='mx-auto mt-16 grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-3'>
           <div className='rounded-lg border border-white/20 bg-white/60 p-4 text-center shadow-sm backdrop-blur-sm'>
-            <Shield className='mx-auto mb-2 h-8 w-8 text-blue-600' />
+            <Shield className='text-primary mx-auto mb-2 h-8 w-8' />
             <h4 className='mb-1 font-semibold text-gray-900'>
               {t('additionalFeatures.enterpriseSecurity.title')}
             </h4>
@@ -312,7 +312,7 @@ export function PricingPreviewSection() {
           <div className='mx-auto max-w-2xl rounded-2xl border border-white/20 bg-white/60 p-8 shadow-lg backdrop-blur-sm'>
             <div className='mb-4 flex items-center justify-center'>
               <div className='rounded-full bg-gradient-to-br from-blue-100 to-purple-100 p-3'>
-                <Users className='h-6 w-6 text-blue-600' />
+                <Users className='text-primary h-6 w-6' />
               </div>
             </div>
             <h3 className='mb-2 text-lg font-semibold text-gray-900'>
@@ -323,7 +323,7 @@ export function PricingPreviewSection() {
             </p>
             <Link
               href='/contact'
-              className='group inline-flex items-center font-semibold text-blue-600 transition-colors hover:text-blue-500'
+              className='group text-primary inline-flex items-center font-semibold transition-colors hover:text-blue-500'
             >
               {t('customSolution.link')}
               <ChevronRight className='ml-1 h-4 w-4 transition-transform group-hover:translate-x-1' />

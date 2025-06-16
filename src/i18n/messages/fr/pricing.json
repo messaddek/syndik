@@ -1,0 +1,135 @@
+{
+  "hero": {
+    "title": "Tarification Simple et Transparente",
+    "description": "Choisissez le plan parfait pour votre syndicat. Tous les plans incluent nos fonctionnalités principales avec un support 24/7."
+  },
+  "plans": {
+    "popular": "Le Plus Populaire",
+    "starter": {
+      "name": "Débutant",
+      "description": "Parfait pour les petits gestionnaires immobiliers qui commencent.",
+      "price": "29€",
+      "period": "/mois",
+      "features": [
+        "Jusqu'à 50 unités",
+        "Portail résident",
+        "Suivi de maintenance de base",
+        "Collecte de loyer en ligne",
+        "Support par email",
+        "Accès application mobile",
+        "Stockage de documents",
+        "Rapports de base"
+      ],
+      "cta": "Essai Gratuit"
+    },
+    "professional": {
+      "name": "Professionnel",
+      "description": "Tout ce dont vous avez besoin pour gérer efficacement des portefeuilles de taille moyenne.",
+      "price": "79€",
+      "period": "/mois",
+      "features": [
+        "Jusqu'à 500 unités",
+        "Tout dans Débutant",
+        "Workflows de maintenance avancés",
+        "Rapports financiers et analyses",
+        "Outils de communication de masse",
+        "Gestion des fournisseurs",
+        "Image de marque personnalisée",
+        "Support téléphone et chat",
+        "Accès API",
+        "Intégrations avancées"
+      ],
+      "cta": "Essai Gratuit",
+      "popular": "Le Plus Populaire"
+    },
+    "enterprise": {
+      "name": "Entreprise",
+      "description": "Fonctionnalités avancées pour les opérations de gestion immobilière à grande échelle.",
+      "price": "Sur mesure",
+      "period": "",
+      "features": [
+        "Unités illimitées",
+        "Tout dans Professionnel",
+        "Solution en marque blanche",
+        "Intégrations personnalisées",
+        "Gestionnaire de compte dédié",
+        "Garanties SLA",
+        "Fonctionnalités de sécurité avancées",
+        "Rapports personnalisés",
+        "Formation sur site",
+        "Support prioritaire"
+      ],
+      "cta": "Contacter les Ventes"
+    }
+  },
+  "allPlansInclude": {
+    "title": "Tous les Plans Incluent",
+    "description": "Chaque plan Syndik comprend ces fonctionnalités essentielles pour vous aider à gérer efficacement votre syndicat.",
+    "features": [
+      "Gestion des Résidents",
+      "Suivi Financier",
+      "Planificateur de Réunions",
+      "Gestion de Documents",
+      "Outils de Communication",
+      "Accès Mobile",
+      "Sécurité des Données",
+      "Support 24/7"
+    ]
+  },
+  "faq": {
+    "title": "Questions Fréquemment Posées",
+    "items": [
+      {
+        "question": "Y a-t-il un essai gratuit ?",
+        "answer": "Oui ! Nous offrons un essai gratuit de 14 jours pour tous nos plans. Aucune carte de crédit requise pour commencer."
+      },
+      {
+        "question": "Puis-je changer de plan plus tard ?",
+        "answer": "Absolument. Vous pouvez mettre à niveau ou rétrograder votre plan à tout moment. Les changements seront reflétés dans votre prochain cycle de facturation."
+      },
+      {
+        "question": "Quels modes de paiement acceptez-vous ?",
+        "answer": "Nous acceptons toutes les cartes de crédit principales, les virements bancaires, et pouvons mettre en place des arrangements de paiement personnalisés pour les clients entreprise."
+      },
+      {
+        "question": "Mes données sont-elles sécurisées ?",
+        "answer": "Oui, nous utilisons des mesures de sécurité de niveau entreprise incluant le chiffrement, des sauvegardes régulières, et nous respectons toutes les réglementations de protection des données."
+      },
+      {
+        "question": "Offrez-vous des remises pour la facturation annuelle ?",
+        "answer": "Oui, nous offrons une remise de 20% lorsque vous choisissez la facturation annuelle pour tous nos plans."
+      }
+    ]
+  },
+  "additionalFeatures": {
+    "enterpriseSecurity": {
+      "title": "Sécurité Entreprise",
+      "description": "Fonctionnalités de sécurité avancées et conformité pour les grandes organisations."
+    },
+    "globalAvailability": {
+      "title": "Disponibilité Mondiale",
+      "description": "Disponible dans le monde entier avec support multi-langue et multi-devises."
+    },
+    "dedicatedSupport": {
+      "title": "Support Dédié",
+      "description": "Obtenez un support prioritaire avec une gestion de compte dédiée."
+    },
+    "awardWinning": {
+      "title": "Solution Primée",
+      "description": "Reconnue comme la meilleure plateforme de gestion immobilière par l'industrie."
+    }
+  },
+  "customSolution": {
+    "title": "Besoin d'une Solution Personnalisée ?",
+    "description": "Contactez notre équipe pour discuter de vos besoins spécifiques et obtenir un devis sur mesure.",
+    "link": "Contacter les Ventes"
+  },
+  "cta": {
+    "title": "Prêt à Commencer ?",
+    "description": "Commencez votre essai gratuit aujourd'hui et découvrez comment Syndik peut transformer la gestion de votre syndicat.",
+    "buttons": {
+      "startTrial": "Essai Gratuit",
+      "contactSales": "Contacter les Ventes"
+    }
+  }
+}

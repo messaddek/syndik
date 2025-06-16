@@ -56,7 +56,7 @@ export function SecuritySection() {
         <div className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
           {securityFeatures.map(feature => (
             <div key={feature.title} className='flex flex-col'>
-              <div className='mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600'>
+              <div className='bg-primary mb-6 flex h-12 w-12 items-center justify-center rounded-lg'>
                 <feature.icon className='h-6 w-6 text-white' />
               </div>
               <h3 className='text-lg font-semibold text-white'>

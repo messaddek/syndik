@@ -33,12 +33,11 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
   const { data: uninvitedResidents = [], isLoading } = useQuery(
     trpc.residents.getUninvitedResidents.queryOptions({ limit: 50 })
   );
-
   // Bulk invite mutation
   const bulkInviteMutation = useMutation(
     trpc.residents.bulkInviteToPortal.mutationOptions({
       onSuccess: data => {
-        const { successCount, errorCount } = data;
+        const { successCount, errorCount, failed } = data;
 
         if (successCount > 0) {
           toast.success(
@@ -47,9 +46,56 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
         }
 
         if (errorCount > 0) {
-          toast.error(
-            `Failed to send ${errorCount} invitation${errorCount > 1 ? 's' : ''}`
+          console.log('Failed invitations:', failed);
+
+          // Group errors by type for better user feedback
+          const alreadyMembers = failed.filter(f =>
+            f.error.includes('already member of organization')
           );
+          const alreadyInvited = failed.filter(f =>
+            f.error.includes('Invitation already sent')
+          );
+          const invalidEmails = failed.filter(f =>
+            f.error.includes('Invalid email')
+          );
+          const otherErrors = failed.filter(
+            f =>
+              !f.error.includes('already member') &&
+              !f.error.includes('already sent') &&
+              !f.error.includes('Invalid email')
+          ); // Show specific error messages
+          if (alreadyMembers.length > 0) {
+            const names = alreadyMembers
+              .map(f => f.residentName || f.email)
+              .join(', ');
+            toast.warning(
+              `${alreadyMembers.length} resident${alreadyMembers.length > 1 ? 's are' : ' is'} already a member: ${names.length > 50 ? names.substring(0, 50) + '...' : names}`
+            );
+          }
+
+          if (alreadyInvited.length > 0) {
+            const names = alreadyInvited
+              .map(f => f.residentName || f.email)
+              .join(', ');
+            toast.warning(
+              `${alreadyInvited.length} resident${alreadyInvited.length > 1 ? 's' : ''} already ${alreadyInvited.length > 1 ? 'have' : 'has'} pending invitations: ${names.length > 50 ? names.substring(0, 50) + '...' : names}`
+            );
+          }
+
+          if (invalidEmails.length > 0) {
+            const names = invalidEmails
+              .map(f => f.residentName || f.email)
+              .join(', ');
+            toast.error(
+              `${invalidEmails.length} resident${invalidEmails.length > 1 ? 's have' : ' has'} invalid email: ${names.length > 50 ? names.substring(0, 50) + '...' : names}`
+            );
+          }
+
+          if (otherErrors.length > 0) {
+            toast.error(
+              `${otherErrors.length} invitation${otherErrors.length > 1 ? 's' : ''} failed for other reasons. Check console for details.`
+            );
+          }
         }
 
         setSelectedResidents([]);

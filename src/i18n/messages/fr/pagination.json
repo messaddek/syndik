@@ -1,0 +1,12 @@
+{
+  "previous": "Précédent",
+  "next": "Suivant",
+  "first": "Premier",
+  "last": "Dernier",
+  "page": "Page",
+  "of": "de",
+  "showingPage": "Affichage de la page",
+  "showingResults": "Affichage de {start} à {end} sur {total} résultats",
+  "noResults": "Aucun résultat trouvé",
+  "rowsPerPage": "Lignes par page"
+}

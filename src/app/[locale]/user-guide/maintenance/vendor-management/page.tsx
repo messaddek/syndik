@@ -111,8 +111,8 @@ export default function VendorManagementPage() {
           {/* Adding Vendors */}
           <Card id='adding-vendors'>
             <CardHeader>
-              <CardTitle className='flex items-center'>
-                <Plus className='mr-2 h-5 w-5' />
+              <CardTitle className='flex items-center space-x-2'>
+                <Plus className='h-5 w-5' />
                 Adding New Vendors
               </CardTitle>
               <CardDescription>
@@ -663,8 +663,11 @@ export default function VendorManagementPage() {
                 className='w-full justify-start'
                 asChild
               >
-                <Link href='/maintenance/vendors/new'>
-                  <Plus className='mr-2 h-4 w-4' />
+                <Link
+                  href='/maintenance/vendors/new'
+                  className='flex items-center gap-2'
+                >
+                  <Plus className='h-4 w-4' />
                   Add Vendor
                 </Link>
               </Button>

@@ -3,17 +3,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ArticleLayout from '@/modules/articles/components/article-layout';
+import { ArticleSidebar } from '@/components/articles/article-sidebar';
 import {
   ArrowLeft,
   Building2,
   MapPin,
-  Users,
   FileText,
   CheckCircle,
   AlertTriangle,
   Clock,
   ChevronRight,
-  Mail,
   Plus,
   Upload,
 } from 'lucide-react';
@@ -120,7 +119,7 @@ const AddingNewPropertiesPage = () => {
                 <Card className='border-blue-200 bg-blue-50'>
                   <CardContent className='p-4'>
                     <div className='flex items-start space-x-3'>
-                      <AlertTriangle className='mt-0.5 h-5 w-5 text-blue-600' />
+                      <AlertTriangle className='text-primary mt-0.5 h-5 w-5' />
                       <div>
                         <p className='font-medium text-blue-800'>
                           Important Note
@@ -621,7 +620,7 @@ const AddingNewPropertiesPage = () => {
                     scheduling a property walkthrough to verify all information.
                   </p>
                 </div>
-              </section>{' '}
+              </section>
               {/* Navigation */}
               <div className='flex items-center justify-between border-t pt-8'>
                 <Button
@@ -645,83 +644,14 @@ const AddingNewPropertiesPage = () => {
             </div>
           </div>
         </div>
-
         {/* Sidebar */}
         <div className='lg:col-span-1'>
-          <div className='space-y-6'>
-            {/* Table of Contents */}
-            <Card>
-              <CardHeader>
-                <CardTitle className='text-lg'>Table of Contents</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <nav className='space-y-2'>
-                  {tableOfContents.map(item => (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      className={`block text-sm transition-colors hover:text-blue-600 ${
-                        item.level === 2
-                          ? 'pl-4 text-gray-600'
-                          : 'font-medium text-gray-700'
-                      }`}
-                    >
-                      {item.title}
-                    </a>
-                  ))}
-                </nav>
-              </CardContent>
-            </Card>
-            {/* Related Articles */}
-            <Card>
-              <CardHeader>
-                <CardTitle className='text-lg'>Related Articles</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className='space-y-3'>
-                  {relatedArticles.map((article, index) => (
-                    <Link
-                      key={index}
-                      href={article.href}
-                      className='block rounded-lg bg-gray-50 p-3 transition-colors hover:bg-gray-100'
-                    >
-                      <h4 className='mb-1 text-sm font-medium text-gray-900'>
-                        {article.title}
-                      </h4>
-                      <div className='flex items-center space-x-1 text-xs text-gray-500'>
-                        <Clock className='h-3 w-3' />
-                        <span>{article.time}</span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            {/* Help */}
-            <Card>
-              <CardHeader>
-                <CardTitle className='text-lg'>Need Help?</CardTitle>
-              </CardHeader>
-              <CardContent className='space-y-3'>
-                <Button
-                  variant='outline'
-                  className='w-full justify-start'
-                  size='sm'
-                >
-                  <Mail className='mr-2 h-4 w-4' />
-                  Contact Support
-                </Button>
-                <Button
-                  variant='outline'
-                  className='w-full justify-start'
-                  size='sm'
-                >
-                  <Users className='mr-2 h-4 w-4' />
-                  Join Community
-                </Button>
-              </CardContent>
-            </Card>{' '}
-          </div>
+          <ArticleSidebar
+            tableOfContents={tableOfContents}
+            relatedArticles={relatedArticles}
+            currentCategory='property-management'
+            showQuickActions={true}
+          />
         </div>
       </div>
     </ArticleLayout>

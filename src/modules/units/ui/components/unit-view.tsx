@@ -335,7 +335,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                     </p>
                     <Link
                       href={`/buildings/${building.id}`}
-                      className='text-sm text-blue-600 hover:underline'
+                      className='text-primary text-sm hover:underline'
                     >
                       {building.name}
                     </Link>

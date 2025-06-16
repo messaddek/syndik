@@ -138,8 +138,8 @@ export function NotificationManagement() {
 
         <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
           <DialogTrigger asChild>
-            <Button>
-              <Plus className='mr-2 h-4 w-4' />
+            <Button className='flex items-center space-x-2'>
+              <Plus className='h-4 w-4' />
               Send Notification
             </Button>
           </DialogTrigger>

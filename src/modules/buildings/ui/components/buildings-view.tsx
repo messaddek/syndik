@@ -22,18 +22,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Plus, Filter, Search, X, Grid3X3, Table } from 'lucide-react';
-import { ResponsiveDialog } from '@/components/responsive-dialog';
-import { BuildingForm } from './building-form';
 import { BuildingsGridView } from './buildings-grid-view';
 import { BuildingsTableView } from './buildings-table-view';
-import { createBuildingSchema } from '../../schema';
-import { z } from 'zod';
 import { useDirection } from '@/hooks/use-direction';
 import { BUILDING_SORT_FIELDS, SORT_ORDERS } from '@/constants';
 import { useConfirm } from '@/hooks/use-confirm';
 import { useTranslations } from 'next-intl';
-
-type BuildingFormData = z.infer<typeof createBuildingSchema>;
+import { CreateBuildingDialog } from '@/modules/buildings/ui/components/create-building-dialog';
+import { EditBuildingDialog } from '@/modules/buildings/ui/components/edit-building-dialog';
 
 type BuildingQueryResult = {
   data: Building[];
@@ -101,6 +97,7 @@ type BuildingsViewProps = {
 
 export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingBuilding, setEditingBuilding] = useState<Building | null>(null);
   // Translation hooks
   const t = useTranslations('buildings');
@@ -113,7 +110,7 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
     t('deleteBuilding'),
-    t('confirmDelete')
+    t('messages.confirmDelete')
   );
 
   // Initialize tRPC client
@@ -136,28 +133,6 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
     })
   );
   // Mutations
-  const createMutation = useMutation(
-    trpc.buildings.create.mutationOptions({
-      onSuccess: () => {
-        queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
-        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
-        setIsCreateDialogOpen(false);
-      },
-    })
-  );
-  const updateMutation = useMutation(
-    trpc.buildings.update.mutationOptions({
-      onSuccess: async () => {
-        await queryClient.invalidateQueries(
-          trpc.buildings.getAll.queryOptions({})
-        );
-        await queryClient.invalidateQueries({
-          queryKey: [['search', 'global']],
-        });
-        setEditingBuilding(null);
-      },
-    })
-  );
   const deleteMutation = useMutation(
     trpc.buildings.delete.mutationOptions({
       onSuccess: () => {
@@ -172,27 +147,21 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
   );
 
   // Handlers
-  const handleCreateBuilding = (data: BuildingFormData) => {
-    createMutation.mutate(data);
-  };
-
-  const handleUpdateBuilding = (data: BuildingFormData) => {
-    if (editingBuilding) {
-      updateMutation.mutate({
-        id: editingBuilding.id,
-        data,
-      });
-    }
-  };
   const handleDeleteBuilding = async (building: Building) => {
     const confirmed = await confirm();
     if (confirmed) {
       deleteMutation.mutate({ id: building.id });
     }
   };
-  const handleCloseDialog = () => {
+
+  const handleEdit = (building: Building) => {
+    setEditingBuilding(building);
+    setIsEditDialogOpen(true);
+  };
+  const handleEditSuccess = () => {
+    queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
+    setIsEditDialogOpen(false);
     setEditingBuilding(null);
-    setIsCreateDialogOpen(false);
   };
 
   // Clear filters
@@ -211,18 +180,20 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
 
   return (
     <div className='space-y-6'>
-      {' '}
       {/* Header */}
       <div className='flex items-center justify-between'>
         <div>
           <h2 className='text-2xl font-bold'>{t('title')}</h2>
-          <p className='text-gray-600'>{t('buildingDetails')}</p>
+          <p className='text-gray-600'>{t('subtitle')}</p>
         </div>
-        <Button onClick={() => setIsCreateDialogOpen(true)}>
-          <Plus className='mr-2 h-4 w-4' />
+        <Button
+          onClick={() => setIsCreateDialogOpen(true)}
+          className='flex items-center gap-2'
+        >
+          <Plus className='h-4 w-4' />
           {t('addBuilding')}
         </Button>
-      </div>{' '}
+      </div>
       {/* Filters */}
       <Card>
         <CardHeader>
@@ -240,7 +211,7 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
           <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
             {/* Search */}
             <div className='space-y-2'>
-              <Label htmlFor='search'>{tCommon('search')}</Label>{' '}
+              <Label htmlFor='search'>{tCommon('search')}</Label>
               <div className='relative'>
                 <Search
                   className={`text-muted-foreground absolute top-2.5 h-4 w-4 ${isRtl ? 'right-2' : 'left-2'}`}
@@ -259,7 +230,7 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
 
             {/* City Filter */}
             <div className='space-y-2'>
-              <Label htmlFor='city'>{t('city')}</Label>
+              <Label htmlFor='city'>{t('form.city')}</Label>
               <Select
                 value={filters.city}
                 onValueChange={value =>
@@ -285,7 +256,7 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
             <div className='flex items-center justify-between border-t pt-2'>
               <p className='text-muted-foreground text-sm'>
                 {(buildingsData as unknown as BuildingQueryResult)?.pagination
-                  ?.total || 0}{' '}
+                  ?.total || 0}
                 {t('building')}(s) found
               </p>
               <Button variant='outline' size='sm' onClick={clearFilters}>
@@ -295,7 +266,7 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
             </div>
           )}
         </CardContent>
-      </Card>{' '}
+      </Card>
       {/* View Tabs */}
       <Tabs
         value={filters.view}
@@ -321,9 +292,9 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
           <TabsContent value={BUILDING_VIEWS.GRID} className='mt-4 space-y-4'>
             <BuildingsGridView
               buildings={buildingsWithData}
-              onEdit={setEditingBuilding}
+              onEdit={handleEdit}
               onDelete={handleDeleteBuilding}
-            />{' '}
+            />
             {/* Pagination for Grid View */}
             <SimplePagination
               currentPage={filters.page || 1}
@@ -337,9 +308,9 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
           <TabsContent value={BUILDING_VIEWS.TABLE} className='mt-4 space-y-4'>
             <BuildingsTableView
               buildings={buildingsWithData}
-              onEdit={setEditingBuilding}
+              onEdit={handleEdit}
               onDelete={handleDeleteBuilding}
-            />{' '}
+            />
             {/* Pagination for Table View */}
             <SimplePagination
               currentPage={filters.page || 1}
@@ -351,32 +322,24 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
             />
           </TabsContent>
         </div>
-      </Tabs>{' '}
+      </Tabs>
       {/* Create/Edit Dialog */}
-      <ResponsiveDialog
-        title={editingBuilding ? t('editBuilding') : t('addBuilding')}
-        description={
-          editingBuilding ? t('basicInformation') : t('buildingDetails')
-        }
-        open={isCreateDialogOpen || !!editingBuilding}
-        onOpenChange={open => {
-          if (!open) handleCloseDialog();
-          else if (!editingBuilding) setIsCreateDialogOpen(true);
+      <CreateBuildingDialog
+        open={isCreateDialogOpen}
+        onOpenChange={setIsCreateDialogOpen}
+        onSuccess={() => {
+          queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
+          queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
         }}
-      >
-        <BuildingForm
+      />
+      {editingBuilding && (
+        <EditBuildingDialog
+          open={isEditDialogOpen}
+          onOpenChange={setIsEditDialogOpen}
+          onSuccess={handleEditSuccess}
           building={editingBuilding}
-          onSubmit={
-            editingBuilding ? handleUpdateBuilding : handleCreateBuilding
-          }
-          isLoading={
-            editingBuilding
-              ? updateMutation.isPending
-              : createMutation.isPending
-          }
-          onCancel={handleCloseDialog}
         />
-      </ResponsiveDialog>
+      )}
       <ConfirmDialog />
     </div>
   );

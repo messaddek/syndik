@@ -34,20 +34,20 @@ export function BuildingsTableView({
   const columns: ColumnDef<Building>[] = [
     {
       accessorKey: 'name',
-      header: t('buildingName'),
+      header: t('table.columns.name'),
       cell: ({ row }) => (
         <Link
           href={`/buildings/${row.original.id}`}
           className='flex items-center space-x-2 hover:underline'
         >
-          <Building2 className='h-4 w-4 text-blue-600' />
+          <Building2 className='text-primary h-4 w-4' />
           <span className='font-medium'>{row.getValue('name')}</span>
         </Link>
       ),
     },
     {
       accessorKey: 'address',
-      header: t('buildingAddress'),
+      header: t('table.columns.address'),
       cell: ({ row }) => (
         <div className='flex items-center space-x-1'>
           <MapPin className='h-3 w-3 text-gray-500' />
@@ -57,11 +57,11 @@ export function BuildingsTableView({
     },
     {
       accessorKey: 'city',
-      header: t('city'),
+      header: t('table.columns.city'),
     },
     {
       accessorKey: 'totalUnits',
-      header: t('totalUnits'),
+      header: t('table.columns.totalUnits'),
       cell: ({ row }) => (
         <Badge variant='secondary'>
           <Users className='mr-1 h-3 w-3' />
@@ -71,12 +71,12 @@ export function BuildingsTableView({
     },
     {
       accessorKey: 'description',
-      header: t('description'),
+      header: t('table.columns.description'),
       cell: ({ row }) => {
         const description = row.getValue('description') as string;
         return (
           <span className='text-sm text-gray-600'>
-            {description || t('description')}
+            {description || t('table.columns.description')}
           </span>
         );
       },
@@ -97,7 +97,7 @@ export function BuildingsTableView({
               <DropdownMenuLabel>{tCommon('actions')}</DropdownMenuLabel>
               <DropdownMenuItem onClick={() => onEdit(building)}>
                 {t('editBuilding')}
-              </DropdownMenuItem>{' '}
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={() => onDelete(building)}

@@ -1,0 +1,21 @@
+{
+  "title": "Units",
+  "totalUnits": "total units",
+  "addUnit": "Add Unit",
+  "editUnit": "Edit Unit",
+  "deleteUnit": "Delete Unit",
+  "confirmDelete": "Are you sure you want to delete this unit?",
+  "viewResidents": "View Residents",
+  "viewIncome": "View Income",
+  "unknownBuilding": "Unknown Building",
+  "occupied": "Occupied",
+  "vacant": "Vacant",
+  "openMenu": "Open menu",
+  "floor": "Floor",
+  "bedrooms": "Bedrooms",
+  "bathrooms": "Bathrooms",
+  "area": "Area",
+  "monthlyFee": "Monthly Fee",
+  "activeResidents": "Active Residents",
+  "thisMonthIncome": "This Month Income"
+}

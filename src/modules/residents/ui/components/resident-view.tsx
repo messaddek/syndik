@@ -359,14 +359,14 @@ export function ResidentView({ id, _searchParams }: ResidentViewProps) {
                   <div className='flex items-center space-x-2'>
                     <Link
                       href={`/units/${unit.id}`}
-                      className='text-sm text-blue-600 hover:underline'
+                      className='text-primary text-sm hover:underline'
                     >
                       Unit {unit.unitNumber}
                     </Link>
                     <span className='text-muted-foreground text-sm'>in</span>
                     <Link
                       href={`/buildings/${building.id}`}
-                      className='text-sm text-blue-600 hover:underline'
+                      className='text-primary text-sm hover:underline'
                     >
                       {building.name}
                     </Link>

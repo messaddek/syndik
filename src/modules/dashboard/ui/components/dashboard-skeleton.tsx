@@ -134,7 +134,7 @@ export function DashboardSkeleton() {
                 <div key={i} className='flex items-center space-x-3'>
                   <div className='flex-shrink-0'>
                     {i % 2 === 0 ? (
-                      <Users className='h-4 w-4 text-blue-600' />
+                      <Users className='text-primary h-4 w-4' />
                     ) : (
                       <Calendar className='h-4 w-4 text-purple-600' />
                     )}

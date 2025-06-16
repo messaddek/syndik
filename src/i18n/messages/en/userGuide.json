@@ -1,0 +1,44 @@
+{
+  "title": "User Guide",
+  "subtitle": "Everything you need to know to manage your properties effectively",
+  "categories": {
+    "gettingStarted": {
+      "title": "Getting Started",
+      "description": "Essential steps to begin using Syndik effectively"
+    },
+    "propertyManagement": {
+      "title": "Property Management",
+      "description": "Tools and features for managing your properties"
+    },
+    "residentManagement": {
+      "title": "Resident Management",
+      "description": "Managing residents, leases, and tenant relations"
+    },
+    "financialManagement": {
+      "title": "Financial Management",
+      "description": "Rent collection, payments, and financial reporting"
+    },
+    "maintenance": {
+      "title": "Maintenance",
+      "description": "Work orders, scheduling, and maintenance tracking"
+    },
+    "communication": {
+      "title": "Communication",
+      "description": "Announcements, messaging, and resident communication"
+    }
+  },
+  "popularArticles": {
+    "title": "Most Popular",
+    "loadingData": "Loading latest data...",
+    "updatedRealTime": "Updated in real-time"
+  },
+  "sidebar": {
+    "quickStart": "Quick Start",
+    "createFirstProperty": "Create Your First Property",
+    "setupUserAccounts": "Set Up User Accounts",
+    "addFirstResident": "Add Your First Resident",
+    "needHelp": "Need Help?",
+    "contactSupport": "Contact Support",
+    "viewFaq": "View FAQ"
+  }
+}

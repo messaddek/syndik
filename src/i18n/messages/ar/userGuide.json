@@ -1,0 +1,44 @@
+{
+  "title": "دليل المستخدم",
+  "subtitle": "كل ما تحتاج لمعرفته لإدارة العقارات بفعالية",
+  "categories": {
+    "gettingStarted": {
+      "title": "البدء",
+      "description": "الخطوات الأساسية لبدء استخدام سينديك بفعالية"
+    },
+    "propertyManagement": {
+      "title": "إدارة العقارات",
+      "description": "الأدوات والميزات لإدارة عقاراتك"
+    },
+    "residentManagement": {
+      "title": "إدارة السكان",
+      "description": "إدارة السكان والعقود وعلاقات المستأجرين"
+    },
+    "financialManagement": {
+      "title": "الإدارة المالية",
+      "description": "تحصيل الإيجار والمدفوعات والتقارير المالية"
+    },
+    "maintenance": {
+      "title": "الصيانة",
+      "description": "أوامر العمل والجدولة وتتبع الصيانة"
+    },
+    "communication": {
+      "title": "التواصل",
+      "description": "الإعلانات والرسائل والتواصل مع السكان"
+    }
+  },
+  "popularArticles": {
+    "title": "الأكثر شعبية",
+    "loadingData": "جاري تحميل أحدث البيانات...",
+    "updatedRealTime": "محدث في الوقت الفعلي"
+  },
+  "sidebar": {
+    "quickStart": "بداية سريعة",
+    "createFirstProperty": "إنشاء عقارك الأول",
+    "setupUserAccounts": "إعداد حسابات المستخدمين",
+    "addFirstResident": "إضافة أول ساكن",
+    "needHelp": "تحتاج مساعدة؟",
+    "contactSupport": "الاتصال بالدعم",
+    "viewFaq": "عرض الأسئلة الشائعة"
+  }
+}

@@ -29,7 +29,8 @@ const InnerLayoutProvider = ({ children }: { children: React.ReactNode }) => {
         },
         variables: {
           // Override problematic CSS variables with actual color values
-          colorPrimary: resolvedTheme === 'dark' ? '#3b82f6' : '#2563eb',
+          colorPrimary: resolvedTheme === 'dark' ? '#3b82f6' : '#1e40af',
+
           colorBackground: resolvedTheme === 'dark' ? '#0a0a0a' : '#ffffff',
           colorText: resolvedTheme === 'dark' ? '#fafafa' : '#0a0a0a',
           colorTextSecondary: resolvedTheme === 'dark' ? '#a1a1aa' : '#71717a',

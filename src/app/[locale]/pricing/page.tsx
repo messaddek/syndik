@@ -4,109 +4,67 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 export default function PricingPage() {
+  const t = useTranslations('pricing');
+
+  // Get features arrays from translations
+  const starterFeatures = t.raw('plans.starter.features') as string[];
+  const professionalFeatures = t.raw('plans.professional.features') as string[];
+  const enterpriseFeatures = t.raw('plans.enterprise.features') as string[];
+  const allPlansFeatures = t.raw('allPlansInclude.features') as string[];
+  const faqItems = t.raw('faq.items') as Array<{
+    question: string;
+    answer: string;
+  }>;
+
   const plans = [
     {
-      name: 'Starter',
-      description: 'Perfect for small residential syndicates',
-      price: '$29',
-      period: '/month',
-      features: [
-        'Up to 50 units',
-        'Basic financial tracking',
-        'Resident portal',
-        'Email support',
-        'Meeting management',
-        'Document storage (1GB)',
-      ],
-      cta: 'Start Free Trial',
+      name: t('plans.starter.name'),
+      description: t('plans.starter.description'),
+      price: t('plans.starter.price'),
+      period: t('plans.starter.period'),
+      features: starterFeatures,
+      cta: t('plans.starter.cta'),
       popular: false,
     },
     {
-      name: 'Professional',
-      description: 'Ideal for growing syndicate communities',
-      price: '$79',
-      period: '/month',
-      features: [
-        'Up to 200 units',
-        'Advanced financial reports',
-        'Resident portal & mobile app',
-        'Priority support',
-        'Meeting management & voting',
-        'Document storage (10GB)',
-        'Custom branding',
-        'API access',
-      ],
-      cta: 'Start Free Trial',
+      name: t('plans.professional.name'),
+      description: t('plans.professional.description'),
+      price: t('plans.professional.price'),
+      period: t('plans.professional.period'),
+      features: professionalFeatures,
+      cta: t('plans.professional.cta'),
       popular: true,
     },
     {
-      name: 'Enterprise',
-      description: 'For large syndicate organizations',
-      price: 'Custom',
-      period: '',
-      features: [
-        'Unlimited units',
-        'Enterprise financial suite',
-        'White-label solution',
-        'Dedicated support manager',
-        'Advanced meeting tools',
-        'Unlimited storage',
-        'Custom integrations',
-        'SLA guarantee',
-        'On-premise deployment',
-      ],
-      cta: 'Contact Sales',
+      name: t('plans.enterprise.name'),
+      description: t('plans.enterprise.description'),
+      price: t('plans.enterprise.price'),
+      period: t('plans.enterprise.period'),
+      features: enterpriseFeatures,
+      cta: t('plans.enterprise.cta'),
       popular: false,
-    },
-  ];
-
-  const faqs = [
-    {
-      question: 'Is there a free trial?',
-      answer:
-        'Yes! We offer a 14-day free trial for all our plans. No credit card required to get started.',
-    },
-    {
-      question: 'Can I change plans later?',
-      answer:
-        'Absolutely. You can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle.',
-    },
-    {
-      question: 'What payment methods do you accept?',
-      answer:
-        'We accept all major credit cards, bank transfers, and can set up custom payment arrangements for enterprise customers.',
-    },
-    {
-      question: 'Is my data secure?',
-      answer:
-        'Yes, we use enterprise-grade security measures including encryption, regular backups, and comply with all data protection regulations.',
-    },
-    {
-      question: 'Do you offer discounts for annual billing?',
-      answer:
-        'Yes, we offer a 20% discount when you choose annual billing for any of our plans.',
     },
   ];
 
   return (
     <LandingLayout>
+      {' '}
       {/* Hero Section */}
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-4xl text-center'>
             <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-              Simple, Transparent Pricing
+              {t('hero.title')}
             </h1>
             <p className='mt-6 text-lg leading-8 text-gray-600'>
-              Choose the perfect plan for your syndicate. All plans include our
-              core features with 24/7 support.
+              {t('hero.description')}
             </p>
           </div>
         </div>
       </div>
-
       {/* Pricing Cards */}
       <div className='py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -116,10 +74,11 @@ export default function PricingPage() {
                 key={plan.name}
                 className={`relative ${plan.popular ? 'scale-105 shadow-lg ring-2 ring-blue-600' : ''}`}
               >
+                {' '}
                 {plan.popular && (
                   <div className='absolute -top-4 left-1/2 -translate-x-1/2'>
-                    <Badge className='bg-blue-600 text-white'>
-                      Most Popular
+                    <Badge className='bg-primary text-white'>
+                      {t('plans.popular')}
                     </Badge>
                   </div>
                 )}
@@ -149,7 +108,7 @@ export default function PricingPage() {
                     className='block'
                   >
                     <Button
-                      className={`w-full ${plan.popular ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
+                      className={`w-full ${plan.popular ? 'bg-primary hover:bg-blue-700' : ''}`}
                       variant={plan.popular ? 'default' : 'outline'}
                     >
                       {plan.cta}
@@ -160,31 +119,20 @@ export default function PricingPage() {
             ))}
           </div>
         </div>
-      </div>
-
+      </div>{' '}
       {/* Features Comparison */}
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-4xl text-center'>
             <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-              All Plans Include
+              {t('allPlansInclude.title')}
             </h2>
             <p className='mt-6 text-lg leading-8 text-gray-600'>
-              Every Syndik plan comes with these essential features to help you
-              manage your syndicate effectively.
+              {t('allPlansInclude.description')}
             </p>
           </div>
           <div className='mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
-            {[
-              'Resident Management',
-              'Financial Tracking',
-              'Meeting Scheduler',
-              'Document Management',
-              'Communication Tools',
-              'Mobile Access',
-              'Data Security',
-              '24/7 Support',
-            ].map(feature => (
+            {allPlansFeatures.map((feature: string) => (
               <div key={feature} className='text-center'>
                 <Check className='mx-auto mb-4 h-8 w-8 text-green-600' />
                 <p className='font-medium text-gray-900'>{feature}</p>
@@ -192,51 +140,50 @@ export default function PricingPage() {
             ))}
           </div>
         </div>
-      </div>
-
+      </div>{' '}
       {/* FAQ Section */}
       <div className='py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-4xl'>
             <h2 className='mb-16 text-center text-3xl font-bold tracking-tight text-gray-900'>
-              Frequently Asked Questions
+              {t('faq.title')}
             </h2>
             <div className='space-y-8'>
-              {faqs.map((faq, index) => (
-                <div key={index} className='border-b border-gray-200 pb-8'>
-                  <h3 className='mb-4 text-lg font-semibold text-gray-900'>
-                    {faq.question}
-                  </h3>
-                  <p className='text-gray-600'>{faq.answer}</p>
-                </div>
-              ))}
+              {faqItems.map(
+                (faq: { question: string; answer: string }, index: number) => (
+                  <div key={index} className='border-b border-gray-200 pb-8'>
+                    <h3 className='mb-4 text-lg font-semibold text-gray-900'>
+                      {faq.question}
+                    </h3>
+                    <p className='text-gray-600'>{faq.answer}</p>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
-      </div>
-
+      </div>{' '}
       {/* CTA Section */}
-      <div className='bg-blue-600 py-24 sm:py-32'>
+      <div className='bg-primary py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl text-center'>
             <h2 className='text-3xl font-bold tracking-tight text-white sm:text-4xl'>
-              Ready to Get Started?
+              {t('cta.title')}
             </h2>
             <p className='mt-6 text-lg leading-8 text-blue-100'>
-              Start your free trial today and see how Syndik can transform your
-              syndicate management.
+              {t('cta.description')}
             </p>
             <div className='mt-10 flex items-center justify-center gap-x-6'>
               <Link href='/sign-up'>
                 <Button size='lg' variant='secondary'>
-                  Start Free Trial
+                  {t('cta.primaryButton')}
                 </Button>
               </Link>
               <Link
                 href='/contact'
                 className='text-sm leading-6 font-semibold text-white hover:text-blue-100'
               >
-                Contact Sales <span aria-hidden='true'>→</span>
+                {t('cta.secondaryButton')} <span aria-hidden='true'>→</span>
               </Link>
             </div>
           </div>

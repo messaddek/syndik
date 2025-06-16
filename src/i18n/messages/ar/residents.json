@@ -1,0 +1,53 @@
+{
+  "title": "السكان",
+  "subtitle": "إدارة السكان وتخصيصات الوحدات الخاصة بهم",
+  "addNew": "إضافة ساكن جديد",
+  "addResident": "إضافة ساكن",
+  "editResident": "تحرير الساكن",
+  "deleteResident": "حذف الساكن",
+  "viewResident": "عرض الساكن",
+  "noResidents": "لم يتم العثور على أي سكان. أضف أول ساكن للبدء.",
+  "noResidentsFiltered": "لم يتم العثور على سكان للوحدة المحددة.",
+  "totalResidents": "إجمالي السكان",
+  "activeResidents": "السكان النشطون",
+  "allUnits": "جميع الوحدات",
+  "clearFilter": "مسح المرشح",
+  "filterByUnit": "تصفية حسب الوحدة:",
+  "loadingUnits": "جاري تحميل الوحدات...",
+  "noUnitsAvailable": "لا توجد وحدات متاحة",
+  "ownerStatus": "مالك",
+  "tenantStatus": "مستأجر",
+  "form": {
+    "title": "معلومات الساكن",
+    "addTitle": "إضافة ساكن جديد",
+    "editTitle": "تحرير الساكن",
+    "description": "إضافة ساكن جديد إلى نظام إدارة المباني الخاص بك.",
+    "editDescription": "تحديث معلومات الساكن وتخصيص الوحدة.",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "email": "عنوان البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "unit": "الوحدة",
+    "selectUnit": "اختر وحدة",
+    "owner": "مالك",
+    "ownerDescription": "ضع علامة إذا كان هذا الساكن مالك الوحدة",
+    "moveInDate": "تاريخ الانتقال",
+    "moveOutDate": "تاريخ المغادرة",
+    "selectDate": "اختر التاريخ",
+    "additionalInfo": "معلومات إضافية",
+    "unitAssignment": "تخصيص الوحدة"
+  },
+  "actions": {
+    "invite": "دعوة إلى البوابة",
+    "sendInvitation": "إرسال الدعوة",
+    "resendInvitation": "إعادة إرسال الدعوة",
+    "invitationSent": "تم إرسال الدعوة بنجاح",
+    "invitationError": "فشل في إرسال الدعوة"
+  },
+  "status": {
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "invited": "مدعو",
+    "pending": "في الانتظار"
+  }
+}

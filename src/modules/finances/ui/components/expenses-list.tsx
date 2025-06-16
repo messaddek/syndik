@@ -96,7 +96,7 @@ export function ExpensesList() {
                   {expense.buildingId ? (
                     <Link
                       href={`/buildings/${expense.buildingId}`}
-                      className='text-blue-600 hover:underline'
+                      className='text-primary hover:underline'
                     >
                       {getBuildingName(expense.buildingId)}
                     </Link>
@@ -133,7 +133,7 @@ export function ExpensesList() {
                       href={expense.receiptUrl}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='text-sm text-blue-600 hover:underline'
+                      className='text-primary text-sm hover:underline'
                     >
                       View Receipt
                     </a>

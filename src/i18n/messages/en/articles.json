@@ -1,0 +1,101 @@
+{
+  "propertyInformationUpdates": {
+    "title": "Property Information Updates",
+    "description": "Learn how to keep your property information current and accurate",
+    "tableOfContents": [
+      { "id": "overview", "title": "Overview", "level": 1 },
+      {
+        "id": "updating-basic-info",
+        "title": "Updating Basic Information",
+        "level": 1
+      },
+      { "id": "property-amenities", "title": "Property Amenities", "level": 1 },
+      {
+        "id": "contact-information",
+        "title": "Contact Information",
+        "level": 1
+      },
+      { "id": "photos-documents", "title": "Photos & Documents", "level": 1 },
+      { "id": "best-practices", "title": "Best Practices", "level": 1 }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Adding New Properties",
+        "href": "/user-guide/property-management/adding-new-properties",
+        "time": "3 min"
+      },
+      {
+        "title": "Document Management",
+        "href": "/user-guide/property-management/document-management-system",
+        "time": "4 min"
+      },
+      {
+        "title": "Unit Management",
+        "href": "/user-guide/property-management/unit-management-organization",
+        "time": "6 min"
+      }
+    ],
+    "sections": {
+      "overview": {
+        "title": "Overview",
+        "content": "Keeping your property information up-to-date is crucial for effective property management. This guide covers how to update various aspects of your property details.",
+        "proTip": {
+          "title": "Pro Tip",
+          "content": "Set up monthly reminders to review and update property information to ensure accuracy."
+        }
+      },
+      "updatingBasicInfo": {
+        "title": "Updating Basic Information",
+        "subtitle": "Property Details & Specifications",
+        "steps": [
+          "Navigate to Properties in the main menu",
+          "Select the property you want to update",
+          "Click the 'Edit Property' button",
+          "Update the necessary fields",
+          "Save your changes"
+        ]
+      },
+      "propertyAmenities": {
+        "title": "Property Amenities",
+        "content": "Managing property amenities helps prospective residents understand what your property offers.",
+        "commonAmenities": {
+          "title": "Common Amenities",
+          "list": [
+            "Swimming Pool",
+            "Fitness Center",
+            "Parking Garage",
+            "Laundry Facilities",
+            "Business Center"
+          ]
+        },
+        "unitFeatures": {
+          "title": "Unit-Specific Features"
+        }
+      },
+      "contactInformation": {
+        "title": "Contact Information",
+        "important": {
+          "title": "Important Note",
+          "content": "Always keep contact information current as it's used for emergency notifications."
+        }
+      },
+      "photosDocuments": {
+        "title": "Photos & Documents",
+        "content": "Visual content helps residents and prospects better understand your property.",
+        "photoUpdates": {
+          "title": "Photo Updates",
+          "content": "Regular photo updates showcase your property's current condition and improvements."
+        }
+      },
+      "bestPractices": {
+        "title": "Best Practices",
+        "regularMaintenance": {
+          "title": "Regular Information Maintenance"
+        },
+        "qualityControl": {
+          "title": "Quality Control"
+        }
+      }
+    }
+  }
+}

@@ -35,7 +35,7 @@ export const OrganizationSwitcherCustom = ({
           <DialogContent className='max-w-md'>
             <DialogHeader>
               <DialogTitle className='flex items-center gap-2 text-lg'>
-                <Building2 className='h-6 w-6 text-blue-600' />
+                <Building2 className='text-primary h-6 w-6' />
                 Create Your Organization
               </DialogTitle>
               <DialogDescription className='text-base'>

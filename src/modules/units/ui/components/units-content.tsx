@@ -136,8 +136,11 @@ export function UnitsContent() {
             {units.length} {t('units.totalUnits')}
           </p>
         </div>
-        <Button onClick={() => setShowCreateDialog(true)}>
-          <Plus className='mr-2 h-4 w-4' />
+        <Button
+          onClick={() => setShowCreateDialog(true)}
+          className='flex items-center space-x-2'
+        >
+          <Plus className='h-4 w-4' />
           {t('units.addUnit')}
         </Button>
       </div>
@@ -202,7 +205,7 @@ export function UnitsContent() {
                   </div>
                 </div>
                 <CardDescription>
-                  {getBuildingName(unit.buildingId)} - {t('units.floor')}{' '}
+                  {getBuildingName(unit.buildingId)} - {t('units.floor')}
                   {unit.floor}
                 </CardDescription>
               </CardHeader>
@@ -277,13 +280,16 @@ export function UnitsContent() {
             <p className='mb-4 text-sm text-gray-600'>
               Start by adding your first unit to manage properties.
             </p>
-            <Button onClick={() => setShowCreateDialog(true)}>
-              <Plus className='mr-2 h-4 w-4' />
+            <Button
+              onClick={() => setShowCreateDialog(true)}
+              className='flex items-center space-x-2'
+            >
+              <Plus className='h-4 w-4' />
               Add First Unit
             </Button>
           </CardContent>
         </Card>
-      )}{' '}
+      )}
       <CreateUnitDialog
         open={showCreateDialog}
         onOpenChange={setShowCreateDialog}

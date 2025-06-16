@@ -159,7 +159,7 @@ export const PopularArticles: React.FC<PopularArticlesProps> = ({
                 <div className='flex items-center justify-between'>
                   <div className='flex-1 space-y-1'>
                     <div className='flex items-center space-x-2'>
-                      <span className='min-w-[20px] text-sm font-bold text-blue-600'>
+                      <span className='text-primary min-w-[20px] text-sm font-bold'>
                         #{index + 1}
                       </span>
                       <h4 className='text-sm font-medium'>

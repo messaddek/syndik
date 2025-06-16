@@ -1,8 +1,8 @@
 import { Link } from '@/i18n/routing';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ArticleLayout from '@/modules/articles/components/article-layout';
+import { ArticleSidebar } from '@/components/articles/article-sidebar';
 import {
   Clock,
   Users,
@@ -666,7 +666,7 @@ const AddingNewResidentsPage = () => {
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
                       <div className='text-center'>
                         <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-blue-100 p-3'>
-                          <Mail className='h-6 w-6 text-blue-600' />
+                          <Mail className='text-primary h-6 w-6' />
                         </div>
                         <h4 className='font-semibold'>Email</h4>
                         <p className='text-sm text-gray-600'>
@@ -716,82 +716,15 @@ const AddingNewResidentsPage = () => {
               </section>
             </div>
           </div>
-        </div>
-
+        </div>{' '}
         {/* Sidebar */}
-        <div className='space-y-6'>
-          {/* Table of Contents */}
-          <Card>
-            <CardHeader>
-              <CardTitle className='text-lg'>Table of Contents</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <nav className='space-y-2'>
-                {tableOfContents.map(item => (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    className={`block text-sm transition-colors hover:text-blue-600 ${
-                      item.level === 2
-                        ? 'pl-4 text-gray-600'
-                        : 'font-medium text-gray-700'
-                    }`}
-                  >
-                    {item.title}
-                  </a>
-                ))}
-              </nav>
-            </CardContent>
-          </Card>
-          {/* Related Articles */}
-          <Card>
-            <CardHeader>
-              <CardTitle className='text-lg'>Related Articles</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className='space-y-3'>
-                {relatedArticles.map((article, index) => (
-                  <Link
-                    key={index}
-                    href={article.href}
-                    className='block rounded-lg bg-gray-50 p-3 transition-colors hover:bg-gray-100'
-                  >
-                    <h4 className='mb-1 text-sm font-medium text-gray-900'>
-                      {article.title}
-                    </h4>
-                    <div className='flex items-center space-x-1 text-xs text-gray-500'>
-                      <Clock className='h-3 w-3' />
-                      <span>{article.time}</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-          {/* Help */}
-          <Card>
-            <CardHeader>
-              <CardTitle className='text-lg'>Need Help?</CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-3'>
-              <Button
-                variant='outline'
-                className='w-full justify-start'
-                size='sm'
-              >
-                <Mail className='mr-2 h-4 w-4' />
-                Contact Support
-              </Button>
-              <Button
-                variant='outline'
-                className='w-full justify-start'
-                size='sm'
-              >
-                <Users className='mr-2 h-4 w-4' />
-                Join Community
-              </Button>
-            </CardContent>
-          </Card>{' '}
+        <div className='lg:col-span-1'>
+          <ArticleSidebar
+            tableOfContents={tableOfContents}
+            relatedArticles={relatedArticles}
+            currentCategory='resident-management'
+            showQuickActions={true}
+          />
         </div>
       </div>
     </ArticleLayout>

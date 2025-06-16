@@ -36,8 +36,11 @@ export function BuildingsList() {
           <h2 className='text-2xl font-bold'>{t('title')}</h2>
           <p className='text-gray-600'>{t('manageBuildingProperties')}</p>
         </div>
-        <Button onClick={() => setIsCreateOpen(true)}>
-          <Plus className='mr-2 h-4 w-4' />
+        <Button
+          onClick={() => setIsCreateOpen(true)}
+          className='flex items-center space-x-2'
+        >
+          <Plus className='h-4 w-4' />
           {t('addBuilding')}
         </Button>
       </div>
@@ -63,8 +66,11 @@ export function BuildingsList() {
             <p className='mb-4 text-center text-gray-600'>
               {t('noBuildingsDescription')}
             </p>
-            <Button onClick={() => setIsCreateOpen(true)}>
-              <Plus className='mr-2 h-4 w-4' />
+            <Button
+              onClick={() => setIsCreateOpen(true)}
+              className='flex items-center space-x-2'
+            >
+              <Plus className='h-4 w-4' />
               {t('addFirstBuilding')}
             </Button>
           </CardContent>

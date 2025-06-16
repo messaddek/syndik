@@ -1,0 +1,105 @@
+{
+  "propertyInformationUpdates": {
+    "title": "Mises à jour des informations de propriété",
+    "description": "Apprenez à maintenir vos informations de propriété à jour et précises",
+    "tableOfContents": [
+      { "id": "overview", "title": "Aperçu", "level": 1 },
+      {
+        "id": "updating-basic-info",
+        "title": "Mise à jour des informations de base",
+        "level": 1
+      },
+      {
+        "id": "property-amenities",
+        "title": "Commodités de la propriété",
+        "level": 1
+      },
+      {
+        "id": "contact-information",
+        "title": "Informations de contact",
+        "level": 1
+      },
+      { "id": "photos-documents", "title": "Photos et documents", "level": 1 },
+      { "id": "best-practices", "title": "Meilleures pratiques", "level": 1 }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Ajouter de nouvelles propriétés",
+        "href": "/user-guide/property-management/adding-new-properties",
+        "time": "3 min"
+      },
+      {
+        "title": "Gestion de documents",
+        "href": "/user-guide/property-management/document-management-system",
+        "time": "4 min"
+      },
+      {
+        "title": "Gestion des unités",
+        "href": "/user-guide/property-management/unit-management-organization",
+        "time": "6 min"
+      }
+    ],
+    "sections": {
+      "overview": {
+        "title": "Aperçu",
+        "content": "Maintenir vos informations de propriété à jour est crucial pour une gestion immobilière efficace. Ce guide couvre comment mettre à jour divers aspects de vos détails de propriété.",
+        "proTip": {
+          "title": "Conseil de pro",
+          "content": "Configurez des rappels mensuels pour examiner et mettre à jour les informations de propriété afin d'assurer leur exactitude."
+        }
+      },
+      "updatingBasicInfo": {
+        "title": "Mise à jour des informations de base",
+        "subtitle": "Détails et spécifications de la propriété",
+        "steps": [
+          "Naviguez vers Propriétés dans le menu principal",
+          "Sélectionnez la propriété que vous voulez mettre à jour",
+          "Cliquez sur le bouton 'Modifier la propriété'",
+          "Mettez à jour les champs nécessaires",
+          "Sauvegardez vos modifications"
+        ]
+      },
+      "propertyAmenities": {
+        "title": "Commodités de la propriété",
+        "content": "La gestion des commodités de propriété aide les résidents potentiels à comprendre ce que votre propriété offre.",
+        "commonAmenities": {
+          "title": "Commodités communes",
+          "list": [
+            "Piscine",
+            "Centre de fitness",
+            "Garage de stationnement",
+            "Installations de buanderie",
+            "Centre d'affaires"
+          ]
+        },
+        "unitFeatures": {
+          "title": "Caractéristiques spécifiques aux unités"
+        }
+      },
+      "contactInformation": {
+        "title": "Informations de contact",
+        "important": {
+          "title": "Note importante",
+          "content": "Gardez toujours les informations de contact à jour car elles sont utilisées pour les notifications d'urgence."
+        }
+      },
+      "photosDocuments": {
+        "title": "Photos et documents",
+        "content": "Le contenu visuel aide les résidents et prospects à mieux comprendre votre propriété.",
+        "photoUpdates": {
+          "title": "Mises à jour des photos",
+          "content": "Les mises à jour régulières des photos mettent en valeur l'état actuel et les améliorations de votre propriété."
+        }
+      },
+      "bestPractices": {
+        "title": "Meilleures pratiques",
+        "regularMaintenance": {
+          "title": "Maintenance régulière des informations"
+        },
+        "qualityControl": {
+          "title": "Contrôle qualité"
+        }
+      }
+    }
+  }
+}

@@ -228,7 +228,7 @@ export default function PrivacyPage() {
                 >
                   <CardHeader>
                     <CardTitle className='flex items-center gap-2 text-2xl text-gray-900'>
-                      <FileText className='h-6 w-6 text-blue-600' />
+                      <FileText className='text-primary h-6 w-6' />
                       {t('sections.introduction.title')}
                     </CardTitle>
                   </CardHeader>
@@ -586,7 +586,7 @@ export default function PrivacyPage() {
                 >
                   <CardHeader>
                     <CardTitle className='flex items-center gap-2 text-2xl text-gray-900'>
-                      <Phone className='h-6 w-6 text-blue-600' />
+                      <Phone className='text-primary h-6 w-6' />
                       {t('sections.contact.title')}
                     </CardTitle>
                   </CardHeader>
@@ -596,7 +596,7 @@ export default function PrivacyPage() {
                     </p>
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
                       <div className='rounded-lg border border-blue-200 bg-white p-4 text-center'>
-                        <div className='mb-2 text-blue-600'>
+                        <div className='text-primary mb-2'>
                           <Phone className='mx-auto h-6 w-6' />
                         </div>
                         <p className='font-semibold text-gray-900'>
@@ -607,7 +607,7 @@ export default function PrivacyPage() {
                         </p>
                       </div>
                       <div className='rounded-lg border border-blue-200 bg-white p-4 text-center'>
-                        <div className='mb-2 text-blue-600'>
+                        <div className='text-primary mb-2'>
                           <Globe className='mx-auto h-6 w-6' />
                         </div>
                         <p className='font-semibold text-gray-900'>
@@ -618,7 +618,7 @@ export default function PrivacyPage() {
                         </p>
                       </div>
                       <div className='rounded-lg border border-blue-200 bg-white p-4 text-center'>
-                        <div className='mb-2 text-blue-600'>
+                        <div className='text-primary mb-2'>
                           <FileText className='mx-auto h-6 w-6' />
                         </div>
                         <p className='font-semibold text-gray-900'>
@@ -635,7 +635,7 @@ export default function PrivacyPage() {
                 <Card className='border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50'>
                   <CardContent className='pt-6'>
                     <p className='text-center text-sm text-gray-600'>
-                      <Shield className='mx-auto mb-2 h-5 w-5 text-blue-600' />
+                      <Shield className='text-primary mx-auto mb-2 h-5 w-5' />
                       {t('acknowledgment.content')}
                     </p>
                   </CardContent>

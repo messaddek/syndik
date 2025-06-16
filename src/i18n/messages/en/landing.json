@@ -1,0 +1,263 @@
+{
+  "hero": {
+    "badge": "Property Management Simplified",
+    "title": "Streamline Your Property Management",
+    "titleHighlight": "with Syndik",
+    "subtitle": "The all-in-one platform that helps property managers automate operations, improve resident satisfaction, and maximize efficiency.",
+    "description": "Transform your property management experience with our comprehensive platform designed for modern property managers who demand efficiency, transparency, and exceptional resident satisfaction.",
+    "buttons": {
+      "startTrial": "Start Free Trial",
+      "watchDemo": "Watch Demo",
+      "getStartedFree": "Get Started Free"
+    },
+    "stats": {
+      "properties": "5,000+ Properties Managed",
+      "residents": "25,000+ Happy Residents",
+      "timesSaved": "40% Time Savings"
+    }
+  },
+  "stats": {
+    "title": "Trusted by Property Managers Worldwide",
+    "subtitle": "Trusted by Property Managers Worldwide",
+    "syndicates": {
+      "label": "Syndicates Managed",
+      "value": "5,000+",
+      "description": "Property syndicates efficiently managed through our platform"
+    },
+    "units": {
+      "label": "Housing Units",
+      "value": "25,000+",
+      "description": "Housing units managed across our partner network"
+    },
+    "transactions": {
+      "label": "Transactions Processed",
+      "value": "500,000+",
+      "description": "Financial and administrative transactions successfully processed"
+    },
+    "satisfaction": {
+      "label": "Customer Satisfaction",
+      "value": "98%",
+      "description": "Satisfaction rate from our property manager clients"
+    }
+  },
+  "features": {
+    "badge": "Everything You Need",
+    "title": "Comprehensive Property Management Features",
+    "subtitle": "All the tools you need to manage your properties efficiently in one integrated platform.",
+    "description": "Discover our advanced features designed to simplify every aspect of modern property management.",
+    "buildingManagement": {
+      "title": "Building Management",
+      "description": "Easily manage all your buildings and properties from a centralized and intuitive interface."
+    },
+    "residentPortal": {
+      "title": "Resident Portal",
+      "description": "Provide your residents with a modern self-service portal for all their interactions and requests."
+    },
+    "financialTracking": {
+      "title": "Financial Tracking",
+      "description": "Track and analyze your finances with advanced reporting tools and real-time dashboards."
+    },
+    "secureCompliant": {
+      "title": "Secure & Compliant",
+      "description": "Benefit from enterprise-grade security with GDPR compliance and data protection."
+    },
+    "meetingManagement": {
+      "title": "Meeting Management",
+      "description": "Organize and manage your general assemblies easily with integrated planning tools."
+    },
+    "automatedWorkflows": {
+      "title": "Automated Workflows",
+      "description": "Automate your recurring processes to save time and improve operational efficiency."
+    },
+    "items": {
+      "residentPortal": {
+        "title": "Resident Portal",
+        "description": "Self-service portal for residents to pay rent, submit maintenance requests, and communicate.",
+        "benefits": [
+          "Online rent payments",
+          "Maintenance requests",
+          "Document access",
+          "Communication tools"
+        ]
+      },
+      "maintenanceManagement": {
+        "title": "Maintenance Management",
+        "description": "Streamline maintenance workflows from request to completion with automated tracking.",
+        "benefits": [
+          "Work order tracking",
+          "Vendor management",
+          "Automated scheduling",
+          "Progress monitoring"
+        ]
+      },
+      "financialReporting": {
+        "title": "Financial Reporting",
+        "description": "Comprehensive financial insights with automated rent collection and expense tracking.",
+        "benefits": [
+          "Automated invoicing",
+          "Expense tracking",
+          "Financial reports",
+          "Budget management"
+        ]
+      },
+      "communication": {
+        "title": "Communication Hub",
+        "description": "Centralized communication platform for residents, staff, and vendors.",
+        "benefits": [
+          "Mass notifications",
+          "Chat system",
+          "Document sharing",
+          "Announcement board"
+        ]
+      }
+    }
+  },
+  "howItWorks": {
+    "badge": "Simple Process",
+    "title": "How Syndik Works",
+    "subtitle": "Get started in minutes with our intuitive setup process.",
+    "description": "Our intuitive platform guides you step by step for quick and efficient implementation.",
+    "steps": {
+      "signUp": {
+        "title": "Quick Sign Up",
+        "description": "Create your account and set up your first property in just a few minutes."
+      },
+      "invite": {
+        "title": "Invite Residents",
+        "description": "Add your residents and give them access to their personalized portal for better communication."
+      },
+      "manage": {
+        "title": "Manage Efficiently",
+        "description": "Monitor everything from a single dashboard and focus on growing your business."
+      },
+      "grow": {
+        "title": "Grow Your Business",
+        "description": "Scale easily by adding new properties and automating your management processes."
+      }
+    }
+  },
+  "benefits": {
+    "badge": "Why Choose Syndik",
+    "title": "Transform Your Property Management",
+    "subtitle": "Experience the benefits that thousands of property managers trust.",
+    "description": "Discover the benefits that make Syndik the first choice for professional property managers.",
+    "saveTime": {
+      "title": "Save Time",
+      "metric": "40% Time Savings",
+      "description": "Automate routine tasks and streamline operations to focus on what matters most."
+    },
+    "reduceCosts": {
+      "title": "Reduce Costs",
+      "metric": "30% Cost Savings",
+      "description": "Optimize your operational expenses through automated processes and better organization."
+    },
+    "improveCommunication": {
+      "title": "Improve Communication",
+      "metric": "95% Satisfaction",
+      "description": "Facilitate exchanges with your residents through modern and efficient communication tools."
+    },
+    "betterOrganization": {
+      "title": "Better Organization",
+      "metric": "100% Digital",
+      "description": "Centralize all your information and documents in an organized and accessible system."
+    }
+  },
+  "security": {
+    "badge": "Enterprise Security",
+    "title": "Your Data is Safe with Us",
+    "subtitle": "We take security seriously with enterprise-grade protection and compliance.",
+    "description": "Our secure infrastructure ensures complete protection of your sensitive data with the industry's highest standards.",
+    "features": {
+      "encryption": {
+        "title": "End-to-End Encryption",
+        "description": "All data is encrypted in transit and at rest using industry-standard protocols."
+      },
+      "roleBasedAccess": {
+        "title": "Role-Based Access Control",
+        "description": "Finely manage access permissions according to each user's roles and responsibilities."
+      },
+      "gdprCompliant": {
+        "title": "GDPR & SOC 2 Compliant",
+        "description": "We meet the highest standards for data protection and privacy."
+      },
+      "regularBackups": {
+        "title": "Automated Backups",
+        "description": "Your data is automatically backed up and can be restored at any time."
+      },
+      "soc2Certified": {
+        "title": "SOC 2 Certification",
+        "description": "We maintain the highest security standards with our SOC 2 Type II certification."
+      },
+      "monitoring": {
+        "title": "24/7 Monitoring",
+        "description": "Continuous monitoring ensures maximum uptime and security for your data."
+      }
+    },
+    "certificationLabel": "Security Certifications",
+    "certificationText": "We comply with the strictest international standards for security and compliance."
+  },
+  "testimonials": {
+    "badge": "Customer Stories",
+    "title": "What Our Customers Say",
+    "subtitle": "Join thousands of satisfied property managers who trust Syndik.",
+    "description": "Discover how Syndik transforms property management through authentic testimonials from our clients.",
+    "reviews": [
+      {
+        "content": "Syndik has revolutionized how we manage properties. The intuitive interface and advanced features have saved us precious time.",
+        "author": {
+          "name": "Marie Dubois",
+          "role": "Property Manager",
+          "company": "Central Real Estate"
+        }
+      },
+      {
+        "content": "The platform is excellent for resident management. The self-service portal has significantly improved our customer relations.",
+        "author": {
+          "name": "Ahmed Hassan",
+          "role": "Agency Director",
+          "company": "Hassan Properties"
+        }
+      },
+      {
+        "content": "The financial and reporting tools are exceptional. We now have complete visibility over our operations.",
+        "author": {
+          "name": "Sophie Lemaire",
+          "role": "Portfolio Manager",
+          "company": "Modern Management"
+        }
+      }
+    ]
+  },
+  "cta": {
+    "badge": "New Features Available",
+    "title": "Ready to Transform Your Property Management?",
+    "titleHighlight": "Start Today.",
+    "subtitle": "Join thousands of property managers who have simplified their workflow with Syndik",
+    "buttons": {
+      "startTrial": "Start Free Trial",
+      "watchDemo": "Watch Demo"
+    },
+    "trustIndicators": {
+      "freeTrial": {
+        "title": "30-Day Free Trial",
+        "subtitle": "No credit card required"
+      },
+      "noSetupFee": {
+        "title": "No Setup Fees",
+        "subtitle": "Get started immediately"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "subtitle": "We're here to help"
+      }
+    },
+    "guarantee": {
+      "title": "100% Satisfaction Guarantee",
+      "description": "Not satisfied? Get a full refund within 30 days.",
+      "link": "Learn more about our guarantee"
+    },
+    "socialProof": {
+      "rating": "4.9/5 stars from 1,200+ reviews"
+    }
+  }
+}

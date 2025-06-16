@@ -150,11 +150,14 @@ export function ResidentsList() {
           <p className='text-muted-foreground'>
             Manage residents and their unit assignments
           </p>
-        </div>{' '}
+        </div>
         <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
           <DialogTrigger asChild>
-            <Button onClick={() => setEditingResident(null)}>
-              <Plus className='mr-2 h-4 w-4' />
+            <Button
+              onClick={() => setEditingResident(null)}
+              className='flex items-center space-x-2'
+            >
+              <Plus className='h-4 w-4' />
               Add Resident
             </Button>
           </DialogTrigger>
@@ -193,7 +196,7 @@ export function ResidentsList() {
           <Select value={selectedUnitId} onValueChange={setSelectedUnitId}>
             <SelectTrigger className='w-48'>
               <SelectValue placeholder='All units' />
-            </SelectTrigger>{' '}
+            </SelectTrigger>
             <SelectContent>
               <SelectItem value='all'>All units</SelectItem>
               {units?.map(unit => (
@@ -239,7 +242,7 @@ export function ResidentsList() {
                         <div>
                           <CardTitle className='text-lg'>
                             {resident.firstName} {resident.lastName}
-                          </CardTitle>{' '}
+                          </CardTitle>
                           <CardDescription className='flex items-center space-x-1'>
                             <MapPin className='h-3 w-3' />
                             <span>
@@ -308,11 +311,11 @@ export function ResidentsList() {
                           <Phone className='h-4 w-4 text-gray-500' />
                           <span>{resident.phone}</span>
                         </div>
-                      )}{' '}
+                      )}
                       <div className='flex items-center space-x-2'>
                         <Calendar className='h-4 w-4 text-gray-500' />
                         <span>
-                          Moved in:{' '}
+                          Moved in:
                           {new Date(resident.moveInDate).toLocaleDateString()}
                         </span>
                       </div>
@@ -320,7 +323,7 @@ export function ResidentsList() {
                         <div className='flex items-center space-x-2'>
                           <Calendar className='h-4 w-4 text-red-500' />
                           <span>
-                            Moving out:{' '}
+                            Moving out:
                             {new Date(
                               resident.moveOutDate
                             ).toLocaleDateString()}

@@ -50,7 +50,7 @@ export function FeaturesSection() {
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         {' '}
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-base leading-7 font-semibold text-blue-600'>
+          <h2 className='text-primary text-base leading-7 font-semibold'>
             {t('subtitle')}
           </h2>
           <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -66,7 +66,7 @@ export function FeaturesSection() {
               <div key={feature.name} className='flex flex-col'>
                 <dt className='flex items-center gap-x-3 text-base leading-7 font-semibold text-gray-900'>
                   <feature.icon
-                    className='h-5 w-5 flex-none text-blue-600'
+                    className='text-primary h-5 w-5 flex-none'
                     aria-hidden='true'
                   />
                   {feature.name}

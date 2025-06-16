@@ -27,20 +27,20 @@ export function HeroSection() {
         <div className='text-center'>
           <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
             {t('title')}{' '}
-            <span className='text-blue-600'>{t('titleHighlight')}</span>
+            <span className='text-primary'>{t('titleHighlight')}</span>
           </h1>
           <p className='mt-6 text-lg leading-8 text-gray-600'>
             {t('description')}
           </p>
           <div className='mt-10 flex items-center justify-center gap-x-6'>
             <Button size='lg' className='px-8' asChild>
-              <Link href='/sign-up'>
-                {t('getStartedFree')}
-                <ArrowRight className='ml-2 h-4 w-4' />
+              <Link href='/sign-up' className='space-x-2'>
+                {t('buttons.getStartedFree')}
+                <ArrowRight className='h-4 w-4 rtl:rotate-180' />
               </Link>
             </Button>
             <Button variant='outline' size='lg' className='px-8' asChild>
-              <Link href='/demo'>{t('watchDemo')}</Link>
+              <Link href='/demo'>{t('buttons.watchDemo')}</Link>
             </Button>
           </div>
         </div>

@@ -1,8 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import {
-  Home,
   CreditCard,
   MessageSquare,
   Settings,
@@ -11,7 +11,10 @@ import {
   FileText,
   Bell,
   LayoutDashboard,
+  Home,
 } from 'lucide-react';
+import { GrAnnounce } from 'react-icons/gr';
+
 import {
   Sidebar,
   SidebarContent,
@@ -25,8 +28,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { UserButton } from '@clerk/nextjs';
-import { Link } from '@/i18n/routing';
-import { usePathname, useRouter } from 'next/navigation';
+import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { OrgSwitcher } from '@/components/org-switcher';
 
@@ -64,7 +66,7 @@ export function PortalSidebar() {
         {
           title: t('portal.announcements'),
           url: '/portal/announcements',
-          icon: Bell,
+          icon: GrAnnounce,
         },
         {
           title: t('portal.notifications'),
@@ -104,20 +106,18 @@ export function PortalSidebar() {
     <Sidebar>
       <SidebarHeader className='border-b p-4'>
         <div className='mb-3 flex items-center gap-2'>
-          <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white'>
-            <Home className='h-4 w-4' />
-          </div>{' '}
+          <div className='flex h-10 w-10 items-center justify-center rounded-lg'>
+            <Image src='/logo.svg' alt='Syndik Logo' width={30} height={30} />
+          </div>
           <div>
-            <h2 className='text-lg font-semibold'>Syndik</h2>
+            <h2 className='text-lg font-semibold'>syndik.ma</h2>
             <p className='text-muted-foreground text-xs'>{t('portal.title')}</p>
           </div>
         </div>
-
         {/* Organization Switcher */}
         <div className='mb-3'>
           <OrgSwitcher appearance='sidebar' />
         </div>
-
         {/* Dashboard Access Button */}
         <Button
           variant='outline'

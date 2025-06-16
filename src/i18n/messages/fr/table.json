@@ -1,0 +1,10 @@
+{
+  "columns": "Colonnes",
+  "actions": "Actions",
+  "noData": "Aucune donnée disponible",
+  "loading": "Chargement...",
+  "edit": "Modifier",
+  "delete": "Supprimer",
+  "view": "Voir",
+  "openMenu": "Ouvrir le menu"
+}

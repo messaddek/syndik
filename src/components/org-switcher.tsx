@@ -7,6 +7,7 @@ import { Link } from '@/i18n/routing';
 import { useClerkAppearance } from '@/hooks/use-clerk-appearance';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
+import { useParams } from 'next/navigation';
 
 interface OrgSwitcherProps {
   appearance?: 'navbar' | 'sidebar' | 'compact';
@@ -23,6 +24,8 @@ export function OrgSwitcher({
   const { elements } = useClerkAppearance(appearance);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
+  const params = useParams();
+  const locale = params.locale as string;
 
   // Enhanced color system with better visibility
   const getThemeColors = () => {
@@ -132,10 +135,11 @@ export function OrgSwitcher({
       <div
         className={`org-switcher-wrapper ${mounted && resolvedTheme === 'dark' ? 'dark-theme' : 'light-theme'}`}
       >
+        {' '}
         <OrganizationSwitcher
           hidePersonal={hidePersonal}
-          afterSelectOrganizationUrl='/org-redirect'
-          afterCreateOrganizationUrl='/org-redirect'
+          afterSelectOrganizationUrl={`/${locale}/org-redirect`}
+          afterCreateOrganizationUrl={`/${locale}/org-redirect`}
           appearance={{
             elements: {
               ...elements,

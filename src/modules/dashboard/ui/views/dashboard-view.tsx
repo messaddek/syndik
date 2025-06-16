@@ -201,7 +201,7 @@ export function DashboardView() {
               </div>
               <div className='flex items-center justify-between'>
                 <span className='text-sm font-medium'>{t('portalAccess')}</span>
-                <span className='text-sm font-bold text-blue-600'>
+                <span className='text-primary text-sm font-bold'>
                   {portalStats?.invitedCount || 0}
                 </span>
               </div>
@@ -238,7 +238,7 @@ export function DashboardView() {
                   >
                     <div className='flex-shrink-0'>
                       {activity.type === 'resident' ? (
-                        <Users className='h-4 w-4 text-blue-600' />
+                        <Users className='text-primary h-4 w-4' />
                       ) : (
                         <Calendar className='h-4 w-4 text-purple-600' />
                       )}

@@ -45,7 +45,7 @@ export function BenefitsSection() {
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         {' '}
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-base leading-7 font-semibold text-blue-600'>
+          <h2 className='text-primary text-base leading-7 font-semibold'>
             {t('subtitle')}
           </h2>
           <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -61,7 +61,7 @@ export function BenefitsSection() {
               <CardHeader>
                 <div className='flex items-center space-x-3'>
                   <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100'>
-                    <benefit.icon className='h-6 w-6 text-blue-600' />
+                    <benefit.icon className='text-primary h-6 w-6' />
                   </div>
                   <div>
                     <CardTitle className='text-lg'>{benefit.title}</CardTitle>

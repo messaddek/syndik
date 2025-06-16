@@ -1,0 +1,7 @@
+{
+  "unitRequired": "Please select a unit",
+  "firstNameRequired": "First name is required",
+  "lastNameRequired": "Last name is required",
+  "emailRequired": "Please enter a valid email address",
+  "invalidMoveInDate": "Move-in date cannot be in the future"
+}

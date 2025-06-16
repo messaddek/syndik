@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, Building2, LayoutDashboard } from 'lucide-react';
+import { Search, LayoutDashboard } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SidebarTrigger } from '@/components/ui/sidebar';
@@ -9,8 +9,8 @@ import { NotificationDropdown } from '@/modules/notifications/ui/components/noti
 import { useRealtimeNotifications } from '@/modules/notifications/hooks/use-realtime-notifications';
 import { OrgSwitcher } from '@/components/org-switcher';
 import { useRouter } from '@/i18n/navigation';
-import { Link } from '@/i18n/routing';
 import { ModeToggle } from '@/components/mode-toggle';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 export function PortalNavbar() {
   // Initialize real-time notifications
@@ -21,14 +21,37 @@ export function PortalNavbar() {
     // Navigate to org-redirect which will handle role-based routing
     router.push('/org-redirect');
   };
-
   return (
-    <header className='flex h-16 shrink-0 items-center gap-2 border-b px-4'>
+    <header className='flex h-16 shrink-0 items-center gap-2 border-b px-2 sm:px-4'>
       <SidebarTrigger className='-ml-1' />
       <Separator orientation='vertical' className='mr-2 h-4' />
 
-      <div className='flex flex-1 items-center justify-between'>
-        {/* Search */}
+      {/* Mobile Layout */}
+      <div className='flex w-full items-center justify-between lg:hidden'>
+        {/* Mobile Search - Icon Only */}
+        <div className='max-w-[200px] flex-1'>
+          <div className='relative'>
+            <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
+            <Input placeholder='Search...' className='pl-9 text-sm' />
+          </div>
+        </div>
+
+        {/* Mobile Center - Organization Switcher */}
+        <div className='mx-2 max-w-[150px]'>
+          <OrgSwitcher appearance='compact' />
+        </div>
+
+        {/* Mobile Right - Controls */}
+        <div className='flex items-center gap-1'>
+          <LanguageSwitcher />
+          <ModeToggle />
+          <NotificationDropdown />
+        </div>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className='hidden flex-1 items-center justify-between lg:flex'>
+        {/* Desktop Search */}
         <div className='max-w-md flex-1'>
           <div className='relative'>
             <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
@@ -37,36 +60,28 @@ export function PortalNavbar() {
               className='pl-9'
             />
           </div>
-        </div>{' '}
-        {/* Organization Switcher & Navigation */}
-        <div className='flex items-center gap-3'>
-          {/* Organization Switcher - Desktop */}
-          <div className='hidden md:block'>
-            <OrgSwitcher appearance='compact' />
-          </div>
+        </div>
+
+        {/* Desktop Center - Organization Controls */}
+        <div className='flex items-center gap-4'>
+          <OrgSwitcher appearance='compact' />
 
           {/* Dashboard Access Button */}
           <Button
             variant='outline'
             size='sm'
             onClick={handleDashboardAccess}
-            className='hidden items-center gap-2 sm:flex'
+            className='flex items-center gap-2'
           >
             <LayoutDashboard className='h-4 w-4' />
             <span>Dashboard</span>
           </Button>
+        </div>
 
-          {/* Mobile Organization Switcher */}
-          <div className='block md:hidden'>
-            <Button variant='outline' size='sm' asChild className='w-auto px-2'>
-              <Link href='/org-switcher'>
-                <Building2 className='h-4 w-4' />
-              </Link>
-            </Button>
-          </div>
-
+        {/* Desktop Right - User Controls */}
+        <div className='flex items-center gap-3'>
+          <LanguageSwitcher />
           <ModeToggle />
-          {/* Notifications */}
           <NotificationDropdown />
         </div>
       </div>

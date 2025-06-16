@@ -42,7 +42,7 @@ export function LanguageDropdown() {
           >
             <span>{localeFlags[loc]}</span>
             <span>{localeNames[loc]}</span>
-            {loc === locale && <span className='ml-auto text-blue-600'>✓</span>}
+            {loc === locale && <span className='text-primary ml-auto'>✓</span>}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

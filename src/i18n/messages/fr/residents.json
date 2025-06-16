@@ -1,0 +1,53 @@
+{
+  "title": "Résidents",
+  "subtitle": "Gérer les résidents et leurs affectations d'unité",
+  "addNew": "Ajouter un nouveau résident",
+  "addResident": "Ajouter un résident",
+  "editResident": "Modifier le résident",
+  "deleteResident": "Supprimer le résident",
+  "viewResident": "Voir le résident",
+  "noResidents": "Aucun résident trouvé. Ajoutez votre premier résident pour commencer.",
+  "noResidentsFiltered": "Aucun résident trouvé pour le logement sélectionné.",
+  "totalResidents": "Total des résidents",
+  "activeResidents": "Résidents actifs",
+  "allUnits": "Toutes les unités",
+  "clearFilter": "Effacer le filtre",
+  "filterByUnit": "Filtrer par unité :",
+  "loadingUnits": "Chargement des unités...",
+  "noUnitsAvailable": "Aucune unité disponible",
+  "ownerStatus": "Propriétaire",
+  "tenantStatus": "Locataire",
+  "form": {
+    "title": "Informations du résident",
+    "addTitle": "Ajouter un nouveau résident",
+    "editTitle": "Modifier le résident",
+    "description": "Ajouter un nouveau résident à votre système de gestion d'immeuble.",
+    "editDescription": "Mettre à jour les informations du résident et l'affectation d'unité.",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "email": "Adresse email",
+    "phone": "Numéro de téléphone",
+    "unit": "Unité",
+    "selectUnit": "Sélectionner une unité",
+    "owner": "Propriétaire",
+    "ownerDescription": "Cochez si ce résident est propriétaire du logement",
+    "moveInDate": "Date d'emménagement",
+    "moveOutDate": "Date de déménagement",
+    "selectDate": "Sélectionner la date",
+    "additionalInfo": "Informations supplémentaires",
+    "unitAssignment": "Affectation d'unité"
+  },
+  "actions": {
+    "invite": "Inviter au portail",
+    "sendInvitation": "Envoyer l'invitation",
+    "resendInvitation": "Renvoyer l'invitation",
+    "invitationSent": "Invitation envoyée avec succès",
+    "invitationError": "Échec de l'envoi de l'invitation"
+  },
+  "status": {
+    "active": "Actif",
+    "inactive": "Inactif",
+    "invited": "Invité",
+    "pending": "En attente"
+  }
+}

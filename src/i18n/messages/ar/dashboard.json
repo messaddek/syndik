@@ -1,0 +1,22 @@
+{
+  "buildings": "المباني",
+  "totalManagedProperties": "إجمالي العقارات المُدارة",
+  "units": "الوحدات",
+  "occupancyRateText": "معدل الإشغال",
+  "residents": "السكان",
+  "activeResidents": "السكان النشطون",
+  "netIncome": "صافي الدخل",
+  "thisMonth": "هذا الشهر",
+  "monthlyFinancialSummary": "الملخص المالي الشهري",
+  "income": "الإيرادات",
+  "expenses": "المصروفات",
+  "portalStatistics": "إحصائيات البوابة",
+  "totalResidents": "إجمالي السكان",
+  "portalAccess": "الوصول للبوابة",
+  "notInvited": "غير مدعوين",
+  "invitationRate": "معدل الدعوة",
+  "recentActivity": "النشاط الأخير",
+  "newResident": "ساكن جديد",
+  "meetingScheduled": "اجتماع مجدول",
+  "noRecentActivity": "لا يوجد نشاط حديث"
+}

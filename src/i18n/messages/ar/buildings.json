@@ -1,0 +1,89 @@
+{
+  "title": "المباني",
+  "subtitle": "إدارة مبانيك وخصائصها",
+  "addNew": "إضافة مبنى جديد",
+  "addBuilding": "إضافة مبنى",
+  "addBuildingDescription": "أضف مبنى جديد إلى إقامتك.",
+  "editBuilding": "تعديل المبنى",
+  "deleteBuilding": "حذف المبنى",
+  "viewBuilding": "عرض المبنى",
+  "noBuildings": "لم يتم العثور على مباني. أضف مبناك الأول للبدء.",
+  "totalBuildings": "إجمالي المباني",
+  "activeBuildings": "المباني النشطة",
+  "buildingDetails": "تفاصيل المبنى",
+  "units": "الوحدات",
+  "gridView": "عرض الشبكة",
+  "tableView": "عرض الجدول",
+  "search": "البحث في المباني...",
+  "filter": "تصفية",
+  "allCities": "جميع المدن",
+  "clearFilters": "مسح المرشحات",
+  "building": "مبنى",
+  "form": {
+    "title": "معلومات المبنى",
+    "addTitle": "إضافة مبنى جديد",
+    "editTitle": "تعديل المبنى",
+    "description": "أضف مبنى جديد إلى محفظتك.",
+    "editDescription": "تحديث معلومات وتفاصيل المبنى.",
+    "name": "اسم المبنى",
+    "address": "العنوان",
+    "city": "المدينة",
+    "postalCode": "الرمز البريدي",
+    "country": "البلد",
+    "totalUnits": "إجمالي الوحدات",
+    "floors": "عدد الطوابق",
+    "buildingType": "نوع المبنى",
+    "constructionYear": "سنة البناء",
+    "buildingDescription": "الوصف",
+    "placeholders": {
+      "name": "أدخل اسم المبنى",
+      "address": "أدخل عنوان المبنى",
+      "city": "أدخل المدينة",
+      "postalCode": "أدخل الرمز البريدي",
+      "description": "أدخل وصف المبنى (اختياري)"
+    },
+    "descriptions": {
+      "buildingDescription": "قدم تفاصيل إضافية حول المبنى (اختياري)"
+    }
+  },
+  "actions": {
+    "add": "إضافة مبنى",
+    "edit": "تعديل المبنى",
+    "delete": "حذف المبنى",
+    "view": "عرض المبنى",
+    "manage": "إدارة المبنى"
+  },
+  "status": {
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "maintenance": "تحت الصيانة",
+    "occupied": "مشغول",
+    "vacant": "شاغر"
+  },
+  "details": {
+    "overview": "نظرة عامة",
+    "units": "الوحدات",
+    "residents": "المقيمين",
+    "maintenance": "الصيانة",
+    "financials": "المالية"
+  },
+  "table": {
+    "columns": {
+      "name": "الاسم",
+      "address": "العنوان",
+      "city": "المدينة",
+      "totalUnits": "إجمالي الوحدات",
+      "description": "الوصف",
+      "actions": "الإجراءات"
+    }
+  },
+  "messages": {
+    "buildingCreated": "تم إنشاء المبنى بنجاح",
+    "buildingUpdated": "تم تحديث المبنى بنجاح",
+    "buildingDeleted": "تم حذف المبنى بنجاح",
+    "errorCreatingBuilding": "فشل في إنشاء المبنى",
+    "errorUpdatingBuilding": "فشل في تحديث المبنى",
+    "errorDeletingBuilding": "فشل في حذف المبنى",
+    "confirmDelete": "هل أنت متأكد من أنك تريد حذف هذا المبنى؟ لا يمكن التراجع عن هذا الإجراء."
+  }
+}

@@ -12,7 +12,7 @@ export function SearchResultsSkeleton() {
             key={`building-${i}`}
             className='flex items-start gap-3 p-3'
           >
-            <Building2 className='mt-0.5 h-4 w-4 text-blue-600' />
+            <Building2 className='text-primary mt-0.5 h-4 w-4' />
             <div className='flex-1 space-y-2'>
               <Skeleton className='h-4 w-32' />
               <div className='flex items-center gap-1'>

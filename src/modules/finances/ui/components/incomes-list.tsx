@@ -92,7 +92,7 @@ export function IncomesList() {
                   {income.buildingId ? (
                     <Link
                       href={`/buildings/${income.buildingId}`}
-                      className='text-blue-600 hover:underline'
+                      className='text-primary hover:underline'
                     >
                       {getBuildingName(income.buildingId)}
                     </Link>

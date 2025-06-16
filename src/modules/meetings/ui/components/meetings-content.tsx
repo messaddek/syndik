@@ -141,7 +141,7 @@ export function MeetingsContent() {
             {meeting.buildingId ? (
               <Link
                 href={`/buildings/${meeting.buildingId}`}
-                className='text-blue-600 hover:underline'
+                className='text-primary hover:underline'
               >
                 {getBuildingName(meeting.buildingId)}
               </Link>
@@ -222,7 +222,7 @@ export function MeetingsContent() {
             <Clock className='text-muted-foreground h-4 w-4' />
           </CardHeader>{' '}
           <CardContent>
-            <div className='text-2xl font-bold text-blue-600'>
+            <div className='text-primary text-2xl font-bold'>
               {upcomingMeetings.length}
             </div>
           </CardContent>
@@ -265,8 +265,11 @@ export function MeetingsContent() {
       {/* Add Meeting Button */}
       <div className='flex items-center justify-between'>
         <h2 className='text-2xl font-bold'>Meetings Management</h2>
-        <Button onClick={() => setShowCreateDialog(true)}>
-          <Plus className='mr-2 h-4 w-4' />
+        <Button
+          onClick={() => setShowCreateDialog(true)}
+          className='flex items-center gap-2'
+        >
+          <Plus className='h-4 w-4' />
           Schedule Meeting
         </Button>
       </div>
@@ -288,8 +291,11 @@ export function MeetingsContent() {
                 <p className='mb-4 text-sm text-gray-600'>
                   Schedule your next meeting to keep residents informed.
                 </p>
-                <Button onClick={() => setShowCreateDialog(true)}>
-                  <Plus className='mr-2 h-4 w-4' />
+                <Button
+                  onClick={() => setShowCreateDialog(true)}
+                  className='flex items-center gap-2'
+                >
+                  <Plus className='h-4 w-4' />
                   Schedule First Meeting
                 </Button>
               </CardContent>
@@ -332,8 +338,11 @@ export function MeetingsContent() {
                 <p className='mb-4 text-sm text-gray-600'>
                   Start by scheduling your first meeting.
                 </p>
-                <Button onClick={() => setShowCreateDialog(true)}>
-                  <Plus className='mr-2 h-4 w-4' />
+                <Button
+                  onClick={() => setShowCreateDialog(true)}
+                  className='flex items-center gap-2'
+                >
+                  <Plus className='h-4 w-4' />
                   Schedule First Meeting
                 </Button>
               </CardContent>

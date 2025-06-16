@@ -85,7 +85,7 @@ export function ResidentSetupForm() {
       <Card className='w-full max-w-md'>
         <CardHeader className='text-center'>
           <div className='mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100'>
-            <Home className='h-6 w-6 text-blue-600' />
+            <Home className='text-primary h-6 w-6' />
           </div>
           <CardTitle className='text-2xl font-bold'>
             Welcome to Syndik

@@ -42,7 +42,7 @@ export function TestimonialsSection() {
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         {' '}
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-base leading-7 font-semibold text-blue-600'>
+          <h2 className='text-primary text-base leading-7 font-semibold'>
             {t('subtitle')}
           </h2>
           <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -71,7 +71,7 @@ export function TestimonialsSection() {
                 </blockquote>
                 <div className='flex items-center space-x-3'>
                   <Avatar>
-                    <AvatarFallback className='bg-blue-100 font-semibold text-blue-600'>
+                    <AvatarFallback className='text-primary bg-blue-100 font-semibold'>
                       {testimonial.author.avatar}
                     </AvatarFallback>
                   </Avatar>

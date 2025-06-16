@@ -121,7 +121,7 @@ export function OccupancyTrendChart() {
       </div>
       <div className='mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2'>
         <div className='text-center'>
-          <div className='text-xl font-bold text-blue-600 sm:text-2xl'>
+          <div className='text-primary text-xl font-bold sm:text-2xl'>
             {currentMonth?.occupancyRate.toFixed(1)}%
           </div>
           <div className='text-muted-foreground text-xs sm:text-sm'>

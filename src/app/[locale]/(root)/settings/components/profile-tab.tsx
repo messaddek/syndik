@@ -166,7 +166,7 @@ export function ProfileTab() {
       <CardContent className='space-y-6'>
         <div className='rounded-lg border border-blue-200 bg-blue-50 p-4'>
           <div className='flex items-start gap-3'>
-            <div className='text-blue-600'>
+            <div className='text-primary'>
               <svg className='h-5 w-5' fill='currentColor' viewBox='0 0 20 20'>
                 <path
                   fillRule='evenodd'

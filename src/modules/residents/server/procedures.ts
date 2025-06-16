@@ -283,8 +283,8 @@ export const residentsRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const { db, orgId } = ctx;
 
-      // Get residents who don't have a corresponding user record (not invited to portal)
-      const uninvitedResidents = await db
+      // Get all active residents
+      const allResidents = await db
         .select({
           id: residents.id,
           firstName: residents.firstName,
@@ -295,25 +295,100 @@ export const residentsRouter = createTRPCRouter({
           isActive: residents.isActive,
         })
         .from(residents)
-        .where(
-          and(
-            eq(residents.orgId, orgId),
-            eq(residents.isActive, true),
-            notExists(
-              db
-                .select()
-                .from(users)
-                .where(
-                  and(
-                    eq(users.residentId, residents.id),
-                    eq(users.orgId, orgId)
+        .where(and(eq(residents.orgId, orgId), eq(residents.isActive, true)))
+        .orderBy(desc(residents.createdAt))
+        .limit(input.limit * 2); // Get more than needed to filter
+
+      // Check Clerk memberships to see who's actually not invited
+      const clerk = await clerkClient();
+      let existingMemberships = [];
+      let pendingInvitations = [];
+
+      try {
+        const [memberships, invitations] = await Promise.all([
+          clerk.organizations.getOrganizationMembershipList({
+            organizationId: orgId,
+          }),
+          clerk.organizations.getOrganizationInvitationList({
+            organizationId: orgId,
+          }),
+        ]);
+
+        existingMemberships = memberships.data;
+        pendingInvitations = invitations.data.filter(
+          inv => inv.status === 'pending'
+        );
+      } catch (error) {
+        console.error('Error fetching Clerk data:', error);
+        // Fall back to checking users table only if Clerk fails
+        const uninvitedResidents = await db
+          .select({
+            id: residents.id,
+            firstName: residents.firstName,
+            lastName: residents.lastName,
+            email: residents.email,
+            phone: residents.phone,
+            isOwner: residents.isOwner,
+            isActive: residents.isActive,
+          })
+          .from(residents)
+          .where(
+            and(
+              eq(residents.orgId, orgId),
+              eq(residents.isActive, true),
+              notExists(
+                db
+                  .select()
+                  .from(users)
+                  .where(
+                    and(
+                      eq(users.residentId, residents.id),
+                      eq(users.orgId, orgId)
+                    )
                   )
-                )
+              )
             )
           )
-        )
-        .orderBy(desc(residents.createdAt))
-        .limit(input.limit);
+          .orderBy(desc(residents.createdAt))
+          .limit(input.limit);
+
+        return uninvitedResidents;
+      }
+
+      // Filter out residents who are already members or have pending invitations
+      const memberEmails = new Set(
+        existingMemberships
+          .map(m => m.publicUserData?.identifier)
+          .filter(Boolean)
+      );
+      const invitedEmails = new Set(
+        pendingInvitations.map(inv => inv.emailAddress)
+      );
+
+      console.log(`📋 Filtering residents:`, {
+        totalResidents: allResidents.length,
+        memberEmails: Array.from(memberEmails),
+        invitedEmails: Array.from(invitedEmails),
+      });
+
+      const uninvitedResidents = allResidents
+        .filter(resident => {
+          const isAlreadyMember = memberEmails.has(resident.email);
+          const hasInvitation = invitedEmails.has(resident.email);
+          const isUninvited = !isAlreadyMember && !hasInvitation;
+
+          console.log(
+            `👤 ${resident.firstName} ${resident.lastName} (${resident.email}):`,
+            {
+              isAlreadyMember,
+              hasInvitation,
+              isUninvited,
+            }
+          );
+
+          return isUninvited;
+        })
+        .slice(0, input.limit);
 
       return uninvitedResidents;
     }),
@@ -333,9 +408,10 @@ export const residentsRouter = createTRPCRouter({
       const errors = [];
 
       for (const residentId of input.residentIds) {
+        let resident: typeof residents.$inferSelect | null = null;
         try {
           // Verify resident exists and belongs to org
-          const [resident] = await db
+          const [residentData] = await db
             .select()
             .from(residents)
             .where(
@@ -343,13 +419,135 @@ export const residentsRouter = createTRPCRouter({
             )
             .limit(1);
 
+          resident = residentData;
+
           if (!resident) {
             errors.push({ residentId, error: 'Resident not found' });
             continue;
           }
 
-          // Create Clerk organization invitation with resident metadata
+          // Validate email format
+          if (!resident.email || !resident.email.includes('@')) {
+            errors.push({
+              residentId,
+              error: `Invalid email address: ${resident.email}`,
+              residentName: `${resident.firstName} ${resident.lastName}`,
+              email: resident.email || 'No email',
+            });
+            continue;
+          }
+
+          // Check if resident already has an invitation or is already a member
           const clerk = await clerkClient();
+
+          try {
+            // Check if user already exists in the organization
+            const existingMemberships =
+              await clerk.organizations.getOrganizationMembershipList({
+                organizationId: orgId,
+              });
+
+            console.log(
+              `🔍 Checking memberships for resident ${residentId} (${resident.email})`
+            );
+            console.log(
+              `📊 Found ${existingMemberships.data.length} existing memberships`
+            );
+
+            // Log what data is actually available in memberships
+            existingMemberships.data.forEach((membership, index) => {
+              console.log(`👤 Membership ${index + 1}:`, {
+                userId: membership.publicUserData?.userId,
+                identifier: membership.publicUserData?.identifier,
+                firstName: membership.publicUserData?.firstName,
+                lastName: membership.publicUserData?.lastName,
+                imageUrl: membership.publicUserData?.imageUrl,
+                hasImage: membership.publicUserData?.hasImage,
+                // Log all available keys
+                availableKeys: Object.keys(membership.publicUserData || {}),
+              });
+            });
+
+            const existingMember = existingMemberships.data.find(membership => {
+              console.log(`🔍 Comparing:`, {
+                residentEmail: resident?.email,
+                memberIdentifier: membership.publicUserData?.identifier,
+                memberUserId: membership.publicUserData?.userId,
+              });
+              // Since emailAddress might not be available in publicUserData,
+              // we'll check what's available and handle invitation conflicts through Clerk errors
+              return membership.publicUserData?.identifier === resident?.email;
+            });
+
+            if (existingMember) {
+              errors.push({
+                residentId,
+                error: `User already member of organization: ${resident.email}`,
+                residentName: `${resident.firstName} ${resident.lastName}`,
+                email: resident.email,
+              });
+              continue;
+            }
+
+            // Check for pending invitations
+            const pendingInvitations =
+              await clerk.organizations.getOrganizationInvitationList({
+                organizationId: orgId,
+              });
+
+            console.log(
+              `📨 Found ${pendingInvitations.data.length} pending invitations`
+            );
+
+            // Log invitation data
+            pendingInvitations.data.forEach((invitation, index) => {
+              console.log(`✉️ Invitation ${index + 1}:`, {
+                emailAddress: invitation.emailAddress,
+                status: invitation.status,
+                role: invitation.role,
+                id: invitation.id,
+                createdAt: invitation.createdAt,
+              });
+            });
+
+            const existingInvitation = pendingInvitations.data.find(
+              invitation => {
+                console.log(`📧 Comparing invitation:`, {
+                  residentEmail: resident?.email,
+                  invitationEmail: invitation.emailAddress,
+                  invitationStatus: invitation.status,
+                });
+                return (
+                  invitation.emailAddress === resident?.email &&
+                  invitation.status === 'pending'
+                );
+              }
+            );
+
+            if (existingInvitation) {
+              errors.push({
+                residentId,
+                error: `Invitation already sent to: ${resident.email}`,
+                residentName: `${resident.firstName} ${resident.lastName}`,
+                email: resident.email,
+              });
+              continue;
+            }
+          } catch (clerkError) {
+            console.error(
+              'Error checking existing memberships/invitations:',
+              clerkError
+            );
+            // Continue with invitation attempt even if this check fails
+          }
+
+          // Create Clerk organization invitation with resident metadata
+          console.log(`🚀 Creating invitation for resident ${residentId}:`, {
+            email: resident.email,
+            orgId: orgId,
+            role: 'org:member',
+          });
+
           const invitation =
             await clerk.organizations.createOrganizationInvitation({
               organizationId: orgId,
@@ -358,8 +556,15 @@ export const residentsRouter = createTRPCRouter({
               publicMetadata: {
                 residentId: residentId,
                 invitationType: 'resident_portal',
+                residentName: `${resident.firstName} ${resident.lastName}`,
               },
             });
+
+          console.log(`✅ Successfully created invitation:`, {
+            invitationId: invitation.id,
+            email: resident.email,
+            residentName: `${resident.firstName} ${resident.lastName}`,
+          });
 
           results.push({
             residentId,
@@ -368,9 +573,39 @@ export const residentsRouter = createTRPCRouter({
             residentName: `${resident.firstName} ${resident.lastName}`,
           });
         } catch (error) {
+          console.error(
+            `❌ Error inviting resident ${residentId} (${resident?.email || 'unknown email'}):`,
+            error
+          );
+
+          // Log the full error object to understand its structure
+          console.error('Full error object:', {
+            name: error instanceof Error ? error.name : 'Unknown',
+            message: error instanceof Error ? error.message : String(error),
+            stack: error instanceof Error ? error.stack : 'No stack',
+            clerkError: error,
+          });
+
+          let errorMessage = 'Unknown error';
+          if (error instanceof Error) {
+            errorMessage = error.message;
+
+            // Parse Clerk-specific error messages
+            if (error.message.includes('email_address_not_allowed')) {
+              errorMessage = `Email address not allowed: ${resident?.email}`;
+            } else if (error.message.includes('invalid_email_address')) {
+              errorMessage = `Invalid email format: ${resident?.email}`;
+            } else if (error.message.includes('already_exists')) {
+              errorMessage = `User already exists: ${resident?.email}`;
+            } else if (error.message.includes('invitation_already_exists')) {
+              errorMessage = `Invitation already exists: ${resident?.email}`;
+            }
+          }
+
           errors.push({
             residentId,
-            error: error instanceof Error ? error.message : 'Unknown error',
+            error: errorMessage,
+            email: resident?.email || 'Unknown',
           });
         }
       }
@@ -387,16 +622,14 @@ export const residentsRouter = createTRPCRouter({
   linkUserToResident: orgProtectedProcedure
     .input(
       z.object({
-        clerkUserId: z.string().min(1, 'Clerk User ID is required'),
-        residentId: z.string().uuid('Invalid resident ID'),
-        userName: z.string().min(1, 'User name is required'),
-        userEmail: z.string().email('Valid email is required'),
+        clerkUserId: z.string(),
+        residentId: z.string().uuid(),
       })
     )
     .mutation(async ({ ctx, input }) => {
       const { db, orgId } = ctx;
 
-      // Verify resident exists and belongs to org
+      // Verify the resident exists and belongs to this org
       const [resident] = await db
         .select()
         .from(residents)
@@ -412,34 +645,29 @@ export const residentsRouter = createTRPCRouter({
         });
       }
 
-      // Check if user already exists
+      // Check if user record already exists
       const [existingUser] = await db
         .select()
         .from(users)
-        .where(and(eq(users.userId, input.clerkUserId), eq(users.orgId, orgId)))
+        .where(eq(users.userId, input.clerkUserId))
         .limit(1);
 
       if (existingUser) {
-        // Update existing user record to link to resident
+        // Update existing user with resident link
         const [updatedUser] = await db
           .update(users)
           .set({
             residentId: input.residentId,
-            name: input.userName,
-            email: input.userEmail,
+            orgId: orgId,
+            name: `${resident.firstName} ${resident.lastName}`,
+            email: resident.email,
+            phone: resident.phone,
             updatedAt: new Date(),
           })
-          .where(
-            and(eq(users.userId, input.clerkUserId), eq(users.orgId, orgId))
-          )
+          .where(eq(users.userId, input.clerkUserId))
           .returning();
 
-        return {
-          linked: true,
-          user: updatedUser,
-          resident,
-          message: 'User successfully linked to resident record',
-        };
+        return updatedUser;
       } else {
         // Create new user record linked to resident
         const [newUser] = await db
@@ -447,19 +675,147 @@ export const residentsRouter = createTRPCRouter({
           .values({
             userId: input.clerkUserId,
             orgId: orgId,
-            name: input.userName,
-            email: input.userEmail,
+            name: `${resident.firstName} ${resident.lastName}`,
+            email: resident.email,
+            phone: resident.phone,
             residentId: input.residentId,
-            isActive: true,
           })
           .returning();
 
-        return {
-          linked: true,
-          user: newUser,
-          resident,
-          message: 'User record created and linked to resident',
-        };
+        return newUser;
       }
     }),
+
+  // Check if current user has a linked resident record
+  getCurrentUserResidentLink: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    if (!userId) {
+      return null;
+    }
+
+    const [userRecord] = await db
+      .select({
+        id: users.id,
+        residentId: users.residentId,
+        name: users.name,
+        email: users.email,
+        phone: users.phone,
+      })
+      .from(users)
+      .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
+      .limit(1);
+
+    return userRecord || null;
+  }),
+
+  // Auto-link current user to resident record based on email
+  autoLinkCurrentUser: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    if (!userId) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'User not authenticated',
+      });
+    }
+
+    // Check if user is already linked
+    const [existingUser] = await db
+      .select()
+      .from(users)
+      .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
+      .limit(1);
+
+    if (existingUser?.residentId) {
+      return {
+        success: true,
+        message: 'User already linked',
+        userRecord: existingUser,
+      };
+    }
+
+    // Get user's email from Clerk
+    const clerk = await clerkClient();
+    let clerkUser;
+
+    try {
+      clerkUser = await clerk.users.getUser(userId);
+    } catch (_error) {
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Failed to fetch user from Clerk',
+      });
+    }
+
+    const userEmail = clerkUser.emailAddresses?.[0]?.emailAddress;
+    if (!userEmail) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: 'No email address found for user',
+      });
+    }
+
+    // Find matching resident by email
+    const [matchingResident] = await db
+      .select()
+      .from(residents)
+      .where(
+        and(
+          eq(residents.email, userEmail),
+          eq(residents.orgId, orgId),
+          eq(residents.isActive, true)
+        )
+      )
+      .limit(1);
+
+    if (!matchingResident) {
+      return {
+        success: false,
+        message: 'No matching resident record found for your email address',
+        userEmail,
+      };
+    }
+
+    // Create or update user record with resident link
+    if (existingUser) {
+      const [updatedUser] = await db
+        .update(users)
+        .set({
+          residentId: matchingResident.id,
+          name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+          email: matchingResident.email,
+          phone: matchingResident.phone,
+          updatedAt: new Date(),
+        })
+        .where(eq(users.userId, userId))
+        .returning();
+
+      return {
+        success: true,
+        message: 'Successfully linked to resident record',
+        userRecord: updatedUser,
+        resident: matchingResident,
+      };
+    } else {
+      const [newUser] = await db
+        .insert(users)
+        .values({
+          userId: userId,
+          orgId: orgId,
+          name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+          email: matchingResident.email,
+          phone: matchingResident.phone,
+          residentId: matchingResident.id,
+        })
+        .returning();
+
+      return {
+        success: true,
+        message: 'Successfully created user record and linked to resident',
+        userRecord: newUser,
+        resident: matchingResident,
+      };
+    }
+  }),
 });

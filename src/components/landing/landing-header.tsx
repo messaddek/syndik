@@ -62,8 +62,8 @@ export function LandingHeader() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  'text-sm font-medium transition-colors hover:text-blue-600',
-                  pathname === item.href ? 'text-blue-600' : 'text-gray-600'
+                  'hover:text-primary text-sm font-medium transition-colors',
+                  pathname === item.href ? 'text-primary' : 'text-gray-600'
                 )}
               >
                 {item.name}
@@ -130,8 +130,8 @@ export function LandingHeader() {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    'block px-3 py-2 text-base font-medium transition-colors hover:text-blue-600',
-                    pathname === item.href ? 'text-blue-600' : 'text-gray-600'
+                    'hover:text-primary block px-3 py-2 text-base font-medium transition-colors',
+                    pathname === item.href ? 'text-primary' : 'text-gray-600'
                   )}
                   onClick={() => setMobileMenuOpen(false)}
                 >

@@ -497,7 +497,7 @@ const SendingAnnouncementsPage = () => {
                           </div>
                           <div className='text-center'>
                             <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-blue-100 p-3'>
-                              <Calendar className='h-6 w-6 text-blue-600' />
+                              <Calendar className='text-primary h-6 w-6' />
                             </div>
                             <h4 className='font-semibold'>Schedule</h4>
                             <p className='text-sm text-gray-600'>
@@ -566,7 +566,7 @@ const SendingAnnouncementsPage = () => {
                       <Card>
                         <CardContent className='p-4 text-center'>
                           <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-blue-100 p-3'>
-                            <Mail className='h-6 w-6 text-blue-600' />
+                            <Mail className='text-primary h-6 w-6' />
                           </div>
                           <h4 className='font-semibold'>Email</h4>
                           <p className='text-sm text-gray-600'>
@@ -822,7 +822,7 @@ const SendingAnnouncementsPage = () => {
                       <a
                         key={item.id}
                         href={`#${item.id}`}
-                        className={`block text-sm transition-colors hover:text-blue-600 ${
+                        className={`hover:text-primary block text-sm transition-colors ${
                           item.level === 2
                             ? 'pl-4 text-gray-600'
                             : 'font-medium text-gray-700'

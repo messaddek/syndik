@@ -1,5 +1,5 @@
 import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
+import { redirect } from '@/i18n/routing';
 import {
   PortalSidebar,
   PortalNavbar,
@@ -12,23 +12,21 @@ import { NotificationProvider } from '@/modules/notifications/providers/notifica
 
 export default async function PortalLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   const { userId, orgId } = await auth();
 
   // Server-side logging
-  // eslint-disable-next-line no-console
   console.log('🏠 Portal Layout - UserId:', userId);
-  // eslint-disable-next-line no-console
   console.log('🏠 Portal Layout - OrgId:', orgId);
-
   if (!userId || !orgId) {
-    // eslint-disable-next-line no-console
     console.log(
       '🚫 Portal Layout - Missing userId or orgId, redirecting to /sign-in'
     );
-    redirect('/sign-in');
+    redirect({ href: '/sign-in', locale: params.locale });
   }
   return (
     <TRPCErrorBoundary>

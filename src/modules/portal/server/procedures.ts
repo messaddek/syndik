@@ -13,6 +13,7 @@ import { announcements } from '@/modules/announcements/schema';
 import { notifications } from '@/modules/notifications/schema';
 import { residentSetupSchema, residentProfileUpdateSchema } from '../schema';
 import { TRPCError } from '@trpc/server';
+import { clerkClient } from '@clerk/nextjs/server';
 import { z } from 'zod';
 
 export const portalRouter = createTRPCRouter({
@@ -307,21 +308,128 @@ export const portalRouter = createTRPCRouter({
 
     return residentProfile;
   }),
-
-  // Check if current user has resident access
+  // Check if current user has resident access (with auto-linking)
   hasResidentAccess: orgProtectedProcedure.query(async ({ ctx }) => {
     const { db, userId, orgId } = ctx;
 
-    const [user] = await db
+    console.log(
+      `🔐 Checking resident access for user ${userId} in org ${orgId}`
+    );
+
+    // First, check if user is already linked
+    const [existingUser] = await db
       .select()
       .from(users)
       .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
       .limit(1);
 
-    return {
-      hasAccess: !!user?.residentId,
-      residentId: user?.residentId || null,
-    };
+    if (existingUser?.residentId) {
+      console.log(
+        `✅ User already linked to resident ${existingUser.residentId}`
+      );
+      return {
+        hasAccess: true,
+        residentId: existingUser.residentId,
+        autoLinked: false,
+        message: 'Already linked',
+      };
+    }
+
+    // If not linked, attempt auto-linking by email
+    console.log(`🔗 Attempting auto-link for user ${userId}`);
+
+    try {
+      // Get user's email from Clerk
+      const clerk = await clerkClient();
+      const clerkUser = await clerk.users.getUser(userId);
+      const userEmail = clerkUser.emailAddresses?.[0]?.emailAddress;
+
+      if (!userEmail) {
+        console.log(`❌ No email found for user ${userId}`);
+        return {
+          hasAccess: false,
+          residentId: null,
+          autoLinked: false,
+          message: 'No email address found',
+          error: 'NO_EMAIL',
+        };
+      }
+
+      console.log(`📧 User email: ${userEmail}`);
+
+      // Find matching resident by email
+      const [matchingResident] = await db
+        .select()
+        .from(residents)
+        .where(
+          and(
+            eq(residents.email, userEmail),
+            eq(residents.orgId, orgId),
+            eq(residents.isActive, true)
+          )
+        )
+        .limit(1);
+
+      if (!matchingResident) {
+        console.log(`❌ No matching resident found for email ${userEmail}`);
+        return {
+          hasAccess: false,
+          residentId: null,
+          autoLinked: false,
+          message: `No resident record found for email: ${userEmail}`,
+          userEmail,
+          error: 'NO_RESIDENT_MATCH',
+        };
+      }
+
+      console.log(
+        `👤 Found matching resident: ${matchingResident.firstName} ${matchingResident.lastName} (${matchingResident.id})`
+      ); // Create or update user record with resident link
+      if (existingUser) {
+        // Update existing user record
+        await db
+          .update(users)
+          .set({
+            residentId: matchingResident.id,
+            name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+            email: matchingResident.email,
+            phone: matchingResident.phone,
+            updatedAt: new Date(),
+          })
+          .where(eq(users.userId, userId));
+      } else {
+        // Create new user record
+        await db.insert(users).values({
+          userId: userId,
+          orgId: orgId,
+          name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+          email: matchingResident.email,
+          phone: matchingResident.phone,
+          residentId: matchingResident.id,
+        });
+      }
+
+      console.log(
+        `✅ Successfully auto-linked user to resident ${matchingResident.id}`
+      );
+
+      return {
+        hasAccess: true,
+        residentId: matchingResident.id,
+        autoLinked: true,
+        message: `Successfully linked to ${matchingResident.firstName} ${matchingResident.lastName}`,
+        residentName: `${matchingResident.firstName} ${matchingResident.lastName}`,
+      };
+    } catch (error) {
+      console.error(`❌ Auto-linking failed for user ${userId}:`, error);
+      return {
+        hasAccess: false,
+        residentId: null,
+        autoLinked: false,
+        message: 'Auto-linking failed',
+        error: 'AUTO_LINK_FAILED',
+      };
+    }
   }),
 
   // Update resident profile (limited fields)

@@ -25,7 +25,7 @@ export function BuildingViewSkeleton() {
             <div
               className={`flex items-center ${isRtl ? 'space-x-2 space-x-reverse' : 'space-x-2'}`}
             >
-              <Building2 className='h-6 w-6 text-blue-600' />
+              <Building2 className='text-primary h-6 w-6' />
               <Skeleton className='h-8 w-48' />
             </div>
             <div

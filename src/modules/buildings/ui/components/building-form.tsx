@@ -59,7 +59,7 @@ export function BuildingForm({
   const createBuilding = useMutation(
     trpc.buildings.create.mutationOptions({
       onSuccess: () => {
-        toast.success(t('buildingCreated'));
+        toast.success(t('messages.buildingCreated'));
         queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
         queryClient.invalidateQueries({
           queryKey: trpc.dashboard.getOverview.queryKey(),
@@ -69,7 +69,7 @@ export function BuildingForm({
         onSuccess?.();
       },
       onError: error => {
-        toast.error(error.message || t('errorCreatingBuilding'));
+        toast.error(error.message || t('messages.errorCreatingBuilding'));
       },
     })
   );
@@ -77,7 +77,7 @@ export function BuildingForm({
   const updateBuilding = useMutation(
     trpc.buildings.update.mutationOptions({
       onSuccess: () => {
-        toast.success(t('buildingUpdated'));
+        toast.success(t('messages.buildingUpdated'));
         queryClient.invalidateQueries(trpc.buildings.getAll.queryOptions({}));
         queryClient.invalidateQueries(
           trpc.buildings.getById.queryOptions({ id: building!.id })
@@ -89,7 +89,7 @@ export function BuildingForm({
         onSuccess?.();
       },
       onError: error => {
-        toast.error(error.message || t('errorUpdatingBuilding'));
+        toast.error(error.message || t('messages.errorUpdatingBuilding'));
       },
     })
   );
@@ -137,28 +137,30 @@ export function BuildingForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-4'>
-        {' '}
         <FormField
           control={form.control}
           name='name'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('buildingName')}</FormLabel>
+              <FormLabel>{t('form.name')}</FormLabel>
               <FormControl>
-                <Input placeholder={t('namePlaceholder')} {...field} />
+                <Input placeholder={t('form.placeholders.name')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
-        />{' '}
+        />
         <FormField
           control={form.control}
           name='address'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('buildingAddress')}</FormLabel>
+              <FormLabel>{t('form.address')}</FormLabel>
               <FormControl>
-                <Input placeholder={t('addressPlaceholder')} {...field} />
+                <Input
+                  placeholder={t('form.placeholders.address')}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -170,9 +172,9 @@ export function BuildingForm({
             name='city'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('city')}</FormLabel>
+                <FormLabel>{t('form.city')}</FormLabel>
                 <FormControl>
-                  <Input placeholder={t('cityPlaceholder')} {...field} />
+                  <Input placeholder={t('form.placeholders.city')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -184,21 +186,24 @@ export function BuildingForm({
             name='postalCode'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('postalCode')}</FormLabel>
+                <FormLabel>{t('form.postalCode')}</FormLabel>
                 <FormControl>
-                  <Input placeholder={t('postalCodePlaceholder')} {...field} />
+                  <Input
+                    placeholder={t('form.placeholders.postalCode')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-        </div>{' '}
+        </div>
         <FormField
           control={form.control}
           name='totalUnits'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('totalUnits')}</FormLabel>
+              <FormLabel>{t('form.totalUnits')}</FormLabel>
               <FormControl>
                 <Input
                   type='number'
@@ -216,15 +221,17 @@ export function BuildingForm({
           name='description'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('description')}</FormLabel>
+              <FormLabel>{t('form.buildingDescription')}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder={t('descriptionPlaceholder')}
+                  placeholder={t('form.placeholders.description')}
                   rows={3}
                   {...field}
                 />
               </FormControl>
-              <FormDescription>{t('description')}</FormDescription>
+              <FormDescription>
+                {t('form.descriptions.buildingDescription')}
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -234,7 +241,7 @@ export function BuildingForm({
             <Button type='button' variant='outline' onClick={onCancel}>
               {tCommon('cancel')}
             </Button>
-          )}{' '}
+          )}
           <Button type='submit' disabled={isSubmitting}>
             {isSubmitting
               ? building

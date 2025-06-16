@@ -1,0 +1,97 @@
+{
+  "propertyInformationUpdates": {
+    "title": "تحديثات معلومات العقار",
+    "description": "تعلم كيفية الحفاظ على معلومات عقارك محدثة ودقيقة",
+    "tableOfContents": [
+      { "id": "overview", "title": "نظرة عامة", "level": 1 },
+      {
+        "id": "updating-basic-info",
+        "title": "تحديث المعلومات الأساسية",
+        "level": 1
+      },
+      { "id": "property-amenities", "title": "مرافق العقار", "level": 1 },
+      { "id": "contact-information", "title": "معلومات الاتصال", "level": 1 },
+      { "id": "photos-documents", "title": "الصور والوثائق", "level": 1 },
+      { "id": "best-practices", "title": "أفضل الممارسات", "level": 1 }
+    ],
+    "relatedArticles": [
+      {
+        "title": "إضافة عقارات جديدة",
+        "href": "/user-guide/property-management/adding-new-properties",
+        "time": "3 دقائق"
+      },
+      {
+        "title": "إدارة الوثائق",
+        "href": "/user-guide/property-management/document-management-system",
+        "time": "4 دقائق"
+      },
+      {
+        "title": "إدارة الوحدات",
+        "href": "/user-guide/property-management/unit-management-organization",
+        "time": "6 دقائق"
+      }
+    ],
+    "sections": {
+      "overview": {
+        "title": "نظرة عامة",
+        "content": "الحفاظ على معلومات عقارك محدثة أمر بالغ الأهمية لإدارة العقارات الفعالة. يغطي هذا الدليل كيفية تحديث جوانب مختلفة من تفاصيل عقارك.",
+        "proTip": {
+          "title": "نصيحة محترف",
+          "content": "قم بإعداد تذكيرات شهرية لمراجعة وتحديث معلومات العقار لضمان الدقة."
+        }
+      },
+      "updatingBasicInfo": {
+        "title": "تحديث المعلومات الأساسية",
+        "subtitle": "تفاصيل ومواصفات العقار",
+        "steps": [
+          "انتقل إلى العقارات في القائمة الرئيسية",
+          "اختر العقار الذي تريد تحديثه",
+          "انقر على زر 'تعديل العقار'",
+          "حدث الحقول الضرورية",
+          "احفظ تغييراتك"
+        ]
+      },
+      "propertyAmenities": {
+        "title": "مرافق العقار",
+        "content": "إدارة مرافق العقار تساعد السكان المحتملين على فهم ما يقدمه عقارك.",
+        "commonAmenities": {
+          "title": "المرافق المشتركة",
+          "list": [
+            "حمام سباحة",
+            "مركز لياقة بدنية",
+            "مرآب للسيارات",
+            "مرافق الغسيل",
+            "مركز الأعمال"
+          ]
+        },
+        "unitFeatures": {
+          "title": "الميزات الخاصة بالوحدة"
+        }
+      },
+      "contactInformation": {
+        "title": "معلومات الاتصال",
+        "important": {
+          "title": "ملاحظة مهمة",
+          "content": "احتفظ دائماً بمعلومات الاتصال محدثة لأنها تُستخدم للإشعارات الطارئة."
+        }
+      },
+      "photosDocuments": {
+        "title": "الصور والوثائق",
+        "content": "المحتوى المرئي يساعد السكان والمهتمين على فهم عقارك بشكل أفضل.",
+        "photoUpdates": {
+          "title": "تحديثات الصور",
+          "content": "التحديثات المنتظمة للصور تعرض الحالة الحالية والتحسينات في عقارك."
+        }
+      },
+      "bestPractices": {
+        "title": "أفضل الممارسات",
+        "regularMaintenance": {
+          "title": "الصيانة المنتظمة للمعلومات"
+        },
+        "qualityControl": {
+          "title": "مراقبة الجودة"
+        }
+      }
+    }
+  }
+}

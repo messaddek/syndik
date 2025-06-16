@@ -1,7 +1,8 @@
 import { Link } from '@/i18n/routing';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { LandingLayout } from '@/components/landing/landing-layout';
+import { ArticleSidebar } from '@/components/articles/article-sidebar';
+import { useTranslations } from 'next-intl';
 import {
   Clock,
   Users,
@@ -9,49 +10,22 @@ import {
   AlertCircle,
   Lightbulb,
   ChevronRight,
-  Mail,
   Edit,
 } from 'lucide-react';
 
 const PropertyInformationUpdatesPage = () => {
-  const tableOfContents = [
-    { id: 'overview', title: 'Overview', level: 1 },
-    {
-      id: 'updating-basic-info',
-      title: 'Updating Basic Information',
-      level: 1,
-    },
-    {
-      id: 'property-amenities',
-      title: 'Managing Property Amenities',
-      level: 1,
-    },
-    {
-      id: 'contact-information',
-      title: 'Contact Information Updates',
-      level: 1,
-    },
-    { id: 'photos-documents', title: 'Photos and Documents', level: 1 },
-    { id: 'best-practices', title: 'Best Practices', level: 1 },
-  ];
+  const t = useTranslations('articles.propertyInformationUpdates');
 
-  const relatedArticles = [
-    {
-      title: 'Adding New Properties',
-      href: '/user-guide/property-management/adding-new-properties',
-      time: '4 min',
-    },
-    {
-      title: 'Unit Management & Organization',
-      href: '/user-guide/property-management/unit-management-organization',
-      time: '6 min',
-    },
-    {
-      title: 'Document Management System',
-      href: '/user-guide/property-management/document-management-system',
-      time: '8 min',
-    },
-  ];
+  const tableOfContents = t.raw('tableOfContents') as Array<{
+    id: string;
+    title: string;
+    level: number;
+  }>;
+  const relatedArticles = t.raw('relatedArticles') as Array<{
+    title: string;
+    href: string;
+    time: string;
+  }>;
 
   return (
     <LandingLayout>
@@ -61,22 +35,21 @@ const PropertyInformationUpdatesPage = () => {
           <nav className='mb-8'>
             <div className='flex items-center space-x-2 text-sm text-gray-600'>
               <Link href='/user-guide' className='hover:text-gray-900'>
-                User Guide
+                {t('breadcrumb.userGuide')}
               </Link>
               <ChevronRight className='h-4 w-4' />
               <Link
                 href='/user-guide#property-management'
                 className='hover:text-gray-900'
               >
-                Property Management
+                {t('breadcrumb.propertyManagement')}
               </Link>
               <ChevronRight className='h-4 w-4' />
               <span className='font-medium text-gray-900'>
-                Property Information Updates
+                {t('breadcrumb.current')}
               </span>
             </div>
           </nav>
-
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
             {/* Main Content */}
             <div className='lg:col-span-3'>
@@ -88,47 +61,41 @@ const PropertyInformationUpdatesPage = () => {
                   </div>
                   <div>
                     <h1 className='text-3xl font-bold text-gray-900'>
-                      Property Information Updates
+                      {t('title')}
                     </h1>
                     <div className='mt-2 flex items-center space-x-4 text-sm text-gray-600'>
                       <div className='flex items-center space-x-1'>
                         <Clock className='h-4 w-4' />
-                        <span>3 min read</span>
+                        <span>{t('meta.readTime')}</span>
                       </div>
                       <div className='flex items-center space-x-1'>
                         <Users className='h-4 w-4' />
-                        <span>All users</span>
+                        <span>{t('meta.audience')}</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <p className='text-lg text-gray-600'>
-                  Learn how to keep your property information current and
-                  accurate with our comprehensive updating tools.
-                </p>
+                <p className='text-lg text-gray-600'>{t('description')}</p>
               </div>
-
               {/* Overview */}
               <section id='overview' className='mb-8'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Overview
+                  {t('sections.overview.title')}
                 </h2>
                 <Card>
                   <CardContent className='p-6'>
                     <p className='mb-4 text-gray-700'>
-                      Keeping property information up-to-date is essential for
-                      effective property management. This guide walks you
-                      through all the ways you can update and maintain your
-                      property details in Syndik.
+                      {t('sections.overview.content')}
                     </p>
                     <div className='rounded-lg bg-blue-50 p-4'>
                       <div className='flex items-start space-x-3'>
-                        <Lightbulb className='mt-0.5 h-5 w-5 text-blue-600' />
+                        <Lightbulb className='text-primary mt-0.5 h-5 w-5' />
                         <div>
-                          <h4 className='font-medium text-blue-900'>Pro Tip</h4>
+                          <h4 className='font-medium text-blue-900'>
+                            {t('sections.overview.proTip.title')}
+                          </h4>
                           <p className='text-sm text-blue-800'>
-                            Regular property information updates help maintain
-                            accurate records and improve tenant satisfaction.
+                            {t('sections.overview.proTip.content')}
                           </p>
                         </div>
                       </div>
@@ -136,52 +103,35 @@ const PropertyInformationUpdatesPage = () => {
                   </CardContent>
                 </Card>
               </section>
-
               {/* Step 1 */}
               <section id='updating-basic-info' className='mb-8'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Updating Basic Information
+                  {t('sections.updatingBasicInfo.title')}
                 </h2>
                 <Card>
                   <CardContent className='p-6'>
                     <div className='space-y-6'>
                       <div>
                         <h3 className='mb-3 text-lg font-medium text-gray-900'>
-                          Property Details
+                          {t('sections.updatingBasicInfo.subtitle')}
                         </h3>
                         <div className='rounded-lg bg-gray-50 p-4'>
                           <ol className='space-y-3 text-sm text-gray-700'>
-                            <li className='flex items-start space-x-2'>
-                              <span className='flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500 text-xs font-medium text-white'>
-                                1
-                              </span>
-                              <span>
-                                Navigate to Properties → Select your property
-                              </span>
-                            </li>
-                            <li className='flex items-start space-x-2'>
-                              <span className='flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500 text-xs font-medium text-white'>
-                                2
-                              </span>
-                              <span>
-                                Click &ldquo;Edit Property&rdquo; in the
-                                property overview
-                              </span>
-                            </li>
-                            <li className='flex items-start space-x-2'>
-                              <span className='flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500 text-xs font-medium text-white'>
-                                3
-                              </span>
-                              <span>
-                                Update name, address, description as needed
-                              </span>
-                            </li>
-                            <li className='flex items-start space-x-2'>
-                              <span className='flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500 text-xs font-medium text-white'>
-                                4
-                              </span>
-                              <span>Save your changes</span>
-                            </li>
+                            {(
+                              t.raw(
+                                'sections.updatingBasicInfo.steps'
+                              ) as string[]
+                            ).map((step, index) => (
+                              <li
+                                key={index}
+                                className='flex items-start space-x-2'
+                              >
+                                <span className='flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500 text-xs font-medium text-white'>
+                                  {index + 1}
+                                </span>
+                                <span>{step}</span>
+                              </li>
+                            ))}
                           </ol>
                         </div>
                       </div>
@@ -189,50 +139,55 @@ const PropertyInformationUpdatesPage = () => {
                   </CardContent>
                 </Card>
               </section>
-
               {/* Step 2 */}
               <section id='property-amenities' className='mb-8'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Managing Property Amenities
+                  {t('sections.propertyAmenities.title')}
                 </h2>
                 <Card>
                   <CardContent className='p-6'>
                     <p className='mb-4 text-gray-700'>
-                      Keep your amenity list current to accurately represent
-                      your property&apos;s offerings:
+                      {t('sections.propertyAmenities.content')}
                     </p>
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                       <div className='rounded-lg border border-gray-200 p-4'>
                         <h4 className='mb-2 font-medium text-gray-900'>
-                          Common Amenities
+                          {t(
+                            'sections.propertyAmenities.commonAmenities.title'
+                          )}
                         </h4>
                         <ul className='space-y-1 text-sm text-gray-600'>
-                          <li>• Swimming pool</li>
-                          <li>• Fitness center</li>
-                          <li>• Parking spaces</li>
-                          <li>• Laundry facilities</li>
+                          {(
+                            t.raw(
+                              'sections.propertyAmenities.commonAmenities.list'
+                            ) as string[]
+                          ).map((amenity, index) => (
+                            <li key={index}>• {amenity}</li>
+                          ))}
                         </ul>
                       </div>
                       <div className='rounded-lg border border-gray-200 p-4'>
                         <h4 className='mb-2 font-medium text-gray-900'>
-                          Unit Features
+                          {t('sections.propertyAmenities.unitFeatures.title')}
                         </h4>
                         <ul className='space-y-1 text-sm text-gray-600'>
-                          <li>• Air conditioning</li>
-                          <li>• Dishwasher</li>
-                          <li>• In-unit laundry</li>
-                          <li>• Balcony/Patio</li>
+                          {(
+                            t.raw(
+                              'sections.propertyAmenities.unitFeatures.list'
+                            ) as string[]
+                          ).map((feature, index) => (
+                            <li key={index}>• {feature}</li>
+                          ))}
                         </ul>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               </section>
-
               {/* Step 3 */}
               <section id='contact-information' className='mb-8'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Contact Information Updates
+                  {t('sections.contactInformation.title')}
                 </h2>
                 <Card>
                   <CardContent className='p-6'>
@@ -241,120 +196,111 @@ const PropertyInformationUpdatesPage = () => {
                         <AlertCircle className='mt-0.5 h-5 w-5 text-yellow-600' />
                         <div>
                           <h4 className='font-medium text-yellow-900'>
-                            Important
+                            {t('sections.contactInformation.important.title')}
                           </h4>
                           <p className='text-sm text-yellow-800'>
-                            Always update contact information immediately when
-                            changes occur to ensure tenants can reach you in
-                            emergencies.
+                            {t('sections.contactInformation.important.content')}
                           </p>
                         </div>
                       </div>
                     </div>
                     <div className='space-y-4'>
-                      <div className='flex items-center space-x-3 rounded-lg bg-gray-50 p-3'>
-                        <CheckCircle className='h-5 w-5 text-green-500' />
-                        <span className='text-sm text-gray-700'>
-                          Office phone and emergency contact numbers
-                        </span>
-                      </div>
-                      <div className='flex items-center space-x-3 rounded-lg bg-gray-50 p-3'>
-                        <CheckCircle className='h-5 w-5 text-green-500' />
-                        <span className='text-sm text-gray-700'>
-                          Management company details and website
-                        </span>
-                      </div>
-                      <div className='flex items-center space-x-3 rounded-lg bg-gray-50 p-3'>
-                        <CheckCircle className='h-5 w-5 text-green-500' />
-                        <span className='text-sm text-gray-700'>
-                          Maintenance request submission process
-                        </span>
-                      </div>
+                      {(
+                        t.raw('sections.contactInformation.items') as string[]
+                      ).map((item, index) => (
+                        <div
+                          key={index}
+                          className='flex items-center space-x-3 rounded-lg bg-gray-50 p-3'
+                        >
+                          <CheckCircle className='h-5 w-5 text-green-500' />
+                          <span className='text-sm text-gray-700'>{item}</span>
+                        </div>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
               </section>
-
               {/* Step 4 */}
               <section id='photos-documents' className='mb-8'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Photos and Documents
+                  {t('sections.photosDocuments.title')}
                 </h2>
                 <Card>
                   <CardContent className='p-6'>
                     <p className='mb-4 text-gray-700'>
-                      Keep visual content and important documents current:
+                      {t('sections.photosDocuments.content')}
                     </p>
                     <div className='space-y-4'>
-                      <div className='border-l-4 border-emerald-500 pl-4'>
+                      <div className='border-l-4 border-emerald-500 pl-4 rtl:border-r-4 rtl:border-l-0 rtl:pr-4 rtl:pl-0'>
                         <h4 className='mb-2 font-medium text-gray-900'>
-                          Photo Updates
+                          {t('sections.photosDocuments.photoUpdates.title')}
                         </h4>
                         <p className='text-sm text-gray-600'>
-                          Upload new photos after renovations, seasonal changes,
-                          or amenity additions to keep listings attractive and
-                          accurate.
+                          {t('sections.photosDocuments.photoUpdates.content')}
                         </p>
                       </div>
-                      <div className='border-l-4 border-blue-500 pl-4'>
+                      <div className='border-l-4 border-blue-500 pl-4 rtl:border-r-4 rtl:border-l-0 rtl:pr-4 rtl:pl-0'>
                         <h4 className='mb-2 font-medium text-gray-900'>
-                          Document Management
+                          {t(
+                            'sections.photosDocuments.documentManagement.title'
+                          )}
                         </h4>
                         <p className='text-sm text-gray-600'>
-                          Update property rules, lease templates, and compliance
-                          documents as regulations change or policies are
-                          updated.
+                          {t(
+                            'sections.photosDocuments.documentManagement.content'
+                          )}
                         </p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               </section>
-
               {/* Best Practices */}
               <section id='best-practices' className='mb-8'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Best Practices
+                  {t('sections.bestPractices.title')}
                 </h2>
                 <Card>
                   <CardContent className='p-6'>
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                       <div className='space-y-3'>
                         <h4 className='font-medium text-gray-900'>
-                          Regular Maintenance
+                          {t('sections.bestPractices.regularMaintenance.title')}
                         </h4>
                         <ul className='space-y-2 text-sm text-gray-600'>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Review information quarterly</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Update photos annually</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Verify contact details monthly</span>
-                          </li>
+                          {(
+                            t.raw(
+                              'sections.bestPractices.regularMaintenance.items'
+                            ) as string[]
+                          ).map((item, index) => (
+                            <li
+                              key={index}
+                              className='flex items-center space-x-2'
+                            >
+                              <CheckCircle className='h-4 w-4 text-green-500' />
+                              <span>{item}</span>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                       <div className='space-y-3'>
                         <h4 className='font-medium text-gray-900'>
-                          Quality Control
+                          {t('sections.bestPractices.qualityControl.title')}
                         </h4>
                         <ul className='space-y-2 text-sm text-gray-600'>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Proofread all text changes</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Test contact information</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Maintain consistent formatting</span>
-                          </li>
+                          {(
+                            t.raw(
+                              'sections.bestPractices.qualityControl.items'
+                            ) as string[]
+                          ).map((item, index) => (
+                            <li
+                              key={index}
+                              className='flex items-center space-x-2'
+                            >
+                              <CheckCircle className='h-4 w-4 text-green-500' />
+                              <span>{item}</span>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     </div>
@@ -362,78 +308,14 @@ const PropertyInformationUpdatesPage = () => {
                 </Card>
               </section>
             </div>
-
             {/* Sidebar */}
             <div className='lg:col-span-1'>
-              <div className='space-y-6'>
-                {/* Table of Contents */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className='text-lg'>Table of Contents</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <nav className='space-y-2'>
-                      {tableOfContents.map(item => (
-                        <a
-                          key={item.id}
-                          href={`#${item.id}`}
-                          className='block text-sm text-gray-600 hover:text-gray-900'
-                        >
-                          {item.title}
-                        </a>
-                      ))}
-                    </nav>
-                  </CardContent>
-                </Card>
-
-                {/* Related Articles */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className='text-lg'>Related Articles</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className='space-y-3'>
-                      {relatedArticles.map((article, index) => (
-                        <Link
-                          key={index}
-                          href={article.href}
-                          className='block rounded-lg p-3 transition-colors hover:bg-gray-50'
-                        >
-                          <h4 className='text-sm font-medium text-gray-900'>
-                            {article.title}
-                          </h4>
-                          <div className='flex items-center space-x-1 text-xs text-gray-500'>
-                            <Clock className='h-3 w-3' />
-                            <span>{article.time}</span>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Need Help */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className='text-lg'>Need Help?</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className='space-y-3'>
-                      <Button
-                        variant='outline'
-                        size='sm'
-                        className='w-full justify-start'
-                      >
-                        <Mail className='mr-2 h-4 w-4' />
-                        Contact Support
-                      </Button>
-                      <p className='text-xs text-gray-500'>
-                        Our team is here to help you make the most of Syndik.
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+              <ArticleSidebar
+                tableOfContents={tableOfContents}
+                relatedArticles={relatedArticles}
+                currentCategory='property-management'
+                showQuickActions={true}
+              />
             </div>
           </div>
         </div>

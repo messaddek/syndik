@@ -1,27 +1,25 @@
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
-import { OrgRedirectClient } from './org-redirect-client';
+'use client';
 
-interface OrgRedirectPageProps {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default async function OrgRedirectPage({
-  searchParams,
-}: OrgRedirectPageProps) {
-  const { userId, orgId } = await auth();
-  const params = await searchParams;
-  const target = params.target as string;
+export default function OrgRedirectPageRedirect() {
+  const router = useRouter();
 
-  // Handle immediate redirects for missing auth
-  if (!userId) {
-    redirect('/sign-in');
-  }
+  useEffect(() => {
+    // Redirect to the default locale org-redirect
+    // Preserve any search parameters
+    const currentSearch = window.location.search;
+    router.replace(`/en/org-redirect${currentSearch}`);
+  }, [router]);
 
-  if (!orgId) {
-    redirect('/org-switcher');
-  }
-
-  // Pass auth info to client component for role-based routing with loading
-  return <OrgRedirectClient userId={userId} orgId={orgId} target={target} />;
+  // Show a minimal loading state during redirect
+  return (
+    <div className='flex min-h-screen items-center justify-center'>
+      <div className='text-center'>
+        <div className='mx-auto h-8 w-8 animate-spin rounded-full border-b-2 border-blue-600'></div>
+        <p className='mt-2 text-sm text-gray-600'>Redirecting...</p>
+      </div>
+    </div>
+  );
 }

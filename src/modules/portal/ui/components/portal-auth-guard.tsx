@@ -22,16 +22,14 @@ export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
       retry: false,
     })
   );
-
   useEffect(() => {
     if (!userId || !orgId) {
       router.push('/sign-in');
       return;
     }
-
     if (!isLoading && error) {
-      // If no account exists, redirect to setup
-      router.push('/portal/setup');
+      // If no account exists, redirect to main app (org guard will handle account creation)
+      router.push('/dashboard');
       return;
     }
 
@@ -42,9 +40,9 @@ export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      // If not a member (resident), redirect to setup
+      // If not a member (resident), redirect to main dashboard
       if (account.role !== 'member') {
-        router.push('/portal/setup');
+        router.push('/dashboard');
         return;
       }
     }

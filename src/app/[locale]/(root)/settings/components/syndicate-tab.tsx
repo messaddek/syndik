@@ -217,7 +217,7 @@ export function SyndicateTab() {
 
         <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
           <div className='rounded-lg bg-blue-50 p-4 text-center'>
-            <div className='text-2xl font-bold text-blue-600'>
+            <div className='text-primary text-2xl font-bold'>
               {syndicateInfo.units}
             </div>
             <div className='text-sm text-gray-600'>Total Units</div>

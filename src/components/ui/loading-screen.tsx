@@ -19,14 +19,14 @@ export function LoadingScreen({
     >
       <div className='space-y-4 text-center'>
         <div className='flex justify-center'>
-          <Loader2 className='h-8 w-8 animate-spin text-blue-600' />
+          <Loader2 className='text-primary h-8 w-8 animate-spin' />
         </div>
         <p className='text-gray-600'>{message}</p>
         {progress !== undefined && (
           <div className='mx-auto w-48'>
             <div className='h-2 w-full rounded-full bg-gray-200'>
               <div
-                className='h-2 rounded-full bg-blue-600 transition-all duration-300 ease-out'
+                className='bg-primary h-2 rounded-full transition-all duration-300 ease-out'
                 style={{ width: `${Math.min(progress, 100)}%` }}
               />
             </div>

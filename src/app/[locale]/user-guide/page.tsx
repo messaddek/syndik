@@ -245,7 +245,7 @@ const UserGuidePage = () => {
                             {article.rating}
                           </div>
                         </div>
-                        <h3 className='mb-2 font-semibold text-gray-900 transition-colors group-hover:text-blue-600'>
+                        <h3 className='group-hover:text-primary mb-2 font-semibold text-gray-900 transition-colors'>
                           <Link
                             href={`/user-guide/${article.category}/${article.slug}`}
                           >
@@ -302,7 +302,7 @@ const UserGuidePage = () => {
                               {' '}
                               <div className='flex min-w-0 items-center gap-3'>
                                 <FileText className='h-4 w-4 shrink-0 text-gray-400' />
-                                <span className='truncate font-medium text-gray-900 group-hover:text-blue-600'>
+                                <span className='group-hover:text-primary truncate font-medium text-gray-900'>
                                   {t(`articleTitles.${article.slug}`, {
                                     fallback: article.title,
                                   })}

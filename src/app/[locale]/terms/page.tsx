@@ -235,7 +235,7 @@ export default function TermsPage() {
                 >
                   <CardHeader>
                     <CardTitle className='flex items-center gap-2 text-2xl text-gray-900'>
-                      <FileText className='h-6 w-6 text-blue-600' />
+                      <FileText className='text-primary h-6 w-6' />
                       {t('sections.description.title')}
                     </CardTitle>
                   </CardHeader>
@@ -380,7 +380,7 @@ export default function TermsPage() {
                 >
                   <CardHeader>
                     <CardTitle className='flex items-center gap-2 text-2xl text-gray-900'>
-                      <Lock className='h-6 w-6 text-blue-600' />
+                      <Lock className='text-primary h-6 w-6' />
                       {t('sections.privacy.title')}
                     </CardTitle>
                   </CardHeader>
@@ -439,7 +439,7 @@ export default function TermsPage() {
                 >
                   <CardHeader>
                     <CardTitle className='flex items-center gap-2 text-2xl text-gray-900'>
-                      <Phone className='h-6 w-6 text-blue-600' />
+                      <Phone className='text-primary h-6 w-6' />
                       {t('sections.contact.title')}
                     </CardTitle>
                   </CardHeader>

@@ -1,0 +1,38 @@
+{
+  "description": "Simplifiez vos opérations de gestion immobilière avec notre plateforme tout-en-un conçue pour les gestionnaires immobiliers modernes.",
+  "sections": {
+    "product": "Produit",
+    "support": "Support",
+    "legalResources": "Légal et Ressources"
+  },
+  "links": {
+    "aboutUs": "À Propos",
+    "pricing": "Tarification",
+    "faq": "FAQ",
+    "requestDemo": "Demander une Démo",
+    "helpCenter": "Centre d'Aide",
+    "termsOfService": "Conditions de Service",
+    "contactUs": "Nous Contacter",
+    "phoneSupport": "Support Téléphonique",
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsConditions": "Termes et Conditions",
+    "security": "Sécurité",
+    "userGuide": "Guide Utilisateur"
+  },
+  "newsletter": {
+    "title": "Restez Informé avec Syndik",
+    "description": "Recevez les derniers conseils de gestion immobilière, mises à jour produit et insights sectoriels dans votre boîte de réception.",
+    "placeholder": "Entrez votre adresse email",
+    "subscribe": "S'abonner",
+    "subscribing": "Abonnement en cours...",
+    "successMessage": "Merci de vous être abonné ! Vous recevrez des mises à jour dans votre boîte de réception.",
+    "disclaimer": "Nous respectons votre vie privée. Désabonnez-vous à tout moment.",
+    "privacyPolicy": "Politique de Confidentialité"
+  },
+  "copyright": "© 2024 Syndik. Tous droits réservés.",
+  "madeWith": "Fait avec ❤️ au Maroc",
+  "certifications": {
+    "soc2": "Conforme SOC 2",
+    "gdpr": "Conforme RGPD"
+  }
+}

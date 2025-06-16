@@ -44,11 +44,10 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
   const t = useTranslations('buildings');
   const tCommon = useTranslations('common');
   const isRtl = useDirection();
-
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
     t('deleteBuilding'),
-    t('confirmDelete'),
+    t('messages.confirmDelete'),
     true
   );
 
@@ -122,7 +121,7 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
             </Button>
             <div>
               <div className={`flex items-center gap-x-2`}>
-                <Building2 className='h-5 w-5 text-blue-600 sm:h-6 sm:w-6' />
+                <Building2 className='text-primary h-5 w-5 sm:h-6 sm:w-6' />
                 <h1 className='text-xl font-bold sm:text-3xl'>
                   {building.name}
                 </h1>

@@ -52,7 +52,7 @@ export function HeroSection() {
         <div className='text-center'>
           <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
             Manage Your Residential Syndicate{' '}
-            <span className='text-blue-600'>Effortlessly</span>
+            <span className='text-primary'>Effortlessly</span>
           </h1>
           <p className='mt-6 text-lg leading-8 text-gray-600'>
             Streamline property management, track finances, organize meetings,
@@ -184,7 +184,7 @@ export function FeaturesSection() {
     <div className='bg-gray-50 py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-base leading-7 font-semibold text-blue-600'>
+          <h2 className='text-primary text-base leading-7 font-semibold'>
             Everything you need
           </h2>
           <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -201,7 +201,7 @@ export function FeaturesSection() {
               <div key={feature.name} className='flex flex-col'>
                 <dt className='flex items-center gap-x-3 text-base leading-7 font-semibold text-gray-900'>
                   <feature.icon
-                    className='h-5 w-5 flex-none text-blue-600'
+                    className='text-primary h-5 w-5 flex-none'
                     aria-hidden='true'
                   />
                   {feature.name}
@@ -254,7 +254,7 @@ export function HowItWorksSection() {
     <div className='bg-gray-50 py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-base leading-7 font-semibold text-blue-600'>
+          <h2 className='text-primary text-base leading-7 font-semibold'>
             How it works
           </h2>
           <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -273,9 +273,9 @@ export function HowItWorksSection() {
                 className='flex flex-col items-center text-center'
               >
                 <div className='mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100'>
-                  <step.icon className='h-8 w-8 text-blue-600' />
+                  <step.icon className='text-primary h-8 w-8' />
                 </div>
-                <div className='mb-4 flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white'>
+                <div className='bg-primary mb-4 flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold text-white'>
                   {step.step}
                 </div>
                 <h3 className='text-lg font-semibold text-gray-900'>
@@ -332,7 +332,7 @@ export function BenefitsSection() {
     <div className='bg-white py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-base leading-7 font-semibold text-blue-600'>
+          <h2 className='text-primary text-base leading-7 font-semibold'>
             Benefits
           </h2>
           <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -349,7 +349,7 @@ export function BenefitsSection() {
               <CardHeader>
                 <div className='flex items-center space-x-3'>
                   <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100'>
-                    <benefit.icon className='h-6 w-6 text-blue-600' />
+                    <benefit.icon className='text-primary h-6 w-6' />
                   </div>
                   <div>
                     <CardTitle className='text-lg'>{benefit.title}</CardTitle>
@@ -430,7 +430,7 @@ export function SecuritySection() {
         <div className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
           {securityFeatures.map(feature => (
             <div key={feature.title} className='flex flex-col'>
-              <div className='mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600'>
+              <div className='bg-primary mb-6 flex h-12 w-12 items-center justify-center rounded-lg'>
                 <feature.icon className='h-6 w-6 text-white' />
               </div>
               <h3 className='text-lg font-semibold text-white'>
@@ -498,7 +498,7 @@ export function TestimonialsSection() {
     <div className='bg-white py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-base leading-7 font-semibold text-blue-600'>
+          <h2 className='text-primary text-base leading-7 font-semibold'>
             Testimonials
           </h2>
           <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -528,7 +528,7 @@ export function TestimonialsSection() {
                 </blockquote>
                 <div className='flex items-center space-x-3'>
                   <Avatar>
-                    <AvatarFallback className='bg-blue-100 font-semibold text-blue-600'>
+                    <AvatarFallback className='text-primary bg-blue-100 font-semibold'>
                       {testimonial.author.avatar}
                     </AvatarFallback>
                   </Avatar>
@@ -680,7 +680,7 @@ export function PricingPreviewSection() {
                       className={`rounded-full bg-gradient-to-br p-3 ${plan.popular ? 'from-blue-100 to-indigo-100' : 'from-gray-100 to-gray-200'} shadow-sm`}
                     >
                       <plan.icon
-                        className={`h-6 w-6 ${plan.popular ? 'text-blue-600' : 'text-gray-600'}`}
+                        className={`h-6 w-6 ${plan.popular ? 'text-primary' : 'text-gray-600'}`}
                       />
                     </div>
                   </div>
@@ -757,7 +757,7 @@ export function PricingPreviewSection() {
         {/* Additional features highlight */}
         <div className='mx-auto mt-16 grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-3'>
           <div className='rounded-lg border border-white/20 bg-white/60 p-4 text-center shadow-sm backdrop-blur-sm'>
-            <Shield className='mx-auto mb-2 h-8 w-8 text-blue-600' />
+            <Shield className='text-primary mx-auto mb-2 h-8 w-8' />
             <h4 className='mb-1 font-semibold text-gray-900'>
               Enterprise Security
             </h4>
@@ -787,7 +787,7 @@ export function PricingPreviewSection() {
           <div className='mx-auto max-w-2xl rounded-2xl border border-white/20 bg-white/60 p-8 shadow-lg backdrop-blur-sm'>
             <div className='mb-4 flex items-center justify-center'>
               <div className='rounded-full bg-gradient-to-br from-blue-100 to-purple-100 p-3'>
-                <Users className='h-6 w-6 text-blue-600' />
+                <Users className='text-primary h-6 w-6' />
               </div>
             </div>
             <h3 className='mb-2 text-lg font-semibold text-gray-900'>
@@ -800,7 +800,7 @@ export function PricingPreviewSection() {
             </p>
             <Link
               href='/contact'
-              className='group inline-flex items-center font-semibold text-blue-600 transition-colors hover:text-blue-500'
+              className='group text-primary inline-flex items-center font-semibold transition-colors hover:text-blue-500'
             >
               Contact our sales team
               <ChevronRight className='ml-1 h-4 w-4 transition-transform group-hover:translate-x-1' />
@@ -885,7 +885,7 @@ export function CTASection() {
           <div className='mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row'>
             <Button
               size='lg'
-              className='hover:shadow-3xl min-w-[200px] border-0 bg-white px-8 py-4 text-lg font-semibold text-blue-600 shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-blue-50'
+              className='hover:shadow-3xl text-primary min-w-[200px] border-0 bg-white px-8 py-4 text-lg font-semibold shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-blue-50'
               asChild
             >
               <Link href='/sign-up' className='group flex items-center'>

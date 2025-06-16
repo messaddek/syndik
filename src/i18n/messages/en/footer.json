@@ -1,0 +1,38 @@
+{
+  "description": "Simplify your property management operations with our all-in-one platform designed for modern property managers.",
+  "sections": {
+    "product": "Product",
+    "support": "Support",
+    "legalResources": "Legal & Resources"
+  },
+  "links": {
+    "aboutUs": "About Us",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "requestDemo": "Request Demo",
+    "helpCenter": "Help Center",
+    "termsOfService": "Terms of Service",
+    "contactUs": "Contact Us",
+    "phoneSupport": "Phone Support",
+    "privacyPolicy": "Privacy Policy",
+    "termsConditions": "Terms & Conditions",
+    "security": "Security",
+    "userGuide": "User Guide"
+  },
+  "newsletter": {
+    "title": "Stay Updated with Syndik",
+    "description": "Get the latest property management tips, product updates, and industry insights delivered to your inbox.",
+    "placeholder": "Enter your email address",
+    "subscribe": "Subscribe",
+    "subscribing": "Subscribing...",
+    "successMessage": "Thank you for subscribing! You'll receive updates in your inbox.",
+    "disclaimer": "We respect your privacy. Unsubscribe at any time.",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "copyright": "© 2024 Syndik. All rights reserved.",
+  "madeWith": "Made with ❤️ in Morocco",
+  "certifications": {
+    "soc2": "SOC 2 Compliant",
+    "gdpr": "GDPR Compliant"
+  }
+}

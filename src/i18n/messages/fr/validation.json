@@ -1,0 +1,7 @@
+{
+  "unitRequired": "Veuillez sélectionner une unité",
+  "firstNameRequired": "Le prénom est requis",
+  "lastNameRequired": "Le nom de famille est requis",
+  "emailRequired": "Veuillez saisir une adresse e-mail valide",
+  "invalidMoveInDate": "La date d'emménagement ne peut pas être dans le futur"
+}

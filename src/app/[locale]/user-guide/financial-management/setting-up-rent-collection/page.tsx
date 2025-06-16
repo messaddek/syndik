@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ArticleLayout from '@/modules/articles/components/article-layout';
+import { ArticleSidebar } from '@/components/articles/article-sidebar';
 import {
   ArrowLeft,
   DollarSign,
@@ -13,8 +14,6 @@ import {
   TrendingUp,
   Clock,
   ChevronRight,
-  Mail,
-  Users,
   FileText,
 } from 'lucide-react';
 
@@ -131,7 +130,7 @@ const SettingUpRentCollectionPage = () => {
 
                   <Card className='border-blue-200 bg-blue-50'>
                     <CardContent className='p-4 text-center'>
-                      <Clock className='mx-auto mb-2 h-8 w-8 text-blue-600' />
+                      <Clock className='text-primary mx-auto mb-2 h-8 w-8' />
                       <h3 className='font-medium text-blue-800'>
                         75% Time Saved
                       </h3>
@@ -817,84 +816,15 @@ const SettingUpRentCollectionPage = () => {
               </div>
             </div>
           </div>
-        </div>
-
+        </div>{' '}
         {/* Sidebar */}
         <div className='lg:col-span-1'>
-          <div className='space-y-6'>
-            {/* Table of Contents */}
-            <Card>
-              <CardHeader>
-                <CardTitle className='text-lg'>Table of Contents</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <nav className='space-y-2'>
-                  {tableOfContents.map(item => (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      className={`block text-sm transition-colors hover:text-blue-600 ${
-                        item.level === 2
-                          ? 'pl-4 text-gray-600'
-                          : 'font-medium text-gray-700'
-                      }`}
-                    >
-                      {item.title}
-                    </a>
-                  ))}
-                </nav>
-              </CardContent>
-            </Card>
-            {/* Related Articles */}
-            <Card>
-              <CardHeader>
-                <CardTitle className='text-lg'>Related Articles</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className='space-y-3'>
-                  {relatedArticles.map((article, index) => (
-                    <Link
-                      key={index}
-                      href={article.href}
-                      className='block rounded-lg bg-gray-50 p-3 transition-colors hover:bg-gray-100'
-                    >
-                      <h4 className='mb-1 text-sm font-medium text-gray-900'>
-                        {article.title}
-                      </h4>
-                      <div className='flex items-center space-x-1 text-xs text-gray-500'>
-                        <Clock className='h-3 w-3' />
-                        <span>{article.time}</span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            {/* Help */}
-            <Card>
-              <CardHeader>
-                <CardTitle className='text-lg'>Need Help?</CardTitle>
-              </CardHeader>
-              <CardContent className='space-y-3'>
-                <Button
-                  variant='outline'
-                  className='w-full justify-start'
-                  size='sm'
-                >
-                  <Mail className='mr-2 h-4 w-4' />
-                  Contact Support
-                </Button>
-                <Button
-                  variant='outline'
-                  className='w-full justify-start'
-                  size='sm'
-                >
-                  <Users className='mr-2 h-4 w-4' />
-                  Join Community
-                </Button>
-              </CardContent>
-            </Card>{' '}
-          </div>
+          <ArticleSidebar
+            tableOfContents={tableOfContents}
+            relatedArticles={relatedArticles}
+            currentCategory='financial-management'
+            showQuickActions={true}
+          />
         </div>
       </div>
     </ArticleLayout>

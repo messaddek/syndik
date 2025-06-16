@@ -81,7 +81,7 @@ I've successfully implemented comprehensive loading states for your org-redirect
 ```tsx
 // Animated progress bar with percentage
 <div
-  className='h-2 rounded-full bg-blue-600 transition-all duration-500 ease-out'
+  className='bg-primary h-2 rounded-full transition-all duration-500 ease-out'
   style={{ width: `${Math.min(progress, 100)}%` }}
 />
 ```

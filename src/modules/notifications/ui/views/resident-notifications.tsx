@@ -275,7 +275,7 @@ export function ResidentNotifications() {
             <div className='h-2 w-2 rounded-full bg-blue-500' />
           </CardHeader>
           <CardContent>
-            <div className='text-2xl font-bold text-blue-600'>
+            <div className='text-primary text-2xl font-bold'>
               {unreadCount?.total || 0}
             </div>
           </CardContent>

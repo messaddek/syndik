@@ -1,0 +1,12 @@
+{
+  "previous": "السابق",
+  "next": "التالي",
+  "first": "الأول",
+  "last": "الأخير",
+  "page": "صفحة",
+  "of": "من",
+  "showingPage": "عرض الصفحة",
+  "showingResults": "عرض {start} إلى {end} من {total} نتيجة",
+  "noResults": "لم يتم العثور على نتائج",
+  "rowsPerPage": "صفوف لكل صفحة"
+}

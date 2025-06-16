@@ -1,0 +1,12 @@
+{
+  "previous": "Previous",
+  "next": "Next",
+  "first": "First",
+  "last": "Last",
+  "page": "Page",
+  "of": "of",
+  "showingPage": "Showing page",
+  "showingResults": "Showing {start} to {end} of {total} results",
+  "noResults": "No results found",
+  "rowsPerPage": "Rows per page"
+}

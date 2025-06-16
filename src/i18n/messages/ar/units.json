@@ -1,0 +1,21 @@
+{
+  "title": "الوحدات",
+  "totalUnits": "إجمالي الوحدات",
+  "addUnit": "إضافة وحدة",
+  "editUnit": "تعديل الوحدة",
+  "deleteUnit": "حذف الوحدة",
+  "confirmDelete": "هل أنت متأكد من أنك تريد حذف هذه الوحدة؟",
+  "viewResidents": "عرض السكان",
+  "viewIncome": "عرض الدخل",
+  "unknownBuilding": "مبنى غير معروف",
+  "occupied": "مأهول",
+  "vacant": "شاغر",
+  "openMenu": "فتح القائمة",
+  "floor": "الطابق",
+  "bedrooms": "غرف النوم",
+  "bathrooms": "الحمامات",
+  "area": "المساحة",
+  "monthlyFee": "الرسوم الشهرية",
+  "activeResidents": "السكان النشطون",
+  "thisMonthIncome": "دخل هذا الشهر"
+}

@@ -148,8 +148,9 @@ export function SyndicateDashboard() {
               })
             }
             disabled={createAnnouncement.isPending}
+            className='flex items-center gap-2'
           >
-            <Plus className='mr-2 h-4 w-4' />
+            <Plus className='h-4 w-4' />
             {createAnnouncement.isPending ? 'Creating...' : 'New Announcement'}
           </Button>
         </div>
@@ -164,7 +165,7 @@ export function SyndicateDashboard() {
                 <p className='text-sm font-medium text-gray-600'>Buildings</p>
                 <p className='text-2xl font-bold'>{overview?.buildings || 0}</p>
               </div>
-              <Building2 className='h-8 w-8 text-blue-600' />
+              <Building2 className='text-primary h-8 w-8' />
             </div>
           </CardContent>
         </Card>
@@ -212,7 +213,7 @@ export function SyndicateDashboard() {
                   {overview?.occupancyRate || '0'}%
                 </p>
               </div>
-              <TrendingUp className='h-8 w-8 text-blue-600' />
+              <TrendingUp className='text-primary h-8 w-8' />
             </div>
           </CardContent>
         </Card>

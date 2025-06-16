@@ -388,7 +388,7 @@ export function FAQContent() {
       {filteredFAQs.map(category => (
         <div key={category.category} className='mb-8 px-3 sm:px-0'>
           <h2 className='mb-4 flex items-center gap-3 text-xl font-semibold'>
-            <category.icon className='h-6 w-6 text-blue-600' />
+            <category.icon className='text-primary h-6 w-6' />
             {category.category}
           </h2>
           <Card>

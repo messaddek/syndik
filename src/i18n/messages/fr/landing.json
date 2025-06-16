@@ -1,0 +1,263 @@
+{
+  "hero": {
+    "badge": "Gestion Immobilière Simplifiée",
+    "title": "Rationalisez Votre Gestion Immobilière",
+    "titleHighlight": "avec Syndik",
+    "subtitle": "La plateforme tout-en-un qui aide les gestionnaires immobiliers à automatiser les opérations, améliorer la satisfaction des résidents et maximiser l'efficacité.",
+    "description": "Transformez votre expérience de gestion immobilière avec notre plateforme complète conçue pour les gestionnaires immobiliers modernes qui exigent efficacité, transparence et satisfaction exceptionnelle des résidents.",
+    "buttons": {
+      "startTrial": "Essai Gratuit",
+      "watchDemo": "Voir la Démo",
+      "getStartedFree": "Commencer Gratuitement"
+    },
+    "stats": {
+      "properties": "5 000+ Propriétés Gérées",
+      "residents": "25 000+ Résidents Satisfaits",
+      "timesSaved": "40% de Gain de Temps"
+    }
+  },
+  "stats": {
+    "title": "Fait Confiance par les Gestionnaires Immobiliers du Monde Entier",
+    "subtitle": "Fait Confiance par les Gestionnaires Immobiliers du Monde Entier",
+    "syndicates": {
+      "label": "Syndicats Gérés",
+      "value": "5 000+",
+      "description": "Syndicats de copropriété gérés efficacement avec notre plateforme"
+    },
+    "units": {
+      "label": "Unités de Logement",
+      "value": "25 000+",
+      "description": "Unités de logement gérées à travers notre réseau de partenaires"
+    },
+    "transactions": {
+      "label": "Transactions Traitées",
+      "value": "500 000+",
+      "description": "Transactions financières et administratives traitées avec succès"
+    },
+    "satisfaction": {
+      "label": "Satisfaction Client",
+      "value": "98%",
+      "description": "Taux de satisfaction de nos clients gestionnaires immobiliers"
+    }
+  },
+  "features": {
+    "badge": "Tout Ce Dont Vous Avez Besoin",
+    "title": "Fonctionnalités Complètes de Gestion Immobilière",
+    "subtitle": "Tous les outils dont vous avez besoin pour gérer efficacement vos propriétés dans une plateforme intégrée.",
+    "description": "Découvrez nos fonctionnalités avancées conçues pour simplifier chaque aspect de la gestion immobilière moderne.",
+    "buildingManagement": {
+      "title": "Gestion des Bâtiments",
+      "description": "Gérez facilement tous vos bâtiments et propriétés depuis une interface centralisée et intuitive."
+    },
+    "residentPortal": {
+      "title": "Portail Résident",
+      "description": "Offrez à vos résidents un portail en libre-service moderne pour toutes leurs interactions et démarches."
+    },
+    "financialTracking": {
+      "title": "Suivi Financier",
+      "description": "Suivez et analysez vos finances avec des outils de reporting avancés et des tableaux de bord en temps réel."
+    },
+    "secureCompliant": {
+      "title": "Sécurisé et Conforme",
+      "description": "Bénéficiez d'une sécurité de niveau entreprise avec conformité RGPD et protection des données."
+    },
+    "meetingManagement": {
+      "title": "Gestion des Assemblées",
+      "description": "Organisez et gérez facilement vos assemblées générales avec des outils de planification intégrés."
+    },
+    "automatedWorkflows": {
+      "title": "Workflows Automatisés",
+      "description": "Automatisez vos processus récurrents pour gagner du temps et améliorer l'efficacité opérationnelle."
+    },
+    "items": {
+      "residentPortal": {
+        "title": "Portail Résident",
+        "description": "Portail en libre-service pour que les résidents paient leur loyer, soumettent des demandes de maintenance et communiquent.",
+        "benefits": [
+          "Paiements de loyer en ligne",
+          "Demandes de maintenance",
+          "Accès aux documents",
+          "Outils de communication"
+        ]
+      },
+      "maintenanceManagement": {
+        "title": "Gestion de Maintenance",
+        "description": "Rationalisez les workflows de maintenance de la demande à l'achèvement avec un suivi automatisé.",
+        "benefits": [
+          "Suivi des ordres de travail",
+          "Gestion des fournisseurs",
+          "Planification automatisée",
+          "Surveillance des progrès"
+        ]
+      },
+      "financialReporting": {
+        "title": "Rapports Financiers",
+        "description": "Aperçus financiers complets avec collecte automatisée des loyers et suivi des dépenses.",
+        "benefits": [
+          "Facturation automatisée",
+          "Suivi des dépenses",
+          "Rapports financiers",
+          "Gestion budgétaire"
+        ]
+      },
+      "communication": {
+        "title": "Hub de Communication",
+        "description": "Plateforme de communication centralisée pour résidents, personnel et fournisseurs.",
+        "benefits": [
+          "Notifications de masse",
+          "Système de chat",
+          "Partage de documents",
+          "Tableau d'annonces"
+        ]
+      }
+    }
+  },
+  "howItWorks": {
+    "badge": "Processus Simple",
+    "title": "Comment Fonctionne Syndik",
+    "subtitle": "Commencez en quelques minutes avec notre processus de configuration intuitif.",
+    "description": "Notre plateforme intuitive vous guide étape par étape pour une mise en œuvre rapide et efficace.",
+    "steps": {
+      "signUp": {
+        "title": "Inscription Rapide",
+        "description": "Créez votre compte et configurez votre première propriété en quelques minutes seulement."
+      },
+      "invite": {
+        "title": "Inviter les Résidents",
+        "description": "Ajoutez vos résidents et donnez-leur accès à leur portail personnalisé pour une meilleure communication."
+      },
+      "manage": {
+        "title": "Gérer Efficacement",
+        "description": "Surveillez tout depuis un tableau de bord unique et concentrez-vous sur le développement de votre entreprise."
+      },
+      "grow": {
+        "title": "Développer Votre Activité",
+        "description": "Évoluez facilement en ajoutant de nouvelles propriétés et en automatisant vos processus de gestion."
+      }
+    }
+  },
+  "benefits": {
+    "badge": "Pourquoi Choisir Syndik",
+    "title": "Transformez Votre Gestion Immobilière",
+    "subtitle": "Découvrez les avantages auxquels font confiance des milliers de gestionnaires immobiliers.",
+    "description": "Découvrez les avantages qui font de Syndik le premier choix des gestionnaires immobiliers professionnels.",
+    "saveTime": {
+      "title": "Économisez du Temps",
+      "metric": "40% de Gain de Temps",
+      "description": "Automatisez les tâches routinières et rationalisez les opérations pour vous concentrer sur l'essentiel."
+    },
+    "reduceCosts": {
+      "title": "Réduisez les Coûts",
+      "metric": "30% d'Économies",
+      "description": "Optimisez vos dépenses opérationnelles grâce à des processus automatisés et une meilleure organisation."
+    },
+    "improveCommunication": {
+      "title": "Améliorez la Communication",
+      "metric": "95% de Satisfaction",
+      "description": "Facilitez les échanges avec vos résidents grâce à des outils de communication modernes et efficaces."
+    },
+    "betterOrganization": {
+      "title": "Meilleure Organisation",
+      "metric": "100% Numérique",
+      "description": "Centralisez toutes vos informations et documents dans un système organisé et accessible."
+    }
+  },
+  "security": {
+    "badge": "Sécurité Entreprise",
+    "title": "Vos Données Sont en Sécurité Avec Nous",
+    "subtitle": "Nous prenons la sécurité au sérieux avec une protection et une conformité de niveau entreprise.",
+    "description": "Notre infrastructure sécurisée garantit la protection complète de vos données sensibles avec les plus hauts standards de l'industrie.",
+    "features": {
+      "encryption": {
+        "title": "Chiffrement de bout en bout",
+        "description": "Toutes les données sont chiffrées en transit et au repos en utilisant des protocoles standard de l'industrie."
+      },
+      "roleBasedAccess": {
+        "title": "Contrôle d'Accès par Rôles",
+        "description": "Gérez finement les permissions d'accès selon les rôles et responsabilités de chaque utilisateur."
+      },
+      "gdprCompliant": {
+        "title": "Conforme RGPD & SOC 2",
+        "description": "Nous respectons les normes les plus élevées pour la protection et la confidentialité des données."
+      },
+      "regularBackups": {
+        "title": "Sauvegardes Automatisées",
+        "description": "Vos données sont automatiquement sauvegardées et peuvent être restaurées à tout moment."
+      },
+      "soc2Certified": {
+        "title": "Certification SOC 2",
+        "description": "Nous maintenons les plus hauts standards de sécurité avec notre certification SOC 2 Type II."
+      },
+      "monitoring": {
+        "title": "Surveillance 24/7",
+        "description": "La surveillance continue garantit un temps de fonctionnement et une sécurité maximums pour vos données."
+      }
+    },
+    "certificationLabel": "Certifications de Sécurité",
+    "certificationText": "Nous respectons les standards internationaux les plus stricts en matière de sécurité et de conformité."
+  },
+  "testimonials": {
+    "badge": "Témoignages Clients",
+    "title": "Ce Que Disent Nos Clients",
+    "subtitle": "Rejoignez des milliers de gestionnaires immobiliers satisfaits qui font confiance à Syndik.",
+    "description": "Découvrez comment Syndik transforme la gestion immobilière à travers les témoignages authentiques de nos clients.",
+    "reviews": [
+      {
+        "content": "Syndik a révolutionné notre façon de gérer les propriétés. L'interface intuitive et les fonctionnalités avancées nous ont fait gagner un temps précieux.",
+        "author": {
+          "name": "Marie Dubois",
+          "role": "Gestionnaire Immobilier",
+          "company": "Immobilier Central"
+        }
+      },
+      {
+        "content": "La plateforme est excellente pour la gestion des résidents. Le portail en libre-service a considérablement amélioré notre relation client.",
+        "author": {
+          "name": "Ahmed Hassan",
+          "role": "Directeur d'Agence",
+          "company": "Hassan Properties"
+        }
+      },
+      {
+        "content": "Les outils financiers et de reporting sont exceptionnels. Nous avons une visibilité complète sur nos opérations maintenant.",
+        "author": {
+          "name": "Sophie Lemaire",
+          "role": "Gestionnaire de Portefeuille",
+          "company": "Gestion Moderne"
+        }
+      }
+    ]
+  },
+  "cta": {
+    "badge": "Nouvelles Fonctionnalités Disponibles",
+    "title": "Prêt à Transformer Votre Gestion Immobilière ?",
+    "titleHighlight": "Commencez Aujourd'hui.",
+    "subtitle": "Rejoignez des milliers de gestionnaires immobiliers qui ont simplifié leur workflow avec Syndik",
+    "buttons": {
+      "startTrial": "Essai Gratuit",
+      "watchDemo": "Voir la Démo"
+    },
+    "trustIndicators": {
+      "freeTrial": {
+        "title": "Essai Gratuit de 30 Jours",
+        "subtitle": "Aucune carte de crédit requise"
+      },
+      "noSetupFee": {
+        "title": "Pas de Frais d'Installation",
+        "subtitle": "Commencez immédiatement"
+      },
+      "support": {
+        "title": "Support 24/7",
+        "subtitle": "Nous sommes là pour vous aider"
+      }
+    },
+    "guarantee": {
+      "title": "Garantie de Satisfaction à 100%",
+      "description": "Pas satisfait ? Obtenez un remboursement complet dans les 30 jours.",
+      "link": "En savoir plus sur notre garantie"
+    },
+    "socialProof": {
+      "rating": "4,9/5 étoiles sur 1 200+ avis"
+    }
+  }
+}

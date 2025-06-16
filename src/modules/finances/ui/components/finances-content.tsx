@@ -136,15 +136,19 @@ export function FinancesContent() {
           </TabsList>
 
           <div className='flex gap-2'>
-            <Button onClick={() => setShowIncomeDialog(true)}>
-              <Plus className='mr-2 h-4 w-4' />
+            <Button
+              onClick={() => setShowIncomeDialog(true)}
+              className='flex items-center gap-2'
+            >
+              <Plus className='h-4 w-4' />
               Add Income
             </Button>
             <Button
               variant='outline'
               onClick={() => setShowExpenseDialog(true)}
+              className='flex items-center gap-2'
             >
-              <Plus className='mr-2 h-4 w-4' />
+              <Plus className='h-4 w-4' />
               Add Expense
             </Button>
           </div>

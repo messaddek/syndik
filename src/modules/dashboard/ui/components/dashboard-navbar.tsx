@@ -260,7 +260,7 @@ export function DashboardNavbar() {
                         onSelect={() => handleSelect('building', building.id)}
                         className='flex min-h-[60px] items-start gap-3 p-3 sm:min-h-auto' // Larger touch targets on mobile
                       >
-                        <Building2 className='mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600' />{' '}
+                        <Building2 className='text-primary mt-0.5 h-4 w-4 flex-shrink-0' />{' '}
                         <div className='min-w-0 flex-1'>
                           {/* Prevent overflow */}
                           <div className='truncate font-medium'>

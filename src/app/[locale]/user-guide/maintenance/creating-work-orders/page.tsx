@@ -111,8 +111,8 @@ export default function CreatingWorkOrdersPage() {
           {/* Creating Work Orders */}
           <Card id='creating-work-orders'>
             <CardHeader>
-              <CardTitle className='flex items-center'>
-                <Plus className='mr-2 h-5 w-5' />
+              <CardTitle className='flex items-center space-x-2'>
+                <Plus className='h-5 w-5' />
                 Creating Work Orders
               </CardTitle>
               <CardDescription>
@@ -603,8 +603,11 @@ export default function CreatingWorkOrdersPage() {
                 className='w-full justify-start'
                 asChild
               >
-                <Link href='/maintenance/work-orders/new'>
-                  <Plus className='mr-2 h-4 w-4' />
+                <Link
+                  href='/maintenance/work-orders/new'
+                  className='flex items-center space-x-2'
+                >
+                  <Plus className='h-4 w-4' />
                   Create Work Order
                 </Link>
               </Button>

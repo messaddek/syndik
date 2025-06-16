@@ -120,7 +120,7 @@ const ProcessingPaymentsPage = () => {
                     </p>
                     <div className='rounded-lg bg-blue-50 p-4'>
                       <div className='flex items-start space-x-3'>
-                        <Lightbulb className='mt-0.5 h-5 w-5 text-blue-600' />
+                        <Lightbulb className='text-primary mt-0.5 h-5 w-5' />
                         <div>
                           <h4 className='font-medium text-blue-900'>
                             Payment Types Supported
@@ -151,7 +151,7 @@ const ProcessingPaymentsPage = () => {
                       <div className='space-y-4'>
                         <div className='text-center'>
                           <div className='mx-auto mb-3 h-12 w-12 rounded-full bg-blue-100 p-3'>
-                            <CreditCard className='h-6 w-6 text-blue-600' />
+                            <CreditCard className='text-primary h-6 w-6' />
                           </div>
                           <h3 className='font-medium text-gray-900'>
                             Credit/Debit Cards

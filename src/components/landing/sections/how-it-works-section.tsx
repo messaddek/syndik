@@ -14,8 +14,8 @@ export function HowItWorksSection() {
   const steps = [
     {
       step: '01',
-      title: t('steps.signUp.title'),
-      description: t('steps.signUp.description'),
+      title: t('steps.setup.title'),
+      description: t('steps.setup.description'),
       icon: UserCheck,
     },
     {
@@ -32,8 +32,8 @@ export function HowItWorksSection() {
     },
     {
       step: '04',
-      title: t('steps.grow.title'),
-      description: t('steps.grow.description'),
+      title: t('steps.automate.title'),
+      description: t('steps.automate.description'),
       icon: TrendingUp,
     },
   ];
@@ -43,7 +43,7 @@ export function HowItWorksSection() {
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         {' '}
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-base leading-7 font-semibold text-blue-600'>
+          <h2 className='text-primary text-base leading-7 font-semibold'>
             {t('subtitle')}
           </h2>
           <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -61,9 +61,9 @@ export function HowItWorksSection() {
                 className='flex flex-col items-center text-center'
               >
                 <div className='mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100'>
-                  <step.icon className='h-8 w-8 text-blue-600' />
+                  <step.icon className='text-primary h-8 w-8' />
                 </div>
-                <div className='mb-4 flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white'>
+                <div className='bg-primary mb-4 flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold text-white'>
                   {step.step}
                 </div>
                 <h3 className='text-lg font-semibold text-gray-900'>

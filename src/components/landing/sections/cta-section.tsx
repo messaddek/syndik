@@ -63,7 +63,7 @@ export function CTASection() {
           <div className='mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row'>
             <Button
               size='lg'
-              className='hover:shadow-3xl min-w-[200px] border-0 bg-white px-8 py-4 text-lg font-semibold text-blue-600 shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-blue-50'
+              className='hover:shadow-3xl text-primary min-w-[200px] border-0 bg-white px-8 py-4 text-lg font-semibold shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-blue-50'
               asChild
             >
               <Link href='/sign-up' className='group flex items-center'>

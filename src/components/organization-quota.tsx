@@ -113,9 +113,9 @@ export function OrganizationQuota({
                 variant='ghost'
                 size='sm'
                 onClick={handleCreateOrganization}
-                className='h-6 px-2 text-xs text-blue-600 hover:bg-blue-50 hover:text-blue-700'
+                className='text-primary flex h-6 items-center gap-1 px-2 text-xs hover:bg-blue-50 hover:text-blue-700'
               >
-                <Plus className='mr-1 h-3 w-3' />
+                <Plus className='h-3 w-3' />
                 {tCommon('add')}
               </Button>
             )}

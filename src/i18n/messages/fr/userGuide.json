@@ -1,0 +1,44 @@
+{
+  "title": "Guide de l'utilisateur",
+  "subtitle": "Tout ce que vous devez savoir pour gérer efficacement vos propriétés",
+  "categories": {
+    "gettingStarted": {
+      "title": "Commencer",
+      "description": "Étapes essentielles pour commencer à utiliser Syndik efficacement"
+    },
+    "propertyManagement": {
+      "title": "Gestion immobilière",
+      "description": "Outils et fonctionnalités pour gérer vos propriétés"
+    },
+    "residentManagement": {
+      "title": "Gestion des résidents",
+      "description": "Gestion des résidents, des baux et des relations avec les locataires"
+    },
+    "financialManagement": {
+      "title": "Gestion financière",
+      "description": "Collecte de loyer, paiements et rapports financiers"
+    },
+    "maintenance": {
+      "title": "Maintenance",
+      "description": "Bons de travail, planification et suivi de la maintenance"
+    },
+    "communication": {
+      "title": "Communication",
+      "description": "Annonces, messagerie et communication avec les résidents"
+    }
+  },
+  "popularArticles": {
+    "title": "Les plus populaires",
+    "loadingData": "Chargement des dernières données...",
+    "updatedRealTime": "Mis à jour en temps réel"
+  },
+  "sidebar": {
+    "quickStart": "Démarrage rapide",
+    "createFirstProperty": "Créer votre première propriété",
+    "setupUserAccounts": "Configurer les comptes utilisateur",
+    "addFirstResident": "Ajouter votre premier résident",
+    "needHelp": "Besoin d'aide ?",
+    "contactSupport": "Contacter le support",
+    "viewFaq": "Voir la FAQ"
+  }
+}

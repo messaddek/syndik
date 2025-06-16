@@ -1,0 +1,7 @@
+{
+  "resultsCount": "{{count}} résultat",
+  "resultsCount_other": "{{count}} résultats",
+  "noResults": "Aucun article trouvé",
+  "suggestions": "Essayez de rechercher :",
+  "minChars": "Tapez au moins 2 caractères pour rechercher"
+}

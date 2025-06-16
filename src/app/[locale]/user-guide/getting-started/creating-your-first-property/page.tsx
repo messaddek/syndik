@@ -1,19 +1,17 @@
 'use client';
 
 import { Link } from '@/i18n/routing';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ArticleLayout from '@/modules/articles/components/article-layout';
+import { ArticleSidebar } from '@/components/articles/article-sidebar';
 import { useTranslations } from 'next-intl';
 import {
   Clock,
-  Users,
   CheckCircle,
   AlertCircle,
   Lightbulb,
   ChevronRight,
-  Mail,
   Home,
 } from 'lucide-react';
 
@@ -34,30 +32,29 @@ const CreatingYourFirstPropertyPage = () => {
       articleSlug='creating-your-first-property'
       title={t('title')}
     >
-      {/* Breadcrumb */}
-      <nav className='mb-8'>
-        <div className='flex items-center space-x-2 text-sm text-gray-600'>
-          <Link
-            href='/user-guide'
-            className='transition-colors hover:text-gray-900'
-          >
-            {tNav('userGuide')}
-          </Link>
-          <ChevronRight className='h-4 w-4 rtl:rotate-180' />
-          <Link
-            href='/user-guide'
-            className='transition-colors hover:text-gray-900'
-          >
-            {tNav('gettingStarted')}
-          </Link>
-          <ChevronRight className='h-4 w-4 rtl:rotate-180' />
-          <span className='text-gray-900'>{t('title')}</span>
-        </div>
-      </nav>
-
       <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
         {/* Main Content */}
         <div className='lg:col-span-3'>
+          {/* Breadcrumb */}
+          <nav className='mb-8'>
+            <div className='flex items-center space-x-2 text-sm text-gray-600'>
+              <Link
+                href='/user-guide'
+                className='transition-colors hover:text-gray-900'
+              >
+                {tNav('userGuide')}
+              </Link>
+              <ChevronRight className='h-4 w-4 rtl:rotate-180' />
+              <Link
+                href='/user-guide'
+                className='transition-colors hover:text-gray-900'
+              >
+                {tNav('gettingStarted')}
+              </Link>
+              <ChevronRight className='h-4 w-4 rtl:rotate-180' />
+              <span className='text-gray-900'>{t('title')}</span>
+            </div>
+          </nav>
           <div className='rounded-lg border bg-white shadow-sm'>
             {/* Header */}
             <div className='border-b p-6'>
@@ -96,7 +93,7 @@ const CreatingYourFirstPropertyPage = () => {
                 <Card className='border-blue-200 bg-blue-50'>
                   <CardContent className='p-4'>
                     <div className='flex items-start space-x-3'>
-                      <Lightbulb className='mt-0.5 h-5 w-5 text-blue-600' />
+                      <Lightbulb className='text-primary mt-0.5 h-5 w-5' />
                       <div>
                         <p className='font-medium text-blue-800'>
                           {tCommon('whatYoullLearn')}
@@ -112,7 +109,7 @@ const CreatingYourFirstPropertyPage = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </section>{' '}
+              </section>
               {/* Step 1 */}
               <section id='step-1'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
@@ -152,7 +149,7 @@ const CreatingYourFirstPropertyPage = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </section>{' '}
+              </section>
               {/* Step 2 */}
               <section id='step-2'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
@@ -209,7 +206,7 @@ const CreatingYourFirstPropertyPage = () => {
                     </CardContent>
                   </Card>
                 </div>
-              </section>{' '}
+              </section>
               {/* Step 3 */}
               <section id='step-3'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
@@ -242,7 +239,7 @@ const CreatingYourFirstPropertyPage = () => {
                       )
                     )}
                 </div>
-              </section>{' '}
+              </section>
               {/* Next Steps */}
               <section id='next-steps'>
                 <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
@@ -279,96 +276,24 @@ const CreatingYourFirstPropertyPage = () => {
               </section>
             </div>
           </div>
-        </div>
 
-        {/* Sidebar */}
-        <div className='space-y-6'>
-          {/* Table of Contents */}
-          <Card>
-            {' '}
-            <CardHeader>
-              <CardTitle className='text-lg'>
-                {t('sections.sidebar.tableOfContents')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <nav className='space-y-2'>
-                {tableOfContents.map(item => (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    className={`block text-sm transition-colors hover:text-blue-600 ${
-                      item.level === 2
-                        ? 'pl-4 text-gray-600'
-                        : 'font-medium text-gray-700'
-                    }`}
-                  >
-                    {item.title}
-                  </a>
-                ))}
-              </nav>
-            </CardContent>
-          </Card>
-          {/* Related Articles */}
-          <Card>
-            {' '}
-            <CardHeader>
-              <CardTitle className='text-lg'>
-                {t('sections.sidebar.relatedArticles')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className='space-y-3'>
-                {relatedArticles.map(
-                  (
-                    article: { title: string; href: string; time: string },
-                    index: number
-                  ) => (
-                    <Link
-                      key={index}
-                      href={article.href}
-                      className='block rounded-lg bg-gray-50 p-3 transition-colors hover:bg-gray-100'
-                    >
-                      <h4 className='mb-1 text-sm font-medium text-gray-900'>
-                        {article.title}
-                      </h4>
-                      <div className='flex items-center space-x-1 text-xs text-gray-500'>
-                        <Clock className='h-3 w-3' />
-                        <span>{article.time}</span>
-                      </div>
-                    </Link>
-                  )
-                )}
-              </div>
-            </CardContent>
-          </Card>{' '}
-          {/* Help */}
-          <Card>
-            <CardHeader>
-              <CardTitle className='text-lg'>
-                {t('sections.sidebar.needHelp')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-3'>
-              <Button
-                variant='outline'
-                className='w-full justify-start'
-                size='sm'
-              >
-                <Mail className='mr-2 h-4 w-4' />
-                {t('sections.sidebar.contactSupport')}
-              </Button>
-              <Button
-                variant='outline'
-                className='w-full justify-start'
-                size='sm'
-              >
-                <Users className='mr-2 h-4 w-4' />
-                {t('sections.sidebar.joinCommunity')}
-              </Button>
-            </CardContent>
-          </Card>
+          {/* Sidebar */}
+          <div className='lg:col-span-1'>
+            <ArticleSidebar
+              tableOfContents={tableOfContents}
+              relatedArticles={relatedArticles}
+              currentCategory='getting-started'
+              showQuickActions={true}
+            />
+          </div>
         </div>
+        {/* Quick Actions */}
+        <ArticleSidebar
+          tableOfContents={tableOfContents}
+          relatedArticles={relatedArticles}
+          currentCategory='property-management'
+          showQuickActions={true}
+        />
       </div>
     </ArticleLayout>
   );

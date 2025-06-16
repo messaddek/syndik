@@ -129,7 +129,7 @@ export default function HelpPage() {
               >
                 <CardContent className='p-6'>
                   <div className='mb-4 flex items-center gap-3'>
-                    <option.icon className='h-6 w-6 text-blue-600' />
+                    <option.icon className='text-primary h-6 w-6' />
                     <h3 className='font-semibold text-gray-900'>
                       {option.title}
                     </h3>
@@ -234,7 +234,7 @@ export default function HelpPage() {
               >
                 <CardContent className='p-8'>
                   <div className='mb-4 flex items-center gap-3'>
-                    <resource.icon className='h-6 w-6 text-blue-600' />
+                    <resource.icon className='text-primary h-6 w-6' />
                     <h3 className='text-xl font-semibold text-gray-900'>
                       {resource.title}
                     </h3>
@@ -246,7 +246,7 @@ export default function HelpPage() {
                         key={item}
                         className='flex items-center gap-2 text-sm text-gray-600'
                       >
-                        <HelpCircle className='h-3 w-3 text-blue-600' />
+                        <HelpCircle className='text-primary h-3 w-3' />
                         {item}
                       </li>
                     ))}

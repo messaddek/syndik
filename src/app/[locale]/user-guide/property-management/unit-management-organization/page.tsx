@@ -576,7 +576,7 @@ const UnitManagementOrganizationPage = () => {
                           </div>
                           <div className='text-center'>
                             <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-blue-100 p-3'>
-                              <Users className='h-6 w-6 text-blue-600' />
+                              <Users className='text-primary h-6 w-6' />
                             </div>
                             <h4 className='font-semibold text-blue-700'>
                               Occupied
@@ -659,7 +659,7 @@ const UnitManagementOrganizationPage = () => {
                     <Card className='mt-4 border-blue-200 bg-blue-50'>
                       <CardContent className='p-4'>
                         <div className='flex items-start space-x-3'>
-                          <AlertCircle className='mt-0.5 h-5 w-5 text-blue-600' />
+                          <AlertCircle className='text-primary mt-0.5 h-5 w-5' />
                           <div>
                             <p className='font-medium text-blue-800'>
                               Pro Tip: Bulk Operations
@@ -692,7 +692,7 @@ const UnitManagementOrganizationPage = () => {
                       <a
                         key={item.id}
                         href={`#${item.id}`}
-                        className={`block text-sm transition-colors hover:text-blue-600 ${
+                        className={`hover:text-primary block text-sm transition-colors ${
                           item.level === 2
                             ? 'pl-4 text-gray-600'
                             : 'font-medium text-gray-700'

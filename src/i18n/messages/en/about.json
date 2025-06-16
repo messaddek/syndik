@@ -1,0 +1,178 @@
+{
+  "hero": {
+    "badge": "Trusted by 500+ Syndicates",
+    "title": "About Syndik",
+    "description": "We're dedicated to revolutionizing residential syndicate management through innovative technology, exceptional service, and a deep understanding of community needs.",
+    "buttons": {
+      "startTrial": "Start Free Trial",
+      "scheduleDemo": "Schedule Demo"
+    }
+  },
+  "rtlDemo": {
+    "title": "RTL Support Demo",
+    "description": "Switch to Arabic to see RTL (Right-to-Left) layout in action."
+  },
+  "mission": {
+    "title": "Our Mission",
+    "description": "To empower residential syndicates with modern, intuitive tools that simplify property management, enhance transparency, and foster stronger community relationships.",
+    "details": "We understand the unique challenges facing residential syndicates today, from financial transparency to resident communication. That's why we've built a comprehensive platform that addresses these needs with precision and care.",
+    "cards": {
+      "propertyFocus": {
+        "title": "Property Focus",
+        "description": "Specialized in residential syndicate management"
+      },
+      "communityFirst": {
+        "title": "Community First",
+        "description": "Building stronger residential communities"
+      }
+    }
+  },
+  "stats": {
+    "title": "Trusted by Communities Worldwide",
+    "description": "Our platform has helped hundreds of syndicates manage their properties more efficiently.",
+    "items": {
+      "syndicates": {
+        "value": "500+",
+        "name": "Active Syndicates",
+        "description": "Properties using our platform"
+      },
+      "properties": {
+        "value": "10,000+",
+        "name": "Properties Managed",
+        "description": "Residential units"
+      },
+      "residents": {
+        "value": "50,000+",
+        "name": "Satisfied Residents",
+        "description": "Happy community members"
+      },
+      "experience": {
+        "value": "5+",
+        "name": "Years of Experience",
+        "description": "In property management tech"
+      }
+    }
+  },
+  "features": {
+    "title": "Comprehensive Platform Features",
+    "description": "Everything you need to manage your residential syndicate efficiently and effectively.",
+    "items": {
+      "financialManagement": {
+        "name": "Financial Management",
+        "description": "Complete financial tracking and reporting for syndicate operations."
+      },
+      "residentPortal": {
+        "name": "Resident Portal",
+        "description": "Easy-to-use portal for residents to stay connected and informed."
+      },
+      "meetingManagement": {
+        "name": "Meeting Management",
+        "description": "Streamlined tools for organizing and conducting syndicate meetings."
+      },
+      "documentStorage": {
+        "name": "Document Storage",
+        "description": "Secure cloud storage for all your important syndicate documents."
+      },
+      "communicationHub": {
+        "name": "Communication Hub",
+        "description": "Centralized platform for all syndicate communications."
+      },
+      "securityPrivacy": {
+        "name": "Security & Privacy",
+        "description": "Enterprise-grade security with GDPR compliance and data protection."
+      }
+    }
+  },
+  "values": {
+    "title": "Our Values",
+    "description": "The principles that guide everything we do at Syndik.",
+    "items": {
+      "transparency": {
+        "name": "Transparency",
+        "description": "We believe in clear, honest communication and transparent financial management that builds trust within communities."
+      },
+      "innovation": {
+        "name": "Innovation",
+        "description": "Continuously improving our platform with cutting-edge technology and user feedback to stay ahead of industry needs."
+      },
+      "community": {
+        "name": "Community",
+        "description": "Building stronger residential communities through better management tools that foster collaboration and engagement."
+      },
+      "excellence": {
+        "name": "Excellence",
+        "description": "Committed to delivering the highest quality service and support to our users with 24/7 reliability."
+      }
+    }
+  },
+  "timeline": {
+    "title": "Our Journey",
+    "description": "From a simple idea to a comprehensive platform serving thousands of residents.",
+    "items": {
+      "2019": {
+        "year": "2019",
+        "title": "Foundation",
+        "description": "Syndik was founded with a vision to modernize residential property management."
+      },
+      "2020": {
+        "year": "2020",
+        "title": "First Launch",
+        "description": "Released our initial platform serving 50+ syndicates across major cities."
+      },
+      "2021": {
+        "year": "2021",
+        "title": "Mobile App",
+        "description": "Launched mobile applications for iOS and Android platforms."
+      },
+      "2022": {
+        "year": "2022",
+        "title": "Scale & Growth",
+        "description": "Expanded to serve 200+ syndicates with enhanced financial modules."
+      },
+      "2023": {
+        "year": "2023",
+        "title": "AI Integration",
+        "description": "Introduced AI-powered insights and automated reporting features."
+      },
+      "2024": {
+        "year": "2024",
+        "title": "Global Expansion",
+        "description": "Reached 500+ syndicates and launched in multiple international markets."
+      }
+    }
+  },
+  "team": {
+    "title": "Meet Our Team",
+    "description": "The passionate experts behind Syndik, dedicated to transforming property management.",
+    "members": {
+      "sarah": {
+        "name": "Sarah Chen",
+        "role": "CEO & Co-Founder",
+        "bio": "Former property management executive with 15+ years of industry experience."
+      },
+      "michael": {
+        "name": "Michael Rodriguez",
+        "role": "CTO & Co-Founder",
+        "bio": "Software architect specializing in enterprise SaaS solutions and scalable systems."
+      },
+      "emma": {
+        "name": "Emma Thompson",
+        "role": "Head of Product",
+        "bio": "UX expert focused on creating intuitive interfaces for property management."
+      },
+      "david": {
+        "name": "David Kim",
+        "role": "Head of Engineering",
+        "bio": "Full-stack developer with expertise in modern web technologies and cloud infrastructure."
+      }
+    }
+  },
+  "cta": {
+    "title": "Ready to Get Started?",
+    "description": "Join our community of successful syndicate managers and experience the difference.",
+    "buttons": {
+      "startTrial": "Start Free Trial",
+      "contactSales": "Contact Sales"
+    }
+  }
+}

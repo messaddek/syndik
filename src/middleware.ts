@@ -15,13 +15,21 @@ const isPublicRoute = createRouteMatcher([
   '/:locale/privacy',
   '/:locale/sign-in(.*)',
   '/:locale/sign-up(.*)',
-  // Non-localized special routes
-  '/sign-in(.*)',
-  '/sign-up(.*)',
+  '/:locale/org-switcher',
+  '/:locale/org-redirect',
+  '/:locale/org-switcher(.*)',
+  '/:locale/org-redirect(.*)',
+  // Localized content routes
+  '/:locale/user-guide(.*)',
+  '/:locale/help(.*)',
+  '/:locale/support(.*)',
+  '/:locale/documentation(.*)',
+  '/:locale/articles(.*)',
+  // Non-localized redirect handlers only
   '/org-switcher',
   '/org-redirect',
-  // API routes
-  '/api/webhooks/clerk',
+  // All API routes are non-localized
+  '/api(.*)',
 ]);
 
 // Create the next-intl middleware
@@ -30,13 +38,12 @@ const intlMiddleware = createMiddleware(routing);
 export default clerkMiddleware(async (auth, req) => {
   const { pathname } = req.nextUrl;
 
-  // Skip intl middleware for non-localized special routes
+  // Skip intl middleware for API routes and specific redirect handlers only
+  // Allow sign-in/sign-up to go through intl middleware for proper locale redirection
   if (
-    pathname.startsWith('/sign-in') ||
-    pathname.startsWith('/sign-up') ||
-    pathname.startsWith('/org-switcher') ||
-    pathname.startsWith('/org-redirect') ||
-    pathname.startsWith('/api/')
+    pathname.startsWith('/api') ||
+    pathname === '/org-switcher' ||
+    pathname === '/org-redirect'
   ) {
     // Only protect routes that are not public
     if (!isPublicRoute(req)) {
@@ -46,7 +53,7 @@ export default clerkMiddleware(async (auth, req) => {
     return;
   }
 
-  // Apply internationalization for all other requests
+  // Apply internationalization for all other requests (excluding API routes)
   const response = intlMiddleware(req);
 
   // Only protect routes that are not public

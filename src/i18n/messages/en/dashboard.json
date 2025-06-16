@@ -1,0 +1,22 @@
+{
+  "buildings": "Buildings",
+  "totalManagedProperties": "Total Managed Properties",
+  "units": "Units",
+  "occupancyRateText": "Occupancy Rate",
+  "residents": "Residents",
+  "activeResidents": "Active Residents",
+  "netIncome": "Net Income",
+  "thisMonth": "This Month",
+  "monthlyFinancialSummary": "Monthly Financial Summary",
+  "income": "Income",
+  "expenses": "Expenses",
+  "portalStatistics": "Portal Statistics",
+  "totalResidents": "Total Residents",
+  "portalAccess": "Portal Access",
+  "notInvited": "Not Invited",
+  "invitationRate": "Invitation Rate",
+  "recentActivity": "Recent Activity",
+  "newResident": "New Resident",
+  "meetingScheduled": "Meeting Scheduled",
+  "noRecentActivity": "No recent activity"
+}

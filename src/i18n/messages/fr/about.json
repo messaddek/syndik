@@ -1,0 +1,178 @@
+{
+  "hero": {
+    "badge": "Approuvé par 500+ Syndicats",
+    "title": "À Propos de Syndik",
+    "description": "Nous nous consacrons à révolutionner la gestion des syndicats résidentiels grâce à une technologie innovante, un service exceptionnel et une compréhension approfondie des besoins communautaires.",
+    "buttons": {
+      "startTrial": "Essai Gratuit",
+      "scheduleDemo": "Planifier une Démo"
+    }
+  },
+  "rtlDemo": {
+    "title": "Démo du Support RTL",
+    "description": "Passez à l'arabe pour voir la mise en page RTL (droite à gauche) en action."
+  },
+  "mission": {
+    "title": "Notre Mission",
+    "description": "Autonomiser les syndicats résidentiels avec des outils modernes et intuitifs qui simplifient la gestion immobilière, améliorent la transparence et favorisent des relations communautaires plus fortes.",
+    "details": "Nous comprenons les défis uniques auxquels font face les syndicats résidentiels aujourd'hui, de la transparence financière à la communication avec les résidents. C'est pourquoi nous avons construit une plateforme complète qui répond à ces besoins avec précision et soin.",
+    "cards": {
+      "propertyFocus": {
+        "title": "Focus Immobilier",
+        "description": "Spécialisé dans la gestion de syndicats résidentiels"
+      },
+      "communityFirst": {
+        "title": "Communauté Avant Tout",
+        "description": "Construire des communautés résidentielles plus fortes"
+      }
+    }
+  },
+  "stats": {
+    "title": "Approuvé par des Communautés du Monde Entier",
+    "description": "Notre plateforme a aidé des centaines de syndicats à gérer leurs propriétés plus efficacement.",
+    "items": {
+      "syndicates": {
+        "value": "500+",
+        "name": "Syndicats Actifs",
+        "description": "Propriétés utilisant notre plateforme"
+      },
+      "properties": {
+        "value": "10 000+",
+        "name": "Propriétés Gérées",
+        "description": "Unités résidentielles"
+      },
+      "residents": {
+        "value": "50 000+",
+        "name": "Résidents Satisfaits",
+        "description": "Membres de communauté heureux"
+      },
+      "experience": {
+        "value": "5+",
+        "name": "Années d'Expérience",
+        "description": "Dans la technologie de gestion immobilière"
+      }
+    }
+  },
+  "features": {
+    "title": "Fonctionnalités Complètes de la Plateforme",
+    "description": "Tout ce dont vous avez besoin pour gérer votre syndicat résidentiel de manière efficace et efficiente.",
+    "items": {
+      "financialManagement": {
+        "name": "Gestion Financière",
+        "description": "Suivi financier complet et rapports pour les opérations du syndicat."
+      },
+      "residentPortal": {
+        "name": "Portail Résident",
+        "description": "Portail facile à utiliser pour que les résidents restent connectés et informés."
+      },
+      "meetingManagement": {
+        "name": "Gestion des Réunions",
+        "description": "Outils rationalisés pour organiser et mener les réunions du syndicat."
+      },
+      "documentStorage": {
+        "name": "Stockage de Documents",
+        "description": "Stockage cloud sécurisé pour tous vos documents importants du syndicat."
+      },
+      "communicationHub": {
+        "name": "Hub de Communication",
+        "description": "Plateforme centralisée pour toutes les communications du syndicat."
+      },
+      "securityPrivacy": {
+        "name": "Sécurité et Confidentialité",
+        "description": "Sécurité de niveau entreprise avec conformité RGPD et protection des données."
+      }
+    }
+  },
+  "values": {
+    "title": "Nos Valeurs",
+    "description": "Les principes qui guident tout ce que nous faisons chez Syndik.",
+    "items": {
+      "transparency": {
+        "name": "Transparence",
+        "description": "Nous croyons en une communication claire et honnête et une gestion financière transparente qui renforce la confiance au sein des communautés."
+      },
+      "innovation": {
+        "name": "Innovation",
+        "description": "Améliorer continuellement notre plateforme avec une technologie de pointe et les retours des utilisateurs pour rester en avance sur les besoins de l'industrie."
+      },
+      "community": {
+        "name": "Communauté",
+        "description": "Construire des communautés résidentielles plus fortes grâce à de meilleurs outils de gestion qui favorisent la collaboration et l'engagement."
+      },
+      "excellence": {
+        "name": "Excellence",
+        "description": "Engagé à fournir le service et le support de la plus haute qualité à nos utilisateurs avec une fiabilité 24/7."
+      }
+    }
+  },
+  "timeline": {
+    "title": "Notre Parcours",
+    "description": "D'une idée simple à une plateforme complète servant des milliers de résidents.",
+    "items": {
+      "2019": {
+        "year": "2019",
+        "title": "Fondation",
+        "description": "Syndik a été fondé avec une vision de moderniser la gestion immobilière résidentielle."
+      },
+      "2020": {
+        "year": "2020",
+        "title": "Premier Lancement",
+        "description": "Lancement de notre plateforme initiale desservant 50+ syndicats à travers les grandes villes."
+      },
+      "2021": {
+        "year": "2021",
+        "title": "Application Mobile",
+        "description": "Lancement d'applications mobiles pour les plateformes iOS et Android."
+      },
+      "2022": {
+        "year": "2022",
+        "title": "Croissance et Expansion",
+        "description": "Extension pour servir 200+ syndicats avec des modules financiers améliorés."
+      },
+      "2023": {
+        "year": "2023",
+        "title": "Intégration IA",
+        "description": "Introduction d'insights alimentés par l'IA et de fonctionnalités de rapport automatisées."
+      },
+      "2024": {
+        "year": "2024",
+        "title": "Expansion Mondiale",
+        "description": "Atteinte de 500+ syndicats et lancement sur plusieurs marchés internationaux."
+      }
+    }
+  },
+  "team": {
+    "title": "Rencontrez Notre Équipe",
+    "description": "Les experts passionnés derrière Syndik, dédiés à transformer la gestion immobilière.",
+    "members": {
+      "sarah": {
+        "name": "Sarah Chen",
+        "role": "PDG et Co-Fondatrice",
+        "bio": "Ancienne dirigeante de gestion immobilière avec plus de 15 ans d'expérience dans l'industrie."
+      },
+      "michael": {
+        "name": "Michael Rodriguez",
+        "role": "CTO et Co-Fondateur",
+        "bio": "Architecte logiciel spécialisé dans les solutions SaaS d'entreprise et les systèmes évolutifs."
+      },
+      "emma": {
+        "name": "Emma Thompson",
+        "role": "Responsable Produit",
+        "bio": "Experte UX axée sur la création d'interfaces intuitives pour la gestion immobilière."
+      },
+      "david": {
+        "name": "David Kim",
+        "role": "Responsable Ingénierie",
+        "bio": "Développeur full-stack avec une expertise en technologies web modernes et infrastructure cloud."
+      }
+    }
+  },
+  "cta": {
+    "title": "Prêt à Commencer ?",
+    "description": "Rejoignez notre communauté de gestionnaires de syndicats prospères et découvrez la différence.",
+    "buttons": {
+      "startTrial": "Essai Gratuit",
+      "contactSales": "Contacter les Ventes"
+    }
+  }
+}

@@ -122,7 +122,7 @@ const InitialConfigurationGuidePage = () => {
                     <Card className='border-blue-200 bg-blue-50'>
                       <CardContent className='p-4'>
                         <div className='flex items-start space-x-3'>
-                          <AlertCircle className='mt-0.5 h-5 w-5 text-blue-600' />
+                          <AlertCircle className='text-primary mt-0.5 h-5 w-5' />
                           <div>
                             <p className='font-medium text-blue-800'>
                               Configuration Checklist
@@ -532,7 +532,7 @@ const InitialConfigurationGuidePage = () => {
                       <a
                         key={item.id}
                         href={`#${item.id}`}
-                        className={`block text-sm transition-colors hover:text-blue-600 ${
+                        className={`hover:text-primary block text-sm transition-colors ${
                           item.level === 2
                             ? 'pl-4 text-gray-600'
                             : 'font-medium text-gray-700'
