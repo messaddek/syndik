@@ -23,7 +23,9 @@ export default function OrgSwitcherPage() {
       <div className='w-full max-w-4xl'>
         {/* Header */}
         <div className='mb-8 text-center'>
-          <div className='mb-4 flex items-center justify-center'>            <Image
+          <div className='mb-4 flex items-center justify-center'>
+            {' '}
+            <Image
               src='/logo.svg'
               alt={t('logoAlt')}
               width={48}
@@ -40,7 +42,9 @@ export default function OrgSwitcherPage() {
         </div>
         {/* Instructions Cards */}
         <div className='mb-8 grid gap-6 md:grid-cols-2'>
-          <Card className='border-blue-200 bg-blue-50/50 dark:bg-blue-900/20'>            <CardHeader>
+          <Card className='border-blue-200 bg-blue-50/50 dark:bg-blue-900/20'>
+            {' '}
+            <CardHeader>
               <CardTitle className='flex items-center text-blue-700 dark:text-blue-300'>
                 <Users className='mr-2 h-5 w-5' />
                 {t('cards.managers.title')}
@@ -57,7 +61,9 @@ export default function OrgSwitcherPage() {
             </CardContent>
           </Card>
 
-          <Card className='border-green-200 bg-green-50/50 dark:bg-green-900/20'>            <CardHeader>
+          <Card className='border-green-200 bg-green-50/50 dark:bg-green-900/20'>
+            {' '}
+            <CardHeader>
               <CardTitle className='flex items-center text-green-700 dark:text-green-300'>
                 <Building2 className='mr-2 h-5 w-5' />
                 {t('cards.residents.title')}
@@ -75,8 +81,12 @@ export default function OrgSwitcherPage() {
           </Card>
         </div>
         {/* Organization List */}
-        <Card className='mx-auto max-w-2xl'>          <CardHeader>
-            <CardTitle className='text-center'>{t('organizationList.title')}</CardTitle>
+        <Card className='mx-auto max-w-2xl'>
+          {' '}
+          <CardHeader>
+            <CardTitle className='text-center'>
+              {t('organizationList.title')}
+            </CardTitle>
             <CardDescription className='text-center'>
               {t('organizationList.description')}
             </CardDescription>
@@ -109,10 +119,9 @@ export default function OrgSwitcherPage() {
             />
           </CardContent>
         </Card>
-        {/* Footer */}        <div className='mt-8 text-center text-sm text-gray-500 dark:text-gray-400'>
-          <p>
-            {t('footer.text')}
-          </p>
+        {/* Footer */}{' '}
+        <div className='mt-8 text-center text-sm text-gray-500 dark:text-gray-400'>
+          <p>{t('footer.text')}</p>
         </div>
       </div>
     </div>
