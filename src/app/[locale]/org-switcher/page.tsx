@@ -10,79 +10,78 @@ import {
 } from '@/components/ui/card';
 import { Building2, Users, ArrowRight } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export default function OrgSwitcherPage() {
   const params = useParams();
   const locale = params.locale as string;
+  const t = useTranslations('orgSwitcher');
 
   return (
     <div className='flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4 dark:from-gray-900 dark:to-gray-800'>
       <div className='w-full max-w-4xl'>
         {/* Header */}
         <div className='mb-8 text-center'>
-          <div className='mb-4 flex items-center justify-center'>
-            <Building2 className='text-primary mr-3 h-12 w-12' />
+          <div className='mb-4 flex items-center justify-center'>            <Image
+              src='/logo.svg'
+              alt={t('logoAlt')}
+              width={48}
+              height={48}
+              className='mr-3'
+            />
             <h1 className='text-4xl font-bold text-gray-900 dark:text-white'>
-              Select Organization
+              {t('title')}
             </h1>
           </div>
           <p className='mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300'>
-            Choose an organization to access its management dashboard or
-            resident portal. Your role determines what features you can access.
+            {t('description')}
           </p>
         </div>
-
         {/* Instructions Cards */}
         <div className='mb-8 grid gap-6 md:grid-cols-2'>
-          <Card className='border-blue-200 bg-blue-50/50 dark:bg-blue-900/20'>
-            <CardHeader>
+          <Card className='border-blue-200 bg-blue-50/50 dark:bg-blue-900/20'>            <CardHeader>
               <CardTitle className='flex items-center text-blue-700 dark:text-blue-300'>
                 <Users className='mr-2 h-5 w-5' />
-                Property Managers & Admins
+                {t('cards.managers.title')}
               </CardTitle>
               <CardDescription>
-                Access the full management dashboard with all administrative
-                features
+                {t('cards.managers.description')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className='text-primary flex items-center text-sm dark:text-blue-400'>
                 <ArrowRight className='mr-2 h-4 w-4' />
-                Will be redirected to <strong>/dashboard</strong>
+                {t('cards.managers.redirect')} <strong>/dashboard</strong>
               </div>
             </CardContent>
           </Card>
 
-          <Card className='border-green-200 bg-green-50/50 dark:bg-green-900/20'>
-            <CardHeader>
+          <Card className='border-green-200 bg-green-50/50 dark:bg-green-900/20'>            <CardHeader>
               <CardTitle className='flex items-center text-green-700 dark:text-green-300'>
                 <Building2 className='mr-2 h-5 w-5' />
-                Residents & Members
+                {t('cards.residents.title')}
               </CardTitle>
               <CardDescription>
-                Access the resident portal with personalized information and
-                services
+                {t('cards.residents.description')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className='flex items-center text-sm text-green-600 dark:text-green-400'>
                 <ArrowRight className='mr-2 h-4 w-4' />
-                Will be redirected to <strong>/portal</strong>
+                {t('cards.residents.redirect')} <strong>/portal</strong>
               </div>
             </CardContent>
           </Card>
         </div>
-
         {/* Organization List */}
-        <Card className='mx-auto max-w-2xl'>
-          <CardHeader>
-            <CardTitle className='text-center'>Your Organizations</CardTitle>
+        <Card className='mx-auto max-w-2xl'>          <CardHeader>
+            <CardTitle className='text-center'>{t('organizationList.title')}</CardTitle>
             <CardDescription className='text-center'>
-              Select an organization to continue
+              {t('organizationList.description')}
             </CardDescription>
           </CardHeader>
           <CardContent className='flex flex-col items-center p-6'>
-            {' '}
             <OrganizationList
               afterSelectOrganizationUrl={`/${locale}/org-redirect`}
               afterCreateOrganizationUrl={`/${locale}/org-redirect`}
@@ -110,12 +109,9 @@ export default function OrgSwitcherPage() {
             />
           </CardContent>
         </Card>
-
-        {/* Footer */}
-        <div className='mt-8 text-center text-sm text-gray-500 dark:text-gray-400'>
+        {/* Footer */}        <div className='mt-8 text-center text-sm text-gray-500 dark:text-gray-400'>
           <p>
-            Don&apos;t see your organization? Contact your property manager for
-            an invitation.
+            {t('footer.text')}
           </p>
         </div>
       </div>

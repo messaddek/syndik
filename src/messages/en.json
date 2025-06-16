@@ -810,6 +810,30 @@
     "moreAvailable": "more available",
     "planLimitReached": "Plan limit reached"
   },
+  "orgSwitcher": {
+    "title": "Select Organization",
+    "description": "Choose an organization to access its management dashboard or resident portal. Your role determines what features you can access.",
+    "cards": {
+      "managers": {
+        "title": "Property Managers & Admins",
+        "description": "Access the full management dashboard with all administrative features",
+        "redirect": "Will be redirected to"
+      },
+      "residents": {
+        "title": "Residents & Members",
+        "description": "Access the resident portal with personalized information and services",
+        "redirect": "Will be redirected to"
+      }
+    },
+    "organizationList": {
+      "title": "Your Organizations",
+      "description": "Select an organization to continue"
+    },
+    "footer": {
+      "text": "Don't see your organization? Contact your property manager for an invitation."
+    },
+    "logoAlt": "Syndik Logo"
+  },
   "pagination": {
     "previous": "Previous",
     "next": "Next",

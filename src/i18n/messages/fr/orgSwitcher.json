@@ -1,0 +1,24 @@
+{
+  "title": "Sélectionner une Organisation",
+  "description": "Choisissez une organisation pour accéder à son tableau de bord de gestion ou au portail résident. Votre rôle détermine les fonctionnalités auxquelles vous pouvez accéder.",
+  "cards": {
+    "managers": {
+      "title": "Gestionnaires Immobiliers & Administrateurs",
+      "description": "Accédez au tableau de bord de gestion complet avec toutes les fonctionnalités administratives",
+      "redirect": "Sera redirigé vers"
+    },
+    "residents": {
+      "title": "Résidents & Membres", 
+      "description": "Accédez au portail résident avec des informations et services personnalisés",
+      "redirect": "Sera redirigé vers"
+    }
+  },
+  "organizationList": {
+    "title": "Vos Organisations",
+    "description": "Sélectionnez une organisation pour continuer"
+  },
+  "footer": {
+    "text": "Vous ne voyez pas votre organisation ? Contactez votre gestionnaire immobilier pour une invitation."
+  },
+  "logoAlt": "Logo Syndik"
+}
