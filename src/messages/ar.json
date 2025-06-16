@@ -466,7 +466,17 @@
     "recentActivity": "النشاط الأخير",
     "newResident": "ساكن جديد",
     "meetingScheduled": "اجتماع مجدول",
-    "noRecentActivity": "لا يوجد نشاط حديث"
+    "noRecentActivity": "لا يوجد نشاط حديث",
+    "quickActions": "إجراءات سريعة",
+    "quickActionsDescription": "قم بإجراء الإجراءات الشائعة بسرعة من هنا.",
+    "addBuilding": "إضافة مبنى",
+    "addResident": "إضافة ساكن",
+    "inviteResidents": "دعوة السكان",
+    "scheduleMeeting": "جدولة اجتماع",
+    "trends": "الاتجاهات",
+    "trendsDescription": "عرض الاتجاهات المالية واتجاهات الإشغال.",
+    "occupancy": "الإشغال",
+    "occupancyDescription": "عرض معدلات وتاريخ الإشغال."
   },
   "errors": {
     "generic": "حدث خطأ. يرجى المحاولة مرة أخرى."

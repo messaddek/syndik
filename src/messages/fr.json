@@ -466,7 +466,17 @@
     "recentActivity": "Activité Récente",
     "newResident": "Nouveau Résident",
     "meetingScheduled": "Réunion Programmée",
-    "noRecentActivity": "Aucune activité récente"
+    "noRecentActivity": "Aucune activité récente",
+    "quickActions": "Actions rapides",
+    "quickActionsDescription": "Effectuez rapidement des actions courantes depuis ici.",
+    "addBuilding": "Ajouter un bâtiment",
+    "addResident": "Ajouter un résident",
+    "inviteResidents": "Inviter des résidents",
+    "scheduleMeeting": "Planifier une réunion",
+    "trends": "Tendances",
+    "trendsDescription": "Voir les tendances financières et d'occupation.",
+    "occupancy": "Occupation",
+    "occupancyDescription": "Voir les taux et l'historique d'occupation."
   },
   "errors": {
     "generic": "Une erreur s'est produite. Veuillez réessayer."
