@@ -5,12 +5,6 @@ import { useTRPC } from '@/trpc/client';
 import { useRouter } from '@/i18n/navigation';
 import { useEffect } from 'react';
 
-import { BuildingViewSkeleton } from '@/modules/buildings/ui/components/building-view-skeleton';
-import { Skeleton } from '@/components/ui/skeleton';
-import { usePathname } from '@/i18n/routing';
-import { UnitViewSkeleton } from '@/modules/units';
-import { ResidentViewSkeleton } from '@/modules/residents';
-
 import { usePathname } from '@/i18n/routing';
 import { getLoadingSkeleton } from '../utils/get-loading-skeleton';
 

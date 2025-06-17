@@ -1,0 +1,136 @@
+{
+  "title": "Politique de confidentialité",
+  "subtitle": "Confidentialité et protection des données",
+  "lastUpdated": "Dernière mise à jour : 1er janvier 2025",
+  "readCarefully": "Nous nous engageons à protéger votre vie privée et à être transparents sur la façon dont nous traitons vos données.",
+  "tableOfContents": "Table des matières",
+  "sections": {
+    "introduction": {
+      "title": "1. Introduction",
+      "content": "Syndik (\"nous\", \"notre\" ou \"nos\") s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre plateforme de gestion de syndics résidentiels."
+    },
+    "informationCollect": {
+      "title": "2. Informations que nous collectons",
+      "personalInfoTitle": "Informations personnelles",
+      "personalInfoContent": "Nous collectons les informations que vous nous fournissez directement, telles que :",
+      "personalInfoItems": [
+        "Nom, adresse e-mail, numéro de téléphone",
+        "Informations sur le syndicat et la propriété",
+        "Informations financières et de paiement",
+        "Préférences de communication",
+        "Identifiants de compte et informations de profil"
+      ],
+      "usageInfoTitle": "Informations d'utilisation",
+      "usageInfoContent": "Nous collectons automatiquement certaines informations sur votre utilisation de notre service :",
+      "usageInfoItems": [
+        "Adresse IP et informations sur l'appareil",
+        "Type de navigateur et système d'exploitation",
+        "Pages visitées et fonctionnalités utilisées",
+        "Heure et date d'accès",
+        "Adresses des sites Web de référence"
+      ]
+    },
+    "howWeUse": {
+      "title": "3. Comment nous utilisons vos informations",
+      "content": "Nous utilisons les informations que nous collectons pour :",
+      "purposes": [
+        "Fournir, maintenir et améliorer notre service",
+        "Traiter les transactions et envoyer les informations connexes",
+        "Envoyer des communications administratives et de support",
+        "Répondre aux commentaires, questions et demandes de service client",
+        "Surveiller et analyser les modèles et tendances d'utilisation",
+        "Personnaliser votre expérience"
+      ]
+    },
+    "sharingDisclosure": {
+      "title": "4. Partage et divulgation d'informations",
+      "content": "Nous ne vendons, n'échangeons ou ne transférons pas vos informations personnelles à des tiers sans votre consentement, sauf dans les circonstances suivantes :",
+      "circumstances": [
+        "Prestataires de services qui nous aident à exploiter notre plateforme",
+        "Conformité légale et protection des droits",
+        "Transferts d'entreprise ou acquisitions",
+        "Avec votre consentement explicite"
+      ]
+    },
+    "dataSecurity": {
+      "title": "5. Sécurité des données",
+      "content": "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations personnelles :",
+      "technicalTitle": "Mesures techniques",
+      "technicalMeasures": [
+        "Chiffrement des données en transit et au repos",
+        "Contrôles d'accès et mécanismes d'authentification",
+        "Évaluations de sécurité et mises à jour régulières"
+      ],
+      "organizationalTitle": "Mesures organisationnelles",
+      "organizationalMeasures": [
+        "Formation des employés sur la protection des données",
+        "Procédures de réponse aux incidents",
+        "Audits de conformité réguliers"
+      ]
+    },
+    "dataRetention": {
+      "title": "6. Conservation des données",
+      "content": "Nous conservons vos informations personnelles uniquement le temps nécessaire pour remplir les objectifs décrits dans cette politique de confidentialité, nous conformer aux obligations légales, résoudre les litiges et faire respecter les accords.",
+      "retentionPeriods": [
+        "Informations de compte : Conservées tant que votre compte est actif",
+        "Enregistrements de transactions : Conservés pendant 7 ans à des fins fiscales et légales",
+        "Journaux de communication : Conservés pendant 2 ans",
+        "Analyses d'utilisation : Anonymisées après 12 mois"
+      ]
+    },
+    "yourRights": {
+      "title": "7. Vos droits et choix",
+      "content": "Selon votre localisation, vous pouvez avoir certains droits concernant vos informations personnelles :",
+      "rights": [
+        "Accéder et recevoir une copie de vos informations personnelles",
+        "Corriger des informations inexactes ou incomplètes",
+        "Supprimer vos informations personnelles",
+        "Vous opposer à certaines activités de traitement ou les restreindre",
+        "Portabilité des données (recevoir vos données dans un format structuré)",
+        "Retirer votre consentement à tout moment"
+      ]
+    },
+    "cookies": {
+      "title": "8. Cookies et technologies de suivi",
+      "content": "Nous utilisons des cookies et des technologies de suivi similaires pour améliorer votre expérience sur notre plateforme :",
+      "cookieTypes": [
+        "Cookies essentiels : Requis pour les fonctionnalités de base de la plateforme",
+        "Cookies de performance : Nous aident à comprendre comment vous utilisez notre service",
+        "Cookies fonctionnels : Se souviennent de vos préférences et paramètres",
+        "Cookies marketing : Utilisés pour diffuser des publicités pertinentes"
+      ],
+      "manageCookies": "Vous pouvez gérer vos préférences de cookies via les paramètres de votre navigateur ou notre centre de préférences de cookies."
+    },
+    "international": {
+      "title": "9. Transferts internationaux de données",
+      "content": "Vos informations peuvent être transférées vers et traitées dans des pays autres que le vôtre. Nous nous assurons que des garanties appropriées sont en place :",
+      "safeguards": [
+        "Clauses contractuelles types approuvées par les autorités réglementaires",
+        "Décisions d'adéquation par les autorités compétentes de protection des données",
+        "Règles d'entreprise contraignantes pour les transferts intra-groupe",
+        "Votre consentement explicite pour des transferts spécifiques"
+      ]
+    },
+    "children": {
+      "title": "10. Confidentialité des enfants",
+      "content": "Notre service n'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 13 ans. Si nous apprenons que nous avons collecté des informations personnelles d'un enfant de moins de 13 ans, nous prendrons des mesures pour supprimer ces informations rapidement."
+    },
+    "changes": {
+      "title": "11. Modifications de cette politique de confidentialité",
+      "content": "Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique de confidentialité sur cette page et en mettant à jour la date de \"dernière mise à jour\". Pour les changements importants, nous fournirons un avis supplémentaire par e-mail ou notification proéminente sur le site Web."
+    },
+    "contact": {
+      "title": "12. Nous contacter",
+      "content": "Si vous avez des questions sur cette politique de confidentialité, veuillez nous contacter :",
+      "emailTitle": "E-mail",
+      "phoneTitle": "Téléphone",
+      "addressTitle": "Adresse",
+      "email": "privacy@syndik.com",
+      "phone": "+1-800-SYNDIK",
+      "address": "[Adresse de l'entreprise]"
+    }
+  },
+  "acknowledgment": {
+    "content": "En utilisant Syndik, vous reconnaissez avoir lu et compris cette politique de confidentialité."
+  }
+}

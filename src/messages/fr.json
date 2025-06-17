@@ -177,6 +177,294 @@
       }
     }
   },
+  "articles-fixed": {
+    "propertyInformationUpdates": {
+      "title": "Mises à jour des informations de propriété",
+      "description": "Apprenez à maintenir vos informations de propriété à jour et précises",
+      "tableOfContents": [
+        {
+          "id": "overview",
+          "title": "Aperçu",
+          "level": 1
+        },
+        {
+          "id": "updating-basic-info",
+          "title": "Mise à jour des informations de base",
+          "level": 1
+        },
+        {
+          "id": "property-amenities",
+          "title": "Commodités de la propriété",
+          "level": 1
+        },
+        {
+          "id": "contact-information",
+          "title": "Informations de contact",
+          "level": 1
+        },
+        {
+          "id": "photos-documents",
+          "title": "Photos et documents",
+          "level": 1
+        },
+        {
+          "id": "best-practices",
+          "title": "Meilleures pratiques",
+          "level": 1
+        }
+      ],
+      "relatedArticles": [
+        {
+          "title": "Ajouter de nouvelles propriétés",
+          "href": "/user-guide/property-management/adding-new-properties",
+          "time": "3 min"
+        },
+        {
+          "title": "Gestion de documents",
+          "href": "/user-guide/property-management/document-management-system",
+          "time": "4 min"
+        },
+        {
+          "title": "Gestion des unités",
+          "href": "/user-guide/property-management/unit-management-organization",
+          "time": "6 min"
+        }
+      ],
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Maintenir vos informations de propriété à jour est crucial pour une gestion immobilière efficace. Ce guide couvre comment mettre à jour divers aspects de vos détails de propriété.",
+          "proTip": {
+            "title": "Conseil de pro",
+            "content": "Configurez des rappels mensuels pour examiner et mettre à jour les informations de propriété afin d'assurer leur exactitude."
+          }
+        },
+        "updatingBasicInfo": {
+          "title": "Mise à jour des informations de base",
+          "subtitle": "Détails et spécifications de la propriété",
+          "steps": [
+            "Naviguez vers Propriétés dans le menu principal",
+            "Sélectionnez la propriété que vous voulez mettre à jour",
+            "Cliquez sur le bouton 'Modifier la propriété'",
+            "Mettez à jour les champs nécessaires",
+            "Sauvegardez vos modifications"
+          ]
+        },
+        "propertyAmenities": {
+          "title": "Commodités de la propriété",
+          "content": "La gestion des commodités de propriété aide les résidents potentiels à comprendre ce que votre propriété offre.",
+          "commonAmenities": {
+            "title": "Commodités communes",
+            "list": [
+              "Piscine",
+              "Centre de fitness",
+              "Garage de stationnement",
+              "Installations de buanderie",
+              "Centre d'affaires"
+            ]
+          },
+          "unitFeatures": {
+            "title": "Caractéristiques spécifiques aux unités"
+          }
+        },
+        "contactInformation": {
+          "title": "Informations de contact",
+          "important": {
+            "title": "Note importante",
+            "content": "Gardez toujours les informations de contact à jour car elles sont utilisées pour les notifications d'urgence."
+          }
+        },
+        "photosDocuments": {
+          "title": "Photos et documents",
+          "content": "Le contenu visuel aide les résidents et prospects à mieux comprendre votre propriété.",
+          "photoUpdates": {
+            "title": "Mises à jour des photos",
+            "content": "Les mises à jour régulières des photos mettent en valeur l'état actuel et les améliorations de votre propriété."
+          }
+        },
+        "bestPractices": {
+          "title": "Meilleures pratiques",
+          "regularMaintenance": {
+            "title": "Maintenance régulière des informations"
+          },
+          "qualityControl": {
+            "title": "Contrôle qualité"
+          }
+        }
+      }
+    },
+    "moveInMoveOutProcess": {
+      "title": "Processus d'emménagement/déménagement",
+      "description": "Rationalisez les emménagements et déménagements avec des workflows complets qui assurent des transitions fluides pour les résidents et la gestion.",
+      "breadcrumb": {
+        "userGuide": "Guide d'utilisation",
+        "residentManagement": "Gestion des résidents",
+        "current": "Processus d'emménagement/déménagement"
+      },
+      "meta": {
+        "readTime": "10 min de lecture",
+        "audience": "Gestionnaires immobiliers"
+      },
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Le processus d'emménagement et de déménagement est crucial pour maintenir l'état de la propriété, assurer la satisfaction des locataires et protéger votre investissement. Syndik fournit des workflows structurés pour gérer ces transitions efficacement.",
+          "keyComponents": {
+            "title": "Composants clés",
+            "items": [
+              "Listes de contrôle d'inspection détaillées",
+              "Système de documentation photo",
+              "Gestion des dépôts de garantie",
+              "Suivi numérique de la remise des clés"
+            ]
+          }
+        }
+      },
+      "relatedArticles": [
+        {
+          "title": "Ajout de nouveaux résidents",
+          "href": "/user-guide/resident-management/adding-new-residents",
+          "time": "5 min"
+        },
+        {
+          "title": "Gestion des contrats de bail",
+          "href": "/user-guide/resident-management/lease-agreement-management",
+          "time": "8 min"
+        },
+        {
+          "title": "Gestion et organisation des unités",
+          "href": "/user-guide/property-management/unit-management-organization",
+          "time": "6 min"
+        }
+      ]
+    },
+    "creatingYourFirstProperty": {
+      "title": "Créer votre première propriété",
+      "description": "Guide complet pour commencer avec la configuration de votre première propriété dans Syndik",
+      "sections": {
+        "overview": {
+          "content": "Créer votre première propriété dans Syndik est le début de votre parcours de gestion immobilière efficace. Ce guide vous accompagnera étape par étape dans le processus.",
+          "whatYoullLearn": [
+            "Comment configurer les informations de base de propriété",
+            "Configurer les unités résidentielles",
+            "Personnaliser les paramètres de propriété",
+            "Meilleures pratiques pour la configuration de propriété"
+          ]
+        },
+        "step1": {
+          "title": "Étape 1: Informations de base",
+          "content": "Commencez par entrer les informations de base de votre propriété",
+          "steps": [
+            "Naviguez vers Propriétés dans le menu principal",
+            "Cliquez sur 'Ajouter une nouvelle propriété'",
+            "Entrez le nom et l'adresse de la propriété",
+            "Sélectionnez le type de propriété",
+            "Ajoutez la description de la propriété"
+          ],
+          "proTip": {
+            "title": "Conseil de pro",
+            "content": "Utilisez des noms descriptifs pour vos propriétés pour les rendre facilement identifiables dans les rapports et listes."
+          }
+        },
+        "step2": {
+          "title": "Étape 2: Configuration des unités",
+          "content": "Configurez les unités résidentielles de votre propriété",
+          "requiredFields": {
+            "title": "Champs requis",
+            "fields": [
+              "Numéro d'unité",
+              "Type d'unité (appartement, studio, etc.)",
+              "Nombre de chambres",
+              "Nombre de salles de bain",
+              "Superficie en pieds carrés"
+            ]
+          },
+          "optionalFields": {
+            "title": "Champs optionnels",
+            "fields": [
+              "Détails du balcon",
+              "Place de parking",
+              "Unité de stockage",
+              "Politique animaux",
+              "Caractéristiques spéciales"
+            ]
+          }
+        },
+        "step3": {
+          "title": "Étape 3: Personnalisation des paramètres",
+          "content": "Ajustez les paramètres avancés de votre propriété",
+          "settings": [
+            {
+              "title": "Paramètres de paiement",
+              "description": "Configurez les montants de loyer, dates d'échéance et frais de retard"
+            },
+            {
+              "title": "Préférences de communication",
+              "description": "Configurez les paramètres de notification et canaux de communication"
+            },
+            {
+              "title": "Contrôle d'accès",
+              "description": "Gérez qui peut voir et modifier les informations de propriété"
+            }
+          ]
+        },
+        "nextSteps": {
+          "title": "Étapes suivantes",
+          "content": "Maintenant que votre propriété est configurée, voici ce que vous pouvez faire ensuite:",
+          "actions": [
+            {
+              "title": "Ajouter des résidents",
+              "description": "Commencez à ajouter des résidents à vos unités",
+              "href": "/user-guide/resident-management/adding-new-residents"
+            },
+            {
+              "title": "Configurer la collecte de loyer",
+              "description": "Configurez les méthodes et horaires de paiement",
+              "href": "/user-guide/financial-management/setting-up-rent-collection"
+            }
+          ]
+        },
+        "sidebar": {
+          "relatedArticlesList": [
+            {
+              "title": "Gestion des unités",
+              "href": "/user-guide/property-management/unit-management-organization",
+              "time": "5 min"
+            },
+            {
+              "title": "Configuration des paiements",
+              "href": "/user-guide/financial-management/setting-up-rent-collection",
+              "time": "3 min"
+            }
+          ]
+        }
+      }
+    },
+    "common": {
+      "tableOfContents": "Table des matières",
+      "relatedArticles": "Articles connexes",
+      "overview": "Aperçu",
+      "nextSteps": "Étapes suivantes",
+      "popular": "Populaire",
+      "readTime": "min",
+      "whatYoullLearn": "Ce que vous apprendrez"
+    },
+    "navigation": {
+      "userGuide": "Guide d'utilisation",
+      "gettingStarted": "Commencer"
+    },
+    "sidebar": {
+      "tableOfContents": "Table des matières",
+      "relatedArticles": "Articles connexes",
+      "quickActions": "Actions rapides",
+      "needHelp": "Besoin d'aide ?",
+      "contactSupport": "Contacter le support",
+      "liveChat": "Chat en direct",
+      "phoneSupport": "Support téléphonique",
+      "supportMessage": "Si vous avez besoin d'une aide immédiate, veuillez contacter notre équipe de support.",
+      "supportHours": "Heures de support : Lundi - Vendredi, 9h - 18h"
+    }
+  },
   "articles": {
     "propertyInformationUpdates": {
       "title": "Mises à jour des informations de propriété",
@@ -1038,7 +1326,7 @@
       "disclaimer": "Nous respectons votre vie privée. Désabonnez-vous à tout moment.",
       "privacyPolicy": "Politique de Confidentialité"
     },
-    "copyright": "© 2024 Syndik. Tous droits réservés.",
+    "copyright": "© 2025 Syndik. Tous droits réservés.",
     "madeWith": "Fait avec ❤️ au Maroc",
     "certifications": {
       "soc2": "Conforme SOC 2",
@@ -1905,6 +2193,142 @@
       }
     }
   },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "subtitle": "Confidentialité et protection des données",
+    "lastUpdated": "Dernière mise à jour : 1er janvier 2025",
+    "readCarefully": "Nous nous engageons à protéger votre vie privée et à être transparents sur la façon dont nous traitons vos données.",
+    "tableOfContents": "Table des matières",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "content": "Syndik (\"nous\", \"notre\" ou \"nos\") s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre plateforme de gestion de syndics résidentiels."
+      },
+      "informationCollect": {
+        "title": "2. Informations que nous collectons",
+        "personalInfoTitle": "Informations personnelles",
+        "personalInfoContent": "Nous collectons les informations que vous nous fournissez directement, telles que :",
+        "personalInfoItems": [
+          "Nom, adresse e-mail, numéro de téléphone",
+          "Informations sur le syndicat et la propriété",
+          "Informations financières et de paiement",
+          "Préférences de communication",
+          "Identifiants de compte et informations de profil"
+        ],
+        "usageInfoTitle": "Informations d'utilisation",
+        "usageInfoContent": "Nous collectons automatiquement certaines informations sur votre utilisation de notre service :",
+        "usageInfoItems": [
+          "Adresse IP et informations sur l'appareil",
+          "Type de navigateur et système d'exploitation",
+          "Pages visitées et fonctionnalités utilisées",
+          "Heure et date d'accès",
+          "Adresses des sites Web de référence"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. Comment nous utilisons vos informations",
+        "content": "Nous utilisons les informations que nous collectons pour :",
+        "purposes": [
+          "Fournir, maintenir et améliorer notre service",
+          "Traiter les transactions et envoyer les informations connexes",
+          "Envoyer des communications administratives et de support",
+          "Répondre aux commentaires, questions et demandes de service client",
+          "Surveiller et analyser les modèles et tendances d'utilisation",
+          "Personnaliser votre expérience"
+        ]
+      },
+      "sharingDisclosure": {
+        "title": "4. Partage et divulgation d'informations",
+        "content": "Nous ne vendons, n'échangeons ou ne transférons pas vos informations personnelles à des tiers sans votre consentement, sauf dans les circonstances suivantes :",
+        "circumstances": [
+          "Prestataires de services qui nous aident à exploiter notre plateforme",
+          "Conformité légale et protection des droits",
+          "Transferts d'entreprise ou acquisitions",
+          "Avec votre consentement explicite"
+        ]
+      },
+      "dataSecurity": {
+        "title": "5. Sécurité des données",
+        "content": "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations personnelles :",
+        "technicalTitle": "Mesures techniques",
+        "technicalMeasures": [
+          "Chiffrement des données en transit et au repos",
+          "Contrôles d'accès et mécanismes d'authentification",
+          "Évaluations de sécurité et mises à jour régulières"
+        ],
+        "organizationalTitle": "Mesures organisationnelles",
+        "organizationalMeasures": [
+          "Formation des employés sur la protection des données",
+          "Procédures de réponse aux incidents",
+          "Audits de conformité réguliers"
+        ]
+      },
+      "dataRetention": {
+        "title": "6. Conservation des données",
+        "content": "Nous conservons vos informations personnelles uniquement le temps nécessaire pour remplir les objectifs décrits dans cette politique de confidentialité, nous conformer aux obligations légales, résoudre les litiges et faire respecter les accords.",
+        "retentionPeriods": [
+          "Informations de compte : Conservées tant que votre compte est actif",
+          "Enregistrements de transactions : Conservés pendant 7 ans à des fins fiscales et légales",
+          "Journaux de communication : Conservés pendant 2 ans",
+          "Analyses d'utilisation : Anonymisées après 12 mois"
+        ]
+      },
+      "yourRights": {
+        "title": "7. Vos droits et choix",
+        "content": "Selon votre localisation, vous pouvez avoir certains droits concernant vos informations personnelles :",
+        "rights": [
+          "Accéder et recevoir une copie de vos informations personnelles",
+          "Corriger des informations inexactes ou incomplètes",
+          "Supprimer vos informations personnelles",
+          "Vous opposer à certaines activités de traitement ou les restreindre",
+          "Portabilité des données (recevoir vos données dans un format structuré)",
+          "Retirer votre consentement à tout moment"
+        ]
+      },
+      "cookies": {
+        "title": "8. Cookies et technologies de suivi",
+        "content": "Nous utilisons des cookies et des technologies de suivi similaires pour améliorer votre expérience sur notre plateforme :",
+        "cookieTypes": [
+          "Cookies essentiels : Requis pour les fonctionnalités de base de la plateforme",
+          "Cookies de performance : Nous aident à comprendre comment vous utilisez notre service",
+          "Cookies fonctionnels : Se souviennent de vos préférences et paramètres",
+          "Cookies marketing : Utilisés pour diffuser des publicités pertinentes"
+        ],
+        "manageCookies": "Vous pouvez gérer vos préférences de cookies via les paramètres de votre navigateur ou notre centre de préférences de cookies."
+      },
+      "international": {
+        "title": "9. Transferts internationaux de données",
+        "content": "Vos informations peuvent être transférées vers et traitées dans des pays autres que le vôtre. Nous nous assurons que des garanties appropriées sont en place :",
+        "safeguards": [
+          "Clauses contractuelles types approuvées par les autorités réglementaires",
+          "Décisions d'adéquation par les autorités compétentes de protection des données",
+          "Règles d'entreprise contraignantes pour les transferts intra-groupe",
+          "Votre consentement explicite pour des transferts spécifiques"
+        ]
+      },
+      "children": {
+        "title": "10. Confidentialité des enfants",
+        "content": "Notre service n'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 13 ans. Si nous apprenons que nous avons collecté des informations personnelles d'un enfant de moins de 13 ans, nous prendrons des mesures pour supprimer ces informations rapidement."
+      },
+      "changes": {
+        "title": "11. Modifications de cette politique de confidentialité",
+        "content": "Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique de confidentialité sur cette page et en mettant à jour la date de \"dernière mise à jour\". Pour les changements importants, nous fournirons un avis supplémentaire par e-mail ou notification proéminente sur le site Web."
+      },
+      "contact": {
+        "title": "12. Nous contacter",
+        "content": "Si vous avez des questions sur cette politique de confidentialité, veuillez nous contacter :",
+        "emailTitle": "E-mail",
+        "phoneTitle": "Téléphone",
+        "addressTitle": "Adresse",
+        "email": "privacy@syndik.com",
+        "phone": "+1-800-SYNDIK",
+        "address": "[Adresse de l'entreprise]"
+      }
+    },
+    "acknowledgment": {
+      "content": "En utilisant Syndik, vous reconnaissez avoir lu et compris cette politique de confidentialité."
+    }
+  },
   "residents": {
     "title": "Résidents",
     "subtitle": "Gérer les résidents et leurs affectations d'unité",
@@ -2046,6 +2470,108 @@
     "delete": "Supprimer",
     "view": "Voir",
     "openMenu": "Ouvrir le menu"
+  },
+  "terms": {
+    "title": "Conditions de service",
+    "subtitle": "Conditions générales",
+    "lastUpdated": "Dernière mise à jour : 1er janvier 2025",
+    "readCarefully": "Veuillez lire attentivement ces conditions avant d'utiliser notre service.",
+    "tableOfContents": "Table des matières",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptation des conditions",
+        "content": "En accédant et en utilisant Syndik (\"nous\", \"notre\" ou \"nos\"), vous acceptez et vous engagez à être lié par les termes et provisions de cet accord. Si vous n'acceptez pas de respecter ce qui précède, veuillez ne pas utiliser ce service."
+      },
+      "description": {
+        "title": "2. Description du service",
+        "content": "Syndik est une plateforme SaaS complète conçue pour la gestion de syndicats résidentiels, fournissant :",
+        "features": [
+          "Gestion de propriétés et d'immeubles",
+          "Suivi et rapports financiers",
+          "Outils de communication avec les résidents",
+          "Gestion des réunions et votes",
+          "Stockage et partage de documents",
+          "Système de demandes de maintenance"
+        ]
+      },
+      "userAccounts": {
+        "title": "3. Comptes utilisateur",
+        "content": "Lorsque vous créez un compte chez nous, vous devez fournir des informations exactes, complètes et à jour en permanence.",
+        "responsibilities": [
+          "Maintenir la sécurité de votre mot de passe",
+          "Accepter la responsabilité de toutes les activités sous votre compte",
+          "Nous notifier immédiatement de toute utilisation non autorisée",
+          "Ne pas partager vos identifiants de compte"
+        ]
+      },
+      "acceptableUse": {
+        "title": "4. Politique d'utilisation acceptable",
+        "content": "Vous ne pouvez utiliser notre service qu'à des fins légales et conformément à ces Conditions.",
+        "prohibitedTitle": "Activités interdites",
+        "prohibited": [
+          "Violer toute loi fédérale, étatique, locale ou internationale applicable",
+          "Transmettre tout matériel diffamatoire, offensant ou autrement répréhensible",
+          "Interférer avec ou perturber le service ou les serveurs",
+          "Tenter d'obtenir un accès non autorisé à d'autres comptes"
+        ],
+        "dataMisuseTitle": "Mauvaise utilisation des données",
+        "dataMisuse": [
+          "Extraction de données non autorisée",
+          "Partage d'identifiants avec des tiers",
+          "Tentative de violation de la sécurité",
+          "Rétro-ingénierie de la plateforme"
+        ]
+      },
+      "payment": {
+        "title": "5. Paiement et facturation",
+        "content": "Certains services peuvent nécessiter un paiement. Les conditions de paiement seront clairement affichées avant tout achat.",
+        "details": [
+          "Tous les frais sont non remboursables sauf si requis par la loi",
+          "Vous nous autorisez à débiter votre méthode de paiement",
+          "Les frais d'abonnement sont facturés à l'avance",
+          "Les changements de prix seront communiqués 30 jours à l'avance"
+        ]
+      },
+      "privacy": {
+        "title": "6. Confidentialité et protection des données",
+        "content": "Votre confidentialité est importante pour nous. Notre Politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre service."
+      },
+      "intellectualProperty": {
+        "title": "7. Propriété intellectuelle",
+        "content": "Le service et son contenu original, ses fonctionnalités et sa fonctionnalité sont et resteront la propriété exclusive de Syndik et de ses concédants de licence."
+      },
+      "limitationLiability": {
+        "title": "8. Limitation de responsabilité",
+        "content": "En aucun cas Syndik, ni ses directeurs, employés, partenaires, agents, fournisseurs ou affiliés, ne seront responsables de dommages indirects, accessoires, spéciaux, consécutifs ou punitifs.",
+        "importantNotice": "Avis important :",
+        "additionalContent": "Notre responsabilité totale envers vous pour toute réclamation découlant de ces conditions ou de votre utilisation du service ne doit pas dépasser le montant que vous nous avez payé au cours des douze mois précédant la réclamation."
+      },
+      "termination": {
+        "title": "9. Résiliation",
+        "content": "Nous pouvons résilier ou suspendre votre compte immédiatement, sans préavis ni responsabilité, pour quelque raison que ce soit, y compris sans limitation si vous violez les Conditions."
+      },
+      "modifications": {
+        "title": "10. Modifications",
+        "content": "Nous nous réservons le droit, à notre seule discrétion, de modifier ou remplacer ces Conditions à tout moment. Si une révision est importante, nous essaierons de fournir un préavis d'au moins 30 jours."
+      },
+      "governingLaw": {
+        "title": "11. Droit applicable",
+        "content": "Ces Conditions seront interprétées et régies par les lois de la juridiction dans laquelle Syndik opère, sans égard à ses dispositions de conflit de lois."
+      },
+      "contact": {
+        "title": "12. Informations de contact",
+        "content": "Si vous avez des questions concernant ces Conditions, veuillez nous contacter :",
+        "emailSupportTitle": "Support par email",
+        "phoneAddressTitle": "Téléphone et adresse",
+        "email": "legal@syndik.com",
+        "phone": "+1-800-SYNDIK",
+        "address": "Département juridique Syndik, 123 Rue des Affaires, Ville, Pays"
+      }
+    },
+    "effectiveDate": {
+      "title": "Date d'entrée en vigueur :",
+      "content": "Ces conditions sont effectives depuis le 1er janvier 2025. En continuant à utiliser Syndik après cette date, vous acceptez d'être lié par ces conditions."
+    }
   },
   "units": {
     "title": "Unités",

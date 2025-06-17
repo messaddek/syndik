@@ -7,14 +7,6 @@ import { AccountInitForm } from '@/modules/accounts/ui/components/account-init-f
 import { useTRPC } from '@/trpc/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { BuildingViewSkeleton } from '@/modules/buildings/ui/components/building-view-skeleton';
-import { BuildingsListSkeleton } from '@/modules/buildings/ui/components/buildings-skeleton';
-import { UnitViewSkeleton } from '@/modules/units/ui/components/unit-view-skeleton';
-import { ResidentViewSkeleton } from '@/modules/residents/ui/components/resident-view-skeleton';
-import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
-import { Skeleton } from '@/components/ui/skeleton';
-import { usePathname } from '@/i18n/routing';
-
 import { usePathname } from '@/i18n/routing';
 import { getLoadingSkeleton } from '../utils/get-loading-skeleton';
 

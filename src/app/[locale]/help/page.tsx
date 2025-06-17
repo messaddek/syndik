@@ -275,7 +275,7 @@ export default function HelpPage() {
                     ))}
                   </ul>{' '}
                   <Link href={resource.href}>
-                    <Button variant='outline' className='w-full'>
+                    <Button variant='outline' className='w-full space-x-2'>
                       {resource.href === '/docs' &&
                         t('resources.documentation.action')}
                       {resource.href === '/tutorials' &&
@@ -284,7 +284,7 @@ export default function HelpPage() {
                         t('resources.knowledgeBase.action')}
                       {resource.href === '/community' &&
                         t('resources.communityForum.action')}
-                      <ArrowRight className='ml-2 h-4 w-4' />
+                      <ArrowRight className='h-4 w-4 rtl:rotate-180' />
                     </Button>
                   </Link>
                 </CardContent>
@@ -295,7 +295,7 @@ export default function HelpPage() {
       </div>
 
       {/* Emergency Support */}
-      <div className='border-l-4 border-red-400 bg-red-50 py-16'>
+      <div className='border-l-4 border-red-400 bg-red-50 py-16 rtl:border-r-4 rtl:border-l-0'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='flex items-center gap-4'>
             <div className='flex-shrink-0'>
