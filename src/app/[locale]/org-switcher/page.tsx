@@ -23,15 +23,8 @@ export default function OrgSwitcherPage() {
       <div className='w-full max-w-4xl'>
         {/* Header */}
         <div className='mb-8 text-center'>
-          <div className='mb-4 flex items-center justify-center'>
-            {' '}
-            <Image
-              src='/logo.svg'
-              alt={t('logoAlt')}
-              width={48}
-              height={48}
-              className='mr-3'
-            />
+          <div className='mb-4 flex items-center justify-center gap-3'>
+            <Image src='/logo.svg' alt={t('logoAlt')} width={48} height={48} />
             <h1 className='text-4xl font-bold text-gray-900 dark:text-white'>
               {t('title')}
             </h1>
@@ -44,8 +37,8 @@ export default function OrgSwitcherPage() {
         <div className='mb-8 grid gap-6 md:grid-cols-2'>
           <Card className='border-blue-200 bg-blue-50/50 dark:bg-blue-900/20'>
             <CardHeader>
-              <CardTitle className='flex items-center text-blue-700 dark:text-blue-300'>
-                <Users className='mr-2 h-5 w-5' />
+              <CardTitle className='flex items-center gap-x-2 text-blue-700 dark:text-blue-300'>
+                <Users className='h-5 w-5' />
                 {t('cards.managers.title')}
               </CardTitle>
               <CardDescription>
@@ -53,18 +46,17 @@ export default function OrgSwitcherPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className='text-primary flex items-center text-sm dark:text-blue-400'>
-                <ArrowRight className='mr-2 h-4 w-4' />
+              <div className='text-primary flex items-center space-x-2 text-sm dark:text-blue-400'>
+                <ArrowRight className='h-4 w-4 rtl:rotate-180' />
                 {t('cards.managers.redirect')} <strong>/dashboard</strong>
               </div>
             </CardContent>
           </Card>
 
           <Card className='border-green-200 bg-green-50/50 dark:bg-green-900/20'>
-            {' '}
             <CardHeader>
-              <CardTitle className='flex items-center text-green-700 dark:text-green-300'>
-                <Building2 className='mr-2 h-5 w-5' />
+              <CardTitle className='flex items-center gap-x-2 text-green-700 dark:text-green-300'>
+                <Building2 className='h-5 w-5' />
                 {t('cards.residents.title')}
               </CardTitle>
               <CardDescription>
@@ -72,8 +64,8 @@ export default function OrgSwitcherPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className='flex items-center text-sm text-green-600 dark:text-green-400'>
-                <ArrowRight className='mr-2 h-4 w-4' />
+              <div className='flex items-center space-x-2 text-sm text-green-600 dark:text-green-400'>
+                <ArrowRight className='h-4 w-4 rtl:rotate-180' />
                 {t('cards.residents.redirect')} <strong>/portal</strong>
               </div>
             </CardContent>
@@ -81,7 +73,6 @@ export default function OrgSwitcherPage() {
         </div>
         {/* Organization List */}
         <Card className='mx-auto max-w-2xl'>
-          {' '}
           <CardHeader>
             <CardTitle className='text-center'>
               {t('organizationList.title')}
@@ -118,7 +109,7 @@ export default function OrgSwitcherPage() {
             />
           </CardContent>
         </Card>
-        {/* Footer */}{' '}
+        {/* Footer */}
         <div className='mt-8 text-center text-sm text-gray-500 dark:text-gray-400'>
           <p>{t('footer.text')}</p>
         </div>

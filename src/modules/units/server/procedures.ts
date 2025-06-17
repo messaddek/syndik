@@ -2,6 +2,7 @@ import { eq, and, ilike } from 'drizzle-orm';
 import { z } from 'zod';
 import { createTRPCRouter, orgProtectedProcedure } from '@/trpc/init';
 import { units, createUnitSchema, updateUnitSchema } from '../schema';
+import { buildings } from '@/lib/schema';
 
 export const unitsRouter = createTRPCRouter({
   create: orgProtectedProcedure
@@ -56,6 +57,8 @@ export const unitsRouter = createTRPCRouter({
       return await db
         .select()
         .from(units)
+        //add join with buildings if needed
+        .leftJoin(buildings, eq(units.buildingId, buildings.id))
         .where(and(...conditions))
         .orderBy(units.floor, units.unitNumber);
     }),

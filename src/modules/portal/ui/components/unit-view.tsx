@@ -24,8 +24,10 @@ import {
   Mail,
   User,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export function UnitView() {
+  const t = useTranslations('units.portal');
   const trpc = useTRPC();
 
   const { data, isLoading, error } = useQuery(
@@ -42,7 +44,7 @@ export function UnitView() {
         <Card>
           <CardContent className='pt-6'>
             <div className='text-center text-red-600'>
-              Error loading unit information: {error.message}
+              {t('error')}: {error.message}
             </div>
           </CardContent>
         </Card>
@@ -55,9 +57,7 @@ export function UnitView() {
       <div className='p-6'>
         <Card>
           <CardContent className='pt-6'>
-            <div className='text-center text-gray-500'>
-              No unit information found
-            </div>
+            <div className='text-center text-gray-500'>{t('noData')}</div>
           </CardContent>
         </Card>
       </div>
@@ -73,143 +73,164 @@ export function UnitView() {
         <div className='flex items-center space-x-3'>
           <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100'>
             <Home className='text-primary h-5 w-5' />
-          </div>
+          </div>{' '}
           <div>
             <h1 className='text-2xl font-bold text-gray-900'>
-              Unit {unit?.unitNumber || 'N/A'}
+              {t('title')} {unit?.unitNumber || t('values.notAvailable')}
             </h1>
             <p className='text-sm text-gray-500'>
-              {building?.name || 'Building information not available'}
+              {building?.name || t('buildingInfo')}
             </p>
           </div>
         </div>
         <Badge variant={resident?.isOwner ? 'default' : 'secondary'}>
-          {resident?.isOwner ? 'Owner' : 'Tenant'}
+          {resident?.isOwner ? t('status.owner') : t('status.tenant')}
         </Badge>
       </div>
-
       {/* Unit Overview Cards */}
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
+        {' '}
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Floor</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('overview.floor')}
+            </CardTitle>
             <Building2 className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
-            <div className='text-2xl font-bold'>{unit?.floor ?? 'N/A'}</div>
-            <p className='text-muted-foreground text-xs'>Building level</p>
+            <div className='text-2xl font-bold'>
+              {unit?.floor ?? t('values.notAvailable')}
+            </div>
+            <p className='text-muted-foreground text-xs'>
+              {t('overview.floorDescription')}
+            </p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Area</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('overview.area')}
+            </CardTitle>
             <Square className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
             <div className='text-2xl font-bold'>
-              {unit?.area ? `${unit.area}m²` : 'N/A'}
+              {unit?.area ? `${unit.area}m²` : t('values.notAvailable')}
             </div>
-            <p className='text-muted-foreground text-xs'>Total area</p>
+            <p className='text-muted-foreground text-xs'>
+              {t('overview.areaDescription')}
+            </p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Bedrooms</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('overview.bedrooms')}
+            </CardTitle>
             <Bed className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
-            <div className='text-2xl font-bold'>{unit?.bedrooms ?? 'N/A'}</div>
-            <p className='text-muted-foreground text-xs'>Number of rooms</p>
+            <div className='text-2xl font-bold'>
+              {unit?.bedrooms ?? t('values.notAvailable')}
+            </div>
+            <p className='text-muted-foreground text-xs'>
+              {t('overview.bedroomsDescription')}
+            </p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Bathrooms</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('overview.bathrooms')}
+            </CardTitle>
             <Bath className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
-            <div className='text-2xl font-bold'>{unit?.bathrooms ?? 'N/A'}</div>
-            <p className='text-muted-foreground text-xs'>Number of bathrooms</p>
+            <div className='text-2xl font-bold'>
+              {unit?.bathrooms ?? t('values.notAvailable')}
+            </div>
+            <p className='text-muted-foreground text-xs'>
+              {t('overview.bathroomsDescription')}
+            </p>
           </CardContent>
         </Card>
       </div>
-
       {/* Unit and Building Details */}
       <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
         {/* Unit Information */}
         <Card>
+          {' '}
           <CardHeader>
             <CardTitle className='flex items-center gap-2'>
               <Home className='h-5 w-5' />
-              Unit Details
+              {t('details.unitTitle')}
             </CardTitle>
-            <CardDescription>Information about your unit</CardDescription>
-          </CardHeader>
+            <CardDescription>{t('details.unitDescription')}</CardDescription>
+          </CardHeader>{' '}
           <CardContent className='space-y-4'>
             <div className='grid grid-cols-2 gap-4'>
               <div>
                 <label className='text-sm font-medium text-gray-500'>
-                  Unit Number
+                  {t('details.unitNumber')}
                 </label>
                 <p className='text-sm font-semibold'>
-                  {unit?.unitNumber || 'N/A'}
+                  {unit?.unitNumber || t('values.notAvailable')}
                 </p>
               </div>
               <div>
                 <label className='text-sm font-medium text-gray-500'>
-                  Floor
-                </label>
-                <p className='text-sm font-semibold'>{unit?.floor ?? 'N/A'}</p>
-              </div>
-              <div>
-                <label className='text-sm font-medium text-gray-500'>
-                  Area
+                  {t('overview.floor')}
                 </label>
                 <p className='text-sm font-semibold'>
-                  {unit?.area ? `${unit.area} m²` : 'N/A'}
+                  {unit?.floor ?? t('values.notAvailable')}
                 </p>
               </div>
               <div>
                 <label className='text-sm font-medium text-gray-500'>
-                  Monthly Fee
+                  {t('overview.area')}
                 </label>
                 <p className='text-sm font-semibold'>
-                  {unit?.monthlyFee ? `${unit.monthlyFee} MAD` : 'N/A'}
+                  {unit?.area ? `${unit.area} m²` : t('values.notAvailable')}
                 </p>
               </div>
               <div>
                 <label className='text-sm font-medium text-gray-500'>
-                  Bedrooms
+                  {t('monthlyFee')}
                 </label>
                 <p className='text-sm font-semibold'>
-                  {unit?.bedrooms ?? 'N/A'}
+                  {unit?.monthlyFee
+                    ? `${unit.monthlyFee} MAD`
+                    : t('values.notAvailable')}
                 </p>
               </div>
               <div>
                 <label className='text-sm font-medium text-gray-500'>
-                  Bathrooms
+                  {t('overview.bedrooms')}
                 </label>
                 <p className='text-sm font-semibold'>
-                  {unit?.bathrooms ?? 'N/A'}
+                  {unit?.bedrooms ?? t('values.notAvailable')}
                 </p>
               </div>
-            </div>
-
+              <div>
+                <label className='text-sm font-medium text-gray-500'>
+                  {t('overview.bathrooms')}
+                </label>
+                <p className='text-sm font-semibold'>
+                  {unit?.bathrooms ?? t('values.notAvailable')}
+                </p>
+              </div>
+            </div>{' '}
             {unit?.description && (
               <div>
                 <label className='text-sm font-medium text-gray-500'>
-                  Description
+                  {t('details.description')}
                 </label>
                 <p className='mt-1 text-sm text-gray-700'>{unit.description}</p>
               </div>
             )}
-
             <div className='flex items-center gap-2 pt-2'>
               <Badge variant={unit?.isOccupied ? 'default' : 'secondary'}>
-                {unit?.isOccupied ? 'Occupied' : 'Available'}
+                {unit?.isOccupied ? t('occupied') : t('vacant')}
               </Badge>
             </div>
           </CardContent>
@@ -220,50 +241,52 @@ export function UnitView() {
           <CardHeader>
             <CardTitle className='flex items-center gap-2'>
               <Building2 className='h-5 w-5' />
-              Building Information
+              {t('details.buildingTitle')}
             </CardTitle>
-            <CardDescription>Information about your building</CardDescription>
+            <CardDescription>
+              {t('details.buildingDescription')}
+            </CardDescription>
           </CardHeader>
           <CardContent className='space-y-4'>
             <div>
               <label className='text-sm font-medium text-gray-500'>
-                Building Name
+                {t('details.buildingName')}
               </label>
-              <p className='text-sm font-semibold'>{building?.name || 'N/A'}</p>
+              <p className='text-sm font-semibold'>
+                {building?.name || t('values.notAvailable')}
+              </p>
             </div>
-
             <div>
               <label className='text-sm font-medium text-gray-500'>
-                Address
+                {t('details.buildingAddress')}
               </label>
               <div className='mt-1 flex items-start gap-2'>
                 <MapPin className='mt-0.5 h-4 w-4 text-gray-400' />
                 <div className='text-sm text-gray-700'>
-                  <p>{building?.address || 'N/A'}</p>
+                  <p>{building?.address || t('values.notAvailable')}</p>
                   <p>
-                    {building?.city || 'N/A'}, {building?.postalCode || 'N/A'}
+                    {building?.city || t('values.notAvailable')},{' '}
+                    {building?.postalCode || t('values.notAvailable')}
                   </p>
                   <p>{building?.country || 'Morocco'}</p>
                 </div>
               </div>
-            </div>
-
+            </div>{' '}
             <div>
               <label className='text-sm font-medium text-gray-500'>
-                Total Units
+                {t('details.totalUnits')}
               </label>
               <div className='mt-1 flex items-center gap-2'>
                 <Users className='h-4 w-4 text-gray-400' />
                 <span className='text-sm font-semibold'>
-                  {building?.totalUnits || 0} units
+                  {building?.totalUnits || 0} {t('totalUnits')}
                 </span>
               </div>
-            </div>
-
+            </div>{' '}
             {building?.description && (
               <div>
                 <label className='text-sm font-medium text-gray-500'>
-                  Description
+                  {t('details.description')}
                 </label>
                 <p className='mt-1 text-sm text-gray-700'>
                   {building.description}
@@ -272,76 +295,78 @@ export function UnitView() {
             )}
           </CardContent>
         </Card>
-      </div>
-
+      </div>{' '}
       {/* Resident Information */}
       <Card>
         <CardHeader>
           <CardTitle className='flex items-center gap-2'>
             <User className='h-5 w-5' />
-            Resident Information
+            {t('resident.title')}
           </CardTitle>
-          <CardDescription>Your details as a resident</CardDescription>
+          <CardDescription>{t('resident.description')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
             <div>
-              <label className='text-sm font-medium text-gray-500'>Name</label>
+              <label className='text-sm font-medium text-gray-500'>
+                {t('resident.name')}
+              </label>
               <p className='text-sm font-semibold'>
                 {resident?.firstName} {resident?.lastName}
               </p>
             </div>
-
             <div>
-              <label className='text-sm font-medium text-gray-500'>Email</label>
+              <label className='text-sm font-medium text-gray-500'>
+                {t('resident.email')}
+              </label>
               <div className='mt-1 flex items-center gap-2'>
                 <Mail className='h-4 w-4 text-gray-400' />
-                <span className='text-sm'>{resident?.email || 'N/A'}</span>
+                <span className='text-sm'>
+                  {resident?.email || t('values.notAvailable')}
+                </span>
               </div>
             </div>
-
             {resident?.phone && (
               <div>
+                {' '}
                 <label className='text-sm font-medium text-gray-500'>
-                  Phone
+                  {t('resident.phone')}
                 </label>
                 <div className='mt-1 flex items-center gap-2'>
                   <Phone className='h-4 w-4 text-gray-400' />
                   <span className='text-sm'>{resident.phone}</span>
                 </div>
               </div>
-            )}
-
+            )}{' '}
             <div className='space-x-2'>
               <label className='text-sm font-medium text-gray-500'>
-                Resident Type
+                {t('details.unitStatus')}
               </label>
               <Badge
                 variant={resident?.isOwner ? 'default' : 'secondary'}
                 className='mt-1'
               >
-                {resident?.isOwner ? 'Owner' : 'Tenant'}
+                {resident?.isOwner ? t('status.owner') : t('status.tenant')}
               </Badge>
-            </div>
-
+            </div>{' '}
             <div>
               <label className='text-sm font-medium text-gray-500'>
-                Move-in Date
+                {t('resident.moveInDate')}
               </label>
               <div className='mt-1 flex items-center gap-2'>
                 <Calendar className='h-4 w-4 text-gray-400' />
                 <span className='text-sm'>
                   {resident?.moveInDate
                     ? new Date(resident.moveInDate).toLocaleDateString()
-                    : 'N/A'}
+                    : t('values.notAvailable')}
                 </span>
               </div>
             </div>
-
             {resident?.moveOutDate && (
               <div>
+                {' '}
                 <label className='text-sm font-medium text-gray-500'>
-                  Move-out Date
+                  {t('resident.leaseEndDate')}
                 </label>
                 <div className='mt-1 flex items-center gap-2'>
                   <Calendar className='h-4 w-4 text-gray-400' />
@@ -355,8 +380,9 @@ export function UnitView() {
 
           {resident?.emergencyContact && (
             <div className='mt-4 border-t pt-4'>
+              {' '}
               <h4 className='mb-2 text-sm font-medium text-gray-900'>
-                Emergency Contact
+                {t('resident.emergencyContact')}
               </h4>
               <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
                 <div>
@@ -367,8 +393,9 @@ export function UnitView() {
                 </div>
                 {resident.emergencyPhone && (
                   <div>
+                    {' '}
                     <label className='text-sm font-medium text-gray-500'>
-                      Contact Phone
+                      {t('resident.phone')}
                     </label>
                     <div className='flex items-center gap-2'>
                       <Phone className='h-4 w-4 text-gray-400' />
@@ -382,7 +409,9 @@ export function UnitView() {
 
           {resident?.notes && (
             <div className='mt-4 border-t pt-4'>
-              <label className='text-sm font-medium text-gray-500'>Notes</label>
+              <label className='text-sm font-medium text-gray-500'>
+                {t('resident.notes')}
+              </label>
               <p className='mt-1 text-sm text-gray-700'>{resident.notes}</p>
             </div>
           )}

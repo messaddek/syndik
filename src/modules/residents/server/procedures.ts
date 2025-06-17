@@ -56,9 +56,14 @@ export const residentsRouter = createTRPCRouter({
           .max(PAGINATION.MAX_PAGE_SIZE)
           .default(PAGINATION.DEFAULT_PAGE_SIZE),
         search: z.string().optional(),
-        unitId: z.string().uuid().optional(),
+        unitId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
         isOwner: z.boolean().optional(),
-        isActive: z.boolean().optional().default(true),
+        isActive: z.boolean().optional(),
         sortBy: z
           .enum([
             RESIDENT_SORT_FIELDS.FIRST_NAME,
@@ -109,7 +114,9 @@ export const residentsRouter = createTRPCRouter({
             ilike(residents.email, `%${search}%`)
           )!
         );
-      } // Build sort order
+      }
+
+      // Build sort order
       const sortField = {
         [RESIDENT_SORT_FIELDS.FIRST_NAME]: residents.firstName,
         [RESIDENT_SORT_FIELDS.LAST_NAME]: residents.lastName,
@@ -135,7 +142,7 @@ export const residentsRouter = createTRPCRouter({
         .limit(pageSize)
         .offset(offset);
 
-      return {
+      const result = {
         data,
         pagination: {
           page,
@@ -144,6 +151,8 @@ export const residentsRouter = createTRPCRouter({
           totalPages: Math.ceil(Number(total) / pageSize),
         },
       };
+
+      return result;
     }),
 
   getById: orgProtectedProcedure

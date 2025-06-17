@@ -19,13 +19,13 @@ interface TRPCErrorBoundaryProps {
   }>;
 }
 
-function DefaultErrorFallback({
+export const DefaultErrorFallback = ({
   error,
   resetErrorBoundary,
 }: {
   error: Error;
   resetErrorBoundary: () => void;
-}) {
+}) => {
   return (
     <Card className='mx-auto mt-8 max-w-md'>
       <CardHeader>
@@ -59,12 +59,12 @@ function DefaultErrorFallback({
       </CardContent>
     </Card>
   );
-}
+};
 
-export function TRPCErrorBoundary({
+export const TRPCErrorBoundary = ({
   children,
   fallback,
-}: TRPCErrorBoundaryProps) {
+}: TRPCErrorBoundaryProps) => {
   return (
     <ErrorBoundary
       FallbackComponent={fallback || DefaultErrorFallback}
@@ -77,4 +77,4 @@ export function TRPCErrorBoundary({
       {children}
     </ErrorBoundary>
   );
-}
+};

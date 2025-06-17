@@ -45,5 +45,46 @@
   "quickActionsDescription": "Tâches courantes et raccourcis",
   "makePayment": "Effectuer un paiement",
   "meetingInfo": "Info réunion",
-  "contactManagement": "Gestion des contacts"
+  "contactManagement": "Gestion des contacts",
+  "navbar": {
+    "searchMobile": "Rechercher...",
+    "searchDesktop": "Rechercher annonces, paiements...",
+    "dashboard": "Tableau de bord"
+  },
+  "setup": {
+    "welcomeTitle": "Bienvenue sur Syndik",
+    "welcomeDescription": "Complétez votre profil de résident pour accéder au portail",
+    "successMessage": "Configuration du compte terminée avec succès !",
+    "errorMessage": "Échec de la configuration",
+    "fullName": "Nom complet",
+    "fullNamePlaceholder": "Jean Dupont",
+    "emailAddress": "Adresse e-mail",
+    "emailPlaceholder": "jean.dupont@example.com",
+    "emailNote": "Doit correspondre à l'e-mail dans votre dossier de résident",
+    "phoneNumber": "Numéro de téléphone (Optionnel)",
+    "phonePlaceholder": "+33 1 XX XX XX XX",
+    "yourUnit": "Votre unité",
+    "selectUnit": "Sélectionnez votre unité",
+    "loadingUnits": "Chargement des unités...",
+    "noUnitsAvailable": "Aucune unité disponible",
+    "unitNote": "Sélectionnez l'unité sur laquelle vous êtes enregistré",
+    "settingUp": "Configuration en cours...",
+    "completeSetup": "Terminer la configuration"
+  },
+  "access": {
+    "checkingAccess": "Vérification de l'accès et liaison du compte...",
+    "welcomeAutoLinked": "Bienvenue ! Lié automatiquement à",
+    "portalAccessRequired": "Accès au portail requis",
+    "accessRequiredDescription": "Vous devez être lié à un dossier de résident pour accéder au portail.",
+    "noResidentFound": "Aucun dossier de résident trouvé",
+    "noResidentFoundDescription": "Aucun dossier de résident trouvé pour l'e-mail :",
+    "emailRequired": "Adresse e-mail requise",
+    "emailRequiredDescription": "Votre compte a besoin d'une adresse e-mail vérifiée pour accéder au portail.",
+    "contactManager": "Contactez votre gestionnaire immobilier",
+    "contactManagerDescription": "Demandez-leur de vous envoyer une invitation au portail pour lier votre compte à votre dossier de résident.",
+    "haveInvitation": "Vous avez déjà une invitation ?",
+    "haveInvitationDescription": "Vérifiez votre e-mail et suivez le lien d'invitation pour terminer le processus de configuration.",
+    "details": "Détails :",
+    "backToDashboard": "Retour au tableau de bord"
+  }
 }

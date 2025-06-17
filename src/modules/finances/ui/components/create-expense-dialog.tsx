@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/select';
 import { createExpenseSchema } from '../../../expenses/schema';
 import { z } from 'zod';
+import { useTranslations } from 'next-intl';
 
 type CreateExpenseForm = z.infer<typeof createExpenseSchema>;
 
@@ -41,6 +42,7 @@ export function CreateExpenseDialog({
   onSuccess,
 }: CreateExpenseDialogProps) {
   const trpc = useTRPC();
+  const t = useTranslations('finance');
   const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -85,8 +87,8 @@ export function CreateExpenseDialog({
 
   return (
     <ResponsiveDialog
-      title='Add New Expense'
-      description='Record a new expense transaction. Fill in the details below.'
+      title={t('createExpenseDialog.title')}
+      description={t('createExpenseDialog.description')}
       open={open ?? false}
       onOpenChange={onOpenChange ?? (() => {})}
     >
@@ -97,11 +99,17 @@ export function CreateExpenseDialog({
             name='buildingId'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Building (Optional)</FormLabel>
+                <FormLabel>
+                  {t('createExpenseDialog.fields.building')}
+                </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder='Select building or leave empty for general expense' />
+                      <SelectValue
+                        placeholder={t(
+                          'createExpenseDialog.fields.buildingPlaceholder'
+                        )}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -122,9 +130,16 @@ export function CreateExpenseDialog({
             name='description'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>
+                  {t('createExpenseDialog.fields.description')}
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder='e.g., Elevator maintenance' {...field} />
+                  <Input
+                    placeholder={t(
+                      'createExpenseDialog.fields.descriptionPlaceholder'
+                    )}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -137,7 +152,9 @@ export function CreateExpenseDialog({
               name='amount'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Amount ($)</FormLabel>
+                  <FormLabel>
+                    {t('createExpenseDialog.fields.amount')}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type='number'
@@ -157,7 +174,9 @@ export function CreateExpenseDialog({
               name='category'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>
+                    {t('createExpenseDialog.fields.category')}
+                  </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -168,15 +187,29 @@ export function CreateExpenseDialog({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value='maintenance'>Maintenance</SelectItem>
-                      <SelectItem value='utilities'>Utilities</SelectItem>
-                      <SelectItem value='cleaning'>Cleaning</SelectItem>
-                      <SelectItem value='security'>Security</SelectItem>
-                      <SelectItem value='supplies'>Supplies</SelectItem>
-                      <SelectItem value='professional_services'>
-                        Professional Services
+                      <SelectItem value='maintenance'>
+                        {t('createExpenseDialog.categories.maintenance')}
                       </SelectItem>
-                      <SelectItem value='other'>Other</SelectItem>
+                      <SelectItem value='utilities'>
+                        {t('createExpenseDialog.categories.utilities')}
+                      </SelectItem>
+                      <SelectItem value='cleaning'>
+                        {t('createExpenseDialog.categories.cleaning')}
+                      </SelectItem>
+                      <SelectItem value='security'>
+                        {t('createExpenseDialog.categories.security')}
+                      </SelectItem>
+                      <SelectItem value='supplies'>
+                        {t('createExpenseDialog.categories.supplies')}
+                      </SelectItem>
+                      <SelectItem value='professional_services'>
+                        {t(
+                          'createExpenseDialog.categories.professionalServices'
+                        )}
+                      </SelectItem>
+                      <SelectItem value='other'>
+                        {t('createExpenseDialog.categories.other')}
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -190,10 +223,12 @@ export function CreateExpenseDialog({
             name='vendor'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Vendor (Optional)</FormLabel>
+                <FormLabel>{t('createExpenseDialog.fields.vendor')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder='Who was paid for this expense?'
+                    placeholder={t(
+                      'createExpenseDialog.fields.vendorPlaceholder'
+                    )}
                     {...field}
                   />
                 </FormControl>
@@ -208,7 +243,7 @@ export function CreateExpenseDialog({
               name='month'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Month</FormLabel>
+                  <FormLabel>{t('createExpenseDialog.fields.month')}</FormLabel>
                   <FormControl>
                     <Input
                       type='number'
@@ -228,7 +263,7 @@ export function CreateExpenseDialog({
               name='year'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Year</FormLabel>
+                  <FormLabel>{t('createExpenseDialog.fields.year')}</FormLabel>
                   <FormControl>
                     <Input
                       type='number'
@@ -248,7 +283,9 @@ export function CreateExpenseDialog({
               name='paidDate'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Paid Date</FormLabel>
+                  <FormLabel>
+                    {t('createExpenseDialog.fields.paidDate')}
+                  </FormLabel>
                   <FormControl>
                     <Input type='date' {...field} />
                   </FormControl>
@@ -263,9 +300,16 @@ export function CreateExpenseDialog({
             name='receiptUrl'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Receipt URL (Optional)</FormLabel>
+                <FormLabel>
+                  {t('createExpenseDialog.fields.receiptUrl')}
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder='https://...' {...field} />
+                  <Input
+                    placeholder={t(
+                      'createExpenseDialog.fields.receiptUrlPlaceholder'
+                    )}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -277,10 +321,12 @@ export function CreateExpenseDialog({
             name='notes'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Notes (Optional)</FormLabel>
+                <FormLabel>{t('createExpenseDialog.fields.notes')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder='Additional notes about this expense...'
+                    placeholder={t(
+                      'createExpenseDialog.fields.notesPlaceholder'
+                    )}
                     className='resize-none'
                     {...field}
                   />
@@ -296,10 +342,12 @@ export function CreateExpenseDialog({
               variant='outline'
               onClick={() => onOpenChange?.(false)}
             >
-              Cancel
+              {t('buttons.cancel')}
             </Button>
             <Button type='submit' disabled={isSubmitting}>
-              {isSubmitting ? 'Creating...' : 'Create Expense'}
+              {isSubmitting
+                ? t('buttons.creating')
+                : t('buttons.createExpense')}
             </Button>
           </div>
         </form>

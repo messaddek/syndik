@@ -342,6 +342,13 @@
     "allCities": "Toutes les villes",
     "clearFilters": "Effacer les filtres",
     "building": "bâtiment",
+    "totalUnits": "Total des unités",
+    "address": "Adresse",
+    "city": "Ville",
+    "postalCode": "Code postal",
+    "country": "Pays",
+    "occupied": "Occupé",
+    "vacant": "Vacant",
     "form": {
       "title": "Informations du bâtiment",
       "addTitle": "Ajouter un nouveau bâtiment",
@@ -408,7 +415,31 @@
       "errorUpdatingBuilding": "Échec de la mise à jour du bâtiment",
       "errorDeletingBuilding": "Échec de la suppression du bâtiment",
       "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce bâtiment ? Cette action ne peut pas être annulée."
-    }
+    },
+    "buildingNotFound": "Bâtiment non trouvé",
+    "backToBuildings": "Retour aux bâtiments",
+    "unitsConfigured": "{count} unités configurées",
+    "occupiedUnits": "Unités occupées",
+    "occupancyRate": "{rate}% taux d'occupation",
+    "totalResidents": "Total des résidents",
+    "activeResidents": "Résidents actifs",
+    "locationCode": "Code de localisation",
+    "buildingInformation": "Informations du bâtiment",
+    "buildingInfoDescription": "Informations détaillées sur ce bâtiment",
+    "description": "Description",
+    "created": "Créé",
+    "quickActions": "Actions rapides",
+    "quickActionsDescription": "Actions courantes pour ce bâtiment",
+    "viewAllUnits": "Voir toutes les unités",
+    "viewResidents": "Voir les résidents",
+    "viewFinances": "Voir les finances",
+    "unitsOverview": "Aperçu des unités",
+    "unitsOverviewDescription": "Aperçu de {count} unités dans ce bâtiment",
+    "unitNumber": "Unité {number}",
+    "floor": "Étage {floor}",
+    "bedrooms": "Chambres",
+    "monthlyFee": "Frais mensuels",
+    "viewAllUnitsCount": "Voir toutes les {count} unités"
   },
   "common": {
     "save": "Enregistrer",
@@ -447,6 +478,8 @@
     "logoAlt": "Logo Syndik"
   },
   "dashboard": {
+    "title": "Tableau de bord",
+    "description": "Aperçu des performances de votre syndicat et des métriques clés",
     "buildings": "Bâtiments",
     "totalManagedProperties": "Total des Propriétés Gérées",
     "units": "Unités",
@@ -476,10 +509,116 @@
     "trends": "Tendances",
     "trendsDescription": "Voir les tendances financières et d'occupation.",
     "occupancy": "Occupation",
-    "occupancyDescription": "Voir les taux et l'historique d'occupation."
+    "occupancyDescription": "Voir les taux et l'historique d'occupation.",
+    "financialTrends": "Tendances Financières",
+    "occupancyTrends": "Tendances d'Occupation"
   },
   "errors": {
     "generic": "Une erreur s'est produite. Veuillez réessayer."
+  },
+  "finance": {
+    "title": "Finances",
+    "description": "Gérer les revenus et les dépenses de vos propriétés",
+    "overview": {
+      "totalIncome": "Total des Revenus",
+      "totalExpenses": "Total des Dépenses",
+      "netIncome": "Revenu Net",
+      "transactions": "Transactions",
+      "thisMonth": "Ce mois"
+    },
+    "tabs": {
+      "incomes": "Revenus",
+      "expenses": "Dépenses"
+    },
+    "buttons": {
+      "addIncome": "Ajouter un Revenu",
+      "addExpense": "Ajouter une Dépense",
+      "cancel": "Annuler",
+      "creating": "Création...",
+      "createIncome": "Créer un Revenu",
+      "createExpense": "Créer une Dépense",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "viewReceipt": "Voir le Reçu"
+    },
+    "createIncomeDialog": {
+      "title": "Ajouter un Nouveau Revenu",
+      "description": "Enregistrer une nouvelle transaction de revenu. Remplissez les détails ci-dessous.",
+      "fields": {
+        "building": "Bâtiment (Optionnel)",
+        "buildingPlaceholder": "Sélectionnez un bâtiment ou laissez vide pour un revenu général",
+        "description": "Description",
+        "descriptionPlaceholder": "ex: Frais de maintenance mensuel",
+        "amount": "Montant ($)",
+        "category": "Catégorie",
+        "month": "Mois",
+        "year": "Année",
+        "receivedDate": "Date de Réception",
+        "notes": "Notes (Optionnel)",
+        "notesPlaceholder": "Notes supplémentaires sur ce revenu..."
+      },
+      "categories": {
+        "monthlyFees": "Frais Mensuels",
+        "parking": "Parking",
+        "utilities": "Services Publics",
+        "maintenance": "Maintenance",
+        "other": "Autre"
+      }
+    },
+    "createExpenseDialog": {
+      "title": "Ajouter une Nouvelle Dépense",
+      "description": "Enregistrer une nouvelle transaction de dépense. Remplissez les détails ci-dessous.",
+      "fields": {
+        "building": "Bâtiment (Optionnel)",
+        "buildingPlaceholder": "Sélectionnez un bâtiment ou laissez vide pour une dépense générale",
+        "description": "Description",
+        "descriptionPlaceholder": "ex: Maintenance d'ascenseur",
+        "amount": "Montant ($)",
+        "category": "Catégorie",
+        "vendor": "Fournisseur (Optionnel)",
+        "vendorPlaceholder": "Qui a été payé pour cette dépense?",
+        "month": "Mois",
+        "year": "Année",
+        "paidDate": "Date de Paiement",
+        "receiptUrl": "URL du Reçu (Optionnel)",
+        "receiptUrlPlaceholder": "https://...",
+        "notes": "Notes (Optionnel)",
+        "notesPlaceholder": "Notes supplémentaires sur cette dépense..."
+      },
+      "categories": {
+        "maintenance": "Maintenance",
+        "utilities": "Services Publics",
+        "cleaning": "Nettoyage",
+        "security": "Sécurité",
+        "supplies": "Fournitures",
+        "professionalServices": "Services Professionnels",
+        "other": "Autre"
+      }
+    },
+    "incomesList": {
+      "noRecords": "Aucun enregistrement de revenu trouvé",
+      "noRecordsDescription": "Commencez par ajouter votre premier enregistrement de revenu.",
+      "period": "Période",
+      "general": "Général",
+      "unknownBuilding": "Bâtiment Inconnu"
+    },
+    "expensesList": {
+      "noRecords": "Aucun enregistrement de dépense trouvé",
+      "noRecordsDescription": "Commencez par ajouter votre premier enregistrement de dépense.",
+      "period": "Période",
+      "general": "Général",
+      "unknownBuilding": "Bâtiment Inconnu"
+    },
+    "confirmDialog": {
+      "deleteIncome": {
+        "title": "Supprimer le Revenu",
+        "description": "Êtes-vous sûr de vouloir supprimer cet enregistrement de revenu? Cette action ne peut pas être annulée."
+      },
+      "deleteExpense": {
+        "title": "Supprimer la Dépense",
+        "description": "Êtes-vous sûr de vouloir supprimer cet enregistrement de dépense? Cette action ne peut pas être annulée."
+      }
+    }
   },
   "footer": {
     "description": "Simplifiez vos opérations de gestion immobilière avec notre plateforme tout-en-un conçue pour les gestionnaires immobiliers modernes.",
@@ -639,7 +778,7 @@
       "subtitle": "Commencez en quelques minutes avec notre processus de configuration intuitif.",
       "description": "Notre plateforme intuitive vous guide étape par étape pour une mise en œuvre rapide et efficace.",
       "steps": {
-        "signUp": {
+        "setup": {
           "title": "Inscription Rapide",
           "description": "Créez votre compte et configurez votre première propriété en quelques minutes seulement."
         },
@@ -651,7 +790,7 @@
           "title": "Gérer Efficacement",
           "description": "Surveillez tout depuis un tableau de bord unique et concentrez-vous sur le développement de votre entreprise."
         },
-        "grow": {
+        "automate": {
           "title": "Développer Votre Activité",
           "description": "Évoluez facilement en ajoutant de nouvelles propriétés et en automatisant vos processus de gestion."
         }
@@ -782,6 +921,10 @@
       }
     }
   },
+  "meetings": {
+    "title": "Réunions",
+    "description": "Planifier et gérer les réunions du syndicat"
+  },
   "meta": {
     "readTime": "5 min de lecture",
     "audience": "Gestionnaires immobiliers"
@@ -803,6 +946,149 @@
     "faq": "FAQ",
     "terms": "Conditions"
   },
+  "notifications": {
+    "title": "Gestion des notifications",
+    "description": "Envoyer des notifications aux résidents et gérer la communication",
+    "addNotification": "Ajouter une notification",
+    "stats": {
+      "totalSent": "Total envoyé",
+      "allNotifications": "Toutes les notifications",
+      "thisWeek": "Cette semaine",
+      "lastSevenDays": "7 derniers jours",
+      "urgent": "Urgent",
+      "highPriorityNotifications": "Notifications haute priorité"
+    },
+    "list": {
+      "recentNotifications": "Notifications récentes",
+      "description": "Toutes les notifications envoyées aux résidents de votre organisation.",
+      "loading": "Chargement des notifications...",
+      "emptyTitle": "Aucune notification envoyée encore",
+      "emptyDescription": "Créez votre première notification pour commencer."
+    },
+    "dropdown": {
+      "title": "Notifications",
+      "markAllRead": "Tout marquer comme lu",
+      "all": "Tout",
+      "unread": "Non lues",
+      "loading": "Chargement des notifications...",
+      "emptyTitle": "Aucune notification encore",
+      "allCaughtUp": "Tout à jour !",
+      "noUnreadNotifications": "Aucune notification non lue",
+      "viewAllNotifications": "Voir toutes les notifications"
+    },
+    "resident": {
+      "title": "Notifications",
+      "description": "Restez informé des annonces importantes et des informations du bâtiment.",
+      "markAllRead": "Tout marquer comme lu",
+      "allNotifications": "Toutes les notifications",
+      "unreadNotifications": "Non lues",
+      "filters": {
+        "category": "Catégorie",
+        "priority": "Priorité",
+        "allCategories": "Toutes les catégories",
+        "allPriorities": "Toutes les priorités",
+        "allCategoriesPlaceholder": "Toutes les catégories",
+        "allPrioritiesPlaceholder": "Toutes les priorités"
+      },
+      "emptyState": {
+        "title": "Aucune notification",
+        "description": "Tout est à jour ! Aucune nouvelle notification à afficher.",
+        "unreadTitle": "Aucune notification non lue",
+        "unreadDescription": "Toutes vos notifications ont été lues."
+      },
+      "actions": {
+        "viewDetails": "Voir les détails",
+        "markAsRead": "Marquer comme lu",
+        "archive": "Archiver"
+      },
+      "loading": "Chargement des notifications...",
+      "success": {
+        "markAllAsRead": "Toutes les notifications marquées comme lues",
+        "markAsRead": "Notification marquée comme lue",
+        "archived": "Notification archivée"
+      }
+    },
+    "settings": {
+      "title": "Paramètres de notification",
+      "description": "Gérez comment et quand vous recevez les notifications.",
+      "channels": {
+        "title": "Canaux de notification",
+        "description": "Choisissez comment vous voulez recevoir les notifications.",
+        "email": "Notifications par email",
+        "emailDescription": "Recevoir les notifications par email",
+        "push": "Notifications push",
+        "pushDescription": "Recevoir les notifications push sur votre appareil",
+        "sms": "Notifications SMS",
+        "smsDescription": "Recevoir les notifications par SMS"
+      },
+      "categories": {
+        "title": "Catégories de notification",
+        "description": "Choisissez quels types de notifications vous voulez recevoir.",
+        "financial": "Financier",
+        "financialDescription": "Facturation, paiements et mises à jour financières",
+        "maintenance": "Maintenance",
+        "maintenanceDescription": "Maintenance et réparations du bâtiment",
+        "community": "Communauté",
+        "communityDescription": "Événements communautaires et annonces",
+        "system": "Système",
+        "systemDescription": "Mises à jour système et notifications techniques",
+        "general": "Général",
+        "generalDescription": "Annonces et mises à jour générales"
+      },
+      "quietHours": {
+        "title": "Heures silencieuses",
+        "description": "Définissez des heures silencieuses pendant lesquelles vous ne voulez pas recevoir de notifications.",
+        "enable": "Activer les heures silencieuses",
+        "startTime": "Heure de début",
+        "endTime": "Heure de fin"
+      },
+      "actions": {
+        "save": "Enregistrer les paramètres",
+        "saving": "Enregistrement...",
+        "reset": "Réinitialiser aux valeurs par défaut"
+      },
+      "success": {
+        "saved": "Paramètres de notification enregistrés avec succès !",
+        "reset": "Paramètres réinitialisés aux valeurs par défaut"
+      },
+      "error": {
+        "save": "Échec de l'enregistrement des paramètres de notification",
+        "load": "Échec du chargement des paramètres de notification"
+      }
+    },
+    "form": {
+      "dialogTitle": "Envoyer une nouvelle notification",
+      "dialogDescription": "Envoyer une notification à tous les résidents de votre organisation.",
+      "title": "Titre",
+      "titlePlaceholder": "Titre de la notification",
+      "message": "Message",
+      "messagePlaceholder": "Message de notification",
+      "category": "Catégorie",
+      "categoryPlaceholder": "Sélectionner une catégorie",
+      "priority": "Priorité",
+      "priorityPlaceholder": "Sélectionner une priorité",
+      "actionUrl": "URL d'action (Optionnel)",
+      "actionUrlPlaceholder": "https://example.com",
+      "categories": {
+        "general": "Général",
+        "financial": "Financier",
+        "maintenance": "Maintenance",
+        "community": "Communauté",
+        "system": "Système"
+      },
+      "priorities": {
+        "low": "Faible",
+        "normal": "Normal",
+        "high": "Élevé",
+        "urgent": "Urgent"
+      },
+      "cancel": "Annuler",
+      "send": "Envoyer la notification",
+      "sending": "Envoi en cours...",
+      "successMessage": "Notification envoyée avec succès !",
+      "errorMessage": "Échec de l'envoi de la notification"
+    }
+  },
   "organizations": {
     "residences": "Résidences",
     "used": "Utilisé",
@@ -811,8 +1097,8 @@
     "planLimitReached": "Limite du plan atteinte"
   },
   "orgSwitcher": {
-    "title": "Sélectionner une Organisation",
-    "description": "Choisissez une organisation pour accéder à son tableau de bord de gestion ou au portail résident. Votre rôle détermine les fonctionnalités auxquelles vous pouvez accéder.",
+    "title": "Sélectionner une Résidence",
+    "description": "Choisissez une résidence pour accéder à son tableau de bord de gestion ou au portail résident. Votre rôle détermine les fonctionnalités auxquelles vous pouvez accéder.",
     "cards": {
       "managers": {
         "title": "Gestionnaires Immobiliers & Administrateurs",
@@ -826,13 +1112,34 @@
       }
     },
     "organizationList": {
-      "title": "Vos Organisations",
-      "description": "Sélectionnez une organisation pour continuer"
+      "title": "Vos Résidences",
+      "description": "Sélectionnez une résidence pour continuer"
     },
     "footer": {
-      "text": "Vous ne voyez pas votre organisation ? Contactez votre gestionnaire immobilier pour une invitation."
+      "text": "Vous ne voyez pas votre résidence? Contactez votre gestionnaire immobilier pour une invitation."
     },
-    "logoAlt": "Logo Syndik"
+    "logoAlt": "Logo Syndik",
+    "redirect": {
+      "loading": "Redirection vers le bon endroit..."
+    },
+    "clerk": {
+      "organizationSwitcher": {
+        "action__createOrganization": "Créer une résidence",
+        "action__manageOrganization": "Gérer la résidence",
+        "notSelected": "Aucune résidence sélectionnée"
+      },
+      "organizationList": {
+        "action__createOrganization": "Créer une résidence",
+        "createOrganization": "Créer une résidence",
+        "titleWithoutPersonal": "Choisissez une résidence"
+      },
+      "createOrganization": {
+        "formButtonSubmit": "Créer la résidence",
+        "title": "Créer une résidence"
+      },
+      "formFieldLabel__organizationName": "Nom de la résidence",
+      "formFieldInputPlaceholder__organizationName": "Nom de la résidence"
+    }
   },
   "pagination": {
     "previous": "Précédent",
@@ -893,7 +1200,48 @@
     "quickActionsDescription": "Tâches courantes et raccourcis",
     "makePayment": "Effectuer un paiement",
     "meetingInfo": "Info réunion",
-    "contactManagement": "Gestion des contacts"
+    "contactManagement": "Gestion des contacts",
+    "navbar": {
+      "searchMobile": "Rechercher...",
+      "searchDesktop": "Rechercher annonces, paiements...",
+      "dashboard": "Tableau de bord"
+    },
+    "setup": {
+      "welcomeTitle": "Bienvenue sur Syndik",
+      "welcomeDescription": "Complétez votre profil de résident pour accéder au portail",
+      "successMessage": "Configuration du compte terminée avec succès !",
+      "errorMessage": "Échec de la configuration",
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Jean Dupont",
+      "emailAddress": "Adresse e-mail",
+      "emailPlaceholder": "jean.dupont@example.com",
+      "emailNote": "Doit correspondre à l'e-mail dans votre dossier de résident",
+      "phoneNumber": "Numéro de téléphone (Optionnel)",
+      "phonePlaceholder": "+33 1 XX XX XX XX",
+      "yourUnit": "Votre unité",
+      "selectUnit": "Sélectionnez votre unité",
+      "loadingUnits": "Chargement des unités...",
+      "noUnitsAvailable": "Aucune unité disponible",
+      "unitNote": "Sélectionnez l'unité sur laquelle vous êtes enregistré",
+      "settingUp": "Configuration en cours...",
+      "completeSetup": "Terminer la configuration"
+    },
+    "access": {
+      "checkingAccess": "Vérification de l'accès et liaison du compte...",
+      "welcomeAutoLinked": "Bienvenue ! Lié automatiquement à",
+      "portalAccessRequired": "Accès au portail requis",
+      "accessRequiredDescription": "Vous devez être lié à un dossier de résident pour accéder au portail.",
+      "noResidentFound": "Aucun dossier de résident trouvé",
+      "noResidentFoundDescription": "Aucun dossier de résident trouvé pour l'e-mail :",
+      "emailRequired": "Adresse e-mail requise",
+      "emailRequiredDescription": "Votre compte a besoin d'une adresse e-mail vérifiée pour accéder au portail.",
+      "contactManager": "Contactez votre gestionnaire immobilier",
+      "contactManagerDescription": "Demandez-leur de vous envoyer une invitation au portail pour lier votre compte à votre dossier de résident.",
+      "haveInvitation": "Vous avez déjà une invitation ?",
+      "haveInvitationDescription": "Vérifiez votre e-mail et suivez le lien d'invitation pour terminer le processus de configuration.",
+      "details": "Détails :",
+      "backToDashboard": "Retour au tableau de bord"
+    }
   },
   "pricing": {
     "hero": {
@@ -1076,6 +1424,14 @@
     "noUnitsAvailable": "Aucune unité disponible",
     "ownerStatus": "Propriétaire",
     "tenantStatus": "Locataire",
+    "search": "Rechercher des résidents...",
+    "filters": "Filtres",
+    "active": "actif",
+    "allTypes": "Tous les types",
+    "owners": "Propriétaires",
+    "tenants": "Locataires",
+    "filtersApplied": "Filtres appliqués",
+    "clearFilters": "Effacer les filtres",
     "form": {
       "title": "Informations du résident",
       "addTitle": "Ajouter un nouveau résident",
@@ -1083,18 +1439,43 @@
       "description": "Ajouter un nouveau résident à votre système de gestion d'immeuble.",
       "editDescription": "Mettre à jour les informations du résident et l'affectation d'unité.",
       "firstName": "Prénom",
+      "firstNamePlaceholder": "Saisir le prénom",
       "lastName": "Nom de famille",
+      "lastNamePlaceholder": "Saisir le nom de famille",
       "email": "Adresse email",
+      "emailPlaceholder": "Saisir l'adresse email",
       "phone": "Numéro de téléphone",
+      "phonePlaceholder": "Saisir le numéro de téléphone",
       "unit": "Unité",
+      "unitPlaceholder": "Sélectionner une unité",
       "selectUnit": "Sélectionner une unité",
+      "loadingUnits": "Chargement des unités...",
+      "noUnitsAvailable": "Aucune unité disponible",
       "owner": "Propriétaire",
       "ownerDescription": "Cochez si ce résident est propriétaire du logement",
       "moveInDate": "Date d'emménagement",
+      "moveInDatePlaceholder": "Sélectionner la date d'emménagement",
       "moveOutDate": "Date de déménagement",
+      "moveOutDatePlaceholder": "Sélectionner la date de déménagement",
+      "emergencyContact": "Contact d'urgence",
+      "emergencyContactPlaceholder": "Saisir le nom du contact d'urgence",
+      "emergencyPhone": "Téléphone d'urgence",
+      "emergencyPhonePlaceholder": "Saisir le numéro de téléphone d'urgence",
+      "notes": "Notes",
+      "notesPlaceholder": "Ajouter des notes supplémentaires sur le résident",
       "selectDate": "Sélectionner la date",
       "additionalInfo": "Informations supplémentaires",
-      "unitAssignment": "Affectation d'unité"
+      "unitAssignment": "Affectation d'unité",
+      "cancel": "Annuler",
+      "submit": "Enregistrer",
+      "submitting": "Enregistrement...",
+      "validation": {
+        "unitRequired": "L'unité est requise",
+        "firstNameRequired": "Le prénom est requis",
+        "lastNameRequired": "Le nom de famille est requis",
+        "emailRequired": "Veuillez saisir une adresse email valide",
+        "invalidMoveInDate": "Veuillez sélectionner une date d'emménagement valide"
+      }
     },
     "actions": {
       "invite": "Inviter au portail",
@@ -1108,6 +1489,45 @@
       "inactive": "Inactif",
       "invited": "Invité",
       "pending": "En attente"
+    },
+    "columns": {
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "unit": "Unité",
+      "type": "Type",
+      "status": "Statut",
+      "moveInDate": "Date d'emménagement",
+      "actions": "Actions",
+      "copyEmail": "Copier l'e-mail",
+      "editResident": "Modifier le résident",
+      "deleteResident": "Supprimer le résident"
+    },
+    "confirmDelete": {
+      "title": "Supprimer le résident",
+      "description": "Êtes-vous sûr de vouloir supprimer ce résident ? Cette action ne peut pas être annulée."
+    },
+    "bulkInvite": {
+      "title": "Invitation en masse des résidents",
+      "description": "Envoyer des invitations au portail à plusieurs résidents à la fois",
+      "selectAll": "Tout sélectionner",
+      "deselectAll": "Tout désélectionner",
+      "selectedCount": "{count} résident(s) sélectionné(s)",
+      "noUninvitedResidents": "Aucun résident non invité trouvé",
+      "sendInvitations": "Envoyer les invitations",
+      "successMessage": "{count} invitation(s) envoyée(s) avec succès",
+      "partialSuccessMessage": "{successCount} invitations envoyées avec succès, {errorCount} ont échoué",
+      "allFailedMessage": "Échec de l'envoi de toutes les invitations"
+    },
+    "invite": {
+      "dialogTitle": "Inviter au portail des résidents",
+      "dialogDescription": "Envoyer une invitation à {firstName} {lastName} pour accéder au portail des résidents.",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "Saisir l'adresse e-mail",
+      "emailRequired": "L'adresse e-mail est requise",
+      "cancel": "Annuler",
+      "send": "Envoyer l'invitation"
     }
   },
   "search": {
@@ -1129,11 +1549,13 @@
   },
   "units": {
     "title": "Unités",
+    "description": "Gérer toutes les unités résidentielles de vos bâtiments",
     "totalUnits": "unités au total",
     "addUnit": "Ajouter une unité",
     "editUnit": "Modifier l'unité",
     "deleteUnit": "Supprimer l'unité",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette unité ?",
+    "confirmDeleteExtended": "Êtes-vous sûr de vouloir supprimer cette unité ? Cette action ne peut pas être annulée et supprimera également tous les résidents associés.",
     "viewResidents": "Voir les résidents",
     "viewIncome": "Voir les revenus",
     "unknownBuilding": "Bâtiment inconnu",
@@ -1146,7 +1568,145 @@
     "area": "Superficie",
     "monthlyFee": "Frais mensuels",
     "activeResidents": "Résidents actifs",
-    "thisMonthIncome": "Revenus de ce mois"
+    "thisMonthIncome": "Revenus de ce mois",
+    "markVacant": "Marquer vacant",
+    "markOccupied": "Marquer occupé",
+    "noUnitsFound": "Aucune unité trouvée",
+    "noUnitsDescription": "Commencez par ajouter votre première unité pour gérer les propriétés.",
+    "addFirstUnit": "Ajouter la première unité",
+    "unitNotFound": "Unité introuvable",
+    "backToUnits": "Retour aux unités",
+    "form": {
+      "building": "Bâtiment",
+      "selectBuilding": "Sélectionner un bâtiment",
+      "unitNumber": "Numéro d'unité",
+      "unitNumberPlaceholder": "ex., 101",
+      "areaSquareMeters": "Superficie (m²)",
+      "monthlyFeeDollar": "Frais mensuels ($)",
+      "optional": "Optionnel",
+      "descriptionPlaceholder": "Description ou notes optionnelles sur cette unité...",
+      "updating": "Mise à jour...",
+      "creating": "Création...",
+      "updateUnit": "Mettre à jour l'unité",
+      "createUnit": "Créer une unité"
+    },
+    "dialogs": {
+      "addTitle": "Ajouter une nouvelle unité",
+      "addDescription": "Créez une nouvelle unité dans votre bâtiment. Remplissez les détails ci-dessous.",
+      "editTitle": "Modifier l'unité",
+      "editDescription": "Mettez à jour les détails de l'unité ci-dessous."
+    },
+    "view": {
+      "backToUnits": "Retour aux unités",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "unitTitle": "Unité {number}",
+      "floorLabel": "Étage {floor}",
+      "collected": "Collecté : {amount} $",
+      "currentResidents": "Résidents actuels",
+      "totalResidents": "{count} résidents au total",
+      "bathroom": "salle de bain",
+      "bathrooms": "salles de bain",
+      "areaNotSpecified": "Superficie non spécifiée",
+      "unitInformation": "Informations de l'unité",
+      "unitInformationDescription": "Détails sur cette unité résidentielle",
+      "createdAt": "Créé le",
+      "status": "Statut",
+      "totalUnits": "Total des unités",
+      "city": "Ville",
+      "viewBuildingDetails": "Voir les détails du bâtiment",
+      "viewAllUnits": "Voir toutes les unités",
+      "currentResidentsDescription": "Personnes vivant dans cette unité ({count} actifs)",
+      "owner": "Propriétaire",
+      "tenant": "Locataire",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "phoneNumber": "Numéro de téléphone",
+      "emailAddress": "Adresse email",
+      "moveInDate": "Date d'emménagement",
+      "editTitle": "Modifier les détails de l'unité",
+      "editDescription": "Mettre à jour les informations de l'unité",
+      "viewResident": "Voir le résident",
+      "financialOverview": "Aperçu financier",
+      "financialOverviewDescription": "Revenus et informations financières pour {month}",
+      "totalIncome": "Revenu total",
+      "expectedIncome": "Revenu attendu",
+      "noIncomeData": "Aucune donnée de revenu disponible pour ce mois.",
+      "collectedThisMonth": "Collecté ce mois",
+      "expectedMonthlyFee": "Frais mensuels attendus",
+      "surplus": "Excédent",
+      "outstanding": "En suspens",
+      "viewFullFinancialHistory": "Voir l'historique financier complet"
+    },
+    "portal": {
+      "title": "Unité",
+      "loading": "Chargement des informations de l'unité...",
+      "error": "Erreur lors du chargement des informations de l'unité",
+      "noData": "Aucune information d'unité trouvée",
+      "buildingInfo": "Informations du bâtiment non disponibles",
+      "totalUnits": "unités au total",
+      "monthlyFee": "Frais mensuels",
+      "occupied": "Occupé",
+      "vacant": "Vacant",
+      "status": {
+        "owner": "Propriétaire",
+        "tenant": "Locataire"
+      },
+      "overview": {
+        "floor": "Étage",
+        "floorDescription": "Niveau du bâtiment",
+        "area": "Superficie",
+        "areaDescription": "Superficie totale",
+        "bedrooms": "Chambres",
+        "bedroomsDescription": "Nombre de chambres",
+        "bathrooms": "Salles de bain",
+        "bathroomsDescription": "Nombre de salles de bain"
+      },
+      "details": {
+        "unitTitle": "Détails de l'unité",
+        "unitDescription": "Informations sur votre unité",
+        "unitNumber": "Numéro d'unité",
+        "unitType": "Type",
+        "unitStatus": "Statut",
+        "balcony": "Balcon",
+        "parking": "Place de parking",
+        "storage": "Rangement",
+        "furnished": "Meublé",
+        "description": "Description",
+        "buildingTitle": "Informations du bâtiment",
+        "buildingDescription": "Détails sur le bâtiment",
+        "buildingName": "Nom du bâtiment",
+        "buildingAddress": "Adresse",
+        "totalUnits": "Total des unités",
+        "totalFloors": "Total des étages",
+        "buildingType": "Type de bâtiment",
+        "yearBuilt": "Année de construction"
+      },
+      "resident": {
+        "title": "Informations du résident",
+        "description": "Vos coordonnées et détails de compte",
+        "name": "Nom complet",
+        "email": "Adresse email",
+        "phone": "Numéro de téléphone",
+        "emergencyContact": "Contact d'urgence",
+        "moveInDate": "Date d'emménagement",
+        "leaseEndDate": "Date de fin de bail",
+        "notes": "Notes"
+      },
+      "contact": {
+        "title": "Informations de contact",
+        "description": "Gestion du bâtiment et contacts d'urgence",
+        "management": "Gestion du bâtiment",
+        "emergency": "Contact d'urgence",
+        "maintenance": "Demande de maintenance"
+      },
+      "values": {
+        "yes": "Oui",
+        "no": "Non",
+        "notAvailable": "N/A",
+        "notSpecified": "Non spécifié"
+      }
+    }
   },
   "userGuide": {
     "title": "Guide de l'utilisateur",

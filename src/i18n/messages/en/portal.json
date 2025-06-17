@@ -45,5 +45,46 @@
   "quickActionsDescription": "Common tasks and shortcuts",
   "makePayment": "Make Payment",
   "meetingInfo": "Meeting Info",
-  "contactManagement": "Contact Management"
+  "contactManagement": "Contact Management",
+  "navbar": {
+    "searchMobile": "Search...",
+    "searchDesktop": "Search announcements, payments...",
+    "dashboard": "Dashboard"
+  },
+  "setup": {
+    "welcomeTitle": "Welcome to Syndik",
+    "welcomeDescription": "Complete your resident profile to access the portal",
+    "successMessage": "Account setup completed successfully!",
+    "errorMessage": "Setup failed",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "John Doe",
+    "emailAddress": "Email Address",
+    "emailPlaceholder": "john.doe@example.com",
+    "emailNote": "This must match the email in your resident record",
+    "phoneNumber": "Phone Number (Optional)",
+    "phonePlaceholder": "+1 (555) 123-4567",
+    "yourUnit": "Your Unit",
+    "selectUnit": "Select your unit",
+    "loadingUnits": "Loading units...",
+    "noUnitsAvailable": "No units available",
+    "unitNote": "Select the unit you are registered to",
+    "settingUp": "Setting up...",
+    "completeSetup": "Complete Setup"
+  },
+  "access": {
+    "checkingAccess": "Checking access and linking account...",
+    "welcomeAutoLinked": "Welcome! Auto-linked to",
+    "portalAccessRequired": "Portal Access Required",
+    "accessRequiredDescription": "You need to be linked to a resident record to access the portal.",
+    "noResidentFound": "No Resident Record Found",
+    "noResidentFoundDescription": "No resident record found for email:",
+    "emailRequired": "Email Address Required",
+    "emailRequiredDescription": "Your account needs a verified email address to access the portal.",
+    "contactManager": "Contact your property manager",
+    "contactManagerDescription": "Ask them to send you a portal invitation to link your account to your resident record.",
+    "haveInvitation": "Already have an invitation?",
+    "haveInvitationDescription": "Check your email and follow the invitation link to complete the setup process.",
+    "details": "Details:",
+    "backToDashboard": "Back to Dashboard"
+  }
 }

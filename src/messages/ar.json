@@ -342,6 +342,13 @@
     "allCities": "جميع المدن",
     "clearFilters": "مسح المرشحات",
     "building": "مبنى",
+    "totalUnits": "إجمالي الوحدات",
+    "address": "العنوان",
+    "city": "المدينة",
+    "postalCode": "الرمز البريدي",
+    "country": "البلد",
+    "occupied": "مشغول",
+    "vacant": "شاغر",
     "form": {
       "title": "معلومات المبنى",
       "addTitle": "إضافة مبنى جديد",
@@ -408,7 +415,31 @@
       "errorUpdatingBuilding": "فشل في تحديث المبنى",
       "errorDeletingBuilding": "فشل في حذف المبنى",
       "confirmDelete": "هل أنت متأكد من أنك تريد حذف هذا المبنى؟ لا يمكن التراجع عن هذا الإجراء."
-    }
+    },
+    "buildingNotFound": "المبنى غير موجود",
+    "backToBuildings": "العودة إلى المباني",
+    "unitsConfigured": "{count} وحدة مُعدة",
+    "occupiedUnits": "الوحدات المشغولة",
+    "occupancyRate": "{rate}% معدل الإشغال",
+    "totalResidents": "إجمالي المقيمين",
+    "activeResidents": "المقيمين النشطين",
+    "locationCode": "رمز الموقع",
+    "buildingInformation": "معلومات المبنى",
+    "buildingInfoDescription": "معلومات مفصلة حول هذا المبنى",
+    "description": "الوصف",
+    "created": "تم الإنشاء",
+    "quickActions": "الإجراءات السريعة",
+    "quickActionsDescription": "الإجراءات الشائعة لهذا المبنى",
+    "viewAllUnits": "عرض جميع الوحدات",
+    "viewResidents": "عرض المقيمين",
+    "viewFinances": "عرض المالية",
+    "unitsOverview": "نظرة عامة على الوحدات",
+    "unitsOverviewDescription": "نظرة عامة على {count} وحدة في هذا المبنى",
+    "unitNumber": "الوحدة {number}",
+    "floor": "الطابق {floor}",
+    "bedrooms": "غرف النوم",
+    "monthlyFee": "الرسوم الشهرية",
+    "viewAllUnitsCount": "عرض جميع الوحدات الـ {count}"
   },
   "common": {
     "save": "حفظ",
@@ -447,6 +478,8 @@
     "logoAlt": "شعار سنديك"
   },
   "dashboard": {
+    "title": "لوحة التحكم",
+    "description": "نظرة عامة على أداء النقابة والمقاييس الرئيسية",
     "buildings": "المباني",
     "totalManagedProperties": "إجمالي العقارات المُدارة",
     "units": "الوحدات",
@@ -476,10 +509,116 @@
     "trends": "الاتجاهات",
     "trendsDescription": "عرض الاتجاهات المالية واتجاهات الإشغال.",
     "occupancy": "الإشغال",
-    "occupancyDescription": "عرض معدلات وتاريخ الإشغال."
+    "occupancyDescription": "عرض معدلات وتاريخ الإشغال.",
+    "financialTrends": "الاتجاهات المالية",
+    "occupancyTrends": "اتجاهات الإشغال"
   },
   "errors": {
     "generic": "حدث خطأ. يرجى المحاولة مرة أخرى."
+  },
+  "finance": {
+    "title": "الماليات",
+    "description": "إدارة الإيرادات والمصروفات لممتلكاتك",
+    "overview": {
+      "totalIncome": "إجمالي الإيرادات",
+      "totalExpenses": "إجمالي المصروفات",
+      "netIncome": "صافي الدخل",
+      "transactions": "المعاملات",
+      "thisMonth": "هذا الشهر"
+    },
+    "tabs": {
+      "incomes": "الإيرادات",
+      "expenses": "المصروفات"
+    },
+    "buttons": {
+      "addIncome": "إضافة إيراد",
+      "addExpense": "إضافة مصروف",
+      "cancel": "إلغاء",
+      "creating": "جاري الإنشاء...",
+      "createIncome": "إنشاء إيراد",
+      "createExpense": "إنشاء مصروف",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "viewReceipt": "عرض الإيصال"
+    },
+    "createIncomeDialog": {
+      "title": "إضافة إيراد جديد",
+      "description": "تسجيل معاملة إيراد جديدة. املأ التفاصيل أدناه.",
+      "fields": {
+        "building": "المبنى (اختياري)",
+        "buildingPlaceholder": "اختر المبنى أو اتركه فارغاً للإيراد العام",
+        "description": "الوصف",
+        "descriptionPlaceholder": "مثال: رسوم الصيانة الشهرية",
+        "amount": "المبلغ ($)",
+        "category": "الفئة",
+        "month": "الشهر",
+        "year": "السنة",
+        "receivedDate": "تاريخ الاستلام",
+        "notes": "ملاحظات (اختياري)",
+        "notesPlaceholder": "ملاحظات إضافية حول هذا الإيراد..."
+      },
+      "categories": {
+        "monthlyFees": "الرسوم الشهرية",
+        "parking": "مواقف السيارات",
+        "utilities": "المرافق",
+        "maintenance": "الصيانة",
+        "other": "أخرى"
+      }
+    },
+    "createExpenseDialog": {
+      "title": "إضافة مصروف جديد",
+      "description": "تسجيل معاملة مصروف جديدة. املأ التفاصيل أدناه.",
+      "fields": {
+        "building": "المبنى (اختياري)",
+        "buildingPlaceholder": "اختر المبنى أو اتركه فارغاً للمصروف العام",
+        "description": "الوصف",
+        "descriptionPlaceholder": "مثال: صيانة المصعد",
+        "amount": "المبلغ ($)",
+        "category": "الفئة",
+        "vendor": "المورد (اختياري)",
+        "vendorPlaceholder": "من تم دفع هذا المصروف له؟",
+        "month": "الشهر",
+        "year": "السنة",
+        "paidDate": "تاريخ الدفع",
+        "receiptUrl": "رابط الإيصال (اختياري)",
+        "receiptUrlPlaceholder": "https://...",
+        "notes": "ملاحظات (اختياري)",
+        "notesPlaceholder": "ملاحظات إضافية حول هذا المصروف..."
+      },
+      "categories": {
+        "maintenance": "الصيانة",
+        "utilities": "المرافق",
+        "cleaning": "التنظيف",
+        "security": "الأمن",
+        "supplies": "المستلزمات",
+        "professionalServices": "الخدمات المهنية",
+        "other": "أخرى"
+      }
+    },
+    "incomesList": {
+      "noRecords": "لا توجد سجلات إيرادات",
+      "noRecordsDescription": "ابدأ بإضافة سجل الإيراد الأول.",
+      "period": "الفترة",
+      "general": "عام",
+      "unknownBuilding": "مبنى غير معروف"
+    },
+    "expensesList": {
+      "noRecords": "لا توجد سجلات مصروفات",
+      "noRecordsDescription": "ابدأ بإضافة سجل المصروف الأول.",
+      "period": "الفترة",
+      "general": "عام",
+      "unknownBuilding": "مبنى غير معروف"
+    },
+    "confirmDialog": {
+      "deleteIncome": {
+        "title": "حذف الإيراد",
+        "description": "هل أنت متأكد من أنك تريد حذف سجل الإيراد هذا؟ لا يمكن التراجع عن هذا الإجراء."
+      },
+      "deleteExpense": {
+        "title": "حذف المصروف",
+        "description": "هل أنت متأكد من أنك تريد حذف سجل المصروف هذا؟ لا يمكن التراجع عن هذا الإجراء."
+      }
+    }
   },
   "footer": {
     "description": "بسّط عمليات إدارة الممتلكات الخاصة بك مع منصتنا الشاملة المصممة لمديري الممتلكات العصريين.",
@@ -786,6 +925,10 @@
       }
     }
   },
+  "meetings": {
+    "title": "الاجتماعات",
+    "description": "جدولة وإدارة اجتماعات النقابة"
+  },
   "meta": {
     "readTime": "5 دقائق قراءة",
     "audience": "مديرو العقارات"
@@ -807,6 +950,149 @@
     "faq": "الأسئلة الشائعة",
     "terms": "الشروط"
   },
+  "notifications": {
+    "title": "إدارة الإشعارات",
+    "description": "إرسال الإشعارات للمقيمين وإدارة التواصل",
+    "addNotification": "إضافة إشعار",
+    "stats": {
+      "totalSent": "إجمالي المرسل",
+      "allNotifications": "جميع الإشعارات",
+      "thisWeek": "هذا الأسبوع",
+      "lastSevenDays": "آخر 7 أيام",
+      "urgent": "عاجل",
+      "highPriorityNotifications": "إشعارات عالية الأولوية"
+    },
+    "list": {
+      "recentNotifications": "الإشعارات الحديثة",
+      "description": "جميع الإشعارات المرسلة للمقيمين في منظمتك.",
+      "loading": "جارٍ تحميل الإشعارات...",
+      "emptyTitle": "لم يتم إرسال أي إشعارات بعد",
+      "emptyDescription": "قم بإنشاء إشعارك الأول للبدء."
+    },
+    "dropdown": {
+      "title": "الإشعارات",
+      "markAllRead": "تحديد الكل كمقروء",
+      "all": "الكل",
+      "unread": "غير مقروءة",
+      "loading": "جارٍ تحميل الإشعارات...",
+      "emptyTitle": "لا توجد إشعارات بعد",
+      "allCaughtUp": "كل شيء محدث!",
+      "noUnreadNotifications": "لا توجد إشعارات غير مقروءة",
+      "viewAllNotifications": "عرض جميع الإشعارات"
+    },
+    "resident": {
+      "title": "الإشعارات",
+      "description": "ابقَ على اطلاع بالإعلانات المهمة ومعلومات المبنى.",
+      "markAllRead": "تحديد الكل كمقروء",
+      "allNotifications": "جميع الإشعارات",
+      "unreadNotifications": "غير مقروءة",
+      "filters": {
+        "category": "الفئة",
+        "priority": "الأولوية",
+        "allCategories": "جميع الفئات",
+        "allPriorities": "جميع الأولويات",
+        "allCategoriesPlaceholder": "جميع الفئات",
+        "allPrioritiesPlaceholder": "جميع الأولويات"
+      },
+      "emptyState": {
+        "title": "لا توجد إشعارات",
+        "description": "كل شيء محدث! لا توجد إشعارات جديدة للعرض.",
+        "unreadTitle": "لا توجد إشعارات غير مقروءة",
+        "unreadDescription": "تم قراءة جميع إشعاراتك."
+      },
+      "actions": {
+        "viewDetails": "عرض التفاصيل",
+        "markAsRead": "تحديد كمقروء",
+        "archive": "أرشفة"
+      },
+      "loading": "جارٍ تحميل الإشعارات...",
+      "success": {
+        "markAllAsRead": "تم تحديد جميع الإشعارات كمقروءة",
+        "markAsRead": "تم تحديد الإشعار كمقروء",
+        "archived": "تم أرشفة الإشعار"
+      }
+    },
+    "settings": {
+      "title": "إعدادات الإشعارات",
+      "description": "إدارة كيفية ووقت تلقي الإشعارات.",
+      "channels": {
+        "title": "قنوات الإشعارات",
+        "description": "اختر كيفية تلقي الإشعارات.",
+        "email": "إشعارات البريد الإلكتروني",
+        "emailDescription": "تلقي الإشعارات عبر البريد الإلكتروني",
+        "push": "الإشعارات الفورية",
+        "pushDescription": "تلقي الإشعارات الفورية على جهازك",
+        "sms": "إشعارات الرسائل النصية",
+        "smsDescription": "تلقي الإشعارات عبر الرسائل النصية"
+      },
+      "categories": {
+        "title": "فئات الإشعارات",
+        "description": "اختر أنواع الإشعارات التي تريد تلقيها.",
+        "financial": "مالي",
+        "financialDescription": "الفواتير والمدفوعات والتحديثات المالية",
+        "maintenance": "صيانة",
+        "maintenanceDescription": "صيانة المبنى والإصلاحات",
+        "community": "مجتمع",
+        "communityDescription": "أحداث المجتمع والإعلانات",
+        "system": "نظام",
+        "systemDescription": "تحديثات النظام والإشعارات التقنية",
+        "general": "عام",
+        "generalDescription": "الإعلانات والتحديثات العامة"
+      },
+      "quietHours": {
+        "title": "ساعات الهدوء",
+        "description": "حدد ساعات الهدوء عندما لا تريد تلقي الإشعارات.",
+        "enable": "تفعيل ساعات الهدوء",
+        "startTime": "وقت البداية",
+        "endTime": "وقت النهاية"
+      },
+      "actions": {
+        "save": "حفظ الإعدادات",
+        "saving": "جارٍ الحفظ...",
+        "reset": "إعادة تعيين إلى الافتراضي"
+      },
+      "success": {
+        "saved": "تم حفظ إعدادات الإشعارات بنجاح!",
+        "reset": "تم إعادة تعيين الإعدادات إلى الافتراضي"
+      },
+      "error": {
+        "save": "فشل في حفظ إعدادات الإشعارات",
+        "load": "فشل في تحميل إعدادات الإشعارات"
+      }
+    },
+    "form": {
+      "dialogTitle": "إرسال إشعار جديد",
+      "dialogDescription": "إرسال إشعار لجميع المقيمين في منظمتك.",
+      "title": "العنوان",
+      "titlePlaceholder": "عنوان الإشعار",
+      "message": "الرسالة",
+      "messagePlaceholder": "رسالة الإشعار",
+      "category": "الفئة",
+      "categoryPlaceholder": "اختر الفئة",
+      "priority": "الأولوية",
+      "priorityPlaceholder": "اختر الأولوية",
+      "actionUrl": "رابط الإجراء (اختياري)",
+      "actionUrlPlaceholder": "https://example.com",
+      "categories": {
+        "general": "عام",
+        "financial": "مالي",
+        "maintenance": "صيانة",
+        "community": "مجتمع",
+        "system": "نظام"
+      },
+      "priorities": {
+        "low": "منخفض",
+        "normal": "عادي",
+        "high": "عالي",
+        "urgent": "عاجل"
+      },
+      "cancel": "إلغاء",
+      "send": "إرسال الإشعار",
+      "sending": "جارٍ الإرسال...",
+      "successMessage": "تم إرسال الإشعار بنجاح!",
+      "errorMessage": "فشل في إرسال الإشعار"
+    }
+  },
   "organizations": {
     "residences": "المساكن",
     "used": "مستخدم",
@@ -815,8 +1101,8 @@
     "planLimitReached": "تم الوصول لحد الخطة"
   },
   "orgSwitcher": {
-    "title": "اختر المنظمة",
-    "description": "اختر منظمة للوصول إلى لوحة الإدارة الخاصة بها أو بوابة المقيمين. دورك يحدد الميزات التي يمكنك الوصول إليها.",
+    "title": "اختر إقامة",
+    "description": "اختر إقامة للوصول إلى لوحة الإدارة الخاصة بها أو بوابة المقيمين. دورك يحدد الميزات التي يمكنك الوصول إليها.",
     "cards": {
       "managers": {
         "title": "مديرو العقارات والإداريون",
@@ -830,13 +1116,34 @@
       }
     },
     "organizationList": {
-      "title": "منظماتك",
-      "description": "اختر منظمة للمتابعة"
+      "title": "إقاماتك",
+      "description": "اختر إقامة للمتابعة"
     },
     "footer": {
       "text": "لا ترى منظمتك؟ اتصل بمدير العقار للحصول على دعوة."
     },
-    "logoAlt": "شعار سينديك"
+    "logoAlt": "شعار سينديك",
+    "redirect": {
+      "loading": "إعادة توجيهك إلى المكان الصحيح..."
+    },
+    "clerk": {
+      "organizationSwitcher": {
+        "action__createOrganization": "إنشاء إقامة",
+        "action__manageOrganization": "إدارة الإقامة",
+        "notSelected": "لم يتم اختيار إقامة"
+      },
+      "organizationList": {
+        "action__createOrganization": "إنشاء إقامة",
+        "createOrganization": "إنشاء إقامة",
+        "titleWithoutPersonal": "اختر إقامة"
+      },
+      "createOrganization": {
+        "formButtonSubmit": "إنشاء إقامة",
+        "title": "إنشاء إقامة"
+      },
+      "formFieldLabel__organizationName": "اسم الإقامة",
+      "formFieldInputPlaceholder__organizationName": "اسم الإقامة"
+    }
   },
   "pagination": {
     "previous": "السابق",
@@ -897,7 +1204,48 @@
     "quickActionsDescription": "المهام الشائعة والاختصارات",
     "makePayment": "إجراء دفعة",
     "meetingInfo": "معلومات الاجتماع",
-    "contactManagement": "إدارة جهات الاتصال"
+    "contactManagement": "إدارة جهات الاتصال",
+    "navbar": {
+      "searchMobile": "بحث...",
+      "searchDesktop": "البحث في الإعلانات والمدفوعات...",
+      "dashboard": "لوحة التحكم"
+    },
+    "setup": {
+      "welcomeTitle": "مرحباً بك في سينديك",
+      "welcomeDescription": "أكمل ملفك الشخصي للوصول إلى البوابة",
+      "successMessage": "تم إنشاء الحساب بنجاح!",
+      "errorMessage": "فشل في الإعداد",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "أحمد محمد",
+      "emailAddress": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "ahmed.mohamed@example.com",
+      "emailNote": "يجب أن يتطابق مع البريد الإلكتروني في سجل السكان",
+      "phoneNumber": "رقم الهاتف (اختياري)",
+      "phonePlaceholder": "+212 5XX XX XX XX",
+      "yourUnit": "وحدتك",
+      "selectUnit": "اختر وحدتك",
+      "loadingUnits": "جاري تحميل الوحدات...",
+      "noUnitsAvailable": "لا توجد وحدات متاحة",
+      "unitNote": "اختر الوحدة المسجل عليها",
+      "settingUp": "جاري الإعداد...",
+      "completeSetup": "إكمال الإعداد"
+    },
+    "access": {
+      "checkingAccess": "جاري التحقق من الوصول وربط الحساب...",
+      "welcomeAutoLinked": "مرحباً! تم الربط التلقائي بـ",
+      "portalAccessRequired": "الوصول إلى البوابة مطلوب",
+      "accessRequiredDescription": "تحتاج إلى ربط حسابك بسجل السكان للوصول إلى البوابة.",
+      "noResidentFound": "لم يتم العثور على سجل السكان",
+      "noResidentFoundDescription": "لم يتم العثور على سجل السكان للبريد الإلكتروني:",
+      "emailRequired": "عنوان البريد الإلكتروني مطلوب",
+      "emailRequiredDescription": "يحتاج حسابك إلى عنوان بريد إلكتروني مُتحقق منه للوصول إلى البوابة.",
+      "contactManager": "تواصل مع مدير العقار",
+      "contactManagerDescription": "اطلب منهم إرسال دعوة البوابة لربط حسابك بسجل السكان الخاص بك.",
+      "haveInvitation": "لديك دعوة بالفعل؟",
+      "haveInvitationDescription": "تحقق من بريدك الإلكتروني واتبع رابط الدعوة لإكمال عملية الإعداد.",
+      "details": "التفاصيل:",
+      "backToDashboard": "العودة إلى لوحة التحكم"
+    }
   },
   "pricing": {
     "hero": {
@@ -1080,6 +1428,14 @@
     "noUnitsAvailable": "لا توجد وحدات متاحة",
     "ownerStatus": "مالك",
     "tenantStatus": "مستأجر",
+    "search": "البحث عن السكان...",
+    "filters": "المرشحات",
+    "active": "نشط",
+    "allTypes": "جميع الأنواع",
+    "owners": "الملاك",
+    "tenants": "المستأجرين",
+    "filtersApplied": "تم تطبيق المرشحات",
+    "clearFilters": "مسح المرشحات",
     "form": {
       "title": "معلومات الساكن",
       "addTitle": "إضافة ساكن جديد",
@@ -1087,18 +1443,43 @@
       "description": "إضافة ساكن جديد إلى نظام إدارة المباني الخاص بك.",
       "editDescription": "تحديث معلومات الساكن وتخصيص الوحدة.",
       "firstName": "الاسم الأول",
+      "firstNamePlaceholder": "أدخل الاسم الأول",
       "lastName": "اسم العائلة",
+      "lastNamePlaceholder": "أدخل اسم العائلة",
       "email": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "أدخل عنوان البريد الإلكتروني",
       "phone": "رقم الهاتف",
+      "phonePlaceholder": "أدخل رقم الهاتف",
       "unit": "الوحدة",
+      "unitPlaceholder": "اختر وحدة",
       "selectUnit": "اختر وحدة",
+      "loadingUnits": "جاري تحميل الوحدات...",
+      "noUnitsAvailable": "لا توجد وحدات متاحة",
       "owner": "مالك",
       "ownerDescription": "ضع علامة إذا كان هذا الساكن مالك الوحدة",
       "moveInDate": "تاريخ الانتقال",
+      "moveInDatePlaceholder": "اختر تاريخ الانتقال",
       "moveOutDate": "تاريخ المغادرة",
+      "moveOutDatePlaceholder": "اختر تاريخ المغادرة",
+      "emergencyContact": "جهة الاتصال الطارئة",
+      "emergencyContactPlaceholder": "أدخل اسم جهة الاتصال الطارئة",
+      "emergencyPhone": "هاتف الطوارئ",
+      "emergencyPhonePlaceholder": "أدخل رقم هاتف الطوارئ",
+      "notes": "ملاحظات",
+      "notesPlaceholder": "أضف أي ملاحظات إضافية حول الساكن",
       "selectDate": "اختر التاريخ",
       "additionalInfo": "معلومات إضافية",
-      "unitAssignment": "تخصيص الوحدة"
+      "unitAssignment": "تخصيص الوحدة",
+      "cancel": "إلغاء",
+      "submit": "حفظ",
+      "submitting": "جاري الحفظ...",
+      "validation": {
+        "unitRequired": "الوحدة مطلوبة",
+        "firstNameRequired": "الاسم الأول مطلوب",
+        "lastNameRequired": "اسم العائلة مطلوب",
+        "emailRequired": "يرجى إدخال عنوان بريد إلكتروني صحيح",
+        "invalidMoveInDate": "يرجى اختيار تاريخ انتقال صحيح"
+      }
     },
     "actions": {
       "invite": "دعوة إلى البوابة",
@@ -1112,6 +1493,45 @@
       "inactive": "غير نشط",
       "invited": "مدعو",
       "pending": "في الانتظار"
+    },
+    "columns": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "unit": "الوحدة",
+      "type": "النوع",
+      "status": "الحالة",
+      "moveInDate": "تاريخ الانتقال",
+      "actions": "الإجراءات",
+      "copyEmail": "نسخ البريد الإلكتروني",
+      "editResident": "تحرير الساكن",
+      "deleteResident": "حذف الساكن"
+    },
+    "confirmDelete": {
+      "title": "حذف الساكن",
+      "description": "هل أنت متأكد من أنك تريد حذف هذا الساكن؟ لا يمكن التراجع عن هذا الإجراء."
+    },
+    "bulkInvite": {
+      "title": "دعوة السكان بالجملة",
+      "description": "إرسال دعوات البوابة إلى عدة سكان في آن واحد",
+      "selectAll": "تحديد الكل",
+      "deselectAll": "إلغاء تحديد الكل",
+      "selectedCount": "{count} ساكن محدد",
+      "noUninvitedResidents": "لا يوجد سكان غير مدعوين",
+      "sendInvitations": "إرسال الدعوات",
+      "successMessage": "تم إرسال {count} دعوة بنجاح",
+      "partialSuccessMessage": "تم إرسال {successCount} دعوة بنجاح، فشل {errorCount}",
+      "allFailedMessage": "فشل في إرسال جميع الدعوات"
+    },
+    "invite": {
+      "dialogTitle": "دعوة إلى بوابة السكان",
+      "dialogDescription": "إرسال دعوة إلى {firstName} {lastName} للوصول إلى بوابة السكان.",
+      "emailLabel": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "أدخل عنوان البريد الإلكتروني",
+      "emailRequired": "عنوان البريد الإلكتروني مطلوب",
+      "cancel": "إلغاء",
+      "send": "إرسال الدعوة"
     }
   },
   "search": {
@@ -1133,11 +1553,13 @@
   },
   "units": {
     "title": "الوحدات",
+    "description": "إدارة جميع الوحدات السكنية في مبانيك",
     "totalUnits": "إجمالي الوحدات",
     "addUnit": "إضافة وحدة",
     "editUnit": "تعديل الوحدة",
     "deleteUnit": "حذف الوحدة",
     "confirmDelete": "هل أنت متأكد من أنك تريد حذف هذه الوحدة؟",
+    "confirmDeleteExtended": "هل أنت متأكد من أنك تريد حذف هذه الوحدة؟ لا يمكن التراجع عن هذا الإجراء وسيؤدي أيضًا إلى إزالة جميع السكان المرتبطين.",
     "viewResidents": "عرض السكان",
     "viewIncome": "عرض الدخل",
     "unknownBuilding": "مبنى غير معروف",
@@ -1150,7 +1572,145 @@
     "area": "المساحة",
     "monthlyFee": "الرسوم الشهرية",
     "activeResidents": "السكان النشطون",
-    "thisMonthIncome": "دخل هذا الشهر"
+    "thisMonthIncome": "دخل هذا الشهر",
+    "markVacant": "تحديد كشاغر",
+    "markOccupied": "تحديد كمأهول",
+    "noUnitsFound": "لم يتم العثور على وحدات",
+    "noUnitsDescription": "ابدأ بإضافة وحدتك الأولى لإدارة العقارات.",
+    "addFirstUnit": "إضافة الوحدة الأولى",
+    "unitNotFound": "الوحدة غير موجودة",
+    "backToUnits": "العودة إلى الوحدات",
+    "form": {
+      "building": "المبنى",
+      "selectBuilding": "اختر مبنى",
+      "unitNumber": "رقم الوحدة",
+      "unitNumberPlaceholder": "مثال: 101",
+      "areaSquareMeters": "المساحة (م²)",
+      "monthlyFeeDollar": "الرسوم الشهرية ($)",
+      "optional": "اختياري",
+      "descriptionPlaceholder": "وصف أو ملاحظات اختيارية حول هذه الوحدة...",
+      "updating": "جارٍ التحديث...",
+      "creating": "جارٍ الإنشاء...",
+      "updateUnit": "تحديث الوحدة",
+      "createUnit": "إنشاء وحدة"
+    },
+    "dialogs": {
+      "addTitle": "إضافة وحدة جديدة",
+      "addDescription": "أنشئ وحدة جديدة في مبناك. املأ التفاصيل أدناه.",
+      "editTitle": "تعديل الوحدة",
+      "editDescription": "قم بتحديث تفاصيل الوحدة أدناه."
+    },
+    "view": {
+      "backToUnits": "العودة إلى الوحدات",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "unitTitle": "الوحدة {number}",
+      "floorLabel": "الطابق {floor}",
+      "collected": "تم جمع: {amount} $",
+      "currentResidents": "السكان الحاليون",
+      "totalResidents": "{count} سكان إجمالي",
+      "bathroom": "حمام",
+      "bathrooms": "حمامات",
+      "areaNotSpecified": "المساحة غير محددة",
+      "unitInformation": "معلومات الوحدة",
+      "unitInformationDescription": "تفاصيل حول هذه الوحدة السكنية",
+      "createdAt": "تاريخ الإنشاء",
+      "status": "الحالة",
+      "totalUnits": "إجمالي الوحدات",
+      "city": "المدينة",
+      "viewBuildingDetails": "عرض تفاصيل المبنى",
+      "viewAllUnits": "عرض جميع الوحدات",
+      "currentResidentsDescription": "الأشخاص الذين يعيشون في هذه الوحدة ({count} نشط)",
+      "owner": "مالك",
+      "tenant": "مستأجر",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "phoneNumber": "رقم الهاتف",
+      "emailAddress": "عنوان البريد الإلكتروني",
+      "moveInDate": "تاريخ الانتقال",
+      "editTitle": "تعديل تفاصيل الوحدة",
+      "editDescription": "تحديث معلومات الوحدة",
+      "viewResident": "عرض المقيم",
+      "financialOverview": "نظرة عامة مالية",
+      "financialOverviewDescription": "الدخل والمعلومات المالية لـ {month}",
+      "totalIncome": "إجمالي الدخل",
+      "expectedIncome": "الدخل المتوقع",
+      "noIncomeData": "لا توجد بيانات دخل متاحة لهذا الشهر.",
+      "collectedThisMonth": "تم جمعه هذا الشهر",
+      "expectedMonthlyFee": "الرسوم الشهرية المتوقعة",
+      "surplus": "فائض",
+      "outstanding": "متأخر",
+      "viewFullFinancialHistory": "عرض التاريخ المالي الكامل"
+    },
+    "portal": {
+      "title": "الوحدة",
+      "loading": "جارٍ تحميل معلومات الوحدة...",
+      "error": "خطأ في تحميل معلومات الوحدة",
+      "noData": "لم يتم العثور على معلومات الوحدة",
+      "buildingInfo": "معلومات المبنى غير متاحة",
+      "totalUnits": "إجمالي الوحدات",
+      "monthlyFee": "الرسوم الشهرية",
+      "occupied": "مأهول",
+      "vacant": "شاغر",
+      "status": {
+        "owner": "مالك",
+        "tenant": "مستأجر"
+      },
+      "overview": {
+        "floor": "الطابق",
+        "floorDescription": "مستوى المبنى",
+        "area": "المساحة",
+        "areaDescription": "المساحة الإجمالية",
+        "bedrooms": "غرف النوم",
+        "bedroomsDescription": "عدد الغرف",
+        "bathrooms": "الحمامات",
+        "bathroomsDescription": "عدد الحمامات"
+      },
+      "details": {
+        "unitTitle": "تفاصيل الوحدة",
+        "unitDescription": "معلومات حول وحدتك",
+        "unitNumber": "رقم الوحدة",
+        "unitType": "النوع",
+        "unitStatus": "الحالة",
+        "balcony": "الشرفة",
+        "parking": "موقف السيارة",
+        "storage": "المخزن",
+        "furnished": "مفروشة",
+        "description": "الوصف",
+        "buildingTitle": "معلومات المبنى",
+        "buildingDescription": "تفاصيل حول المبنى",
+        "buildingName": "اسم المبنى",
+        "buildingAddress": "العنوان",
+        "totalUnits": "إجمالي الوحدات",
+        "totalFloors": "إجمالي الطوابق",
+        "buildingType": "نوع المبنى",
+        "yearBuilt": "سنة البناء"
+      },
+      "resident": {
+        "title": "معلومات المقيم",
+        "description": "بيانات الاتصال وتفاصيل الحساب الخاصة بك",
+        "name": "الاسم الكامل",
+        "email": "عنوان البريد الإلكتروني",
+        "phone": "رقم الهاتف",
+        "emergencyContact": "جهة الاتصال للطوارئ",
+        "moveInDate": "تاريخ الانتقال",
+        "leaseEndDate": "تاريخ انتهاء الإيجار",
+        "notes": "ملاحظات"
+      },
+      "contact": {
+        "title": "معلومات الاتصال",
+        "description": "إدارة المبنى وجهات الاتصال للطوارئ",
+        "management": "إدارة المبنى",
+        "emergency": "جهة الاتصال للطوارئ",
+        "maintenance": "طلب صيانة"
+      },
+      "values": {
+        "yes": "نعم",
+        "no": "لا",
+        "notAvailable": "غير متاح",
+        "notSpecified": "غير محدد"
+      }
+    }
   },
   "userGuide": {
     "title": "دليل المستخدم",
