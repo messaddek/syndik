@@ -1390,6 +1390,13 @@
     "allCities": "All Cities",
     "clearFilters": "Clear Filters",
     "building": "building",
+    "totalUnits": "Total Units",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal Code",
+    "country": "Country",
+    "occupied": "Occupied",
+    "vacant": "Vacant",
     "form": {
       "title": "Building Information",
       "addTitle": "Add New Building",
@@ -1456,7 +1463,31 @@
       "errorUpdatingBuilding": "Failed to update building",
       "errorDeletingBuilding": "Failed to delete building",
       "confirmDelete": "Are you sure you want to delete this building? This action cannot be undone."
-    }
+    },
+    "buildingNotFound": "Building not found",
+    "backToBuildings": "Back to Buildings",
+    "unitsConfigured": "{count} units configured",
+    "occupiedUnits": "Occupied Units",
+    "occupancyRate": "{rate}% occupancy rate",
+    "totalResidents": "Total Residents",
+    "activeResidents": "Active residents",
+    "locationCode": "Location code",
+    "buildingInformation": "Building Information",
+    "buildingInfoDescription": "Detailed information about this building",
+    "description": "Description",
+    "created": "Created",
+    "quickActions": "Quick Actions",
+    "quickActionsDescription": "Common actions for this building",
+    "viewAllUnits": "View All Units",
+    "viewResidents": "View Residents",
+    "viewFinances": "View Finances",
+    "unitsOverview": "Units Overview",
+    "unitsOverviewDescription": "Overview of {count} units in this building",
+    "unitNumber": "Unit {number}",
+    "floor": "Floor {floor}",
+    "bedrooms": "Bedrooms",
+    "monthlyFee": "Monthly Fee",
+    "viewAllUnitsCount": "View All {count} Units"
   },
   "common": {
     "save": "Save",
@@ -1495,6 +1526,8 @@
     "logoAlt": "Syndik Logo"
   },
   "dashboard": {
+    "title": "Dashboard",
+    "description": "Overview of your syndicate's performance and key metrics",
     "buildings": "Buildings",
     "totalManagedProperties": "Total Managed Properties",
     "units": "Units",
@@ -1524,10 +1557,239 @@
     "trends": "Trends",
     "trendsDescription": "See financial and occupancy trends.",
     "occupancy": "Occupancy",
-    "occupancyDescription": "View occupancy rates and history."
+    "occupancyDescription": "View occupancy rates and history.",
+    "financialTrends": "Financial Trends",
+    "occupancyTrends": "Occupancy Trends"
   },
   "errors": {
     "generic": "An error occurred. Please try again."
+  },
+  "finance": {
+    "title": "Finances",
+    "description": "Manage income and expenses for your properties",
+    "overview": {
+      "title": "Accounts",
+      "add": "Add Account",
+      "edit": "Edit Account",
+      "delete": "Delete Account",
+      "name": "Account Name",
+      "type": "Account Type",
+      "balance": "Balance",
+      "currency": "Currency",
+      "description": "Description",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "bankAccount": "Bank Account",
+      "cashAccount": "Cash Account",
+      "creditAccount": "Credit Account",
+      "currentBalance": "Current Balance",
+      "initialBalance": "Initial Balance"
+    },
+    "expenses": {
+      "title": "Expenses",
+      "add": "Add Expense",
+      "create": "Create Expense",
+      "edit": "Edit Expense",
+      "delete": "Delete Expense",
+      "amount": "Amount",
+      "category": "Category",
+      "description": "Description",
+      "date": "Date",
+      "account": "Account",
+      "receipt": "Receipt",
+      "uploadReceipt": "Upload Receipt",
+      "selectCategory": "Select Category",
+      "selectAccount": "Select Account",
+      "expenseDetails": "Expense Details",
+      "totalExpenses": "Total Expenses",
+      "monthlyExpenses": "Monthly Expenses",
+      "yearlyExpenses": "Yearly Expenses",
+      "recentExpenses": "Recent Expenses",
+      "noExpenses": "No expenses found",
+      "expenseAdded": "Expense added successfully",
+      "expenseUpdated": "Expense updated successfully",
+      "expenseDeleted": "Expense deleted successfully"
+    },
+    "income": {
+      "title": "Income",
+      "add": "Add Income",
+      "create": "Create Income",
+      "edit": "Edit Income",
+      "delete": "Delete Income",
+      "amount": "Amount",
+      "source": "Source",
+      "description": "Description",
+      "date": "Date",
+      "account": "Account",
+      "selectSource": "Select Source",
+      "selectAccount": "Select Account",
+      "incomeDetails": "Income Details",
+      "totalIncome": "Total Income",
+      "monthlyIncome": "Monthly Income",
+      "yearlyIncome": "Yearly Income",
+      "recentIncome": "Recent Income",
+      "noIncome": "No income found",
+      "incomeAdded": "Income added successfully",
+      "incomeUpdated": "Income updated successfully",
+      "incomeDeleted": "Income deleted successfully"
+    },
+    "categories": {
+      "title": "Categories",
+      "add": "Add Category",
+      "edit": "Edit Category",
+      "delete": "Delete Category",
+      "name": "Category Name",
+      "type": "Type",
+      "color": "Color",
+      "description": "Description",
+      "expense": "Expense",
+      "income": "Income",
+      "maintenance": "Maintenance",
+      "utilities": "Utilities",
+      "insurance": "Insurance",
+      "repairs": "Repairs",
+      "cleaning": "Cleaning",
+      "security": "Security",
+      "other": "Other",
+      "rent": "Rent",
+      "fees": "Fees",
+      "fines": "Fines",
+      "deposits": "Deposits"
+    },
+    "budgets": {
+      "title": "Budgets",
+      "add": "Add Budget",
+      "edit": "Edit Budget",
+      "delete": "Delete Budget",
+      "name": "Budget Name",
+      "amount": "Budget Amount",
+      "period": "Period",
+      "category": "Category",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "yearly": "Yearly",
+      "spent": "Spent",
+      "remaining": "Remaining",
+      "percentage": "Percentage Used",
+      "overBudget": "Over Budget",
+      "underBudget": "Under Budget",
+      "onTrack": "On Track"
+    },
+    "reports": {
+      "title": "Reports",
+      "generate": "Generate Report",
+      "export": "Export",
+      "print": "Print",
+      "period": "Period",
+      "dateRange": "Date Range",
+      "from": "From",
+      "to": "To",
+      "incomeStatement": "Income Statement",
+      "expenseReport": "Expense Report",
+      "balanceSheet": "Balance Sheet",
+      "cashFlow": "Cash Flow",
+      "monthlyReport": "Monthly Report",
+      "yearlyReport": "Yearly Report",
+      "customReport": "Custom Report"
+    },
+    "dashboard": {
+      "totalBalance": "Total Balance",
+      "totalIncome": "Total Income",
+      "totalExpenses": "Total Expenses",
+      "netIncome": "Net Income",
+      "thisMonth": "This Month",
+      "lastMonth": "Last Month",
+      "thisYear": "This Year",
+      "lastYear": "Last Year",
+      "recentTransactions": "Recent Transactions",
+      "topCategories": "Top Categories",
+      "accountSummary": "Account Summary",
+      "budgetOverview": "Budget Overview"
+    },
+    "transactions": {
+      "title": "Transactions",
+      "view": "View Transaction",
+      "edit": "Edit Transaction",
+      "delete": "Delete Transaction",
+      "type": "Type",
+      "reference": "Reference",
+      "notes": "Notes",
+      "attachments": "Attachments",
+      "noTransactions": "No transactions found",
+      "transactionHistory": "Transaction History",
+      "filter": "Filter",
+      "search": "Search transactions",
+      "allTypes": "All Types",
+      "sortBy": "Sort By",
+      "newest": "Newest First",
+      "oldest": "Oldest First",
+      "highestAmount": "Highest Amount",
+      "lowestAmount": "Lowest Amount"
+    },
+    "common": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "delete": "Delete",
+      "edit": "Edit",
+      "view": "View",
+      "add": "Add",
+      "create": "Create",
+      "update": "Update",
+      "remove": "Remove",
+      "search": "Search",
+      "filter": "Filter",
+      "export": "Export",
+      "import": "Import",
+      "print": "Print",
+      "refresh": "Refresh",
+      "loading": "Loading...",
+      "noData": "No data available",
+      "error": "An error occurred",
+      "success": "Operation completed successfully",
+      "confirm": "Confirm",
+      "yes": "Yes",
+      "no": "No",
+      "required": "Required",
+      "optional": "Optional",
+      "selectFile": "Select File",
+      "uploadFile": "Upload File",
+      "downloadFile": "Download File",
+      "deleteFile": "Delete File"
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalidAmount": "Please enter a valid amount",
+      "invalidDate": "Please enter a valid date",
+      "invalidEmail": "Please enter a valid email",
+      "minLength": "Minimum length is {min} characters",
+      "maxLength": "Maximum length is {max} characters",
+      "positiveNumber": "Amount must be positive",
+      "futureDate": "Date cannot be in the future",
+      "pastDate": "Date cannot be in the past"
+    },
+    "notifications": {
+      "accountCreated": "Account created successfully",
+      "accountUpdated": "Account updated successfully",
+      "accountDeleted": "Account deleted successfully",
+      "expenseCreated": "Expense created successfully",
+      "expenseUpdated": "Expense updated successfully",
+      "expenseDeleted": "Expense deleted successfully",
+      "incomeCreated": "Income created successfully",
+      "incomeUpdated": "Income updated successfully",
+      "incomeDeleted": "Income deleted successfully",
+      "categoryCreated": "Category created successfully",
+      "categoryUpdated": "Category updated successfully",
+      "categoryDeleted": "Category deleted successfully",
+      "budgetCreated": "Budget created successfully",
+      "budgetUpdated": "Budget updated successfully",
+      "budgetDeleted": "Budget deleted successfully",
+      "reportGenerated": "Report generated successfully",
+      "fileUploaded": "File uploaded successfully",
+      "fileDeleted": "File deleted successfully",
+      "operationFailed": "Operation failed. Please try again."
+    }
   },
   "footer": {
     "description": "Simplify your property management operations with our all-in-one platform designed for modern property managers.",
@@ -1799,7 +2061,7 @@
       "subtitle": "Get started in minutes with our intuitive setup process.",
       "description": "Our intuitive platform guides you step by step for quick and efficient implementation.",
       "steps": {
-        "signUp": {
+        "setup": {
           "title": "Quick Sign Up",
           "description": "Create your account and set up your first property in just a few minutes."
         },
@@ -1811,7 +2073,7 @@
           "title": "Manage Efficiently",
           "description": "Monitor everything from a single dashboard and focus on growing your business."
         },
-        "grow": {
+        "automate": {
           "title": "Grow Your Business",
           "description": "Scale easily by adding new properties and automating your management processes."
         }
@@ -1942,6 +2204,10 @@
       }
     }
   },
+  "meetings": {
+    "title": "Meetings",
+    "description": "Schedule and manage syndicate meetings"
+  },
   "meta": {
     "readTime": "5 min read",
     "audience": "Property Managers"
@@ -1964,6 +2230,149 @@
     "terms": "Terms",
     "userGuide": "User Guide"
   },
+  "notifications": {
+    "title": "Notification Management",
+    "description": "Send notifications to residents and manage communication",
+    "addNotification": "Add Notification",
+    "stats": {
+      "totalSent": "Total Sent",
+      "allNotifications": "All notifications",
+      "thisWeek": "This Week",
+      "lastSevenDays": "Last 7 days",
+      "urgent": "Urgent",
+      "highPriorityNotifications": "High priority notifications"
+    },
+    "list": {
+      "recentNotifications": "Recent Notifications",
+      "description": "All notifications sent to residents in your organization.",
+      "loading": "Loading notifications...",
+      "emptyTitle": "No notifications sent yet",
+      "emptyDescription": "Create your first notification to get started."
+    },
+    "dropdown": {
+      "title": "Notifications",
+      "markAllRead": "Mark all read",
+      "all": "All",
+      "unread": "Unread",
+      "loading": "Loading notifications...",
+      "emptyTitle": "No notifications yet",
+      "allCaughtUp": "All caught up!",
+      "noUnreadNotifications": "No unread notifications",
+      "viewAllNotifications": "View all notifications"
+    },
+    "resident": {
+      "title": "Notifications",
+      "description": "Stay updated with important announcements and building information.",
+      "markAllRead": "Mark all read",
+      "allNotifications": "All Notifications",
+      "unreadNotifications": "Unread",
+      "filters": {
+        "category": "Category",
+        "priority": "Priority",
+        "allCategories": "All Categories",
+        "allPriorities": "All Priorities",
+        "allCategoriesPlaceholder": "All categories",
+        "allPrioritiesPlaceholder": "All priorities"
+      },
+      "emptyState": {
+        "title": "No notifications",
+        "description": "You're all caught up! No new notifications to display.",
+        "unreadTitle": "No unread notifications",
+        "unreadDescription": "All your notifications have been read."
+      },
+      "actions": {
+        "viewDetails": "View Details",
+        "markAsRead": "Mark as read",
+        "archive": "Archive"
+      },
+      "loading": "Loading notifications...",
+      "success": {
+        "markAllAsRead": "All notifications marked as read",
+        "markAsRead": "Notification marked as read",
+        "archived": "Notification archived"
+      }
+    },
+    "settings": {
+      "title": "Notification Settings",
+      "description": "Manage how and when you receive notifications.",
+      "channels": {
+        "title": "Notification Channels",
+        "description": "Choose how you want to receive notifications.",
+        "email": "Email Notifications",
+        "emailDescription": "Receive notifications via email",
+        "push": "Push Notifications",
+        "pushDescription": "Receive push notifications on your device",
+        "sms": "SMS Notifications",
+        "smsDescription": "Receive notifications via text message"
+      },
+      "categories": {
+        "title": "Notification Categories",
+        "description": "Choose which types of notifications you want to receive.",
+        "financial": "Financial",
+        "financialDescription": "Billing, payments, and financial updates",
+        "maintenance": "Maintenance",
+        "maintenanceDescription": "Building maintenance and repairs",
+        "community": "Community",
+        "communityDescription": "Community events and announcements",
+        "system": "System",
+        "systemDescription": "System updates and technical notifications",
+        "general": "General",
+        "generalDescription": "General announcements and updates"
+      },
+      "quietHours": {
+        "title": "Quiet Hours",
+        "description": "Set quiet hours when you don't want to receive notifications.",
+        "enable": "Enable quiet hours",
+        "startTime": "Start time",
+        "endTime": "End time"
+      },
+      "actions": {
+        "save": "Save Settings",
+        "saving": "Saving...",
+        "reset": "Reset to Defaults"
+      },
+      "success": {
+        "saved": "Notification settings saved successfully!",
+        "reset": "Settings reset to defaults"
+      },
+      "error": {
+        "save": "Failed to save notification settings",
+        "load": "Failed to load notification settings"
+      }
+    },
+    "form": {
+      "dialogTitle": "Send New Notification",
+      "dialogDescription": "Send a notification to all residents in your organization.",
+      "title": "Title",
+      "titlePlaceholder": "Notification title",
+      "message": "Message",
+      "messagePlaceholder": "Notification message",
+      "category": "Category",
+      "categoryPlaceholder": "Select category",
+      "priority": "Priority",
+      "priorityPlaceholder": "Select priority",
+      "actionUrl": "Action URL (Optional)",
+      "actionUrlPlaceholder": "https://example.com",
+      "categories": {
+        "general": "General",
+        "financial": "Financial",
+        "maintenance": "Maintenance",
+        "community": "Community",
+        "system": "System"
+      },
+      "priorities": {
+        "low": "Low",
+        "normal": "Normal",
+        "high": "High",
+        "urgent": "Urgent"
+      },
+      "cancel": "Cancel",
+      "send": "Send Notification",
+      "sending": "Sending...",
+      "successMessage": "Notification sent successfully!",
+      "errorMessage": "Failed to send notification"
+    }
+  },
   "organizations": {
     "residences": "Residences",
     "used": "Used",
@@ -1972,8 +2381,8 @@
     "planLimitReached": "Plan limit reached"
   },
   "orgSwitcher": {
-    "title": "Select Organization",
-    "description": "Choose an organization to access its management dashboard or resident portal. Your role determines what features you can access.",
+    "title": "Select Residence",
+    "description": "Choose a residence to access its management dashboard or resident portal. Your role determines what features you can access.",
     "cards": {
       "managers": {
         "title": "Property Managers & Admins",
@@ -1987,13 +2396,34 @@
       }
     },
     "organizationList": {
-      "title": "Your Organizations",
+      "title": "Your Residences",
       "description": "Select an organization to continue"
     },
     "footer": {
-      "text": "Don't see your organization? Contact your property manager for an invitation."
+      "text": "Don't see your residence? Contact your property manager for an invitation."
     },
-    "logoAlt": "Syndik Logo"
+    "logoAlt": "Syndik Logo",
+    "redirect": {
+      "loading": "Redirecting you to the right place..."
+    },
+    "clerk": {
+      "organizationSwitcher": {
+        "action__createOrganization": "Create residence",
+        "action__manageOrganization": "Manage residence",
+        "notSelected": "No residence selected"
+      },
+      "organizationList": {
+        "action__createOrganization": "Create residence",
+        "createOrganization": "Create Residence",
+        "titleWithoutPersonal": "Choose a residence"
+      },
+      "createOrganization": {
+        "formButtonSubmit": "Create residence",
+        "title": "Create residence"
+      },
+      "formFieldLabel__organizationName": "Residence name",
+      "formFieldInputPlaceholder__organizationName": "Residence name"
+    }
   },
   "pagination": {
     "previous": "Previous",
@@ -2054,7 +2484,48 @@
     "quickActionsDescription": "Common tasks and shortcuts",
     "makePayment": "Make Payment",
     "meetingInfo": "Meeting Info",
-    "contactManagement": "Contact Management"
+    "contactManagement": "Contact Management",
+    "navbar": {
+      "searchMobile": "Search...",
+      "searchDesktop": "Search announcements, payments...",
+      "dashboard": "Dashboard"
+    },
+    "setup": {
+      "welcomeTitle": "Welcome to Syndik",
+      "welcomeDescription": "Complete your resident profile to access the portal",
+      "successMessage": "Account setup completed successfully!",
+      "errorMessage": "Setup failed",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "emailAddress": "Email Address",
+      "emailPlaceholder": "john.doe@example.com",
+      "emailNote": "This must match the email in your resident record",
+      "phoneNumber": "Phone Number (Optional)",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "yourUnit": "Your Unit",
+      "selectUnit": "Select your unit",
+      "loadingUnits": "Loading units...",
+      "noUnitsAvailable": "No units available",
+      "unitNote": "Select the unit you are registered to",
+      "settingUp": "Setting up...",
+      "completeSetup": "Complete Setup"
+    },
+    "access": {
+      "checkingAccess": "Checking access and linking account...",
+      "welcomeAutoLinked": "Welcome! Auto-linked to",
+      "portalAccessRequired": "Portal Access Required",
+      "accessRequiredDescription": "You need to be linked to a resident record to access the portal.",
+      "noResidentFound": "No Resident Record Found",
+      "noResidentFoundDescription": "No resident record found for email:",
+      "emailRequired": "Email Address Required",
+      "emailRequiredDescription": "Your account needs a verified email address to access the portal.",
+      "contactManager": "Contact your property manager",
+      "contactManagerDescription": "Ask them to send you a portal invitation to link your account to your resident record.",
+      "haveInvitation": "Already have an invitation?",
+      "haveInvitationDescription": "Check your email and follow the invitation link to complete the setup process.",
+      "details": "Details:",
+      "backToDashboard": "Back to Dashboard"
+    }
   },
   "pricing": {
     "hero": {
@@ -2237,6 +2708,14 @@
     "noUnitsAvailable": "No units available",
     "ownerStatus": "Owner",
     "tenantStatus": "Tenant",
+    "search": "Search residents...",
+    "filters": "Filters",
+    "active": "active",
+    "allTypes": "All types",
+    "owners": "Owners",
+    "tenants": "Tenants",
+    "filtersApplied": "Filters applied",
+    "clearFilters": "Clear filters",
     "form": {
       "title": "Resident Information",
       "addTitle": "Add New Resident",
@@ -2244,18 +2723,43 @@
       "description": "Add a new resident to your building management system.",
       "editDescription": "Update resident information and unit assignment.",
       "firstName": "First Name",
+      "firstNamePlaceholder": "Enter first name",
       "lastName": "Last Name",
+      "lastNamePlaceholder": "Enter last name",
       "email": "Email Address",
+      "emailPlaceholder": "Enter email address",
       "phone": "Phone Number",
+      "phonePlaceholder": "Enter phone number",
       "unit": "Unit",
+      "unitPlaceholder": "Select a unit",
       "selectUnit": "Select a unit",
+      "loadingUnits": "Loading units...",
+      "noUnitsAvailable": "No units available",
       "owner": "Owner",
       "ownerDescription": "Check if this resident is the owner of the unit",
       "moveInDate": "Move In Date",
+      "moveInDatePlaceholder": "Select move in date",
       "moveOutDate": "Move Out Date",
+      "moveOutDatePlaceholder": "Select move out date",
+      "emergencyContact": "Emergency Contact",
+      "emergencyContactPlaceholder": "Enter emergency contact name",
+      "emergencyPhone": "Emergency Phone",
+      "emergencyPhonePlaceholder": "Enter emergency phone number",
+      "notes": "Notes",
+      "notesPlaceholder": "Add any additional notes about the resident",
       "selectDate": "Select date",
       "additionalInfo": "Additional Information",
-      "unitAssignment": "Unit Assignment"
+      "unitAssignment": "Unit Assignment",
+      "cancel": "Cancel",
+      "submit": "Save",
+      "submitting": "Saving...",
+      "validation": {
+        "unitRequired": "Unit is required",
+        "firstNameRequired": "First name is required",
+        "lastNameRequired": "Last name is required",
+        "emailRequired": "Please enter a valid email address",
+        "invalidMoveInDate": "Please select a valid move in date"
+      }
     },
     "actions": {
       "invite": "Invite to Portal",
@@ -2269,6 +2773,45 @@
       "inactive": "Inactive",
       "invited": "Invited",
       "pending": "Pending"
+    },
+    "columns": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "unit": "Unit",
+      "type": "Type",
+      "status": "Status",
+      "moveInDate": "Move In Date",
+      "actions": "Actions",
+      "copyEmail": "Copy email",
+      "editResident": "Edit resident",
+      "deleteResident": "Delete resident"
+    },
+    "confirmDelete": {
+      "title": "Delete Resident",
+      "description": "Are you sure you want to delete this resident? This action cannot be undone."
+    },
+    "bulkInvite": {
+      "title": "Bulk Invite Residents",
+      "description": "Send portal invitations to multiple residents at once",
+      "selectAll": "Select All",
+      "deselectAll": "Deselect All",
+      "selectedCount": "{count} resident(s) selected",
+      "noUninvitedResidents": "No uninvited residents found",
+      "sendInvitations": "Send Invitations",
+      "successMessage": "Successfully sent {count} invitation(s)",
+      "partialSuccessMessage": "Sent {successCount} invitations successfully, {errorCount} failed",
+      "allFailedMessage": "Failed to send all invitations"
+    },
+    "invite": {
+      "dialogTitle": "Invite to Resident Portal",
+      "dialogDescription": "Send an invitation to {firstName} {lastName} to access the resident portal.",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter email address",
+      "emailRequired": "Email address is required",
+      "cancel": "Cancel",
+      "send": "Send Invitation"
     }
   },
   "search": {
@@ -2290,11 +2833,13 @@
   },
   "units": {
     "title": "Units",
+    "description": "Manage all residential units in your buildings",
     "totalUnits": "total units",
     "addUnit": "Add Unit",
     "editUnit": "Edit Unit",
     "deleteUnit": "Delete Unit",
     "confirmDelete": "Are you sure you want to delete this unit?",
+    "confirmDeleteExtended": "Are you sure you want to delete this unit? This action cannot be undone and will also remove all associated residents.",
     "viewResidents": "View Residents",
     "viewIncome": "View Income",
     "unknownBuilding": "Unknown Building",
@@ -2307,7 +2852,145 @@
     "area": "Area",
     "monthlyFee": "Monthly Fee",
     "activeResidents": "Active Residents",
-    "thisMonthIncome": "This Month Income"
+    "thisMonthIncome": "This Month Income",
+    "markVacant": "Mark Vacant",
+    "markOccupied": "Mark Occupied",
+    "noUnitsFound": "No units found",
+    "noUnitsDescription": "Start by adding your first unit to manage properties.",
+    "addFirstUnit": "Add First Unit",
+    "unitNotFound": "Unit not found",
+    "backToUnits": "Back to Units",
+    "form": {
+      "building": "Building",
+      "selectBuilding": "Select a building",
+      "unitNumber": "Unit Number",
+      "unitNumberPlaceholder": "e.g., 101",
+      "areaSquareMeters": "Area (m²)",
+      "monthlyFeeDollar": "Monthly Fee ($)",
+      "optional": "Optional",
+      "descriptionPlaceholder": "Optional description or notes about this unit...",
+      "updating": "Updating...",
+      "creating": "Creating...",
+      "updateUnit": "Update Unit",
+      "createUnit": "Create Unit"
+    },
+    "dialogs": {
+      "addTitle": "Add New Unit",
+      "addDescription": "Create a new unit in your building. Fill in the details below.",
+      "editTitle": "Edit Unit",
+      "editDescription": "Update the unit details below."
+    },
+    "view": {
+      "backToUnits": "Back to Units",
+      "edit": "Edit",
+      "delete": "Delete",
+      "unitTitle": "Unit {number}",
+      "floorLabel": "Floor {floor}",
+      "collected": "Collected: ${amount}",
+      "currentResidents": "Current Residents",
+      "totalResidents": "{count} total residents",
+      "bathroom": "bathroom",
+      "bathrooms": "bathrooms",
+      "areaNotSpecified": "Area not specified",
+      "unitInformation": "Unit Information",
+      "unitInformationDescription": "Details about this residential unit",
+      "createdAt": "Created At",
+      "status": "Status",
+      "totalUnits": "Total Units",
+      "city": "City",
+      "viewBuildingDetails": "View Building Details",
+      "viewAllUnits": "View All Units",
+      "currentResidentsDescription": "People living in this unit ({count} active)",
+      "owner": "Owner",
+      "tenant": "Tenant",
+      "active": "Active",
+      "inactive": "Inactive",
+      "phoneNumber": "Phone Number",
+      "emailAddress": "Email Address",
+      "moveInDate": "Move-in Date",
+      "editTitle": "Edit Unit Details",
+      "editDescription": "Update unit information",
+      "viewResident": "View Resident",
+      "financialOverview": "Financial Overview",
+      "financialOverviewDescription": "Income and financial information for {month}",
+      "totalIncome": "Total Income",
+      "expectedIncome": "Expected Income",
+      "noIncomeData": "No income data available for this month.",
+      "collectedThisMonth": "Collected This Month",
+      "expectedMonthlyFee": "Expected Monthly Fee",
+      "surplus": "Surplus",
+      "outstanding": "Outstanding",
+      "viewFullFinancialHistory": "View Full Financial History"
+    },
+    "portal": {
+      "title": "Unit",
+      "loading": "Loading unit information...",
+      "error": "Error loading unit information",
+      "noData": "No unit information found",
+      "buildingInfo": "Building information not available",
+      "totalUnits": "total units",
+      "monthlyFee": "Monthly Fee",
+      "occupied": "Occupied",
+      "vacant": "Vacant",
+      "status": {
+        "owner": "Owner",
+        "tenant": "Tenant"
+      },
+      "overview": {
+        "floor": "Floor",
+        "floorDescription": "Building level",
+        "area": "Area",
+        "areaDescription": "Total area",
+        "bedrooms": "Bedrooms",
+        "bedroomsDescription": "Number of rooms",
+        "bathrooms": "Bathrooms",
+        "bathroomsDescription": "Number of bathrooms"
+      },
+      "details": {
+        "unitTitle": "Unit Details",
+        "unitDescription": "Information about your unit",
+        "unitNumber": "Unit Number",
+        "unitType": "Type",
+        "unitStatus": "Status",
+        "balcony": "Balcony",
+        "parking": "Parking Space",
+        "storage": "Storage",
+        "furnished": "Furnished",
+        "description": "Description",
+        "buildingTitle": "Building Information",
+        "buildingDescription": "Details about the building",
+        "buildingName": "Building Name",
+        "buildingAddress": "Address",
+        "totalUnits": "Total Units",
+        "totalFloors": "Total Floors",
+        "buildingType": "Building Type",
+        "yearBuilt": "Year Built"
+      },
+      "resident": {
+        "title": "Resident Information",
+        "description": "Your contact and account details",
+        "name": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "emergencyContact": "Emergency Contact",
+        "moveInDate": "Move-in Date",
+        "leaseEndDate": "Lease End Date",
+        "notes": "Notes"
+      },
+      "contact": {
+        "title": "Contact Information",
+        "description": "Building management and emergency contacts",
+        "management": "Building Management",
+        "emergency": "Emergency Contact",
+        "maintenance": "Maintenance Request"
+      },
+      "values": {
+        "yes": "Yes",
+        "no": "No",
+        "notAvailable": "N/A",
+        "notSpecified": "Not specified"
+      }
+    }
   },
   "userGuide": {
     "title": "User Guide",

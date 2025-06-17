@@ -6,6 +6,7 @@ import { OrganizationSwitcherCustom } from './organization-switcher';
 import { AccountInitForm } from '@/modules/accounts/ui/components/account-init-form';
 import { useTRPC } from '@/trpc/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { BuildingViewSkeleton } from '@/modules/buildings/ui/components/building-view-skeleton';
 import { BuildingsListSkeleton } from '@/modules/buildings/ui/components/buildings-skeleton';
 import { UnitViewSkeleton } from '@/modules/units/ui/components/unit-view-skeleton';
@@ -13,6 +14,9 @@ import { ResidentViewSkeleton } from '@/modules/residents/ui/components/resident
 import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
 import { Skeleton } from '@/components/ui/skeleton';
 import { usePathname } from '@/i18n/routing';
+
+import { usePathname } from '@/i18n/routing';
+import { getLoadingSkeleton } from '../utils/get-loading-skeleton';
 
 interface OrganizationGuardProps {
   children: React.ReactNode;
@@ -23,78 +27,7 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
   const { user, isLoaded: userLoaded } = useUser();
   const pathname = usePathname();
   const trpc = useTRPC();
-  const queryClient = useQueryClient(); // Function to get appropriate skeleton based on route
-  const getLoadingSkeleton = () => {
-    if (pathname.includes('/buildings/') && pathname.split('/').length > 3) {
-      // Individual building view
-      return <BuildingViewSkeleton />;
-    }
-
-    if (pathname.includes('/buildings') && pathname.split('/').length === 3) {
-      // Buildings list view
-      return <BuildingsListSkeleton />;
-    }
-
-    if (pathname.includes('/units/') && pathname.split('/').length > 3) {
-      // Individual unit view
-      return <UnitViewSkeleton />;
-    }
-
-    if (pathname.includes('/units') && pathname.split('/').length === 3) {
-      // Units list view
-      return <BuildingsListSkeleton />; // Reuse buildings skeleton for units list
-    }
-    if (pathname.includes('/residents/') && pathname.split('/').length > 3) {
-      // Individual resident view
-      return <ResidentViewSkeleton />;
-    }
-
-    if (pathname.includes('/residents') && pathname.split('/').length === 3) {
-      // Residents list view
-      return <BuildingsListSkeleton />; // Reuse buildings skeleton for residents list
-    }
-
-    if (pathname.includes('/dashboard') && pathname.split('/').length === 3) {
-      // Dashboard view
-      return <DashboardSkeleton />;
-    }
-
-    if (pathname.includes('/finances') && pathname.split('/').length === 3) {
-      // Finances view
-      return <DashboardSkeleton />; // Reuse dashboard skeleton for finances
-    }
-
-    if (pathname.includes('/meetings') && pathname.split('/').length === 3) {
-      // Meetings view
-      return <DashboardSkeleton />; // Reuse dashboard skeleton for meetings
-    }
-
-    if (
-      pathname.includes('/notifications') &&
-      pathname.split('/').length === 3
-    ) {
-      // Notifications view
-      return <DashboardSkeleton />; // Reuse dashboard skeleton for notifications
-    }
-
-    if (pathname.includes('/settings') && pathname.split('/').length === 3) {
-      // Settings view
-      return <DashboardSkeleton />; // Reuse dashboard skeleton for settings
-    }
-
-    // Default to minimal skeleton for other pages
-    return (
-      <div className='space-y-6'>
-        <Skeleton className='h-8 w-48' />
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
-          {[...Array(4)].map((_, i) => (
-            <Skeleton key={i} className='h-32' />
-          ))}
-        </div>
-        <Skeleton className='h-64' />
-      </div>
-    );
-  };
+  const queryClient = useQueryClient();
 
   // Determine default role based on current route
   const isPortalRoute = pathname.startsWith('/portal');
@@ -127,10 +60,9 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
         // Error handling is managed by the form component
       },
     })
-  );
-  // Show loading while Clerk is loading
+  ); // Show loading while Clerk is loading
   if (!userLoaded || !orgLoaded || accountLoading) {
-    return getLoadingSkeleton();
+    return getLoadingSkeleton(pathname);
   }
 
   // If user is not signed in, redirect (this shouldn't happen due to middleware)

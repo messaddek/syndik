@@ -8,24 +8,24 @@ import { dark } from '@clerk/themes';
 import { useTheme } from 'next-themes';
 import { NuqsAdapter } from 'nuqs/adapters/next';
 import { Toaster } from 'sonner';
+import { useClerkLocalization } from '@/hooks/use-clerk-localization';
 import { useLocale } from 'next-intl';
-import { Locale } from '@/i18n/config';
-import { arSA, enUS, frFR } from '@clerk/localizations';
+import type { Locale } from '@/i18n/config';
 
 // Inner component that uses theme
 const InnerLayoutProvider = ({ children }: { children: React.ReactNode }) => {
   const { resolvedTheme } = useTheme();
   const locale = useLocale() as Locale;
-  const clerkLocale = locale === 'ar' ? arSA : locale === 'fr' ? frFR : enUS;
+  const clerkLocalization = useClerkLocalization();
 
   return (
     <ClerkProvider
-      localization={clerkLocale} // Set default locale for Clerk
+      localization={clerkLocalization} // Use custom localization with residence terminology
       appearance={{
         baseTheme: resolvedTheme === 'dark' ? dark : undefined,
         layout: {
-          privacyPageUrl: '/privacy',
-          termsPageUrl: '/terms',
+          privacyPageUrl: `/${locale}/privacy`,
+          termsPageUrl: `/${locale}/terms`,
         },
         variables: {
           // Override problematic CSS variables with actual color values

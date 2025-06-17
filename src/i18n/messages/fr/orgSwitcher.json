@@ -1,6 +1,6 @@
 {
-  "title": "Sélectionner une Organisation",
-  "description": "Choisissez une organisation pour accéder à son tableau de bord de gestion ou au portail résident. Votre rôle détermine les fonctionnalités auxquelles vous pouvez accéder.",
+  "title": "Sélectionner une Résidence",
+  "description": "Choisissez une résidence pour accéder à son tableau de bord de gestion ou au portail résident. Votre rôle détermine les fonctionnalités auxquelles vous pouvez accéder.",
   "cards": {
     "managers": {
       "title": "Gestionnaires Immobiliers & Administrateurs",
@@ -14,11 +14,32 @@
     }
   },
   "organizationList": {
-    "title": "Vos Organisations",
-    "description": "Sélectionnez une organisation pour continuer"
+    "title": "Vos Résidences",
+    "description": "Sélectionnez une résidence pour continuer"
   },
   "footer": {
-    "text": "Vous ne voyez pas votre organisation ? Contactez votre gestionnaire immobilier pour une invitation."
+    "text": "Vous ne voyez pas votre résidence? Contactez votre gestionnaire immobilier pour une invitation."
   },
-  "logoAlt": "Logo Syndik"
+  "logoAlt": "Logo Syndik",
+  "redirect": {
+    "loading": "Redirection vers le bon endroit..."
+  },
+  "clerk": {
+    "organizationSwitcher": {
+      "action__createOrganization": "Créer une résidence",
+      "action__manageOrganization": "Gérer la résidence",
+      "notSelected": "Aucune résidence sélectionnée"
+    },
+    "organizationList": {
+      "action__createOrganization": "Créer une résidence",
+      "createOrganization": "Créer une résidence",
+      "titleWithoutPersonal": "Choisissez une résidence"
+    },
+    "createOrganization": {
+      "formButtonSubmit": "Créer la résidence",
+      "title": "Créer une résidence"
+    },
+    "formFieldLabel__organizationName": "Nom de la résidence",
+    "formFieldInputPlaceholder__organizationName": "Nom de la résidence"
+  }
 }

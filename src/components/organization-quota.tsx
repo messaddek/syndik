@@ -8,6 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+
 interface OrganizationQuotaProps {
   showTitle?: boolean;
   className?: string;
@@ -57,7 +58,7 @@ export function OrganizationQuota({
   const isAtLimit = !usage.canCreateMore;
   const handleCreateOrganization = () => {
     // Navigate to organization creation flow
-    router.push('/org-switcher');
+    router.push(`/org-switcher`);
   };
 
   const handleUpgrade = () => {

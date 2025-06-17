@@ -29,7 +29,12 @@ export const meetingsRouter = createTRPCRouter({
   getAll: orgProtectedProcedure
     .input(
       z.object({
-        buildingId: z.string().uuid().optional(),
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
         upcoming: z.boolean().optional(),
       })
     )

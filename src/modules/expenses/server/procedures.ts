@@ -26,7 +26,12 @@ export const expensesRouter = createTRPCRouter({
       z.object({
         year: z.number().optional(),
         month: z.number().optional(),
-        buildingId: z.string().uuid().optional(),
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
       })
     )
     .query(async ({ ctx, input }) => {
@@ -111,7 +116,12 @@ export const expensesRouter = createTRPCRouter({
       z.object({
         year: z.number(),
         month: z.number().optional(),
-        buildingId: z.string().uuid().optional(),
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
       })
     )
     .query(async ({ ctx, input }) => {

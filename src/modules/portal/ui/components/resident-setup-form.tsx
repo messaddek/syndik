@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { useTRPC } from '@/trpc/client';
 import {
   Card,
@@ -42,6 +43,7 @@ export function ResidentSetupForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const trpc = useTRPC();
+  const t = useTranslations('portal.setup');
 
   const form = useForm<FormData>({
     resolver: zodResolver(residentSetupSchema),
@@ -57,16 +59,15 @@ export function ResidentSetupForm() {
   const { data: availableUnits = [], isLoading: unitsLoading } = useQuery(
     trpc.portal.getAvailableUnits.queryOptions()
   );
-
   // Setup mutation
   const setupMutation = useMutation(
     trpc.portal.setupResidentAccount.mutationOptions({
       onSuccess: () => {
-        toast.success('Account setup completed successfully!');
+        toast.success(t('successMessage'));
         router.push('/portal');
       },
       onError: error => {
-        toast.error(`Setup failed: ${error.message}`);
+        toast.error(`${t('errorMessage')}: ${error.message}`);
       },
     })
   );
@@ -83,18 +84,16 @@ export function ResidentSetupForm() {
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8'>
       <Card className='w-full max-w-md'>
+        {' '}
         <CardHeader className='text-center'>
           <div className='mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100'>
             <Home className='text-primary h-6 w-6' />
           </div>
           <CardTitle className='text-2xl font-bold'>
-            Welcome to Syndik
+            {t('welcomeTitle')}
           </CardTitle>
-          <CardDescription>
-            Complete your resident profile to access the portal
-          </CardDescription>
+          <CardDescription>{t('welcomeDescription')}</CardDescription>
         </CardHeader>
-
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
@@ -103,12 +102,16 @@ export function ResidentSetupForm() {
                 name='name'
                 render={({ field }) => (
                   <FormItem>
+                    {' '}
                     <FormLabel className='flex items-center gap-2'>
                       <User className='h-4 w-4' />
-                      Full Name
+                      {t('fullName')}
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder='John Doe' {...field} />
+                      <Input
+                        placeholder={t('fullNamePlaceholder')}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -119,20 +122,21 @@ export function ResidentSetupForm() {
                 name='email'
                 render={({ field }) => (
                   <FormItem>
+                    {' '}
                     <FormLabel className='flex items-center gap-2'>
                       <Mail className='h-4 w-4' />
-                      Email Address
+                      {t('emailAddress')}
                     </FormLabel>
                     <FormControl>
                       <Input
                         type='email'
-                        placeholder='john.doe@example.com'
+                        placeholder={t('emailPlaceholder')}
                         {...field}
                       />
                     </FormControl>
                     <FormMessage />
                     <p className='text-muted-foreground text-xs'>
-                      This must match the email in your resident record
+                      {t('emailNote')}
                     </p>
                   </FormItem>
                 )}
@@ -142,12 +146,16 @@ export function ResidentSetupForm() {
                 name='phone'
                 render={({ field }) => (
                   <FormItem>
+                    {' '}
                     <FormLabel className='flex items-center gap-2'>
                       <Phone className='h-4 w-4' />
-                      Phone Number (Optional)
+                      {t('phoneNumber')}
                     </FormLabel>
                     <FormControl>
-                      <PhoneInput placeholder='+1 (555) 123-4567' {...field} />
+                      <PhoneInput
+                        placeholder={t('phonePlaceholder')}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -158,27 +166,29 @@ export function ResidentSetupForm() {
                 name='unitId'
                 render={({ field }) => (
                   <FormItem>
+                    {' '}
                     <FormLabel className='flex items-center gap-2'>
                       <MapPin className='h-4 w-4' />
-                      Your Unit
+                      {t('yourUnit')}
                     </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
+                      {' '}
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder='Select your unit' />
+                          <SelectValue placeholder={t('selectUnit')} />
                         </SelectTrigger>
                       </FormControl>{' '}
                       <SelectContent>
                         {unitsLoading ? (
                           <SelectItem value='loading' disabled>
-                            Loading units...
+                            {t('loadingUnits')}
                           </SelectItem>
                         ) : availableUnits.length === 0 ? (
                           <SelectItem value='no-units' disabled>
-                            No units available
+                            {t('noUnitsAvailable')}
                           </SelectItem>
                         ) : (
                           availableUnits.map(({ unit, building }) => (
@@ -190,20 +200,20 @@ export function ResidentSetupForm() {
                           ))
                         )}
                       </SelectContent>
-                    </Select>
+                    </Select>{' '}
                     <FormMessage />
                     <p className='text-muted-foreground text-xs'>
-                      Select the unit you are registered to
+                      {t('unitNote')}
                     </p>
                   </FormItem>
                 )}
-              />
+              />{' '}
               <Button
                 type='submit'
                 className='w-full'
                 disabled={isSubmitting || setupMutation.isPending}
               >
-                {isSubmitting ? 'Setting up...' : 'Complete Setup'}
+                {isSubmitting ? t('settingUp') : t('completeSetup')}
               </Button>
             </form>
           </Form>

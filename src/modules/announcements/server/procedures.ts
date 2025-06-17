@@ -20,11 +20,15 @@ export const announcementsRouter = createTRPCRouter({
 
       return newAnnouncement;
     }),
-
   getAll: orgProtectedProcedure
     .input(
       z.object({
-        buildingId: z.string().uuid().optional(),
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
         includeExpired: z.boolean().default(false),
         limit: z.number().min(1).max(100).default(10),
       })

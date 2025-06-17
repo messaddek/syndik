@@ -12,6 +12,7 @@ import { IncomesList } from './incomes-list';
 import { ExpensesList } from './expenses-list';
 import { CreateIncomeDialog } from './create-income-dialog';
 import { CreateExpenseDialog } from './create-expense-dialog';
+import { useTranslations } from 'next-intl';
 
 interface Income {
   id: string;
@@ -29,8 +30,9 @@ interface Expense {
   year: number;
 }
 
-export function FinancesContent() {
+export const FinancesView = () => {
   const trpc = useTRPC();
+  const t = useTranslations('finance');
   const [showIncomeDialog, setShowIncomeDialog] = useState(false);
   const [showExpenseDialog, setShowExpenseDialog] = useState(false);
 
@@ -70,21 +72,25 @@ export function FinancesContent() {
       <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Total Income</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('overview.totalIncome')}
+            </CardTitle>
             <TrendingUp className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
             <div className='text-2xl font-bold text-green-600'>
               ${totalIncome.toFixed(2)}
             </div>
-            <p className='text-muted-foreground text-xs'>This month</p>
+            <p className='text-muted-foreground text-xs'>
+              {t('overview.thisMonth')}
+            </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
             <CardTitle className='text-sm font-medium'>
-              Total Expenses
+              {t('overview.totalExpenses')}
             </CardTitle>
             <TrendingDown className='text-muted-foreground h-4 w-4' />
           </CardHeader>
@@ -92,13 +98,17 @@ export function FinancesContent() {
             <div className='text-2xl font-bold text-red-600'>
               ${totalExpenses.toFixed(2)}
             </div>
-            <p className='text-muted-foreground text-xs'>This month</p>
+            <p className='text-muted-foreground text-xs'>
+              {t('overview.thisMonth')}
+            </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Net Income</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('overview.netIncome')}
+            </CardTitle>
             <DollarSign className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
@@ -107,13 +117,17 @@ export function FinancesContent() {
             >
               ${netIncome.toFixed(2)}
             </div>
-            <p className='text-muted-foreground text-xs'>This month</p>
+            <p className='text-muted-foreground text-xs'>
+              {t('overview.thisMonth')}
+            </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Transactions</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('overview.transactions')}
+            </CardTitle>
             <Badge variant='outline'>
               {typedIncomes.length + typedExpenses.length}
             </Badge>
@@ -122,7 +136,9 @@ export function FinancesContent() {
             <div className='text-2xl font-bold'>
               {typedIncomes.length + typedExpenses.length}
             </div>
-            <p className='text-muted-foreground text-xs'>This month</p>
+            <p className='text-muted-foreground text-xs'>
+              {t('overview.thisMonth')}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -131,8 +147,8 @@ export function FinancesContent() {
       <Tabs defaultValue='incomes' className='w-full'>
         <div className='flex items-center justify-between'>
           <TabsList>
-            <TabsTrigger value='incomes'>Incomes</TabsTrigger>
-            <TabsTrigger value='expenses'>Expenses</TabsTrigger>
+            <TabsTrigger value='incomes'>{t('tabs.incomes')}</TabsTrigger>
+            <TabsTrigger value='expenses'>{t('tabs.expenses')}</TabsTrigger>
           </TabsList>
 
           <div className='flex gap-2'>
@@ -141,7 +157,7 @@ export function FinancesContent() {
               className='flex items-center gap-2'
             >
               <Plus className='h-4 w-4' />
-              Add Income
+              {t('buttons.addIncome')}
             </Button>
             <Button
               variant='outline'
@@ -149,7 +165,7 @@ export function FinancesContent() {
               className='flex items-center gap-2'
             >
               <Plus className='h-4 w-4' />
-              Add Expense
+              {t('buttons.addExpense')}
             </Button>
           </div>
         </div>
@@ -175,4 +191,4 @@ export function FinancesContent() {
       />
     </div>
   );
-}
+};

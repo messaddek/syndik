@@ -1,0 +1,143 @@
+{
+  "title": "إدارة الإشعارات",
+  "description": "إرسال الإشعارات للمقيمين وإدارة التواصل",
+  "addNotification": "إضافة إشعار",
+  "stats": {
+    "totalSent": "إجمالي المرسل",
+    "allNotifications": "جميع الإشعارات",
+    "thisWeek": "هذا الأسبوع",
+    "lastSevenDays": "آخر 7 أيام",
+    "urgent": "عاجل",
+    "highPriorityNotifications": "إشعارات عالية الأولوية"
+  },
+  "list": {
+    "recentNotifications": "الإشعارات الحديثة",
+    "description": "جميع الإشعارات المرسلة للمقيمين في منظمتك.",
+    "loading": "جارٍ تحميل الإشعارات...",
+    "emptyTitle": "لم يتم إرسال أي إشعارات بعد",
+    "emptyDescription": "قم بإنشاء إشعارك الأول للبدء."
+  },
+  "dropdown": {
+    "title": "الإشعارات",
+    "markAllRead": "تحديد الكل كمقروء",
+    "all": "الكل",
+    "unread": "غير مقروءة",
+    "loading": "جارٍ تحميل الإشعارات...",
+    "emptyTitle": "لا توجد إشعارات بعد",
+    "allCaughtUp": "كل شيء محدث!",
+    "noUnreadNotifications": "لا توجد إشعارات غير مقروءة",
+    "viewAllNotifications": "عرض جميع الإشعارات"
+  },
+  "resident": {
+    "title": "الإشعارات",
+    "description": "ابقَ على اطلاع بالإعلانات المهمة ومعلومات المبنى.",
+    "markAllRead": "تحديد الكل كمقروء",
+    "allNotifications": "جميع الإشعارات",
+    "unreadNotifications": "غير مقروءة",
+    "filters": {
+      "category": "الفئة",
+      "priority": "الأولوية",
+      "allCategories": "جميع الفئات",
+      "allPriorities": "جميع الأولويات",
+      "allCategoriesPlaceholder": "جميع الفئات",
+      "allPrioritiesPlaceholder": "جميع الأولويات"
+    },
+    "emptyState": {
+      "title": "لا توجد إشعارات",
+      "description": "كل شيء محدث! لا توجد إشعارات جديدة للعرض.",
+      "unreadTitle": "لا توجد إشعارات غير مقروءة",
+      "unreadDescription": "تم قراءة جميع إشعاراتك."
+    },
+    "actions": {
+      "viewDetails": "عرض التفاصيل",
+      "markAsRead": "تحديد كمقروء",
+      "archive": "أرشفة"
+    },
+    "loading": "جارٍ تحميل الإشعارات...",
+    "success": {
+      "markAllAsRead": "تم تحديد جميع الإشعارات كمقروءة",
+      "markAsRead": "تم تحديد الإشعار كمقروء",
+      "archived": "تم أرشفة الإشعار"
+    }
+  },
+  "settings": {
+    "title": "إعدادات الإشعارات",
+    "description": "إدارة كيفية ووقت تلقي الإشعارات.",
+    "channels": {
+      "title": "قنوات الإشعارات",
+      "description": "اختر كيفية تلقي الإشعارات.",
+      "email": "إشعارات البريد الإلكتروني",
+      "emailDescription": "تلقي الإشعارات عبر البريد الإلكتروني",
+      "push": "الإشعارات الفورية",
+      "pushDescription": "تلقي الإشعارات الفورية على جهازك",
+      "sms": "إشعارات الرسائل النصية",
+      "smsDescription": "تلقي الإشعارات عبر الرسائل النصية"
+    },
+    "categories": {
+      "title": "فئات الإشعارات",
+      "description": "اختر أنواع الإشعارات التي تريد تلقيها.",
+      "financial": "مالي",
+      "financialDescription": "الفواتير والمدفوعات والتحديثات المالية",
+      "maintenance": "صيانة",
+      "maintenanceDescription": "صيانة المبنى والإصلاحات",
+      "community": "مجتمع",
+      "communityDescription": "أحداث المجتمع والإعلانات",
+      "system": "نظام",
+      "systemDescription": "تحديثات النظام والإشعارات التقنية",
+      "general": "عام",
+      "generalDescription": "الإعلانات والتحديثات العامة"
+    },
+    "quietHours": {
+      "title": "ساعات الهدوء",
+      "description": "حدد ساعات الهدوء عندما لا تريد تلقي الإشعارات.",
+      "enable": "تفعيل ساعات الهدوء",
+      "startTime": "وقت البداية",
+      "endTime": "وقت النهاية"
+    },
+    "actions": {
+      "save": "حفظ الإعدادات",
+      "saving": "جارٍ الحفظ...",
+      "reset": "إعادة تعيين إلى الافتراضي"
+    },
+    "success": {
+      "saved": "تم حفظ إعدادات الإشعارات بنجاح!",
+      "reset": "تم إعادة تعيين الإعدادات إلى الافتراضي"
+    },
+    "error": {
+      "save": "فشل في حفظ إعدادات الإشعارات",
+      "load": "فشل في تحميل إعدادات الإشعارات"
+    }
+  },
+  "form": {
+    "dialogTitle": "إرسال إشعار جديد",
+    "dialogDescription": "إرسال إشعار لجميع المقيمين في منظمتك.",
+    "title": "العنوان",
+    "titlePlaceholder": "عنوان الإشعار",
+    "message": "الرسالة",
+    "messagePlaceholder": "رسالة الإشعار",
+    "category": "الفئة",
+    "categoryPlaceholder": "اختر الفئة",
+    "priority": "الأولوية",
+    "priorityPlaceholder": "اختر الأولوية",
+    "actionUrl": "رابط الإجراء (اختياري)",
+    "actionUrlPlaceholder": "https://example.com",
+    "categories": {
+      "general": "عام",
+      "financial": "مالي",
+      "maintenance": "صيانة",
+      "community": "مجتمع",
+      "system": "نظام"
+    },
+    "priorities": {
+      "low": "منخفض",
+      "normal": "عادي",
+      "high": "عالي",
+      "urgent": "عاجل"
+    },
+    "cancel": "إلغاء",
+    "send": "إرسال الإشعار",
+    "sending": "جارٍ الإرسال...",
+    "successMessage": "تم إرسال الإشعار بنجاح!",
+    "errorMessage": "فشل في إرسال الإشعار"
+  }
+}

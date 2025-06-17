@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { useTRPC } from '@/trpc/client';
 import { Button } from '@/components/ui/button';
 import {
@@ -33,6 +34,8 @@ interface UnitFormProps {
 }
 
 export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
+  const t = useTranslations('units');
+  const tCommon = useTranslations('common');
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -110,16 +113,17 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+        {' '}
         <FormField
           control={form.control}
           name='buildingId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Building</FormLabel>
+              <FormLabel>{t('form.building')}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder='Select a building' />
+                    <SelectValue placeholder={t('form.selectBuilding')} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -134,28 +138,30 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
             </FormItem>
           )}
         />
-
         <div className='grid grid-cols-2 gap-4'>
+          {' '}
           <FormField
             control={form.control}
             name='unitNumber'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Unit Number</FormLabel>
+                <FormLabel>{t('form.unitNumber')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='e.g., 101' {...field} />
+                  <Input
+                    placeholder={t('form.unitNumberPlaceholder')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name='floor'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Floor</FormLabel>
+                <FormLabel>{t('floor')}</FormLabel>
                 <FormControl>
                   <Input
                     type='number'
@@ -169,14 +175,14 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
             )}
           />
         </div>
-
         <div className='grid grid-cols-2 gap-4'>
+          {' '}
           <FormField
             control={form.control}
             name='bedrooms'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Bedrooms</FormLabel>
+                <FormLabel>{t('bedrooms')}</FormLabel>
                 <FormControl>
                   <Input
                     type='number'
@@ -189,13 +195,12 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name='bathrooms'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Bathrooms</FormLabel>
+                <FormLabel>{t('bathrooms')}</FormLabel>
                 <FormControl>
                   <Input
                     type='number'
@@ -209,20 +214,20 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
             )}
           />
         </div>
-
         <div className='grid grid-cols-2 gap-4'>
+          {' '}
           <FormField
             control={form.control}
             name='area'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Area (m²)</FormLabel>
+                <FormLabel>{t('form.areaSquareMeters')}</FormLabel>
                 <FormControl>
                   <Input
                     type='number'
                     min='0'
                     step='0.01'
-                    placeholder='Optional'
+                    placeholder={t('form.optional')}
                     {...field}
                     onChange={e =>
                       field.onChange(
@@ -235,13 +240,12 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name='monthlyFee'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Monthly Fee ($)</FormLabel>
+                <FormLabel>{t('form.monthlyFeeDollar')}</FormLabel>
                 <FormControl>
                   <Input
                     type='number'
@@ -255,17 +259,16 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
               </FormItem>
             )}
           />
-        </div>
-
+        </div>{' '}
         <FormField
           control={form.control}
           name='description'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>{t('portal.details.description')}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder='Optional description or notes about this unit...'
+                  placeholder={t('form.descriptionPlaceholder')}
                   className='resize-none'
                   {...field}
                 />
@@ -274,19 +277,18 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
             </FormItem>
           )}
         />
-
         <div className='flex justify-end space-x-2 pt-4'>
           <Button type='button' variant='outline' onClick={onCancel}>
-            Cancel
+            {tCommon('cancel')}
           </Button>
           <Button type='submit' disabled={isSubmitting}>
             {isSubmitting
               ? isEditing
-                ? 'Updating...'
-                : 'Creating...'
+                ? t('form.updating')
+                : t('form.creating')
               : isEditing
-                ? 'Update Unit'
-                : 'Create Unit'}
+                ? t('form.updateUnit')
+                : t('form.createUnit')}
           </Button>
         </div>
       </form>

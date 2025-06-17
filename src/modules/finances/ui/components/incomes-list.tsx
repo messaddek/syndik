@@ -15,15 +15,18 @@ import { Trash2, Edit } from 'lucide-react';
 import { format } from 'date-fns';
 import { useConfirm } from '@/hooks/use-confirm';
 import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 export function IncomesList() {
   const trpc = useTRPC();
+  const t = useTranslations('finance');
   const queryClient = useQueryClient();
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Income',
-    'Are you sure you want to delete this income record? This action cannot be undone.'
+    t('confirmDialog.deleteIncome.title'),
+    t('confirmDialog.deleteIncome.description'),
+    true
   );
 
   const { data: incomes = [] } = useQuery(trpc.incomes.getAll.queryOptions({}));
@@ -49,9 +52,9 @@ export function IncomesList() {
   };
 
   const getBuildingName = (buildingId?: string | null) => {
-    if (!buildingId) return 'General';
+    if (!buildingId) return t('incomesList.general');
     const building = buildings.find(b => b.id === buildingId);
-    return building?.name || 'Unknown Building';
+    return building?.name || t('incomesList.unknownBuilding');
   };
 
   const getCategoryColor = (category: string) => {
@@ -70,10 +73,10 @@ export function IncomesList() {
       <Card>
         <CardContent className='flex flex-col items-center justify-center p-8'>
           <h3 className='mb-2 text-lg font-medium text-gray-900'>
-            No income records found
+            {t('incomesList.noRecords')}
           </h3>
           <p className='text-sm text-gray-600'>
-            Start by adding your first income record.
+            {t('incomesList.noRecordsDescription')}
           </p>
         </CardContent>
       </Card>
@@ -116,7 +119,7 @@ export function IncomesList() {
             <div className='flex items-center justify-between'>
               <div className='space-y-1'>
                 <p className='text-muted-foreground text-sm'>
-                  Period: {income.month}/{income.year}
+                  {t('incomesList.period')}: {income.month}/{income.year}
                 </p>
                 {income.notes && (
                   <p className='text-sm text-gray-600'>{income.notes}</p>

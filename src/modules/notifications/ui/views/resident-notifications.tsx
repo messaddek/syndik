@@ -25,6 +25,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { Notification } from '../../schema';
+import { useTranslations } from 'next-intl';
 
 const priorityColors = {
   low: 'bg-gray-100 text-gray-700',
@@ -52,6 +53,18 @@ function NotificationItem({
   onMarkAsRead,
   onArchive,
 }: NotificationItemProps) {
+  const t = useTranslations('notifications.resident');
+  const tForm = useTranslations('notifications.form');
+
+  const getPriorityLabel = (priority: string) => {
+    const key = `priorities.${priority}`;
+    return tForm(key) || priority;
+  };
+
+  const getCategoryLabel = (category: string) => {
+    const key = `categories.${category}`;
+    return tForm(key) || category;
+  };
   return (
     <Card
       className={cn(
@@ -98,10 +111,10 @@ function NotificationItem({
                     ]
                   )}
                 >
-                  {notification.priority}
+                  {getPriorityLabel(notification.priority)}
                 </Badge>
                 <Badge variant='outline' className='text-xs'>
-                  {notification.category}
+                  {getCategoryLabel(notification.category)}
                 </Badge>
               </div>
             </div>
@@ -135,12 +148,13 @@ function NotificationItem({
         {notification.actionUrl && (
           <div className='mt-3'>
             <Button size='sm' variant='outline' asChild>
+              {' '}
               <a
                 href={notification.actionUrl}
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                View Details
+                {t('actions.viewDetails')}
               </a>
             </Button>
           </div>
@@ -154,6 +168,8 @@ export function ResidentNotifications() {
   const [activeTab, setActiveTab] = useState('all');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
+  const t = useTranslations('notifications.resident');
+  const tForm = useTranslations('notifications.form');
 
   const trpc = useTRPC();
   const queryClient = useQueryClient();
@@ -225,7 +241,7 @@ export function ResidentNotifications() {
         queryClient.invalidateQueries(
           trpc.notifications.getUnreadCount.queryOptions()
         );
-        toast.success('All notifications marked as read');
+        toast.success(t('success.markAllAsRead'));
       },
     })
   );
@@ -234,12 +250,11 @@ export function ResidentNotifications() {
 
   return (
     <div className='space-y-6'>
+      {' '}
       <div className='flex items-center justify-between'>
         <div>
-          <h1 className='text-3xl font-bold'>Notifications</h1>
-          <p className='text-muted-foreground mt-2'>
-            Stay updated with important announcements and building information.
-          </p>
+          <h1 className='text-3xl font-bold'>{t('title')}</h1>
+          <p className='text-muted-foreground mt-2'>{t('description')}</p>
         </div>
         <div className='flex items-center gap-2'>
           {unreadCount && unreadCount.total > 0 && (
@@ -249,7 +264,7 @@ export function ResidentNotifications() {
               disabled={markAllAsReadMutation.isPending}
             >
               <Check className='mr-2 h-4 w-4' />
-              Mark all read ({unreadCount.total})
+              {t('markAllRead')} ({unreadCount.total})
             </Button>
           )}
           <Button variant='outline' size='icon'>
@@ -257,7 +272,6 @@ export function ResidentNotifications() {
           </Button>
         </div>
       </div>
-
       {/* Quick Stats */}
       <div className='grid gap-4 md:grid-cols-4'>
         <Card>
@@ -303,62 +317,90 @@ export function ResidentNotifications() {
           </CardContent>
         </Card>
       </div>
-
       {/* Filters */}
       <Card>
+        {' '}
         <CardHeader>
           <CardTitle className='flex items-center gap-2'>
             <Filter className='h-5 w-5' />
-            Filters
+            {t('filters.category')} & {t('filters.priority')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className='flex gap-4'>
             <div className='space-y-2'>
-              <label className='text-sm font-medium'>Category</label>
+              <label className='text-sm font-medium'>
+                {t('filters.category')}
+              </label>
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger className='w-[180px]'>
-                  <SelectValue placeholder='All categories' />
+                  <SelectValue
+                    placeholder={t('filters.allCategoriesPlaceholder')}
+                  />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value='all'>All Categories</SelectItem>
-                  <SelectItem value='general'>General</SelectItem>
-                  <SelectItem value='financial'>Financial</SelectItem>
-                  <SelectItem value='maintenance'>Maintenance</SelectItem>
-                  <SelectItem value='community'>Community</SelectItem>
-                  <SelectItem value='system'>System</SelectItem>
+                  <SelectItem value='all'>
+                    {t('filters.allCategories')}
+                  </SelectItem>
+                  <SelectItem value='general'>
+                    {tForm('categories.general')}
+                  </SelectItem>
+                  <SelectItem value='financial'>
+                    {tForm('categories.financial')}
+                  </SelectItem>
+                  <SelectItem value='maintenance'>
+                    {tForm('categories.maintenance')}
+                  </SelectItem>
+                  <SelectItem value='community'>
+                    {tForm('categories.community')}
+                  </SelectItem>
+                  <SelectItem value='system'>
+                    {tForm('categories.system')}
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className='space-y-2'>
-              <label className='text-sm font-medium'>Priority</label>
+              <label className='text-sm font-medium'>
+                {t('filters.priority')}
+              </label>
               <Select value={priorityFilter} onValueChange={setPriorityFilter}>
                 <SelectTrigger className='w-[180px]'>
-                  <SelectValue placeholder='All priorities' />
-                </SelectTrigger>
+                  <SelectValue
+                    placeholder={t('filters.allPrioritiesPlaceholder')}
+                  />
+                </SelectTrigger>{' '}
                 <SelectContent>
-                  <SelectItem value='all'>All Priorities</SelectItem>
-                  <SelectItem value='urgent'>Urgent</SelectItem>
-                  <SelectItem value='high'>High</SelectItem>
-                  <SelectItem value='normal'>Normal</SelectItem>
-                  <SelectItem value='low'>Low</SelectItem>
+                  <SelectItem value='all'>
+                    {t('filters.allPriorities')}
+                  </SelectItem>
+                  <SelectItem value='urgent'>
+                    {tForm('priorities.urgent')}
+                  </SelectItem>
+                  <SelectItem value='high'>
+                    {tForm('priorities.high')}
+                  </SelectItem>
+                  <SelectItem value='normal'>
+                    {tForm('priorities.normal')}
+                  </SelectItem>
+                  <SelectItem value='low'>{tForm('priorities.low')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
         </CardContent>
       </Card>
-
       {/* Notifications */}
       <Tabs
         value={activeTab}
         onValueChange={setActiveTab}
         className='space-y-4'
       >
+        {' '}
         <TabsList>
-          <TabsTrigger value='all'>All Notifications</TabsTrigger>
+          <TabsTrigger value='all'>{t('allNotifications')}</TabsTrigger>
           <TabsTrigger value='unread' className='relative'>
-            Unread
+            {t('unreadNotifications')}
             {unreadCount && unreadCount.total > 0 && (
               <Badge variant='secondary' className='ml-2 h-4 text-xs'>
                 {unreadCount.total}
@@ -366,21 +408,19 @@ export function ResidentNotifications() {
             )}
           </TabsTrigger>
         </TabsList>
-
         <TabsContent value='all' className='space-y-4'>
+          {' '}
           {isLoading ? (
             <div className='py-8 text-center'>
-              <div className='text-muted-foreground'>
-                Loading notifications...
-              </div>
+              <div className='text-muted-foreground'>{t('loading')}</div>
             </div>
           ) : notifications.length === 0 ? (
             <Card>
               <CardContent className='py-8 text-center'>
                 <Bell className='text-muted-foreground mx-auto mb-2 h-8 w-8' />
-                <p className='text-muted-foreground'>No notifications found</p>
+                <p className='text-muted-foreground'>{t('emptyState.title')}</p>
                 <p className='text-muted-foreground mt-1 text-sm'>
-                  Check back later for updates from your building management.
+                  {t('emptyState.description')}
                 </p>
               </CardContent>
             </Card>
@@ -401,21 +441,21 @@ export function ResidentNotifications() {
             </div>
           )}
         </TabsContent>
-
         <TabsContent value='unread' className='space-y-4'>
+          {' '}
           {isLoading ? (
             <div className='py-8 text-center'>
-              <div className='text-muted-foreground'>
-                Loading notifications...
-              </div>
+              <div className='text-muted-foreground'>{t('loading')}</div>
             </div>
           ) : notifications.filter(n => !n.isRead).length === 0 ? (
             <Card>
               <CardContent className='py-8 text-center'>
                 <Check className='mx-auto mb-2 h-8 w-8 text-green-500' />
-                <p className='text-muted-foreground'>All caught up!</p>
+                <p className='text-muted-foreground'>
+                  {t('emptyState.unreadTitle')}
+                </p>
                 <p className='text-muted-foreground mt-1 text-sm'>
-                  You have no unread notifications.
+                  {t('emptyState.unreadDescription')}
                 </p>
               </CardContent>
             </Card>

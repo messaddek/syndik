@@ -1,0 +1,143 @@
+{
+  "title": "Notification Management",
+  "description": "Send notifications to residents and manage communication",
+  "addNotification": "Add Notification",
+  "stats": {
+    "totalSent": "Total Sent",
+    "allNotifications": "All notifications",
+    "thisWeek": "This Week",
+    "lastSevenDays": "Last 7 days",
+    "urgent": "Urgent",
+    "highPriorityNotifications": "High priority notifications"
+  },
+  "list": {
+    "recentNotifications": "Recent Notifications",
+    "description": "All notifications sent to residents in your organization.",
+    "loading": "Loading notifications...",
+    "emptyTitle": "No notifications sent yet",
+    "emptyDescription": "Create your first notification to get started."
+  },
+  "dropdown": {
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "all": "All",
+    "unread": "Unread",
+    "loading": "Loading notifications...",
+    "emptyTitle": "No notifications yet",
+    "allCaughtUp": "All caught up!",
+    "noUnreadNotifications": "No unread notifications",
+    "viewAllNotifications": "View all notifications"
+  },
+  "resident": {
+    "title": "Notifications",
+    "description": "Stay updated with important announcements and building information.",
+    "markAllRead": "Mark all read",
+    "allNotifications": "All Notifications",
+    "unreadNotifications": "Unread",
+    "filters": {
+      "category": "Category",
+      "priority": "Priority",
+      "allCategories": "All Categories",
+      "allPriorities": "All Priorities",
+      "allCategoriesPlaceholder": "All categories",
+      "allPrioritiesPlaceholder": "All priorities"
+    },
+    "emptyState": {
+      "title": "No notifications",
+      "description": "You're all caught up! No new notifications to display.",
+      "unreadTitle": "No unread notifications",
+      "unreadDescription": "All your notifications have been read."
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "markAsRead": "Mark as read",
+      "archive": "Archive"
+    },
+    "loading": "Loading notifications...",
+    "success": {
+      "markAllAsRead": "All notifications marked as read",
+      "markAsRead": "Notification marked as read",
+      "archived": "Notification archived"
+    }
+  },
+  "settings": {
+    "title": "Notification Settings",
+    "description": "Manage how and when you receive notifications.",
+    "channels": {
+      "title": "Notification Channels",
+      "description": "Choose how you want to receive notifications.",
+      "email": "Email Notifications",
+      "emailDescription": "Receive notifications via email",
+      "push": "Push Notifications",
+      "pushDescription": "Receive push notifications on your device",
+      "sms": "SMS Notifications",
+      "smsDescription": "Receive notifications via text message"
+    },
+    "categories": {
+      "title": "Notification Categories",
+      "description": "Choose which types of notifications you want to receive.",
+      "financial": "Financial",
+      "financialDescription": "Billing, payments, and financial updates",
+      "maintenance": "Maintenance",
+      "maintenanceDescription": "Building maintenance and repairs",
+      "community": "Community",
+      "communityDescription": "Community events and announcements",
+      "system": "System",
+      "systemDescription": "System updates and technical notifications",
+      "general": "General",
+      "generalDescription": "General announcements and updates"
+    },
+    "quietHours": {
+      "title": "Quiet Hours",
+      "description": "Set quiet hours when you don't want to receive notifications.",
+      "enable": "Enable quiet hours",
+      "startTime": "Start time",
+      "endTime": "End time"
+    },
+    "actions": {
+      "save": "Save Settings",
+      "saving": "Saving...",
+      "reset": "Reset to Defaults"
+    },
+    "success": {
+      "saved": "Notification settings saved successfully!",
+      "reset": "Settings reset to defaults"
+    },
+    "error": {
+      "save": "Failed to save notification settings",
+      "load": "Failed to load notification settings"
+    }
+  },
+  "form": {
+    "dialogTitle": "Send New Notification",
+    "dialogDescription": "Send a notification to all residents in your organization.",
+    "title": "Title",
+    "titlePlaceholder": "Notification title",
+    "message": "Message",
+    "messagePlaceholder": "Notification message",
+    "category": "Category",
+    "categoryPlaceholder": "Select category",
+    "priority": "Priority",
+    "priorityPlaceholder": "Select priority",
+    "actionUrl": "Action URL (Optional)",
+    "actionUrlPlaceholder": "https://example.com",
+    "categories": {
+      "general": "General",
+      "financial": "Financial",
+      "maintenance": "Maintenance",
+      "community": "Community",
+      "system": "System"
+    },
+    "priorities": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "cancel": "Cancel",
+    "send": "Send Notification",
+    "sending": "Sending...",
+    "successMessage": "Notification sent successfully!",
+    "errorMessage": "Failed to send notification"
+  }
+}

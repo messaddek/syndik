@@ -1,6 +1,7 @@
 'use client';
 
 import { useSuspenseQuery, useQuery } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { useTRPC } from '@/trpc/client';
 import {
   Card,
@@ -39,11 +40,13 @@ export function ResidentView({ id, _searchParams }: ResidentViewProps) {
   const trpc = useTRPC();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const t = useTranslations('residents');
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Resident',
-    'Are you sure you want to delete this resident? This action cannot be undone.'
+    t('confirmDelete.title'),
+    t('confirmDelete.description'),
+    true
   );
 
   // Fetch resident data

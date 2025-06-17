@@ -1,0 +1,104 @@
+{
+  "title": "الماليات",
+  "description": "إدارة الإيرادات والمصروفات لممتلكاتك",
+  "overview": {
+    "totalIncome": "إجمالي الإيرادات",
+    "totalExpenses": "إجمالي المصروفات",
+    "netIncome": "صافي الدخل",
+    "transactions": "المعاملات",
+    "thisMonth": "هذا الشهر"
+  },
+  "tabs": {
+    "incomes": "الإيرادات",
+    "expenses": "المصروفات"
+  },
+  "buttons": {
+    "addIncome": "إضافة إيراد",
+    "addExpense": "إضافة مصروف",
+    "cancel": "إلغاء",
+    "creating": "جاري الإنشاء...",
+    "createIncome": "إنشاء إيراد",
+    "createExpense": "إنشاء مصروف",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "viewReceipt": "عرض الإيصال"
+  },
+  "createIncomeDialog": {
+    "title": "إضافة إيراد جديد",
+    "description": "تسجيل معاملة إيراد جديدة. املأ التفاصيل أدناه.",
+    "fields": {
+      "building": "المبنى (اختياري)",
+      "buildingPlaceholder": "اختر المبنى أو اتركه فارغاً للإيراد العام",
+      "description": "الوصف",
+      "descriptionPlaceholder": "مثال: رسوم الصيانة الشهرية",
+      "amount": "المبلغ ($)",
+      "category": "الفئة",
+      "month": "الشهر",
+      "year": "السنة",
+      "receivedDate": "تاريخ الاستلام",
+      "notes": "ملاحظات (اختياري)",
+      "notesPlaceholder": "ملاحظات إضافية حول هذا الإيراد..."
+    },
+    "categories": {
+      "monthlyFees": "الرسوم الشهرية",
+      "parking": "مواقف السيارات",
+      "utilities": "المرافق",
+      "maintenance": "الصيانة",
+      "other": "أخرى"
+    }
+  },
+  "createExpenseDialog": {
+    "title": "إضافة مصروف جديد",
+    "description": "تسجيل معاملة مصروف جديدة. املأ التفاصيل أدناه.",
+    "fields": {
+      "building": "المبنى (اختياري)",
+      "buildingPlaceholder": "اختر المبنى أو اتركه فارغاً للمصروف العام",
+      "description": "الوصف",
+      "descriptionPlaceholder": "مثال: صيانة المصعد",
+      "amount": "المبلغ ($)",
+      "category": "الفئة",
+      "vendor": "المورد (اختياري)",
+      "vendorPlaceholder": "من تم دفع هذا المصروف له؟",
+      "month": "الشهر",
+      "year": "السنة",
+      "paidDate": "تاريخ الدفع",
+      "receiptUrl": "رابط الإيصال (اختياري)",
+      "receiptUrlPlaceholder": "https://...",
+      "notes": "ملاحظات (اختياري)",
+      "notesPlaceholder": "ملاحظات إضافية حول هذا المصروف..."
+    },
+    "categories": {
+      "maintenance": "الصيانة",
+      "utilities": "المرافق",
+      "cleaning": "التنظيف",
+      "security": "الأمن",
+      "supplies": "المستلزمات",
+      "professionalServices": "الخدمات المهنية",
+      "other": "أخرى"
+    }
+  },
+  "incomesList": {
+    "noRecords": "لا توجد سجلات إيرادات",
+    "noRecordsDescription": "ابدأ بإضافة سجل الإيراد الأول.",
+    "period": "الفترة",
+    "general": "عام",
+    "unknownBuilding": "مبنى غير معروف"
+  },
+  "expensesList": {
+    "noRecords": "لا توجد سجلات مصروفات",
+    "noRecordsDescription": "ابدأ بإضافة سجل المصروف الأول.",
+    "period": "الفترة",
+    "general": "عام",
+    "unknownBuilding": "مبنى غير معروف"
+  },
+  "confirmDialog": {
+    "deleteIncome": {
+      "title": "حذف الإيراد",
+      "description": "هل أنت متأكد من أنك تريد حذف سجل الإيراد هذا؟ لا يمكن التراجع عن هذا الإجراء."
+    },
+    "deleteExpense": {
+      "title": "حذف المصروف",
+      "description": "هل أنت متأكد من أنك تريد حذف سجل المصروف هذا؟ لا يمكن التراجع عن هذا الإجراء."
+    }
+  }
+}

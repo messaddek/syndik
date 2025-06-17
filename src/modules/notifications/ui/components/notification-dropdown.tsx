@@ -17,6 +17,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Notification } from '@/lib/schema';
 import { useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 const priorityColors = {
   low: 'bg-gray-100 text-gray-700',
   normal: 'bg-blue-100 text-blue-700',
@@ -43,6 +44,12 @@ function NotificationItem({
   onMarkAsRead,
   onArchive,
 }: NotificationItemProps) {
+  const t = useTranslations('notifications.form');
+
+  const getPriorityLabel = (priority: string) => {
+    const key = `priorities.${priority}`;
+    return t(key) || priority;
+  };
   return (
     <div
       className={cn(
@@ -99,7 +106,7 @@ function NotificationItem({
                   ]
                 )}
               >
-                {notification.priority}
+                {getPriorityLabel(notification.priority)}
               </Badge>
             </div>
           </div>
@@ -137,6 +144,7 @@ interface NotificationDropdownProps {
 
 export function NotificationDropdown({ children }: NotificationDropdownProps) {
   const [activeTab, setActiveTab] = useState('all');
+  const t = useTranslations('notifications.dropdown');
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -217,9 +225,9 @@ export function NotificationDropdown({ children }: NotificationDropdownProps) {
         )}
       </PopoverTrigger>
       <PopoverContent className='w-96 p-0' align='end'>
-        <div className='border-b p-4'>
+        <div className='p-4'>
           <div className='flex items-center justify-between'>
-            <h3 className='font-semibold'>Notifications</h3>
+            <h3 className='font-semibold'>{t('title')}</h3>
             <div className='flex items-center gap-2'>
               {unreadCount && unreadCount.total > 0 && (
                 <Button
@@ -229,7 +237,7 @@ export function NotificationDropdown({ children }: NotificationDropdownProps) {
                   disabled={markAllAsReadMutation.isPending}
                 >
                   <Check className='mr-1 h-3 w-3' />
-                  Mark all read
+                  {t('markAllRead')}
                 </Button>
               )}
               <Button
@@ -242,13 +250,12 @@ export function NotificationDropdown({ children }: NotificationDropdownProps) {
             </div>
           </div>
         </div>
-
         <Tabs value={activeTab} onValueChange={setActiveTab} className='w-full'>
-          <div className='border-b px-4'>
+          <div className='px-4'>
             <TabsList className='grid w-full grid-cols-2'>
-              <TabsTrigger value='all'>All</TabsTrigger>
+              <TabsTrigger value='all'>{t('all')}</TabsTrigger>
               <TabsTrigger value='unread' className='relative'>
-                Unread
+                {t('unread')}
                 {unreadCount && unreadCount.total > 0 && (
                   <Badge variant='secondary' className='ml-1 h-4 text-xs'>
                     {unreadCount.total}
@@ -257,18 +264,17 @@ export function NotificationDropdown({ children }: NotificationDropdownProps) {
               </TabsTrigger>
             </TabsList>
           </div>
-
           <TabsContent value='all' className='m-0'>
             <ScrollArea className='h-96'>
               {isLoading ? (
                 <div className='text-muted-foreground p-4 text-center text-sm'>
-                  Loading notifications...
+                  {t('loading')}
                 </div>
               ) : notifications.length === 0 ? (
                 <div className='p-8 text-center'>
                   <Bell className='text-muted-foreground mx-auto mb-2 h-8 w-8' />
                   <p className='text-muted-foreground text-sm'>
-                    No notifications yet
+                    {t('emptyTitle')}
                   </p>
                 </div>
               ) : (
@@ -289,21 +295,20 @@ export function NotificationDropdown({ children }: NotificationDropdownProps) {
               )}
             </ScrollArea>
           </TabsContent>
-
           <TabsContent value='unread' className='m-0'>
             <ScrollArea className='h-96'>
               {isLoading ? (
                 <div className='text-muted-foreground p-4 text-center text-sm'>
-                  Loading notifications...
+                  {t('loading')}
                 </div>
               ) : notifications.filter(n => !n.isRead).length === 0 ? (
                 <div className='p-8 text-center'>
                   <Check className='mx-auto mb-2 h-8 w-8 text-green-500' />
                   <p className='text-muted-foreground text-sm'>
-                    All caught up!
+                    {t('allCaughtUp')}
                   </p>
                   <p className='text-muted-foreground mt-1 text-xs'>
-                    No unread notifications
+                    {t('noUnreadNotifications')}
                   </p>
                 </div>
               ) : (
@@ -327,11 +332,10 @@ export function NotificationDropdown({ children }: NotificationDropdownProps) {
             </ScrollArea>
           </TabsContent>
         </Tabs>
-
         {notifications.length > 0 && (
           <div className='border-t p-3'>
             <Button variant='ghost' className='w-full' size='sm'>
-              View all notifications
+              {t('viewAllNotifications')}
             </Button>
           </div>
         )}

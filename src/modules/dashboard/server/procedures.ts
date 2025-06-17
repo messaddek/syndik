@@ -127,7 +127,12 @@ export const dashboardRouter = createTRPCRouter({
     .input(
       z.object({
         year: z.number().default(new Date().getFullYear()),
-        buildingId: z.string().uuid().optional(),
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
       })
     )
     .query(async ({ ctx, input }) => {

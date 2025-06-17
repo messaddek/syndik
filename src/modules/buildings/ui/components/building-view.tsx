@@ -258,18 +258,18 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                   </p>
                   <p className='text-sm'>{building.postalCode}</p>
                 </div>
-              </div>
+              </div>{' '}
               {building.description && (
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Description
+                    {t('description')}
                   </p>
                   <p className='text-sm'>{building.description}</p>
                 </div>
-              )}
+              )}{' '}
               <div>
                 <p className='text-muted-foreground text-sm font-medium'>
-                  Created
+                  {t('created')}
                 </p>
                 <p className='text-sm'>
                   {new Date(building.createdAt).toLocaleDateString()}

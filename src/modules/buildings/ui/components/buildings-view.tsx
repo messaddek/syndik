@@ -1,7 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import { Building } from '../../types';
 import { useTRPC } from '@/trpc/client';
 import {
@@ -30,6 +35,7 @@ import { useConfirm } from '@/hooks/use-confirm';
 import { useTranslations } from 'next-intl';
 import { CreateBuildingDialog } from '@/modules/buildings/ui/components/create-building-dialog';
 import { EditBuildingDialog } from '@/modules/buildings/ui/components/edit-building-dialog';
+import { PageHeader } from '@/components/page-header';
 
 type BuildingQueryResult = {
   data: Building[];
@@ -95,7 +101,7 @@ type BuildingsViewProps = {
   };
 };
 
-export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
+export const BuildingsView = ({ initialFilters }: BuildingsViewProps = {}) => {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingBuilding, setEditingBuilding] = useState<Building | null>(null);
@@ -110,14 +116,15 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
     t('deleteBuilding'),
-    t('messages.confirmDelete')
+    t('messages.confirmDelete'),
+    true
   );
 
   // Initialize tRPC client
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   // Queries
-  const { data: buildingsData } = useQuery(
+  const { data: buildingsData } = useSuspenseQuery(
     trpc.buildings.getAll.queryOptions({
       page: filters.page,
       pageSize: filters.pageSize,
@@ -177,23 +184,20 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
   // Get the buildings data
   const buildingsWithData =
     (buildingsData as unknown as BuildingQueryResult)?.data || [];
-
   return (
     <div className='space-y-6'>
       {/* Header */}
-      <div className='flex items-center justify-between'>
-        <div>
-          <h2 className='text-2xl font-bold'>{t('title')}</h2>
-          <p className='text-gray-600'>{t('subtitle')}</p>
-        </div>
-        <Button
-          onClick={() => setIsCreateDialogOpen(true)}
-          className='flex items-center gap-2'
-        >
-          <Plus className='h-4 w-4' />
-          {t('addBuilding')}
-        </Button>
-      </div>
+      <PageHeader
+        title={t('title')}
+        description={t('subtitle')}
+        ctaButtonContent={
+          <>
+            <Plus className='h-4 w-4' />
+            {t('addBuilding')}
+          </>
+        }
+        ctaButtonCallback={() => setIsCreateDialogOpen(true)}
+      />
       {/* Filters */}
       <Card>
         <CardHeader>
@@ -343,4 +347,4 @@ export function BuildingsView({ initialFilters }: BuildingsViewProps = {}) {
       <ConfirmDialog />
     </div>
   );
-}
+};

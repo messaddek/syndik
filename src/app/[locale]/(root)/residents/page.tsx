@@ -1,25 +1,36 @@
 import { Suspense } from 'react';
-import { ResidentsView } from '@/modules/residents';
+import { loadResidentsSearchParams, ResidentsView } from '@/modules/residents';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
-import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
-import { transformResidentsParams } from '@/modules/residents';
+import { getQueryClient, trpc } from '@/trpc/server';
+import { SearchParams } from 'nuqs';
+import { ResidentsViewSkeleton } from '@/modules/residents/ui/components/residents-view-skeleton';
 
 type ResidentsPageProps = {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
+  searchParams: Promise<SearchParams>;
 };
 
-export default async function ResidentsPage({
-  searchParams,
-}: ResidentsPageProps) {
-  const filters = await transformResidentsParams(await searchParams);
+const ResidentsPage = async ({ searchParams }: ResidentsPageProps) => {
+  const queryClient = getQueryClient();
+
+  const filters = await loadResidentsSearchParams(searchParams);
+
+  void queryClient.prefetchQuery(
+    trpc.residents.getAll.queryOptions({
+      ...filters,
+      isOwner: filters.isOwner ?? undefined,
+      isActive: filters.isActive ?? undefined,
+    })
+  );
 
   return (
     <TRPCErrorBoundary>
       <div className='flex flex-col space-y-4'>
-        <Suspense fallback={<DashboardSkeleton />}>
-          <ResidentsView initialFilters={filters} />
+        <Suspense fallback={<ResidentsViewSkeleton />}>
+          <ResidentsView />
         </Suspense>
       </div>
     </TRPCErrorBoundary>
   );
-}
+};
+
+export default ResidentsPage;

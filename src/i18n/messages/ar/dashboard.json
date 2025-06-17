@@ -1,4 +1,6 @@
 {
+  "title": "لوحة التحكم",
+  "description": "نظرة عامة على أداء النقابة والمقاييس الرئيسية",
   "buildings": "المباني",
   "totalManagedProperties": "إجمالي العقارات المُدارة",
   "units": "الوحدات",
@@ -28,5 +30,7 @@
   "trends": "الاتجاهات",
   "trendsDescription": "عرض الاتجاهات المالية واتجاهات الإشغال.",
   "occupancy": "الإشغال",
-  "occupancyDescription": "عرض معدلات وتاريخ الإشغال."
+  "occupancyDescription": "عرض معدلات وتاريخ الإشغال.",
+  "financialTrends": "الاتجاهات المالية",
+  "occupancyTrends": "اتجاهات الإشغال"
 }

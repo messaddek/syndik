@@ -4,11 +4,15 @@ import { useQuery } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { useRouter } from '@/i18n/navigation';
 import { useEffect } from 'react';
+
 import { BuildingViewSkeleton } from '@/modules/buildings/ui/components/building-view-skeleton';
 import { Skeleton } from '@/components/ui/skeleton';
 import { usePathname } from '@/i18n/routing';
 import { UnitViewSkeleton } from '@/modules/units';
 import { ResidentViewSkeleton } from '@/modules/residents';
+
+import { usePathname } from '@/i18n/routing';
+import { getLoadingSkeleton } from '../utils/get-loading-skeleton';
 
 interface RoleGuardProps {
   children: React.ReactNode;
@@ -24,37 +28,6 @@ export function RoleGuard({
   const trpc = useTRPC();
   const router = useRouter();
   const pathname = usePathname();
-
-  // Function to get appropriate skeleton based on route
-  const getLoadingSkeleton = () => {
-    if (pathname.includes('/buildings/') && pathname.split('/').length > 3) {
-      // Individual building view
-      return <BuildingViewSkeleton />;
-    }
-
-    if (pathname.includes('/units/') && pathname.split('/').length > 3) {
-      // Individual building view
-      return <UnitViewSkeleton />;
-    }
-
-    if (pathname.includes('/residents/') && pathname.split('/').length > 3) {
-      // Individual building view
-      return <ResidentViewSkeleton />;
-    }
-
-    // Default to minimal skeleton for other pages
-    return (
-      <div className='space-y-6'>
-        <Skeleton className='h-8 w-48' />
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
-          {[...Array(4)].map((_, i) => (
-            <Skeleton key={i} className='h-32' />
-          ))}
-        </div>
-        <Skeleton className='h-64' />
-      </div>
-    );
-  };
 
   const { data: account, isLoading } = useQuery(
     trpc.accounts.getCurrentAccount.queryOptions()
@@ -108,8 +81,9 @@ export function RoleGuard({
       console.log('⏳ RoleGuard - Still loading account...');
     }
   }, [account, isLoading, allowedRoles, redirectTo, router]);
+
   if (isLoading) {
-    return getLoadingSkeleton();
+    return getLoadingSkeleton(pathname);
   }
 
   if (!account) {

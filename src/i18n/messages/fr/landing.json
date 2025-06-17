@@ -118,7 +118,7 @@
     "subtitle": "Commencez en quelques minutes avec notre processus de configuration intuitif.",
     "description": "Notre plateforme intuitive vous guide étape par étape pour une mise en œuvre rapide et efficace.",
     "steps": {
-      "signUp": {
+      "setup": {
         "title": "Inscription Rapide",
         "description": "Créez votre compte et configurez votre première propriété en quelques minutes seulement."
       },
@@ -130,7 +130,7 @@
         "title": "Gérer Efficacement",
         "description": "Surveillez tout depuis un tableau de bord unique et concentrez-vous sur le développement de votre entreprise."
       },
-      "grow": {
+      "automate": {
         "title": "Développer Votre Activité",
         "description": "Évoluez facilement en ajoutant de nouvelles propriétés et en automatisant vos processus de gestion."
       }

@@ -42,9 +42,10 @@ interface ColumnActionsProps {
   resident: ResidentWithUnit;
   onEdit: (resident: ResidentWithUnit) => void;
   onDelete: (id: string) => void;
+  t: (key: string) => string;
 }
 
-function ColumnActions({ resident, onEdit, onDelete }: ColumnActionsProps) {
+function ColumnActions({ resident, onEdit, onDelete, t }: ColumnActionsProps) {
   return (
     <div className='flex items-center space-x-1'>
       <ResidentInviteButton resident={resident} />
@@ -56,23 +57,23 @@ function ColumnActions({ resident, onEdit, onDelete }: ColumnActionsProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end'>
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuLabel>{t('columns.actions')}</DropdownMenuLabel>
           <DropdownMenuItem
             onClick={() => navigator.clipboard.writeText(resident.email)}
           >
-            Copy email
+            {t('columns.copyEmail')}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => onEdit(resident)}>
             <Edit className='mr-2 h-4 w-4' />
-            Edit resident
+            {t('columns.editResident')}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => onDelete(resident.id)}
             className='text-destructive'
           >
             <Trash2 className='mr-2 h-4 w-4' />
-            Delete resident
+            {t('columns.deleteResident')}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -82,7 +83,8 @@ function ColumnActions({ resident, onEdit, onDelete }: ColumnActionsProps) {
 
 export function createResidentsColumns(
   onEdit: (resident: ResidentWithUnit) => void,
-  onDelete: (id: string) => void
+  onDelete: (id: string) => void,
+  t: (key: string) => string
 ): ColumnDef<ResidentWithUnit>[] {
   return [
     {
@@ -115,7 +117,7 @@ export function createResidentsColumns(
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            First Name
+            {t('columns.firstName')}
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         );
@@ -138,7 +140,7 @@ export function createResidentsColumns(
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Last Name
+            {t('columns.lastName')}
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         );
@@ -152,7 +154,7 @@ export function createResidentsColumns(
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Email
+            {t('columns.email')}
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         );
@@ -166,7 +168,7 @@ export function createResidentsColumns(
     },
     {
       accessorKey: 'phone',
-      header: 'Phone',
+      header: t('columns.phone'),
       cell: ({ row }) => {
         const phone = row.getValue('phone') as string | null;
         return phone ? (
@@ -181,7 +183,7 @@ export function createResidentsColumns(
     },
     {
       id: 'unit',
-      header: 'Unit',
+      header: t('columns.unit'),
       cell: ({ row }) => {
         const resident = row.original;
         return resident.unit ? (
@@ -200,7 +202,7 @@ export function createResidentsColumns(
     },
     {
       accessorKey: 'isOwner',
-      header: 'Type',
+      header: t('columns.type'),
       cell: ({ row }) => {
         const isOwner = row.getValue('isOwner') as boolean;
         return (
@@ -208,12 +210,12 @@ export function createResidentsColumns(
             {isOwner ? (
               <>
                 <UserCheck className='mr-1 h-3 w-3' />
-                Owner
+                {t('ownerStatus')}
               </>
             ) : (
               <>
                 <User className='mr-1 h-3 w-3' />
-                Tenant
+                {t('tenantStatus')}
               </>
             )}
           </Badge>
@@ -222,12 +224,12 @@ export function createResidentsColumns(
     },
     {
       accessorKey: 'isActive',
-      header: 'Status',
+      header: t('columns.status'),
       cell: ({ row }) => {
         const isActive = row.getValue('isActive') as boolean;
         return (
           <Badge variant={isActive ? 'default' : 'destructive'}>
-            {isActive ? 'Active' : 'Inactive'}
+            {isActive ? t('status.active') : t('status.inactive')}
           </Badge>
         );
       },
@@ -240,7 +242,7 @@ export function createResidentsColumns(
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Move In Date
+            {t('columns.moveInDate')}
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         );
@@ -260,6 +262,7 @@ export function createResidentsColumns(
             resident={resident}
             onEdit={onEdit}
             onDelete={onDelete}
+            t={t}
           />
         );
       },

@@ -1,6 +1,7 @@
 'use client';
 
 import { Search, LayoutDashboard } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SidebarTrigger } from '@/components/ui/sidebar';
@@ -16,31 +17,31 @@ export function PortalNavbar() {
   // Initialize real-time notifications
   useRealtimeNotifications();
   const router = useRouter();
+  const t = useTranslations('portal.navbar');
 
   const handleDashboardAccess = () => {
     // Navigate to org-redirect which will handle role-based routing
     router.push('/org-redirect');
   };
   return (
-    <header className='flex h-16 shrink-0 items-center gap-2 border-b px-2 sm:px-4'>
+    <header className='bg-background sticky top-0 z-40 flex h-16 shrink-0 items-center gap-2 border-b px-2 sm:px-4'>
       <SidebarTrigger className='-ml-1' />
       <Separator orientation='vertical' className='mr-2 h-4' />
 
       {/* Mobile Layout */}
       <div className='flex w-full items-center justify-between lg:hidden'>
+        {' '}
         {/* Mobile Search - Icon Only */}
         <div className='max-w-[200px] flex-1'>
           <div className='relative'>
             <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
-            <Input placeholder='Search...' className='pl-9 text-sm' />
+            <Input placeholder={t('searchMobile')} className='pl-9 text-sm' />
           </div>
         </div>
-
         {/* Mobile Center - Organization Switcher */}
         <div className='mx-2 max-w-[150px]'>
           <OrgSwitcher appearance='compact' />
         </div>
-
         {/* Mobile Right - Controls */}
         <div className='flex items-center gap-1'>
           <LanguageSwitcher />
@@ -51,22 +52,17 @@ export function PortalNavbar() {
 
       {/* Desktop Layout */}
       <div className='hidden flex-1 items-center justify-between lg:flex'>
+        {' '}
         {/* Desktop Search */}
         <div className='max-w-md flex-1'>
           <div className='relative'>
             <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
-            <Input
-              placeholder='Search announcements, payments...'
-              className='pl-9'
-            />
+            <Input placeholder={t('searchDesktop')} className='pl-9' />
           </div>
         </div>
-
         {/* Desktop Center - Organization Controls */}
         <div className='flex items-center gap-4'>
-          <OrgSwitcher appearance='compact' />
-
-          {/* Dashboard Access Button */}
+          <OrgSwitcher appearance='compact' /> {/* Dashboard Access Button */}
           <Button
             variant='outline'
             size='sm'
@@ -74,10 +70,9 @@ export function PortalNavbar() {
             className='flex items-center gap-2'
           >
             <LayoutDashboard className='h-4 w-4' />
-            <span>Dashboard</span>
+            <span>{t('dashboard')}</span>
           </Button>
         </div>
-
         {/* Desktop Right - User Controls */}
         <div className='flex items-center gap-3'>
           <LanguageSwitcher />

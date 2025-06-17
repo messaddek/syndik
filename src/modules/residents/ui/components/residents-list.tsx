@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { useTRPC } from '@/trpc/client';
 import type { Resident } from '../../types';
 import { ResidentForm } from './resident-form';
@@ -61,11 +62,13 @@ export function ResidentsList() {
   const [selectedUnitId, setSelectedUnitId] = useState<string>('all');
   const queryClient = useQueryClient();
   const trpc = useTRPC();
+  const t = useTranslations('residents');
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Resident',
-    'Are you sure you want to delete this resident? This action cannot be undone.'
+    t('confirmDelete.title'),
+    t('confirmDelete.description'),
+    true
   );
 
   // Queries using proper tRPC patterns
@@ -116,7 +119,7 @@ export function ResidentsList() {
 
   const getUnitInfo = (unitId?: string | null) => {
     if (!unitId) return null;
-    return units?.find(u => u.id === unitId);
+    return units?.find(u => u.units.id === unitId);
   }; // Extract residents data from paginated response
   const residents = (residentsData?.data ||
     []) as unknown as SerializedResident[];
@@ -199,7 +202,7 @@ export function ResidentsList() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value='all'>All units</SelectItem>
-              {units?.map(unit => (
+              {units?.map(({ units: unit }) => (
                 <SelectItem key={unit.id} value={unit.id}>
                   Unit {unit.unitNumber}
                 </SelectItem>
@@ -231,7 +234,7 @@ export function ResidentsList() {
       ) : (
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
           {filteredResidents?.map(resident => {
-            const unit = getUnitInfo(resident.unitId);
+            const { units: unit } = getUnitInfo(resident.unitId) ?? {};
             return (
               <Link key={resident.id} href={`/residents/${resident.id}`}>
                 <Card className='cursor-pointer transition-shadow hover:shadow-md'>
@@ -246,7 +249,8 @@ export function ResidentsList() {
                           <CardDescription className='flex items-center space-x-1'>
                             <MapPin className='h-3 w-3' />
                             <span>
-                              Unit {unit?.unitNumber ?? 'No unit assigned'}
+                              Unit
+                              {unit?.unitNumber ?? 'No unit assigned'}
                             </span>
                           </CardDescription>
                         </div>

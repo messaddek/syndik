@@ -27,6 +27,7 @@ import {
 import { createIncomeSchema } from '../../../incomes/schema';
 import { z } from 'zod';
 import { DatePicker } from '@/components/ui/date-picker';
+import { useTranslations } from 'next-intl';
 
 type CreateIncomeForm = z.infer<typeof createIncomeSchema>;
 
@@ -42,6 +43,7 @@ export function CreateIncomeDialog({
   onSuccess,
 }: CreateIncomeDialogProps) {
   const trpc = useTRPC();
+  const t = useTranslations('finance');
   const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -85,8 +87,8 @@ export function CreateIncomeDialog({
 
   return (
     <ResponsiveDialog
-      title='Add New Income'
-      description='Record a new income transaction. Fill in the details below.'
+      title={t('createIncomeDialog.title')}
+      description={t('createIncomeDialog.description')}
       open={open ?? false}
       onOpenChange={onOpenChange ?? (() => {})}
     >
@@ -97,11 +99,15 @@ export function CreateIncomeDialog({
             name='buildingId'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Building (Optional)</FormLabel>
+                <FormLabel>{t('createIncomeDialog.fields.building')}</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder='Select building or leave empty for general income' />
+                      <SelectValue
+                        placeholder={t(
+                          'createIncomeDialog.fields.buildingPlaceholder'
+                        )}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -122,10 +128,14 @@ export function CreateIncomeDialog({
             name='description'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>
+                  {t('createIncomeDialog.fields.description')}
+                </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder='e.g., Monthly maintenance fees'
+                    placeholder={t(
+                      'createIncomeDialog.fields.descriptionPlaceholder'
+                    )}
                     {...field}
                   />
                 </FormControl>
@@ -140,7 +150,7 @@ export function CreateIncomeDialog({
               name='amount'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Amount ($)</FormLabel>
+                  <FormLabel>{t('createIncomeDialog.fields.amount')}</FormLabel>
                   <FormControl>
                     <Input
                       type='number'
@@ -160,7 +170,9 @@ export function CreateIncomeDialog({
               name='category'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>
+                    {t('createIncomeDialog.fields.category')}
+                  </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -171,11 +183,21 @@ export function CreateIncomeDialog({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value='monthly_fees'>Monthly Fees</SelectItem>
-                      <SelectItem value='parking'>Parking</SelectItem>
-                      <SelectItem value='utilities'>Utilities</SelectItem>
-                      <SelectItem value='maintenance'>Maintenance</SelectItem>
-                      <SelectItem value='other'>Other</SelectItem>
+                      <SelectItem value='monthly_fees'>
+                        {t('createIncomeDialog.categories.monthlyFees')}
+                      </SelectItem>
+                      <SelectItem value='parking'>
+                        {t('createIncomeDialog.categories.parking')}
+                      </SelectItem>
+                      <SelectItem value='utilities'>
+                        {t('createIncomeDialog.categories.utilities')}
+                      </SelectItem>
+                      <SelectItem value='maintenance'>
+                        {t('createIncomeDialog.categories.maintenance')}
+                      </SelectItem>
+                      <SelectItem value='other'>
+                        {t('createIncomeDialog.categories.other')}
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -190,7 +212,7 @@ export function CreateIncomeDialog({
               name='month'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Month</FormLabel>
+                  <FormLabel>{t('createIncomeDialog.fields.month')}</FormLabel>
                   <FormControl>
                     <Input
                       type='number'
@@ -210,7 +232,7 @@ export function CreateIncomeDialog({
               name='year'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Year</FormLabel>
+                  <FormLabel>{t('createIncomeDialog.fields.year')}</FormLabel>
                   <FormControl>
                     <Input
                       type='number'
@@ -230,7 +252,9 @@ export function CreateIncomeDialog({
               name='receivedDate'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Received Date</FormLabel>
+                  <FormLabel>
+                    {t('createIncomeDialog.fields.receivedDate')}
+                  </FormLabel>
                   <FormControl>
                     <DatePicker {...field} />
                   </FormControl>
@@ -245,10 +269,12 @@ export function CreateIncomeDialog({
             name='notes'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Notes (Optional)</FormLabel>
+                <FormLabel>{t('createIncomeDialog.fields.notes')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder='Additional notes about this income...'
+                    placeholder={t(
+                      'createIncomeDialog.fields.notesPlaceholder'
+                    )}
                     className='resize-none'
                     {...field}
                   />
@@ -264,10 +290,10 @@ export function CreateIncomeDialog({
               variant='outline'
               onClick={() => onOpenChange?.(false)}
             >
-              Cancel
+              {t('buttons.cancel')}
             </Button>
             <Button type='submit' disabled={isSubmitting}>
-              {isSubmitting ? 'Creating...' : 'Create Income'}
+              {isSubmitting ? t('buttons.creating') : t('buttons.createIncome')}
             </Button>
           </div>
         </form>

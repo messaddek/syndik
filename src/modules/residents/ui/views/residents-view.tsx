@@ -1,7 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState, useMemo, useCallback } from 'react';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
+import { ColumnDef } from '@tanstack/react-table';
 import { useTRPC } from '@/trpc/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,25 +22,50 @@ import {
 } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, Search, Filter, X } from 'lucide-react';
+import { DataTable } from '@/components/ui/data-table';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  Plus,
+  Search,
+  Filter,
+  X,
+  ArrowUpDown,
+  MoreHorizontal,
+  Edit,
+  Trash2,
+  User,
+  UserCheck,
+  Mail,
+  Phone,
+  MapPin,
+} from 'lucide-react';
 import { CreateResidentDialog } from '../components/create-resident-dialog';
 import { EditResidentDialog } from '../components/edit-resident-dialog';
-import { ResidentsDataTable } from '../components/residents-data-table';
+import { ResidentInviteButton } from '../components/resident-invite-button';
 import { useResidentsFilters } from '@/modules/residents';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import { useConfirm } from '@/hooks/use-confirm';
+import { PageHeader } from '@/components/page-header';
+import { Link } from '@/i18n/routing';
 
-type ResidentsViewProps = {
-  initialFilters?: {
-    page: number;
-    pageSize: number;
-    search: string;
-    unitId: string;
-    isOwner?: boolean;
-    isActive: boolean;
-    sortBy: string;
-    sortOrder: string;
-  };
+type PaginationData = {
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+};
+
+type ResidentQueryResult = {
+  data: ResidentWithUnit[];
+  pagination: PaginationData;
 };
 
 type ResidentWithUnit = {
@@ -63,29 +95,41 @@ type ResidentWithUnit = {
   };
 };
 
-export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
+export const ResidentsView = () => {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingResident, setEditingResident] =
     useState<ResidentWithUnit | null>(null);
 
+  const t = useTranslations('residents');
+
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Resident',
-    'Are you sure you want to delete this resident? This action cannot be undone.'
-  );
-
-  // URL state management with nuqs
-  const [filters, setFilters] = useResidentsFilters(initialFilters);
+    t('confirmDelete.title'),
+    t('confirmDelete.description'),
+    true
+  ); // URL state management with nuqs
+  const [filters, setFilters] = useResidentsFilters();
 
   // Debounce search input to prevent excessive API calls
-  const debouncedSearch = useDebouncedValue(filters.search, 300);
-
-  // Initialize tRPC client
+  const debouncedSearch = useDebouncedValue(filters.search, 300); // Initialize tRPC client
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
   // Get units for filter dropdown
   const { data: units = [] } = useQuery(trpc.units.getAll.queryOptions({}));
+
+  // Fetch residents data
+  const queryOptions = trpc.residents.getAll.queryOptions({
+    ...filters,
+    search: debouncedSearch || undefined,
+    isOwner: filters.isOwner ?? undefined,
+    isActive: filters.isActive ?? undefined,
+  });
+  const {
+    data: residentsData,
+    isLoading: _residentsLoading,
+    error: _error,
+  } = useSuspenseQuery(queryOptions);
 
   // Delete mutation
   const deleteResident = useMutation(
@@ -96,16 +140,239 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
       },
     })
   );
-  const handleEdit = (resident: ResidentWithUnit) => {
-    setEditingResident(resident);
-  };
 
-  const handleDelete = async (id: string) => {
-    const confirmed = await confirm();
-    if (confirmed) {
-      await deleteResident.mutateAsync({ id });
-    }
-  };
+  // Event handlers
+  const handleEdit = useCallback((resident: ResidentWithUnit) => {
+    setEditingResident(resident);
+  }, []);
+
+  const handleDelete = useCallback(
+    async (id: string) => {
+      const confirmed = await confirm();
+      if (confirmed) {
+        await deleteResident.mutateAsync({ id });
+      }
+    },
+    [confirm, deleteResident]
+  );
+  // Transform data to include unit information
+  const residentsWithUnits = useMemo(() => {
+    const typedResidentsData = residentsData as ResidentQueryResult | undefined;
+    if (!typedResidentsData?.data || !Array.isArray(units)) return [];
+
+    return typedResidentsData.data.map((resident: ResidentWithUnit) => ({
+      ...resident,
+      unit: units.find(({ units: unit }) => unit.id === resident.unitId),
+    })) as ResidentWithUnit[];
+  }, [residentsData, units]);
+
+  // Column definitions
+  const columns = useMemo(
+    (): ColumnDef<ResidentWithUnit>[] => [
+      {
+        id: 'select',
+        header: ({ table }) => (
+          <Checkbox
+            checked={
+              table.getIsAllPageRowsSelected() ||
+              (table.getIsSomePageRowsSelected() && 'indeterminate')
+            }
+            onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
+            aria-label='Select all'
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={value => row.toggleSelected(!!value)}
+            aria-label='Select row'
+            className='mr-0 ml-2 rtl:mr-2 rtl:ml-0'
+          />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+      },
+      {
+        accessorKey: 'firstName',
+        header: ({ column }) => (
+          <Button
+            variant='ghost'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            {t('columns.firstName')}
+            <ArrowUpDown className='ml-2 h-4 w-4' />
+          </Button>
+        ),
+        cell: ({ row }) => (
+          <Link
+            href={`/residents/${row.original.id}`}
+            className='flex items-center space-x-2 hover:underline'
+          >
+            <User className='text-muted-foreground h-4 w-4' />
+            <span className='font-medium'>{row.getValue('firstName')}</span>
+          </Link>
+        ),
+      },
+      {
+        accessorKey: 'lastName',
+        header: ({ column }) => (
+          <Button
+            variant='ghost'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            {t('columns.lastName')}
+            <ArrowUpDown className='ml-2 h-4 w-4' />
+          </Button>
+        ),
+      },
+      {
+        accessorKey: 'email',
+        header: ({ column }) => (
+          <Button
+            variant='ghost'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            {t('columns.email')}
+            <ArrowUpDown className='ml-2 h-4 w-4' />
+          </Button>
+        ),
+        cell: ({ row }) => (
+          <div className='flex items-center space-x-2'>
+            <Mail className='text-muted-foreground h-4 w-4' />
+            <span className='lowercase'>{row.getValue('email')}</span>
+          </div>
+        ),
+      },
+      {
+        accessorKey: 'phone',
+        header: t('columns.phone'),
+        cell: ({ row }) => {
+          const phone = row.getValue('phone') as string | null;
+          return phone ? (
+            <div className='flex items-center space-x-2'>
+              <Phone className='text-muted-foreground h-4 w-4' />
+              <span>{phone}</span>
+            </div>
+          ) : (
+            <span className='text-muted-foreground'>-</span>
+          );
+        },
+      },
+      {
+        id: 'unit',
+        header: t('columns.unit'),
+        cell: ({ row }) => {
+          const resident = row.original;
+          return resident.unit ? (
+            <div className='flex items-center space-x-2'>
+              <MapPin className='text-muted-foreground h-4 w-4' />
+              <span>
+                Unit {resident.unit.unitNumber}
+                {resident.unit.building?.name &&
+                  ` - ${resident.unit.building.name}`}
+              </span>
+            </div>
+          ) : (
+            <span className='text-muted-foreground'>-</span>
+          );
+        },
+      },
+      {
+        accessorKey: 'isOwner',
+        header: t('columns.type'),
+        cell: ({ row }) => {
+          const isOwner = row.getValue('isOwner') as boolean;
+          return (
+            <Badge variant={isOwner ? 'default' : 'secondary'}>
+              {isOwner ? (
+                <>
+                  <UserCheck className='mr-1 h-3 w-3' />
+                  {t('ownerStatus')}
+                </>
+              ) : (
+                <>
+                  <User className='mr-1 h-3 w-3' />
+                  {t('tenantStatus')}
+                </>
+              )}
+            </Badge>
+          );
+        },
+      },
+      {
+        accessorKey: 'isActive',
+        header: t('columns.status'),
+        cell: ({ row }) => {
+          const isActive = row.getValue('isActive') as boolean;
+          return (
+            <Badge variant={isActive ? 'default' : 'destructive'}>
+              {isActive ? t('status.active') : t('status.inactive')}
+            </Badge>
+          );
+        },
+      },
+      {
+        accessorKey: 'moveInDate',
+        header: ({ column }) => (
+          <Button
+            variant='ghost'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            {t('columns.moveInDate')}
+            <ArrowUpDown className='ml-2 h-4 w-4' />
+          </Button>
+        ),
+        cell: ({ row }) => {
+          const date = row.getValue('moveInDate') as string;
+          return <span>{new Date(date).toLocaleDateString()}</span>;
+        },
+      },
+      {
+        id: 'actions',
+        enableHiding: false,
+        cell: ({ row }) => {
+          const resident = row.original;
+          return (
+            <div className='flex items-center space-x-1'>
+              <ResidentInviteButton resident={resident} />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant='ghost' className='h-8 w-8 p-0'>
+                    <span className='sr-only'>Open menu</span>
+                    <MoreHorizontal className='h-4 w-4' />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align='end'>
+                  <DropdownMenuLabel>{t('columns.actions')}</DropdownMenuLabel>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      navigator.clipboard.writeText(resident.email)
+                    }
+                  >
+                    {t('columns.copyEmail')}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => handleEdit(resident)}>
+                    <Edit className='mr-2 h-4 w-4' />
+                    {t('columns.editResident')}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => handleDelete(resident.id)}
+                    className='text-destructive'
+                  >
+                    <Trash2 className='mr-2 h-4 w-4' />
+                    {t('columns.deleteResident')}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          );
+        },
+      },
+    ],
+    [t, handleEdit, handleDelete]
+  );
+
   const handleSuccess = () => {
     setIsCreateDialogOpen(false);
     setEditingResident(null);
@@ -125,32 +392,27 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
     filters.unitId ||
     filters.isOwner !== null
   );
-
   return (
     <div className='space-y-6'>
-      {' '}
       {/* Header */}
-      <div className='flex flex-col gap-4 md:flex-row md:items-center md:justify-between'>
-        <div>
-          <h1 className='text-2xl font-bold tracking-tight'>Residents</h1>
-          <p className='text-muted-foreground'>
-            Manage residents and their unit assignments
-          </p>
-        </div>
-        <Button
-          onClick={() => setIsCreateDialogOpen(true)}
-          className='flex items-center space-x-2'
-        >
-          <Plus className='h-4 w-4' />
-          Add Resident
-        </Button>
-      </div>
+      <PageHeader
+        title={t('title')}
+        description={t('subtitle')}
+        ctaButtonContent={
+          <>
+            <Plus className='h-4 w-4' />
+            {t('addNew')}
+          </>
+        }
+        ctaButtonCallback={() => setIsCreateDialogOpen(true)}
+      />
+
       {/* Filters */}
       <Card>
         <CardHeader>
           <CardTitle className='flex items-center space-x-2'>
             <Filter className='h-5 w-5' />
-            <span>Filters</span>
+            <span>{t('filters')}</span>
             {hasActiveFilters && (
               <Badge variant='secondary' className='ml-2'>
                 {
@@ -159,8 +421,8 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
                     filters.unitId,
                     filters.isOwner !== undefined,
                   ].filter(Boolean).length
-                }{' '}
-                active
+                }
+                {t('active')}
               </Badge>
             )}
           </CardTitle>
@@ -169,12 +431,12 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
           <div className='grid grid-cols-1 gap-4 md:grid-cols-4'>
             {/* Search */}
             <div className='space-y-2'>
-              <Label htmlFor='search'>Search</Label>
+              <Label htmlFor='search'>{t('search')}</Label>
               <div className='relative'>
                 <Search className='text-muted-foreground absolute top-2.5 left-2 h-4 w-4' />
                 <Input
                   id='search'
-                  placeholder='Search residents...'
+                  placeholder={t('search')}
                   className='pl-8'
                   value={filters.search}
                   onChange={e =>
@@ -183,10 +445,9 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
                 />
               </div>
             </div>
-
             {/* Unit Filter */}
             <div className='space-y-2'>
-              <Label htmlFor='unit'>Unit</Label>
+              <Label htmlFor='unit'>{t('columns.unit')}</Label>
               <Select
                 value={filters.unitId}
                 onValueChange={value =>
@@ -194,25 +455,25 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
                 }
               >
                 <SelectTrigger>
-                  <SelectValue placeholder='All units' />
+                  <SelectValue placeholder={t('allUnits')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value='all'>All units</SelectItem>
+                  <SelectItem value='all'>{t('allUnits')}</SelectItem>
                   {Array.isArray(units) &&
-                    units.map(unit => {
+                    units.map(({ units: unit, buildings: building }) => {
                       return (
                         <SelectItem key={unit.id} value={unit.id}>
-                          Unit {unit.unitNumber} - Building {unit.buildingId}
+                          Unit {unit.unitNumber} - Building{' '}
+                          {building?.name || 'N/A'}
                         </SelectItem>
                       );
                     })}
                 </SelectContent>
               </Select>
             </div>
-
             {/* Owner/Tenant Filter */}
             <div className='space-y-2'>
-              <Label htmlFor='type'>Type</Label>
+              <Label htmlFor='type'>{t('columns.type')}</Label>
               <Select
                 value={
                   filters.isOwner === null
@@ -229,19 +490,18 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
                 }
               >
                 <SelectTrigger>
-                  <SelectValue placeholder='All types' />
+                  <SelectValue placeholder={t('allTypes')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value='all'>All types</SelectItem>
-                  <SelectItem value='owner'>Owners</SelectItem>
-                  <SelectItem value='tenant'>Tenants</SelectItem>
+                  <SelectItem value='all'>{t('allTypes')}</SelectItem>
+                  <SelectItem value='owner'>{t('owners')}</SelectItem>
+                  <SelectItem value='tenant'>{t('tenants')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-
             {/* Status Filter */}
             <div className='space-y-2'>
-              <Label htmlFor='status'>Status</Label>
+              <Label htmlFor='status'>{t('columns.status')}</Label>
               <Select
                 value={filters.isActive ? 'active' : 'inactive'}
                 onValueChange={value =>
@@ -255,8 +515,10 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value='active'>Active</SelectItem>
-                  <SelectItem value='inactive'>Inactive</SelectItem>
+                  <SelectItem value='active'>{t('status.active')}</SelectItem>
+                  <SelectItem value='inactive'>
+                    {t('status.inactive')}
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -264,24 +526,28 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
 
           {hasActiveFilters && (
             <div className='flex items-center justify-between border-t pt-2'>
-              <p className='text-muted-foreground text-sm'>Filters applied</p>
+              <p className='text-muted-foreground text-sm'>
+                {t('filtersApplied')}
+              </p>
               <Button variant='outline' size='sm' onClick={clearFilters}>
                 <X className='mr-2 h-4 w-4' />
-                Clear filters
+                {t('clearFilters')}
               </Button>
             </div>
           )}
         </CardContent>
-      </Card>{' '}
+      </Card>
       {/* Data Table */}
-      <ResidentsDataTable
-        filters={{
-          ...filters,
-          search: debouncedSearch, // Use debounced search for API calls
-          isOwner: filters.isOwner || undefined, // Convert null to undefined
-        }}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
+      <DataTable
+        columns={columns}
+        data={residentsWithUnits}
+        searchKey='firstName'
+        searchPlaceholder={t('search')}
+        showSearch={false}
+        showPagination={true}
+        pagination={
+          (residentsData as ResidentQueryResult | undefined)?.pagination
+        }
         onPageChange={page => setFilters({ page })}
         onPageSizeChange={pageSize => setFilters({ pageSize, page: 1 })}
       />
@@ -304,4 +570,4 @@ export function ResidentsView({ initialFilters }: ResidentsViewProps = {}) {
       <ConfirmDialog />
     </div>
   );
-}
+};
