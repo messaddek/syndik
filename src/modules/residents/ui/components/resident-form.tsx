@@ -235,7 +235,7 @@ export function ResidentForm({
                       {t('noUnitsAvailable')}
                     </SelectItem>
                   ) : (
-                    units.map(unit => (
+                    units.map(({ units: unit }) => (
                       <SelectItem key={unit.id} value={unit.id}>
                         Unit {unit.unitNumber} - Floor {unit.floor}
                       </SelectItem>

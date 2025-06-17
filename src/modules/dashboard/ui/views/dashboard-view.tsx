@@ -27,6 +27,7 @@ import { CreateResidentDialog } from '@/modules/residents/ui/components/create-r
 import { CreateMeetingDialog } from '@/modules/meetings/ui/components/create-meeting-dialog';
 import { FinancialTrendChart, OccupancyTrendChart } from '../components';
 import { DashboardSkeleton } from '../components/dashboard-skeleton';
+import { PageHeader } from '@/components/page-header';
 
 interface Activity {
   id: string;
@@ -46,7 +47,7 @@ interface DashboardOverview {
   netIncome: number;
 }
 
-export function DashboardView() {
+const DashboardView = () => {
   const trpc = useTRPC();
   const t = useTranslations('dashboard');
 
@@ -77,6 +78,8 @@ export function DashboardView() {
 
   return (
     <div className='space-y-6'>
+      <PageHeader title={t('title')} description={t('description')} />
+
       {/* Overview Cards */}
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
         <Card>
@@ -346,4 +349,6 @@ export function DashboardView() {
       />
     </div>
   );
-}
+};
+
+export { DashboardView };

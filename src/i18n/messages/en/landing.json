@@ -118,7 +118,7 @@
     "subtitle": "Get started in minutes with our intuitive setup process.",
     "description": "Our intuitive platform guides you step by step for quick and efficient implementation.",
     "steps": {
-      "signUp": {
+      "setup": {
         "title": "Quick Sign Up",
         "description": "Create your account and set up your first property in just a few minutes."
       },
@@ -130,7 +130,7 @@
         "title": "Manage Efficiently",
         "description": "Monitor everything from a single dashboard and focus on growing your business."
       },
-      "grow": {
+      "automate": {
         "title": "Grow Your Business",
         "description": "Scale easily by adding new properties and automating your management processes."
       }

@@ -15,15 +15,18 @@ import { Trash2, Edit, ExternalLink } from 'lucide-react';
 import { format } from 'date-fns';
 import { useConfirm } from '@/hooks/use-confirm';
 import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 export function ExpensesList() {
   const trpc = useTRPC();
+  const t = useTranslations('finance');
   const queryClient = useQueryClient();
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Expense',
-    'Are you sure you want to delete this expense record? This action cannot be undone.'
+    t('confirmDialog.deleteExpense.title'),
+    t('confirmDialog.deleteExpense.description'),
+    true
   );
 
   const { data: expenses = [] } = useQuery(
@@ -51,9 +54,9 @@ export function ExpensesList() {
   };
 
   const getBuildingName = (buildingId?: string | null) => {
-    if (!buildingId) return 'General';
+    if (!buildingId) return t('expensesList.general');
     const building = buildings.find(b => b.id === buildingId);
-    return building?.name || 'Unknown Building';
+    return building?.name || t('expensesList.unknownBuilding');
   };
 
   const getCategoryColor = (category: string) => {
@@ -74,10 +77,10 @@ export function ExpensesList() {
       <Card>
         <CardContent className='flex flex-col items-center justify-center p-8'>
           <h3 className='mb-2 text-lg font-medium text-gray-900'>
-            No expense records found
+            {t('expensesList.noRecords')}
           </h3>
           <p className='text-sm text-gray-600'>
-            Start by adding your first expense record.
+            {t('expensesList.noRecordsDescription')}
           </p>
         </CardContent>
       </Card>
@@ -121,7 +124,7 @@ export function ExpensesList() {
             <div className='flex items-center justify-between'>
               <div className='space-y-1'>
                 <p className='text-muted-foreground text-sm'>
-                  Period: {expense.month}/{expense.year}
+                  {t('expensesList.period')}: {expense.month}/{expense.year}
                 </p>
                 {expense.notes && (
                   <p className='text-sm text-gray-600'>{expense.notes}</p>
@@ -135,7 +138,7 @@ export function ExpensesList() {
                       rel='noopener noreferrer'
                       className='text-primary text-sm hover:underline'
                     >
-                      View Receipt
+                      {t('buttons.viewReceipt')}
                     </a>
                   </div>
                 )}

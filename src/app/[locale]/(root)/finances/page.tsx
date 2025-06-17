@@ -1,23 +1,20 @@
-'use client';
-
 import { Suspense } from 'react';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
-import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
-import { FinancesContent } from '@/modules/finances/ui/components/finances-content';
+import { FinancesView } from '@/modules/finances/ui/components/finances-view';
+import { FinancesViewSkeleton } from '@/modules/finances/ui/components/finances-view-skeleton';
+import { PageHeader } from '@/components/page-header';
+import { useTranslations } from 'next-intl';
 
 export default function FinancesPage() {
+  const t = useTranslations('finance');
+
   return (
     <TRPCErrorBoundary>
       <div className='flex flex-col space-y-4'>
-        <div>
-          <h1 className='text-3xl font-bold tracking-tight'>Finances</h1>
-          <p className='text-muted-foreground'>
-            Manage income and expenses for your properties
-          </p>
-        </div>
+        <PageHeader title={t('title')} description={t('description')} />
 
-        <Suspense fallback={<DashboardSkeleton />}>
-          <FinancesContent />
+        <Suspense fallback={<FinancesViewSkeleton />}>
+          <FinancesView />
         </Suspense>
       </div>
     </TRPCErrorBoundary>

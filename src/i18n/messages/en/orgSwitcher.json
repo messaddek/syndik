@@ -1,6 +1,6 @@
 {
-  "title": "Select Organization",
-  "description": "Choose an organization to access its management dashboard or resident portal. Your role determines what features you can access.",
+  "title": "Select Residence",
+  "description": "Choose a residence to access its management dashboard or resident portal. Your role determines what features you can access.",
   "cards": {
     "managers": {
       "title": "Property Managers & Admins",
@@ -14,11 +14,32 @@
     }
   },
   "organizationList": {
-    "title": "Your Organizations",
+    "title": "Your Residences",
     "description": "Select an organization to continue"
   },
   "footer": {
-    "text": "Don't see your organization? Contact your property manager for an invitation."
+    "text": "Don't see your residence? Contact your property manager for an invitation."
   },
-  "logoAlt": "Syndik Logo"
+  "logoAlt": "Syndik Logo",
+  "redirect": {
+    "loading": "Redirecting you to the right place..."
+  },
+  "clerk": {
+    "organizationSwitcher": {
+      "action__createOrganization": "Create residence",
+      "action__manageOrganization": "Manage residence",
+      "notSelected": "No residence selected"
+    },
+    "organizationList": {
+      "action__createOrganization": "Create residence",
+      "createOrganization": "Create Residence",
+      "titleWithoutPersonal": "Choose a residence"
+    },
+    "createOrganization": {
+      "formButtonSubmit": "Create residence",
+      "title": "Create residence"
+    },
+    "formFieldLabel__organizationName": "Residence name",
+    "formFieldInputPlaceholder__organizationName": "Residence name"
+  }
 }

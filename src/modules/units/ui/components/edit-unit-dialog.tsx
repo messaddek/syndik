@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import { UnitForm } from './unit-form';
 import type { Unit } from '../../types';
@@ -17,6 +18,8 @@ export function EditUnitDialog({
   onSuccess,
   unit,
 }: EditUnitDialogProps) {
+  const t = useTranslations('units');
+
   const handleSuccess = () => {
     onOpenChange?.(false);
     onSuccess?.();
@@ -28,8 +31,8 @@ export function EditUnitDialog({
 
   return (
     <ResponsiveDialog
-      title='Edit Unit'
-      description='Update the unit details below.'
+      title={t('dialogs.editTitle')}
+      description={t('dialogs.editDescription')}
       open={open ?? false}
       onOpenChange={onOpenChange ?? (() => {})}
     >

@@ -13,8 +13,8 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Plus, MoreHorizontal } from 'lucide-react';
-import { CreateUnitDialog } from './create-unit-dialog';
-import { EditUnitDialog } from './edit-unit-dialog';
+import { CreateUnitDialog } from '../components/create-unit-dialog';
+import { EditUnitDialog } from '../components/edit-unit-dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,9 +29,10 @@ import type { Unit } from '../../types';
 import type { Resident } from '@/modules/residents/types';
 import type { Income } from '@/modules/incomes/types';
 import { Link } from '@/i18n/routing';
+import { PageHeader } from '@/components/page-header';
 
-export function UnitsContent() {
-  const t = useTranslations();
+const UnitsView = () => {
+  const t = useTranslations('units');
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [showCreateDialog, setShowCreateDialog] = useState(false);
@@ -40,16 +41,12 @@ export function UnitsContent() {
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    t('units.deleteUnit'),
-    t('units.confirmDelete')
+    t('deleteUnit'),
+    t('confirmDelete'),
+    true
   );
 
   const { data: units = [] } = useQuery(trpc.units.getAll.queryOptions({}));
-
-  const { data: buildingsData = { data: [] } } = useQuery(
-    trpc.buildings.getAll.queryOptions({})
-  );
-  const buildings = buildingsData.data || [];
 
   // Get residents data for all units
   const { data: allResidentsData } = useQuery(
@@ -106,11 +103,6 @@ export function UnitsContent() {
     setEditingUnit(undefined);
   };
 
-  const getBuildingName = (buildingId: string) => {
-    const building = buildings.find(b => b.id === buildingId);
-    return building?.name || t('units.unknownBuilding');
-  };
-
   const getUnitResidentCount = (unitId: string) => {
     return allResidents.filter(
       (resident: Resident) => resident.unitId === unitId && resident.isActive
@@ -129,23 +121,19 @@ export function UnitsContent() {
 
   return (
     <>
-      <div className='mb-4 flex items-center justify-between'>
-        <div>
-          <h2 className='text-2xl font-bold'>{t('units.title')}</h2>
-          <p className='text-muted-foreground'>
-            {units.length} {t('units.totalUnits')}
-          </p>
-        </div>
-        <Button
-          onClick={() => setShowCreateDialog(true)}
-          className='flex items-center space-x-2'
-        >
-          <Plus className='h-4 w-4' />
-          {t('units.addUnit')}
-        </Button>
-      </div>
+      <PageHeader
+        title={t('title')}
+        description={t('description')}
+        ctaButtonContent={
+          <div className='flex items-center gap-x-2'>
+            <Plus className='h-4 w-4' />
+            {t('addUnit')}
+          </div>
+        }
+        ctaButtonCallback={() => setShowCreateDialog(true)}
+      />
       <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-        {units.map(unit => (
+        {units.map(({ units: unit, buildings: building }) => (
           <Link key={unit.id} href={`/units/${unit.id}`}>
             <Card className='cursor-pointer transition-shadow hover:shadow-lg'>
               <CardHeader>
@@ -153,9 +141,7 @@ export function UnitsContent() {
                   <CardTitle className='text-lg'>{unit.unitNumber}</CardTitle>
                   <div className='flex items-center gap-2'>
                     <Badge variant={unit.isOccupied ? 'default' : 'secondary'}>
-                      {unit.isOccupied
-                        ? t('units.occupied')
-                        : t('units.vacant')}
+                      {unit.isOccupied ? t('occupied') : t('vacant')}
                     </Badge>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -164,7 +150,7 @@ export function UnitsContent() {
                           className='h-8 w-8 p-0'
                           onClick={e => e.preventDefault()}
                         >
-                          <span className='sr-only'>{t('units.openMenu')}</span>
+                          <span className='sr-only'>{t('openMenu')}</span>
                           <MoreHorizontal className='h-4 w-4' />
                         </Button>
                       </DropdownMenuTrigger>
@@ -173,7 +159,7 @@ export function UnitsContent() {
                           {t('common.actions')}
                         </DropdownMenuLabel>
                         <DropdownMenuItem onClick={() => handleEdit(unit)}>
-                          {t('units.editUnit')}
+                          {t('editUnit')}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
@@ -184,62 +170,62 @@ export function UnitsContent() {
                             )
                           }
                         >
-                          {t('units.viewResidents')}
+                          {t('viewResidents')}
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() =>
                             window.open(`/finances?unitId=${unit.id}`, '_blank')
                           }
                         >
-                          {t('units.viewIncome')}
+                          {t('viewIncome')}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
                           onClick={() => handleDelete(unit.id)}
                           className='text-red-600'
                         >
-                          {t('units.deleteUnit')}
+                          {t('deleteUnit')}
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
                 </div>
                 <CardDescription>
-                  {getBuildingName(unit.buildingId)} - {t('units.floor')}
+                  {building?.name ?? t('unknownBuilding')} - {t('floor')}
                   {unit.floor}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className='space-y-2'>
                   <div className='flex justify-between text-sm'>
-                    <span>{t('units.bedrooms')}:</span>
+                    <span>{t('bedrooms')}:</span>
                     <span>{unit.bedrooms}</span>
                   </div>
                   <div className='flex justify-between text-sm'>
-                    <span>{t('units.bathrooms')}:</span>
+                    <span>{t('bathrooms')}:</span>
                     <span>{unit.bathrooms}</span>
                   </div>
                   {unit.area && (
                     <div className='flex justify-between text-sm'>
-                      <span>{t('units.area')}:</span>
+                      <span>{t('area')}:</span>
                       <span>{unit.area} m²</span>
                     </div>
                   )}
                   <div className='flex justify-between text-sm font-medium'>
-                    <span>{t('units.monthlyFee')}:</span>
+                    <span>{t('monthlyFee')}:</span>
                     <span>${unit.monthlyFee}</span>
                   </div>
 
                   {/* Relationship Information */}
                   <div className='mt-2 border-t pt-2'>
                     <div className='flex justify-between text-sm'>
-                      <span>{t('units.activeResidents')}:</span>
+                      <span>{t('activeResidents')}:</span>
                       <span className='font-medium'>
                         {getUnitResidentCount(unit.id)}
                       </span>
                     </div>
                     <div className='flex justify-between text-sm'>
-                      <span>{t('units.thisMonthIncome')}:</span>
+                      <span>{t('thisMonthIncome')}:</span>
                       <span className='font-medium text-green-600'>
                         ${getUnitMonthlyIncome(unit.id).toFixed(2)}
                       </span>
@@ -257,13 +243,15 @@ export function UnitsContent() {
                   <Button
                     variant='outline'
                     size='sm'
-                    onClick={() =>
-                      handleToggleOccupancy(unit.id, unit.isOccupied)
-                    }
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleToggleOccupancy(unit.id, unit.isOccupied);
+                    }}
                     disabled={toggleOccupancy.isPending}
                     className='flex-1'
                   >
-                    {unit.isOccupied ? 'Mark Vacant' : 'Mark Occupied'}
+                    {unit.isOccupied ? t('markVacant') : t('markOccupied')}
                   </Button>
                 </div>
               </CardContent>
@@ -275,17 +263,17 @@ export function UnitsContent() {
         <Card>
           <CardContent className='flex flex-col items-center justify-center p-8'>
             <h3 className='mb-2 text-lg font-medium text-gray-900'>
-              No units found
+              {t('noUnitsFound')}
             </h3>
             <p className='mb-4 text-sm text-gray-600'>
-              Start by adding your first unit to manage properties.
+              {t('noUnitsDescription')}
             </p>
             <Button
               onClick={() => setShowCreateDialog(true)}
               className='flex items-center space-x-2'
             >
               <Plus className='h-4 w-4' />
-              Add First Unit
+              {t('addFirstUnit')}
             </Button>
           </CardContent>
         </Card>
@@ -306,4 +294,6 @@ export function UnitsContent() {
       <ConfirmDialog />
     </>
   );
-}
+};
+
+export { UnitsView };

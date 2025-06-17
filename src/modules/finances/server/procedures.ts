@@ -9,7 +9,12 @@ export const financesRouter = createTRPCRouter({
   getFinancialSummary: orgProtectedProcedure
     .input(
       z.object({
-        buildingId: z.string().uuid().optional(),
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
         startDate: z.date().optional(),
         endDate: z.date().optional(),
         _period: z.enum(['monthly', 'quarterly', 'yearly']).default('monthly'),
@@ -95,12 +100,16 @@ export const financesRouter = createTRPCRouter({
         })),
       };
     }),
-
   // Monthly Financial Trends
   getFinancialTrends: orgProtectedProcedure
     .input(
       z.object({
-        buildingId: z.string().uuid().optional(),
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
         months: z.number().min(1).max(24).default(12),
       })
     )
@@ -157,12 +166,16 @@ export const financesRouter = createTRPCRouter({
         })),
       };
     }),
-
   // Financial Health Score
   getFinancialHealth: orgProtectedProcedure
     .input(
       z.object({
-        buildingId: z.string().uuid().optional(),
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
       })
     )
     .query(async ({ ctx, input }) => {

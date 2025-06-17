@@ -1,6 +1,11 @@
 import { PAGINATION, SORT_ORDERS, BUILDING_SORT_FIELDS } from '@/constants';
 import { BUILDING_VIEWS } from './hooks/use-buildings-filters';
-import { createLoader, parseAsInteger, parseAsString } from 'nuqs/server';
+import {
+  createLoader,
+  parseAsInteger,
+  parseAsString,
+  parseAsStringEnum,
+} from 'nuqs/server';
 
 export const buildingsFilterSearchParams = {
   page: parseAsInteger
@@ -11,13 +16,18 @@ export const buildingsFilterSearchParams = {
     .withOptions({ clearOnDefault: true }),
   search: parseAsString.withDefault('').withOptions({ clearOnDefault: true }),
   city: parseAsString.withDefault('').withOptions({ clearOnDefault: true }),
-  sortBy: parseAsString
+  sortBy: parseAsStringEnum([
+    BUILDING_SORT_FIELDS.NAME,
+    BUILDING_SORT_FIELDS.CITY,
+    BUILDING_SORT_FIELDS.TOTAL_UNITS,
+    BUILDING_SORT_FIELDS.CREATED_AT,
+  ])
     .withDefault(BUILDING_SORT_FIELDS.NAME)
     .withOptions({ clearOnDefault: true }),
-  sortOrder: parseAsString
+  sortOrder: parseAsStringEnum([SORT_ORDERS.ASC, SORT_ORDERS.DESC])
     .withDefault(SORT_ORDERS.ASC)
     .withOptions({ clearOnDefault: true }),
-  view: parseAsString
+  view: parseAsStringEnum([BUILDING_VIEWS.GRID, BUILDING_VIEWS.TABLE])
     .withDefault(BUILDING_VIEWS.GRID)
     .withOptions({ clearOnDefault: true }),
 };
@@ -25,11 +35,3 @@ export const buildingsFilterSearchParams = {
 export const loadBuildingsSearchParams = createLoader(
   buildingsFilterSearchParams
 );
-
-// Transform the loaded params to match the component's expected types
-export const transformBuildingsParams = async (
-  searchParams: Record<string, string | string[] | undefined>
-) => {
-  const params = await loadBuildingsSearchParams(searchParams);
-  return params;
-};

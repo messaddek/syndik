@@ -1,6 +1,7 @@
 'use client';
 
 import { useSuspenseQuery, useQuery } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { useTRPC } from '@/trpc/client';
 import {
   Card,
@@ -26,7 +27,7 @@ import { useRouter } from '@/i18n/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
-import { UnitForm } from './unit-form';
+import { UnitForm } from '../components/unit-form';
 import { useConfirm } from '@/hooks/use-confirm';
 import type { Resident } from '@/modules/residents/types';
 
@@ -37,14 +38,15 @@ interface UnitViewProps {
 
 export function UnitView({ id, _searchParams }: UnitViewProps) {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const t = useTranslations('units');
   const trpc = useTRPC();
   const router = useRouter();
   const queryClient = useQueryClient();
-
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Unit',
-    'Are you sure you want to delete this unit? This action cannot be undone and will also remove all associated residents.'
+    t('deleteUnit'),
+    t('confirmDeleteExtended'),
+    true
   );
 
   // Fetch unit data
@@ -119,7 +121,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
   if (!unit) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <p className='text-muted-foreground'>Unit not found</p>
+        <p className='text-muted-foreground'>{t('unitNotFound')}</p>
       </div>
     );
   }
@@ -138,25 +140,29 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
         {/* Header */}
         <div className='flex items-center justify-between'>
           <div className='flex items-center space-x-4'>
+            {' '}
             <Button variant='ghost' size='sm' asChild>
               <Link href='/units'>
                 <ArrowLeft className='mr-2 h-4 w-4' />
-                Back to Units
+                {t('backToUnits')}
               </Link>
             </Button>
             <div>
               <div className='flex items-center space-x-2'>
                 <Home className='h-6 w-6 text-green-600' />
-                <h1 className='text-3xl font-bold'>Unit {unit.unitNumber}</h1>
+                <h1 className='text-3xl font-bold'>
+                  {t('view.unitTitle', { number: unit.unitNumber })}
+                </h1>
                 <Badge variant={unit.isOccupied ? 'default' : 'secondary'}>
-                  {unit.isOccupied ? 'Occupied' : 'Vacant'}
+                  {unit.isOccupied ? t('occupied') : t('vacant')}
                 </Badge>
               </div>
               {building && (
                 <div className='text-muted-foreground mt-1 flex items-center space-x-1'>
                   <MapPin className='h-4 w-4' />
                   <span>
-                    {building.name} - Floor {unit.floor}
+                    {building.name} -{' '}
+                    {t('view.floorLabel', { floor: unit.floor })}
                   </span>
                 </div>
               )}
@@ -168,43 +174,31 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
               onClick={handleToggleOccupancy}
               disabled={toggleOccupancyMutation.isPending}
             >
-              {unit.isOccupied ? 'Mark Vacant' : 'Mark Occupied'}
+              {unit.isOccupied ? t('markVacant') : t('markOccupied')}
             </Button>
             <Button variant='outline' onClick={() => setIsEditDialogOpen(true)}>
               <Edit className='mr-2 h-4 w-4' />
-              Edit
+              {t('view.edit')}
             </Button>
             <Button variant='destructive' onClick={handleDeleteUnit}>
               <Trash2 className='mr-2 h-4 w-4' />
-              Delete
+              {t('view.delete')}
             </Button>
           </div>
-        </div>
-
+        </div>{' '}
         {/* Overview Cards */}
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>Monthly Fee</CardTitle>
+              <CardTitle className='text-sm font-medium'>
+                {t('monthlyFee')}
+              </CardTitle>
               <DollarSign className='text-muted-foreground h-4 w-4' />
             </CardHeader>
             <CardContent>
               <div className='text-2xl font-bold'>${unit.monthlyFee}</div>
               <p className='text-muted-foreground text-xs'>
-                Collected: ${monthlyIncome}
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>Bedrooms</CardTitle>
-              <Bed className='text-muted-foreground h-4 w-4' />
-            </CardHeader>
-            <CardContent>
-              <div className='text-2xl font-bold'>{unit.bedrooms}</div>
-              <p className='text-muted-foreground text-xs'>
-                {unit.bathrooms} bathroom{unit.bathrooms !== 1 ? 's' : ''}
+                {t('view.collected', { amount: monthlyIncome })}
               </p>
             </CardContent>
           </Card>
@@ -212,107 +206,125 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Current Residents
+                {t('bedrooms')}
               </CardTitle>
-              <Users className='text-muted-foreground h-4 w-4' />
+              <Bed className='text-muted-foreground h-4 w-4' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>{activeResidents}</div>
+              <div className='text-2xl font-bold'>{unit.bedrooms}</div>
               <p className='text-muted-foreground text-xs'>
-                {residents.length} total residents
+                {unit.bathrooms}{' '}
+                {unit.bathrooms !== 1
+                  ? t('view.bathrooms')
+                  : t('view.bathroom')}
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>Floor</CardTitle>
+              <CardTitle className='text-sm font-medium'>
+                {t('view.currentResidents')}
+              </CardTitle>
+              <Users className='text-muted-foreground h-4 w-4' />
+            </CardHeader>
+            <CardContent>
+              <div className='text-2xl font-bold'>{activeResidents}</div>
+              <p className='text-muted-foreground text-xs'>
+                {t('view.totalResidents', { count: residents.length })}
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+              <CardTitle className='text-sm font-medium'>
+                {t('floor')}
+              </CardTitle>
               <Home className='text-muted-foreground h-4 w-4' />
             </CardHeader>
             <CardContent>
               <div className='text-2xl font-bold'>{unit.floor}</div>
               <p className='text-muted-foreground text-xs'>
-                {unit.area ? `${unit.area} m²` : 'Area not specified'}
+                {unit.area ? `${unit.area} m²` : t('view.areaNotSpecified')}
               </p>
             </CardContent>
           </Card>
         </div>
-
         {/* Unit Details */}
         <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
           <Card>
+            {' '}
             <CardHeader>
-              <CardTitle>Unit Information</CardTitle>
+              <CardTitle>{t('view.unitInformation')}</CardTitle>
               <CardDescription>
-                Details about this residential unit
+                {t('view.unitInformationDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent className='space-y-4'>
               <div className='grid grid-cols-2 gap-4'>
+                {' '}
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Unit Number
+                    {t('form.unitNumber')}
                   </p>
                   <p className='text-sm'>{unit.unitNumber}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Floor
+                    {t('floor')}
                   </p>
                   <p className='text-sm'>{unit.floor}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Bedrooms
+                    {t('bedrooms')}
                   </p>
                   <p className='text-sm'>{unit.bedrooms}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Bathrooms
+                    {t('bathrooms')}
                   </p>
                   <p className='text-sm'>{unit.bathrooms}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Monthly Fee
+                    {t('monthlyFee')}
                   </p>
                   <p className='text-sm'>${unit.monthlyFee}</p>
                 </div>
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Area
+                    {t('area')}
                   </p>
                   <p className='text-sm'>
-                    {unit.area ? `${unit.area} m²` : 'Not specified'}
+                    {unit.area ? `${unit.area} m²` : t('view.areaNotSpecified')}
                   </p>
                 </div>
-              </div>
-
+              </div>{' '}
               {unit.description && (
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
-                    Description
+                    {t('portal.details.description')}
                   </p>
                   <p className='text-sm'>{unit.description}</p>
                 </div>
               )}
-
               <div>
                 <p className='text-muted-foreground text-sm font-medium'>
-                  Status
+                  {t('view.status')}
                 </p>
                 <Badge
                   variant={unit.isOccupied ? 'default' : 'secondary'}
                   className='mt-1'
                 >
-                  {unit.isOccupied ? 'Occupied' : 'Vacant'}
+                  {unit.isOccupied ? t('occupied') : t('vacant')}
                 </Badge>
               </div>
-
               <div>
                 <p className='text-muted-foreground text-sm font-medium'>
-                  Created
+                  {t('view.createdAt')}
                 </p>
                 <p className='text-sm'>
                   {new Date(unit.createdAt).toLocaleDateString()}
@@ -322,16 +334,19 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
           </Card>
 
           <Card>
+            {' '}
             <CardHeader>
-              <CardTitle>Building Information</CardTitle>
-              <CardDescription>Details about the building</CardDescription>
+              <CardTitle>{t('portal.details.buildingTitle')}</CardTitle>
+              <CardDescription>
+                {t('portal.details.buildingDescription')}
+              </CardDescription>
             </CardHeader>
             <CardContent className='space-y-4'>
               {building ? (
                 <>
                   <div>
                     <p className='text-muted-foreground text-sm font-medium'>
-                      Building Name
+                      {t('portal.details.buildingName')}
                     </p>
                     <Link
                       href={`/buildings/${building.id}`}
@@ -342,13 +357,13 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                   </div>
                   <div>
                     <p className='text-muted-foreground text-sm font-medium'>
-                      Address
+                      {t('portal.details.buildingAddress')}
                     </p>
                     <p className='text-sm'>{building.address}</p>
                   </div>
                   <div>
                     <p className='text-muted-foreground text-sm font-medium'>
-                      City
+                      {t('view.city')}
                     </p>
                     <p className='text-sm'>
                       {building.city}, {building.country}
@@ -356,39 +371,41 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                   </div>
                   <div>
                     <p className='text-muted-foreground text-sm font-medium'>
-                      Total Units
+                      {t('view.totalUnits')}
                     </p>
                     <p className='text-sm'>{building.totalUnits}</p>
                   </div>
                   <div className='flex space-x-2 pt-4'>
                     <Button variant='outline' size='sm' asChild>
                       <Link href={`/buildings/${building.id}`}>
-                        View Building Details
+                        {t('view.viewBuildingDetails')}
                       </Link>
                     </Button>
                     <Button variant='outline' size='sm' asChild>
                       <Link href={`/units?buildingId=${building.id}`}>
-                        View All Units
+                        {t('view.viewAllUnits')}
                       </Link>
-                    </Button>
+                    </Button>{' '}
                   </div>
                 </>
               ) : (
                 <p className='text-muted-foreground text-sm'>
-                  Building information not available
+                  {t('portal.buildingInfo')}
                 </p>
               )}
             </CardContent>
           </Card>
         </div>
-
         {/* Residents */}
         {residents.length > 0 && (
           <Card>
+            {' '}
             <CardHeader>
-              <CardTitle>Current Residents</CardTitle>
+              <CardTitle>{t('view.currentResidents')}</CardTitle>
               <CardDescription>
-                People living in this unit ({activeResidents} active)
+                {t('view.currentResidentsDescription', {
+                  count: activeResidents,
+                })}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -402,28 +419,34 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                             {resident.firstName} {resident.lastName}
                           </CardTitle>
                           <div className='flex space-x-1'>
+                            {' '}
                             <Badge
                               variant={
                                 resident.isOwner ? 'default' : 'secondary'
                               }
                             >
-                              {resident.isOwner ? 'Owner' : 'Tenant'}
+                              {resident.isOwner
+                                ? t('view.owner')
+                                : t('view.tenant')}
                             </Badge>
                             <Badge
                               variant={
                                 resident.isActive ? 'default' : 'destructive'
                               }
                             >
-                              {resident.isActive ? 'Active' : 'Inactive'}
+                              {resident.isActive
+                                ? t('view.active')
+                                : t('view.inactive')}
                             </Badge>
                           </div>
                         </div>
                         <CardDescription>{resident.email}</CardDescription>
                       </CardHeader>
                       <CardContent>
+                        {' '}
                         <div className='space-y-2 text-sm'>
                           <div className='flex justify-between'>
-                            <span>Move-in Date:</span>
+                            <span>{t('view.moveInDate')}:</span>
                             <span>
                               {new Date(
                                 resident.moveInDate
@@ -432,7 +455,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                           </div>
                           {resident.phone && (
                             <div className='flex justify-between'>
-                              <span>Phone:</span>
+                              <span>{t('view.phoneNumber')}:</span>
                               <span>{resident.phone}</span>
                             </div>
                           )}
@@ -444,20 +467,20 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
               </div>
             </CardContent>
           </Card>
-        )}
-
+        )}{' '}
         {/* Financial Overview */}
         <Card>
           <CardHeader>
-            <CardTitle>Financial Overview</CardTitle>
+            <CardTitle>{t('view.financialOverview')}</CardTitle>
             <CardDescription>
-              Income and financial information for{' '}
-              {new Date().toLocaleDateString('en-US', {
-                month: 'long',
-                year: 'numeric',
+              {t('view.financialOverviewDescription', {
+                month: new Date().toLocaleDateString('en-US', {
+                  month: 'long',
+                  year: 'numeric',
+                }),
               })}
             </CardDescription>
-          </CardHeader>
+          </CardHeader>{' '}
           <CardContent>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
               <div className='text-center'>
@@ -465,13 +488,13 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                   ${monthlyIncome}
                 </p>
                 <p className='text-muted-foreground text-sm'>
-                  Collected This Month
+                  {t('view.collectedThisMonth')}
                 </p>
               </div>
               <div className='text-center'>
                 <p className='text-2xl font-bold'>${unit.monthlyFee}</p>
                 <p className='text-muted-foreground text-sm'>
-                  Expected Monthly Fee
+                  {t('view.expectedMonthlyFee')}
                 </p>
               </div>
               <div className='text-center'>
@@ -481,25 +504,26 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                   ${monthlyIncome - unit.monthlyFee}
                 </p>
                 <p className='text-muted-foreground text-sm'>
-                  {monthlyIncome >= unit.monthlyFee ? 'Surplus' : 'Outstanding'}
+                  {monthlyIncome >= unit.monthlyFee
+                    ? t('view.surplus')
+                    : t('view.outstanding')}
                 </p>
               </div>
             </div>
             <div className='mt-4 text-center'>
               <Button variant='outline' asChild>
                 <Link href={`/finances?unitId=${id}`}>
-                  View Full Financial History
+                  {t('view.viewFullFinancialHistory')}
                 </Link>
               </Button>
             </div>
           </CardContent>
         </Card>
-      </div>
-
+      </div>{' '}
       {/* Edit Dialog */}
       <ResponsiveDialog
-        title='Edit Unit'
-        description='Update the unit information'
+        title={t('view.editTitle')}
+        description={t('view.editDescription')}
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
       >
@@ -510,7 +534,6 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
           onCancel={() => setIsEditDialogOpen(false)}
         />
       </ResponsiveDialog>
-
       <ConfirmDialog />
     </>
   );

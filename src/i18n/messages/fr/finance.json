@@ -1,0 +1,104 @@
+{
+  "title": "Finances",
+  "description": "Gérer les revenus et les dépenses de vos propriétés",
+  "overview": {
+    "totalIncome": "Total des Revenus",
+    "totalExpenses": "Total des Dépenses",
+    "netIncome": "Revenu Net",
+    "transactions": "Transactions",
+    "thisMonth": "Ce mois"
+  },
+  "tabs": {
+    "incomes": "Revenus",
+    "expenses": "Dépenses"
+  },
+  "buttons": {
+    "addIncome": "Ajouter un Revenu",
+    "addExpense": "Ajouter une Dépense",
+    "cancel": "Annuler",
+    "creating": "Création...",
+    "createIncome": "Créer un Revenu",
+    "createExpense": "Créer une Dépense",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "viewReceipt": "Voir le Reçu"
+  },
+  "createIncomeDialog": {
+    "title": "Ajouter un Nouveau Revenu",
+    "description": "Enregistrer une nouvelle transaction de revenu. Remplissez les détails ci-dessous.",
+    "fields": {
+      "building": "Bâtiment (Optionnel)",
+      "buildingPlaceholder": "Sélectionnez un bâtiment ou laissez vide pour un revenu général",
+      "description": "Description",
+      "descriptionPlaceholder": "ex: Frais de maintenance mensuel",
+      "amount": "Montant ($)",
+      "category": "Catégorie",
+      "month": "Mois",
+      "year": "Année",
+      "receivedDate": "Date de Réception",
+      "notes": "Notes (Optionnel)",
+      "notesPlaceholder": "Notes supplémentaires sur ce revenu..."
+    },
+    "categories": {
+      "monthlyFees": "Frais Mensuels",
+      "parking": "Parking",
+      "utilities": "Services Publics",
+      "maintenance": "Maintenance",
+      "other": "Autre"
+    }
+  },
+  "createExpenseDialog": {
+    "title": "Ajouter une Nouvelle Dépense",
+    "description": "Enregistrer une nouvelle transaction de dépense. Remplissez les détails ci-dessous.",
+    "fields": {
+      "building": "Bâtiment (Optionnel)",
+      "buildingPlaceholder": "Sélectionnez un bâtiment ou laissez vide pour une dépense générale",
+      "description": "Description",
+      "descriptionPlaceholder": "ex: Maintenance d'ascenseur",
+      "amount": "Montant ($)",
+      "category": "Catégorie",
+      "vendor": "Fournisseur (Optionnel)",
+      "vendorPlaceholder": "Qui a été payé pour cette dépense?",
+      "month": "Mois",
+      "year": "Année",
+      "paidDate": "Date de Paiement",
+      "receiptUrl": "URL du Reçu (Optionnel)",
+      "receiptUrlPlaceholder": "https://...",
+      "notes": "Notes (Optionnel)",
+      "notesPlaceholder": "Notes supplémentaires sur cette dépense..."
+    },
+    "categories": {
+      "maintenance": "Maintenance",
+      "utilities": "Services Publics",
+      "cleaning": "Nettoyage",
+      "security": "Sécurité",
+      "supplies": "Fournitures",
+      "professionalServices": "Services Professionnels",
+      "other": "Autre"
+    }
+  },
+  "incomesList": {
+    "noRecords": "Aucun enregistrement de revenu trouvé",
+    "noRecordsDescription": "Commencez par ajouter votre premier enregistrement de revenu.",
+    "period": "Période",
+    "general": "Général",
+    "unknownBuilding": "Bâtiment Inconnu"
+  },
+  "expensesList": {
+    "noRecords": "Aucun enregistrement de dépense trouvé",
+    "noRecordsDescription": "Commencez par ajouter votre premier enregistrement de dépense.",
+    "period": "Période",
+    "general": "Général",
+    "unknownBuilding": "Bâtiment Inconnu"
+  },
+  "confirmDialog": {
+    "deleteIncome": {
+      "title": "Supprimer le Revenu",
+      "description": "Êtes-vous sûr de vouloir supprimer cet enregistrement de revenu? Cette action ne peut pas être annulée."
+    },
+    "deleteExpense": {
+      "title": "Supprimer la Dépense",
+      "description": "Êtes-vous sûr de vouloir supprimer cet enregistrement de dépense? Cette action ne peut pas être annulée."
+    }
+  }
+}

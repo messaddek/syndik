@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { BuildingsView, loadBuildingsSearchParams } from '@/modules/buildings';
 import { getQueryClient, trpc } from '@/trpc/server';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
-import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
+import { BuildingsListSkeleton } from '@/modules/buildings/ui/components/buildings-skeleton';
 
 type BuildingsPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -28,7 +28,7 @@ export default async function BuildingsPage({
   return (
     <TRPCErrorBoundary>
       <div className='flex flex-col space-y-4'>
-        <Suspense fallback={<DashboardSkeleton />}>
+        <Suspense fallback={<BuildingsListSkeleton />}>
           <BuildingsView initialFilters={filters} />
         </Suspense>
       </div>

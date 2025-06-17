@@ -26,8 +26,18 @@ export const incomesRouter = createTRPCRouter({
       z.object({
         year: z.number().optional(),
         month: z.number().optional(),
-        buildingId: z.string().uuid().optional(),
-        unitId: z.string().uuid().optional(), // Added unit filtering
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
+        unitId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)), // Added unit filtering
       })
     )
     .query(async ({ ctx, input }) => {
@@ -115,8 +125,18 @@ export const incomesRouter = createTRPCRouter({
       z.object({
         year: z.number(),
         month: z.number().optional(),
-        buildingId: z.string().uuid().optional(),
-        unitId: z.string().uuid().optional(), // Added unit filtering
+        buildingId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)),
+        unitId: z
+          .string()
+          .uuid()
+          .optional()
+          .or(z.literal(''))
+          .transform(val => (val === '' ? undefined : val)), // Added unit filtering
       })
     )
     .query(async ({ ctx, input }) => {

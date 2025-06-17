@@ -1,0 +1,143 @@
+{
+  "title": "Gestion des notifications",
+  "description": "Envoyer des notifications aux résidents et gérer la communication",
+  "addNotification": "Ajouter une notification",
+  "stats": {
+    "totalSent": "Total envoyé",
+    "allNotifications": "Toutes les notifications",
+    "thisWeek": "Cette semaine",
+    "lastSevenDays": "7 derniers jours",
+    "urgent": "Urgent",
+    "highPriorityNotifications": "Notifications haute priorité"
+  },
+  "list": {
+    "recentNotifications": "Notifications récentes",
+    "description": "Toutes les notifications envoyées aux résidents de votre organisation.",
+    "loading": "Chargement des notifications...",
+    "emptyTitle": "Aucune notification envoyée encore",
+    "emptyDescription": "Créez votre première notification pour commencer."
+  },
+  "dropdown": {
+    "title": "Notifications",
+    "markAllRead": "Tout marquer comme lu",
+    "all": "Tout",
+    "unread": "Non lues",
+    "loading": "Chargement des notifications...",
+    "emptyTitle": "Aucune notification encore",
+    "allCaughtUp": "Tout à jour !",
+    "noUnreadNotifications": "Aucune notification non lue",
+    "viewAllNotifications": "Voir toutes les notifications"
+  },
+  "resident": {
+    "title": "Notifications",
+    "description": "Restez informé des annonces importantes et des informations du bâtiment.",
+    "markAllRead": "Tout marquer comme lu",
+    "allNotifications": "Toutes les notifications",
+    "unreadNotifications": "Non lues",
+    "filters": {
+      "category": "Catégorie",
+      "priority": "Priorité",
+      "allCategories": "Toutes les catégories",
+      "allPriorities": "Toutes les priorités",
+      "allCategoriesPlaceholder": "Toutes les catégories",
+      "allPrioritiesPlaceholder": "Toutes les priorités"
+    },
+    "emptyState": {
+      "title": "Aucune notification",
+      "description": "Tout est à jour ! Aucune nouvelle notification à afficher.",
+      "unreadTitle": "Aucune notification non lue",
+      "unreadDescription": "Toutes vos notifications ont été lues."
+    },
+    "actions": {
+      "viewDetails": "Voir les détails",
+      "markAsRead": "Marquer comme lu",
+      "archive": "Archiver"
+    },
+    "loading": "Chargement des notifications...",
+    "success": {
+      "markAllAsRead": "Toutes les notifications marquées comme lues",
+      "markAsRead": "Notification marquée comme lue",
+      "archived": "Notification archivée"
+    }
+  },
+  "settings": {
+    "title": "Paramètres de notification",
+    "description": "Gérez comment et quand vous recevez les notifications.",
+    "channels": {
+      "title": "Canaux de notification",
+      "description": "Choisissez comment vous voulez recevoir les notifications.",
+      "email": "Notifications par email",
+      "emailDescription": "Recevoir les notifications par email",
+      "push": "Notifications push",
+      "pushDescription": "Recevoir les notifications push sur votre appareil",
+      "sms": "Notifications SMS",
+      "smsDescription": "Recevoir les notifications par SMS"
+    },
+    "categories": {
+      "title": "Catégories de notification",
+      "description": "Choisissez quels types de notifications vous voulez recevoir.",
+      "financial": "Financier",
+      "financialDescription": "Facturation, paiements et mises à jour financières",
+      "maintenance": "Maintenance",
+      "maintenanceDescription": "Maintenance et réparations du bâtiment",
+      "community": "Communauté",
+      "communityDescription": "Événements communautaires et annonces",
+      "system": "Système",
+      "systemDescription": "Mises à jour système et notifications techniques",
+      "general": "Général",
+      "generalDescription": "Annonces et mises à jour générales"
+    },
+    "quietHours": {
+      "title": "Heures silencieuses",
+      "description": "Définissez des heures silencieuses pendant lesquelles vous ne voulez pas recevoir de notifications.",
+      "enable": "Activer les heures silencieuses",
+      "startTime": "Heure de début",
+      "endTime": "Heure de fin"
+    },
+    "actions": {
+      "save": "Enregistrer les paramètres",
+      "saving": "Enregistrement...",
+      "reset": "Réinitialiser aux valeurs par défaut"
+    },
+    "success": {
+      "saved": "Paramètres de notification enregistrés avec succès !",
+      "reset": "Paramètres réinitialisés aux valeurs par défaut"
+    },
+    "error": {
+      "save": "Échec de l'enregistrement des paramètres de notification",
+      "load": "Échec du chargement des paramètres de notification"
+    }
+  },
+  "form": {
+    "dialogTitle": "Envoyer une nouvelle notification",
+    "dialogDescription": "Envoyer une notification à tous les résidents de votre organisation.",
+    "title": "Titre",
+    "titlePlaceholder": "Titre de la notification",
+    "message": "Message",
+    "messagePlaceholder": "Message de notification",
+    "category": "Catégorie",
+    "categoryPlaceholder": "Sélectionner une catégorie",
+    "priority": "Priorité",
+    "priorityPlaceholder": "Sélectionner une priorité",
+    "actionUrl": "URL d'action (Optionnel)",
+    "actionUrlPlaceholder": "https://example.com",
+    "categories": {
+      "general": "Général",
+      "financial": "Financier",
+      "maintenance": "Maintenance",
+      "community": "Communauté",
+      "system": "Système"
+    },
+    "priorities": {
+      "low": "Faible",
+      "normal": "Normal",
+      "high": "Élevé",
+      "urgent": "Urgent"
+    },
+    "cancel": "Annuler",
+    "send": "Envoyer la notification",
+    "sending": "Envoi en cours...",
+    "successMessage": "Notification envoyée avec succès !",
+    "errorMessage": "Échec de l'envoi de la notification"
+  }
+}

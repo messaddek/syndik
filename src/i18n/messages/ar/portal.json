@@ -45,5 +45,46 @@
   "quickActionsDescription": "المهام الشائعة والاختصارات",
   "makePayment": "إجراء دفعة",
   "meetingInfo": "معلومات الاجتماع",
-  "contactManagement": "إدارة جهات الاتصال"
+  "contactManagement": "إدارة جهات الاتصال",
+  "navbar": {
+    "searchMobile": "بحث...",
+    "searchDesktop": "البحث في الإعلانات والمدفوعات...",
+    "dashboard": "لوحة التحكم"
+  },
+  "setup": {
+    "welcomeTitle": "مرحباً بك في سينديك",
+    "welcomeDescription": "أكمل ملفك الشخصي للوصول إلى البوابة",
+    "successMessage": "تم إنشاء الحساب بنجاح!",
+    "errorMessage": "فشل في الإعداد",
+    "fullName": "الاسم الكامل",
+    "fullNamePlaceholder": "أحمد محمد",
+    "emailAddress": "عنوان البريد الإلكتروني",
+    "emailPlaceholder": "ahmed.mohamed@example.com",
+    "emailNote": "يجب أن يتطابق مع البريد الإلكتروني في سجل السكان",
+    "phoneNumber": "رقم الهاتف (اختياري)",
+    "phonePlaceholder": "+212 5XX XX XX XX",
+    "yourUnit": "وحدتك",
+    "selectUnit": "اختر وحدتك",
+    "loadingUnits": "جاري تحميل الوحدات...",
+    "noUnitsAvailable": "لا توجد وحدات متاحة",
+    "unitNote": "اختر الوحدة المسجل عليها",
+    "settingUp": "جاري الإعداد...",
+    "completeSetup": "إكمال الإعداد"
+  },
+  "access": {
+    "checkingAccess": "جاري التحقق من الوصول وربط الحساب...",
+    "welcomeAutoLinked": "مرحباً! تم الربط التلقائي بـ",
+    "portalAccessRequired": "الوصول إلى البوابة مطلوب",
+    "accessRequiredDescription": "تحتاج إلى ربط حسابك بسجل السكان للوصول إلى البوابة.",
+    "noResidentFound": "لم يتم العثور على سجل السكان",
+    "noResidentFoundDescription": "لم يتم العثور على سجل السكان للبريد الإلكتروني:",
+    "emailRequired": "عنوان البريد الإلكتروني مطلوب",
+    "emailRequiredDescription": "يحتاج حسابك إلى عنوان بريد إلكتروني مُتحقق منه للوصول إلى البوابة.",
+    "contactManager": "تواصل مع مدير العقار",
+    "contactManagerDescription": "اطلب منهم إرسال دعوة البوابة لربط حسابك بسجل السكان الخاص بك.",
+    "haveInvitation": "لديك دعوة بالفعل؟",
+    "haveInvitationDescription": "تحقق من بريدك الإلكتروني واتبع رابط الدعوة لإكمال عملية الإعداد.",
+    "details": "التفاصيل:",
+    "backToDashboard": "العودة إلى لوحة التحكم"
+  }
 }

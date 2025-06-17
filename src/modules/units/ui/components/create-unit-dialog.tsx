@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import { UnitForm } from './unit-form';
 
@@ -14,6 +15,8 @@ export function CreateUnitDialog({
   onOpenChange,
   onSuccess,
 }: CreateUnitDialogProps) {
+  const t = useTranslations('units');
+
   const handleSuccess = () => {
     onOpenChange?.(false);
     onSuccess?.();
@@ -25,8 +28,8 @@ export function CreateUnitDialog({
 
   return (
     <ResponsiveDialog
-      title='Add New Unit'
-      description='Create a new unit in your building. Fill in the details below.'
+      title={t('dialogs.addTitle')}
+      description={t('dialogs.addDescription')}
       open={open ?? false}
       onOpenChange={onOpenChange ?? (() => {})}
     >

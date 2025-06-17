@@ -1,4 +1,6 @@
 {
+  "title": "Tableau de bord",
+  "description": "Aperçu des performances de votre syndicat et des métriques clés",
   "buildings": "Bâtiments",
   "totalManagedProperties": "Total des Propriétés Gérées",
   "units": "Unités",
@@ -28,5 +30,7 @@
   "trends": "Tendances",
   "trendsDescription": "Voir les tendances financières et d'occupation.",
   "occupancy": "Occupation",
-  "occupancyDescription": "Voir les taux et l'historique d'occupation."
+  "occupancyDescription": "Voir les taux et l'historique d'occupation.",
+  "financialTrends": "Tendances Financières",
+  "occupancyTrends": "Tendances d'Occupation"
 }
