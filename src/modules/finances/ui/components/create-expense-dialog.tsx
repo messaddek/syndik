@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/select';
 import { createExpenseSchema } from '../../../expenses/schema';
 import { z } from 'zod';
+import { DatePicker } from '@/components/ui/date-picker';
 
 type CreateExpenseForm = z.infer<typeof createExpenseSchema>;
 
@@ -250,7 +251,7 @@ export function CreateExpenseDialog({
                 <FormItem>
                   <FormLabel>Paid Date</FormLabel>
                   <FormControl>
-                    <Input type='date' {...field} />
+                    <DatePicker {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

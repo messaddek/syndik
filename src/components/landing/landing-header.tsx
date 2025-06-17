@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
 import { Menu, X, BookOpen } from 'lucide-react';
 import { useUser, UserButton } from '@clerk/nextjs';
 import { Button } from '../ui/button';
@@ -149,7 +149,7 @@ export function LandingHeader() {
                 <Button
                   variant='ghost'
                   size='sm'
-                  className='w-full justify-start'
+                  className='w-full justify-center'
                   asChild
                 >
                   <Link

@@ -1,6 +1,12 @@
 {
   "title": "Guide de l'utilisateur",
   "subtitle": "Tout ce que vous devez savoir pour gérer efficacement vos propriétés",
+  "common": {
+    "numberMostPopular": "#{number} Plus populaire",
+    "popular": "Populaire",
+    "readTime": "min",
+    "readTimeMinutes": "min"
+  },
   "categories": {
     "gettingStarted": {
       "title": "Commencer",
@@ -32,6 +38,58 @@
     "loadingData": "Chargement des dernières données...",
     "updatedRealTime": "Mis à jour en temps réel"
   },
+  "articleTitles": {
+    "creating-your-first-property": "Créer votre première propriété",
+    "setting-up-user-accounts": "Configuration des comptes utilisateur",
+    "understanding-roles-permissions": "Comprendre les rôles et permissions",
+    "initial-configuration-guide": "Guide de configuration initiale",
+    "adding-new-properties": "Ajouter de nouvelles propriétés",
+    "unit-management-organization": "Gestion et organisation des unités",
+    "property-information-updates": "Mises à jour des informations de propriété",
+    "document-management-system": "Système de gestion de documents",
+    "adding-new-residents": "Ajouter de nouveaux résidents",
+    "lease-agreement-management": "Gestion des contrats de bail",
+    "resident-communication-tools": "Outils de communication avec les résidents",
+    "move-in-move-out-process": "Processus d'emménagement/déménagement",
+    "setting-up-rent-collection": "Configuration de la collecte de loyer",
+    "processing-payments": "Traitement des paiements",
+    "generating-financial-reports": "Génération de rapports financiers",
+    "late-payment-management": "Gestion des retards de paiement",
+    "creating-work-orders": "Création de bons de travail",
+    "tracking-maintenance-requests": "Suivi des demandes de maintenance",
+    "vendor-management": "Gestion des fournisseurs",
+    "preventive-maintenance-setup": "Configuration de la maintenance préventive",
+    "sending-announcements": "Envoi d'annonces",
+    "individual-messaging": "Messagerie individuelle",
+    "notification-settings": "Paramètres de notification",
+    "email-templates": "Modèles d'e-mail"
+  },
+  "articleDescriptions": {
+    "creating-your-first-property": "Configuration essentielle et premières étapes pour la création de propriété",
+    "setting-up-user-accounts": "Créer et gérer les comptes utilisateur pour votre équipe",
+    "understanding-roles-permissions": "Apprendre sur les rôles utilisateur et la gestion des permissions",
+    "initial-configuration-guide": "Configuration complète du système",
+    "adding-new-properties": "Comment ajouter et configurer de nouvelles propriétés dans le système",
+    "unit-management-organization": "Organiser et gérer les unités au sein de vos propriétés",
+    "property-information-updates": "Maintenir les informations de propriété à jour et précises",
+    "document-management-system": "Stocker et organiser les documents liés aux propriétés",
+    "adding-new-residents": "Comment intégrer de nouveaux résidents à votre propriété",
+    "lease-agreement-management": "Créer, gérer et suivre les contrats de bail",
+    "resident-communication-tools": "Utiliser les outils de communication pour rester connecté avec les résidents",
+    "move-in-move-out-process": "Rationaliser les procédures d'emménagement et de déménagement",
+    "setting-up-rent-collection": "Configurer la collecte automatisée de loyer et le traitement des paiements",
+    "processing-payments": "Gérer et traiter différents types de paiements",
+    "generating-financial-reports": "Créer et analyser des rapports financiers",
+    "late-payment-management": "Gérer les retards de paiement et les procédures de recouvrement",
+    "creating-work-orders": "Créer et gérer les bons de travail de maintenance",
+    "tracking-maintenance-requests": "Surveiller et gérer les demandes de maintenance des résidents",
+    "vendor-management": "Gérer les relations avec les fournisseurs de maintenance",
+    "preventive-maintenance-setup": "Configurer des programmes de maintenance préventive planifiés",
+    "sending-announcements": "Communiquer efficacement avec tous les résidents",
+    "individual-messaging": "Envoyer des messages directs à des résidents spécifiques",
+    "notification-settings": "Configurer les préférences et paramètres de notification",
+    "email-templates": "Créer et gérer des modèles d'e-mail pour les communications courantes"
+  },
   "sidebar": {
     "quickStart": "Démarrage rapide",
     "createFirstProperty": "Créer votre première propriété",
@@ -40,5 +98,9 @@
     "needHelp": "Besoin d'aide ?",
     "contactSupport": "Contacter le support",
     "viewFaq": "Voir la FAQ"
+  },
+  "search": {
+    "placeholder": "Rechercher des articles, des guides et des FAQ...",
+    "noResults": "Aucun résultat trouvé pour votre recherche."
   }
 }

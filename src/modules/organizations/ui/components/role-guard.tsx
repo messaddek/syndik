@@ -6,7 +6,7 @@ import { useRouter } from '@/i18n/navigation';
 import { useEffect } from 'react';
 import { BuildingViewSkeleton } from '@/modules/buildings/ui/components/building-view-skeleton';
 import { Skeleton } from '@/components/ui/skeleton';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
 import { UnitViewSkeleton } from '@/modules/units';
 import { ResidentViewSkeleton } from '@/modules/residents';
 

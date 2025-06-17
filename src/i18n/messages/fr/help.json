@@ -1,0 +1,112 @@
+{
+  "title": "Aide et Support",
+  "subtitle": "Nous sommes là pour vous aider à tirer le meilleur parti de Syndik. Trouvez des réponses, obtenez de l'aide et apprenez à optimiser la gestion de votre syndicat.",
+  "supportOptions": {
+    "liveChat": {
+      "title": "Chat en Direct",
+      "description": "Obtenez une aide instantanée de notre équipe de support",
+      "availability": "Disponible 24h/24 et 7j/7",
+      "action": "Démarrer le Chat"
+    },
+    "emailSupport": {
+      "title": "Support par Email",
+      "description": "Envoyez-nous des questions détaillées et obtenez des réponses complètes",
+      "availability": "Réponse sous 24 heures",
+      "action": "Envoyer un Email"
+    },
+    "phoneSupport": {
+      "title": "Support Téléphonique",
+      "description": "Parlez directement avec nos experts techniques",
+      "availability": "Lun-Ven, 9h-18h",
+      "action": "Nous Appeler"
+    },
+    "scheduleDemo": {
+      "title": "Planifier une Démo",
+      "description": "Réservez une démonstration personnalisée avec notre équipe",
+      "availability": "Planification flexible",
+      "action": "Réserver une Démo"
+    }
+  },
+  "contactForm": {
+    "title": "Envoyez-nous un Message",
+    "subtitle": "Vous ne trouvez pas ce que vous cherchez ? Envoyez-nous un message détaillé et nous vous répondrons rapidement.",
+    "cardTitle": "Contacter le Support",
+    "fields": {
+      "firstName": {
+        "label": "Prénom",
+        "placeholder": "Entrez votre prénom"
+      },
+      "lastName": {
+        "label": "Nom",
+        "placeholder": "Entrez votre nom"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Entrez votre adresse email"
+      },
+      "subject": {
+        "label": "Sujet",
+        "placeholder": "Comment pouvons-nous vous aider ?"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Veuillez décrire votre question ou problème en détail..."
+      }
+    },
+    "submitButton": "Envoyer le Message"
+  },
+  "resources": {
+    "title": "Ressources en Libre-Service",
+    "subtitle": "Trouvez des réponses et apprenez de nouvelles compétences avec notre bibliothèque de ressources complète.",
+    "documentation": {
+      "title": "Documentation",
+      "description": "Guides complets et documentation API",
+      "items": [
+        "Guides Utilisateur",
+        "Manuel Admin",
+        "Référence API",
+        "Meilleures Pratiques"
+      ],
+      "action": "Explorer la Documentation"
+    },
+    "videoTutorials": {
+      "title": "Tutoriels Vidéo",
+      "description": "Guides vidéo étape par étape pour les tâches courantes",
+      "items": [
+        "Commencer",
+        "Gérer les Résidents",
+        "Rapports Financiers",
+        "Configuration de Réunion"
+      ],
+      "action": "Explorer les Tutoriels Vidéo"
+    },
+    "knowledgeBase": {
+      "title": "Base de Connaissances",
+      "description": "Collection consultable d'articles et de solutions",
+      "items": [
+        "Dépannage",
+        "Guides de Fonctionnalités",
+        "Aide à l'Intégration",
+        "Conseils de Migration"
+      ],
+      "action": "Explorer la Base de Connaissances"
+    },
+    "communityForum": {
+      "title": "Forum Communautaire",
+      "description": "Connectez-vous avec d'autres utilisateurs Syndik et partagez vos expériences",
+      "items": [
+        "Discussions Utilisateurs",
+        "Demandes de Fonctionnalités",
+        "Histoires de Succès",
+        "Trucs et Astuces"
+      ],
+      "action": "Explorer le Forum Communautaire"
+    }
+  },
+  "emergency": {
+    "title": "Support d'Urgence",
+    "description": "Pour les problèmes système critiques affectant les opérations de votre syndicat, appelez notre ligne d'urgence :",
+    "phone": "+1-800-EMERGENCY",
+    "availability": "Disponible 24h/24 et 7j/7 pour les clients Enterprise"
+  }
+}

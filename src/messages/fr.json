@@ -292,6 +292,393 @@
           }
         }
       }
+    },
+    "moveInMoveOutProcess": {
+      "title": "Processus d'emménagement/déménagement",
+      "description": "Rationalisez les emménagements et déménagements avec des workflows complets qui assurent des transitions fluides pour les résidents et la gestion.",
+      "breadcrumb": {
+        "userGuide": "Guide d'utilisation",
+        "residentManagement": "Gestion des résidents",
+        "current": "Processus d'emménagement/déménagement"
+      },
+      "meta": {
+        "readTime": "10 min de lecture",
+        "audience": "Gestionnaires immobiliers"
+      },
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Le processus d'emménagement et de déménagement est crucial pour maintenir l'état de la propriété, assurer la satisfaction des locataires et protéger votre investissement. Syndik fournit des workflows structurés pour gérer ces transitions efficacement.",
+          "keyComponents": {
+            "title": "Composants clés",
+            "items": [
+              "Listes de contrôle d'inspection détaillées",
+              "Système de documentation photo",
+              "Gestion des dépôts de garantie",
+              "Suivi numérique de la remise des clés"
+            ]
+          }
+        }
+      },
+      "relatedArticles": [
+        {
+          "title": "Ajout de nouveaux résidents",
+          "href": "/user-guide/resident-management/adding-new-residents",
+          "time": "5 min"
+        },
+        {
+          "title": "Gestion des contrats de bail",
+          "href": "/user-guide/resident-management/lease-agreement-management",
+          "time": "8 min"
+        },
+        {
+          "title": "Gestion et organisation des unités",
+          "href": "/user-guide/property-management/unit-management-organization",
+          "time": "6 min"
+        }
+      ]
+    },
+    "creatingYourFirstProperty": {
+      "title": "Créer votre première propriété",
+      "description": "Guide complet pour commencer avec la configuration de votre première propriété dans Syndik",
+      "sections": {
+        "overview": {
+          "content": "Créer votre première propriété dans Syndik est le début de votre parcours de gestion immobilière efficace. Ce guide vous accompagnera étape par étape dans le processus.",
+          "whatYoullLearn": [
+            "Comment configurer les informations de base de propriété",
+            "Configurer les unités résidentielles",
+            "Personnaliser les paramètres de propriété",
+            "Meilleures pratiques pour la configuration de propriété"
+          ]
+        },
+        "step1": {
+          "title": "Étape 1: Informations de base",
+          "content": "Commencez par entrer les informations de base de votre propriété",
+          "steps": [
+            "Naviguez vers Propriétés dans le menu principal",
+            "Cliquez sur 'Ajouter une nouvelle propriété'",
+            "Entrez le nom et l'adresse de la propriété",
+            "Sélectionnez le type de propriété",
+            "Ajoutez la description de la propriété"
+          ],
+          "proTip": {
+            "title": "Conseil de pro",
+            "content": "Utilisez des noms descriptifs pour vos propriétés pour les rendre facilement identifiables dans les rapports et listes."
+          }
+        },
+        "step2": {
+          "title": "Étape 2: Configuration des unités",
+          "content": "Configurez les unités résidentielles de votre propriété",
+          "requiredFields": {
+            "title": "Champs requis",
+            "fields": [
+              "Numéro d'unité",
+              "Type d'unité (appartement, studio, etc.)",
+              "Nombre de chambres",
+              "Nombre de salles de bain",
+              "Superficie en pieds carrés"
+            ]
+          },
+          "optionalFields": {
+            "title": "Champs optionnels",
+            "fields": [
+              "Détails du balcon",
+              "Place de parking",
+              "Unité de stockage",
+              "Politique animaux",
+              "Caractéristiques spéciales"
+            ]
+          }
+        },
+        "step3": {
+          "title": "Étape 3: Personnalisation des paramètres",
+          "content": "Ajustez les paramètres avancés de votre propriété",
+          "settings": [
+            {
+              "title": "Paramètres de paiement",
+              "description": "Configurez les montants de loyer, dates d'échéance et frais de retard"
+            },
+            {
+              "title": "Préférences de communication",
+              "description": "Configurez les paramètres de notification et canaux de communication"
+            },
+            {
+              "title": "Contrôle d'accès",
+              "description": "Gérez qui peut voir et modifier les informations de propriété"
+            }
+          ]
+        },
+        "nextSteps": {
+          "title": "Étapes suivantes",
+          "content": "Maintenant que votre propriété est configurée, voici ce que vous pouvez faire ensuite:",
+          "actions": [
+            {
+              "title": "Ajouter des résidents",
+              "description": "Commencez à ajouter des résidents à vos unités",
+              "href": "/user-guide/resident-management/adding-new-residents"
+            },
+            {
+              "title": "Configurer la collecte de loyer",
+              "description": "Configurez les méthodes et horaires de paiement",
+              "href": "/user-guide/financial-management/setting-up-rent-collection"
+            }
+          ]
+        },
+        "sidebar": {
+          "relatedArticlesList": [
+            {
+              "title": "Gestion des unités",
+              "href": "/user-guide/property-management/unit-management-organization",
+              "time": "5 min"
+            },
+            {
+              "title": "Configuration des paiements",
+              "href": "/user-guide/financial-management/setting-up-rent-collection",
+              "time": "3 min"
+            }
+          ]
+        }
+      }
+    },
+    "addingNewResidents": {
+      "title": "Ajouter de nouveaux résidents",
+      "description": "Guide complet pour l'intégration de nouveaux résidents, de la configuration initiale à la finalisation du déménagement",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "L'ajout de nouveaux résidents à votre propriété implique plusieurs étapes importantes pour assurer un processus d'intégration fluide.",
+          "whatYoullLearn": [
+            "Documentation requise pour les nouveaux résidents",
+            "Comment créer des profils de résidents",
+            "Processus d'attribution de bail",
+            "Procédures de configuration de paiement"
+          ]
+        }
+      }
+    },
+    "addingNewProperties": {
+      "title": "Ajouter de nouvelles propriétés",
+      "description": "Guide étape par étape pour ajouter de nouvelles propriétés à votre portefeuille",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "L'ajout de nouvelles propriétés à votre portefeuille est une tâche fondamentale en gestion immobilière."
+        }
+      }
+    },
+    "settingUpUserAccounts": {
+      "title": "Configuration des comptes utilisateur",
+      "description": "Apprenez à créer et gérer les comptes utilisateur pour votre équipe",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "La configuration appropriée des comptes utilisateur garantit un accès sécurisé au système."
+        }
+      }
+    },
+    "understandingRolesPermissions": {
+      "title": "Comprendre les rôles et permissions",
+      "description": "Guide du système de contrôle d'accès basé sur les rôles",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Le système de contrôle d'accès garantit une sécurité appropriée."
+        }
+      }
+    },
+    "initialConfigurationGuide": {
+      "title": "Guide de configuration initiale",
+      "description": "Guide de configuration pour les nouvelles installations",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Ce guide vous aide à configurer Syndik pour votre organisation."
+        }
+      }
+    },
+    "unitManagementOrganization": {
+      "title": "Gestion et organisation des unités",
+      "description": "Organisez et gérez efficacement les unités",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Une gestion efficace des unités maximise l'occupation."
+        }
+      }
+    },
+    "documentManagementSystem": {
+      "title": "Système de gestion de documents",
+      "description": "Organisez et gérez vos documents immobiliers",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Un système organisé facilite l'accès aux documents."
+        }
+      }
+    },
+    "leaseAgreementManagement": {
+      "title": "Gestion des contrats de bail",
+      "description": "Gérez les contrats de bail et renouvellements",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Une gestion efficace des baux assure la conformité légale."
+        }
+      }
+    },
+    "residentCommunicationTools": {
+      "title": "Outils de communication avec les résidents",
+      "description": "Stratégies de communication efficaces",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Une communication forte améliore la satisfaction."
+        }
+      }
+    },
+    "settingUpRentCollection": {
+      "title": "Configuration de la collecte de loyer",
+      "description": "Configurez des systèmes automatisés de collecte",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "La collecte automatisée améliore le flux de trésorerie."
+        }
+      }
+    },
+    "processingPayments": {
+      "title": "Traitement des paiements",
+      "description": "Gérez les paiements efficacement",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Un traitement efficace garantit des registres précis."
+        }
+      }
+    },
+    "generatingFinancialReports": {
+      "title": "Génération de rapports financiers",
+      "description": "Créez des rapports complets",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Les rapports fournissent des insights sur la performance."
+        }
+      }
+    },
+    "latePaymentManagement": {
+      "title": "Gestion des retards de paiement",
+      "description": "Gérez les retards efficacement",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Une gestion cohérente maintient le flux de trésorerie."
+        }
+      }
+    },
+    "creatingWorkOrders": {
+      "title": "Création de bons de travail",
+      "description": "Gérez les demandes de maintenance",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Une gestion organisée assure une maintenance opportune."
+        }
+      }
+    },
+    "trackingMaintenanceRequests": {
+      "title": "Suivi des demandes de maintenance",
+      "description": "Surveillez les demandes de maintenance",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Un suivi efficace résout rapidement les problèmes."
+        }
+      }
+    },
+    "preventiveMaintenanceSetup": {
+      "title": "Configuration de maintenance préventive",
+      "description": "Établissez des horaires proactifs",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "La maintenance préventive réduit les coûts."
+        }
+      }
+    },
+    "vendorManagement": {
+      "title": "Gestion des fournisseurs",
+      "description": "Gérez les relations avec les prestataires",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Une gestion efficace garantit la qualité."
+        }
+      }
+    },
+    "sendingAnnouncements": {
+      "title": "Envoi d'annonces",
+      "description": "Communiquez efficacement avec tous les résidents",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Des annonces bien conçues gardent les résidents informés."
+        }
+      }
+    },
+    "individualMessaging": {
+      "title": "Messagerie individuelle",
+      "description": "Communiquez directement avec les résidents",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "La messagerie directe permet une communication personnalisée."
+        }
+      }
+    },
+    "notificationSettings": {
+      "title": "Paramètres de notification",
+      "description": "Configurez les notifications",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Des paramètres appropriés assurent une communication efficace."
+        }
+      }
+    },
+    "emailTemplates": {
+      "title": "Modèles d'email",
+      "description": "Créez des modèles professionnels",
+      "sections": {
+        "overview": {
+          "title": "Aperçu",
+          "content": "Les modèles garantissent une communication cohérente."
+        }
+      }
+    },
+    "common": {
+      "tableOfContents": "Table des matières",
+      "relatedArticles": "Articles connexes",
+      "overview": "Aperçu",
+      "nextSteps": "Étapes suivantes",
+      "popular": "Populaire",
+      "readTime": "min",
+      "whatYoullLearn": "Ce que vous apprendrez"
+    },
+    "navigation": {
+      "userGuide": "Guide d'utilisation",
+      "gettingStarted": "Commencer"
+    },
+    "sidebar": {
+      "tableOfContents": "Table des matières",
+      "relatedArticles": "Articles connexes",
+      "quickActions": "Actions rapides",
+      "needHelp": "Besoin d'aide ?",
+      "contactSupport": "Contacter le support",
+      "liveChat": "Chat en direct",
+      "phoneSupport": "Support téléphonique",
+      "supportMessage": "Si vous avez besoin d'une aide immédiate, veuillez contacter notre équipe de support.",
+      "supportHours": "Heures de support : Lundi - Vendredi, 9h - 18h"
     }
   },
   "articleTitles": {
@@ -517,6 +904,118 @@
     "certifications": {
       "soc2": "Conforme SOC 2",
       "gdpr": "Conforme RGPD"
+    }
+  },
+  "help": {
+    "title": "Aide et Support",
+    "subtitle": "Nous sommes là pour vous aider à tirer le meilleur parti de Syndik. Trouvez des réponses, obtenez de l'aide et apprenez à optimiser la gestion de votre syndicat.",
+    "supportOptions": {
+      "liveChat": {
+        "title": "Chat en Direct",
+        "description": "Obtenez une aide instantanée de notre équipe de support",
+        "availability": "Disponible 24h/24 et 7j/7",
+        "action": "Démarrer le Chat"
+      },
+      "emailSupport": {
+        "title": "Support par Email",
+        "description": "Envoyez-nous des questions détaillées et obtenez des réponses complètes",
+        "availability": "Réponse sous 24 heures",
+        "action": "Envoyer un Email"
+      },
+      "phoneSupport": {
+        "title": "Support Téléphonique",
+        "description": "Parlez directement avec nos experts techniques",
+        "availability": "Lun-Ven, 9h-18h",
+        "action": "Nous Appeler"
+      },
+      "scheduleDemo": {
+        "title": "Planifier une Démo",
+        "description": "Réservez une démonstration personnalisée avec notre équipe",
+        "availability": "Planification flexible",
+        "action": "Réserver une Démo"
+      }
+    },
+    "contactForm": {
+      "title": "Envoyez-nous un Message",
+      "subtitle": "Vous ne trouvez pas ce que vous cherchez ? Envoyez-nous un message détaillé et nous vous répondrons rapidement.",
+      "cardTitle": "Contacter le Support",
+      "fields": {
+        "firstName": {
+          "label": "Prénom",
+          "placeholder": "Entrez votre prénom"
+        },
+        "lastName": {
+          "label": "Nom",
+          "placeholder": "Entrez votre nom"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Entrez votre adresse email"
+        },
+        "subject": {
+          "label": "Sujet",
+          "placeholder": "Comment pouvons-nous vous aider ?"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Veuillez décrire votre question ou problème en détail..."
+        }
+      },
+      "submitButton": "Envoyer le Message"
+    },
+    "resources": {
+      "title": "Ressources en Libre-Service",
+      "subtitle": "Trouvez des réponses et apprenez de nouvelles compétences avec notre bibliothèque de ressources complète.",
+      "documentation": {
+        "title": "Documentation",
+        "description": "Guides complets et documentation API",
+        "items": [
+          "Guides Utilisateur",
+          "Manuel Admin",
+          "Référence API",
+          "Meilleures Pratiques"
+        ],
+        "action": "Explorer la Documentation"
+      },
+      "videoTutorials": {
+        "title": "Tutoriels Vidéo",
+        "description": "Guides vidéo étape par étape pour les tâches courantes",
+        "items": [
+          "Commencer",
+          "Gérer les Résidents",
+          "Rapports Financiers",
+          "Configuration de Réunion"
+        ],
+        "action": "Explorer les Tutoriels Vidéo"
+      },
+      "knowledgeBase": {
+        "title": "Base de Connaissances",
+        "description": "Collection consultable d'articles et de solutions",
+        "items": [
+          "Dépannage",
+          "Guides de Fonctionnalités",
+          "Aide à l'Intégration",
+          "Conseils de Migration"
+        ],
+        "action": "Explorer la Base de Connaissances"
+      },
+      "communityForum": {
+        "title": "Forum Communautaire",
+        "description": "Connectez-vous avec d'autres utilisateurs Syndik et partagez vos expériences",
+        "items": [
+          "Discussions Utilisateurs",
+          "Demandes de Fonctionnalités",
+          "Histoires de Succès",
+          "Trucs et Astuces"
+        ],
+        "action": "Explorer le Forum Communautaire"
+      }
+    },
+    "emergency": {
+      "title": "Support d'Urgence",
+      "description": "Pour les problèmes système critiques affectant les opérations de votre syndicat, appelez notre ligne d'urgence :",
+      "phone": "+1-800-EMERGENCY",
+      "availability": "Disponible 24h/24 et 7j/7 pour les clients Enterprise"
     }
   },
   "landing": {
@@ -801,7 +1300,8 @@
     "about": "À Propos",
     "pricing": "Tarification",
     "faq": "FAQ",
-    "terms": "Conditions"
+    "terms": "Conditions",
+    "userGuide": "Guide de l'utilisateur"
   },
   "organizations": {
     "residences": "Résidences",
@@ -1151,6 +1651,12 @@
   "userGuide": {
     "title": "Guide de l'utilisateur",
     "subtitle": "Tout ce que vous devez savoir pour gérer efficacement vos propriétés",
+    "common": {
+      "numberMostPopular": "#{number} Plus populaire",
+      "popular": "Populaire",
+      "readTime": "min",
+      "readTimeMinutes": "min"
+    },
     "categories": {
       "gettingStarted": {
         "title": "Commencer",
@@ -1182,6 +1688,58 @@
       "loadingData": "Chargement des dernières données...",
       "updatedRealTime": "Mis à jour en temps réel"
     },
+    "articleTitles": {
+      "creating-your-first-property": "Créer votre première propriété",
+      "setting-up-user-accounts": "Configuration des comptes utilisateur",
+      "understanding-roles-permissions": "Comprendre les rôles et permissions",
+      "initial-configuration-guide": "Guide de configuration initiale",
+      "adding-new-properties": "Ajouter de nouvelles propriétés",
+      "unit-management-organization": "Gestion et organisation des unités",
+      "property-information-updates": "Mises à jour des informations de propriété",
+      "document-management-system": "Système de gestion de documents",
+      "adding-new-residents": "Ajouter de nouveaux résidents",
+      "lease-agreement-management": "Gestion des contrats de bail",
+      "resident-communication-tools": "Outils de communication avec les résidents",
+      "move-in-move-out-process": "Processus d'emménagement/déménagement",
+      "setting-up-rent-collection": "Configuration de la collecte de loyer",
+      "processing-payments": "Traitement des paiements",
+      "generating-financial-reports": "Génération de rapports financiers",
+      "late-payment-management": "Gestion des retards de paiement",
+      "creating-work-orders": "Création de bons de travail",
+      "tracking-maintenance-requests": "Suivi des demandes de maintenance",
+      "vendor-management": "Gestion des fournisseurs",
+      "preventive-maintenance-setup": "Configuration de la maintenance préventive",
+      "sending-announcements": "Envoi d'annonces",
+      "individual-messaging": "Messagerie individuelle",
+      "notification-settings": "Paramètres de notification",
+      "email-templates": "Modèles d'e-mail"
+    },
+    "articleDescriptions": {
+      "creating-your-first-property": "Configuration essentielle et premières étapes pour la création de propriété",
+      "setting-up-user-accounts": "Créer et gérer les comptes utilisateur pour votre équipe",
+      "understanding-roles-permissions": "Apprendre sur les rôles utilisateur et la gestion des permissions",
+      "initial-configuration-guide": "Configuration complète du système",
+      "adding-new-properties": "Comment ajouter et configurer de nouvelles propriétés dans le système",
+      "unit-management-organization": "Organiser et gérer les unités au sein de vos propriétés",
+      "property-information-updates": "Maintenir les informations de propriété à jour et précises",
+      "document-management-system": "Stocker et organiser les documents liés aux propriétés",
+      "adding-new-residents": "Comment intégrer de nouveaux résidents à votre propriété",
+      "lease-agreement-management": "Créer, gérer et suivre les contrats de bail",
+      "resident-communication-tools": "Utiliser les outils de communication pour rester connecté avec les résidents",
+      "move-in-move-out-process": "Rationaliser les procédures d'emménagement et de déménagement",
+      "setting-up-rent-collection": "Configurer la collecte automatisée de loyer et le traitement des paiements",
+      "processing-payments": "Gérer et traiter différents types de paiements",
+      "generating-financial-reports": "Créer et analyser des rapports financiers",
+      "late-payment-management": "Gérer les retards de paiement et les procédures de recouvrement",
+      "creating-work-orders": "Créer et gérer les bons de travail de maintenance",
+      "tracking-maintenance-requests": "Surveiller et gérer les demandes de maintenance des résidents",
+      "vendor-management": "Gérer les relations avec les fournisseurs de maintenance",
+      "preventive-maintenance-setup": "Configurer des programmes de maintenance préventive planifiés",
+      "sending-announcements": "Communiquer efficacement avec tous les résidents",
+      "individual-messaging": "Envoyer des messages directs à des résidents spécifiques",
+      "notification-settings": "Configurer les préférences et paramètres de notification",
+      "email-templates": "Créer et gérer des modèles d'e-mail pour les communications courantes"
+    },
     "sidebar": {
       "quickStart": "Démarrage rapide",
       "createFirstProperty": "Créer votre première propriété",
@@ -1190,6 +1748,10 @@
       "needHelp": "Besoin d'aide ?",
       "contactSupport": "Contacter le support",
       "viewFaq": "Voir la FAQ"
+    },
+    "search": {
+      "placeholder": "Rechercher des articles, des guides et des FAQ...",
+      "noResults": "Aucun résultat trouvé pour votre recherche."
     }
   },
   "validation": {

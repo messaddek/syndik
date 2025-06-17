@@ -64,7 +64,9 @@ export function DashboardSidebar() {
             height={64}
             className='size-16'
           />
-          <span className='text-lg font-semibold text-gray-900'>syndik.ma</span>
+          <span className='text-lg font-semibold text-gray-900 dark:text-gray-200'>
+            syndik.ma
+          </span>
         </Link>
       </SidebarHeader>
       <SidebarContent>

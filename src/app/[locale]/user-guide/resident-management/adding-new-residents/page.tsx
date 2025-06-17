@@ -1,32 +1,54 @@
+'use client';
+
 import { Link } from '@/i18n/routing';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ArticleLayout from '@/modules/articles/components/article-layout';
 import { ArticleSidebar } from '@/components/articles/article-sidebar';
+import { useTranslations } from 'next-intl';
 import {
   Clock,
   Users,
   CheckCircle,
   UserPlus,
   ChevronRight,
-  Mail,
-  Phone,
   FileText,
-  CreditCard,
-  Calendar,
-  Key,
 } from 'lucide-react';
 
 const AddingNewResidentsPage = () => {
+  const t = useTranslations('articles.addingNewResidents');
+  const tCommon = useTranslations('articles.common');
+  const tNav = useTranslations('articles.navigation');
+
   const tableOfContents = [
-    { id: 'overview', title: 'Overview', level: 1 },
-    { id: 'preparation', title: 'Preparation & Documentation', level: 1 },
-    { id: 'resident-profile', title: 'Creating Resident Profile', level: 1 },
-    { id: 'lease-assignment', title: 'Lease Assignment', level: 1 },
-    { id: 'payment-setup', title: 'Payment Setup', level: 1 },
-    { id: 'access-credentials', title: 'Access Credentials', level: 1 },
-    { id: 'move-in-checklist', title: 'Move-in Checklist', level: 1 },
-    { id: 'communication-setup', title: 'Communication Setup', level: 1 },
+    { id: 'overview', title: t('sections.overview.title'), level: 1 },
+    { id: 'preparation', title: t('sections.preparation.title'), level: 1 },
+    {
+      id: 'resident-profile',
+      title: t('sections.residentProfile.title'),
+      level: 1,
+    },
+    {
+      id: 'lease-assignment',
+      title: t('sections.leaseAssignment.title'),
+      level: 1,
+    },
+    { id: 'payment-setup', title: t('sections.paymentSetup.title'), level: 1 },
+    {
+      id: 'access-credentials',
+      title: t('sections.accessCredentials.title'),
+      level: 1,
+    },
+    {
+      id: 'move-in-checklist',
+      title: t('sections.moveInChecklist.title'),
+      level: 1,
+    },
+    {
+      id: 'communication-setup',
+      title: t('sections.communicationSetup.title'),
+      level: 1,
+    },
   ];
 
   const relatedArticles = [
@@ -46,37 +68,32 @@ const AddingNewResidentsPage = () => {
       time: '7 min',
     },
   ];
-  return (
-    <ArticleLayout
-      articleSlug='adding-new-residents'
-      title='Adding New Residents'
-    >
-      {/* Breadcrumb */}
-      <nav className='mb-8'>
-        <div className='flex items-center space-x-2 text-sm text-gray-600'>
-          <Link
-            href='/user-guide'
-            className='transition-colors hover:text-gray-900'
-          >
-            User Guide
-          </Link>
-          <ChevronRight className='h-4 w-4' />
-          <Link
-            href='/user-guide'
-            className='transition-colors hover:text-gray-900'
-          >
-            Resident Management
-          </Link>
-          <ChevronRight className='h-4 w-4' />
-          <span className='text-gray-900'>Adding New Residents</span>
-        </div>
-      </nav>
 
+  return (
+    <ArticleLayout articleSlug='adding-new-residents' title={t('title')}>
       <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
-        {/* Main Content */}
         <div className='lg:col-span-3'>
+          <nav className='mb-8'>
+            <div className='flex items-center space-x-2 text-sm text-gray-600'>
+              <Link
+                href='/user-guide'
+                className='transition-colors hover:text-gray-900'
+              >
+                {tNav('userGuide')}
+              </Link>
+              <ChevronRight className='h-4 w-4 rtl:rotate-180' />
+              <Link
+                href='/user-guide/resident-management'
+                className='transition-colors hover:text-gray-900'
+              >
+                {tNav('residentManagement')}
+              </Link>
+              <ChevronRight className='h-4 w-4 rtl:rotate-180' />
+              <span className='text-gray-900'>{t('title')}</span>
+            </div>
+          </nav>
+
           <div className='rounded-lg border bg-white shadow-sm'>
-            {/* Header */}
             <div className='border-b p-6'>
               <div className='mb-4 flex items-center space-x-3'>
                 <div className='rounded-lg bg-purple-500 p-2'>
@@ -84,135 +101,88 @@ const AddingNewResidentsPage = () => {
                 </div>
                 <div>
                   <h1 className='text-3xl font-bold text-gray-900'>
-                    Adding New Residents
+                    {t('title')}
                   </h1>
                   <div className='mt-2 flex items-center space-x-4'>
-                    <Badge variant='secondary'>Resident Management</Badge>
-                    <Badge variant='outline'>Popular</Badge>
+                    <Badge variant='secondary'>
+                      {tNav('residentManagement')}
+                    </Badge>
+                    <Badge variant='outline'>{tCommon('popular')}</Badge>
                     <div className='flex items-center space-x-1 text-sm text-gray-500'>
                       <Clock className='h-4 w-4' />
-                      <span>5 min read</span>
+                      <span>{t('metadata.readTime')}</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <p className='text-lg text-gray-600'>
-                Complete guide to onboarding new residents, from initial setup
-                to move-in completion. Learn the step-by-step process for adding
-                residents to your property management system.
-              </p>
+              <p className='text-gray-700'>{t('metadata.description')}</p>
             </div>
 
-            {/* Content */}
-            <div className='space-y-8 p-6'>
-              {/* Overview */}
-              <section id='overview'>
-                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Overview
+            <div className='p-6'>
+              <section id='overview' className='mb-12'>
+                <h2 className='mb-6 text-2xl font-semibold text-gray-900'>
+                  {t('sections.overview.title')}
                 </h2>
-                <p className='mb-4 text-gray-700'>
-                  Adding new residents is a critical process that sets the
-                  foundation for a successful landlord-tenant relationship. This
-                  guide covers everything from initial documentation to
-                  finalizing the move-in process.
+                <p className='mb-6 text-gray-700'>
+                  {t('sections.overview.content')}
                 </p>
 
-                <Card className='border-purple-200 bg-purple-50'>
-                  <CardContent className='p-4'>
-                    <div className='flex items-start space-x-3'>
-                      <CheckCircle className='mt-0.5 h-5 w-5 text-purple-600' />
-                      <div>
-                        <p className='font-medium text-purple-800'>
-                          Key Steps Overview
-                        </p>
-                        <ul className='mt-2 space-y-1 text-sm text-purple-700'>
-                          <li>• Collect and verify resident information</li>
-                          <li>• Create resident profile in the system</li>
-                          <li>• Assign unit and lease terms</li>
-                          <li>• Set up payment methods and schedules</li>
-                          <li>• Provide access credentials and keys</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </section>
-
-              {/* Preparation */}
-              <section id='preparation'>
-                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Preparation & Documentation
-                </h2>
-                <p className='mb-4 text-gray-700'>
-                  Before adding a resident to the system, ensure you have all
-                  necessary documentation and information.
-                </p>
-
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <div className='grid gap-4 md:grid-cols-2'>
                   <Card>
-                    <CardHeader>
-                      <CardTitle className='flex items-center space-x-2 text-lg'>
-                        <FileText className='h-5 w-5' />
-                        <span>Required Documents</span>
-                      </CardTitle>
+                    <CardHeader className='pb-3'>
+                      <div className='flex items-center space-x-2'>
+                        <Users className='h-5 w-5 text-blue-500' />
+                        <CardTitle className='text-lg'>
+                          {t('sections.overview.benefits.title')}
+                        </CardTitle>
+                      </div>
                     </CardHeader>
                     <CardContent>
-                      <ul className='space-y-2 text-sm'>
-                        <li className='flex items-center space-x-2'>
-                          <CheckCircle className='h-4 w-4 text-green-500' />
-                          <span>Signed lease agreement</span>
+                      <ul className='space-y-2 text-sm text-gray-600'>
+                        <li className='flex items-start space-x-2'>
+                          <CheckCircle className='mt-0.5 h-4 w-4 text-green-500' />
+                          <span>{t('sections.overview.benefits.items.0')}</span>
                         </li>
-                        <li className='flex items-center space-x-2'>
-                          <CheckCircle className='h-4 w-4 text-green-500' />
-                          <span>Government-issued ID</span>
+                        <li className='flex items-start space-x-2'>
+                          <CheckCircle className='mt-0.5 h-4 w-4 text-green-500' />
+                          <span>{t('sections.overview.benefits.items.1')}</span>
                         </li>
-                        <li className='flex items-center space-x-2'>
-                          <CheckCircle className='h-4 w-4 text-green-500' />
-                          <span>Proof of income</span>
-                        </li>
-                        <li className='flex items-center space-x-2'>
-                          <CheckCircle className='h-4 w-4 text-green-500' />
-                          <span>Security deposit payment</span>
-                        </li>
-                        <li className='flex items-center space-x-2'>
-                          <CheckCircle className='h-4 w-4 text-green-500' />
-                          <span>Emergency contact information</span>
-                        </li>
-                        <li className='flex items-center space-x-2'>
-                          <CheckCircle className='h-4 w-4 text-green-500' />
-                          <span>Background check results</span>
+                        <li className='flex items-start space-x-2'>
+                          <CheckCircle className='mt-0.5 h-4 w-4 text-green-500' />
+                          <span>{t('sections.overview.benefits.items.2')}</span>
                         </li>
                       </ul>
                     </CardContent>
                   </Card>
 
                   <Card>
-                    <CardHeader>
-                      <CardTitle className='text-lg'>
-                        Optional Documents
-                      </CardTitle>
+                    <CardHeader className='pb-3'>
+                      <div className='flex items-center space-x-2'>
+                        <FileText className='h-5 w-5 text-purple-500' />
+                        <CardTitle className='text-lg'>
+                          {t('sections.overview.requirements.title')}
+                        </CardTitle>
+                      </div>
                     </CardHeader>
                     <CardContent>
-                      <ul className='space-y-2 text-sm'>
-                        <li className='flex items-center space-x-2'>
-                          <div className='h-4 w-4 rounded border-2 border-gray-300'></div>
-                          <span>Pet documentation</span>
+                      <ul className='space-y-2 text-sm text-gray-600'>
+                        <li className='flex items-start space-x-2'>
+                          <CheckCircle className='mt-0.5 h-4 w-4 text-green-500' />
+                          <span>
+                            {t('sections.overview.requirements.items.0')}
+                          </span>
                         </li>
-                        <li className='flex items-center space-x-2'>
-                          <div className='h-4 w-4 rounded border-2 border-gray-300'></div>
-                          <span>Vehicle registration</span>
+                        <li className='flex items-start space-x-2'>
+                          <CheckCircle className='mt-0.5 h-4 w-4 text-green-500' />
+                          <span>
+                            {t('sections.overview.requirements.items.1')}
+                          </span>
                         </li>
-                        <li className='flex items-center space-x-2'>
-                          <div className='h-4 w-4 rounded border-2 border-gray-300'></div>
-                          <span>Renter&apos;s insurance</span>
-                        </li>
-                        <li className='flex items-center space-x-2'>
-                          <div className='h-4 w-4 rounded border-2 border-gray-300'></div>
-                          <span>Move-in photos</span>
-                        </li>
-                        <li className='flex items-center space-x-2'>
-                          <div className='h-4 w-4 rounded border-2 border-gray-300'></div>
-                          <span>Utility transfer forms</span>
+                        <li className='flex items-start space-x-2'>
+                          <CheckCircle className='mt-0.5 h-4 w-4 text-green-500' />
+                          <span>
+                            {t('sections.overview.requirements.items.2')}
+                          </span>
                         </li>
                       </ul>
                     </CardContent>
@@ -220,510 +190,54 @@ const AddingNewResidentsPage = () => {
                 </div>
               </section>
 
-              {/* Resident Profile */}
-              <section id='resident-profile'>
-                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Creating Resident Profile
+              <section id='preparation' className='mb-12'>
+                <h2 className='mb-6 text-2xl font-semibold text-gray-900'>
+                  {t('sections.preparation.title')}
                 </h2>
-                <p className='mb-4 text-gray-700'>
-                  Follow these steps to create a comprehensive resident profile
-                  in Syndik:
+                <p className='mb-6 text-gray-700'>
+                  {t('sections.preparation.content')}
                 </p>
 
-                <div className='space-y-4'>
-                  <div className='flex items-start space-x-3'>
-                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-purple-500 text-sm font-medium text-white'>
-                      1
-                    </div>
-                    <div>
-                      <h3 className='font-medium text-gray-900'>
-                        Navigate to Residents
-                      </h3>
-                      <p className='text-sm text-gray-600'>
-                        Go to Residents → Add New Resident
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className='flex items-start space-x-3'>
-                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-purple-500 text-sm font-medium text-white'>
-                      2
-                    </div>
-                    <div>
-                      <h3 className='font-medium text-gray-900'>
-                        Enter Personal Information
-                      </h3>
-                      <p className='text-sm text-gray-600'>
-                        Fill in name, contact details, and identification
-                        information
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className='flex items-start space-x-3'>
-                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-purple-500 text-sm font-medium text-white'>
-                      3
-                    </div>
-                    <div>
-                      <h3 className='font-medium text-gray-900'>
-                        Add Emergency Contacts
-                      </h3>
-                      <p className='text-sm text-gray-600'>
-                        Include at least one emergency contact with relationship
-                        details
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className='flex items-start space-x-3'>
-                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-purple-500 text-sm font-medium text-white'>
-                      4
-                    </div>
-                    <div>
-                      <h3 className='font-medium text-gray-900'>
-                        Upload Documents
-                      </h3>
-                      <p className='text-sm text-gray-600'>
-                        Attach ID copies, lease documents, and other required
-                        files
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <Card className='mt-4'>
-                  <CardHeader>
-                    <CardTitle className='text-lg'>
-                      Personal Information Fields
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-                      <div>
-                        <h4 className='mb-2 font-semibold text-red-700'>
-                          Required Fields
-                        </h4>
-                        <ul className='space-y-1 text-sm'>
-                          <li>• Full name</li>
-                          <li>• Email address</li>
-                          <li>• Phone number</li>
-                          <li>• Date of birth</li>
-                          <li>• Government ID number</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className='mb-2 font-semibold text-blue-700'>
-                          Contact Information
-                        </h4>
-                        <ul className='space-y-1 text-sm'>
-                          <li>• Primary phone</li>
-                          <li>• Secondary phone</li>
-                          <li>• Work phone</li>
-                          <li>• Previous address</li>
-                          <li>• Work address</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className='mb-2 font-semibold text-green-700'>
-                          Additional Details
-                        </h4>
-                        <ul className='space-y-1 text-sm'>
-                          <li>• Occupation</li>
-                          <li>• Employer information</li>
-                          <li>• Income details</li>
-                          <li>• Vehicle information</li>
-                          <li>• Pet information</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </section>
-
-              {/* Lease Assignment */}
-              <section id='lease-assignment'>
-                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Lease Assignment
-                </h2>
-                <p className='mb-4 text-gray-700'>
-                  Assign the resident to a specific unit and configure lease
-                  terms.
-                </p>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className='flex items-center space-x-2 text-lg'>
-                      <Key className='h-5 w-5' />
-                      <span>Lease Configuration</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
-                      <div>
-                        <h4 className='mb-3 font-semibold'>Unit Assignment</h4>
-                        <div className='space-y-2 text-sm'>
-                          <div className='flex justify-between'>
-                            <span>Property:</span>
-                            <span className='font-medium'>
-                              Select from available
-                            </span>
-                          </div>
-                          <div className='flex justify-between'>
-                            <span>Unit:</span>
-                            <span className='font-medium'>
-                              Choose specific unit
-                            </span>
-                          </div>
-                          <div className='flex justify-between'>
-                            <span>Move-in Date:</span>
-                            <span className='font-medium'>Set start date</span>
-                          </div>
-                          <div className='flex justify-between'>
-                            <span>Lease Type:</span>
-                            <span className='font-medium'>
-                              Fixed/Month-to-month
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <h4 className='mb-3 font-semibold'>Lease Terms</h4>
-                        <div className='space-y-2 text-sm'>
-                          <div className='flex justify-between'>
-                            <span>Lease Duration:</span>
-                            <span className='font-medium'>
-                              6, 12, or 24 months
-                            </span>
-                          </div>
-                          <div className='flex justify-between'>
-                            <span>Monthly Rent:</span>
-                            <span className='font-medium'>Set amount</span>
-                          </div>
-                          <div className='flex justify-between'>
-                            <span>Security Deposit:</span>
-                            <span className='font-medium'>
-                              Configure amount
-                            </span>
-                          </div>
-                          <div className='flex justify-between'>
-                            <span>Pet Deposit:</span>
-                            <span className='font-medium'>If applicable</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </section>
-
-              {/* Payment Setup */}
-              <section id='payment-setup'>
-                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Payment Setup
-                </h2>
-                <p className='mb-4 text-gray-700'>
-                  Configure payment methods and collection preferences for the
-                  new resident.
-                </p>
-
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className='flex items-center space-x-2 text-lg'>
-                        <CreditCard className='h-5 w-5' />
-                        <span>Payment Methods</span>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className='space-y-3'>
-                        <div className='flex items-center justify-between rounded-lg bg-gray-50 p-3'>
-                          <span className='text-sm font-medium'>
-                            Bank Transfer (ACH)
-                          </span>
-                          <CheckCircle className='h-4 w-4 text-green-500' />
-                        </div>
-                        <div className='flex items-center justify-between rounded-lg bg-gray-50 p-3'>
-                          <span className='text-sm font-medium'>
-                            Credit/Debit Card
-                          </span>
-                          <CheckCircle className='h-4 w-4 text-green-500' />
-                        </div>
-                        <div className='flex items-center justify-between rounded-lg bg-gray-50 p-3'>
-                          <span className='text-sm font-medium'>
-                            Online Portal
-                          </span>
-                          <CheckCircle className='h-4 w-4 text-green-500' />
-                        </div>
-                        <div className='flex items-center justify-between rounded-lg bg-gray-50 p-3'>
-                          <span className='text-sm font-medium'>
-                            Check/Money Order
-                          </span>
-                          <div className='h-4 w-4 rounded border-2 border-gray-300'></div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className='flex items-center space-x-2 text-lg'>
-                        <Calendar className='h-5 w-5' />
-                        <span>Payment Schedule</span>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className='space-y-3'>
-                        <div>
-                          <label className='text-sm font-medium'>
-                            Due Date
-                          </label>
-                          <p className='text-sm text-gray-600'>
-                            1st of each month (default)
-                          </p>
-                        </div>
-                        <div>
-                          <label className='text-sm font-medium'>
-                            Late Fee Grace Period
-                          </label>
-                          <p className='text-sm text-gray-600'>
-                            5 days after due date
-                          </p>
-                        </div>
-                        <div>
-                          <label className='text-sm font-medium'>
-                            Auto-pay Setup
-                          </label>
-                          <p className='text-sm text-gray-600'>
-                            Optional automatic payments
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </section>
-
-              {/* Access Credentials */}
-              <section id='access-credentials'>
-                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Access Credentials
-                </h2>
-                <p className='mb-4 text-gray-700'>
-                  Set up system access and physical access for the new resident.
-                </p>
-
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className='text-lg'>Portal Access</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className='space-y-3'>
-                        <div>
-                          <h4 className='text-sm font-semibold'>
-                            Resident Portal Login
-                          </h4>
-                          <p className='text-sm text-gray-600'>
-                            Email invitation with temporary password
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className='text-sm font-semibold'>
-                            Mobile App Access
-                          </h4>
-                          <p className='text-sm text-gray-600'>
-                            Same credentials work for mobile app
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className='text-sm font-semibold'>
-                            Account Verification
-                          </h4>
-                          <p className='text-sm text-gray-600'>
-                            Email verification required on first login
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className='text-lg'>Physical Access</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className='space-y-3'>
-                        <div>
-                          <h4 className='text-sm font-semibold'>Unit Keys</h4>
-                          <p className='text-sm text-gray-600'>
-                            Provide keys and track issuance
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className='text-sm font-semibold'>
-                            Building Access
-                          </h4>
-                          <p className='text-sm text-gray-600'>
-                            Fobs, codes, or key cards
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className='text-sm font-semibold'>
-                            Mailbox Keys
-                          </h4>
-                          <p className='text-sm text-gray-600'>
-                            If applicable to property
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </section>
-
-              {/* Move-in Checklist */}
-              <section id='move-in-checklist'>
-                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Move-in Checklist
-                </h2>
-                <p className='mb-4 text-gray-700'>
-                  Complete these final steps to finalize the resident onboarding
-                  process.
-                </p>
-
-                <Card>
-                  <CardContent className='p-4'>
-                    <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                      <div>
-                        <h4 className='mb-3 font-semibold'>
-                          Pre-Move-in Tasks
-                        </h4>
-                        <ul className='space-y-2 text-sm'>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Unit inspection completed</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Welcome packet prepared</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Utility information provided</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Building rules explained</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className='mb-3 font-semibold'>
-                          Move-in Day Tasks
-                        </h4>
-                        <ul className='space-y-2 text-sm'>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Keys handed over</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Move-in inspection form</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Emergency procedures reviewed</span>
-                          </li>
-                          <li className='flex items-center space-x-2'>
-                            <CheckCircle className='h-4 w-4 text-green-500' />
-                            <span>Contact information confirmed</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </section>
-
-              {/* Communication Setup */}
-              <section id='communication-setup'>
-                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                  Communication Setup
-                </h2>
-                <p className='mb-4 text-gray-700'>
-                  Configure communication preferences and introduce the resident
-                  to available channels.
-                </p>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className='flex items-center space-x-2 text-lg'>
-                      <Mail className='h-5 w-5' />
-                      <span>Communication Channels</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-                      <div className='text-center'>
-                        <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-blue-100 p-3'>
-                          <Mail className='text-primary h-6 w-6' />
-                        </div>
-                        <h4 className='font-semibold'>Email</h4>
-                        <p className='text-sm text-gray-600'>
-                          Official notices and announcements
-                        </p>
-                      </div>
-                      <div className='text-center'>
-                        <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-green-100 p-3'>
-                          <Phone className='h-6 w-6 text-green-600' />
-                        </div>
-                        <h4 className='font-semibold'>Phone/SMS</h4>
-                        <p className='text-sm text-gray-600'>
-                          Urgent matters and reminders
-                        </p>
-                      </div>
-                      <div className='text-center'>
-                        <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-purple-100 p-3'>
-                          <Users className='h-6 w-6 text-purple-600' />
-                        </div>
-                        <h4 className='font-semibold'>Portal Messaging</h4>
-                        <p className='text-sm text-gray-600'>
-                          Direct communication and requests
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className='mt-4 border-green-200 bg-green-50'>
-                  <CardContent className='p-4'>
+                <div className='rounded-lg bg-blue-50 p-6'>
+                  <h3 className='mb-4 text-lg font-medium text-gray-900'>
+                    {t('sections.preparation.checklist.title')}
+                  </h3>
+                  <div className='grid gap-3 md:grid-cols-2'>
                     <div className='flex items-start space-x-3'>
-                      <CheckCircle className='mt-0.5 h-5 w-5 text-green-600' />
-                      <div>
-                        <p className='font-medium text-green-800'>
-                          Congratulations!
-                        </p>
-                        <p className='text-sm text-green-700'>
-                          You&apos;ve successfully added a new resident to your
-                          property. The resident should now have access to their
-                          portal and can begin using Syndik&apos;s resident
-                          services.
-                        </p>
-                      </div>
+                      <CheckCircle className='mt-0.5 h-5 w-5 text-blue-500' />
+                      <span className='text-sm text-gray-700'>
+                        {t('sections.preparation.checklist.items.0')}
+                      </span>
                     </div>
-                  </CardContent>
-                </Card>
+                    <div className='flex items-start space-x-3'>
+                      <CheckCircle className='mt-0.5 h-5 w-5 text-blue-500' />
+                      <span className='text-sm text-gray-700'>
+                        {t('sections.preparation.checklist.items.1')}
+                      </span>
+                    </div>
+                    <div className='flex items-start space-x-3'>
+                      <CheckCircle className='mt-0.5 h-5 w-5 text-blue-500' />
+                      <span className='text-sm text-gray-700'>
+                        {t('sections.preparation.checklist.items.2')}
+                      </span>
+                    </div>
+                    <div className='flex items-start space-x-3'>
+                      <CheckCircle className='mt-0.5 h-5 w-5 text-blue-500' />
+                      <span className='text-sm text-gray-700'>
+                        {t('sections.preparation.checklist.items.3')}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </section>
             </div>
           </div>
-        </div>{' '}
-        {/* Sidebar */}
+        </div>
+
         <div className='lg:col-span-1'>
           <ArticleSidebar
             tableOfContents={tableOfContents}
             relatedArticles={relatedArticles}
-            currentCategory='resident-management'
-            showQuickActions={true}
           />
         </div>
       </div>

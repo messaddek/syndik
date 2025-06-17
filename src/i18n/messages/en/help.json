@@ -1,0 +1,112 @@
+{
+  "title": "Help & Support",
+  "subtitle": "We're here to help you get the most out of Syndik. Find answers, get support, and learn how to optimize your syndicate management.",
+  "supportOptions": {
+    "liveChat": {
+      "title": "Live Chat",
+      "description": "Get instant help from our support team",
+      "availability": "Available 24/7",
+      "action": "Start Chat"
+    },
+    "emailSupport": {
+      "title": "Email Support",
+      "description": "Send us detailed questions and get comprehensive answers",
+      "availability": "Response within 24 hours",
+      "action": "Send Email"
+    },
+    "phoneSupport": {
+      "title": "Phone Support",
+      "description": "Speak directly with our technical experts",
+      "availability": "Mon-Fri, 9AM-6PM",
+      "action": "Call Us"
+    },
+    "scheduleDemo": {
+      "title": "Schedule Demo",
+      "description": "Book a personalized demo with our team",
+      "availability": "Flexible scheduling",
+      "action": "Book Demo"
+    }
+  },
+  "contactForm": {
+    "title": "Send Us a Message",
+    "subtitle": "Can't find what you're looking for? Send us a detailed message and we'll get back to you quickly.",
+    "cardTitle": "Contact Support",
+    "fields": {
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Enter your first name"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter your last name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email address"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "What can we help you with?"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Please describe your question or issue in detail..."
+      }
+    },
+    "submitButton": "Send Message"
+  },
+  "resources": {
+    "title": "Self-Service Resources",
+    "subtitle": "Find answers and learn new skills with our comprehensive resource library.",
+    "documentation": {
+      "title": "Documentation",
+      "description": "Comprehensive guides and API documentation",
+      "items": [
+        "User Guides",
+        "Admin Manual",
+        "API Reference",
+        "Best Practices"
+      ],
+      "action": "Explore Documentation"
+    },
+    "videoTutorials": {
+      "title": "Video Tutorials",
+      "description": "Step-by-step video guides for common tasks",
+      "items": [
+        "Getting Started",
+        "Managing Residents",
+        "Financial Reports",
+        "Meeting Setup"
+      ],
+      "action": "Explore Video Tutorials"
+    },
+    "knowledgeBase": {
+      "title": "Knowledge Base",
+      "description": "Searchable collection of articles and solutions",
+      "items": [
+        "Troubleshooting",
+        "Feature Guides",
+        "Integration Help",
+        "Migration Tips"
+      ],
+      "action": "Explore Knowledge Base"
+    },
+    "communityForum": {
+      "title": "Community Forum",
+      "description": "Connect with other Syndik users and share experiences",
+      "items": [
+        "User Discussions",
+        "Feature Requests",
+        "Success Stories",
+        "Tips & Tricks"
+      ],
+      "action": "Explore Community Forum"
+    }
+  },
+  "emergency": {
+    "title": "Emergency Support",
+    "description": "For critical system issues affecting your syndicate operations, call our emergency hotline:",
+    "phone": "+1-800-EMERGENCY",
+    "availability": "Available 24/7 for Enterprise customers"
+  }
+}

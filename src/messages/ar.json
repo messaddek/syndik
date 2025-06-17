@@ -292,6 +292,197 @@
           }
         }
       }
+    },
+    "moveInMoveOutProcess": {
+      "title": "عملية الانتقال والمغادرة",
+      "description": "تبسيط عمليات الانتقال والمغادرة بواسطة تدفقات عمل شاملة تضمن انتقالات سلسة للسكان والإدارة.",
+      "breadcrumb": {
+        "userGuide": "دليل المستخدم",
+        "residentManagement": "إدارة السكان",
+        "current": "عملية الانتقال والمغادرة"
+      },
+      "meta": {
+        "readTime": "10 دقائق قراءة",
+        "audience": "مديرو العقارات"
+      },
+      "sections": {
+        "overview": {
+          "title": "نظرة عامة",
+          "content": "عملية الانتقال والمغادرة أمر بالغ الأهمية للحفاظ على حالة العقار وضمان رضا المستأجرين وحماية استثمارك.",
+          "keyComponents": {
+            "title": "المكونات الرئيسية",
+            "items": [
+              "قوائم تفتيش مفصلة",
+              "نظام توثيق بالصور",
+              "إدارة الودائع الضمان",
+              "تتبع رقمي لتسليم المفاتيح"
+            ]
+          }
+        }
+      },
+      "relatedArticles": [
+        {
+          "title": "إضافة سكان جدد",
+          "href": "/user-guide/resident-management/adding-new-residents",
+          "time": "5 دقائق"
+        },
+        {
+          "title": "إدارة عقود الإيجار",
+          "href": "/user-guide/resident-management/lease-agreement-management",
+          "time": "8 دقائق"
+        },
+        {
+          "title": "إدارة وتنظيم الوحدات",
+          "href": "/user-guide/property-management/unit-management-organization",
+          "time": "6 دقائق"
+        }
+      ]
+    },
+    "creatingYourFirstProperty": {
+      "title": "إنشاء أول عقار لك",
+      "description": "دليل شامل للبدء في إعداد أول عقار لك في سينديك",
+      "sections": {
+        "overview": {
+          "content": "إنشاء أول عقار لك في سينديك هو بداية رحلة إدارة العقارات الفعالة. سيرشدك هذا الدليل خلال العملية خطوة بخطوة.",
+          "whatYoullLearn": [
+            "كيفية إعداد المعلومات الأساسية للعقار",
+            "تكوين الوحدات السكنية",
+            "تخصيص إعدادات العقار",
+            "أفضل الممارسات لإعداد العقار"
+          ]
+        },
+        "step1": {
+          "title": "الخطوة 1: المعلومات الأساسية",
+          "content": "ابدأ بإدخال المعلومات الأساسية حول عقارك",
+          "steps": [
+            "انتقل إلى العقارات في القائمة الرئيسية",
+            "انقر على 'إضافة عقار جديد'",
+            "أدخل اسم وعنوان العقار",
+            "حدد نوع العقار",
+            "أضف وصف العقار"
+          ],
+          "proTip": {
+            "title": "نصيحة محترف",
+            "content": "استخدم أسماء وصفية لعقاراتك لجعلها قابلة للتعرف بسهولة في التقارير والقوائم."
+          }
+        },
+        "step2": {
+          "title": "الخطوة 2: إعداد الوحدات",
+          "content": "قم بتكوين الوحدات السكنية في عقارك",
+          "requiredFields": {
+            "title": "الحقول المطلوبة",
+            "fields": [
+              "رقم الوحدة",
+              "نوع الوحدة (شقة، ستوديو، إلخ)",
+              "عدد غرف النوم",
+              "عدد الحمامات",
+              "المساحة بالقدم المربع"
+            ]
+          },
+          "optionalFields": {
+            "title": "الحقول الاختيارية",
+            "fields": [
+              "تفاصيل الشرفة",
+              "مكان وقوف السيارات",
+              "وحدة التخزين",
+              "سياسة الحيوانات الأليفة",
+              "الميزات الخاصة"
+            ]
+          }
+        },
+        "step3": {
+          "title": "الخطوة 3: تخصيص الإعدادات",
+          "content": "اضبط الإعدادات المتقدمة لعقارك",
+          "settings": [
+            {
+              "title": "إعدادات الدفع",
+              "description": "قم بتكوين مبالغ الإيجار وتواريخ الاستحقاق والرسوم المتأخرة"
+            },
+            {
+              "title": "تفضيلات التواصل",
+              "description": "إعداد إعدادات الإشعارات وقنوات التواصل"
+            },
+            {
+              "title": "التحكم في الوصول",
+              "description": "إدارة من يمكنه عرض وتعديل معلومات العقار"
+            }
+          ]
+        },
+        "nextSteps": {
+          "title": "الخطوات التالية",
+          "content": "الآن بعد أن تم إعداد عقارك، إليك ما يمكنك فعله بعد ذلك:",
+          "actions": [
+            {
+              "title": "إضافة السكان",
+              "description": "ابدأ في إضافة السكان إلى وحداتك",
+              "href": "/user-guide/resident-management/adding-new-residents"
+            },
+            {
+              "title": "إعداد تحصيل الإيجار",
+              "description": "قم بتكوين طرق ومواعيد الدفع",
+              "href": "/user-guide/financial-management/setting-up-rent-collection"
+            }
+          ]
+        },
+        "sidebar": {
+          "relatedArticlesList": [
+            {
+              "title": "إدارة الوحدات",
+              "href": "/user-guide/property-management/unit-management-organization",
+              "time": "5 دقائق"
+            },
+            {
+              "title": "إعداد الدفع",
+              "href": "/user-guide/financial-management/setting-up-rent-collection",
+              "time": "3 دقائق"
+            }
+          ]
+        }
+      }
+    },
+    "addingNewResidents": {
+      "title": "إضافة سكان جدد",
+      "description": "دليل شامل لإضافة سكان جدد من الإعداد الأولي إلى إكمال الانتقال",
+      "sections": {
+        "overview": {
+          "title": "نظرة عامة",
+          "content": "إضافة سكان جدد إلى عقارك تتضمن عدة خطوات مهمة لضمان عملية إدماج سلسة."
+        }
+      }
+    },
+    "addingNewProperties": {
+      "title": "إضافة عقارات جديدة",
+      "description": "دليل خطوة بخطوة لإضافة عقارات جديدة إلى محفظتك",
+      "sections": {
+        "overview": {
+          "title": "نظرة عامة",
+          "content": "إضافة عقارات جديدة إلى محفظتك مهمة أساسية في إدارة العقارات."
+        }
+      }
+    },
+    "common": {
+      "tableOfContents": "جدول المحتويات",
+      "relatedArticles": "مقالات ذات صلة",
+      "overview": "نظرة عامة",
+      "nextSteps": "الخطوات التالية",
+      "popular": "شائع",
+      "readTime": "دقائق",
+      "whatYoullLearn": "ما ستتعلمه"
+    },
+    "navigation": {
+      "userGuide": "دليل المستخدم",
+      "gettingStarted": "البدء"
+    },
+    "sidebar": {
+      "tableOfContents": "جدول المحتويات",
+      "relatedArticles": "مقالات ذات صلة",
+      "quickActions": "إجراءات سريعة",
+      "needHelp": "تحتاج مساعدة؟",
+      "contactSupport": "اتصل بالدعم",
+      "liveChat": "الدردشة الحية",
+      "phoneSupport": "الدعم الهاتفي",
+      "supportMessage": "إذا كنت بحاجة إلى مساعدة فورية، يرجى الاتصال بفريق الدعم لدينا.",
+      "supportHours": "ساعات الدعم: الاثنين - الجمعة، 9 صباحاً - 6 مساءً"
     }
   },
   "articleTitles": {
@@ -517,6 +708,118 @@
     "certifications": {
       "soc2": "متوافق مع SOC 2",
       "gdpr": "متوافق مع GDPR"
+    }
+  },
+  "help": {
+    "title": "المساعدة والدعم",
+    "subtitle": "نحن هنا لمساعدتك في الحصول على أقصى استفادة من سينديك. ابحث عن الإجابات، واحصل على الدعم، وتعلم كيفية تحسين إدارة النقابة.",
+    "supportOptions": {
+      "liveChat": {
+        "title": "الدردشة المباشرة",
+        "description": "احصل على مساعدة فورية من فريق الدعم لدينا",
+        "availability": "متاح على مدار الساعة طوال أيام الأسبوع",
+        "action": "بدء الدردشة"
+      },
+      "emailSupport": {
+        "title": "الدعم عبر البريد الإلكتروني",
+        "description": "أرسل لنا أسئلة مفصلة واحصل على إجابات شاملة",
+        "availability": "الرد خلال 24 ساعة",
+        "action": "إرسال بريد إلكتروني"
+      },
+      "phoneSupport": {
+        "title": "الدعم الهاتفي",
+        "description": "تحدث مباشرة مع خبرائنا التقنيين",
+        "availability": "الاثنين-الجمعة، 9 صباحاً - 6 مساءً",
+        "action": "اتصل بنا"
+      },
+      "scheduleDemo": {
+        "title": "جدولة عرض توضيحي",
+        "description": "احجز عرضاً توضيحياً مخصصاً مع فريقنا",
+        "availability": "جدولة مرنة",
+        "action": "احجز عرضاً توضيحياً"
+      }
+    },
+    "contactForm": {
+      "title": "أرسل لنا رسالة",
+      "subtitle": "لا تجد ما تبحث عنه؟ أرسل لنا رسالة مفصلة وسنعود إليك بسرعة.",
+      "cardTitle": "الاتصال بالدعم",
+      "fields": {
+        "firstName": {
+          "label": "الاسم الأول",
+          "placeholder": "أدخل اسمك الأول"
+        },
+        "lastName": {
+          "label": "اسم العائلة",
+          "placeholder": "أدخل اسم عائلتك"
+        },
+        "email": {
+          "label": "البريد الإلكتروني",
+          "placeholder": "أدخل عنوان بريدك الإلكتروني"
+        },
+        "subject": {
+          "label": "الموضوع",
+          "placeholder": "كيف يمكننا مساعدتك؟"
+        },
+        "message": {
+          "label": "الرسالة",
+          "placeholder": "يرجى وصف سؤالك أو مشكلتك بالتفصيل..."
+        }
+      },
+      "submitButton": "إرسال الرسالة"
+    },
+    "resources": {
+      "title": "موارد الخدمة الذاتية",
+      "subtitle": "ابحث عن الإجابات وتعلم مهارات جديدة مع مكتبة الموارد الشاملة لدينا.",
+      "documentation": {
+        "title": "التوثيق",
+        "description": "أدلة شاملة وتوثيق API",
+        "items": [
+          "أدلة المستخدم",
+          "دليل المدير",
+          "مرجع API",
+          "أفضل الممارسات"
+        ],
+        "action": "استكشاف التوثيق"
+      },
+      "videoTutorials": {
+        "title": "البرامج التعليمية بالفيديو",
+        "description": "أدلة فيديو خطوة بخطوة للمهام الشائعة",
+        "items": [
+          "البدء",
+          "إدارة السكان",
+          "التقارير المالية",
+          "إعداد الاجتماع"
+        ],
+        "action": "استكشاف البرامج التعليمية بالفيديو"
+      },
+      "knowledgeBase": {
+        "title": "قاعدة المعرفة",
+        "description": "مجموعة قابلة للبحث من المقالات والحلول",
+        "items": [
+          "استكشاف الأخطاء وإصلاحها",
+          "أدلة الميزات",
+          "مساعدة التكامل",
+          "نصائح الترحيل"
+        ],
+        "action": "استكشاف قاعدة المعرفة"
+      },
+      "communityForum": {
+        "title": "منتدى المجتمع",
+        "description": "تواصل مع مستخدمي سينديك الآخرين وشارك خبراتك",
+        "items": [
+          "مناقشات المستخدمين",
+          "طلبات الميزات",
+          "قصص النجاح",
+          "النصائح والحيل"
+        ],
+        "action": "استكشاف منتدى المجتمع"
+      }
+    },
+    "emergency": {
+      "title": "الدعم الطارئ",
+      "description": "للمشاكل النظامية الحرجة التي تؤثر على عمليات نقابتك، اتصل بخط الطوارئ:",
+      "phone": "+1-800-EMERGENCY",
+      "availability": "متاح على مدار الساعة طوال أيام الأسبوع لعملاء المؤسسات"
     }
   },
   "landing": {
@@ -805,7 +1108,8 @@
     "about": "من نحن",
     "pricing": "التسعير",
     "faq": "الأسئلة الشائعة",
-    "terms": "الشروط"
+    "terms": "الشروط",
+    "userGuide": "دليل المستخدم"
   },
   "organizations": {
     "residences": "المساكن",
@@ -1155,6 +1459,12 @@
   "userGuide": {
     "title": "دليل المستخدم",
     "subtitle": "كل ما تحتاج لمعرفته لإدارة العقارات بفعالية",
+    "common": {
+      "numberMostPopular": "#{number} الأكثر شعبية",
+      "popular": "شائع",
+      "readTime": "دقيقة",
+      "readTimeMinutes": "دقائق"
+    },
     "categories": {
       "gettingStarted": {
         "title": "البدء",
@@ -1186,6 +1496,58 @@
       "loadingData": "جاري تحميل أحدث البيانات...",
       "updatedRealTime": "محدث في الوقت الفعلي"
     },
+    "articleTitles": {
+      "creating-your-first-property": "إنشاء عقارك الأول",
+      "setting-up-user-accounts": "إعداد حسابات المستخدمين",
+      "understanding-roles-permissions": "فهم الأدوار والصلاحيات",
+      "initial-configuration-guide": "دليل التكوين الأولي",
+      "adding-new-properties": "إضافة عقارات جديدة",
+      "unit-management-organization": "إدارة وتنظيم الوحدات",
+      "property-information-updates": "تحديثات معلومات العقار",
+      "document-management-system": "نظام إدارة الوثائق",
+      "adding-new-residents": "إضافة سكان جدد",
+      "lease-agreement-management": "إدارة عقود الإيجار",
+      "resident-communication-tools": "أدوات التواصل مع السكان",
+      "move-in-move-out-process": "عملية الانتقال والمغادرة",
+      "setting-up-rent-collection": "إعداد تحصيل الإيجار",
+      "processing-payments": "معالجة المدفوعات",
+      "generating-financial-reports": "إنشاء التقارير المالية",
+      "late-payment-management": "إدارة المدفوعات المتأخرة",
+      "creating-work-orders": "إنشاء أوامر العمل",
+      "tracking-maintenance-requests": "تتبع طلبات الصيانة",
+      "vendor-management": "إدارة الموردين",
+      "preventive-maintenance-setup": "إعداد الصيانة الوقائية",
+      "sending-announcements": "إرسال الإعلانات",
+      "individual-messaging": "الرسائل الفردية",
+      "notification-settings": "إعدادات الإشعارات",
+      "email-templates": "قوالب البريد الإلكتروني"
+    },
+    "articleDescriptions": {
+      "creating-your-first-property": "الإعداد الأساسي والخطوات الأولى لإنشاء العقار",
+      "setting-up-user-accounts": "إنشاء وإدارة حسابات المستخدمين لفريقك",
+      "understanding-roles-permissions": "تعلم حول أدوار المستخدمين وإدارة الصلاحيات",
+      "initial-configuration-guide": "إعداد وتكوين النظام الكامل",
+      "adding-new-properties": "كيفية إضافة وتكوين عقارات جديدة في النظام",
+      "unit-management-organization": "تنظيم وإدارة الوحدات داخل عقاراتك",
+      "property-information-updates": "الحفاظ على معلومات العقار محدثة ودقيقة",
+      "document-management-system": "تخزين وتنظيم الوثائق المتعلقة بالعقارات",
+      "adding-new-residents": "كيفية إدخال سكان جدد إلى عقارك",
+      "lease-agreement-management": "إنشاء وإدارة وتتبع عقود الإيجار",
+      "resident-communication-tools": "استخدام أدوات التواصل للبقاء على اتصال مع السكان",
+      "move-in-move-out-process": "تبسيط إجراءات الانتقال والمغادرة",
+      "setting-up-rent-collection": "تكوين تحصيل الإيجار الآلي ومعالجة المدفوعات",
+      "processing-payments": "التعامل مع ومعالجة أنواع مختلفة من المدفوعات",
+      "generating-financial-reports": "إنشاء وتحليل التقارير المالية",
+      "late-payment-management": "التعامل مع المدفوعات المتأخرة وإجراءات التحصيل",
+      "creating-work-orders": "إنشاء وإدارة أوامر عمل الصيانة",
+      "tracking-maintenance-requests": "مراقبة وإدارة طلبات الصيانة من السكان",
+      "vendor-management": "إدارة العلاقات مع موردي الصيانة",
+      "preventive-maintenance-setup": "إعداد برامج الصيانة الوقائية المجدولة",
+      "sending-announcements": "التواصل بفعالية مع جميع السكان",
+      "individual-messaging": "إرسال رسائل مباشرة لسكان محددين",
+      "notification-settings": "تكوين تفضيلات وإعدادات الإشعارات",
+      "email-templates": "إنشاء وإدارة قوالب البريد الإلكتروني للتواصل المعتاد"
+    },
     "sidebar": {
       "quickStart": "بداية سريعة",
       "createFirstProperty": "إنشاء عقارك الأول",
@@ -1194,6 +1556,10 @@
       "needHelp": "تحتاج مساعدة؟",
       "contactSupport": "الاتصال بالدعم",
       "viewFaq": "عرض الأسئلة الشائعة"
+    },
+    "search": {
+      "placeholder": "ابحث في دليل المستخدم...",
+      "noResults": "لا توجد نتائج مطابقة لبحثك."
     }
   },
   "validation": {

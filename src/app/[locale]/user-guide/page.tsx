@@ -50,7 +50,7 @@ const UserGuidePage = () => {
     // Fallback data while loading - using actual article data
     {
       slug: 'creating-your-first-property',
-      title: 'Creating Your First Property',
+      title: t('articleTitles.creating-your-first-property'),
       views: '2.1k',
       rating: 4.9,
       category: 'getting-started',
@@ -58,7 +58,7 @@ const UserGuidePage = () => {
     },
     {
       slug: 'adding-new-residents',
-      title: 'Adding New Residents',
+      title: t('articleTitles.adding-new-residents'),
       views: '1.8k',
       rating: 4.8,
       category: 'resident-management',
@@ -66,7 +66,7 @@ const UserGuidePage = () => {
     },
     {
       slug: 'setting-up-rent-collection',
-      title: 'Setting Up Rent Collection',
+      title: t('articleTitles.setting-up-rent-collection'),
       views: '1.5k',
       rating: 4.7,
       category: 'financial-management',
@@ -74,7 +74,7 @@ const UserGuidePage = () => {
     },
     {
       slug: 'tracking-maintenance-requests',
-      title: 'Tracking Maintenance Requests',
+      title: t('articleTitles.tracking-maintenance-requests'),
       views: '1.3k',
       rating: 4.8,
       category: 'maintenance',
@@ -106,7 +106,7 @@ const UserGuidePage = () => {
       icon: BookOpen,
       color: 'bg-blue-500',
       articles: getArticlesByCategory('getting-started').map(article => ({
-        title: article.title,
+        title: t(`articleTitles.${article.slug}`),
         time: `${article.readTime} ${getMinuteText(article.readTime)}`,
         popular: article.popular,
         slug: article.slug,
@@ -119,7 +119,7 @@ const UserGuidePage = () => {
       icon: Building2,
       color: 'bg-emerald-500',
       articles: getArticlesByCategory('property-management').map(article => ({
-        title: article.title,
+        title: t(`articleTitles.${article.slug}`),
         time: `${article.readTime} ${getMinuteText(article.readTime)}`,
         popular: article.popular,
         slug: article.slug,
@@ -132,7 +132,7 @@ const UserGuidePage = () => {
       icon: Users,
       color: 'bg-purple-500',
       articles: getArticlesByCategory('resident-management').map(article => ({
-        title: article.title,
+        title: t(`articleTitles.${article.slug}`),
         time: `${article.readTime} ${getMinuteText(article.readTime)}`,
         popular: article.popular,
         slug: article.slug,
@@ -145,7 +145,7 @@ const UserGuidePage = () => {
       icon: CreditCard,
       color: 'bg-orange-500',
       articles: getArticlesByCategory('financial-management').map(article => ({
-        title: article.title,
+        title: t(`articleTitles.${article.slug}`),
         time: `${article.readTime} ${getMinuteText(article.readTime)}`,
         popular: article.popular,
         slug: article.slug,
@@ -158,7 +158,7 @@ const UserGuidePage = () => {
       icon: Settings,
       color: 'bg-red-500',
       articles: getArticlesByCategory('maintenance').map(article => ({
-        title: article.title,
+        title: t(`articleTitles.${article.slug}`),
         time: `${article.readTime} ${getMinuteText(article.readTime)}`,
         popular: article.popular,
         slug: article.slug,
@@ -171,7 +171,7 @@ const UserGuidePage = () => {
       icon: MessageSquare,
       color: 'bg-indigo-500',
       articles: getArticlesByCategory('communication').map(article => ({
-        title: article.title,
+        title: t(`articleTitles.${article.slug}`),
         time: `${article.readTime} ${getMinuteText(article.readTime)}`,
         popular: article.popular,
         slug: article.slug,
@@ -301,11 +301,9 @@ const UserGuidePage = () => {
                             >
                               {' '}
                               <div className='flex min-w-0 items-center gap-3'>
-                                <FileText className='h-4 w-4 shrink-0 text-gray-400' />
+                                <FileText className='h-4 w-4 shrink-0 text-gray-400' />{' '}
                                 <span className='group-hover:text-primary truncate font-medium text-gray-900'>
-                                  {t(`articleTitles.${article.slug}`, {
-                                    fallback: article.title,
-                                  })}
+                                  {article.title}
                                 </span>
                                 {article.popular && (
                                   <Badge

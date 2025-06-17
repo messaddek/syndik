@@ -12,7 +12,7 @@ import { UnitViewSkeleton } from '@/modules/units/ui/components/unit-view-skelet
 import { ResidentViewSkeleton } from '@/modules/residents/ui/components/resident-view-skeleton';
 import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-skeleton';
 import { Skeleton } from '@/components/ui/skeleton';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
 
 interface OrganizationGuardProps {
   children: React.ReactNode;

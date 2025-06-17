@@ -25,9 +25,6 @@ const isPublicRoute = createRouteMatcher([
   '/:locale/support(.*)',
   '/:locale/documentation(.*)',
   '/:locale/articles(.*)',
-  // Non-localized redirect handlers only
-  '/org-switcher',
-  '/org-redirect',
   // All API routes are non-localized
   '/api(.*)',
 ]);
@@ -38,13 +35,37 @@ const intlMiddleware = createMiddleware(routing);
 export default clerkMiddleware(async (auth, req) => {
   const { pathname } = req.nextUrl;
 
-  // Skip intl middleware for API routes and specific redirect handlers only
+  // Handle non-localized org routes redirect to localized versions
+  if (pathname === '/org-switcher' || pathname === '/org-redirect') {
+    // Try to detect user's preferred locale from multiple sources
+    let targetLocale = 'en'; // default fallback
+
+    // 1. Check for locale in cookies (if user has previously selected one)
+    const localeCookie = req.cookies.get('NEXT_LOCALE')?.value;
+
+    // 2. Check Accept-Language header
+    const acceptLanguage = req.headers.get('accept-language');
+    const browserLocale = acceptLanguage?.split(',')[0]?.split('-')[0];
+
+    const supportedLocales = ['en', 'fr', 'ar'];
+
+    // Priority: cookie > browser language > default
+    if (localeCookie && supportedLocales.includes(localeCookie)) {
+      targetLocale = localeCookie;
+    } else if (browserLocale && supportedLocales.includes(browserLocale)) {
+      targetLocale = browserLocale;
+    }
+
+    const url = req.nextUrl.clone();
+    url.pathname = `/${targetLocale}${pathname}`;
+
+    // Preserve query parameters if any
+    return Response.redirect(url);
+  }
+
+  // Skip intl middleware for API routes only
   // Allow sign-in/sign-up to go through intl middleware for proper locale redirection
-  if (
-    pathname.startsWith('/api') ||
-    pathname === '/org-switcher' ||
-    pathname === '/org-redirect'
-  ) {
+  if (pathname.startsWith('/api')) {
     // Only protect routes that are not public
     if (!isPublicRoute(req)) {
       await auth.protect();

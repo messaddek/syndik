@@ -1,14 +1,15 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+'use client';
+
+import { Link } from '@/i18n/routing';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import ArticleLayout from '@/modules/articles/components/article-layout';
+import { ArticleSidebar } from '@/components/articles/article-sidebar';
+import { useTranslations } from 'next-intl';
 import {
-  ArrowLeft,
+  Clock,
+  Lightbulb,
+  ChevronRight,
   FileText,
   Calendar,
   TrendingUp,
@@ -16,491 +17,308 @@ import {
   Filter,
   BarChart3,
 } from 'lucide-react';
-import { Link } from '@/i18n/routing';
 
-export default function GeneratingFinancialReportsPage() {
+const GeneratingFinancialReportsPage = () => {
+  const t = useTranslations('articles.generatingFinancialReports');
+  const tCommon = useTranslations('articles.common');
+  const tNav = useTranslations('articles.navigation');
+
+  const tableOfContents = [
+    { id: 'overview', title: tCommon('overview'), level: 1 },
+    { id: 'report-types', title: t('sections.reportTypes.title'), level: 1 },
+    {
+      id: 'generating-reports',
+      title: t('sections.generatingReports.title'),
+      level: 1,
+    },
+    {
+      id: 'customizing-reports',
+      title: t('sections.customizingReports.title'),
+      level: 1,
+    },
+    {
+      id: 'scheduling-reports',
+      title: t('sections.schedulingReports.title'),
+      level: 1,
+    },
+    {
+      id: 'exporting-sharing',
+      title: t('sections.exportingSharing.title'),
+      level: 1,
+    },
+    { id: 'best-practices', title: tCommon('bestPractices'), level: 1 },
+  ];
+
+  const relatedArticles = t.raw('sections.sidebar.relatedArticlesList');
+
   return (
-    <div className='container mx-auto max-w-4xl px-4 py-8'>
-      <div className='mb-6'>
-        <Link
-          href='/user-guide'
-          className='text-muted-foreground hover:text-primary mb-4 inline-flex items-center text-sm'
-        >
-          <ArrowLeft className='mr-2 h-4 w-4' />
-          Back to User Guide
-        </Link>
-        <h1 className='mb-2 text-3xl font-bold'>
-          Generating Financial Reports
-        </h1>
-        <p className='text-muted-foreground'>
-          Learn how to create and export comprehensive financial reports for
-          your properties.
-        </p>
-      </div>
+    <ArticleLayout
+      articleSlug='generating-financial-reports'
+      title={t('title')}
+    >
+      <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
+        {/* Main Content */}
+        <div className='lg:col-span-3'>
+          {/* Breadcrumb */}
+          <nav className='mb-8'>
+            <div className='flex items-center space-x-2 text-sm text-gray-600'>
+              <Link
+                href='/user-guide'
+                className='transition-colors hover:text-gray-900'
+              >
+                {tNav('userGuide')}
+              </Link>
+              <ChevronRight className='h-4 w-4 rtl:rotate-180' />
+              <Link
+                href='/user-guide'
+                className='transition-colors hover:text-gray-900'
+              >
+                {t('sections.breadcrumb.financialManagement')}
+              </Link>
+              <ChevronRight className='h-4 w-4 rtl:rotate-180' />
+              <span className='font-medium text-gray-900'>{t('title')}</span>
+            </div>
+          </nav>
 
-      <div className='grid gap-6 lg:grid-cols-4'>
-        <div className='space-y-6 lg:col-span-3'>
-          {/* Table of Contents */}
-          <Card>
-            <CardHeader>
-              <CardTitle className='flex items-center'>
-                <FileText className='mr-2 h-5 w-5' />
-                Table of Contents
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className='space-y-2'>
-                <li>
-                  <a
-                    href='#types-of-reports'
-                    className='text-primary hover:underline'
-                  >
-                    Types of Financial Reports
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#generating-reports'
-                    className='text-primary hover:underline'
-                  >
-                    Generating Reports
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#customizing-reports'
-                    className='text-primary hover:underline'
-                  >
-                    Customizing Report Parameters
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#exporting-reports'
-                    className='text-primary hover:underline'
-                  >
-                    Exporting and Sharing
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#scheduling-reports'
-                    className='text-primary hover:underline'
-                  >
-                    Scheduling Automated Reports
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#troubleshooting'
-                    className='text-primary hover:underline'
-                  >
-                    Troubleshooting
-                  </a>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Types of Reports */}
-          <Card id='types-of-reports'>
-            <CardHeader>
-              <CardTitle className='flex items-center'>
-                <BarChart3 className='mr-2 h-5 w-5' />
-                Types of Financial Reports
-              </CardTitle>
-              <CardDescription>
-                Understand the different financial reports available in Syndik
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div className='grid gap-4 md:grid-cols-2'>
-                <div className='rounded-lg border p-4'>
-                  <h4 className='mb-2 font-semibold'>Income Statement</h4>
-                  <p className='text-muted-foreground text-sm'>
-                    Comprehensive overview of rental income, fees, and other
-                    revenue streams over a specified period.
-                  </p>
-                </div>
-                <div className='rounded-lg border p-4'>
-                  <h4 className='mb-2 font-semibold'>Expense Report</h4>
-                  <p className='text-muted-foreground text-sm'>
-                    Detailed breakdown of all property-related expenses
-                    including maintenance, utilities, and management fees.
-                  </p>
-                </div>
-                <div className='rounded-lg border p-4'>
-                  <h4 className='mb-2 font-semibold'>Cash Flow Statement</h4>
-                  <p className='text-muted-foreground text-sm'>
-                    Track money flowing in and out of your properties with
-                    period-over-period comparisons.
-                  </p>
-                </div>
-                <div className='rounded-lg border p-4'>
-                  <h4 className='mb-2 font-semibold'>Rent Roll Report</h4>
-                  <p className='text-muted-foreground text-sm'>
-                    Summary of all units, current rent amounts, lease terms, and
-                    occupancy status.
-                  </p>
+          {/* Header */}
+          <div className='mb-8'>
+            <div className='mb-4 flex items-center space-x-3'>
+              <div className='rounded-lg bg-green-500 p-2'>
+                <BarChart3 className='h-6 w-6 text-white' />
+              </div>
+              <div>
+                <h1 className='text-3xl font-bold text-gray-900'>
+                  {t('title')}
+                </h1>
+                <div className='mt-2 flex items-center space-x-4 text-sm text-gray-600'>
+                  <div className='flex items-center space-x-1'>
+                    <Clock className='h-4 w-4' />
+                    <span>{t('metadata.readTime')}</span>
+                  </div>
+                  <Badge variant='secondary'>{t('metadata.audience')}</Badge>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+            <p className='text-lg text-gray-600'>{t('description')}</p>
+          </div>
+
+          {/* Overview */}
+          <section id='overview' className='mb-12'>
+            <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+              {tCommon('overview')}
+            </h2>
+            <p className='mb-4 text-gray-700'>
+              {t('sections.overview.content')}
+            </p>
+          </section>
+
+          {/* Report Types */}
+          <section id='report-types' className='mb-12'>
+            <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+              {t('sections.reportTypes.title')}
+            </h2>
+            <p className='mb-6 text-gray-700'>
+              {t('sections.reportTypes.description')}
+            </p>
+
+            <div className='grid gap-6 md:grid-cols-2'>
+              {t
+                .raw('sections.reportTypes.types')
+                .map(
+                  (
+                    type: { title: string; description: string; icon: string },
+                    index: number
+                  ) => (
+                    <Card key={index}>
+                      <CardHeader>
+                        <CardTitle className='flex items-center space-x-2'>
+                          {type.icon === 'trending-up' && (
+                            <TrendingUp className='h-5 w-5 text-green-500' />
+                          )}
+                          {type.icon === 'calendar' && (
+                            <Calendar className='h-5 w-5 text-green-500' />
+                          )}
+                          {type.icon === 'file-text' && (
+                            <FileText className='h-5 w-5 text-green-500' />
+                          )}
+                          {type.icon === 'bar-chart' && (
+                            <BarChart3 className='h-5 w-5 text-green-500' />
+                          )}
+                          <span>{type.title}</span>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className='text-gray-700'>{type.description}</p>
+                      </CardContent>
+                    </Card>
+                  )
+                )}
+            </div>
+          </section>
 
           {/* Generating Reports */}
-          <Card id='generating-reports'>
-            <CardHeader>
-              <CardTitle className='flex items-center'>
-                <TrendingUp className='mr-2 h-5 w-5' />
-                Generating Reports
-              </CardTitle>
-              <CardDescription>
-                Step-by-step guide to creating financial reports
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div className='space-y-3'>
-                <div className='flex items-start space-x-3'>
-                  <Badge variant='outline' className='mt-0.5'>
-                    1
-                  </Badge>
-                  <div>
-                    <p className='font-medium'>Navigate to Reports</p>
-                    <p className='text-muted-foreground text-sm'>
-                      Go to the Finances section and click on
-                      &ldquo;Reports&rdquo; in the navigation menu.
-                    </p>
-                  </div>
-                </div>
-                <div className='flex items-start space-x-3'>
-                  <Badge variant='outline' className='mt-0.5'>
-                    2
-                  </Badge>
-                  <div>
-                    <p className='font-medium'>Select Report Type</p>
-                    <p className='text-muted-foreground text-sm'>
-                      Choose from Income Statement, Expense Report, Cash Flow,
-                      or Rent Roll from the available options.
-                    </p>
-                  </div>
-                </div>
-                <div className='flex items-start space-x-3'>
-                  <Badge variant='outline' className='mt-0.5'>
-                    3
-                  </Badge>
-                  <div>
-                    <p className='font-medium'>Set Date Range</p>
-                    <p className='text-muted-foreground text-sm'>
-                      Select the time period for your report using the date
-                      picker (monthly, quarterly, or custom range).
-                    </p>
-                  </div>
-                </div>
-                <div className='flex items-start space-x-3'>
-                  <Badge variant='outline' className='mt-0.5'>
-                    4
-                  </Badge>
-                  <div>
-                    <p className='font-medium'>Choose Properties</p>
-                    <p className='text-muted-foreground text-sm'>
-                      Select specific properties or include all properties in
-                      your portfolio.
-                    </p>
-                  </div>
-                </div>
-                <div className='flex items-start space-x-3'>
-                  <Badge variant='outline' className='mt-0.5'>
-                    5
-                  </Badge>
-                  <div>
-                    <p className='font-medium'>Generate Report</p>
-                    <p className='text-muted-foreground text-sm'>
-                      Click &ldquo;Generate Report&rdquo; to create your
-                      financial report with the specified parameters.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <section id='generating-reports' className='mb-12'>
+            <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+              {t('sections.generatingReports.title')}
+            </h2>
+            <p className='mb-6 text-gray-700'>
+              {t('sections.generatingReports.description')}
+            </p>
+
+            <div className='space-y-6'>
+              {t
+                .raw('sections.generatingReports.steps')
+                .map(
+                  (step: { title: string; content: string }, index: number) => (
+                    <Card key={index}>
+                      <CardHeader>
+                        <CardTitle className='flex items-center space-x-2'>
+                          <div className='flex h-6 w-6 items-center justify-center rounded-full bg-green-500 text-sm font-semibold text-white'>
+                            {index + 1}
+                          </div>
+                          <span>{step.title}</span>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className='text-gray-700'>{step.content}</p>
+                      </CardContent>
+                    </Card>
+                  )
+                )}
+            </div>
+          </section>
 
           {/* Customizing Reports */}
-          <Card id='customizing-reports'>
-            <CardHeader>
-              <CardTitle className='flex items-center'>
-                <Filter className='mr-2 h-5 w-5' />
-                Customizing Report Parameters
-              </CardTitle>
-              <CardDescription>
-                Advanced options for tailoring your financial reports
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div className='space-y-4'>
-                <div>
-                  <h4 className='mb-2 font-medium'>Filtering Options</h4>
-                  <ul className='text-muted-foreground space-y-1 text-sm'>
-                    <li>
-                      • Filter by property type (residential, commercial,
-                      mixed-use)
-                    </li>
-                    <li>• Include or exclude specific expense categories</li>
-                    <li>• Filter by payment status (paid, pending, overdue)</li>
-                    <li>• Group by property, unit, or resident</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className='mb-2 font-medium'>Comparison Features</h4>
-                  <ul className='text-muted-foreground space-y-1 text-sm'>
-                    <li>• Year-over-year comparisons</li>
-                    <li>• Month-over-month analysis</li>
-                    <li>• Budget vs. actual performance</li>
-                    <li>• Property performance benchmarking</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className='mb-2 font-medium'>Display Options</h4>
-                  <ul className='text-muted-foreground space-y-1 text-sm'>
-                    <li>• Summary view vs. detailed breakdown</li>
-                    <li>• Chart and graph visualizations</li>
-                    <li>• Currency formatting preferences</li>
-                    <li>• Custom report headers and branding</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <section id='customizing-reports' className='mb-12'>
+            <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+              {t('sections.customizingReports.title')}
+            </h2>
+            <p className='mb-6 text-gray-700'>
+              {t('sections.customizingReports.description')}
+            </p>
 
-          {/* Exporting Reports */}
-          <Card id='exporting-reports'>
-            <CardHeader>
-              <CardTitle className='flex items-center'>
-                <Download className='mr-2 h-5 w-5' />
-                Exporting and Sharing
-              </CardTitle>
-              <CardDescription>
-                Save and share your financial reports in various formats
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div className='grid gap-4 md:grid-cols-2'>
-                <div>
-                  <h4 className='mb-2 font-medium'>Export Formats</h4>
-                  <ul className='text-muted-foreground space-y-1 text-sm'>
-                    <li>• PDF for presentation and printing</li>
-                    <li>• Excel/CSV for further analysis</li>
-                    <li>• HTML for web sharing</li>
-                    <li>• JSON for integration with other systems</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className='mb-2 font-medium'>Sharing Options</h4>
-                  <ul className='text-muted-foreground space-y-1 text-sm'>
-                    <li>• Email reports directly to stakeholders</li>
-                    <li>• Generate shareable links with access controls</li>
-                    <li>• Upload to cloud storage platforms</li>
-                    <li>• Print reports with custom formatting</li>
-                  </ul>
-                </div>
-              </div>
-              <div className='bg-muted rounded-lg p-4'>
-                <p className='text-sm'>
-                  <strong>Tip:</strong> Use PDF format for official documents
-                  and Excel format when you need to perform additional
-                  calculations or analysis.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+            <div className='space-y-4'>
+              {t
+                .raw('sections.customizingReports.options')
+                .map(
+                  (
+                    option: { title: string; description: string },
+                    index: number
+                  ) => (
+                    <div key={index} className='flex items-start space-x-3'>
+                      <Filter className='mt-1 h-5 w-5 text-green-500' />
+                      <div>
+                        <h3 className='font-semibold text-gray-900'>
+                          {option.title}
+                        </h3>
+                        <p className='text-gray-700'>{option.description}</p>
+                      </div>
+                    </div>
+                  )
+                )}
+            </div>
+          </section>
 
           {/* Scheduling Reports */}
-          <Card id='scheduling-reports'>
-            <CardHeader>
-              <CardTitle className='flex items-center'>
-                <Calendar className='mr-2 h-5 w-5' />
-                Scheduling Automated Reports
-              </CardTitle>
-              <CardDescription>
-                Set up recurring financial reports for regular delivery
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div className='space-y-3'>
-                <div className='flex items-start space-x-3'>
-                  <Badge variant='outline' className='mt-0.5'>
-                    1
-                  </Badge>
-                  <div>
-                    <p className='font-medium'>Create Report Template</p>
-                    <p className='text-muted-foreground text-sm'>
-                      Set up your report with the desired parameters and
-                      filters.
-                    </p>
-                  </div>
-                </div>
-                <div className='flex items-start space-x-3'>
-                  <Badge variant='outline' className='mt-0.5'>
-                    2
-                  </Badge>
-                  <div>
-                    <p className='font-medium'>Set Schedule</p>
-                    <p className='text-muted-foreground text-sm'>
-                      Choose frequency: daily, weekly, monthly, quarterly, or
-                      custom intervals.
-                    </p>
-                  </div>
-                </div>
-                <div className='flex items-start space-x-3'>
-                  <Badge variant='outline' className='mt-0.5'>
-                    3
-                  </Badge>
-                  <div>
-                    <p className='font-medium'>Configure Recipients</p>
-                    <p className='text-muted-foreground text-sm'>
-                      Add email addresses of stakeholders who should receive the
-                      automated reports.
-                    </p>
-                  </div>
-                </div>
-                <div className='flex items-start space-x-3'>
-                  <Badge variant='outline' className='mt-0.5'>
-                    4
-                  </Badge>
-                  <div>
-                    <p className='font-medium'>Activate Schedule</p>
-                    <p className='text-muted-foreground text-sm'>
-                      Save and activate your scheduled report to begin automatic
-                      generation and delivery.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <section id='scheduling-reports' className='mb-12'>
+            <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+              {t('sections.schedulingReports.title')}
+            </h2>
+            <p className='mb-6 text-gray-700'>
+              {t('sections.schedulingReports.description')}
+            </p>
 
-          {/* Troubleshooting */}
-          <Card id='troubleshooting'>
-            <CardHeader>
-              <CardTitle>Troubleshooting</CardTitle>
-              <CardDescription>
-                Common issues and solutions when generating financial reports
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div className='space-y-4'>
+            <div className='space-y-4'>
+              {t
+                .raw('sections.schedulingReports.features')
+                .map(
+                  (
+                    feature: { title: string; description: string },
+                    index: number
+                  ) => (
+                    <div key={index} className='flex items-start space-x-3'>
+                      <Calendar className='mt-1 h-5 w-5 text-green-500' />
+                      <div>
+                        <h3 className='font-semibold text-gray-900'>
+                          {feature.title}
+                        </h3>
+                        <p className='text-gray-700'>{feature.description}</p>
+                      </div>
+                    </div>
+                  )
+                )}
+            </div>
+          </section>
+
+          {/* Exporting & Sharing */}
+          <section id='exporting-sharing' className='mb-12'>
+            <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+              {t('sections.exportingSharing.title')}
+            </h2>
+            <p className='mb-6 text-gray-700'>
+              {t('sections.exportingSharing.description')}
+            </p>
+
+            <div className='space-y-4'>
+              {t
+                .raw('sections.exportingSharing.methods')
+                .map(
+                  (
+                    method: { title: string; description: string },
+                    index: number
+                  ) => (
+                    <div key={index} className='flex items-start space-x-3'>
+                      <Download className='mt-1 h-5 w-5 text-green-500' />
+                      <div>
+                        <h3 className='font-semibold text-gray-900'>
+                          {method.title}
+                        </h3>
+                        <p className='text-gray-700'>{method.description}</p>
+                      </div>
+                    </div>
+                  )
+                )}
+            </div>
+          </section>
+
+          {/* Best Practices */}
+          <section id='best-practices' className='mb-12'>
+            <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+              {tCommon('bestPractices')}
+            </h2>
+            <div className='rounded-lg border border-green-200 bg-green-50 p-6'>
+              <div className='flex items-start space-x-3'>
+                <Lightbulb className='mt-1 h-5 w-5 text-green-600' />
                 <div>
-                  <h4 className='mb-2 font-medium'>
-                    Report shows incomplete data
-                  </h4>
-                  <p className='text-muted-foreground text-sm'>
-                    Ensure all transactions are properly recorded and
-                    categorized. Check that the date range includes all relevant
-                    periods.
-                  </p>
-                </div>
-                <div>
-                  <h4 className='mb-2 font-medium'>
-                    Export fails or takes too long
-                  </h4>
-                  <p className='text-muted-foreground text-sm'>
-                    Try reducing the date range or number of properties
-                    included. Large datasets may require breaking into smaller
-                    reports.
-                  </p>
-                </div>
-                <div>
-                  <h4 className='mb-2 font-medium'>
-                    Numbers don&apos;t match expectations
-                  </h4>
-                  <p className='text-muted-foreground text-sm'>
-                    Verify that all income and expense categories are correctly
-                    assigned. Review any pending or unprocessed transactions.
-                  </p>
-                </div>
-                <div>
-                  <h4 className='mb-2 font-medium'>
-                    Scheduled reports not being sent
-                  </h4>
-                  <p className='text-muted-foreground text-sm'>
-                    Check email addresses are correct and verify that automated
-                    emails aren&apos;t being blocked by spam filters.
-                  </p>
+                  <h3 className='font-semibold text-green-900'>
+                    {tCommon('tips')}
+                  </h3>
+                  <ul className='mt-2 space-y-1 text-green-800'>
+                    {t
+                      .raw('sections.bestPractices.tips')
+                      .map((tip: string, index: number) => (
+                        <li key={index} className='flex items-start space-x-2'>
+                          <span className='mt-1.5 h-1.5 w-1.5 rounded-full bg-green-600' />
+                          <span>{tip}</span>
+                        </li>
+                      ))}
+                  </ul>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </section>
         </div>
 
         {/* Sidebar */}
-        <div className='space-y-6'>
-          <Card>
-            <CardHeader>
-              <CardTitle className='text-lg'>Related Articles</CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-3'>
-              <Link
-                href='/user-guide/financial-management/setting-up-rent-collection'
-                className='hover:bg-muted block rounded-lg border p-3 transition-colors'
-              >
-                <h4 className='text-sm font-medium'>
-                  Setting Up Rent Collection
-                </h4>
-                <p className='text-muted-foreground mt-1 text-xs'>
-                  Configure automated rent collection systems
-                </p>
-              </Link>
-              <Link
-                href='/user-guide/financial-management/processing-payments'
-                className='hover:bg-muted block rounded-lg border p-3 transition-colors'
-              >
-                <h4 className='text-sm font-medium'>Processing Payments</h4>
-                <p className='text-muted-foreground mt-1 text-xs'>
-                  Handle incoming payments and reconciliation
-                </p>
-              </Link>
-              <Link
-                href='/user-guide/financial-management/late-payment-management'
-                className='hover:bg-muted block rounded-lg border p-3 transition-colors'
-              >
-                <h4 className='text-sm font-medium'>Late Payment Management</h4>
-                <p className='text-muted-foreground mt-1 text-xs'>
-                  Manage overdue payments and collections
-                </p>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className='text-lg'>Quick Actions</CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-2'>
-              <Button
-                variant='outline'
-                size='sm'
-                className='w-full justify-start'
-                asChild
-              >
-                <Link href='/finances/reports'>
-                  <FileText className='mr-2 h-4 w-4' />
-                  Generate Report
-                </Link>
-              </Button>
-              <Button
-                variant='outline'
-                size='sm'
-                className='w-full justify-start'
-                asChild
-              >
-                <Link href='/finances'>
-                  <TrendingUp className='mr-2 h-4 w-4' />
-                  View Finances
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
+        <div className='lg:col-span-1'>
+          <ArticleSidebar
+            tableOfContents={tableOfContents}
+            relatedArticles={relatedArticles}
+          />
         </div>
       </div>
-    </div>
+    </ArticleLayout>
   );
-}
+};
+
+export default GeneratingFinancialReportsPage;
