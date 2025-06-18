@@ -20,6 +20,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Link } from '@/i18n/routing';
+import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 interface BuildingsGridViewProps {
@@ -35,6 +36,7 @@ export function BuildingsGridView({
 }: BuildingsGridViewProps) {
   const t = useTranslations('buildings');
   const tCommon = useTranslations('common');
+  const router = useRouter();
 
   if (buildings.length === 0) {
     return (
@@ -70,7 +72,7 @@ export function BuildingsGridView({
                         <span className='sr-only'>Open menu</span>
                         <MoreHorizontal className='h-4 w-4' />
                       </Button>
-                    </DropdownMenuTrigger>{' '}
+                    </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                       <DropdownMenuLabel>
                         {tCommon('actions')}
@@ -94,7 +96,6 @@ export function BuildingsGridView({
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {' '}
                 <div className='space-y-3'>
                   <div className='flex items-center justify-between'>
                     <span className='text-sm text-gray-600'>
@@ -107,12 +108,28 @@ export function BuildingsGridView({
                   </div>
                   <p className='line-clamp-2 text-sm text-gray-600'>
                     {building.description || t('description')}
-                  </p>
+                  </p>{' '}
                   <div className='flex space-x-2 pt-2'>
-                    <Button variant='outline' size='sm' className='flex-1'>
+                    <Button
+                      variant='outline'
+                      size='sm'
+                      className='flex-1'
+                      onClick={e => {
+                        e.preventDefault();
+                        router.push(`/buildings/${building.id}`);
+                      }}
+                    >
                       {t('buildingDetails')}
                     </Button>
-                    <Button variant='outline' size='sm' className='flex-1'>
+                    <Button
+                      variant='outline'
+                      size='sm'
+                      className='flex-1'
+                      onClick={e => {
+                        e.preventDefault();
+                        router.push(`/units?buildingId=${building.id}`);
+                      }}
+                    >
                       {t('units')}
                     </Button>
                   </div>

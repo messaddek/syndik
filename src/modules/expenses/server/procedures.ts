@@ -1,7 +1,7 @@
 import { eq, and, desc } from 'drizzle-orm';
 import { z } from 'zod';
 import { createTRPCRouter, orgProtectedProcedure } from '@/trpc/init';
-import { expenses, createExpenseSchema } from '../schema';
+import { expenses, createExpenseSchema, updateExpenseSchema } from '../schema';
 
 export const expensesRouter = createTRPCRouter({
   create: orgProtectedProcedure
@@ -73,7 +73,7 @@ export const expensesRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string().uuid(),
-        data: createExpenseSchema.partial(),
+        data: updateExpenseSchema,
       })
     )
     .mutation(async ({ ctx, input }) => {

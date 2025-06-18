@@ -4,7 +4,7 @@ import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function PortalPage() {
-  // eslint-disable-next-line no-console
+   
   console.log('🏠 Portal Page - Rendering portal page');
 
   return (

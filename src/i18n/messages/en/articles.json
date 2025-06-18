@@ -1144,6 +1144,9 @@
     "liveChat": "Live Chat",
     "phoneSupport": "Phone Support",
     "supportMessage": "If you need immediate assistance, please contact our support team.",
-    "supportHours": "Support Hours: Monday - Friday, 9 AM - 6 PM"
+    "supportHours": "Support Hours: Monday - Friday, 9 AM - 6 PM",
+    "backToGuide": "Back to User Guide",
+    "viewFaq": "View FAQs",
+    "moreInCategory": "More in Category"
   }
 }

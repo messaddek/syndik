@@ -55,6 +55,7 @@ import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import { useConfirm } from '@/hooks/use-confirm';
 import { PageHeader } from '@/components/page-header';
 import { Link } from '@/i18n/routing';
+import { PAGINATION } from '@/constants';
 
 type PaginationData = {
   page: number;
@@ -113,10 +114,14 @@ export const ResidentsView = () => {
   // Debounce search input to prevent excessive API calls
   const debouncedSearch = useDebouncedValue(filters.search, 300); // Initialize tRPC client
   const trpc = useTRPC();
-  const queryClient = useQueryClient();
-
-  // Get units for filter dropdown
-  const { data: units = [] } = useQuery(trpc.units.getAll.queryOptions({}));
+  const queryClient = useQueryClient(); // Get units for filter dropdown
+  const { data: unitsData } = useQuery(
+    trpc.units.getAll.queryOptions({
+      page: PAGINATION.DEFAULT_PAGE,
+      pageSize: PAGINATION.MAX_PAGE_SIZE, // Get a large number to include all units
+    })
+  );
+  const units = useMemo(() => unitsData?.data || [], [unitsData?.data]);
 
   // Fetch residents data
   const queryOptions = trpc.residents.getAll.queryOptions({
@@ -154,15 +159,14 @@ export const ResidentsView = () => {
       }
     },
     [confirm, deleteResident]
-  );
-  // Transform data to include unit information
+  ); // Transform data to include unit information
   const residentsWithUnits = useMemo(() => {
     const typedResidentsData = residentsData as ResidentQueryResult | undefined;
     if (!typedResidentsData?.data || !Array.isArray(units)) return [];
 
     return typedResidentsData.data.map((resident: ResidentWithUnit) => ({
       ...resident,
-      unit: units.find(({ units: unit }) => unit.id === resident.unitId),
+      unit: units.find(unit => unit.id === resident.unitId),
     })) as ResidentWithUnit[];
   }, [residentsData, units]);
 
@@ -460,11 +464,11 @@ export const ResidentsView = () => {
                 <SelectContent>
                   <SelectItem value='all'>{t('allUnits')}</SelectItem>
                   {Array.isArray(units) &&
-                    units.map(({ units: unit, buildings: building }) => {
+                    units.map(unit => {
                       return (
                         <SelectItem key={unit.id} value={unit.id}>
                           Unit {unit.unitNumber} - Building{' '}
-                          {building?.name || 'N/A'}
+                          {unit.building?.name || 'N/A'}
                         </SelectItem>
                       );
                     })}

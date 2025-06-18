@@ -105,7 +105,7 @@ export function ExpensesList() {
                     </Link>
                   ) : (
                     getBuildingName(expense.buildingId)
-                  )}{' '}
+                  )}
                   • {format(new Date(expense.paidDate), 'MMM dd, yyyy')}
                   {expense.vendor && ` • ${expense.vendor}`}
                 </CardDescription>

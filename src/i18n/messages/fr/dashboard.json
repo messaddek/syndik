@@ -32,5 +32,18 @@
   "occupancy": "Occupation",
   "occupancyDescription": "Voir les taux et l'historique d'occupation.",
   "financialTrends": "Tendances Financières",
-  "occupancyTrends": "Tendances d'Occupation"
+  "occupancyTrends": "Tendances d'Occupation",
+  "missingPayments": {
+    "title": "Paiements Manqués",
+    "description": "Unités qui n'ont pas payé ce mois",
+    "allPaid": "Toutes les unités ont payé ce mois ! 🎉",
+    "unitsOverdue": "unités en retard",
+    "expectedAmount": "Montant attendu",
+    "overdue": "en retard",
+    "sendReminders": "Envoyer des Rappels",
+    "viewDetails": "Voir les Détails"
+  },
+  "quickActionsItems": {
+    "recordIncome": "Enregistrer un Revenu"
+  }
 }

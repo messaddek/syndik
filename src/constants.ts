@@ -24,3 +24,13 @@ export const BUILDING_SORT_FIELDS = {
   TOTAL_UNITS: 'totalUnits',
   CREATED_AT: 'createdAt',
 } as const;
+
+export const UNIT_SORT_FIELDS = {
+  UNIT_NUMBER: 'unitNumber',
+  FLOOR: 'floor',
+  AREA: 'area',
+  BEDROOMS: 'bedrooms',
+  BATHROOMS: 'bathrooms',
+  MONTHLY_FEE: 'monthlyFee',
+  CREATED_AT: 'createdAt',
+} as const;

@@ -92,6 +92,7 @@
   },
   "sidebar": {
     "quickStart": "بداية سريعة",
+    "quickNavigation": "تنقل سريع",
     "createFirstProperty": "إنشاء عقارك الأول",
     "setupUserAccounts": "إعداد حسابات المستخدمين",
     "addFirstResident": "إضافة أول ساكن",

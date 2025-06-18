@@ -3,19 +3,22 @@
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import { useTranslations } from 'next-intl';
 import { IncomeForm } from './income-form';
+import type { Income } from '../../../incomes/types';
 
-interface CreateIncomeDialogProps {
+interface EditIncomeDialogProps {
+  income: Income;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSuccess?: () => void;
 }
 
-export function CreateIncomeDialog({
+export function EditIncomeDialog({
+  income,
   open,
   onOpenChange,
   onSuccess,
-}: CreateIncomeDialogProps) {
-  const t = useTranslations('finance.createIncomeDialog');
+}: EditIncomeDialogProps) {
+  const t = useTranslations('finance');
 
   const handleSuccess = () => {
     onOpenChange(false);
@@ -25,15 +28,18 @@ export function CreateIncomeDialog({
   const handleCancel = () => {
     onOpenChange(false);
   };
-
   return (
     <ResponsiveDialog
       open={open}
       onOpenChange={onOpenChange}
-      title={t('title')}
-      description={t('description')}
+      title={`${t('buttons.edit')} ${t('tabs.incomes')}`}
+      description='Update the income details below.'
     >
-      <IncomeForm onSuccess={handleSuccess} onCancel={handleCancel} />
+      <IncomeForm
+        income={income}
+        onSuccess={handleSuccess}
+        onCancel={handleCancel}
+      />
     </ResponsiveDialog>
   );
 }

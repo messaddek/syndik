@@ -13,19 +13,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Filter, Search, X } from 'lucide-react';
+import { Plus, MoreHorizontal, Filter, Search, X } from 'lucide-react';
 import { CreateUnitDialog } from '../components/create-unit-dialog';
 import { EditUnitDialog } from '../components/edit-unit-dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { useTRPC } from '@/trpc/client';
 import { useConfirm } from '@/hooks/use-confirm';
 import { useUnitsFilters } from '../../hooks/use-units-filters';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import type { UnitWithBuilding } from '../../types';
 import type { Resident } from '@/modules/residents/types';
+import type { Income } from '@/modules/incomes/types';
+import { Link } from '@/i18n/routing';
 import { PageHeader } from '@/components/page-header';
-import { UnitsGridView } from '../components/units-grid-view';
 import { PAGINATION } from '@/constants';
 
 const UnitsView = () => {
@@ -71,8 +86,8 @@ const UnitsView = () => {
   // Get buildings for filter dropdown
   const { data: buildingsData } = useQuery(
     trpc.buildings.getAll.queryOptions({
-      page: PAGINATION.DEFAULT_PAGE,
-      pageSize: PAGINATION.MAX_PAGE_SIZE,
+      page: 1,
+      pageSize: 100,
     })
   );
   const buildings = buildingsData?.data || [];
@@ -81,7 +96,7 @@ const UnitsView = () => {
   const { data: allResidentsData } = useQuery(
     trpc.residents.getAll.queryOptions({
       page: PAGINATION.DEFAULT_PAGE,
-      pageSize: PAGINATION.MAX_PAGE_SIZE, // Get a large number to include all units
+      pageSize: PAGINATION.MAX_PAGE_SIZE, // Get a large number to include all residents
     })
   );
   const allResidents = (allResidentsData as { data: Resident[] })?.data || [];
@@ -103,6 +118,7 @@ const UnitsView = () => {
       },
     })
   );
+
   const deleteUnit = useMutation(
     trpc.units.delete.mutationOptions({
       onSuccess: () => {
@@ -163,6 +179,22 @@ const UnitsView = () => {
     filters.maxBathrooms !== undefined ||
     filters.isOccupied !== undefined
   );
+
+  const getUnitResidentCount = (unitId: string) => {
+    return allResidents.filter(
+      (resident: Resident) => resident.unitId === unitId && resident.isActive
+    ).length;
+  };
+
+  const getUnitMonthlyIncome = (unitId: string) => {
+    const unitIncomes = (allIncomes as Income[]).filter(
+      (income: Income) => income.unitId === unitId
+    );
+    return unitIncomes.reduce(
+      (sum: number, income: Income) => sum + Number(income.amount),
+      0
+    );
+  };
 
   // Get unique floors for filter
   const uniqueFloors = Array.from(
@@ -433,17 +465,135 @@ const UnitsView = () => {
       </Card>
 
       {/* Units Grid */}
-      <UnitsGridView
-        units={units}
-        allResidents={allResidents}
-        allIncomes={allIncomes}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-        onToggleOccupancy={handleToggleOccupancy}
-        onCreateNew={() => setShowCreateDialog(true)}
-        isToggling={toggleOccupancy.isPending}
-      />
+      <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+        {units.map(unit => (
+          <Link key={unit.id} href={`/units/${unit.id}`}>
+            <Card className='cursor-pointer transition-shadow hover:shadow-lg'>
+              <CardHeader>
+                <div className='flex items-center justify-between'>
+                  <CardTitle className='text-lg'>{unit.unitNumber}</CardTitle>
+                  <div className='flex items-center gap-2'>
+                    <Badge variant={unit.isOccupied ? 'default' : 'secondary'}>
+                      {unit.isOccupied ? t('occupied') : t('vacant')}
+                    </Badge>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant='ghost'
+                          className='h-8 w-8 p-0'
+                          onClick={e => e.preventDefault()}
+                        >
+                          <span className='sr-only'>{t('openMenu')}</span>
+                          <MoreHorizontal className='h-4 w-4' />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align='end'>
+                        <DropdownMenuLabel>
+                          {tCommon('actions')}
+                        </DropdownMenuLabel>
+                        <DropdownMenuItem onClick={() => handleEdit(unit)}>
+                          {t('editUnit')}
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          onClick={() =>
+                            window.open(
+                              `/residents?unitId=${unit.id}`,
+                              '_blank'
+                            )
+                          }
+                        >
+                          {t('viewResidents')}
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() =>
+                            window.open(`/finances?unitId=${unit.id}`, '_blank')
+                          }
+                        >
+                          {t('viewIncome')}
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          onClick={() => handleDelete(unit.id)}
+                          className='text-red-600'
+                        >
+                          {t('deleteUnit')}
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </div>
+                <CardDescription>
+                  {unit.building?.name ?? t('unknownBuilding')} - {t('floor')}{' '}
+                  {unit.floor}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className='space-y-2'>
+                  <div className='flex justify-between text-sm'>
+                    <span>{t('bedrooms')}:</span>
+                    <span>{unit.bedrooms}</span>
+                  </div>
+                  <div className='flex justify-between text-sm'>
+                    <span>{t('bathrooms')}:</span>
+                    <span>{unit.bathrooms}</span>
+                  </div>
+                  {unit.area && (
+                    <div className='flex justify-between text-sm'>
+                      <span>{t('area')}:</span>
+                      <span>{unit.area} m²</span>
+                    </div>
+                  )}
+                  <div className='flex justify-between text-sm font-medium'>
+                    <span>{t('monthlyFee')}:</span>
+                    <span>${unit.monthlyFee}</span>
+                  </div>
 
+                  {/* Relationship Information */}
+                  <div className='mt-2 border-t pt-2'>
+                    <div className='flex justify-between text-sm'>
+                      <span>{t('activeResidents')}:</span>
+                      <span className='font-medium'>
+                        {getUnitResidentCount(unit.id)}
+                      </span>
+                    </div>
+                    <div className='flex justify-between text-sm'>
+                      <span>{t('thisMonthIncome')}:</span>
+                      <span className='font-medium text-green-600'>
+                        ${getUnitMonthlyIncome(unit.id).toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
+
+                  {unit.description && (
+                    <p className='text-muted-foreground mt-2 text-sm'>
+                      {unit.description}
+                    </p>
+                  )}
+                </div>
+
+                <div className='mt-4 flex gap-2'>
+                  <Button
+                    variant='outline'
+                    size='sm'
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleToggleOccupancy(unit.id, unit.isOccupied);
+                    }}
+                    disabled={toggleOccupancy.isPending}
+                    className='flex-1'
+                  >
+                    {unit.isOccupied ? t('markVacant') : t('markOccupied')}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
+
+      {/* Pagination */}
       {pagination && pagination.totalPages > 1 && (
         <div className='flex items-center justify-between'>
           <div className='flex items-center space-x-2'>
@@ -471,6 +621,26 @@ const UnitsView = () => {
             {pagination.total} total units
           </p>
         </div>
+      )}
+
+      {units.length === 0 && (
+        <Card>
+          <CardContent className='flex flex-col items-center justify-center p-8'>
+            <h3 className='mb-2 text-lg font-medium text-gray-900'>
+              {t('noUnitsFound')}
+            </h3>
+            <p className='mb-4 text-sm text-gray-600'>
+              {t('noUnitsDescription')}
+            </p>
+            <Button
+              onClick={() => setShowCreateDialog(true)}
+              className='flex items-center space-x-2'
+            >
+              <Plus className='h-4 w-4' />
+              {t('addFirstUnit')}
+            </Button>
+          </CardContent>
+        </Card>
       )}
 
       <CreateUnitDialog

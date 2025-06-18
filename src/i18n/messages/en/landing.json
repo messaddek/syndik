@@ -258,7 +258,9 @@
       "link": "Learn more about our guarantee"
     },
     "socialProof": {
-      "rating": "4.9/5 stars from 1,200+ reviews"
+      "rating": "4.9/5 stars from 1,200+ reviews",
+      "certified": "Certified by the Property Management Association",
+      "award": "Awarded Best Property Management Software 2023"
     }
   }
 }

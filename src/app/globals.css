@@ -115,6 +115,15 @@
 }
 
 /* Direction and RTL support */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hash navigation target offset */
+.hash-target {
+  scroll-margin-top: 300px;
+}
+
 html[dir='rtl'] {
   direction: rtl;
 }

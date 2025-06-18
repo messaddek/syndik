@@ -56,3 +56,7 @@ export const createIncomeSchema = z.object({
     .refine(date => !isNaN(Date.parse(date)), 'Invalid date'),
   notes: z.string().optional(),
 });
+
+export const updateIncomeSchema = createIncomeSchema.extend({
+  id: z.string().uuid(),
+});

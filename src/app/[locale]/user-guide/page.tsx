@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -33,6 +33,54 @@ import { useQuery } from '@tanstack/react-query';
 const UserGuidePage = () => {
   const t = useTranslations('userGuide');
   const locale = useLocale();
+  // Refs for each category section
+  const categoryRefs = useRef<{ [key: string]: HTMLDivElement | null }>({}); // Handle hash navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      console.log('Hash detected:', hash);
+
+      if (hash) {
+        const element = document.getElementById(hash);
+        if (element) {
+          console.log('Element found by ID:', hash); // Manually calculate scroll position with offset
+          const elementTop =
+            element.getBoundingClientRect().top + window.pageYOffset;
+          const offset = 120; // Fixed navbar + breathing room
+          const targetPosition = elementTop - offset;
+
+          // Scroll to calculated position
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth',
+          });
+
+          // Add highlight effect
+          setTimeout(() => {
+            element.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.3)';
+            setTimeout(() => {
+              element.style.boxShadow = '';
+            }, 1500);
+          }, 100);
+        } else {
+          console.log('No element found with ID:', hash);
+        }
+      }
+    };
+
+    // Handle initial hash on page load
+    if (window.location.hash) {
+      setTimeout(handleHashChange, 300);
+    }
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
   // Helper function to get the correct word for minutes based on locale
   const getMinuteText = (minutes: number) => {
     if (locale === 'ar') {
@@ -178,7 +226,6 @@ const UserGuidePage = () => {
       })),
     },
   ];
-
   return (
     <LandingLayout>
       <div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100'>
@@ -191,7 +238,7 @@ const UserGuidePage = () => {
               </h1>
               <p className='mx-auto mb-8 max-w-3xl text-xl text-gray-600'>
                 {t('subtitle')}
-              </p>{' '}
+              </p>
               {/* Search */}
               <div className='mx-auto max-w-lg'>
                 <ArticleSearch
@@ -271,13 +318,20 @@ const UserGuidePage = () => {
                     </Card>
                   ))}
                 </div>
-              </div>{' '}
+              </div>
               {/* Guide Categories */}
               <div className='space-y-8'>
                 {guides.map(guide => {
                   const IconComponent = guide.icon;
                   return (
-                    <Card key={guide.id} className='overflow-hidden'>
+                    <Card
+                      key={guide.id}
+                      className='hash-target overflow-hidden'
+                      ref={el => {
+                        categoryRefs.current[guide.id] = el;
+                      }}
+                      id={guide.id}
+                    >
                       <CardHeader className='bg-gradient-to-r from-gray-50 to-gray-100'>
                         <div className='flex items-center gap-4'>
                           <div className={`rounded-lg p-3 ${guide.color}`}>
@@ -299,9 +353,8 @@ const UserGuidePage = () => {
                               href={`/user-guide/${guide.id}/${article.slug}`}
                               className='group flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-gray-50'
                             >
-                              {' '}
                               <div className='flex min-w-0 items-center gap-3'>
-                                <FileText className='h-4 w-4 shrink-0 text-gray-400' />{' '}
+                                <FileText className='h-4 w-4 shrink-0 text-gray-400' />
                                 <span className='group-hover:text-primary truncate font-medium text-gray-900'>
                                   {article.title}
                                 </span>
@@ -329,10 +382,36 @@ const UserGuidePage = () => {
                   );
                 })}
               </div>
-            </div>
-
+            </div>{' '}
             {/* Sidebar */}
-            <div className='space-y-6'>
+            <div className='sticky top-24 h-fit space-y-6'>
+              {/* Quick Navigation */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className='flex items-center gap-2'>
+                    <BookOpen className='h-5 w-5 text-blue-500' />
+                    {t('sidebar.quickNavigation')}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className='space-y-2'>
+                  {guides.map(guide => {
+                    const IconComponent = guide.icon;
+                    return (
+                      <a
+                        key={guide.id}
+                        href={`#${guide.id}`}
+                        className='flex items-center gap-3 rounded-lg p-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900'
+                      >
+                        <div className={`rounded p-1 ${guide.color}`}>
+                          <IconComponent className='h-3 w-3 text-white' />
+                        </div>
+                        {guide.title}
+                      </a>
+                    );
+                  })}
+                </CardContent>
+              </Card>
+
               {/* Quick Actions */}
               <Card>
                 <CardHeader>

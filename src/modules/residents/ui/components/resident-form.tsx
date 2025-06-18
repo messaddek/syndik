@@ -74,7 +74,7 @@ export function ResidentForm({
   const formSchema = createFormSchema();
   type FormData = z.infer<typeof formSchema>;
 
-  const { data: units = [], isLoading: unitsLoading } = useQuery(
+  const { data: units, isLoading: unitsLoading } = useQuery(
     trpc.units.getAll.queryOptions({})
   );
 
@@ -230,12 +230,12 @@ export function ResidentForm({
                     <SelectItem value='loading' disabled>
                       {t('loadingUnits')}
                     </SelectItem>
-                  ) : units.length === 0 ? (
+                  ) : units?.data.length === 0 ? (
                     <SelectItem value='no-units' disabled>
                       {t('noUnitsAvailable')}
                     </SelectItem>
                   ) : (
-                    units.map(({ units: unit }) => (
+                    units?.data.map(unit => (
                       <SelectItem key={unit.id} value={unit.id}>
                         Unit {unit.unitNumber} - Floor {unit.floor}
                       </SelectItem>

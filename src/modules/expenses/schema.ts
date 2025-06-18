@@ -60,3 +60,7 @@ export const createExpenseSchema = z.object({
   receiptUrl: z.string().url().optional(),
   notes: z.string().optional(),
 });
+
+export const updateExpenseSchema = createExpenseSchema.extend({
+  id: z.string().uuid(),
+});

@@ -257,7 +257,9 @@
       "link": "En savoir plus sur notre garantie"
     },
     "socialProof": {
-      "rating": "4,9/5 étoiles sur 1 200+ avis"
+      "rating": "4,9/5 étoiles sur 1 200+ avis",
+      "certified": "Certifié par des milliers de gestionnaires immobiliers",
+      "award": "Récompensé par l'Association des Gestionnaires Immobiliers"
     }
   }
 }

@@ -92,6 +92,7 @@
   },
   "sidebar": {
     "quickStart": "Quick Start",
+    "quickNavigation": "Quick Navigation",
     "createFirstProperty": "Create Your First Property",
     "setupUserAccounts": "Set Up User Accounts",
     "addFirstResident": "Add Your First Resident",

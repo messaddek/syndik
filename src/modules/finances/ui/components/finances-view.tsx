@@ -142,30 +142,33 @@ export const FinancesView = () => {
           </CardContent>
         </Card>
       </div>
-
       {/* Income and Expenses Tabs */}
       <Tabs defaultValue='incomes' className='w-full'>
-        <div className='flex items-center justify-between'>
-          <TabsList>
-            <TabsTrigger value='incomes'>{t('tabs.incomes')}</TabsTrigger>
-            <TabsTrigger value='expenses'>{t('tabs.expenses')}</TabsTrigger>
+        <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+          <TabsList className='w-full sm:w-auto'>
+            <TabsTrigger value='incomes' className='flex-1 sm:flex-none'>
+              {t('tabs.incomes')}
+            </TabsTrigger>
+            <TabsTrigger value='expenses' className='flex-1 sm:flex-none'>
+              {t('tabs.expenses')}
+            </TabsTrigger>
           </TabsList>
 
-          <div className='flex gap-2'>
+          <div className='flex flex-col gap-2 sm:flex-row'>
             <Button
               onClick={() => setShowIncomeDialog(true)}
-              className='flex items-center gap-2'
+              className='flex w-full items-center justify-center gap-2 sm:w-auto'
             >
               <Plus className='h-4 w-4' />
-              {t('buttons.addIncome')}
+              <span className='sm:inline'>{t('buttons.addIncome')}</span>
             </Button>
             <Button
               variant='outline'
               onClick={() => setShowExpenseDialog(true)}
-              className='flex items-center gap-2'
+              className='flex w-full items-center justify-center gap-2 sm:w-auto'
             >
               <Plus className='h-4 w-4' />
-              {t('buttons.addExpense')}
+              <span className='sm:inline'>{t('buttons.addExpense')}</span>
             </Button>
           </div>
         </div>
@@ -178,13 +181,11 @@ export const FinancesView = () => {
           <ExpensesList />
         </TabsContent>
       </Tabs>
-
       {/* Dialogs */}
       <CreateIncomeDialog
         open={showIncomeDialog}
         onOpenChange={setShowIncomeDialog}
       />
-
       <CreateExpenseDialog
         open={showExpenseDialog}
         onOpenChange={setShowExpenseDialog}
