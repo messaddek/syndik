@@ -4,12 +4,13 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { usePathname } from '@/i18n/routing';
-import { Menu, X, BookOpen } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useUser, UserButton } from '@clerk/nextjs';
 import { Button } from '../ui/button';
 import { cn } from '../../lib/utils';
 import Image from 'next/image';
 import { LanguageDropdown } from '../language-dropdown';
+import { SupportDialog } from '../support-dialog';
 import { Gabarito } from 'next/font/google';
 
 const gabarito = Gabarito({
@@ -54,7 +55,6 @@ export function LandingHeader() {
               </span>
             </Link>
           </div>
-
           {/* Desktop Navigation */}
           <div className='hidden items-center space-x-8 md:flex'>
             {navigation.map(item => (
@@ -69,17 +69,11 @@ export function LandingHeader() {
                 {item.name}
               </Link>
             ))}
-          </div>
-
+          </div>{' '}
           {/* CTA Buttons */}
           <div className='hidden items-center space-x-4 md:flex'>
             <LanguageDropdown />
-            <Button variant='ghost' size='sm' asChild>
-              <Link href='/user-guide'>
-                <BookOpen className='h-4 w-4' />
-                <span className='sr-only'>{t('userGuide')}</span>
-              </Link>
-            </Button>
+            <SupportDialog />
             {isSignedIn ? (
               <>
                 <Button variant='ghost' size='sm' asChild>
@@ -105,7 +99,6 @@ export function LandingHeader() {
               </>
             )}
           </div>
-
           {/* Mobile menu button */}
           <div className='md:hidden'>
             <Button
@@ -143,23 +136,11 @@ export function LandingHeader() {
                 {/* Language Dropdown for Mobile */}
                 <div className='flex justify-center py-2'>
                   <LanguageDropdown />
+                </div>{' '}
+                {/* Support Dialog for Mobile */}
+                <div className='flex justify-center py-2'>
+                  <SupportDialog />
                 </div>
-
-                {/* User Guide Button */}
-                <Button
-                  variant='ghost'
-                  size='sm'
-                  className='w-full justify-center'
-                  asChild
-                >
-                  <Link
-                    href='/user-guide'
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <BookOpen className='mr-2 h-4 w-4' />
-                    {t('userGuide')}
-                  </Link>
-                </Button>
                 {isSignedIn ? (
                   <>
                     <Button

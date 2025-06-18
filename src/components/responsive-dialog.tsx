@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/drawer';
 
 interface ResponsiveDialogProps {
-  title: string;
+  title: string | React.ReactNode;
   description: string;
   children: React.ReactNode;
   open: boolean;
@@ -37,12 +37,12 @@ export const ResponsiveDialog = ({
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
-        <DrawerContent>
+        <DrawerContent className='flex h-full flex-col'>
           <DrawerHeader>
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
-          <div className='p-4'>{children}</div>
+          <div className='flex-1 overflow-auto p-4'>{children}</div>
         </DrawerContent>
       </Drawer>
     );

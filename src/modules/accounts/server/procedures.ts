@@ -1,6 +1,8 @@
 import { eq, and, count } from 'drizzle-orm';
 import { z } from 'zod';
 import { createTRPCRouter, protectedProcedure } from '@/trpc/init';
+import { TRPCError } from '@trpc/server';
+import { withRetry } from '@/lib/db';
 import {
   accounts,
   userPreferences,
@@ -238,55 +240,76 @@ export const accountsRouter = createTRPCRouter({
     const { userId } = ctx;
 
     if (!userId) {
-      throw new Error('User ID is required');
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'User ID is required',
+      });
     }
 
-    // Get all organizations this user is part of
-    const userOrganizations = await ctx.db
-      .select({
-        orgId: accounts.orgId,
-        organizationName: accounts.organizationName,
-        role: accounts.role,
-        createdAt: accounts.createdAt,
-      })
-      .from(accounts)
-      .where(eq(accounts.userId, userId));
+    try {
+      // Get all organizations this user is part of with retry logic
+      const userOrganizations = await withRetry(async () => {
+        return await ctx.db
+          .select({
+            orgId: accounts.orgId,
+            organizationName: accounts.organizationName,
+            role: accounts.role,
+            createdAt: accounts.createdAt,
+          })
+          .from(accounts)
+          .where(eq(accounts.userId, userId));
+      });
 
-    // Define plan limits (in a real app, this would come from a subscription/billing service)
-    const planLimits = {
-      free: { maxOrganizations: 1, name: 'Free Plan' },
-      basic: { maxOrganizations: 3, name: 'Basic Plan' },
-      pro: { maxOrganizations: 10, name: 'Pro Plan' },
-      enterprise: { maxOrganizations: 50, name: 'Enterprise Plan' },
-    };
+      // Define plan limits (in a real app, this would come from a subscription/billing service)
+      const planLimits = {
+        free: { maxOrganizations: 1, name: 'Free Plan' },
+        basic: { maxOrganizations: 3, name: 'Basic Plan' },
+        pro: { maxOrganizations: 10, name: 'Pro Plan' },
+        enterprise: { maxOrganizations: 50, name: 'Enterprise Plan' },
+      };
 
-    // For demo purposes, determine plan based on organization count
-    // In a real app, this would be stored in a user subscription table
-    const currentOrgCount = userOrganizations.length;
-    let currentPlan: keyof typeof planLimits = 'free';
+      // For demo purposes, determine plan based on organization count
+      // In a real app, this would be stored in a user subscription table
+      const currentOrgCount = userOrganizations.length;
+      let currentPlan: keyof typeof planLimits = 'free';
 
-    if (currentOrgCount >= 10) {
-      currentPlan = 'enterprise';
-    } else if (currentOrgCount >= 5) {
-      currentPlan = 'pro';
-    } else if (currentOrgCount >= 2) {
-      currentPlan = 'basic';
+      if (currentOrgCount >= 10) {
+        currentPlan = 'enterprise';
+      } else if (currentOrgCount >= 5) {
+        currentPlan = 'pro';
+      } else if (currentOrgCount >= 2) {
+        currentPlan = 'basic';
+      }
+
+      const planInfo = planLimits[currentPlan];
+
+      return {
+        currentCount: currentOrgCount,
+        maxAllowed: planInfo.maxOrganizations,
+        remaining: Math.max(0, planInfo.maxOrganizations - currentOrgCount),
+        planName: planInfo.name,
+        usagePercentage: Math.min(
+          100,
+          (currentOrgCount / planInfo.maxOrganizations) * 100
+        ),
+        organizations: userOrganizations,
+        canCreateMore: currentOrgCount < planInfo.maxOrganizations,
+      };
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown database error';
+      console.error('[ACCOUNTS] getOrganizationUsage - Database error:', {
+        error: errorMessage,
+        userId,
+        timestamp: new Date().toISOString(),
+      });
+
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: `Failed to fetch organization usage: ${errorMessage}`,
+        cause: error,
+      });
     }
-
-    const planInfo = planLimits[currentPlan];
-
-    return {
-      currentCount: currentOrgCount,
-      maxAllowed: planInfo.maxOrganizations,
-      remaining: Math.max(0, planInfo.maxOrganizations - currentOrgCount),
-      planName: planInfo.name,
-      usagePercentage: Math.min(
-        100,
-        (currentOrgCount / planInfo.maxOrganizations) * 100
-      ),
-      organizations: userOrganizations,
-      canCreateMore: currentOrgCount < planInfo.maxOrganizations,
-    };
   }),
 
   // Check if user can create a new organization

@@ -12,6 +12,7 @@ import {
   Bell,
   LayoutDashboard,
   Home,
+  Shield,
 } from 'lucide-react';
 import { GrAnnounce } from 'react-icons/gr';
 
@@ -31,11 +32,13 @@ import { UserButton } from '@clerk/nextjs';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { OrgSwitcher } from '@/components/org-switcher';
+import { useHelpdeskPermissions } from '@/modules/helpdesk/hooks/use-helpdesk-permissions';
 
 export function PortalSidebar() {
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+  const { canAccessAdminPortal } = useHelpdeskPermissions();
 
   const navigationItems = [
     {
@@ -129,7 +132,6 @@ export function PortalSidebar() {
           <span>{t('portal.accessDashboard')}</span>
         </Button>
       </SidebarHeader>
-
       <SidebarContent>
         {navigationItems.map(group => (
           <SidebarGroup key={group.title}>
@@ -150,9 +152,21 @@ export function PortalSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
-      </SidebarContent>
-
+      </SidebarContent>{' '}
       <SidebarFooter className='border-t p-4'>
+        {canAccessAdminPortal && (
+          <div className='mb-3'>
+            <Button
+              onClick={() => router.push('/admin')}
+              className='flex w-full items-center gap-2 bg-orange-600 text-white hover:bg-orange-700'
+              size='sm'
+            >
+              <Shield className='h-4 w-4' />
+              <span>{t('admin.admin_portal')}</span>
+            </Button>
+          </div>
+        )}
+
         <div className='flex items-center gap-3'>
           <UserButton afterSignOutUrl='/' />
           <div className='min-w-0 flex-1'>
