@@ -32,5 +32,18 @@
   "occupancy": "Occupancy",
   "occupancyDescription": "View occupancy rates and history.",
   "financialTrends": "Financial Trends",
-  "occupancyTrends": "Occupancy Trends"
+  "occupancyTrends": "Occupancy Trends",
+  "missingPayments": {
+    "title": "Missing Payments",
+    "description": "Units that haven't paid this month's fees",
+    "allPaid": "All units have paid this month! 🎉",
+    "unitsOverdue": "units overdue",
+    "expectedAmount": "Expected amount",
+    "overdue": "overdue",
+    "sendReminders": "Send Reminders",
+    "viewDetails": "View Details"
+  },
+  "quickActionsItems": {
+    "recordIncome": "Record Income"
+  }
 }

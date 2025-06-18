@@ -1,4 +1,4 @@
-import { eq, and, ilike } from 'drizzle-orm';
+import { eq, and, ilike, gte, lte, asc, desc, sql } from 'drizzle-orm';
 import { z } from 'zod';
 import { createTRPCRouter, orgProtectedProcedure } from '@/trpc/init';
 import { units, createUnitSchema, updateUnitSchema } from '../schema';
@@ -42,25 +42,172 @@ export const unitsRouter = createTRPCRouter({
   getAll: orgProtectedProcedure
     .input(
       z.object({
-        unitNumber: z.string().optional(),
+        page: z.number().min(1).default(1),
+        pageSize: z.number().min(1).max(100).default(10),
+        search: z.string().optional(),
+        buildingId: z.string().uuid().optional(),
+        floor: z.number().optional(),
+        minBedrooms: z.number().optional(),
+        maxBedrooms: z.number().optional(),
+        minBathrooms: z.number().optional(),
+        maxBathrooms: z.number().optional(),
+        isOccupied: z.boolean().optional(),
+        sortBy: z.string().default('unitNumber'),
+        sortOrder: z.enum(['asc', 'desc']).default('asc'),
       })
     )
     .query(async ({ ctx, input }) => {
       const { db, orgId } = ctx;
+      const {
+        page,
+        pageSize,
+        search,
+        buildingId,
+        floor,
+        minBedrooms,
+        maxBedrooms,
+        minBathrooms,
+        maxBathrooms,
+        isOccupied,
+        sortBy,
+        sortOrder,
+      } = input;
+
+      console.log('Fetching units with filters:', {
+        page,
+        pageSize,
+        search,
+        buildingId,
+        floor,
+        minBedrooms,
+        maxBedrooms,
+        minBathrooms,
+        maxBathrooms,
+        isOccupied,
+        sortBy,
+        sortOrder,
+      });
 
       const conditions = [eq(units.orgId, orgId)];
 
-      if (input.unitNumber) {
-        conditions.push(ilike(units.unitNumber, `%${input.unitNumber}%`));
+      // Apply filters
+      if (search) {
+        conditions.push(ilike(units.unitNumber, `%${search}%`));
       }
 
-      return await db
-        .select()
+      if (buildingId) {
+        conditions.push(eq(units.buildingId, buildingId));
+      }
+
+      if (floor !== undefined) {
+        conditions.push(eq(units.floor, floor));
+      }
+
+      if (minBedrooms !== undefined) {
+        conditions.push(gte(units.bedrooms, minBedrooms));
+      }
+
+      if (maxBedrooms !== undefined) {
+        conditions.push(lte(units.bedrooms, maxBedrooms));
+      }
+
+      if (minBathrooms !== undefined) {
+        conditions.push(gte(units.bathrooms, minBathrooms));
+      }
+
+      if (maxBathrooms !== undefined) {
+        conditions.push(lte(units.bathrooms, maxBathrooms));
+      }
+
+      if (isOccupied !== undefined) {
+        conditions.push(eq(units.isOccupied, isOccupied));
+      } // Build order by clause
+      let orderDirection;
+      switch (sortBy) {
+        case 'unitNumber':
+          orderDirection =
+            sortOrder === 'desc'
+              ? desc(units.unitNumber)
+              : asc(units.unitNumber);
+          break;
+        case 'floor':
+          orderDirection =
+            sortOrder === 'desc' ? desc(units.floor) : asc(units.floor);
+          break;
+        case 'area':
+          orderDirection =
+            sortOrder === 'desc' ? desc(units.area) : asc(units.area);
+          break;
+        case 'bedrooms':
+          orderDirection =
+            sortOrder === 'desc' ? desc(units.bedrooms) : asc(units.bedrooms);
+          break;
+        case 'bathrooms':
+          orderDirection =
+            sortOrder === 'desc' ? desc(units.bathrooms) : asc(units.bathrooms);
+          break;
+        case 'monthlyFee':
+          orderDirection =
+            sortOrder === 'desc'
+              ? desc(units.monthlyFee)
+              : asc(units.monthlyFee);
+          break;
+        case 'createdAt':
+          orderDirection =
+            sortOrder === 'desc' ? desc(units.createdAt) : asc(units.createdAt);
+          break;
+        default:
+          orderDirection =
+            sortOrder === 'desc'
+              ? desc(units.unitNumber)
+              : asc(units.unitNumber);
+      }
+
+      // Get total count for pagination
+      const [{ count }] = await db
+        .select({ count: sql<number>`count(*)`.mapWith(Number) })
         .from(units)
-        //add join with buildings if needed
+        .where(and(...conditions));
+
+      // Get paginated results with building info
+      const result = await db
+        .select({
+          id: units.id,
+          buildingId: units.buildingId,
+          orgId: units.orgId,
+          unitNumber: units.unitNumber,
+          floor: units.floor,
+          area: units.area,
+          bedrooms: units.bedrooms,
+          bathrooms: units.bathrooms,
+          monthlyFee: units.monthlyFee,
+          isOccupied: units.isOccupied,
+          description: units.description,
+          createdAt: units.createdAt,
+          updatedAt: units.updatedAt,
+          building: {
+            id: buildings.id,
+            name: buildings.name,
+            address: buildings.address,
+            city: buildings.city,
+          },
+        })
+        .from(units)
         .leftJoin(buildings, eq(units.buildingId, buildings.id))
         .where(and(...conditions))
-        .orderBy(units.floor, units.unitNumber);
+        .orderBy(orderDirection)
+        .limit(pageSize)
+        .offset((page - 1) * pageSize);
+
+      return {
+        data: result,
+        pagination: {
+          page,
+          pageSize,
+          total: count,
+          totalPages: Math.ceil(count / pageSize),
+        },
+      };
     }),
 
   getById: orgProtectedProcedure

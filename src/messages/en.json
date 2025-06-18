@@ -1341,7 +1341,10 @@
       "liveChat": "Live Chat",
       "phoneSupport": "Phone Support",
       "supportMessage": "If you need immediate assistance, please contact our support team.",
-      "supportHours": "Support Hours: Monday - Friday, 9 AM - 6 PM"
+      "supportHours": "Support Hours: Monday - Friday, 9 AM - 6 PM",
+      "backToGuide": "Back to User Guide",
+      "viewFaq": "View FAQs",
+      "moreInCategory": "More in Category"
     }
   },
   "articleTitles": {
@@ -1525,7 +1528,8 @@
     "saveChanges": "Save Changes",
     "signIn": "Sign In",
     "getStarted": "Get Started",
-    "logoAlt": "Syndik Logo"
+    "logoAlt": "Syndik Logo",
+    "any": "Any"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -1561,10 +1565,29 @@
     "occupancy": "Occupancy",
     "occupancyDescription": "View occupancy rates and history.",
     "financialTrends": "Financial Trends",
-    "occupancyTrends": "Occupancy Trends"
+    "occupancyTrends": "Occupancy Trends",
+    "missingPayments": {
+      "title": "Missing Payments",
+      "description": "Units that haven't paid this month's fees",
+      "allPaid": "All units have paid this month! 🎉",
+      "unitsOverdue": "units overdue",
+      "expectedAmount": "Expected amount",
+      "overdue": "overdue",
+      "sendReminders": "Send Reminders",
+      "viewDetails": "View Details"
+    },
+    "quickActionsItems": {
+      "recordIncome": "Record Income"
+    }
   },
   "errors": {
-    "generic": "An error occurred. Please try again."
+    "generic": "An error occurred. Please try again.",
+    "boundary": {
+      "title": "Something went wrong",
+      "description": "An error occurred while loading data. Please try again.",
+      "errorDetails": "Error details",
+      "tryAgain": "Try again"
+    }
   },
   "finance": {
     "title": "Finances",
@@ -1586,7 +1609,20 @@
       "cashAccount": "Cash Account",
       "creditAccount": "Credit Account",
       "currentBalance": "Current Balance",
-      "initialBalance": "Initial Balance"
+      "initialBalance": "Initial Balance",
+      "totalIncome": "Total Income",
+      "totalExpenses": "Total Expenses",
+      "netIncome": "Net Income",
+      "thisMonth": "This Month",
+      "transactions": "Transactions"
+    },
+    "tabs": {
+      "incomes": "Incomes",
+      "expenses": "Expenses"
+    },
+    "buttons": {
+      "addIncome": "Add Income",
+      "addExpense": "Add Expense"
     },
     "expenses": {
       "title": "Expenses",
@@ -1624,8 +1660,10 @@
       "description": "Description",
       "date": "Date",
       "account": "Account",
+      "unit": "Unit",
       "selectSource": "Select Source",
       "selectAccount": "Select Account",
+      "selectUnit": "Select Unit",
       "incomeDetails": "Income Details",
       "totalIncome": "Total Income",
       "monthlyIncome": "Monthly Income",
@@ -1791,6 +1829,71 @@
       "fileUploaded": "File uploaded successfully",
       "fileDeleted": "File deleted successfully",
       "operationFailed": "Operation failed. Please try again."
+    },
+    "createIncomeDialog": {
+      "title": "Add New Income",
+      "description": "Record a new income transaction. Fill in the details below.",
+      "fields": {
+        "building": "Building (Optional)",
+        "buildingPlaceholder": "Select a building or leave empty for general income",
+        "unit": "Unit",
+        "unitPlaceholder": "Select a unit",
+        "unitHelp": "Select building first",
+        "unitsAvailable": "units available",
+        "noUnitsAvailable": "No units",
+        "noUnitsInBuilding": "No units in building",
+        "unitDisabledBuilding": "Select building first",
+        "unitDisabledCategory": "For monthly fees only",
+        "description": "Description",
+        "descriptionPlaceholder": "e.g., Monthly maintenance fee",
+        "amount": "Amount ($)",
+        "category": "Category",
+        "month": "Month",
+        "year": "Year",
+        "receivedDate": "Received Date",
+        "notes": "Notes (Optional)",
+        "notesPlaceholder": "Additional notes about this income..."
+      },
+      "categories": {
+        "monthlyFees": "Monthly Fees",
+        "parking": "Parking",
+        "utilities": "Utilities",
+        "maintenance": "Maintenance",
+        "other": "Other"
+      }
+    },
+    "createExpenseDialog": {
+      "title": "Add New Expense",
+      "description": "Record a new expense transaction. Fill in the details below.",
+      "fields": {
+        "building": "Building (Optional)",
+        "buildingPlaceholder": "Select a building or leave empty for general expense",
+        "description": "Description",
+        "descriptionPlaceholder": "e.g., Elevator maintenance",
+        "amount": "Amount ($)",
+        "category": "Category",
+        "vendor": "Vendor (Optional)",
+        "vendorPlaceholder": "Who was paid for this expense?",
+        "month": "Month",
+        "year": "Year",
+        "paidDate": "Paid Date",
+        "receiptUrl": "Receipt URL (Optional)",
+        "receiptUrlPlaceholder": "https://...",
+        "notes": "Notes (Optional)",
+        "notesPlaceholder": "Additional notes about this expense..."
+      },
+      "categories": {
+        "maintenance": "Maintenance",
+        "utilities": "Utilities",
+        "cleaning": "Cleaning",
+        "security": "Security",
+        "supplies": "Supplies",
+        "professionalServices": "Professional Services",
+        "other": "Other"
+      }
+    },
+    "incomesList": {
+      "period": "Period"
     }
   },
   "footer": {
@@ -2203,7 +2306,9 @@
         "link": "Learn more about our guarantee"
       },
       "socialProof": {
-        "rating": "4.9/5 stars from 1,200+ reviews"
+        "rating": "4.9/5 stars from 1,200+ reviews",
+        "certified": "Certified by the Property Management Association",
+        "award": "Awarded Best Property Management Software 2023"
       }
     }
   },
@@ -3101,6 +3206,24 @@
     "addFirstUnit": "Add First Unit",
     "unitNotFound": "Unit not found",
     "backToUnits": "Back to Units",
+    "filters": "Filters",
+    "filter": "Filter",
+    "active": "active",
+    "clearFilters": "Clear Filters",
+    "filtersApplied": "Filters applied",
+    "search": "Search units",
+    "searchPlaceholder": "Search by unit number...",
+    "allBuildings": "All Buildings",
+    "allFloors": "All Floors",
+    "allStatuses": "All Statuses",
+    "occupancyStatus": "Status",
+    "building": "Building",
+    "bedroomRange": "Bedrooms",
+    "bathroomRange": "Bathrooms",
+    "minBedrooms": "Min Bedrooms",
+    "maxBedrooms": "Max Bedrooms",
+    "minBathrooms": "Min Bathrooms",
+    "maxBathrooms": "Max Bathrooms",
     "form": {
       "building": "Building",
       "selectBuilding": "Select a building",
@@ -3327,6 +3450,7 @@
     },
     "sidebar": {
       "quickStart": "Quick Start",
+      "quickNavigation": "Quick Navigation",
       "createFirstProperty": "Create Your First Property",
       "setupUserAccounts": "Set Up User Accounts",
       "addFirstResident": "Add Your First Resident",

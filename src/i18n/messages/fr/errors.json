@@ -1,3 +1,9 @@
 {
-  "generic": "Une erreur s'est produite. Veuillez réessayer."
+  "generic": "Une erreur s'est produite. Veuillez réessayer.",
+  "boundary": {
+    "title": "Une erreur s'est produite",
+    "description": "Une erreur s'est produite lors du chargement des données. Veuillez réessayer.",
+    "errorDetails": "Détails de l'erreur",
+    "tryAgain": "Réessayer"
+  }
 }

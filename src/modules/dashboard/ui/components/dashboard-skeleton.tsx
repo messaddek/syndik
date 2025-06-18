@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import {
   Card,
   CardContent,
@@ -14,18 +17,20 @@ import {
   Calendar,
   BarChart3,
   PieChart,
+  AlertTriangle,
 } from 'lucide-react';
 
 export function DashboardSkeleton() {
+  const t = useTranslations('dashboard');
   return (
     <div className='space-y-6'>
-      {/* Overview Cards */}
+      {/* Overview Cards */}{' '}
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
         {[
-          { icon: Building2, label: 'Buildings' },
-          { icon: Home, label: 'Units' },
-          { icon: Users, label: 'Residents' },
-          { icon: TrendingUp, label: 'Net Income' },
+          { icon: Building2, label: t('buildings') },
+          { icon: Home, label: t('units') },
+          { icon: Users, label: t('residents') },
+          { icon: TrendingUp, label: t('netIncome') },
         ].map((item, i) => (
           <Card key={i}>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
@@ -99,10 +104,9 @@ export function DashboardSkeleton() {
             </div>
           </CardContent>
         </Card>
-      </div>
-      {/* Financial Summary and Recent Activity */}
-      <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
-        {' '}
+      </div>{' '}
+      {/* Financial Summary */}
+      <div className='grid grid-cols-1 gap-6 lg:grid-cols-3'>
         {/* Financial Summary Card */}
         <Card>
           <CardHeader>
@@ -121,7 +125,81 @@ export function DashboardSkeleton() {
             </div>
           </CardContent>
         </Card>
-        {/* Recent Activity Card */}
+
+        {/* Missing Payments Card Skeleton */}
+        <Card>
+          <CardHeader>
+            <CardTitle className='flex items-center gap-2'>
+              <AlertTriangle className='h-5 w-5 text-amber-500' />
+              <Skeleton className='h-6 w-32' />
+            </CardTitle>
+            <CardDescription>
+              <Skeleton className='h-4 w-48' />
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className='space-y-4'>
+              {/* Summary skeleton */}
+              <div className='rounded-lg border border-amber-200 bg-amber-50 p-4'>
+                <div className='flex items-center justify-between'>
+                  <div className='space-y-1'>
+                    <Skeleton className='h-4 w-24' />
+                    <Skeleton className='h-3 w-32' />
+                  </div>
+                  <Skeleton className='h-8 w-8 rounded' />
+                </div>
+              </div>
+              {/* Missing payments list skeleton */}
+              <div className='space-y-3'>
+                {[...Array(2)].map((_, i) => (
+                  <div
+                    key={i}
+                    className='flex items-center justify-between rounded-lg border bg-gray-50 p-3'
+                  >
+                    <div className='flex items-center space-x-3'>
+                      <Building2 className='h-4 w-4 text-gray-400' />
+                      <div className='space-y-1'>
+                        <Skeleton className='h-4 w-32' />
+                        <Skeleton className='h-3 w-24' />
+                      </div>
+                    </div>
+                    <div className='space-y-1 text-right'>
+                      <Skeleton className='h-4 w-16' />
+                      <Skeleton className='h-3 w-12' />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* Action buttons skeleton */}
+              <div className='flex gap-2 pt-2'>
+                <Skeleton className='h-8 flex-1' />
+                <Skeleton className='h-8 flex-1' />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Portal Statistics Card */}
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <Skeleton className='h-6 w-32' />
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className='space-y-4'>
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className='flex items-center justify-between'>
+                  <Skeleton className='h-4 w-20' />
+                  <Skeleton className='h-4 w-12' />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+      {/* Recent Activity */}
+      <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
         <Card>
           <CardHeader>
             <CardTitle>
@@ -149,7 +227,24 @@ export function DashboardSkeleton() {
             </div>
           </CardContent>
         </Card>
-      </div>{' '}
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <Skeleton className='h-6 w-32' />
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className='space-y-3'>
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className='flex items-center justify-between'>
+                  <Skeleton className='h-4 w-24' />
+                  <Skeleton className='h-4 w-16' />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
       {/* Quick Actions */}
       <Card>
         <CardHeader>
@@ -161,12 +256,13 @@ export function DashboardSkeleton() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {' '}
           <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
             {[
-              { icon: Building2, label: 'Add Building' },
-              { icon: Users, label: 'Add Resident' },
-              { icon: TrendingUp, label: 'Record Income' },
-              { icon: Calendar, label: 'Schedule Meeting' },
+              { icon: Building2, label: t('addBuilding') },
+              { icon: Users, label: t('addResident') },
+              { icon: TrendingUp, label: t('quickActionsItems.recordIncome') },
+              { icon: Calendar, label: t('scheduleMeeting') },
             ].map((action, i) => (
               <div
                 key={i}

@@ -343,4 +343,78 @@ export const dashboardRouter = createTRPCRouter({
 
       return monthsData;
     }),
+
+  getMissingPayments: orgProtectedProcedure
+    .input(
+      z.object({
+        month: z.number().default(new Date().getMonth() + 1),
+        year: z.number().default(new Date().getFullYear()),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { db, orgId } = ctx;
+
+      // Get all occupied units with their expected monthly fees
+      const occupiedUnits = await db
+        .select({
+          unitId: units.id,
+          unitNumber: units.unitNumber,
+          buildingId: units.buildingId,
+          monthlyFee: units.monthlyFee,
+          residentName: sql<string>`${residents.firstName} || ' ' || ${residents.lastName}`,
+          residentId: residents.id,
+        })
+        .from(units)
+        .innerJoin(
+          residents,
+          and(eq(residents.unitId, units.id), eq(residents.isActive, true))
+        )
+        .where(and(eq(units.orgId, orgId), eq(units.isOccupied, true)));
+
+      // Get all payments made for the specified month/year
+      const paidUnits = await db
+        .select({
+          unitId: incomes.unitId,
+        })
+        .from(incomes)
+        .where(
+          and(
+            eq(incomes.orgId, orgId),
+            eq(incomes.month, input.month),
+            eq(incomes.year, input.year),
+            sql`${incomes.unitId} IS NOT NULL`
+          )
+        );
+
+      const paidUnitIds = new Set(paidUnits.map(p => p.unitId));
+
+      // Filter units that haven't paid
+      const missingPayments = occupiedUnits.filter(
+        unit => !paidUnitIds.has(unit.unitId)
+      );
+
+      // Get building names for missing payments
+      const missingPaymentsWithBuildings = await Promise.all(
+        missingPayments.map(async unit => {
+          const [building] = await db
+            .select({ name: buildings.name })
+            .from(buildings)
+            .where(eq(buildings.id, unit.buildingId!));
+
+          return {
+            ...unit,
+            buildingName: building?.name || 'Unknown Building',
+          };
+        })
+      );
+
+      return {
+        missingPayments: missingPaymentsWithBuildings,
+        totalMissing: missingPaymentsWithBuildings.length,
+        totalExpectedAmount: missingPaymentsWithBuildings.reduce(
+          (sum, unit) => sum + parseFloat(unit.monthlyFee?.toString() || '0'),
+          0
+        ),
+      };
+    }),
 });

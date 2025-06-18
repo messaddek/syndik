@@ -1,6 +1,7 @@
 'use client';
 
 import { ErrorBoundary } from 'react-error-boundary';
+import { useTranslations } from 'next-intl';
 import { Button } from './ui/button';
 import {
   Card,
@@ -26,35 +27,35 @@ export const DefaultErrorFallback = ({
   error: Error;
   resetErrorBoundary: () => void;
 }) => {
+  const t = useTranslations('errors');
+
   return (
     <Card className='mx-auto mt-8 max-w-md'>
       <CardHeader>
         <div className='flex items-center space-x-2'>
           <AlertTriangle className='text-destructive h-5 w-5' />
           <CardTitle className='text-destructive'>
-            Something went wrong
+            {t('boundary.title')}
           </CardTitle>
         </div>
-        <CardDescription>
-          An error occurred while loading data. Please try again.
-        </CardDescription>
+        <CardDescription>{t('boundary.description')}</CardDescription>
       </CardHeader>
       <CardContent className='space-y-4'>
         <details className='text-muted-foreground text-sm'>
           <summary className='hover:text-foreground cursor-pointer'>
-            Error details
+            {t('boundary.errorDetails')}
           </summary>
           <pre className='bg-muted mt-2 overflow-auto rounded p-2 text-xs'>
             {error.message}
           </pre>
-        </details>
+        </details>{' '}
         <Button
           onClick={resetErrorBoundary}
           className='w-full'
           variant='outline'
         >
           <RefreshCw className='mr-2 h-4 w-4' />
-          Try again
+          {t('boundary.tryAgain')}
         </Button>
       </CardContent>
     </Card>

@@ -177,294 +177,6 @@
       }
     }
   },
-  "articles-fixed": {
-    "propertyInformationUpdates": {
-      "title": "Mises à jour des informations de propriété",
-      "description": "Apprenez à maintenir vos informations de propriété à jour et précises",
-      "tableOfContents": [
-        {
-          "id": "overview",
-          "title": "Aperçu",
-          "level": 1
-        },
-        {
-          "id": "updating-basic-info",
-          "title": "Mise à jour des informations de base",
-          "level": 1
-        },
-        {
-          "id": "property-amenities",
-          "title": "Commodités de la propriété",
-          "level": 1
-        },
-        {
-          "id": "contact-information",
-          "title": "Informations de contact",
-          "level": 1
-        },
-        {
-          "id": "photos-documents",
-          "title": "Photos et documents",
-          "level": 1
-        },
-        {
-          "id": "best-practices",
-          "title": "Meilleures pratiques",
-          "level": 1
-        }
-      ],
-      "relatedArticles": [
-        {
-          "title": "Ajouter de nouvelles propriétés",
-          "href": "/user-guide/property-management/adding-new-properties",
-          "time": "3 min"
-        },
-        {
-          "title": "Gestion de documents",
-          "href": "/user-guide/property-management/document-management-system",
-          "time": "4 min"
-        },
-        {
-          "title": "Gestion des unités",
-          "href": "/user-guide/property-management/unit-management-organization",
-          "time": "6 min"
-        }
-      ],
-      "sections": {
-        "overview": {
-          "title": "Aperçu",
-          "content": "Maintenir vos informations de propriété à jour est crucial pour une gestion immobilière efficace. Ce guide couvre comment mettre à jour divers aspects de vos détails de propriété.",
-          "proTip": {
-            "title": "Conseil de pro",
-            "content": "Configurez des rappels mensuels pour examiner et mettre à jour les informations de propriété afin d'assurer leur exactitude."
-          }
-        },
-        "updatingBasicInfo": {
-          "title": "Mise à jour des informations de base",
-          "subtitle": "Détails et spécifications de la propriété",
-          "steps": [
-            "Naviguez vers Propriétés dans le menu principal",
-            "Sélectionnez la propriété que vous voulez mettre à jour",
-            "Cliquez sur le bouton 'Modifier la propriété'",
-            "Mettez à jour les champs nécessaires",
-            "Sauvegardez vos modifications"
-          ]
-        },
-        "propertyAmenities": {
-          "title": "Commodités de la propriété",
-          "content": "La gestion des commodités de propriété aide les résidents potentiels à comprendre ce que votre propriété offre.",
-          "commonAmenities": {
-            "title": "Commodités communes",
-            "list": [
-              "Piscine",
-              "Centre de fitness",
-              "Garage de stationnement",
-              "Installations de buanderie",
-              "Centre d'affaires"
-            ]
-          },
-          "unitFeatures": {
-            "title": "Caractéristiques spécifiques aux unités"
-          }
-        },
-        "contactInformation": {
-          "title": "Informations de contact",
-          "important": {
-            "title": "Note importante",
-            "content": "Gardez toujours les informations de contact à jour car elles sont utilisées pour les notifications d'urgence."
-          }
-        },
-        "photosDocuments": {
-          "title": "Photos et documents",
-          "content": "Le contenu visuel aide les résidents et prospects à mieux comprendre votre propriété.",
-          "photoUpdates": {
-            "title": "Mises à jour des photos",
-            "content": "Les mises à jour régulières des photos mettent en valeur l'état actuel et les améliorations de votre propriété."
-          }
-        },
-        "bestPractices": {
-          "title": "Meilleures pratiques",
-          "regularMaintenance": {
-            "title": "Maintenance régulière des informations"
-          },
-          "qualityControl": {
-            "title": "Contrôle qualité"
-          }
-        }
-      }
-    },
-    "moveInMoveOutProcess": {
-      "title": "Processus d'emménagement/déménagement",
-      "description": "Rationalisez les emménagements et déménagements avec des workflows complets qui assurent des transitions fluides pour les résidents et la gestion.",
-      "breadcrumb": {
-        "userGuide": "Guide d'utilisation",
-        "residentManagement": "Gestion des résidents",
-        "current": "Processus d'emménagement/déménagement"
-      },
-      "meta": {
-        "readTime": "10 min de lecture",
-        "audience": "Gestionnaires immobiliers"
-      },
-      "sections": {
-        "overview": {
-          "title": "Aperçu",
-          "content": "Le processus d'emménagement et de déménagement est crucial pour maintenir l'état de la propriété, assurer la satisfaction des locataires et protéger votre investissement. Syndik fournit des workflows structurés pour gérer ces transitions efficacement.",
-          "keyComponents": {
-            "title": "Composants clés",
-            "items": [
-              "Listes de contrôle d'inspection détaillées",
-              "Système de documentation photo",
-              "Gestion des dépôts de garantie",
-              "Suivi numérique de la remise des clés"
-            ]
-          }
-        }
-      },
-      "relatedArticles": [
-        {
-          "title": "Ajout de nouveaux résidents",
-          "href": "/user-guide/resident-management/adding-new-residents",
-          "time": "5 min"
-        },
-        {
-          "title": "Gestion des contrats de bail",
-          "href": "/user-guide/resident-management/lease-agreement-management",
-          "time": "8 min"
-        },
-        {
-          "title": "Gestion et organisation des unités",
-          "href": "/user-guide/property-management/unit-management-organization",
-          "time": "6 min"
-        }
-      ]
-    },
-    "creatingYourFirstProperty": {
-      "title": "Créer votre première propriété",
-      "description": "Guide complet pour commencer avec la configuration de votre première propriété dans Syndik",
-      "sections": {
-        "overview": {
-          "content": "Créer votre première propriété dans Syndik est le début de votre parcours de gestion immobilière efficace. Ce guide vous accompagnera étape par étape dans le processus.",
-          "whatYoullLearn": [
-            "Comment configurer les informations de base de propriété",
-            "Configurer les unités résidentielles",
-            "Personnaliser les paramètres de propriété",
-            "Meilleures pratiques pour la configuration de propriété"
-          ]
-        },
-        "step1": {
-          "title": "Étape 1: Informations de base",
-          "content": "Commencez par entrer les informations de base de votre propriété",
-          "steps": [
-            "Naviguez vers Propriétés dans le menu principal",
-            "Cliquez sur 'Ajouter une nouvelle propriété'",
-            "Entrez le nom et l'adresse de la propriété",
-            "Sélectionnez le type de propriété",
-            "Ajoutez la description de la propriété"
-          ],
-          "proTip": {
-            "title": "Conseil de pro",
-            "content": "Utilisez des noms descriptifs pour vos propriétés pour les rendre facilement identifiables dans les rapports et listes."
-          }
-        },
-        "step2": {
-          "title": "Étape 2: Configuration des unités",
-          "content": "Configurez les unités résidentielles de votre propriété",
-          "requiredFields": {
-            "title": "Champs requis",
-            "fields": [
-              "Numéro d'unité",
-              "Type d'unité (appartement, studio, etc.)",
-              "Nombre de chambres",
-              "Nombre de salles de bain",
-              "Superficie en pieds carrés"
-            ]
-          },
-          "optionalFields": {
-            "title": "Champs optionnels",
-            "fields": [
-              "Détails du balcon",
-              "Place de parking",
-              "Unité de stockage",
-              "Politique animaux",
-              "Caractéristiques spéciales"
-            ]
-          }
-        },
-        "step3": {
-          "title": "Étape 3: Personnalisation des paramètres",
-          "content": "Ajustez les paramètres avancés de votre propriété",
-          "settings": [
-            {
-              "title": "Paramètres de paiement",
-              "description": "Configurez les montants de loyer, dates d'échéance et frais de retard"
-            },
-            {
-              "title": "Préférences de communication",
-              "description": "Configurez les paramètres de notification et canaux de communication"
-            },
-            {
-              "title": "Contrôle d'accès",
-              "description": "Gérez qui peut voir et modifier les informations de propriété"
-            }
-          ]
-        },
-        "nextSteps": {
-          "title": "Étapes suivantes",
-          "content": "Maintenant que votre propriété est configurée, voici ce que vous pouvez faire ensuite:",
-          "actions": [
-            {
-              "title": "Ajouter des résidents",
-              "description": "Commencez à ajouter des résidents à vos unités",
-              "href": "/user-guide/resident-management/adding-new-residents"
-            },
-            {
-              "title": "Configurer la collecte de loyer",
-              "description": "Configurez les méthodes et horaires de paiement",
-              "href": "/user-guide/financial-management/setting-up-rent-collection"
-            }
-          ]
-        },
-        "sidebar": {
-          "relatedArticlesList": [
-            {
-              "title": "Gestion des unités",
-              "href": "/user-guide/property-management/unit-management-organization",
-              "time": "5 min"
-            },
-            {
-              "title": "Configuration des paiements",
-              "href": "/user-guide/financial-management/setting-up-rent-collection",
-              "time": "3 min"
-            }
-          ]
-        }
-      }
-    },
-    "common": {
-      "tableOfContents": "Table des matières",
-      "relatedArticles": "Articles connexes",
-      "overview": "Aperçu",
-      "nextSteps": "Étapes suivantes",
-      "popular": "Populaire",
-      "readTime": "min",
-      "whatYoullLearn": "Ce que vous apprendrez"
-    },
-    "navigation": {
-      "userGuide": "Guide d'utilisation",
-      "gettingStarted": "Commencer"
-    },
-    "sidebar": {
-      "tableOfContents": "Table des matières",
-      "relatedArticles": "Articles connexes",
-      "quickActions": "Actions rapides",
-      "needHelp": "Besoin d'aide ?",
-      "contactSupport": "Contacter le support",
-      "liveChat": "Chat en direct",
-      "phoneSupport": "Support téléphonique",
-      "supportMessage": "Si vous avez besoin d'une aide immédiate, veuillez contacter notre équipe de support.",
-      "supportHours": "Heures de support : Lundi - Vendredi, 9h - 18h"
-    }
-  },
   "articles": {
     "propertyInformationUpdates": {
       "title": "Mises à jour des informations de propriété",
@@ -966,7 +678,10 @@
       "liveChat": "Chat en direct",
       "phoneSupport": "Support téléphonique",
       "supportMessage": "Si vous avez besoin d'une aide immédiate, veuillez contacter notre équipe de support.",
-      "supportHours": "Heures de support : Lundi - Vendredi, 9h - 18h"
+      "supportHours": "Heures de support : Lundi - Vendredi, 9h - 18h",
+      "backToGuide": "Retour au guide",
+      "viewFaq": "Voir les FAQ",
+      "moreInCategory": "Plus dans cette catégorie"
     }
   },
   "articleTitles": {
@@ -1150,7 +865,8 @@
     "saveChanges": "Enregistrer les modifications",
     "signIn": "Se connecter",
     "getStarted": "Commencer",
-    "logoAlt": "Logo Syndik"
+    "logoAlt": "Logo Syndik",
+    "any": "Tout"
   },
   "dashboard": {
     "title": "Tableau de bord",
@@ -1186,10 +902,29 @@
     "occupancy": "Occupation",
     "occupancyDescription": "Voir les taux et l'historique d'occupation.",
     "financialTrends": "Tendances Financières",
-    "occupancyTrends": "Tendances d'Occupation"
+    "occupancyTrends": "Tendances d'Occupation",
+    "missingPayments": {
+      "title": "Paiements Manqués",
+      "description": "Unités qui n'ont pas payé ce mois",
+      "allPaid": "Toutes les unités ont payé ce mois ! 🎉",
+      "unitsOverdue": "unités en retard",
+      "expectedAmount": "Montant attendu",
+      "overdue": "en retard",
+      "sendReminders": "Envoyer des Rappels",
+      "viewDetails": "Voir les Détails"
+    },
+    "quickActionsItems": {
+      "recordIncome": "Enregistrer un Revenu"
+    }
   },
   "errors": {
-    "generic": "Une erreur s'est produite. Veuillez réessayer."
+    "generic": "Une erreur s'est produite. Veuillez réessayer.",
+    "boundary": {
+      "title": "Une erreur s'est produite",
+      "description": "Une erreur s'est produite lors du chargement des données. Veuillez réessayer.",
+      "errorDetails": "Détails de l'erreur",
+      "tryAgain": "Réessayer"
+    }
   },
   "finance": {
     "title": "Finances",
@@ -1222,6 +957,14 @@
       "fields": {
         "building": "Bâtiment (Optionnel)",
         "buildingPlaceholder": "Sélectionnez un bâtiment ou laissez vide pour un revenu général",
+        "unit": "Unité",
+        "unitPlaceholder": "Sélectionnez une unité",
+        "unitHelp": "Sélectionnez d'abord un bâtiment",
+        "unitsAvailable": "unités disponibles",
+        "noUnitsAvailable": "Aucune unité",
+        "noUnitsInBuilding": "Aucune unité dans ce bâtiment",
+        "unitDisabledBuilding": "Sélectionnez d'abord un bâtiment",
+        "unitDisabledCategory": "Frais mensuels uniquement",
         "description": "Description",
         "descriptionPlaceholder": "ex: Frais de maintenance mensuel",
         "amount": "Montant ($)",
@@ -1704,7 +1447,9 @@
         "link": "En savoir plus sur notre garantie"
       },
       "socialProof": {
-        "rating": "4,9/5 étoiles sur 1 200+ avis"
+        "rating": "4,9/5 étoiles sur 1 200+ avis",
+        "certified": "Certifié par des milliers de gestionnaires immobiliers",
+        "award": "Récompensé par l'Association des Gestionnaires Immobiliers"
       }
     }
   },
@@ -2602,6 +2347,24 @@
     "addFirstUnit": "Ajouter la première unité",
     "unitNotFound": "Unité introuvable",
     "backToUnits": "Retour aux unités",
+    "filters": "Filtres",
+    "filter": "Filtrer",
+    "active": "actif",
+    "clearFilters": "Effacer les filtres",
+    "filtersApplied": "Filtres appliqués",
+    "search": "Rechercher des unités",
+    "searchPlaceholder": "Rechercher par numéro d'unité...",
+    "allBuildings": "Tous les bâtiments",
+    "allFloors": "Tous les étages",
+    "allStatuses": "Tous les statuts",
+    "occupancyStatus": "Statut",
+    "building": "Bâtiment",
+    "bedroomRange": "Chambres",
+    "bathroomRange": "Salles de bain",
+    "minBedrooms": "Min Chambres",
+    "maxBedrooms": "Max Chambres",
+    "minBathrooms": "Min Salles de bain",
+    "maxBathrooms": "Max Salles de bain",
     "form": {
       "building": "Bâtiment",
       "selectBuilding": "Sélectionner un bâtiment",
@@ -2828,6 +2591,7 @@
     },
     "sidebar": {
       "quickStart": "Démarrage rapide",
+      "quickNavigation": "Navigation rapide",
       "createFirstProperty": "Créer votre première propriété",
       "setupUserAccounts": "Configurer les comptes utilisateur",
       "addFirstResident": "Ajouter votre premier résident",

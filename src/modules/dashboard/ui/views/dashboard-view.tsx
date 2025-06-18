@@ -25,7 +25,11 @@ import { BulkInviteDialog } from '@/modules/residents';
 import { CreateBuildingDialog } from '@/modules/buildings';
 import { CreateResidentDialog } from '@/modules/residents/ui/components/create-resident-dialog';
 import { CreateMeetingDialog } from '@/modules/meetings/ui/components/create-meeting-dialog';
-import { FinancialTrendChart, OccupancyTrendChart } from '../components';
+import {
+  FinancialTrendChart,
+  OccupancyTrendChart,
+  MissingPaymentsCard,
+} from '../components';
 import { DashboardSkeleton } from '../components/dashboard-skeleton';
 import { PageHeader } from '@/components/page-header';
 
@@ -187,6 +191,9 @@ const DashboardView = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Missing Payments Card */}
+        <MissingPaymentsCard />
 
         <Card>
           <CardHeader>

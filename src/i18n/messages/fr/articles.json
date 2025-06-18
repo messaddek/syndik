@@ -487,6 +487,9 @@
     "liveChat": "Chat en direct",
     "phoneSupport": "Support téléphonique",
     "supportMessage": "Si vous avez besoin d'une aide immédiate, veuillez contacter notre équipe de support.",
-    "supportHours": "Heures de support : Lundi - Vendredi, 9h - 18h"
+    "supportHours": "Heures de support : Lundi - Vendredi, 9h - 18h",
+    "backToGuide": "Retour au guide",
+    "viewFaq": "Voir les FAQ",
+    "moreInCategory": "Plus dans cette catégorie"
   }
 }

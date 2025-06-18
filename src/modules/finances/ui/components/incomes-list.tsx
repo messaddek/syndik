@@ -101,7 +101,7 @@ export function IncomesList() {
                     </Link>
                   ) : (
                     getBuildingName(income.buildingId)
-                  )}{' '}
+                  )}
                   • {format(new Date(income.receivedDate), 'MMM dd, yyyy')}
                 </CardDescription>
               </div>

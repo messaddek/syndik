@@ -119,7 +119,7 @@ export function ResidentsList() {
 
   const getUnitInfo = (unitId?: string | null) => {
     if (!unitId) return null;
-    return units?.find(u => u.units.id === unitId);
+    return units?.data?.find(u => u.id === unitId);
   }; // Extract residents data from paginated response
   const residents = (residentsData?.data ||
     []) as unknown as SerializedResident[];
@@ -202,7 +202,7 @@ export function ResidentsList() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value='all'>All units</SelectItem>
-              {units?.map(({ units: unit }) => (
+              {units?.data.map(unit => (
                 <SelectItem key={unit.id} value={unit.id}>
                   Unit {unit.unitNumber}
                 </SelectItem>
@@ -234,7 +234,7 @@ export function ResidentsList() {
       ) : (
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
           {filteredResidents?.map(resident => {
-            const { units: unit } = getUnitInfo(resident.unitId) ?? {};
+            const unit = getUnitInfo(resident.unitId);
             return (
               <Link key={resident.id} href={`/residents/${resident.id}`}>
                 <Card className='cursor-pointer transition-shadow hover:shadow-md'>
