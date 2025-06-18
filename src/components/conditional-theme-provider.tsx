@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
 import { ThemeProvider } from '@/components/theme-provider';
 import { LightModeProvider } from '@/components/light-mode-provider';
 
@@ -19,6 +19,7 @@ const LIGHT_MODE_PATHS = [
   '/privacy',
   '/sign-in',
   '/sign-up',
+  '/user-guide',
 ];
 
 export function ConditionalThemeProvider({

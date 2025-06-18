@@ -1,6 +1,12 @@
 {
   "title": "دليل المستخدم",
   "subtitle": "كل ما تحتاج لمعرفته لإدارة العقارات بفعالية",
+  "common": {
+    "numberMostPopular": "#{number} الأكثر شعبية",
+    "popular": "شائع",
+    "readTime": "دقيقة",
+    "readTimeMinutes": "دقائق"
+  },
   "categories": {
     "gettingStarted": {
       "title": "البدء",
@@ -32,6 +38,58 @@
     "loadingData": "جاري تحميل أحدث البيانات...",
     "updatedRealTime": "محدث في الوقت الفعلي"
   },
+  "articleTitles": {
+    "creating-your-first-property": "إنشاء عقارك الأول",
+    "setting-up-user-accounts": "إعداد حسابات المستخدمين",
+    "understanding-roles-permissions": "فهم الأدوار والصلاحيات",
+    "initial-configuration-guide": "دليل التكوين الأولي",
+    "adding-new-properties": "إضافة عقارات جديدة",
+    "unit-management-organization": "إدارة وتنظيم الوحدات",
+    "property-information-updates": "تحديثات معلومات العقار",
+    "document-management-system": "نظام إدارة الوثائق",
+    "adding-new-residents": "إضافة سكان جدد",
+    "lease-agreement-management": "إدارة عقود الإيجار",
+    "resident-communication-tools": "أدوات التواصل مع السكان",
+    "move-in-move-out-process": "عملية الانتقال والمغادرة",
+    "setting-up-rent-collection": "إعداد تحصيل الإيجار",
+    "processing-payments": "معالجة المدفوعات",
+    "generating-financial-reports": "إنشاء التقارير المالية",
+    "late-payment-management": "إدارة المدفوعات المتأخرة",
+    "creating-work-orders": "إنشاء أوامر العمل",
+    "tracking-maintenance-requests": "تتبع طلبات الصيانة",
+    "vendor-management": "إدارة الموردين",
+    "preventive-maintenance-setup": "إعداد الصيانة الوقائية",
+    "sending-announcements": "إرسال الإعلانات",
+    "individual-messaging": "الرسائل الفردية",
+    "notification-settings": "إعدادات الإشعارات",
+    "email-templates": "قوالب البريد الإلكتروني"
+  },
+  "articleDescriptions": {
+    "creating-your-first-property": "الإعداد الأساسي والخطوات الأولى لإنشاء العقار",
+    "setting-up-user-accounts": "إنشاء وإدارة حسابات المستخدمين لفريقك",
+    "understanding-roles-permissions": "تعلم حول أدوار المستخدمين وإدارة الصلاحيات",
+    "initial-configuration-guide": "إعداد وتكوين النظام الكامل",
+    "adding-new-properties": "كيفية إضافة وتكوين عقارات جديدة في النظام",
+    "unit-management-organization": "تنظيم وإدارة الوحدات داخل عقاراتك",
+    "property-information-updates": "الحفاظ على معلومات العقار محدثة ودقيقة",
+    "document-management-system": "تخزين وتنظيم الوثائق المتعلقة بالعقارات",
+    "adding-new-residents": "كيفية إدخال سكان جدد إلى عقارك",
+    "lease-agreement-management": "إنشاء وإدارة وتتبع عقود الإيجار",
+    "resident-communication-tools": "استخدام أدوات التواصل للبقاء على اتصال مع السكان",
+    "move-in-move-out-process": "تبسيط إجراءات الانتقال والمغادرة",
+    "setting-up-rent-collection": "تكوين تحصيل الإيجار الآلي ومعالجة المدفوعات",
+    "processing-payments": "التعامل مع ومعالجة أنواع مختلفة من المدفوعات",
+    "generating-financial-reports": "إنشاء وتحليل التقارير المالية",
+    "late-payment-management": "التعامل مع المدفوعات المتأخرة وإجراءات التحصيل",
+    "creating-work-orders": "إنشاء وإدارة أوامر عمل الصيانة",
+    "tracking-maintenance-requests": "مراقبة وإدارة طلبات الصيانة من السكان",
+    "vendor-management": "إدارة العلاقات مع موردي الصيانة",
+    "preventive-maintenance-setup": "إعداد برامج الصيانة الوقائية المجدولة",
+    "sending-announcements": "التواصل بفعالية مع جميع السكان",
+    "individual-messaging": "إرسال رسائل مباشرة لسكان محددين",
+    "notification-settings": "تكوين تفضيلات وإعدادات الإشعارات",
+    "email-templates": "إنشاء وإدارة قوالب البريد الإلكتروني للتواصل المعتاد"
+  },
   "sidebar": {
     "quickStart": "بداية سريعة",
     "createFirstProperty": "إنشاء عقارك الأول",
@@ -40,5 +98,9 @@
     "needHelp": "تحتاج مساعدة؟",
     "contactSupport": "الاتصال بالدعم",
     "viewFaq": "عرض الأسئلة الشائعة"
+  },
+  "search": {
+    "placeholder": "ابحث في دليل المستخدم...",
+    "noResults": "لا توجد نتائج مطابقة لبحثك."
   }
 }

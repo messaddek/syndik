@@ -1,16 +1,19 @@
+'use client';
+
 import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { LandingLayout } from '@/components/landing/landing-layout';
+import ArticleLayout from '@/modules/articles/components/article-layout';
+import { ArticleSidebar } from '@/components/articles/article-sidebar';
+import { useTranslations } from 'next-intl';
 import {
-  Clock,
   Users,
   CheckCircle,
   AlertCircle,
   Building,
   ChevronRight,
-  Mail,
+  ArrowLeft,
   Home,
   Layout,
   Hash,
@@ -20,746 +23,975 @@ import {
 } from 'lucide-react';
 
 const UnitManagementOrganizationPage = () => {
+  const t = useTranslations('articles.unitManagementOrganization');
+  const tCommon = useTranslations('articles.common');
+  const tNav = useTranslations('articles.navigation');
+
   const tableOfContents = [
-    { id: 'overview', title: 'Overview', level: 1 },
-    { id: 'adding-units', title: 'Adding Units', level: 1 },
-    { id: 'unit-numbering', title: 'Unit Numbering System', level: 1 },
-    { id: 'unit-types', title: 'Unit Types & Categories', level: 1 },
-    { id: 'floor-plans', title: 'Floor Plans & Layouts', level: 1 },
-    { id: 'amenities', title: 'Unit Amenities', level: 1 },
-    { id: 'status-management', title: 'Status Management', level: 1 },
-    { id: 'bulk-operations', title: 'Bulk Operations', level: 1 },
+    { id: 'overview', title: t('sections.overview.title'), level: 1 },
+    { id: 'adding-units', title: t('sections.addingUnits.title'), level: 1 },
+    {
+      id: 'unit-numbering',
+      title: t('sections.unitNumbering.title'),
+      level: 1,
+    },
+    { id: 'unit-types', title: t('sections.unitTypes.title'), level: 1 },
+    { id: 'floor-plans', title: t('sections.floorPlans.title'), level: 1 },
+    { id: 'amenities', title: t('sections.amenities.title'), level: 1 },
+    {
+      id: 'status-management',
+      title: t('sections.statusManagement.title'),
+      level: 1,
+    },
+    {
+      id: 'bulk-operations',
+      title: t('sections.bulkOperations.title'),
+      level: 1,
+    },
   ];
 
   const relatedArticles = [
     {
-      title: 'Adding New Properties',
+      title: tNav('relatedArticles.addingProperties'),
       href: '/user-guide/property-management/adding-new-properties',
       time: '4 min',
     },
     {
-      title: 'Creating Your First Property',
+      title: tNav('relatedArticles.firstProperty'),
       href: '/user-guide/getting-started/creating-your-first-property',
       time: '5 min',
     },
     {
-      title: 'Adding New Residents',
+      title: tNav('relatedArticles.addingResidents'),
       href: '/user-guide/resident-management/adding-new-residents',
       time: '5 min',
     },
   ];
 
   return (
-    <LandingLayout>
-      <div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100'>
-        <div className='mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
-          {/* Breadcrumb */}
-          <nav className='mb-8'>
-            <div className='flex items-center space-x-2 text-sm text-gray-600'>
-              <Link
-                href='/user-guide'
-                className='transition-colors hover:text-gray-900'
-              >
-                User Guide
-              </Link>
-              <ChevronRight className='h-4 w-4' />
-              <Link
-                href='/user-guide'
-                className='transition-colors hover:text-gray-900'
-              >
-                Property Management
-              </Link>
-              <ChevronRight className='h-4 w-4' />
-              <span className='text-gray-900'>
-                Unit Management & Organization
-              </span>
+    <ArticleLayout
+      articleSlug='unit-management-organization'
+      title={t('title')}
+    >
+      <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
+        {/* Main Content */}
+        <div className='lg:col-span-3'>
+          <div className='mx-auto max-w-4xl'>
+            {/* Hero Section */}
+            <div className='mb-8 rounded-lg bg-gradient-to-r from-emerald-50 to-green-50 p-6'>
+              <div className='mb-4 flex items-center space-x-3'>
+                <Layout className='h-8 w-8 text-emerald-600' />
+                <Badge
+                  variant='secondary'
+                  className='bg-emerald-100 text-emerald-800'
+                >
+                  {tCommon('badges.essential')}
+                </Badge>
+              </div>
+              <h1 className='mb-3 text-3xl font-bold text-gray-900'>
+                {t('hero.title')}
+              </h1>
+              <p className='text-lg text-gray-700'>{t('hero.description')}</p>
             </div>
-          </nav>
 
-          <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
-            {/* Main Content */}
-            <div className='lg:col-span-3'>
-              <div className='rounded-lg border bg-white shadow-sm'>
-                {/* Header */}
-                <div className='border-b p-6'>
-                  <div className='mb-4 flex items-center space-x-3'>
-                    <div className='rounded-lg bg-emerald-500 p-2'>
-                      <Layout className='h-6 w-6 text-white' />
+            {/* Content */}
+            <div className='space-y-8 p-6'>
+              {/* Overview */}
+              <section id='overview'>
+                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+                  {t('sections.overview.title')}
+                </h2>
+                <p className='mb-4 text-gray-700'>
+                  {t('sections.overview.description')}
+                </p>
+                <Card className='border-emerald-200 bg-emerald-50'>
+                  <CardContent className='p-4'>
+                    <div className='flex items-start space-x-3'>
+                      <CheckCircle className='mt-0.5 h-5 w-5 text-emerald-600' />
+                      <div>
+                        <p className='font-medium text-emerald-800'>
+                          {t('sections.overview.benefits.title')}
+                        </p>
+                        <ul className='mt-2 space-y-1 text-sm text-emerald-700'>
+                          <li>
+                            • {t('sections.overview.benefits.items.tracking')}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t('sections.overview.benefits.items.maintenance')}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.overview.benefits.items.communication'
+                            )}
+                          </li>
+                          <li>
+                            • {t('sections.overview.benefits.items.analysis')}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Adding Units */}
+              <section id='adding-units'>
+                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+                  {t('sections.addingUnits.title')}
+                </h2>
+                <p className='mb-4 text-gray-700'>
+                  {t('sections.addingUnits.description')}
+                </p>
+                <div className='space-y-4'>
+                  <div className='flex items-start space-x-3'>
+                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-sm font-medium text-white'>
+                      1
                     </div>
                     <div>
-                      <h1 className='text-3xl font-bold text-gray-900'>
-                        Unit Management & Organization
-                      </h1>
-                      <div className='mt-2 flex items-center space-x-4'>
-                        <Badge variant='secondary'>Property Management</Badge>
-                        <div className='flex items-center space-x-1 text-sm text-gray-500'>
-                          <Clock className='h-4 w-4' />
-                          <span>6 min read</span>
-                        </div>
-                      </div>
+                      <h3 className='font-medium text-gray-900'>
+                        {t('sections.addingUnits.steps.navigate.title')}
+                      </h3>
+                      <p className='text-sm text-gray-600'>
+                        {t('sections.addingUnits.steps.navigate.description')}
+                      </p>
                     </div>
                   </div>
-                  <p className='text-lg text-gray-600'>
-                    Learn how to effectively organize and manage units within
-                    your properties. This guide covers unit creation,
-                    categorization, numbering systems, and organizational best
-                    practices.
-                  </p>
+                  <div className='flex items-start space-x-3'>
+                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-sm font-medium text-white'>
+                      2
+                    </div>
+                    <div>
+                      <h3 className='font-medium text-gray-900'>
+                        {t('sections.addingUnits.steps.click.title')}
+                      </h3>
+                      <p className='text-sm text-gray-600'>
+                        {t('sections.addingUnits.steps.click.description')}
+                      </p>
+                    </div>
+                  </div>
+                  <div className='flex items-start space-x-3'>
+                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-sm font-medium text-white'>
+                      3
+                    </div>
+                    <div>
+                      <h3 className='font-medium text-gray-900'>
+                        {t('sections.addingUnits.steps.fill.title')}
+                      </h3>
+                      <p className='text-sm text-gray-600'>
+                        {t('sections.addingUnits.steps.fill.description')}
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Content */}
-                <div className='space-y-8 p-6'>
-                  {/* Overview */}
-                  <section id='overview'>
-                    <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                      Overview
-                    </h2>
-                    <p className='mb-4 text-gray-700'>
-                      Proper unit organization is fundamental to efficient
-                      property management. A well-structured unit system helps
-                      you track occupancy, manage maintenance, and streamline
-                      resident services.
-                    </p>
-
-                    <Card className='border-emerald-200 bg-emerald-50'>
-                      <CardContent className='p-4'>
-                        <div className='flex items-start space-x-3'>
-                          <CheckCircle className='mt-0.5 h-5 w-5 text-emerald-600' />
-                          <div>
-                            <p className='font-medium text-emerald-800'>
-                              Key Benefits
-                            </p>
-                            <ul className='mt-2 space-y-1 text-sm text-emerald-700'>
-                              <li>• Streamlined unit tracking and reporting</li>
-                              <li>• Improved maintenance scheduling</li>
-                              <li>• Enhanced resident communication</li>
-                              <li>• Better financial analysis by unit type</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </section>
-
-                  {/* Adding Units */}
-                  <section id='adding-units'>
-                    <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                      Adding Units
-                    </h2>
-                    <p className='mb-4 text-gray-700'>
-                      Follow these steps to add individual units to your
-                      properties:
-                    </p>
-
-                    <div className='space-y-4'>
-                      <div className='flex items-start space-x-3'>
-                        <div className='flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-sm font-medium text-white'>
-                          1
-                        </div>
-                        <div>
-                          <h3 className='font-medium text-gray-900'>
-                            Navigate to Unit Management
-                          </h3>
-                          <p className='text-sm text-gray-600'>
-                            Go to Properties → Select Property → Units tab
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className='flex items-start space-x-3'>
-                        <div className='flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-sm font-medium text-white'>
-                          2
-                        </div>
-                        <div>
-                          <h3 className='font-medium text-gray-900'>
-                            Click &quot;Add New Unit&quot;
-                          </h3>
-                          <p className='text-sm text-gray-600'>
-                            Use the &quot;Add Unit&quot; button to open the
-                            creation form
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className='flex items-start space-x-3'>
-                        <div className='flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-sm font-medium text-white'>
-                          3
-                        </div>
-                        <div>
-                          <h3 className='font-medium text-gray-900'>
-                            Fill Unit Details
-                          </h3>
-                          <p className='text-sm text-gray-600'>
-                            Enter unit number, type, size, and other relevant
-                            information
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <Card className='mt-4'>
-                      <CardHeader>
-                        <CardTitle className='text-lg'>
-                          Required Unit Information
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                          <div>
-                            <h4 className='mb-2 font-semibold text-green-700'>
-                              Essential Fields
-                            </h4>
-                            <ul className='space-y-1 text-sm'>
-                              <li>• Unit number/identifier</li>
-                              <li>• Floor/level</li>
-                              <li>• Unit type (studio, 1BR, etc.)</li>
-                              <li>• Square footage</li>
-                              <li>• Number of bedrooms</li>
-                              <li>• Number of bathrooms</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <h4 className='mb-2 font-semibold text-blue-700'>
-                              Optional Fields
-                            </h4>
-                            <ul className='space-y-1 text-sm'>
-                              <li>• Unit description</li>
-                              <li>• Balcony/patio details</li>
-                              <li>• Parking space assignment</li>
-                              <li>• Storage unit inclusion</li>
-                              <li>• Pet policy override</li>
-                              <li>• Accessibility features</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </section>
-
-                  {/* Unit Numbering */}
-                  <section id='unit-numbering'>
-                    <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                      Unit Numbering System
-                    </h2>
-                    <p className='mb-4 text-gray-700'>
-                      Establish a consistent numbering system for easy
-                      identification and organization.
-                    </p>
-
+                <Card className='mt-4'>
+                  <CardHeader>
+                    <CardTitle className='text-lg'>
+                      {t('sections.addingUnits.requiredInfo.title')}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className='flex items-center space-x-2 text-lg'>
-                            <Hash className='h-5 w-5' />
-                            <span>Sequential Numbering</span>
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className='mb-3 text-sm text-gray-600'>
-                            Simple consecutive numbering system
-                          </p>
-                          <div className='space-y-2 text-sm'>
-                            <div className='flex justify-between'>
-                              <span>Examples:</span>
-                              <span className='font-mono'>
-                                101, 102, 103...
-                              </span>
-                            </div>
-                            <div className='flex justify-between'>
-                              <span>Best for:</span>
-                              <span>Small buildings</span>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className='flex items-center space-x-2 text-lg'>
-                            <Building className='h-5 w-5' />
-                            <span>Floor-Based Numbering</span>
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className='mb-3 text-sm text-gray-600'>
-                            Floor number + unit position
-                          </p>
-                          <div className='space-y-2 text-sm'>
-                            <div className='flex justify-between'>
-                              <span>Examples:</span>
-                              <span className='font-mono'>
-                                201, 202, 301, 302...
-                              </span>
-                            </div>
-                            <div className='flex justify-between'>
-                              <span>Best for:</span>
-                              <span>Multi-story buildings</span>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-
-                    <Card className='mt-4 border-yellow-200 bg-yellow-50'>
-                      <CardContent className='p-4'>
-                        <div className='flex items-start space-x-3'>
-                          <AlertCircle className='mt-0.5 h-5 w-5 text-yellow-600' />
-                          <div>
-                            <p className='font-medium text-yellow-800'>
-                              Numbering Best Practices
-                            </p>
-                            <ul className='mt-2 space-y-1 text-sm text-yellow-700'>
-                              <li>
-                                • Keep numbering consistent across properties
-                              </li>
-                              <li>
-                                • Avoid confusing patterns (no 13th floor, etc.)
-                              </li>
-                              <li>• Leave room for future expansion</li>
-                              <li>• Consider accessibility and wayfinding</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </section>
-
-                  {/* Unit Types */}
-                  <section id='unit-types'>
-                    <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                      Unit Types & Categories
-                    </h2>
-                    <p className='mb-4 text-gray-700'>
-                      Organize units by type and category for better management
-                      and reporting.
-                    </p>
-
-                    <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className='text-lg'>
-                            Residential Types
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <ul className='space-y-2 text-sm'>
-                            <li className='flex items-center space-x-2'>
-                              <Home className='h-4 w-4 text-gray-400' />
-                              <span>Studio</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Home className='h-4 w-4 text-gray-400' />
-                              <span>1 Bedroom</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Home className='h-4 w-4 text-gray-400' />
-                              <span>2 Bedroom</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Home className='h-4 w-4 text-gray-400' />
-                              <span>3+ Bedroom</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Home className='h-4 w-4 text-gray-400' />
-                              <span>Penthouse</span>
-                            </li>
-                          </ul>
-                        </CardContent>
-                      </Card>
-
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className='text-lg'>
-                            Special Units
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <ul className='space-y-2 text-sm'>
-                            <li className='flex items-center space-x-2'>
-                              <Tag className='h-4 w-4 text-gray-400' />
-                              <span>Accessible Units</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Tag className='h-4 w-4 text-gray-400' />
-                              <span>Furnished Units</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Tag className='h-4 w-4 text-gray-400' />
-                              <span>Short-term Rentals</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Tag className='h-4 w-4 text-gray-400' />
-                              <span>Corporate Units</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Tag className='h-4 w-4 text-gray-400' />
-                              <span>Model Units</span>
-                            </li>
-                          </ul>
-                        </CardContent>
-                      </Card>
-
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className='text-lg'>
-                            Commercial Spaces
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <ul className='space-y-2 text-sm'>
-                            <li className='flex items-center space-x-2'>
-                              <Building className='h-4 w-4 text-gray-400' />
-                              <span>Retail Space</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Building className='h-4 w-4 text-gray-400' />
-                              <span>Office Space</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Building className='h-4 w-4 text-gray-400' />
-                              <span>Storage Units</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Building className='h-4 w-4 text-gray-400' />
-                              <span>Parking Spaces</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                              <Building className='h-4 w-4 text-gray-400' />
-                              <span>Common Areas</span>
-                            </li>
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </section>
-
-                  {/* Floor Plans */}
-                  <section id='floor-plans'>
-                    <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                      Floor Plans & Layouts
-                    </h2>
-                    <p className='mb-4 text-gray-700'>
-                      Upload and manage floor plans for better unit
-                      visualization and marketing.
-                    </p>
-
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className='flex items-center space-x-2 text-lg'>
-                          <FileText className='h-5 w-5' />
-                          <span>Floor Plan Management</span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className='space-y-4'>
-                          <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                            <div>
-                              <h4 className='mb-2 font-semibold'>
-                                Supported Formats
-                              </h4>
-                              <ul className='space-y-1 text-sm text-gray-600'>
-                                <li>• PDF documents</li>
-                                <li>• Image files (JPG, PNG)</li>
-                                <li>• CAD drawings (DWG, DXF)</li>
-                                <li>• Interactive floor plans</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <h4 className='mb-2 font-semibold'>
-                                Usage Benefits
-                              </h4>
-                              <ul className='space-y-1 text-sm text-gray-600'>
-                                <li>• Enhanced marketing materials</li>
-                                <li>• Better maintenance planning</li>
-                                <li>• Improved space utilization</li>
-                                <li>• Virtual tour integration</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </section>
-
-                  {/* Amenities */}
-                  <section id='amenities'>
-                    <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                      Unit Amenities
-                    </h2>
-                    <p className='mb-4 text-gray-700'>
-                      Track and manage amenities available in each unit for
-                      accurate marketing and pricing.
-                    </p>
-
-                    <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className='text-lg'>
-                            Standard Amenities
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className='space-y-3'>
-                            <div className='flex items-center justify-between'>
-                              <span className='text-sm'>Air Conditioning</span>
-                              <CheckCircle className='h-4 w-4 text-green-500' />
-                            </div>
-                            <div className='flex items-center justify-between'>
-                              <span className='text-sm'>Dishwasher</span>
-                              <CheckCircle className='h-4 w-4 text-green-500' />
-                            </div>
-                            <div className='flex items-center justify-between'>
-                              <span className='text-sm'>In-unit Laundry</span>
-                              <CheckCircle className='h-4 w-4 text-green-500' />
-                            </div>
-                            <div className='flex items-center justify-between'>
-                              <span className='text-sm'>Hardwood Floors</span>
-                              <CheckCircle className='h-4 w-4 text-green-500' />
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className='text-lg'>
-                            Premium Features
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className='space-y-3'>
-                            <div className='flex items-center justify-between'>
-                              <span className='text-sm'>Balcony/Patio</span>
-                              <CheckCircle className='h-4 w-4 text-green-500' />
-                            </div>
-                            <div className='flex items-center justify-between'>
-                              <span className='text-sm'>Walk-in Closet</span>
-                              <CheckCircle className='h-4 w-4 text-green-500' />
-                            </div>
-                            <div className='flex items-center justify-between'>
-                              <span className='text-sm'>Fireplace</span>
-                              <CheckCircle className='h-4 w-4 text-green-500' />
-                            </div>
-                            <div className='flex items-center justify-between'>
-                              <span className='text-sm'>City View</span>
-                              <CheckCircle className='h-4 w-4 text-green-500' />
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </section>
-
-                  {/* Status Management */}
-                  <section id='status-management'>
-                    <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                      Status Management
-                    </h2>
-                    <p className='mb-4 text-gray-700'>
-                      Keep track of unit availability and status for efficient
-                      leasing and maintenance scheduling.
-                    </p>
-
-                    <Card>
-                      <CardContent className='p-4'>
-                        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
-                          <div className='text-center'>
-                            <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-green-100 p-3'>
-                              <CheckCircle className='h-6 w-6 text-green-600' />
-                            </div>
-                            <h4 className='font-semibold text-green-700'>
-                              Available
-                            </h4>
-                            <p className='text-sm text-gray-600'>
-                              Ready for lease
-                            </p>
-                          </div>
-                          <div className='text-center'>
-                            <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-blue-100 p-3'>
-                              <Users className='text-primary h-6 w-6' />
-                            </div>
-                            <h4 className='font-semibold text-blue-700'>
-                              Occupied
-                            </h4>
-                            <p className='text-sm text-gray-600'>
-                              Currently leased
-                            </p>
-                          </div>
-                          <div className='text-center'>
-                            <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-yellow-100 p-3'>
-                              <Settings className='h-6 w-6 text-yellow-600' />
-                            </div>
-                            <h4 className='font-semibold text-yellow-700'>
-                              Maintenance
-                            </h4>
-                            <p className='text-sm text-gray-600'>
-                              Under repair
-                            </p>
-                          </div>
-                          <div className='text-center'>
-                            <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-gray-100 p-3'>
-                              <AlertCircle className='h-6 w-6 text-gray-600' />
-                            </div>
-                            <h4 className='font-semibold text-gray-700'>
-                              Offline
-                            </h4>
-                            <p className='text-sm text-gray-600'>
-                              Not available
-                            </p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </section>
-
-                  {/* Bulk Operations */}
-                  <section id='bulk-operations'>
-                    <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
-                      Bulk Operations
-                    </h2>
-                    <p className='mb-4 text-gray-700'>
-                      Efficiently manage multiple units simultaneously with bulk
-                      operations.
-                    </p>
-
-                    <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className='text-lg'>
-                            Bulk Unit Creation
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <ul className='space-y-2 text-sm'>
-                            <li>• Import from spreadsheet</li>
-                            <li>• Template-based creation</li>
-                            <li>• Pattern-based numbering</li>
-                            <li>• Automatic floor assignment</li>
-                          </ul>
-                        </CardContent>
-                      </Card>
-
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className='text-lg'>
-                            Bulk Unit Updates
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <ul className='space-y-2 text-sm'>
-                            <li>• Status changes</li>
-                            <li>• Rent adjustments</li>
-                            <li>• Amenity updates</li>
-                            <li>• Category reassignment</li>
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    </div>
-
-                    <Card className='mt-4 border-blue-200 bg-blue-50'>
-                      <CardContent className='p-4'>
-                        <div className='flex items-start space-x-3'>
-                          <AlertCircle className='text-primary mt-0.5 h-5 w-5' />
-                          <div>
-                            <p className='font-medium text-blue-800'>
-                              Pro Tip: Bulk Operations
-                            </p>
-                            <p className='text-sm text-blue-700'>
-                              Use bulk operations to save time when setting up
-                              large properties or making property-wide changes.
-                              Always verify changes before applying to multiple
-                              units.
-                            </p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </section>
-                </div>
-              </div>
-            </div>
-
-            {/* Sidebar */}
-            <div className='space-y-6'>
-              {/* Table of Contents */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className='text-lg'>Table of Contents</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <nav className='space-y-2'>
-                    {tableOfContents.map(item => (
-                      <a
-                        key={item.id}
-                        href={`#${item.id}`}
-                        className={`hover:text-primary block text-sm transition-colors ${
-                          item.level === 2
-                            ? 'pl-4 text-gray-600'
-                            : 'font-medium text-gray-700'
-                        }`}
-                      >
-                        {item.title}
-                      </a>
-                    ))}
-                  </nav>
-                </CardContent>
-              </Card>
-
-              {/* Related Articles */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className='text-lg'>Related Articles</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className='space-y-3'>
-                    {relatedArticles.map((article, index) => (
-                      <Link
-                        key={index}
-                        href={article.href}
-                        className='block rounded-lg bg-gray-50 p-3 transition-colors hover:bg-gray-100'
-                      >
-                        <h4 className='mb-1 text-sm font-medium text-gray-900'>
-                          {article.title}
+                      <div>
+                        <h4 className='mb-2 font-semibold text-green-700'>
+                          {t(
+                            'sections.addingUnits.requiredInfo.essential.title'
+                          )}
                         </h4>
-                        <div className='flex items-center space-x-1 text-xs text-gray-500'>
-                          <Clock className='h-3 w-3' />
-                          <span>{article.time}</span>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                        <ul className='space-y-1 text-sm'>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.essential.items.unitNumber'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.essential.items.floor'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.essential.items.unitType'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.essential.items.squareFootage'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.essential.items.bedrooms'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.essential.items.bathrooms'
+                            )}
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className='mb-2 font-semibold text-blue-700'>
+                          {t(
+                            'sections.addingUnits.requiredInfo.optional.title'
+                          )}
+                        </h4>
+                        <ul className='space-y-1 text-sm'>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.optional.items.description'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.optional.items.balcony'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.optional.items.parking'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.optional.items.storage'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.optional.items.petPolicy'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.addingUnits.requiredInfo.optional.items.accessibility'
+                            )}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
 
-              {/* Help */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className='text-lg'>Need Help?</CardTitle>
-                </CardHeader>
-                <CardContent className='space-y-3'>
-                  <Button
-                    variant='outline'
-                    className='w-full justify-start'
-                    size='sm'
-                  >
-                    <Mail className='mr-2 h-4 w-4' />
-                    Contact Support
-                  </Button>
-                  <Button
-                    variant='outline'
-                    className='w-full justify-start'
-                    size='sm'
-                  >
-                    <Users className='mr-2 h-4 w-4' />
-                    Join Community
-                  </Button>
-                </CardContent>
-              </Card>
+              {/* Unit Numbering */}
+              <section id='unit-numbering'>
+                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+                  {t('sections.unitNumbering.title')}
+                </h2>
+                <p className='mb-4 text-gray-700'>
+                  {t('sections.unitNumbering.description')}
+                </p>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className='flex items-center space-x-2 text-lg'>
+                        <Hash className='h-5 w-5' />
+                        <span>
+                          {t('sections.unitNumbering.systems.sequential.title')}
+                        </span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className='mb-3 text-sm text-gray-600'>
+                        {t(
+                          'sections.unitNumbering.systems.sequential.description'
+                        )}
+                      </p>
+                      <div className='space-y-2 text-sm'>
+                        <div className='flex justify-between'>
+                          <span>
+                            {t(
+                              'sections.unitNumbering.systems.sequential.examples.label'
+                            )}
+                            :
+                          </span>
+                          <span className='font-mono'>
+                            {t(
+                              'sections.unitNumbering.systems.sequential.examples.value'
+                            )}
+                          </span>
+                        </div>
+                        <div className='flex justify-between'>
+                          <span>
+                            {t(
+                              'sections.unitNumbering.systems.sequential.bestFor.label'
+                            )}
+                            :
+                          </span>
+                          <span>
+                            {t(
+                              'sections.unitNumbering.systems.sequential.bestFor.value'
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className='flex items-center space-x-2 text-lg'>
+                        <Building className='h-5 w-5' />
+                        <span>
+                          {t('sections.unitNumbering.systems.floorBased.title')}
+                        </span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className='mb-3 text-sm text-gray-600'>
+                        {t(
+                          'sections.unitNumbering.systems.floorBased.description'
+                        )}
+                      </p>
+                      <div className='space-y-2 text-sm'>
+                        <div className='flex justify-between'>
+                          <span>
+                            {t(
+                              'sections.unitNumbering.systems.floorBased.examples.label'
+                            )}
+                            :
+                          </span>
+                          <span className='font-mono'>
+                            {t(
+                              'sections.unitNumbering.systems.floorBased.examples.value'
+                            )}
+                          </span>
+                        </div>
+                        <div className='flex justify-between'>
+                          <span>
+                            {t(
+                              'sections.unitNumbering.systems.floorBased.bestFor.label'
+                            )}
+                            :
+                          </span>
+                          <span>
+                            {t(
+                              'sections.unitNumbering.systems.floorBased.bestFor.value'
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Card className='mt-4 border-yellow-200 bg-yellow-50'>
+                  <CardContent className='p-4'>
+                    <div className='flex items-start space-x-3'>
+                      <AlertCircle className='mt-0.5 h-5 w-5 text-yellow-600' />
+                      <div>
+                        <p className='font-medium text-yellow-800'>
+                          {t('sections.unitNumbering.bestPractices.title')}
+                        </p>
+                        <ul className='mt-2 space-y-1 text-sm text-yellow-700'>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.unitNumbering.bestPractices.items.consistency'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.unitNumbering.bestPractices.items.avoidConfusion'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.unitNumbering.bestPractices.items.expansion'
+                            )}
+                          </li>
+                          <li>
+                            •{' '}
+                            {t(
+                              'sections.unitNumbering.bestPractices.items.accessibility'
+                            )}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Unit Types */}
+              <section id='unit-types'>
+                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+                  {t('sections.unitTypes.title')}
+                </h2>
+                <p className='mb-4 text-gray-700'>
+                  {t('sections.unitTypes.description')}
+                </p>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className='text-lg'>
+                        {t('sections.unitTypes.categories.residential.title')}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className='space-y-2 text-sm'>
+                        <li className='flex items-center space-x-2'>
+                          <Home className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.residential.items.studio'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Home className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.residential.items.oneBedroom'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Home className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.residential.items.twoBedroom'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Home className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.residential.items.threePlus'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Home className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.residential.items.penthouse'
+                            )}
+                          </span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className='text-lg'>
+                        {t('sections.unitTypes.categories.special.title')}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className='space-y-2 text-sm'>
+                        <li className='flex items-center space-x-2'>
+                          <Tag className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.special.items.accessible'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Tag className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.special.items.furnished'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Tag className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.special.items.shortTerm'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Tag className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.special.items.corporate'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Tag className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.special.items.model'
+                            )}
+                          </span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className='text-lg'>
+                        {t('sections.unitTypes.categories.commercial.title')}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className='space-y-2 text-sm'>
+                        <li className='flex items-center space-x-2'>
+                          <Building className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.commercial.items.retail'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Building className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.commercial.items.office'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Building className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.commercial.items.storage'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Building className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.commercial.items.parking'
+                            )}
+                          </span>
+                        </li>
+                        <li className='flex items-center space-x-2'>
+                          <Building className='h-4 w-4 text-gray-400' />
+                          <span>
+                            {t(
+                              'sections.unitTypes.categories.commercial.items.common'
+                            )}
+                          </span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </section>
+
+              {/* Floor Plans */}
+              <section id='floor-plans'>
+                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+                  {t('sections.floorPlans.title')}
+                </h2>
+                <p className='mb-4 text-gray-700'>
+                  {t('sections.floorPlans.description')}
+                </p>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className='flex items-center space-x-2 text-lg'>
+                      <FileText className='h-5 w-5' />
+                      <span>{t('sections.floorPlans.management.title')}</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className='space-y-4'>
+                      <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                        <div>
+                          <h4 className='mb-2 font-semibold'>
+                            {t('sections.floorPlans.management.formats.title')}
+                          </h4>
+                          <ul className='space-y-1 text-sm text-gray-600'>
+                            <li>
+                              •{' '}
+                              {t(
+                                'sections.floorPlans.management.formats.items.pdf'
+                              )}
+                            </li>
+                            <li>
+                              •{' '}
+                              {t(
+                                'sections.floorPlans.management.formats.items.images'
+                              )}
+                            </li>
+                            <li>
+                              •{' '}
+                              {t(
+                                'sections.floorPlans.management.formats.items.cad'
+                              )}
+                            </li>
+                            <li>
+                              •{' '}
+                              {t(
+                                'sections.floorPlans.management.formats.items.interactive'
+                              )}
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className='mb-2 font-semibold'>
+                            {t('sections.floorPlans.management.benefits.title')}
+                          </h4>
+                          <ul className='space-y-1 text-sm text-gray-600'>
+                            <li>
+                              •{' '}
+                              {t(
+                                'sections.floorPlans.management.benefits.items.marketing'
+                              )}
+                            </li>
+                            <li>
+                              •{' '}
+                              {t(
+                                'sections.floorPlans.management.benefits.items.maintenance'
+                              )}
+                            </li>
+                            <li>
+                              •{' '}
+                              {t(
+                                'sections.floorPlans.management.benefits.items.utilization'
+                              )}
+                            </li>
+                            <li>
+                              •{' '}
+                              {t(
+                                'sections.floorPlans.management.benefits.items.virtualTour'
+                              )}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Amenities */}
+              <section id='amenities'>
+                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+                  {t('sections.amenities.title')}
+                </h2>
+                <p className='mb-4 text-gray-700'>
+                  {t('sections.amenities.description')}
+                </p>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className='text-lg'>
+                        {t('sections.amenities.categories.standard.title')}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className='space-y-3'>
+                        <div className='flex items-center justify-between'>
+                          <span className='text-sm'>
+                            {t(
+                              'sections.amenities.categories.standard.items.airConditioning'
+                            )}
+                          </span>
+                          <CheckCircle className='h-4 w-4 text-green-500' />
+                        </div>
+                        <div className='flex items-center justify-between'>
+                          <span className='text-sm'>
+                            {t(
+                              'sections.amenities.categories.standard.items.dishwasher'
+                            )}
+                          </span>
+                          <CheckCircle className='h-4 w-4 text-green-500' />
+                        </div>
+                        <div className='flex items-center justify-between'>
+                          <span className='text-sm'>
+                            {t(
+                              'sections.amenities.categories.standard.items.laundry'
+                            )}
+                          </span>
+                          <CheckCircle className='h-4 w-4 text-green-500' />
+                        </div>
+                        <div className='flex items-center justify-between'>
+                          <span className='text-sm'>
+                            {t(
+                              'sections.amenities.categories.standard.items.hardwood'
+                            )}
+                          </span>
+                          <CheckCircle className='h-4 w-4 text-green-500' />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className='text-lg'>
+                        {t('sections.amenities.categories.premium.title')}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className='space-y-3'>
+                        <div className='flex items-center justify-between'>
+                          <span className='text-sm'>
+                            {t(
+                              'sections.amenities.categories.premium.items.balcony'
+                            )}
+                          </span>
+                          <CheckCircle className='h-4 w-4 text-green-500' />
+                        </div>
+                        <div className='flex items-center justify-between'>
+                          <span className='text-sm'>
+                            {t(
+                              'sections.amenities.categories.premium.items.walkInCloset'
+                            )}
+                          </span>
+                          <CheckCircle className='h-4 w-4 text-green-500' />
+                        </div>
+                        <div className='flex items-center justify-between'>
+                          <span className='text-sm'>
+                            {t(
+                              'sections.amenities.categories.premium.items.fireplace'
+                            )}
+                          </span>
+                          <CheckCircle className='h-4 w-4 text-green-500' />
+                        </div>
+                        <div className='flex items-center justify-between'>
+                          <span className='text-sm'>
+                            {t(
+                              'sections.amenities.categories.premium.items.cityView'
+                            )}
+                          </span>
+                          <CheckCircle className='h-4 w-4 text-green-500' />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </section>
+
+              {/* Status Management */}
+              <section id='status-management'>
+                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+                  {t('sections.statusManagement.title')}
+                </h2>
+                <p className='mb-4 text-gray-700'>
+                  {t('sections.statusManagement.description')}
+                </p>
+                <Card>
+                  <CardContent className='p-4'>
+                    <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
+                      <div className='text-center'>
+                        <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-green-100 p-3'>
+                          <CheckCircle className='h-6 w-6 text-green-600' />
+                        </div>
+                        <h4 className='font-semibold text-green-700'>
+                          {t(
+                            'sections.statusManagement.statuses.available.title'
+                          )}
+                        </h4>
+                        <p className='text-sm text-gray-600'>
+                          {t(
+                            'sections.statusManagement.statuses.available.description'
+                          )}
+                        </p>
+                      </div>
+                      <div className='text-center'>
+                        <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-blue-100 p-3'>
+                          <Users className='h-6 w-6 text-blue-600' />
+                        </div>
+                        <h4 className='font-semibold text-blue-700'>
+                          {t(
+                            'sections.statusManagement.statuses.occupied.title'
+                          )}
+                        </h4>
+                        <p className='text-sm text-gray-600'>
+                          {t(
+                            'sections.statusManagement.statuses.occupied.description'
+                          )}
+                        </p>
+                      </div>
+                      <div className='text-center'>
+                        <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-yellow-100 p-3'>
+                          <Settings className='h-6 w-6 text-yellow-600' />
+                        </div>
+                        <h4 className='font-semibold text-yellow-700'>
+                          {t(
+                            'sections.statusManagement.statuses.maintenance.title'
+                          )}
+                        </h4>
+                        <p className='text-sm text-gray-600'>
+                          {t(
+                            'sections.statusManagement.statuses.maintenance.description'
+                          )}
+                        </p>
+                      </div>
+                      <div className='text-center'>
+                        <div className='mx-auto mb-2 h-12 w-12 rounded-full bg-gray-100 p-3'>
+                          <AlertCircle className='h-6 w-6 text-gray-600' />
+                        </div>
+                        <h4 className='font-semibold text-gray-700'>
+                          {t(
+                            'sections.statusManagement.statuses.offline.title'
+                          )}
+                        </h4>
+                        <p className='text-sm text-gray-600'>
+                          {t(
+                            'sections.statusManagement.statuses.offline.description'
+                          )}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Bulk Operations */}
+              <section id='bulk-operations'>
+                <h2 className='mb-4 text-2xl font-semibold text-gray-900'>
+                  {t('sections.bulkOperations.title')}
+                </h2>
+                <p className='mb-4 text-gray-700'>
+                  {t('sections.bulkOperations.description')}
+                </p>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className='text-lg'>
+                        {t('sections.bulkOperations.types.creation.title')}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className='space-y-2 text-sm'>
+                        <li>
+                          •{' '}
+                          {t(
+                            'sections.bulkOperations.types.creation.items.import'
+                          )}
+                        </li>
+                        <li>
+                          •{' '}
+                          {t(
+                            'sections.bulkOperations.types.creation.items.template'
+                          )}
+                        </li>
+                        <li>
+                          •{' '}
+                          {t(
+                            'sections.bulkOperations.types.creation.items.pattern'
+                          )}
+                        </li>
+                        <li>
+                          •{' '}
+                          {t(
+                            'sections.bulkOperations.types.creation.items.automatic'
+                          )}
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className='text-lg'>
+                        {t('sections.bulkOperations.types.updates.title')}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className='space-y-2 text-sm'>
+                        <li>
+                          •{' '}
+                          {t(
+                            'sections.bulkOperations.types.updates.items.status'
+                          )}
+                        </li>
+                        <li>
+                          •{' '}
+                          {t(
+                            'sections.bulkOperations.types.updates.items.rent'
+                          )}
+                        </li>
+                        <li>
+                          •{' '}
+                          {t(
+                            'sections.bulkOperations.types.updates.items.amenity'
+                          )}
+                        </li>
+                        <li>
+                          •{' '}
+                          {t(
+                            'sections.bulkOperations.types.updates.items.category'
+                          )}
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Card className='mt-4 border-blue-200 bg-blue-50'>
+                  <CardContent className='p-4'>
+                    <div className='flex items-start space-x-3'>
+                      <AlertCircle className='mt-0.5 h-5 w-5 text-blue-600' />
+                      <div>
+                        <p className='font-medium text-blue-800'>
+                          {t('sections.bulkOperations.tip.title')}
+                        </p>
+                        <p className='text-sm text-blue-700'>
+                          {t('sections.bulkOperations.tip.description')}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Navigation */}
+              <div className='flex items-center justify-between border-t pt-8'>
+                <Button
+                  variant='outline'
+                  className='flex items-center space-x-2'
+                  asChild
+                >
+                  <Link href='/user-guide'>
+                    <ArrowLeft className='h-4 w-4' />
+                    <span>{tNav('backToGuide')}</span>
+                  </Link>
+                </Button>
+
+                <Button className='flex items-center space-x-2' asChild>
+                  <Link href='/user-guide/property-management/property-information-updates'>
+                    <span>{tNav('nextArticle')}</span>
+                    <ChevronRight className='h-4 w-4' />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+        {/* Sidebar */}
+        <div className='lg:col-span-1'>
+          <ArticleSidebar
+            tableOfContents={tableOfContents}
+            relatedArticles={relatedArticles}
+            currentCategory='property-management'
+            showQuickActions={true}
+          />
+        </div>
       </div>
-    </LandingLayout>
+    </ArticleLayout>
   );
 };
 

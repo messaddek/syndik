@@ -171,7 +171,7 @@ export const ArticleSearch = ({
       <div className='relative'>
         <Search className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400' />
         <Input
-          placeholder={t('searchPlaceholder')}
+          placeholder={t('search.placeholder')}
           value={query}
           onChange={e => setQuery(e.target.value)}
           className='pr-10 pl-10'

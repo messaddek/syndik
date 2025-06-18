@@ -292,6 +292,1056 @@
           }
         }
       }
+    },
+    "moveInMoveOutProcess": {
+      "title": "Move-in/Move-out Process",
+      "description": "Streamline move-ins and move-outs with comprehensive workflows that ensure smooth transitions for both residents and management.",
+      "breadcrumb": {
+        "userGuide": "User Guide",
+        "residentManagement": "Resident Management",
+        "current": "Move-in/Move-out Process"
+      },
+      "meta": {
+        "readTime": "10 min read",
+        "audience": "Property managers"
+      },
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "The move-in and move-out process is crucial for maintaining property condition, ensuring tenant satisfaction, and protecting your investment. Syndik provides structured workflows to manage these transitions efficiently.",
+          "keyComponents": {
+            "title": "Key Components",
+            "items": [
+              "Detailed inspection checklists",
+              "Photo documentation system",
+              "Security deposit management",
+              "Digital key handover tracking"
+            ]
+          }
+        },
+        "moveInProcess": {
+          "title": "Move-in Process",
+          "preMoveIn": {
+            "title": "Pre-Move-in Preparation",
+            "steps": [
+              "Complete final unit cleaning and inspection",
+              "Verify all maintenance items are resolved",
+              "Prepare welcome packet and unit information",
+              "Coordinate key pickup and access setup"
+            ]
+          },
+          "moveInDay": {
+            "title": "Move-in Day Tasks",
+            "tasks": [
+              "Conduct walkthrough inspection with resident",
+              "Document any existing conditions with photos",
+              "Review and sign lease documents",
+              "Collect security deposit and first month's rent",
+              "Provide keys and access credentials"
+            ]
+          },
+          "informationHandover": {
+            "title": "Information Handover",
+            "items": [
+              "Property rules and regulations packet",
+              "Emergency contact information",
+              "Utility setup instructions and contacts",
+              "Amenity access codes and schedules",
+              "Maintenance request procedures"
+            ]
+          }
+        },
+        "moveOutProcess": {
+          "title": "Move-out Process",
+          "noticeRequirements": {
+            "title": "Notice Requirements",
+            "content": "Ensure proper notice periods are followed according to lease terms and local regulations (typically 30-60 days)."
+          },
+          "preMoveOut": {
+            "title": "Pre-Move-out Steps",
+            "steps": [
+              {
+                "title": "Schedule pre-move-out inspection",
+                "description": "Identify any issues that need attention before final inspection"
+              },
+              {
+                "title": "Provide move-out checklist",
+                "description": "Give residents clear expectations for unit condition requirements"
+              }
+            ]
+          },
+          "finalInspection": {
+            "title": "Final Inspection",
+            "items": [
+              "Complete detailed unit inspection",
+              "Document all findings with photos",
+              "Calculate any deductions from security deposit",
+              "Collect all keys and access devices",
+              "Schedule any necessary repairs or cleaning"
+            ]
+          }
+        },
+        "inspectionChecklists": {
+          "title": "Inspection Checklists",
+          "livingAreas": {
+            "title": "Living Areas",
+            "items": [
+              "Walls and paint condition",
+              "Flooring and carpets",
+              "Windows and blinds",
+              "Light fixtures and switches",
+              "Outlets and electrical"
+            ]
+          },
+          "kitchenBath": {
+            "title": "Kitchen & Bath",
+            "items": [
+              "Appliances functionality",
+              "Plumbing fixtures",
+              "Cabinets and countertops",
+              "Tile and grout condition",
+              "Ventilation fans"
+            ]
+          },
+          "systemsSafety": {
+            "title": "Systems & Safety",
+            "items": [
+              "HVAC operation",
+              "Smoke detector batteries",
+              "Security system function",
+              "Water pressure and temperature",
+              "Door locks and hardware"
+            ]
+          },
+          "digitalDocumentation": {
+            "title": "Digital Documentation",
+            "content": "All inspection items are automatically saved with timestamps, photos, and inspector notes for complete audit trails."
+          }
+        },
+        "securityDeposits": {
+          "title": "Security Deposits",
+          "depositManagement": {
+            "title": "Deposit Management",
+            "items": [
+              "Track deposits in dedicated accounts",
+              "Calculate interest where required",
+              "Maintain detailed deduction records"
+            ]
+          },
+          "refundProcess": {
+            "title": "Refund Process",
+            "steps": [
+              "Complete final inspection within required timeframe",
+              "Provide itemized deduction list to tenant",
+              "Process refund according to local laws",
+              "Send refund with detailed statement",
+              "Keep records for required retention period"
+            ]
+          },
+          "legalCompliance": {
+            "title": "Legal Compliance",
+            "content": "Follow all local and state laws regarding deposit handling, interest calculations, and return timeframes to avoid penalties."
+          }
+        },
+        "documentation": {
+          "title": "Documentation",
+          "requiredDocuments": {
+            "title": "Required Documents",
+            "items": [
+              "Move-in/move-out inspection reports",
+              "Photo documentation of unit condition",
+              "Signed acknowledgment forms",
+              "Key inventory and tracking forms",
+              "Security deposit calculations and receipts"
+            ]
+          },
+          "recordKeeping": {
+            "title": "Record Keeping",
+            "items": [
+              "Maintain digital copies of all documents",
+              "Store records according to legal requirements",
+              "Ensure easy access for future reference"
+            ]
+          }
+        },
+        "bestPractices": {
+          "title": "Best Practices",
+          "processEfficiency": {
+            "title": "Process Efficiency",
+            "items": [
+              "Use standardized checklists for consistency",
+              "Implement digital workflows to reduce paperwork",
+              "Schedule inspections well in advance",
+              "Maintain clear communication timelines"
+            ]
+          },
+          "tenantRelations": {
+            "title": "Tenant Relations",
+            "items": [
+              "Provide clear expectations upfront",
+              "Offer flexible scheduling when possible",
+              "Respond promptly to questions and concerns",
+              "Follow up after moves to ensure satisfaction"
+            ]
+          },
+          "successTips": {
+            "title": "Success Tips",
+            "items": [
+              "Create welcome packets for new residents with all essential information",
+              "Use video walkthroughs for remote tenants or as backup documentation",
+              "Maintain unit turnover schedule to minimize vacancy time",
+              "Keep spare keys and access devices properly labeled and secure"
+            ]
+          }
+        }
+      },
+      "relatedArticles": [
+        {
+          "title": "Adding New Residents",
+          "href": "/user-guide/resident-management/adding-new-residents",
+          "time": "5 min"
+        },
+        {
+          "title": "Lease Agreement Management",
+          "href": "/user-guide/resident-management/lease-agreement-management",
+          "time": "8 min"
+        },
+        {
+          "title": "Unit Management & Organization",
+          "href": "/user-guide/property-management/unit-management-organization",
+          "time": "6 min"
+        }
+      ]
+    },
+    "creatingYourFirstProperty": {
+      "title": "Creating Your First Property",
+      "description": "Comprehensive guide to get started with setting up your first property in Syndik",
+      "sections": {
+        "overview": {
+          "content": "Creating your first property in Syndik is the beginning of your efficient property management journey. This guide will walk you through the process step by step.",
+          "whatYoullLearn": [
+            "How to set up basic property information",
+            "Configure residential units",
+            "Customize property settings",
+            "Best practices for property setup"
+          ]
+        },
+        "step1": {
+          "title": "Step 1: Basic Information",
+          "content": "Start by entering the basic information about your property",
+          "steps": [
+            "Navigate to Properties in the main menu",
+            "Click 'Add New Property'",
+            "Enter property name and address",
+            "Select property type",
+            "Add property description"
+          ],
+          "proTip": {
+            "title": "Pro Tip",
+            "content": "Use descriptive names for your properties to make them easily identifiable in reports and listings."
+          }
+        },
+        "step2": {
+          "title": "Step 2: Unit Setup",
+          "content": "Configure the residential units in your property",
+          "requiredFields": {
+            "title": "Required Fields",
+            "fields": [
+              "Unit number",
+              "Unit type (apartment, studio, etc.)",
+              "Number of bedrooms",
+              "Number of bathrooms",
+              "Square footage"
+            ]
+          },
+          "optionalFields": {
+            "title": "Optional Fields",
+            "fields": [
+              "Balcony details",
+              "Parking space",
+              "Storage unit",
+              "Pet policy",
+              "Special features"
+            ]
+          }
+        },
+        "step3": {
+          "title": "Step 3: Settings Customization",
+          "content": "Adjust the advanced settings for your property",
+          "settings": [
+            {
+              "title": "Payment Settings",
+              "description": "Configure rent amounts, due dates, and late fees"
+            },
+            {
+              "title": "Communication Preferences",
+              "description": "Set up notification settings and communication channels"
+            },
+            {
+              "title": "Access Control",
+              "description": "Manage who can view and edit property information"
+            }
+          ]
+        },
+        "nextSteps": {
+          "title": "Next Steps",
+          "content": "Now that your property is set up, here's what you can do next:",
+          "actions": [
+            {
+              "title": "Add Residents",
+              "description": "Start adding residents to your units",
+              "href": "/user-guide/resident-management/adding-new-residents"
+            },
+            {
+              "title": "Set Up Rent Collection",
+              "description": "Configure payment methods and schedules",
+              "href": "/user-guide/financial-management/setting-up-rent-collection"
+            }
+          ]
+        },
+        "sidebar": {
+          "relatedArticlesList": [
+            {
+              "title": "Unit Management",
+              "href": "/user-guide/property-management/unit-management-organization",
+              "time": "5 min"
+            },
+            {
+              "title": "Payment Setup",
+              "href": "/user-guide/financial-management/setting-up-rent-collection",
+              "time": "3 min"
+            }
+          ]
+        }
+      }
+    },
+    "addingNewResidents": {
+      "title": "Adding New Residents",
+      "description": "Complete guide to onboarding new residents, from initial setup to move-in completion",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Adding new residents to your property involves several important steps to ensure a smooth onboarding process. This guide covers everything from initial documentation to final move-in procedures.",
+          "whatYoullLearn": [
+            "Required documentation for new residents",
+            "How to create resident profiles",
+            "Lease assignment process",
+            "Payment setup procedures",
+            "Move-in checklist completion"
+          ]
+        },
+        "preparation": {
+          "title": "Preparation & Documentation",
+          "content": "Before adding a new resident, ensure you have all necessary documentation and information.",
+          "requiredDocuments": [
+            "Completed rental application",
+            "Proof of income",
+            "Photo identification",
+            "References from previous landlords",
+            "Security deposit payment"
+          ]
+        },
+        "residentProfile": {
+          "title": "Creating Resident Profile",
+          "content": "Set up the resident's profile in the system with accurate personal and contact information.",
+          "steps": [
+            "Navigate to Residents section",
+            "Click 'Add New Resident'",
+            "Enter personal information",
+            "Add contact details",
+            "Upload required documents"
+          ]
+        },
+        "leaseAssignment": {
+          "title": "Lease Assignment",
+          "content": "Assign the resident to their specific unit and set up lease terms.",
+          "process": [
+            "Select the unit to assign",
+            "Set lease start and end dates",
+            "Configure rent amount and payment schedule",
+            "Add any special lease terms",
+            "Generate lease agreement"
+          ]
+        },
+        "paymentSetup": {
+          "title": "Payment Setup",
+          "content": "Configure payment methods and schedules for the new resident.",
+          "options": [
+            "Bank transfer setup",
+            "Credit card payment",
+            "Check payment instructions",
+            "Automatic payment enrollment"
+          ]
+        },
+        "accessCredentials": {
+          "title": "Access Credentials",
+          "content": "Provide the resident with access to the resident portal and property facilities."
+        },
+        "moveInChecklist": {
+          "title": "Move-in Checklist",
+          "content": "Complete the move-in process with a comprehensive checklist.",
+          "items": [
+            "Unit inspection walkthrough",
+            "Key handover",
+            "Utility setup assistance",
+            "Property amenities tour",
+            "Emergency contact information"
+          ]
+        },
+        "communicationSetup": {
+          "title": "Communication Setup",
+          "content": "Ensure the resident is set up to receive important communications and updates."
+        }
+      }
+    },
+    "addingNewProperties": {
+      "title": "Adding New Properties",
+      "description": "Step-by-step guide to add new properties to your portfolio",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Adding new properties to your portfolio is a fundamental task in property management. This comprehensive guide walks you through each step of the process.",
+          "whatYoullLearn": [
+            "How to prepare property information",
+            "Adding basic property details",
+            "Setting up units and amenities",
+            "Document management best practices"
+          ]
+        },
+        "preparation": {
+          "title": "Before You Start",
+          "content": "Gather all necessary information and documents before beginning the property setup process.",
+          "checklist": [
+            "Property deed or ownership documents",
+            "Building plans and specifications",
+            "Utility account information",
+            "Insurance documentation",
+            "Local permits and licenses"
+          ]
+        },
+        "basicInfo": {
+          "title": "Adding Basic Information",
+          "content": "Start by entering the fundamental details about your property.",
+          "steps": [
+            "Property name and address",
+            "Property type and classification",
+            "Construction year and condition",
+            "Total number of units",
+            "Parking and storage information"
+          ]
+        },
+        "propertyDetails": {
+          "title": "Property Details",
+          "content": "Configure detailed information about your property's features and amenities.",
+          "categories": [
+            "Building amenities",
+            "Unit features",
+            "Safety and security systems",
+            "Maintenance and utilities"
+          ]
+        },
+        "unitsSetup": {
+          "title": "Setting Up Units",
+          "content": "Configure individual units within your property.",
+          "process": [
+            "Create unit templates",
+            "Add unit-specific details",
+            "Set rent amounts",
+            "Configure availability status"
+          ]
+        },
+        "documents": {
+          "title": "Uploading Documents",
+          "content": "Upload and organize important property documents.",
+          "documentTypes": [
+            "Property deeds and titles",
+            "Building permits",
+            "Insurance policies",
+            "Maintenance contracts",
+            "Property photos"
+          ]
+        },
+        "verification": {
+          "title": "Review & Verification",
+          "content": "Review all entered information and verify accuracy before finalizing."
+        }
+      }
+    },
+    "settingUpUserAccounts": {
+      "title": "Setting Up User Accounts",
+      "description": "Learn how to create and manage user accounts for your property management team",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Setting up user accounts properly ensures that your team members have appropriate access to the system while maintaining security and accountability.",
+          "whatYoullLearn": [
+            "How to create new user accounts",
+            "Assign appropriate roles and permissions",
+            "Configure user preferences",
+            "Manage user access and security"
+          ]
+        },
+        "userTypes": {
+          "title": "User Types",
+          "content": "Understand the different types of users in the system.",
+          "types": [
+            {
+              "name": "Administrator",
+              "description": "Full access to all features and settings"
+            },
+            {
+              "name": "Property Manager",
+              "description": "Access to property management features"
+            },
+            {
+              "name": "Maintenance Staff",
+              "description": "Access to maintenance and work order features"
+            },
+            {
+              "name": "Accounting",
+              "description": "Access to financial features and reports"
+            }
+          ]
+        },
+        "creatingAccounts": {
+          "title": "Creating User Accounts",
+          "content": "Step-by-step process to create new user accounts.",
+          "steps": [
+            "Navigate to User Management",
+            "Click 'Add New User'",
+            "Enter user information",
+            "Assign roles and permissions",
+            "Send invitation email"
+          ]
+        },
+        "permissions": {
+          "title": "Managing Permissions",
+          "content": "Configure appropriate permissions for each user role."
+        },
+        "security": {
+          "title": "Security Settings",
+          "content": "Configure security settings for user accounts.",
+          "features": [
+            "Two-factor authentication",
+            "Password requirements",
+            "Session timeout",
+            "Login attempt limits"
+          ]
+        }
+      }
+    },
+    "understandingRolesPermissions": {
+      "title": "Understanding Roles & Permissions",
+      "description": "Comprehensive guide to the role-based access control system",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "The role-based access control system ensures that users only have access to the features and data they need for their job responsibilities.",
+          "whatYoullLearn": [
+            "Available roles in the system",
+            "Permission levels for each role",
+            "How to customize permissions",
+            "Best practices for role assignment"
+          ]
+        },
+        "roleTypes": {
+          "title": "Role Types",
+          "content": "Description of available roles and their default permissions.",
+          "roles": [
+            {
+              "name": "Super Administrator",
+              "description": "Complete system access and configuration",
+              "permissions": [
+                "All permissions"
+              ]
+            },
+            {
+              "name": "Property Manager",
+              "description": "Property operations and resident management",
+              "permissions": [
+                "Property management",
+                "Resident management",
+                "Basic reporting"
+              ]
+            },
+            {
+              "name": "Maintenance Coordinator",
+              "description": "Maintenance and work order management",
+              "permissions": [
+                "Work orders",
+                "Maintenance requests",
+                "Vendor management"
+              ]
+            },
+            {
+              "name": "Financial Administrator",
+              "description": "Financial management and reporting",
+              "permissions": [
+                "Financial management",
+                "Payment processing",
+                "Financial reports"
+              ]
+            }
+          ]
+        },
+        "customization": {
+          "title": "Customizing Permissions",
+          "content": "How to customize permissions for specific needs."
+        },
+        "bestPractices": {
+          "title": "Best Practices",
+          "content": "Guidelines for effective role and permission management.",
+          "practices": [
+            "Follow principle of least privilege",
+            "Regularly review and update permissions",
+            "Document role assignments",
+            "Train users on their access levels"
+          ]
+        }
+      }
+    },
+    "initialConfigurationGuide": {
+      "title": "Initial Configuration Guide",
+      "description": "Complete setup guide for new Syndik installations",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "This guide will help you configure Syndik for your organization's specific needs, ensuring optimal performance and user experience.",
+          "whatYoullLearn": [
+            "System-wide configuration settings",
+            "Organization setup",
+            "Default preferences",
+            "Integration configurations"
+          ]
+        },
+        "organizationSettings": {
+          "title": "Organization Settings",
+          "content": "Configure basic organization information and preferences.",
+          "settings": [
+            "Organization name and details",
+            "Default language and timezone",
+            "Currency and date formats",
+            "Logo and branding"
+          ]
+        },
+        "systemPreferences": {
+          "title": "System Preferences",
+          "content": "Set up default system preferences and behaviors."
+        },
+        "integrations": {
+          "title": "Third-party Integrations",
+          "content": "Configure integrations with external services.",
+          "availableIntegrations": [
+            "Payment processors",
+            "Email services",
+            "SMS providers",
+            "Accounting software"
+          ]
+        },
+        "securityConfiguration": {
+          "title": "Security Configuration",
+          "content": "Set up security policies and configurations."
+        }
+      }
+    },
+    "unitManagementOrganization": {
+      "title": "Unit Management & Organization",
+      "description": "Learn how to efficiently organize and manage units across your properties",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Effective unit management is essential for maintaining organized property operations and maximizing occupancy rates.",
+          "whatYoullLearn": [
+            "Unit organization strategies",
+            "Status tracking systems",
+            "Maintenance scheduling",
+            "Occupancy management"
+          ]
+        },
+        "unitOrganization": {
+          "title": "Unit Organization",
+          "content": "Structure your units for easy management and reporting.",
+          "strategies": [
+            "Consistent numbering systems",
+            "Unit type categorization",
+            "Floor and building organization",
+            "Custom labeling schemes"
+          ]
+        },
+        "statusTracking": {
+          "title": "Status Tracking",
+          "content": "Monitor unit availability and condition in real-time.",
+          "statuses": [
+            "Occupied",
+            "Vacant - Ready",
+            "Vacant - Needs Maintenance",
+            "Under Renovation",
+            "Not Available"
+          ]
+        }
+      }
+    },
+    "documentManagementSystem": {
+      "title": "Document Management System",
+      "description": "Organize, store, and manage all your property documents securely",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "A well-organized document management system ensures you can quickly access important documents when needed.",
+          "whatYoullLearn": [
+            "Document organization strategies",
+            "Upload and storage procedures",
+            "Access control and permissions",
+            "Backup and security practices"
+          ]
+        },
+        "organization": {
+          "title": "Document Organization",
+          "content": "Structure your documents for easy retrieval.",
+          "categories": [
+            "Legal documents",
+            "Financial records",
+            "Maintenance documentation",
+            "Resident information",
+            "Property photos and videos"
+          ]
+        }
+      }
+    },
+    "leaseAgreementManagement": {
+      "title": "Lease Agreement Management",
+      "description": "Comprehensive guide to managing lease agreements and renewals",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Effective lease management ensures legal compliance and smooth tenant relationships.",
+          "whatYoullLearn": [
+            "Creating lease agreements",
+            "Managing lease terms",
+            "Renewal processes",
+            "Legal compliance requirements"
+          ]
+        },
+        "creation": {
+          "title": "Creating Lease Agreements",
+          "content": "Set up comprehensive lease agreements that protect your interests.",
+          "components": [
+            "Basic lease terms",
+            "Rent and payment details",
+            "Property rules and regulations",
+            "Maintenance responsibilities",
+            "Legal clauses and protections"
+          ]
+        }
+      }
+    },
+    "residentCommunicationTools": {
+      "title": "Resident Communication Tools",
+      "description": "Effective communication strategies and tools for resident engagement",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Strong communication with residents builds trust and improves satisfaction.",
+          "whatYoullLearn": [
+            "Communication channels available",
+            "Best practices for resident communication",
+            "Automated messaging systems",
+            "Emergency communication protocols"
+          ]
+        },
+        "channels": {
+          "title": "Communication Channels",
+          "content": "Various ways to communicate with residents.",
+          "options": [
+            "Email notifications",
+            "SMS alerts",
+            "In-app messaging",
+            "Physical notices",
+            "Community announcements"
+          ]
+        }
+      }
+    },
+    "settingUpRentCollection": {
+      "title": "Setting Up Rent Collection",
+      "description": "Configure automated rent collection systems and payment processing",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Automated rent collection improves cash flow and reduces administrative burden.",
+          "whatYoullLearn": [
+            "Payment method configuration",
+            "Automated collection setup",
+            "Late fee management",
+            "Payment tracking and reporting"
+          ]
+        },
+        "paymentMethods": {
+          "title": "Payment Methods",
+          "content": "Configure various payment options for residents.",
+          "methods": [
+            "Bank transfers (ACH)",
+            "Credit and debit cards",
+            "Online payment portals",
+            "Mobile app payments",
+            "Check processing"
+          ]
+        }
+      }
+    },
+    "processingPayments": {
+      "title": "Processing Payments",
+      "description": "Handle rent payments, late fees, and other charges efficiently",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Efficient payment processing ensures accurate record-keeping and timely collections."
+        },
+        "paymentTypes": {
+          "title": "Payment Types",
+          "content": "Different types of payments you can process.",
+          "types": [
+            "Regular rent payments",
+            "Late fees and penalties",
+            "Security deposits",
+            "Utility charges",
+            "Maintenance fees"
+          ]
+        }
+      }
+    },
+    "generatingFinancialReports": {
+      "title": "Generating Financial Reports",
+      "description": "Create comprehensive financial reports for analysis and compliance",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Financial reports provide insights into property performance and help with decision-making."
+        },
+        "reportTypes": {
+          "title": "Report Types",
+          "content": "Various financial reports available.",
+          "types": [
+            "Income statements",
+            "Cash flow reports",
+            "Occupancy reports",
+            "Expense tracking",
+            "Tax reports"
+          ]
+        }
+      }
+    },
+    "latePaymentManagement": {
+      "title": "Late Payment Management",
+      "description": "Handle late payments and enforce payment policies effectively",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Consistent late payment management maintains cash flow and enforces lease terms."
+        },
+        "policies": {
+          "title": "Late Payment Policies",
+          "content": "Establish clear policies for late payments.",
+          "components": [
+            "Grace period definition",
+            "Late fee structure",
+            "Notice requirements",
+            "Escalation procedures"
+          ]
+        }
+      }
+    },
+    "creatingWorkOrders": {
+      "title": "Creating Work Orders",
+      "description": "Manage maintenance requests through structured work order systems",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Organized work order management ensures timely maintenance and resident satisfaction."
+        },
+        "workOrderTypes": {
+          "title": "Work Order Types",
+          "content": "Different categories of maintenance work orders.",
+          "types": [
+            "Emergency repairs",
+            "Routine maintenance",
+            "Preventive maintenance",
+            "Unit improvements",
+            "Common area maintenance"
+          ]
+        }
+      }
+    },
+    "trackingMaintenanceRequests": {
+      "title": "Tracking Maintenance Requests",
+      "description": "Monitor and manage maintenance requests from submission to completion",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Effective tracking ensures all maintenance issues are resolved promptly."
+        },
+        "trackingStages": {
+          "title": "Tracking Stages",
+          "content": "Different stages of maintenance request processing.",
+          "stages": [
+            "Request submitted",
+            "Initial review",
+            "Work order created",
+            "Technician assigned",
+            "Work in progress",
+            "Completed and verified"
+          ]
+        }
+      }
+    },
+    "preventiveMaintenanceSetup": {
+      "title": "Preventive Maintenance Setup",
+      "description": "Establish proactive maintenance schedules to prevent costly repairs",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Preventive maintenance reduces long-term costs and extends property lifespan."
+        },
+        "schedules": {
+          "title": "Maintenance Schedules",
+          "content": "Common preventive maintenance schedules.",
+          "types": [
+            "HVAC system maintenance",
+            "Plumbing inspections",
+            "Electrical safety checks",
+            "Fire safety equipment",
+            "Common area upkeep"
+          ]
+        }
+      }
+    },
+    "vendorManagement": {
+      "title": "Vendor Management",
+      "description": "Manage relationships with contractors and service providers",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Effective vendor management ensures quality work and competitive pricing."
+        },
+        "vendorTypes": {
+          "title": "Vendor Types",
+          "content": "Different types of vendors you may work with.",
+          "types": [
+            "General contractors",
+            "Specialty trades",
+            "Cleaning services",
+            "Landscaping services",
+            "Emergency services"
+          ]
+        }
+      }
+    },
+    "sendingAnnouncements": {
+      "title": "Sending Announcements",
+      "description": "Communicate important information to all residents effectively",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Well-crafted announcements keep residents informed and engaged."
+        },
+        "announcementTypes": {
+          "title": "Announcement Types",
+          "content": "Different types of announcements you can send.",
+          "types": [
+            "Property updates",
+            "Maintenance notifications",
+            "Policy changes",
+            "Community events",
+            "Emergency alerts"
+          ]
+        }
+      }
+    },
+    "individualMessaging": {
+      "title": "Individual Messaging",
+      "description": "Communicate directly with individual residents for personal matters",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Direct messaging allows for personalized communication and issue resolution."
+        },
+        "messagingBestPractices": {
+          "title": "Messaging Best Practices",
+          "content": "Guidelines for effective individual communication.",
+          "practices": [
+            "Professional tone",
+            "Clear and concise messages",
+            "Timely responses",
+            "Documentation of communications"
+          ]
+        }
+      }
+    },
+    "notificationSettings": {
+      "title": "Notification Settings",
+      "description": "Configure when and how notifications are sent to residents and staff",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Proper notification settings ensure important information reaches the right people."
+        },
+        "notificationTypes": {
+          "title": "Notification Types",
+          "content": "Different types of notifications you can configure.",
+          "types": [
+            "Payment reminders",
+            "Maintenance updates",
+            "Policy notifications",
+            "Emergency alerts",
+            "System notifications"
+          ]
+        }
+      }
+    },
+    "emailTemplates": {
+      "title": "Email Templates",
+      "description": "Create and manage professional email templates for common communications",
+      "sections": {
+        "overview": {
+          "title": "Overview",
+          "content": "Email templates ensure consistent, professional communication while saving time."
+        },
+        "templateTypes": {
+          "title": "Template Types",
+          "content": "Common email templates you can create.",
+          "types": [
+            "Welcome emails",
+            "Payment reminders",
+            "Maintenance notifications",
+            "Lease renewal notices",
+            "Move-out instructions"
+          ]
+        }
+      }
+    },
+    "common": {
+      "tableOfContents": "Table of Contents",
+      "relatedArticles": "Related Articles",
+      "overview": "Overview",
+      "nextSteps": "Next Steps",
+      "popular": "Popular",
+      "readTime": "min read",
+      "whatYoullLearn": "What you'll learn"
+    },
+    "navigation": {
+      "userGuide": "User Guide",
+      "gettingStarted": "Getting Started"
+    },
+    "sidebar": {
+      "tableOfContents": "Table of Contents",
+      "relatedArticles": "Related Articles",
+      "quickActions": "Quick Actions",
+      "needHelp": "Need Help?",
+      "contactSupport": "Contact Support",
+      "liveChat": "Live Chat",
+      "phoneSupport": "Phone Support",
+      "supportMessage": "If you need immediate assistance, please contact our support team.",
+      "supportHours": "Support Hours: Monday - Friday, 9 AM - 6 PM"
     }
   },
   "articleTitles": {
@@ -774,11 +1824,123 @@
       "disclaimer": "We respect your privacy. Unsubscribe at any time.",
       "privacyPolicy": "Privacy Policy"
     },
-    "copyright": "© 2024 Syndik. All rights reserved.",
+    "copyright": "© 2025 Syndik. All rights reserved.",
     "madeWith": "Made with ❤️ in Morocco",
     "certifications": {
       "soc2": "SOC 2 Compliant",
       "gdpr": "GDPR Compliant"
+    }
+  },
+  "help": {
+    "title": "Help & Support",
+    "subtitle": "We're here to help you get the most out of Syndik. Find answers, get support, and learn how to optimize your syndicate management.",
+    "supportOptions": {
+      "liveChat": {
+        "title": "Live Chat",
+        "description": "Get instant help from our support team",
+        "availability": "Available 24/7",
+        "action": "Start Chat"
+      },
+      "emailSupport": {
+        "title": "Email Support",
+        "description": "Send us detailed questions and get comprehensive answers",
+        "availability": "Response within 24 hours",
+        "action": "Send Email"
+      },
+      "phoneSupport": {
+        "title": "Phone Support",
+        "description": "Speak directly with our technical experts",
+        "availability": "Mon-Fri, 9AM-6PM",
+        "action": "Call Us"
+      },
+      "scheduleDemo": {
+        "title": "Schedule Demo",
+        "description": "Book a personalized demo with our team",
+        "availability": "Flexible scheduling",
+        "action": "Book Demo"
+      }
+    },
+    "contactForm": {
+      "title": "Send Us a Message",
+      "subtitle": "Can't find what you're looking for? Send us a detailed message and we'll get back to you quickly.",
+      "cardTitle": "Contact Support",
+      "fields": {
+        "firstName": {
+          "label": "First Name",
+          "placeholder": "Enter your first name"
+        },
+        "lastName": {
+          "label": "Last Name",
+          "placeholder": "Enter your last name"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email address"
+        },
+        "subject": {
+          "label": "Subject",
+          "placeholder": "What can we help you with?"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Please describe your question or issue in detail..."
+        }
+      },
+      "submitButton": "Send Message"
+    },
+    "resources": {
+      "title": "Self-Service Resources",
+      "subtitle": "Find answers and learn new skills with our comprehensive resource library.",
+      "documentation": {
+        "title": "Documentation",
+        "description": "Comprehensive guides and API documentation",
+        "items": [
+          "User Guides",
+          "Admin Manual",
+          "API Reference",
+          "Best Practices"
+        ],
+        "action": "Explore Documentation"
+      },
+      "videoTutorials": {
+        "title": "Video Tutorials",
+        "description": "Step-by-step video guides for common tasks",
+        "items": [
+          "Getting Started",
+          "Managing Residents",
+          "Financial Reports",
+          "Meeting Setup"
+        ],
+        "action": "Explore Video Tutorials"
+      },
+      "knowledgeBase": {
+        "title": "Knowledge Base",
+        "description": "Searchable collection of articles and solutions",
+        "items": [
+          "Troubleshooting",
+          "Feature Guides",
+          "Integration Help",
+          "Migration Tips"
+        ],
+        "action": "Explore Knowledge Base"
+      },
+      "communityForum": {
+        "title": "Community Forum",
+        "description": "Connect with other Syndik users and share experiences",
+        "items": [
+          "User Discussions",
+          "Feature Requests",
+          "Success Stories",
+          "Tips & Tricks"
+        ],
+        "action": "Explore Community Forum"
+      }
+    },
+    "emergency": {
+      "title": "Emergency Support",
+      "description": "For critical system issues affecting your syndicate operations, call our emergency hotline:",
+      "phone": "+1-800-EMERGENCY",
+      "availability": "Available 24/7 for Enterprise customers"
     }
   },
   "landing": {
@@ -1016,6 +2178,7 @@
       "title": "Ready to Transform Your Property Management?",
       "titleHighlight": "Start Today.",
       "subtitle": "Join thousands of property managers who have simplified their workflow with Syndik",
+      "description": "Experience the future of property management with our all-in-one platform designed to meet the needs of modern property managers.",
       "buttons": {
         "startTrial": "Start Free Trial",
         "watchDemo": "Watch Demo"
@@ -1067,7 +2230,8 @@
     "about": "About",
     "pricing": "Pricing",
     "faq": "FAQ",
-    "terms": "Terms"
+    "terms": "Terms",
+    "userGuide": "User Guide"
   },
   "notifications": {
     "title": "Notification Management",
@@ -1528,6 +2692,142 @@
       }
     }
   },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "Privacy & Data Protection",
+    "lastUpdated": "Last updated: January 1, 2025",
+    "readCarefully": "We're committed to protecting your privacy and being transparent about how we handle your data.",
+    "tableOfContents": "Table of Contents",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "content": "Syndik (\"we,\" \"our,\" or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our residential syndicate management platform."
+      },
+      "informationCollect": {
+        "title": "2. Information We Collect",
+        "personalInfoTitle": "Personal Information",
+        "personalInfoContent": "We collect information you provide directly to us, such as:",
+        "personalInfoItems": [
+          "Name, email address, phone number",
+          "Syndicate and property information",
+          "Financial and payment information",
+          "Communication preferences",
+          "Account credentials and profile information"
+        ],
+        "usageInfoTitle": "Usage Information",
+        "usageInfoContent": "We automatically collect certain information about your use of our Service:",
+        "usageInfoItems": [
+          "IP address and device information",
+          "Browser type and operating system",
+          "Pages visited and features used",
+          "Time and date of access",
+          "Referring website addresses"
+        ]
+      },
+      "howWeUse": {
+        "title": "3. How We Use Your Information",
+        "content": "We use the information we collect to:",
+        "purposes": [
+          "Provide, maintain, and improve our Service",
+          "Process transactions and send related information",
+          "Send administrative and support communications",
+          "Respond to comments, questions, and customer service requests",
+          "Monitor and analyze usage patterns and trends",
+          "Personalize your experience"
+        ]
+      },
+      "sharingDisclosure": {
+        "title": "4. Information Sharing and Disclosure",
+        "content": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:",
+        "circumstances": [
+          "Service providers who assist us in operating our platform",
+          "Legal compliance and protection of rights",
+          "Business transfers or acquisitions",
+          "With your explicit consent"
+        ]
+      },
+      "dataSecurity": {
+        "title": "5. Data Security",
+        "content": "We implement appropriate technical and organizational measures to protect your personal information:",
+        "technicalTitle": "Technical Measures",
+        "technicalMeasures": [
+          "Encryption of data in transit and at rest",
+          "Access controls and authentication mechanisms",
+          "Regular security assessments and updates"
+        ],
+        "organizationalTitle": "Organizational Measures",
+        "organizationalMeasures": [
+          "Employee training on data protection",
+          "Incident response procedures",
+          "Regular compliance audits"
+        ]
+      },
+      "dataRetention": {
+        "title": "6. Data Retention",
+        "content": "We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, comply with legal obligations, resolve disputes, and enforce agreements.",
+        "retentionPeriods": [
+          "Account information: Retained while your account is active",
+          "Transaction records: Retained for 7 years for tax and legal purposes",
+          "Communication logs: Retained for 2 years",
+          "Usage analytics: Anonymized after 12 months"
+        ]
+      },
+      "yourRights": {
+        "title": "7. Your Rights and Choices",
+        "content": "Depending on your location, you may have certain rights regarding your personal information:",
+        "rights": [
+          "Access and receive a copy of your personal information",
+          "Correct inaccurate or incomplete information",
+          "Delete your personal information",
+          "Object to or restrict certain processing activities",
+          "Data portability (receive your data in a structured format)",
+          "Withdraw consent at any time"
+        ]
+      },
+      "cookies": {
+        "title": "8. Cookies and Tracking Technologies",
+        "content": "We use cookies and similar tracking technologies to enhance your experience on our platform:",
+        "cookieTypes": [
+          "Essential cookies: Required for basic platform functionality",
+          "Performance cookies: Help us understand how you use our service",
+          "Functional cookies: Remember your preferences and settings",
+          "Marketing cookies: Used to deliver relevant advertisements"
+        ],
+        "manageCookies": "You can manage your cookie preferences through your browser settings or our cookie preference center."
+      },
+      "international": {
+        "title": "9. International Data Transfers",
+        "content": "Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place:",
+        "safeguards": [
+          "Standard contractual clauses approved by regulatory authorities",
+          "Adequacy decisions by relevant data protection authorities",
+          "Binding corporate rules for intra-group transfers",
+          "Your explicit consent for specific transfers"
+        ]
+      },
+      "children": {
+        "title": "10. Children's Privacy",
+        "content": "Our Service is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information promptly."
+      },
+      "changes": {
+        "title": "11. Changes to This Privacy Policy",
+        "content": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"last updated\" date. For material changes, we will provide additional notice through email or prominent website notification."
+      },
+      "contact": {
+        "title": "12. Contact Us",
+        "content": "If you have any questions about this Privacy Policy, please contact us:",
+        "emailTitle": "Email",
+        "phoneTitle": "Phone",
+        "addressTitle": "Address",
+        "email": "privacy@syndik.com",
+        "phone": "+1-800-SYNDIK",
+        "address": "[Company Address]"
+      }
+    },
+    "acknowledgment": {
+      "content": "By using Syndik, you acknowledge that you have read and understood this Privacy Policy."
+    }
+  },
   "residents": {
     "title": "Residents",
     "subtitle": "Manage residents and their unit assignments",
@@ -1669,6 +2969,108 @@
     "delete": "Delete",
     "view": "View",
     "openMenu": "Open menu"
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "subtitle": "Terms & Conditions",
+    "lastUpdated": "Last updated: January 1, 2025",
+    "readCarefully": "Please read these terms carefully before using our service.",
+    "tableOfContents": "Table of Contents",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "content": "By accessing and using Syndik (\"we,\" \"our,\" or \"us\"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service."
+      },
+      "description": {
+        "title": "2. Description of Service",
+        "content": "Syndik is a comprehensive SaaS platform designed for residential syndicate management, providing:",
+        "features": [
+          "Property and building management",
+          "Financial tracking and reporting",
+          "Resident communication tools",
+          "Meeting and voting management",
+          "Document storage and sharing",
+          "Maintenance request system"
+        ]
+      },
+      "userAccounts": {
+        "title": "3. User Accounts",
+        "content": "When you create an account with us, you must provide information that is accurate, complete, and current at all times.",
+        "responsibilities": [
+          "Maintain the security of your password",
+          "Accept responsibility for all activities under your account",
+          "Notify us immediately of any unauthorized use",
+          "Do not share your account credentials"
+        ]
+      },
+      "acceptableUse": {
+        "title": "4. Acceptable Use Policy",
+        "content": "You may use our service only for lawful purposes and in accordance with these Terms.",
+        "prohibitedTitle": "Prohibited Activities",
+        "prohibited": [
+          "Violate any applicable federal, state, local, or international law",
+          "Transmit any material that is defamatory, offensive, or otherwise objectionable",
+          "Interfere with or disrupt the service or servers",
+          "Attempt to gain unauthorized access to other accounts"
+        ],
+        "dataMisuseTitle": "Data Misuse",
+        "dataMisuse": [
+          "Unauthorized data scraping",
+          "Sharing credentials with third parties",
+          "Attempting to breach security",
+          "Reverse engineering the platform"
+        ]
+      },
+      "payment": {
+        "title": "5. Payment and Billing",
+        "content": "Some services may require payment. Payment terms will be clearly displayed before you make any purchase.",
+        "details": [
+          "All fees are non-refundable except as required by law",
+          "You authorize us to charge your payment method",
+          "Subscription fees are billed in advance",
+          "Price changes will be communicated 30 days in advance"
+        ]
+      },
+      "privacy": {
+        "title": "6. Privacy and Data Protection",
+        "content": "Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your information when you use our service."
+      },
+      "intellectualProperty": {
+        "title": "7. Intellectual Property",
+        "content": "The service and its original content, features, and functionality are and will remain the exclusive property of Syndik and its licensors."
+      },
+      "limitationLiability": {
+        "title": "8. Limitation of Liability",
+        "content": "In no event shall Syndik, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages.",
+        "importantNotice": "Important Notice:",
+        "additionalContent": "Our total liability to you for any claim arising from these terms or your use of the service shall not exceed the amount you paid us in the twelve months preceding the claim."
+      },
+      "termination": {
+        "title": "9. Termination",
+        "content": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms."
+      },
+      "modifications": {
+        "title": "10. Modifications",
+        "content": "We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days notice."
+      },
+      "governingLaw": {
+        "title": "11. Governing Law",
+        "content": "These Terms shall be interpreted and governed by the laws of the jurisdiction in which Syndik operates, without regard to its conflict of law provisions."
+      },
+      "contact": {
+        "title": "12. Contact Information",
+        "content": "If you have any questions about these Terms, please contact us:",
+        "emailSupportTitle": "Email Support",
+        "phoneAddressTitle": "Phone & Address",
+        "email": "legal@syndik.com",
+        "phone": "+1-800-SYNDIK",
+        "address": "Syndik Legal Department, 123 Business Street, City, Country"
+      }
+    },
+    "effectiveDate": {
+      "title": "Effective Date:",
+      "content": "These terms are effective as of January 1, 2025. By continuing to use Syndik after this date, you agree to be bound by these terms."
+    }
   },
   "units": {
     "title": "Units",
@@ -1834,6 +3236,12 @@
   "userGuide": {
     "title": "User Guide",
     "subtitle": "Everything you need to know to manage your properties effectively",
+    "common": {
+      "numberMostPopular": "#{number} Most Popular",
+      "popular": "Popular",
+      "readTime": "min",
+      "readTimeMinutes": "min"
+    },
     "categories": {
       "gettingStarted": {
         "title": "Getting Started",
@@ -1865,6 +3273,58 @@
       "loadingData": "Loading latest data...",
       "updatedRealTime": "Updated in real-time"
     },
+    "articleTitles": {
+      "creating-your-first-property": "Creating Your First Property",
+      "setting-up-user-accounts": "Setting Up User Accounts",
+      "understanding-roles-permissions": "Understanding Roles & Permissions",
+      "initial-configuration-guide": "Initial Configuration Guide",
+      "adding-new-properties": "Adding New Properties",
+      "unit-management-organization": "Unit Management & Organization",
+      "property-information-updates": "Property Information Updates",
+      "document-management-system": "Document Management System",
+      "adding-new-residents": "Adding New Residents",
+      "lease-agreement-management": "Lease Agreement Management",
+      "resident-communication-tools": "Resident Communication Tools",
+      "move-in-move-out-process": "Move-in/Move-out Process",
+      "setting-up-rent-collection": "Setting Up Rent Collection",
+      "processing-payments": "Processing Payments",
+      "generating-financial-reports": "Generating Financial Reports",
+      "late-payment-management": "Late Payment Management",
+      "creating-work-orders": "Creating Work Orders",
+      "tracking-maintenance-requests": "Tracking Maintenance Requests",
+      "vendor-management": "Vendor Management",
+      "preventive-maintenance-setup": "Preventive Maintenance Setup",
+      "sending-announcements": "Sending Announcements",
+      "individual-messaging": "Individual Messaging",
+      "notification-settings": "Notification Settings",
+      "email-templates": "Email Templates"
+    },
+    "articleDescriptions": {
+      "creating-your-first-property": "Essential setup and first steps for property creation",
+      "setting-up-user-accounts": "Create and manage user accounts for your team",
+      "understanding-roles-permissions": "Learn about user roles and permission management",
+      "initial-configuration-guide": "Complete system setup and configuration",
+      "adding-new-properties": "How to add and configure new properties in the system",
+      "unit-management-organization": "Organize and manage units within your properties",
+      "property-information-updates": "Keep property information current and accurate",
+      "document-management-system": "Store and organize property-related documents",
+      "adding-new-residents": "How to onboard new residents to your property",
+      "lease-agreement-management": "Create, manage, and track lease agreements",
+      "resident-communication-tools": "Use communication tools to stay connected with residents",
+      "move-in-move-out-process": "Streamline the move-in and move-out procedures",
+      "setting-up-rent-collection": "Configure automated rent collection and payment processing",
+      "processing-payments": "Handle and process various payment types",
+      "generating-financial-reports": "Create and analyze financial reports",
+      "late-payment-management": "Handle late payments and collection procedures",
+      "creating-work-orders": "Create and manage maintenance work orders",
+      "tracking-maintenance-requests": "Monitor and manage maintenance requests from residents",
+      "vendor-management": "Manage relationships with maintenance vendors",
+      "preventive-maintenance-setup": "Set up scheduled preventive maintenance programs",
+      "sending-announcements": "Communicate effectively with all residents",
+      "individual-messaging": "Send direct messages to specific residents",
+      "notification-settings": "Configure notification preferences and settings",
+      "email-templates": "Create and manage email templates for common communications"
+    },
     "sidebar": {
       "quickStart": "Quick Start",
       "createFirstProperty": "Create Your First Property",
@@ -1873,6 +3333,11 @@
       "needHelp": "Need Help?",
       "contactSupport": "Contact Support",
       "viewFaq": "View FAQ"
+    },
+    "search": {
+      "title": "Search User Guide",
+      "placeholder": "Search user guide articles...",
+      "noResults": "No results found. Try different keywords."
     }
   },
   "validation": {

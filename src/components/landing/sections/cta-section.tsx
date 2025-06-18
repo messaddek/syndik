@@ -66,9 +66,9 @@ export function CTASection() {
               className='hover:shadow-3xl text-primary min-w-[200px] border-0 bg-white px-8 py-4 text-lg font-semibold shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-blue-50'
               asChild
             >
-              <Link href='/sign-up' className='group flex items-center'>
+              <Link href='/sign-up' className='group flex items-center gap-x-2'>
                 {t('buttons.startTrial')}
-                <ArrowRight className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
+                <ArrowRight className='h-5 w-5 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1' />
               </Link>
             </Button>
             <Button
@@ -77,9 +77,9 @@ export function CTASection() {
               className='min-w-[200px] border-2 border-white/30 bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/20'
               asChild
             >
-              <Link href='/demo' className='group flex items-center'>
+              <Link href='/demo' className='group flex items-center gap-x-2'>
                 {t('buttons.watchDemo')}
-                <ChevronRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                <ChevronRight className='h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1' />
               </Link>
             </Button>
           </div>

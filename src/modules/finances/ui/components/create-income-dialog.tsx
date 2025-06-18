@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/select';
 import { createIncomeSchema } from '../../../incomes/schema';
 import { z } from 'zod';
+import { DatePicker } from '@/components/ui/date-picker';
 import { useTranslations } from 'next-intl';
 
 type CreateIncomeForm = z.infer<typeof createIncomeSchema>;
@@ -255,7 +256,7 @@ export function CreateIncomeDialog({
                     {t('createIncomeDialog.fields.receivedDate')}
                   </FormLabel>
                   <FormControl>
-                    <Input type='date' {...field} />
+                    <DatePicker {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

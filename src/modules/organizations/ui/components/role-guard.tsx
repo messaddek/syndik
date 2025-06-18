@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { useRouter } from '@/i18n/navigation';
 import { useEffect } from 'react';
+
 import { usePathname } from '@/i18n/routing';
 import { getLoadingSkeleton } from '../utils/get-loading-skeleton';
 

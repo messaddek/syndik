@@ -17,84 +17,90 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 export default function HelpPage() {
+  const t = useTranslations('help');
   const supportOptions = [
     {
-      title: 'Live Chat',
-      description: 'Get instant help from our support team',
+      title: t('supportOptions.liveChat.title'),
+      description: t('supportOptions.liveChat.description'),
       icon: MessageCircle,
-      availability: 'Available 24/7',
-      action: 'Start Chat',
+      availability: t('supportOptions.liveChat.availability'),
+      action: t('supportOptions.liveChat.action'),
       href: '#chat',
     },
     {
-      title: 'Email Support',
-      description: 'Send us detailed questions and get comprehensive answers',
+      title: t('supportOptions.emailSupport.title'),
+      description: t('supportOptions.emailSupport.description'),
       icon: Mail,
-      availability: 'Response within 24 hours',
-      action: 'Send Email',
+      availability: t('supportOptions.emailSupport.availability'),
+      action: t('supportOptions.emailSupport.action'),
       href: 'mailto:support@syndik.com',
     },
     {
-      title: 'Phone Support',
-      description: 'Speak directly with our technical experts',
+      title: t('supportOptions.phoneSupport.title'),
+      description: t('supportOptions.phoneSupport.description'),
       icon: Phone,
-      availability: 'Mon-Fri, 9AM-6PM',
-      action: 'Call Us',
+      availability: t('supportOptions.phoneSupport.availability'),
+      action: t('supportOptions.phoneSupport.action'),
       href: 'tel:+1-800-SYNDIK',
     },
     {
-      title: 'Schedule Demo',
-      description: 'Book a personalized demo with our team',
+      title: t('supportOptions.scheduleDemo.title'),
+      description: t('supportOptions.scheduleDemo.description'),
       icon: Video,
-      availability: 'Flexible scheduling',
-      action: 'Book Demo',
+      availability: t('supportOptions.scheduleDemo.availability'),
+      action: t('supportOptions.scheduleDemo.action'),
       href: '/demo',
     },
   ];
-
   const resources = [
     {
-      title: 'Documentation',
-      description: 'Comprehensive guides and API documentation',
+      title: t('resources.documentation.title'),
+      description: t('resources.documentation.description'),
       icon: Book,
-      items: ['User Guides', 'Admin Manual', 'API Reference', 'Best Practices'],
+      items: [
+        t('resources.documentation.items.0'),
+        t('resources.documentation.items.1'),
+        t('resources.documentation.items.2'),
+        t('resources.documentation.items.3'),
+      ],
       href: '/docs',
     },
     {
-      title: 'Video Tutorials',
-      description: 'Step-by-step video guides for common tasks',
+      title: t('resources.videoTutorials.title'),
+      description: t('resources.videoTutorials.description'),
       icon: Video,
       items: [
-        'Getting Started',
-        'Managing Residents',
-        'Financial Reports',
-        'Meeting Setup',
+        t('resources.videoTutorials.items.0'),
+        t('resources.videoTutorials.items.1'),
+        t('resources.videoTutorials.items.2'),
+        t('resources.videoTutorials.items.3'),
       ],
       href: '/tutorials',
     },
     {
-      title: 'Knowledge Base',
-      description: 'Searchable collection of articles and solutions',
+      title: t('resources.knowledgeBase.title'),
+      description: t('resources.knowledgeBase.description'),
       icon: FileText,
       items: [
-        'Troubleshooting',
-        'Feature Guides',
-        'Integration Help',
-        'Migration Tips',
+        t('resources.knowledgeBase.items.0'),
+        t('resources.knowledgeBase.items.1'),
+        t('resources.knowledgeBase.items.2'),
+        t('resources.knowledgeBase.items.3'),
       ],
       href: '/knowledge-base',
     },
     {
-      title: 'Community Forum',
-      description: 'Connect with other Syndik users and share experiences',
+      title: t('resources.communityForum.title'),
+      description: t('resources.communityForum.description'),
       icon: Users,
       items: [
-        'User Discussions',
-        'Feature Requests',
-        'Success Stories',
-        'Tips & Tricks',
+        t('resources.communityForum.items.0'),
+        t('resources.communityForum.items.1'),
+        t('resources.communityForum.items.2'),
+        t('resources.communityForum.items.3'),
       ],
       href: '/community',
     },
@@ -106,13 +112,12 @@ export default function HelpPage() {
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-4xl text-center'>
+            {' '}
             <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-              Help & Support
+              {t('title')}
             </h1>
             <p className='mt-6 text-lg leading-8 text-gray-600'>
-              We&apos;re here to help you get the most out of Syndik. Find
-              answers, get support, and learn how to optimize your syndicate
-              management.
+              {t('subtitle')}
             </p>
           </div>
         </div>
@@ -157,55 +162,73 @@ export default function HelpPage() {
       <div className='py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl'>
+            {' '}
             <div className='mb-12 text-center'>
               <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-                Send Us a Message
+                {t('contactForm.title')}
               </h2>
               <p className='mt-4 text-lg text-gray-600'>
-                Can&apos;t find what you&apos;re looking for? Send us a detailed
-                message and we&apos;ll get back to you quickly.
+                {t('contactForm.subtitle')}
               </p>
             </div>
             <Card>
               <CardHeader>
-                <CardTitle>Contact Support</CardTitle>
+                <CardTitle>{t('contactForm.cardTitle')}</CardTitle>
               </CardHeader>
               <CardContent className='space-y-6'>
                 <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
                   <div className='space-y-2'>
-                    <Label htmlFor='firstName'>First Name</Label>
-                    <Input id='firstName' placeholder='Enter your first name' />
+                    <Label htmlFor='firstName'>
+                      {t('contactForm.fields.firstName.label')}
+                    </Label>
+                    <Input
+                      id='firstName'
+                      placeholder={t(
+                        'contactForm.fields.firstName.placeholder'
+                      )}
+                    />
                   </div>
                   <div className='space-y-2'>
-                    <Label htmlFor='lastName'>Last Name</Label>
-                    <Input id='lastName' placeholder='Enter your last name' />
+                    <Label htmlFor='lastName'>
+                      {t('contactForm.fields.lastName.label')}
+                    </Label>
+                    <Input
+                      id='lastName'
+                      placeholder={t('contactForm.fields.lastName.placeholder')}
+                    />
                   </div>
                 </div>
                 <div className='space-y-2'>
-                  <Label htmlFor='email'>Email</Label>
+                  <Label htmlFor='email'>
+                    {t('contactForm.fields.email.label')}
+                  </Label>
                   <Input
                     id='email'
                     type='email'
-                    placeholder='Enter your email address'
+                    placeholder={t('contactForm.fields.email.placeholder')}
                   />
                 </div>
                 <div className='space-y-2'>
-                  <Label htmlFor='subject'>Subject</Label>
+                  <Label htmlFor='subject'>
+                    {t('contactForm.fields.subject.label')}
+                  </Label>
                   <Input
                     id='subject'
-                    placeholder='What can we help you with?'
+                    placeholder={t('contactForm.fields.subject.placeholder')}
                   />
                 </div>
                 <div className='space-y-2'>
-                  <Label htmlFor='message'>Message</Label>
+                  <Label htmlFor='message'>
+                    {t('contactForm.fields.message.label')}
+                  </Label>
                   <Textarea
                     id='message'
-                    placeholder='Please describe your question or issue in detail...'
+                    placeholder={t('contactForm.fields.message.placeholder')}
                     rows={6}
                   />
                 </div>
                 <Button className='w-full'>
-                  Send Message
+                  {t('contactForm.submitButton')}
                   <ArrowRight className='ml-2 h-4 w-4' />
                 </Button>
               </CardContent>
@@ -217,13 +240,13 @@ export default function HelpPage() {
       {/* Resources Section */}
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+          {' '}
           <div className='mx-auto mb-16 max-w-2xl text-center'>
             <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-              Self-Service Resources
+              {t('resources.title')}
             </h2>
             <p className='mt-6 text-lg leading-8 text-gray-600'>
-              Find answers and learn new skills with our comprehensive resource
-              library.
+              {t('resources.subtitle')}
             </p>
           </div>
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
@@ -250,11 +273,18 @@ export default function HelpPage() {
                         {item}
                       </li>
                     ))}
-                  </ul>
+                  </ul>{' '}
                   <Link href={resource.href}>
-                    <Button variant='outline' className='w-full'>
-                      Explore {resource.title}
-                      <ArrowRight className='ml-2 h-4 w-4' />
+                    <Button variant='outline' className='w-full space-x-2'>
+                      {resource.href === '/docs' &&
+                        t('resources.documentation.action')}
+                      {resource.href === '/tutorials' &&
+                        t('resources.videoTutorials.action')}
+                      {resource.href === '/knowledge-base' &&
+                        t('resources.knowledgeBase.action')}
+                      {resource.href === '/community' &&
+                        t('resources.communityForum.action')}
+                      <ArrowRight className='h-4 w-4 rtl:rotate-180' />
                     </Button>
                   </Link>
                 </CardContent>
@@ -265,28 +295,27 @@ export default function HelpPage() {
       </div>
 
       {/* Emergency Support */}
-      <div className='border-l-4 border-red-400 bg-red-50 py-16'>
+      <div className='border-l-4 border-red-400 bg-red-50 py-16 rtl:border-r-4 rtl:border-l-0'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='flex items-center gap-4'>
             <div className='flex-shrink-0'>
               <Phone className='h-8 w-8 text-red-600' />
-            </div>
+            </div>{' '}
             <div>
               <h3 className='text-lg font-semibold text-red-800'>
-                Emergency Support
+                {t('emergency.title')}
               </h3>
               <p className='text-red-700'>
-                For critical system issues affecting your syndicate operations,
-                call our emergency hotline:
+                {t('emergency.description')}
                 <a
-                  href='tel:+1-800-EMERGENCY'
+                  href={`tel:${t('emergency.phone')}`}
                   className='ml-1 font-semibold hover:underline'
                 >
-                  +1-800-EMERGENCY
+                  {t('emergency.phone')}
                 </a>
               </p>
               <p className='mt-1 text-sm text-red-600'>
-                Available 24/7 for Enterprise customers
+                {t('emergency.availability')}
               </p>
             </div>
           </div>

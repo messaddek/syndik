@@ -1,6 +1,12 @@
 {
   "title": "User Guide",
   "subtitle": "Everything you need to know to manage your properties effectively",
+  "common": {
+    "numberMostPopular": "#{number} Most Popular",
+    "popular": "Popular",
+    "readTime": "min",
+    "readTimeMinutes": "min"
+  },
   "categories": {
     "gettingStarted": {
       "title": "Getting Started",
@@ -32,6 +38,58 @@
     "loadingData": "Loading latest data...",
     "updatedRealTime": "Updated in real-time"
   },
+  "articleTitles": {
+    "creating-your-first-property": "Creating Your First Property",
+    "setting-up-user-accounts": "Setting Up User Accounts",
+    "understanding-roles-permissions": "Understanding Roles & Permissions",
+    "initial-configuration-guide": "Initial Configuration Guide",
+    "adding-new-properties": "Adding New Properties",
+    "unit-management-organization": "Unit Management & Organization",
+    "property-information-updates": "Property Information Updates",
+    "document-management-system": "Document Management System",
+    "adding-new-residents": "Adding New Residents",
+    "lease-agreement-management": "Lease Agreement Management",
+    "resident-communication-tools": "Resident Communication Tools",
+    "move-in-move-out-process": "Move-in/Move-out Process",
+    "setting-up-rent-collection": "Setting Up Rent Collection",
+    "processing-payments": "Processing Payments",
+    "generating-financial-reports": "Generating Financial Reports",
+    "late-payment-management": "Late Payment Management",
+    "creating-work-orders": "Creating Work Orders",
+    "tracking-maintenance-requests": "Tracking Maintenance Requests",
+    "vendor-management": "Vendor Management",
+    "preventive-maintenance-setup": "Preventive Maintenance Setup",
+    "sending-announcements": "Sending Announcements",
+    "individual-messaging": "Individual Messaging",
+    "notification-settings": "Notification Settings",
+    "email-templates": "Email Templates"
+  },
+  "articleDescriptions": {
+    "creating-your-first-property": "Essential setup and first steps for property creation",
+    "setting-up-user-accounts": "Create and manage user accounts for your team",
+    "understanding-roles-permissions": "Learn about user roles and permission management",
+    "initial-configuration-guide": "Complete system setup and configuration",
+    "adding-new-properties": "How to add and configure new properties in the system",
+    "unit-management-organization": "Organize and manage units within your properties",
+    "property-information-updates": "Keep property information current and accurate",
+    "document-management-system": "Store and organize property-related documents",
+    "adding-new-residents": "How to onboard new residents to your property",
+    "lease-agreement-management": "Create, manage, and track lease agreements",
+    "resident-communication-tools": "Use communication tools to stay connected with residents",
+    "move-in-move-out-process": "Streamline the move-in and move-out procedures",
+    "setting-up-rent-collection": "Configure automated rent collection and payment processing",
+    "processing-payments": "Handle and process various payment types",
+    "generating-financial-reports": "Create and analyze financial reports",
+    "late-payment-management": "Handle late payments and collection procedures",
+    "creating-work-orders": "Create and manage maintenance work orders",
+    "tracking-maintenance-requests": "Monitor and manage maintenance requests from residents",
+    "vendor-management": "Manage relationships with maintenance vendors",
+    "preventive-maintenance-setup": "Set up scheduled preventive maintenance programs",
+    "sending-announcements": "Communicate effectively with all residents",
+    "individual-messaging": "Send direct messages to specific residents",
+    "notification-settings": "Configure notification preferences and settings",
+    "email-templates": "Create and manage email templates for common communications"
+  },
   "sidebar": {
     "quickStart": "Quick Start",
     "createFirstProperty": "Create Your First Property",
@@ -40,5 +98,10 @@
     "needHelp": "Need Help?",
     "contactSupport": "Contact Support",
     "viewFaq": "View FAQ"
+  },
+  "search": {
+    "title": "Search User Guide",
+    "placeholder": "Search user guide articles...",
+    "noResults": "No results found. Try different keywords."
   }
 }

@@ -6,6 +6,7 @@ import { OrganizationSwitcherCustom } from './organization-switcher';
 import { AccountInitForm } from '@/modules/accounts/ui/components/account-init-form';
 import { useTRPC } from '@/trpc/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { usePathname } from '@/i18n/routing';
 import { getLoadingSkeleton } from '../utils/get-loading-skeleton';
 
