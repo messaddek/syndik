@@ -12,6 +12,7 @@ import {
   Settings,
   HelpCircle,
   Bell,
+  Shield,
 } from 'lucide-react';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 
@@ -29,12 +30,14 @@ import {
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { OrganizationQuota } from '@/components/organization-quota';
+import { useHelpdeskPermissions } from '@/modules/helpdesk/hooks/use-helpdesk-permissions';
 
 export function DashboardSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations('navigation');
   const tCommon = useTranslations('common');
+  const { canAccessAdminPortal } = useHelpdeskPermissions();
 
   const navigation = [
     { name: t('dashboard'), href: '/dashboard', icon: BarChart3 },
@@ -43,6 +46,7 @@ export function DashboardSidebar() {
     { name: t('residents'), href: '/residents', icon: Users },
     { name: t('finances'), href: '/finances', icon: TrendingUp },
     { name: t('meetings'), href: '/meetings', icon: Calendar },
+    { name: t('helpdesk'), href: '/helpdesk', icon: HelpCircle },
     { name: t('notifications'), href: '/notifications', icon: Bell },
   ];
   const footerNavigation = [
@@ -52,6 +56,10 @@ export function DashboardSidebar() {
 
   const handlePortalAccess = () => {
     router.push('/org-redirect?target=portal');
+  };
+
+  const handleAdminAccess = () => {
+    router.push('/admin');
   };
   return (
     <Sidebar>
@@ -105,12 +113,12 @@ export function DashboardSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-      </SidebarContent>
+      </SidebarContent>{' '}
       <SidebarFooter>
         <div className='border-t px-4 py-3'>
           <OrganizationQuota />
         </div>
-        <div className='px-4 pb-2'>
+        <div className='space-y-2 px-4 pb-2'>
           <Button
             variant='outline'
             size='sm'
@@ -120,6 +128,20 @@ export function DashboardSidebar() {
             <Home className='h-4 w-4' />
             <span>{tCommon('residentPortal')}</span>
           </Button>
+
+          {canAccessAdminPortal && (
+            <Button
+              variant='outline'
+              size='sm'
+              onClick={handleAdminAccess}
+              className={cn(
+                'flex w-full items-center gap-2 border-orange-200 text-orange-700 hover:bg-orange-50 hover:text-orange-800'
+              )}
+            >
+              <Shield className='h-4 w-4' />
+              <span>Admin Portal</span>
+            </Button>
+          )}
         </div>
         <SidebarMenu>
           {footerNavigation.map(item => {

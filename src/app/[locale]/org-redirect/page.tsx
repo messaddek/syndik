@@ -22,7 +22,7 @@ export default function OrgRedirectPage() {
 
     if (!user || !organization) {
       // If no user or organization, redirect to org-switcher
-      router.push(`${locale}/org-switcher`);
+      router.push(`/org-switcher`);
       return;
     }
 
@@ -33,7 +33,7 @@ export default function OrgRedirectPage() {
 
     if (!membership) {
       // User is not a member of this organization
-      router.push(`${locale}/org-switcher`);
+      router.push(`/org-switcher`);
       return;
     }
 
@@ -42,7 +42,7 @@ export default function OrgRedirectPage() {
     // Handle target-specific routing
     if (target === 'portal') {
       // Always go to portal if specifically requested
-      router.push(`${locale}/portal`);
+      router.push(`/portal`);
       return;
     }
 
@@ -50,14 +50,14 @@ export default function OrgRedirectPage() {
     if (role === 'org:admin' || role === 'org:member') {
       // Admins and managers go to dashboard
       if (role === 'org:admin') {
-        router.push(`${locale}/dashboard`);
+        router.push(`/dashboard`);
       } else {
         // Members (residents) go to portal
-        router.push(`${locale}/portal`);
+        router.push(`/portal`);
       }
     } else {
       // Unknown role, default to portal
-      router.push(`${locale}/portal`);
+      router.push(`/portal`);
     }
   }, [userLoaded, orgLoaded, user, organization, router, target, locale]); // Show loading state while determining where to redirect
   return (
