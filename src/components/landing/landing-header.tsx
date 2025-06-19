@@ -77,10 +77,9 @@ export function LandingHeader() {
             {isSignedIn ? (
               <>
                 <Button variant='ghost' size='sm' asChild>
-                  <Link href='/dashboard'>{t('dashboard')}</Link>
+                  <Link href='/dashboard'>{t('dashboard')}</Link>{' '}
                 </Button>
                 <UserButton
-                  afterSignOutUrl='/'
                   appearance={{
                     elements: {
                       avatarBox: 'h-8 w-8',
@@ -150,10 +149,9 @@ export function LandingHeader() {
                       asChild
                     >
                       <Link href='/dashboard'>{t('dashboard')}</Link>
-                    </Button>
+                    </Button>{' '}
                     <div className='flex items-center justify-center pt-2'>
                       <UserButton
-                        afterSignOutUrl='/'
                         appearance={{
                           elements: {
                             avatarBox: 'h-8 w-8',

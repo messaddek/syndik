@@ -46,14 +46,18 @@ export default clerkMiddleware(async (auth, req) => {
     '🌐 Middleware - Environment:',
     isDevelopment ? 'development' : 'production'
   );
+
+  // CRITICAL: Handle authentication for protected routes FIRST
+  // This must be done before any response is returned to avoid header mutation
+  if (!isPublicRoute(req)) {
+    console.log('� Protected Route - Authenticating:', pathname);
+    await auth.protect();
+  }
+
   // CRITICAL: Handle API routes first - skip all subdomain logic
   if (pathname.startsWith('/api')) {
     console.log('🔧 API Route - Skipping subdomain logic:', pathname);
-    // Only protect routes that are not public
-    if (!isPublicRoute(req)) {
-      await auth.protect();
-    }
-    return; // Early return for API routes
+    return; // Early return for API routes - auth already handled above
   }
 
   // Skip subdomain logic for static files and Next.js internals
@@ -310,14 +314,8 @@ export default clerkMiddleware(async (auth, req) => {
   // Skip intl middleware for API routes only
   // Allow sign-in/sign-up to go through intl middleware for proper locale redirection
   // NOTE: API routes are handled at the beginning of the middleware with early return
-
   // Apply internationalization for all other requests (excluding API routes)
   const response = intlMiddleware(req);
-
-  // Only protect routes that are not public
-  if (!isPublicRoute(req)) {
-    await auth.protect();
-  }
 
   return response;
 });

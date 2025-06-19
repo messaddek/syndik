@@ -129,8 +129,7 @@ export function DashboardNavbar() {
         {/* Mobile Right - User Controls */}
         <div className='flex items-center gap-1'>
           <OrganizationStatus />
-          <LanguageSwitcher />
-          <ModeToggle />{' '}
+          <LanguageSwitcher /> <ModeToggle />{' '}
           {isLoaded && user ? (
             <UserButton
               appearance={{
@@ -190,7 +189,7 @@ export function DashboardNavbar() {
           {isLoaded && user ? (
             <div className='flex items-center space-x-4'>
               <span className='hidden text-sm text-gray-600 xl:block dark:text-gray-300'>
-                {t('welcome')}, {user.firstName}!
+                {t('welcome')}, {user.firstName}!{' '}
               </span>{' '}
               <UserButton
                 appearance={{
