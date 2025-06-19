@@ -3,13 +3,55 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
+interface TranslationResult {
+  success: boolean;
+  value?: string;
+  error?: string;
+}
+
+interface UrlInfo {
+  fullUrl: string;
+  hostname: string;
+  pathname: string;
+  search: string;
+  hash: string;
+  origin: string;
+}
+
+interface TranslationTests {
+  navigation: {
+    backToLanding: TranslationResult;
+    dashboard: TranslationResult;
+  };
+  common: {
+    loading: TranslationResult;
+  };
+  dashboard: {
+    title: TranslationResult;
+  };
+}
+
+interface LocalStorageInfo {
+  preferredLocale: string | null;
+  allKeys: string[];
+}
+
+interface Diagnostics {
+  timestamp: string;
+  locale: string;
+  urlInfo: UrlInfo;
+  translationTests: TranslationTests;
+  cookies: string;
+  localStorage: LocalStorageInfo | string;
+}
+
 /**
  * URL and Translation Diagnostic Component
  * Specifically to debug the Arabic translation issue
  */
 export function UrlTranslationDiagnostic() {
   const locale = useLocale();
-  const [diagnostics, setDiagnostics] = useState<any>(null);
+  const [diagnostics, setDiagnostics] = useState<Diagnostics | null>(null);
 
   // Try different translation namespaces
   const tNavigation = useTranslations('navigation');
