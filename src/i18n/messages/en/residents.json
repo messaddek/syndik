@@ -111,7 +111,16 @@
     "sendInvitations": "Send Invitations",
     "successMessage": "Successfully sent {count} invitation(s)",
     "partialSuccessMessage": "Sent {successCount} invitations successfully, {errorCount} failed",
-    "allFailedMessage": "Failed to send all invitations"
+    "allFailedMessage": "Failed to send all invitations",
+    "alreadyInvited": "{count} resident(s) already have pending invitations",
+    "otherErrors": "{count} invitation(s) failed for other reasons",
+    "failedToSend": "Failed to send invitations",
+    "selectResidents": "Please select at least one resident to invite",
+    "sending": "Sending...",
+    "alreadyMember": "{count, plural, =1 {# resident is} other {# residents are}} already a member: {names}",
+    "alreadyInvitedDetailed": "{count, plural, =1 {# resident already has} other {# residents already have}} pending invitations: {names}",
+    "invalidEmails": "Invalid email addresses: {names}",
+    "otherErrorsDetailed": "{count, plural, =1 {# invitation failed} other {# invitations failed}} for other reasons. Check console for details."
   },
   "invite": {
     "dialogTitle": "Invite to Resident Portal",

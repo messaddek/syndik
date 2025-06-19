@@ -111,7 +111,16 @@
     "sendInvitations": "إرسال الدعوات",
     "successMessage": "تم إرسال {count} دعوة بنجاح",
     "partialSuccessMessage": "تم إرسال {successCount} دعوة بنجاح، فشل {errorCount}",
-    "allFailedMessage": "فشل في إرسال جميع الدعوات"
+    "allFailedMessage": "فشل في إرسال جميع الدعوات",
+    "alreadyInvited": "{count} ساكن لديهم دعوات معلقة بالفعل",
+    "otherErrors": "{count} دعوة فشلت لأسباب أخرى",
+    "failedToSend": "فشل في إرسال الدعوات",
+    "selectResidents": "يرجى تحديد ساكن واحد على الأقل للدعوة",
+    "sending": "جارٍ الإرسال...",
+    "alreadyMember": "{count, plural, =1 {ساكن واحد عضو} other {# سكان أعضاء}} بالفعل: {names}",
+    "alreadyInvitedDetailed": "{count, plural, =1 {ساكن واحد لديه} other {# سكان لديهم}} دعوات معلقة بالفعل: {names}",
+    "invalidEmails": "عناوين بريد إلكتروني غير صالحة: {names}",
+    "otherErrorsDetailed": "{count, plural, =1 {دعوة واحدة فشلت} other {# دعوات فشلت}} لأسباب أخرى. تحقق من وحدة التحكم للحصول على التفاصيل."
   },
   "invite": {
     "dialogTitle": "دعوة إلى بوابة السكان",

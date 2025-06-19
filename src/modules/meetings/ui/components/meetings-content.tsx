@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import {
   Card,
   CardContent,
@@ -28,14 +29,15 @@ import { useConfirm } from '@/hooks/use-confirm';
 import { Link } from '@/i18n/routing';
 
 export function MeetingsContent() {
+  const t = useTranslations('meetings');
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [showCreateDialog, setShowCreateDialog] = useState(false);
 
   // Confirmation dialog
   const [ConfirmDialog, confirm] = useConfirm(
-    'Delete Meeting',
-    'Are you sure you want to delete this meeting? This action cannot be undone.'
+    t('delete_meeting_title'),
+    t('delete_meeting_description')
   );
 
   const { data: allMeetings = [] } = useQuery(
@@ -81,9 +83,9 @@ export function MeetingsContent() {
     }
   };
   const getBuildingName = (buildingId?: string | null) => {
-    if (!buildingId) return 'General Meeting';
+    if (!buildingId) return t('general_meeting');
     const building = buildings.find(b => b.id === buildingId);
-    return building?.name || 'Unknown Building';
+    return building?.name || t('unknown_building');
   };
   const isUpcoming = (date: Date) => isAfter(new Date(date), new Date());
 
@@ -110,13 +112,13 @@ export function MeetingsContent() {
                   className='bg-green-100 text-green-800'
                 >
                   <CheckCircle className='mr-1 h-3 w-3' />
-                  Completed
+                  {t('completed')}
                 </Badge>
               )}
               {!meeting.isCompleted && isUpcoming(meeting.scheduledDate) && (
                 <Badge variant='outline'>
                   <Clock className='mr-1 h-3 w-3' />
-                  Upcoming
+                  {t('upcoming')}
                 </Badge>
               )}
             </CardTitle>
@@ -156,14 +158,14 @@ export function MeetingsContent() {
 
           {meeting.agenda && (
             <div>
-              <h4 className='mb-1 text-sm font-medium'>Agenda:</h4>
+              <h4 className='mb-1 text-sm font-medium'>{t('agenda_title')}</h4>
               <p className='text-sm text-gray-600'>{meeting.agenda}</p>
             </div>
           )}
 
           {meeting.minutes && (
             <div>
-              <h4 className='mb-1 text-sm font-medium'>Minutes:</h4>
+              <h4 className='mb-1 text-sm font-medium'>{t('minutes_title')}</h4>
               <p className='text-sm text-gray-600'>{meeting.minutes}</p>
             </div>
           )}
@@ -171,7 +173,7 @@ export function MeetingsContent() {
           {meeting.maxParticipants && (
             <p className='text-muted-foreground flex items-center gap-1 text-sm'>
               <Users className='h-4 w-4' />
-              Max participants: {meeting.maxParticipants}
+              {t('max_participants_text')} {meeting.maxParticipants}
             </p>
           )}
         </div>
@@ -184,7 +186,7 @@ export function MeetingsContent() {
               onClick={() => handleMarkComplete(meeting.id)}
               disabled={completeMeeting.isPending}
             >
-              Mark Complete
+              {t('mark_complete')}
             </Button>
           )}
           <Button
@@ -193,7 +195,7 @@ export function MeetingsContent() {
             onClick={() => handleDelete(meeting.id)}
             disabled={deleteMeeting.isPending}
           >
-            Delete
+            {t('delete')}
           </Button>
         </div>
       </CardContent>
@@ -207,7 +209,7 @@ export function MeetingsContent() {
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
             <CardTitle className='text-sm font-medium'>
-              Total Meetings
+              {t('statistics.total_meetings')}
             </CardTitle>
             <Calendar className='text-muted-foreground h-4 w-4' />
           </CardHeader>
@@ -218,7 +220,9 @@ export function MeetingsContent() {
 
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Upcoming</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('statistics.upcoming_meetings')}
+            </CardTitle>
             <Clock className='text-muted-foreground h-4 w-4' />
           </CardHeader>{' '}
           <CardContent>
@@ -230,7 +234,9 @@ export function MeetingsContent() {
 
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Completed</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('statistics.completed_meetings')}
+            </CardTitle>
             <CheckCircle className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
@@ -242,7 +248,9 @@ export function MeetingsContent() {
 
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>This Month</CardTitle>
+            <CardTitle className='text-sm font-medium'>
+              {t('statistics.this_month')}
+            </CardTitle>
             <Calendar className='text-muted-foreground h-4 w-4' />
           </CardHeader>
           <CardContent>
@@ -264,39 +272,39 @@ export function MeetingsContent() {
 
       {/* Add Meeting Button */}
       <div className='flex items-center justify-between'>
-        <h2 className='text-2xl font-bold'>Meetings Management</h2>
+        <h2 className='text-2xl font-bold'>{t('meetings_management')}</h2>
         <Button
           onClick={() => setShowCreateDialog(true)}
           className='flex items-center gap-2'
         >
           <Plus className='h-4 w-4' />
-          Schedule Meeting
+          {t('schedule_meeting_button')}
         </Button>
       </div>
 
       {/* Meetings Tabs */}
       <Tabs defaultValue='upcoming' className='w-full'>
         <TabsList>
-          <TabsTrigger value='upcoming'>Upcoming</TabsTrigger>
-          <TabsTrigger value='past'>Past</TabsTrigger>
-          <TabsTrigger value='all'>All</TabsTrigger>
+          <TabsTrigger value='upcoming'>{t('upcoming_tab')}</TabsTrigger>
+          <TabsTrigger value='past'>{t('past_tab')}</TabsTrigger>
+          <TabsTrigger value='all'>{t('all_tab')}</TabsTrigger>
         </TabsList>{' '}
         <TabsContent value='upcoming' className='space-y-4'>
           {upcomingMeetings.length === 0 ? (
             <Card>
               <CardContent className='flex flex-col items-center justify-center p-8'>
                 <h3 className='mb-2 text-lg font-medium text-gray-900'>
-                  No upcoming meetings
+                  {t('no_upcoming_meetings')}
                 </h3>
                 <p className='mb-4 text-sm text-gray-600'>
-                  Schedule your next meeting to keep residents informed.
+                  {t('no_upcoming_meetings_description')}
                 </p>
                 <Button
                   onClick={() => setShowCreateDialog(true)}
                   className='flex items-center gap-2'
                 >
                   <Plus className='h-4 w-4' />
-                  Schedule First Meeting
+                  {t('schedule_first_meeting')}
                 </Button>
               </CardContent>
             </Card>
@@ -313,10 +321,10 @@ export function MeetingsContent() {
             <Card>
               <CardContent className='flex flex-col items-center justify-center p-8'>
                 <h3 className='mb-2 text-lg font-medium text-gray-900'>
-                  No past meetings
+                  {t('no_past_meetings')}
                 </h3>
                 <p className='text-sm text-gray-600'>
-                  Past meetings will appear here once they are completed.
+                  {t('no_past_meetings_description')}
                 </p>
               </CardContent>
             </Card>
@@ -333,17 +341,17 @@ export function MeetingsContent() {
             <Card>
               <CardContent className='flex flex-col items-center justify-center p-8'>
                 <h3 className='mb-2 text-lg font-medium text-gray-900'>
-                  No meetings found
+                  {t('no_meetings_found')}
                 </h3>
                 <p className='mb-4 text-sm text-gray-600'>
-                  Start by scheduling your first meeting.
+                  {t('no_meetings_found_description')}
                 </p>
                 <Button
                   onClick={() => setShowCreateDialog(true)}
                   className='flex items-center gap-2'
                 >
                   <Plus className='h-4 w-4' />
-                  Schedule First Meeting
+                  {t('schedule_first_meeting')}
                 </Button>
               </CardContent>
             </Card>

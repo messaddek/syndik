@@ -375,7 +375,9 @@ export function useCrossSubdomainNavigation() {
 /**
  * Get the landing page URL for the current environment
  * This ensures we always point to the correct main domain
+ * @param locale - The locale to include in the URL (e.g., 'en', 'fr', 'ar')
  */
-export function getLandingUrl(): string {
-  return buildSubdomainUrl(SUBDOMAINS.MAIN, '/');
+export function getLandingUrl(locale?: string): string {
+  const basePath = locale && locale !== 'en' ? `/${locale}` : '/';
+  return buildSubdomainUrl(SUBDOMAINS.MAIN, basePath);
 }

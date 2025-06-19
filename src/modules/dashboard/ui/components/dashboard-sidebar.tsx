@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import {
   Building2,
@@ -41,6 +41,7 @@ import {
 export function DashboardSidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
   const t = useTranslations('navigation');
   const tCommon = useTranslations('common');
   const { canAccessAdminPortal } = useHelpdeskPermissions();
@@ -72,9 +73,8 @@ export function DashboardSidebar() {
       window.location.href = adminUrl;
     }
   };
-
   const handleBackToLanding = () => {
-    const landingUrl = getLandingUrl();
+    const landingUrl = getLandingUrl(locale);
     window.location.href = landingUrl;
   };
 

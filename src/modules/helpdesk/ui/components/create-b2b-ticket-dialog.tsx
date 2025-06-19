@@ -4,6 +4,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useTranslations } from 'next-intl';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import {
@@ -98,13 +99,14 @@ const urgencyColors = {
   critical: 'bg-red-100 text-red-800',
 };
 
-export function CreateB2BTicketDialog({
+export const CreateB2BTicketDialog = ({
   children,
   onSuccess,
   trigger,
   open: isOpen,
   onOpenChange,
-}: CreateB2BTicketDialogProps) {
+}: CreateB2BTicketDialogProps) => {
+  const t = useTranslations('helpDesk');
   const [internalOpen, setInternalOpen] = React.useState(false);
 
   // Use external state if provided, otherwise use internal state
@@ -134,16 +136,14 @@ export function CreateB2BTicketDialog({
   const createB2BTicket = useMutation(
     trpc.helpdesk.createB2BTicket.mutationOptions({
       onSuccess: () => {
-        toast.success('B2B support ticket created successfully');
+        toast.success(t('ticket_created'));
         form.reset();
         setOpen(false);
         onSuccess?.();
       },
       onError: (error: unknown) => {
         const message =
-          error instanceof Error
-            ? error.message
-            : 'Failed to create B2B ticket';
+          error instanceof Error ? error.message : t('error_creating_ticket');
         toast.error(message);
       },
     })
@@ -179,16 +179,18 @@ export function CreateB2BTicketDialog({
         title={
           <div className='flex items-center gap-2'>
             <AlertTriangle className='h-5 w-5 text-orange-500' />
-            Create B2B Support Ticket
+            {t('b2b_ticket_title')}
           </div>
         }
-        description='Submit a ticket for support with the Syndik platform'
+        description={t('b2b_ticket_description')}
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
             {/* Basic Information */}
             <div className='space-y-4'>
-              <h3 className='text-lg font-semibold'>Ticket Information</h3>
+              <h3 className='text-lg font-semibold'>
+                {t('ticket_information')}
+              </h3>
 
               <FormField
                 control={form.control}
@@ -550,7 +552,7 @@ export function CreateB2BTicketDialog({
                 variant='outline'
                 onClick={() => setOpen(false)}
               >
-                Cancel
+                {t('cancel')}
               </Button>
               <Button
                 type='submit'
@@ -558,8 +560,8 @@ export function CreateB2BTicketDialog({
                 className='bg-orange-600 hover:bg-orange-700'
               >
                 {createB2BTicket.isPending
-                  ? 'Creating...'
-                  : 'Create B2B Ticket'}
+                  ? t('creating')
+                  : t('create_b2b_ticket_button')}
               </Button>
             </div>{' '}
           </form>
@@ -573,10 +575,10 @@ export function CreateB2BTicketDialog({
       title={
         <div className='flex items-center gap-2'>
           <AlertTriangle className='h-5 w-5 text-orange-500' />
-          Create B2B Support Ticket
+          {t('b2b_ticket_title')}
         </div>
       }
-      description='Submit a ticket for support with the Syndik platform'
+      description={t('b2b_ticket_description')}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -590,7 +592,7 @@ export function CreateB2BTicketDialog({
                 variant='outline'
                 onClick={() => setOpen(false)}
               >
-                Cancel
+                {t('cancel')}
               </Button>
               <Button
                 type='submit'
@@ -598,8 +600,8 @@ export function CreateB2BTicketDialog({
                 className='bg-orange-600 hover:bg-orange-700'
               >
                 {createB2BTicket.isPending
-                  ? 'Creating...'
-                  : 'Create B2B Ticket'}
+                  ? t('creating')
+                  : t('create_b2b_ticket_button')}
               </Button>
             </div>
           </div>
@@ -607,4 +609,4 @@ export function CreateB2BTicketDialog({
       </Form>
     </ResponsiveDialog>
   );
-}
+};

@@ -111,7 +111,16 @@
     "sendInvitations": "Envoyer les invitations",
     "successMessage": "{count} invitation(s) envoyée(s) avec succès",
     "partialSuccessMessage": "{successCount} invitations envoyées avec succès, {errorCount} ont échoué",
-    "allFailedMessage": "Échec de l'envoi de toutes les invitations"
+    "allFailedMessage": "Échec de l'envoi de toutes les invitations",
+    "alreadyInvited": "{count} résident(s) ont déjà des invitations en attente",
+    "otherErrors": "{count} invitation(s) ont échoué pour d'autres raisons",
+    "failedToSend": "Échec de l'envoi des invitations",
+    "selectResidents": "Veuillez sélectionner au moins un résident à inviter",
+    "sending": "Envoi en cours...",
+    "alreadyMember": "{count, plural, =1 {# résident est} other {# résidents sont}} déjà membre(s) : {names}",
+    "alreadyInvitedDetailed": "{count, plural, =1 {# résident a} other {# résidents ont}} déjà des invitations en attente : {names}",
+    "invalidEmails": "Adresses e-mail invalides : {names}",
+    "otherErrorsDetailed": "{count, plural, =1 {# invitation a échoué} other {# invitations ont échoué}} pour d'autres raisons. Vérifiez la console pour plus de détails."
   },
   "invite": {
     "dialogTitle": "Inviter au portail des résidents",

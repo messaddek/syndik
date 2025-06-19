@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import {
   CreditCard,
@@ -44,6 +44,7 @@ export function PortalSidebar() {
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
   const { canAccessAdminPortal } = useHelpdeskPermissions();
 
   const navigationItems = [
@@ -110,9 +111,8 @@ export function PortalSidebar() {
   const handleDashboardAccess = () => {
     router.push('/org-redirect');
   };
-
   const handleBackToLanding = () => {
-    const landingUrl = getLandingUrl();
+    const landingUrl = getLandingUrl(locale);
     window.location.href = landingUrl;
   };
 
