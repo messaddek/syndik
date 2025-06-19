@@ -152,12 +152,10 @@ export function PortalSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
-      </SidebarContent>{' '}
+      </SidebarContent>
       <SidebarFooter className='border-t p-4'>
-        {' '}
         {canAccessAdminPortal && (
           <div className='mb-3'>
-            {' '}
             <Button
               onClick={() => {
                 // Use route-based navigation for admin portal in development

@@ -129,7 +129,8 @@ export function DashboardNavbar() {
         {/* Mobile Right - User Controls */}
         <div className='flex items-center gap-1'>
           <OrganizationStatus />
-          <LanguageSwitcher /> <ModeToggle />{' '}
+          <LanguageSwitcher />
+          <ModeToggle />
           {isLoaded && user ? (
             <UserButton
               appearance={{
@@ -189,8 +190,8 @@ export function DashboardNavbar() {
           {isLoaded && user ? (
             <div className='flex items-center space-x-4'>
               <span className='hidden text-sm text-gray-600 xl:block dark:text-gray-300'>
-                {t('welcome')}, {user.firstName}!{' '}
-              </span>{' '}
+                {t('welcome')}, {user.firstName}!
+              </span>
               <UserButton
                 appearance={{
                   elements: {
@@ -214,7 +215,7 @@ export function DashboardNavbar() {
             </div>
           ) : (
             <div className='h-8 w-8 animate-pulse rounded-full bg-gray-200 dark:bg-gray-700' />
-          )}{' '}
+          )}
         </div>
       </div>
       {/* Command Dialog */}
@@ -229,7 +230,7 @@ export function DashboardNavbar() {
           value={searchQuery}
           onValueChange={setSearchQuery}
           className='text-base sm:text-sm' // Larger text on mobile
-        />{' '}
+        />
         <CommandList className='max-h-[50vh] sm:max-h-[60vh]'>
           {/* Limit height on mobile */}
           {searchQuery.length === 0 && (
@@ -259,7 +260,7 @@ export function DashboardNavbar() {
                         onSelect={() => handleSelect('building', building.id)}
                         className='flex min-h-[60px] items-start gap-3 p-3 sm:min-h-auto' // Larger touch targets on mobile
                       >
-                        <Building2 className='text-primary mt-0.5 h-4 w-4 flex-shrink-0' />{' '}
+                        <Building2 className='text-primary mt-0.5 h-4 w-4 flex-shrink-0' />
                         <div className='min-w-0 flex-1'>
                           {/* Prevent overflow */}
                           <div className='truncate font-medium'>
