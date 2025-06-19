@@ -38,7 +38,6 @@ export default clerkMiddleware(async (auth, req) => {
   const { hostname, pathname } = req.nextUrl;
   const currentSubdomain = getCurrentSubdomain(hostname);
   const isDevelopment = process.env.NODE_ENV === 'development';
-
   console.log('🌐 Middleware - Hostname:', hostname);
   console.log('🌐 Middleware - Pathname:', pathname);
   console.log('🌐 Middleware - Subdomain:', currentSubdomain);
@@ -46,6 +45,28 @@ export default clerkMiddleware(async (auth, req) => {
     '🌐 Middleware - Environment:',
     isDevelopment ? 'development' : 'production'
   );
+
+  // Debug route detection
+  const isDashboardRoute =
+    pathname.startsWith('/dashboard') ||
+    pathname.match(/^\/[a-z]{2}\/dashboard/);
+  const isPortalRoute =
+    pathname.startsWith('/portal') || pathname.match(/^\/[a-z]{2}\/portal/);
+  const isAdminRoute =
+    pathname.startsWith('/admin') || pathname.match(/^\/[a-z]{2}\/admin/);
+
+  if (isDashboardRoute || isPortalRoute || isAdminRoute) {
+    console.log('🔍 Route Detection:', {
+      isDashboardRoute,
+      isPortalRoute,
+      isAdminRoute,
+      currentSubdomain,
+      shouldRedirect:
+        !isDevelopment &&
+        currentSubdomain !== SUBDOMAINS.APP &&
+        currentSubdomain !== SUBDOMAINS.ADMIN,
+    });
+  }
 
   // DEVELOPMENT ONLY: Handle admin-dev routes (fallback when no admin subdomain access)
   if (isDevelopment) {
@@ -129,32 +150,78 @@ export default clerkMiddleware(async (auth, req) => {
       }
     } else if (currentSubdomain === SUBDOMAINS.APP) {
       // App subdomain - handle dashboard and portal routes
+
+      // Hide /dashboard from URLs - rewrite root and locale roots to dashboard
       if (pathname === '/') {
-        // Redirect to role-based routing
-        console.log('🚀 App Root - Redirecting to org-redirect');
-        return NextResponse.rewrite(new URL('/org-redirect', req.url));
+        console.log('🚀 App Root - Rewriting to /en/dashboard');
+        return NextResponse.rewrite(new URL('/en/dashboard', req.url));
       }
+
+      // Handle locale root paths (e.g., /en, /fr) and rewrite to dashboard
+      const localeOnlyMatch = pathname.match(/^\/([a-z]{2})$/);
+      if (localeOnlyMatch) {
+        const [, locale] = localeOnlyMatch;
+        const dashboardPath = `/${locale}/dashboard`;
+        console.log(
+          `🚀 App Locale Root - Rewriting ${pathname} to ${dashboardPath}`
+        );
+        return NextResponse.rewrite(new URL(dashboardPath, req.url));
+      }
+
       // Allow all other routes to proceed normally
     } else if (
       currentSubdomain === SUBDOMAINS.MAIN ||
       currentSubdomain === null
     ) {
       // Main domain - redirect app routes to app subdomain
-      if (
+      const isDashboardRoute =
         pathname.startsWith('/dashboard') ||
-        pathname.startsWith('/portal') ||
-        pathname.startsWith('/org-')
-      ) {
+        pathname.match(/^\/[a-z]{2}\/dashboard/);
+      const isPortalRoute =
+        pathname.startsWith('/portal') || pathname.match(/^\/[a-z]{2}\/portal/);
+      const isOrgRoute =
+        pathname.startsWith('/org-') || pathname.match(/^\/[a-z]{2}\/org-/);
+      if (isDashboardRoute || isPortalRoute || isOrgRoute) {
         const isStaging = hostname.includes('staging.syndik.ma');
         const appDomain = isStaging ? 'app.staging.syndik.ma' : 'app.syndik.ma';
-        const appUrl = `https://${appDomain}${pathname}`;
 
-        console.log('🚀 Redirecting to app subdomain:', pathname, '→', appUrl);
-        return NextResponse.redirect(new URL(appUrl));
-      }
+        // For dashboard routes, redirect to clean URLs (remove /dashboard)
+        if (isDashboardRoute) {
+          let cleanUrl;
+          const localeMatch = pathname.match(/^\/([a-z]{2})\/dashboard(.*)$/);
+          if (localeMatch) {
+            const [, locale, subPath] = localeMatch;
+            // Redirect /en/dashboard to /en, /en/dashboard/settings to /en/settings
+            cleanUrl = `https://${appDomain}/${locale}${subPath || ''}`;
+          } else {
+            // Non-locale dashboard route: /dashboard -> /, /dashboard/settings -> /settings
+            const dashboardPath = pathname.replace('/dashboard', '') || '/';
+            cleanUrl = `https://${appDomain}${dashboardPath}`;
+          }
 
-      // Main domain - redirect admin routes to admin subdomain
-      if (pathname.startsWith('/admin')) {
+          console.log(
+            '🚀 Redirecting dashboard to clean URL:',
+            pathname,
+            '→',
+            cleanUrl
+          );
+          return NextResponse.redirect(new URL(cleanUrl));
+        } else {
+          // For portal and org routes, keep the original path
+          const appUrl = `https://${appDomain}${pathname}`;
+          console.log(
+            '🚀 Redirecting to app subdomain:',
+            pathname,
+            '→',
+            appUrl
+          );
+          return NextResponse.redirect(new URL(appUrl));
+        }
+      } // Main domain - redirect admin routes to admin subdomain
+      const isAdminRoute =
+        pathname.startsWith('/admin') || pathname.match(/^\/[a-z]{2}\/admin/);
+
+      if (isAdminRoute) {
         // Extract locale and admin path
         const localeMatch = pathname.match(/^\/([a-z]{2})\/admin(.*)$/);
         if (localeMatch) {
