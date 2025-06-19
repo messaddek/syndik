@@ -9,7 +9,11 @@ export const routing = defineRouting({
   defaultLocale: 'en',
 
   // Disable automatic locale detection to prevent conflicts with Clerk
+  // but enable locale prefix to ensure URL-based locale detection works
   localeDetection: false,
+
+  // Ensure locale is always in the URL
+  localePrefix: 'always',
 });
 
 // Lightweight wrappers around Next.js' navigation APIs

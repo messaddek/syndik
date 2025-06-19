@@ -167,39 +167,40 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
         <div className='space-y-4'>
           {/* Summary */}
           <div className='bg-muted flex items-center justify-between rounded-lg p-3'>
+            {' '}
             <div className='flex items-center space-x-2'>
               <Mail className='text-muted-foreground h-4 w-4' />
               <span className='text-sm'>
-                {uninvitedResidents.length} resident
-                {uninvitedResidents.length !== 1 ? 's' : ''}
-                {uninvitedResidents.length > 0 ? ' not yet invited' : ''}
+                {t('bulkInvite.residentsCount', {
+                  count: uninvitedResidents.length,
+                })}
+                {uninvitedResidents.length > 0
+                  ? ' ' + t('bulkInvite.notYetInvited')
+                  : ''}
               </span>
             </div>
             {selectedResidents.length > 0 && (
               <Badge variant='secondary'>
-                {selectedResidents.length} selected
+                {selectedResidents.length} {t('bulkInvite.selected')}
               </Badge>
             )}
-          </div>
-
+          </div>{' '}
           {/* Loading state */}
           {isLoading && (
             <div className='flex items-center justify-center py-8'>
               <Loader2 className='h-6 w-6 animate-spin' />
-              <span className='ml-2'>Loading residents...</span>
+              <span className='ml-2'>{t('bulkInvite.loadingResidents')}</span>
             </div>
           )}
-
           {/* No uninvited residents */}
           {!isLoading && uninvitedResidents.length === 0 && (
             <div className='py-8 text-center'>
               <Users className='text-muted-foreground mx-auto mb-4 h-12 w-12' />
               <p className='text-muted-foreground'>
-                All active residents have already been invited to the portal.
+                {t('bulkInvite.noUninvitedMessage')}
               </p>
             </div>
           )}
-
           {/* Residents list */}
           {!isLoading && uninvitedResidents.length > 0 && (
             <>
@@ -266,7 +267,6 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
               </ScrollArea>
             </>
           )}
-
           {/* Actions */}
           {uninvitedResidents.length > 0 && (
             <div className='flex items-center justify-between pt-4'>

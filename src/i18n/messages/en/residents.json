@@ -120,7 +120,12 @@
     "alreadyMember": "{count, plural, =1 {# resident is} other {# residents are}} already a member: {names}",
     "alreadyInvitedDetailed": "{count, plural, =1 {# resident already has} other {# residents already have}} pending invitations: {names}",
     "invalidEmails": "Invalid email addresses: {names}",
-    "otherErrorsDetailed": "{count, plural, =1 {# invitation failed} other {# invitations failed}} for other reasons. Check console for details."
+    "otherErrorsDetailed": "{count, plural, =1 {# invitation failed} other {# invitations failed}} for other reasons. Check console for details.",
+    "residentsCount": "{count, plural, =1 {# resident} other {# residents}}",
+    "notYetInvited": "not yet invited",
+    "selected": "selected",
+    "noUninvitedMessage": "All active residents have already been invited to the portal.",
+    "loadingResidents": "Loading residents..."
   },
   "invite": {
     "dialogTitle": "Invite to Resident Portal",

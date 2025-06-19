@@ -120,7 +120,12 @@
     "alreadyMember": "{count, plural, =1 {ساكن واحد عضو} other {# سكان أعضاء}} بالفعل: {names}",
     "alreadyInvitedDetailed": "{count, plural, =1 {ساكن واحد لديه} other {# سكان لديهم}} دعوات معلقة بالفعل: {names}",
     "invalidEmails": "عناوين بريد إلكتروني غير صالحة: {names}",
-    "otherErrorsDetailed": "{count, plural, =1 {دعوة واحدة فشلت} other {# دعوات فشلت}} لأسباب أخرى. تحقق من وحدة التحكم للحصول على التفاصيل."
+    "otherErrorsDetailed": "{count, plural, =1 {دعوة واحدة فشلت} other {# دعوات فشلت}} لأسباب أخرى. تحقق من وحدة التحكم للحصول على التفاصيل.",
+    "residentsCount": "{count, plural, =1 {ساكن واحد} other {# سكان}}",
+    "notYetInvited": "لم يتم دعوتهم بعد",
+    "selected": "محدد",
+    "noUninvitedMessage": "تم دعوة جميع السكان النشطين بالفعل إلى البوابة.",
+    "loadingResidents": "جارٍ تحميل السكان..."
   },
   "invite": {
     "dialogTitle": "دعوة إلى بوابة السكان",

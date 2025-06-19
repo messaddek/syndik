@@ -120,7 +120,12 @@
     "alreadyMember": "{count, plural, =1 {# résident est} other {# résidents sont}} déjà membre(s) : {names}",
     "alreadyInvitedDetailed": "{count, plural, =1 {# résident a} other {# résidents ont}} déjà des invitations en attente : {names}",
     "invalidEmails": "Adresses e-mail invalides : {names}",
-    "otherErrorsDetailed": "{count, plural, =1 {# invitation a échoué} other {# invitations ont échoué}} pour d'autres raisons. Vérifiez la console pour plus de détails."
+    "otherErrorsDetailed": "{count, plural, =1 {# invitation a échoué} other {# invitations ont échoué}} pour d'autres raisons. Vérifiez la console pour plus de détails.",
+    "residentsCount": "{count, plural, =1 {# résident} other {# résidents}}",
+    "notYetInvited": "pas encore invité(s)",
+    "selected": "sélectionné(s)",
+    "noUninvitedMessage": "Tous les résidents actifs ont déjà été invités au portail.",
+    "loadingResidents": "Chargement des résidents..."
   },
   "invite": {
     "dialogTitle": "Inviter au portail des résidents",
