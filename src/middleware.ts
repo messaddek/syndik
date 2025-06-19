@@ -34,6 +34,29 @@ const isPublicRoute = createRouteMatcher([
 // Create the next-intl middleware
 const intlMiddleware = createMiddleware(routing);
 
+// Helper function to get user's preferred locale
+function getPreferredLocale(req: Request): string {
+  let targetLocale = 'en'; // default fallback
+
+  // 1. Check for locale in cookies (if user has previously selected one)
+  const localeCookie = req.headers.get('cookie')?.match(/NEXT_LOCALE=([^;]+)/)?.[1];
+
+  // 2. Check Accept-Language header
+  const acceptLanguage = req.headers.get('accept-language');
+  const browserLocale = acceptLanguage?.split(',')[0]?.split('-')[0];
+
+  const supportedLocales = ['en', 'fr', 'ar'];
+
+  // Priority: cookie > browser language > default
+  if (localeCookie && supportedLocales.includes(localeCookie)) {
+    targetLocale = localeCookie;
+  } else if (browserLocale && supportedLocales.includes(browserLocale)) {
+    targetLocale = browserLocale;
+  }
+
+  return targetLocale;
+}
+
 export default clerkMiddleware(async (auth, req) => {
   const { hostname, pathname } = req.nextUrl;
   const currentSubdomain = getCurrentSubdomain(hostname);
@@ -42,22 +65,18 @@ export default clerkMiddleware(async (auth, req) => {
   console.log('🌐 Middleware - Hostname:', hostname);
   console.log('🌐 Middleware - Pathname:', pathname);
   console.log('🌐 Middleware - Subdomain:', currentSubdomain);
-  console.log(
-    '🌐 Middleware - Environment:',
-    isDevelopment ? 'development' : 'production'
-  );
+  console.log('🌐 Middleware - Environment:', isDevelopment ? 'development' : 'production');
 
   // CRITICAL: Handle authentication for protected routes FIRST
-  // This must be done before any response is returned to avoid header mutation
   if (!isPublicRoute(req)) {
-    console.log('� Protected Route - Authenticating:', pathname);
+    console.log('🔒 Protected Route - Authenticating:', pathname);
     await auth.protect();
   }
 
-  // CRITICAL: Handle API routes first - skip all subdomain logic
+  // CRITICAL: Handle API routes first - skip all subdomain and i18n logic
   if (pathname.startsWith('/api')) {
     console.log('🔧 API Route - Skipping subdomain logic:', pathname);
-    return; // Early return for API routes - auth already handled above
+    return; // Early return for API routes
   }
 
   // Skip subdomain logic for static files and Next.js internals
@@ -67,7 +86,11 @@ export default clerkMiddleware(async (auth, req) => {
     pathname.includes('.')
   ) {
     console.log('🔧 Static/Internal - Skipping subdomain logic:', pathname);
-    return; // Early return for static files
+    // Still apply intl middleware for non-static routes
+    if (!pathname.includes('.')) {
+      return intlMiddleware(req);
+    }
+    return;
   }
 
   // DEVELOPMENT ONLY: Handle admin-dev routes (fallback when no admin subdomain access)
@@ -75,11 +98,8 @@ export default clerkMiddleware(async (auth, req) => {
     // Handle non-localized admin-dev routes
     if (pathname.startsWith('/admin-dev')) {
       console.log('🚀 Admin Dev Route Detected - Rewriting to /admin');
-      const defaultLocale = 'en';
-      const adminPath = pathname.replace(
-        '/admin-dev',
-        `/${defaultLocale}/admin`
-      );
+      const preferredLocale = getPreferredLocale(req);
+      const adminPath = pathname.replace('/admin-dev', `/${preferredLocale}/admin`);
       console.log('🚀 Rewriting to:', adminPath);
       return NextResponse.rewrite(new URL(adminPath, req.url));
     }
@@ -92,23 +112,16 @@ export default clerkMiddleware(async (auth, req) => {
       return NextResponse.rewrite(new URL(adminPath, req.url));
     }
 
-    // Development: Don't redirect to subdomains, allow normal routing
-    if (
-      pathname.startsWith('/admin') &&
-      currentSubdomain !== SUBDOMAINS.ADMIN
-    ) {
-      console.log(
-        '🏠 Development: Admin route detected, allowing normal routing (no subdomain redirect)'
-      );
-      // Let the route continue normally to Next.js routing
+    // Development: Don't redirect to subdomains, allow normal routing with i18n
+    if (pathname.startsWith('/admin') && currentSubdomain !== SUBDOMAINS.ADMIN) {
+      console.log('🏠 Development: Admin route detected, applying i18n');
+      return intlMiddleware(req);
     }
 
-    // Development: Allow dashboard/portal routes on localhost
+    // Development: Allow dashboard/portal routes on localhost with i18n
     if (pathname.startsWith('/dashboard') || pathname.startsWith('/portal')) {
-      console.log(
-        '🏠 Development: App route detected, allowing normal routing'
-      );
-      // Let the route continue normally to Next.js routing
+      console.log('🏠 Development: App route detected, applying i18n');
+      return intlMiddleware(req);
     }
   }
 
@@ -122,10 +135,10 @@ export default clerkMiddleware(async (auth, req) => {
         !pathname.startsWith('/_next') &&
         !pathname.startsWith('/api')
       ) {
-        // For root path, redirect to default locale admin
+        // For root path, redirect to default locale admin with user's preferred locale
         if (pathname === '/') {
-          const defaultLocale = 'en';
-          const adminPath = `/${defaultLocale}/admin`;
+          const preferredLocale = getPreferredLocale(req);
+          const adminPath = `/${preferredLocale}/admin`;
           console.log('🚀 Admin Root Rewrite:', pathname, '→', adminPath);
           return NextResponse.rewrite(new URL(adminPath, req.url));
         }
@@ -138,25 +151,21 @@ export default clerkMiddleware(async (auth, req) => {
           console.log('🚀 Admin Locale Rewrite:', pathname, '→', adminPath);
           return NextResponse.rewrite(new URL(adminPath, req.url));
         } else {
-          // Non-locale path, add default locale
-          const defaultLocale = 'en';
-          const adminPath = `/${defaultLocale}/admin${pathname}`;
-          console.log(
-            '🚀 Admin Default Locale Rewrite:',
-            pathname,
-            '→',
-            adminPath
-          );
+          // Non-locale path, add user's preferred locale
+          const preferredLocale = getPreferredLocale(req);
+          const adminPath = `/${preferredLocale}/admin${pathname}`;
+          console.log('🚀 Admin Default Locale Rewrite:', pathname, '→', adminPath);
           return NextResponse.rewrite(new URL(adminPath, req.url));
         }
       }
     } else if (currentSubdomain === SUBDOMAINS.APP) {
-      // App subdomain - handle dashboard and portal routes
+      // App subdomain - handle dashboard and portal routes with proper i18n
 
-      // Hide /dashboard from URLs - rewrite root and locale roots to dashboard
+      // Hide /dashboard from URLs - rewrite root to dashboard with user's preferred locale
       if (pathname === '/') {
-        console.log('🚀 App Root - Rewriting to /en/dashboard');
-        return NextResponse.rewrite(new URL('/en/dashboard', req.url));
+        const preferredLocale = getPreferredLocale(req);
+        console.log('🚀 App Root - Rewriting to dashboard with locale:', preferredLocale);
+        return NextResponse.rewrite(new URL(`/${preferredLocale}/dashboard`, req.url));
       }
 
       // Handle locale root paths (e.g., /en, /fr) and rewrite to dashboard
@@ -164,34 +173,17 @@ export default clerkMiddleware(async (auth, req) => {
       if (localeOnlyMatch) {
         const [, locale] = localeOnlyMatch;
         const dashboardPath = `/${locale}/dashboard`;
-        console.log(
-          `🚀 App Locale Root - Rewriting ${pathname} to ${dashboardPath}`
-        );
+        console.log(`🚀 App Locale Root - Rewriting ${pathname} to ${dashboardPath}`);
         return NextResponse.rewrite(new URL(dashboardPath, req.url));
-      } // Allow all other routes to proceed normally
-    } else if (
-      currentSubdomain === SUBDOMAINS.MAIN ||
-      currentSubdomain === null
-    ) {
-      // Main domain - redirect app routes to app subdomain
-      const isDashboardRoute =
-        pathname.startsWith('/dashboard') ||
-        pathname.match(/^\/[a-z]{2}\/dashboard/);
-      const isPortalRoute =
-        pathname.startsWith('/portal') || pathname.match(/^\/[a-z]{2}\/portal/);
-      const isOrgRoute =
-        pathname.startsWith('/org-') || pathname.match(/^\/[a-z]{2}\/org-/);
-
-      // Debug route detection only for main domain redirects
-      if (isDashboardRoute || isPortalRoute || isOrgRoute) {
-        console.log('🔍 Main Domain Route Detection:', {
-          isDashboardRoute,
-          isPortalRoute,
-          isOrgRoute,
-          currentSubdomain,
-          willRedirect: true,
-        });
       }
+      
+      // For all other routes on app subdomain, apply intl middleware
+      return intlMiddleware(req);
+    } else if (currentSubdomain === SUBDOMAINS.MAIN || currentSubdomain === null) {
+      // Main domain - redirect app routes to app subdomain
+      const isDashboardRoute = pathname.startsWith('/dashboard') || pathname.match(/^\/[a-z]{2}\/dashboard/);
+      const isPortalRoute = pathname.startsWith('/portal') || pathname.match(/^\/[a-z]{2}\/portal/);
+      const isOrgRoute = pathname.startsWith('/org-') || pathname.match(/^\/[a-z]{2}\/org-/);
 
       if (isDashboardRoute || isPortalRoute || isOrgRoute) {
         const isStaging = hostname.includes('staging.syndik.ma');
@@ -211,29 +203,18 @@ export default clerkMiddleware(async (auth, req) => {
             cleanUrl = `https://${appDomain}${dashboardPath}`;
           }
 
-          console.log(
-            '🚀 Redirecting dashboard to clean URL:',
-            pathname,
-            '→',
-            cleanUrl
-          );
+          console.log('🚀 Redirecting dashboard to clean URL:', pathname, '→', cleanUrl);
           return NextResponse.redirect(new URL(cleanUrl));
         } else {
           // For portal and org routes, keep the original path
           const appUrl = `https://${appDomain}${pathname}`;
-          console.log(
-            '🚀 Redirecting to app subdomain:',
-            pathname,
-            '→',
-            appUrl
-          );
+          console.log('🚀 Redirecting to app subdomain:', pathname, '→', appUrl);
           return NextResponse.redirect(new URL(appUrl));
         }
       }
 
       // Main domain - redirect admin routes to admin subdomain
-      const isAdminRoute =
-        pathname.startsWith('/admin') || pathname.match(/^\/[a-z]{2}\/admin/);
+      const isAdminRoute = pathname.startsWith('/admin') || pathname.match(/^\/[a-z]{2}\/admin/);
 
       if (isAdminRoute) {
         // Extract locale and admin path
@@ -243,35 +224,21 @@ export default clerkMiddleware(async (auth, req) => {
           const targetPath = adminPath || '/';
 
           const isStaging = hostname.includes('staging.syndik.ma');
-          const adminDomain = isStaging
-            ? 'admin.staging.syndik.ma'
-            : 'admin.syndik.ma';
+          const adminDomain = isStaging ? 'admin.staging.syndik.ma' : 'admin.syndik.ma';
           const adminUrl = `https://${adminDomain}/${locale}/admin${targetPath}`;
 
-          console.log(
-            '🔄 Redirecting locale-based admin route:',
-            pathname,
-            '→',
-            adminUrl
-          );
+          console.log('🔄 Redirecting locale-based admin route:', pathname, '→', adminUrl);
           return NextResponse.redirect(new URL(adminUrl));
         } else {
-          // Non-locale admin route, add default locale
+          // Non-locale admin route, add user's preferred locale
           const adminPath = pathname.replace('/admin', '') || '/';
-          const defaultLocale = 'en';
+          const preferredLocale = getPreferredLocale(req);
 
           const isStaging = hostname.includes('staging.syndik.ma');
-          const adminDomain = isStaging
-            ? 'admin.staging.syndik.ma'
-            : 'admin.syndik.ma';
-          const adminUrl = `https://${adminDomain}/${defaultLocale}/admin${adminPath}`;
+          const adminDomain = isStaging ? 'admin.staging.syndik.ma' : 'admin.syndik.ma';
+          const adminUrl = `https://${adminDomain}/${preferredLocale}/admin${adminPath}`;
 
-          console.log(
-            '🔄 Redirecting non-locale admin route:',
-            pathname,
-            '→',
-            adminUrl
-          );
+          console.log('🔄 Redirecting non-locale admin route:', pathname, '→', adminUrl);
           return NextResponse.redirect(new URL(adminUrl));
         }
       }
@@ -280,44 +247,19 @@ export default clerkMiddleware(async (auth, req) => {
 
   // Handle non-localized org routes redirect to localized versions
   if (pathname === '/org-switcher' || pathname === '/org-redirect') {
-    // Try to detect user's preferred locale from multiple sources
-    let targetLocale = 'en'; // default fallback
-
-    // 1. Check for locale in cookies (if user has previously selected one)
-    const localeCookie = req.cookies.get('NEXT_LOCALE')?.value;
-
-    // 2. Check Accept-Language header
-    const acceptLanguage = req.headers.get('accept-language');
-    const browserLocale = acceptLanguage?.split(',')[0]?.split('-')[0];
-
-    const supportedLocales = ['en', 'fr', 'ar'];
-
-    // Priority: cookie > browser language > default
-    if (localeCookie && supportedLocales.includes(localeCookie)) {
-      targetLocale = localeCookie;
-    } else if (browserLocale && supportedLocales.includes(browserLocale)) {
-      targetLocale = browserLocale;
-    }
-
+    const targetLocale = getPreferredLocale(req);
     const url = req.nextUrl.clone();
     url.pathname = `/${targetLocale}${pathname}`;
 
     // Preserve query parameters if any
-    console.log(
-      '🌐 Redirecting org route to localized version:',
-      pathname,
-      '→',
-      url.pathname
-    );
+    console.log('🌐 Redirecting org route to localized version:', pathname, '→', url.pathname);
     return Response.redirect(url);
   }
-  // Skip intl middleware for API routes only
-  // Allow sign-in/sign-up to go through intl middleware for proper locale redirection
-  // NOTE: API routes are handled at the beginning of the middleware with early return
-  // Apply internationalization for all other requests (excluding API routes)
-  const response = intlMiddleware(req);
 
-  return response;
+  // Apply internationalization for all other requests
+  // This ensures that all routes get proper locale handling
+  console.log('🌐 Applying intl middleware for:', pathname);
+  return intlMiddleware(req);
 });
 
 export const config = {

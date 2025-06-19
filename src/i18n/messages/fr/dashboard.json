@@ -5,6 +5,8 @@
   "totalManagedProperties": "Total des Propriétés Gérées",
   "units": "Unités",
   "occupancyRateText": "Taux d'Occupation",
+  "currentRate": "Taux Actuel",
+  "averageRate": "Taux Moyen",
   "residents": "Résidents",
   "activeResidents": "Résidents Actifs",
   "netIncome": "Revenu Net",

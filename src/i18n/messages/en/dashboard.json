@@ -5,6 +5,8 @@
   "totalManagedProperties": "Total Managed Properties",
   "units": "Units",
   "occupancyRateText": "Occupancy Rate",
+  "currentRate": "Current Rate",
+  "averageRate": "Average Rate",
   "residents": "Residents",
   "activeResidents": "Active Residents",
   "netIncome": "Net Income",
