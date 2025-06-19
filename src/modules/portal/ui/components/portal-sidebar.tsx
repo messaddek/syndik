@@ -154,10 +154,22 @@ export function PortalSidebar() {
         ))}
       </SidebarContent>{' '}
       <SidebarFooter className='border-t p-4'>
+        {' '}
         {canAccessAdminPortal && (
           <div className='mb-3'>
+            {' '}
             <Button
-              onClick={() => router.push('/admin')}
+              onClick={() => {
+                // Use route-based navigation for admin portal in development
+                const isDevelopment = process.env.NODE_ENV === 'development';
+
+                if (isDevelopment) {
+                  // Use route-based admin access for development without admin rights
+                  router.push('/admin-dev');
+                } else {
+                  window.location.href = 'https://admin.syndik.ma';
+                }
+              }}
               className='flex w-full items-center gap-2 bg-orange-600 text-white hover:bg-orange-700'
               size='sm'
             >
@@ -166,7 +178,6 @@ export function PortalSidebar() {
             </Button>
           </div>
         )}
-
         <div className='flex items-center gap-3'>
           <UserButton afterSignOutUrl='/' />
           <div className='min-w-0 flex-1'>
