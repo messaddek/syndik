@@ -1,5 +1,6 @@
 /**
  * Utility functions for handling subdomain-based routing
+ * Supports production, staging, Vercel, and development environments
  */
 
 export const SUBDOMAINS = {
@@ -12,10 +13,64 @@ export const SUBDOMAINS = {
 export type SubdomainType = (typeof SUBDOMAINS)[keyof typeof SUBDOMAINS];
 
 /**
+ * Enhanced environment detection
+ */
+export function getEnvironment(): string {
+  // Explicit environment variable (highest priority)
+  if (process.env.NEXT_PUBLIC_ENVIRONMENT) {
+    return process.env.NEXT_PUBLIC_ENVIRONMENT;
+  }
+
+  // Vercel environment detection
+  if (process.env.VERCEL_ENV) {
+    return process.env.VERCEL_ENV; // 'production', 'preview', 'development'
+  }
+
+  // Hostname-based detection (client-side)
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+
+    if (hostname.includes('staging.syndik.ma')) return 'staging';
+    if (hostname.includes('syndik.ma')) return 'production';
+    if (hostname.includes('.vercel.app')) return 'vercel';
+    if (hostname.includes('localhost')) return 'development';
+  }
+
+  // Fallback
+  return process.env.NODE_ENV || 'development';
+}
+
+/**
+ * Debug environment information
+ */
+export function debugEnvironment() {
+  const env = {
+    NODE_ENV: process.env.NODE_ENV,
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
+    NEXT_PUBLIC_MAIN_URL: process.env.NEXT_PUBLIC_MAIN_URL,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_ADMIN_URL: process.env.NEXT_PUBLIC_ADMIN_URL,
+    hostname:
+      typeof window !== 'undefined' ? window.location.hostname : 'server',
+    detected: getEnvironment(),
+  };
+
+  console.log('🔍 Environment Debug:', env);
+  return env;
+}
+
+/**
  * Get the current subdomain from hostname
+ * Enhanced to handle all environments properly
  */
 export function getCurrentSubdomain(hostname: string): SubdomainType | null {
   console.log('🔍 getCurrentSubdomain - hostname:', hostname);
+
+  // Debug environment for troubleshooting
+  if (process.env.NODE_ENV === 'development') {
+    debugEnvironment();
+  }
 
   // Handle localhost development
   if (hostname.includes('localhost') || hostname.includes('127.0.0.1')) {
@@ -43,8 +98,8 @@ export function getCurrentSubdomain(hostname: string): SubdomainType | null {
     console.log('🔄 Default to app subdomain');
     return SUBDOMAINS.APP; // Default for localhost with app prefix
   }
-  // Handle production domains
-  const parts = hostname.split('.'); // Handle Vercel domains (*.vercel.app)
+
+  // Handle Vercel domains (*.vercel.app)
   // NOTE: Vercel only provides ONE domain per deployment (no real subdomains)
   if (hostname.includes('.vercel.app')) {
     console.log('🚀 Vercel deployment detected - using route-based routing');
@@ -54,6 +109,10 @@ export function getCurrentSubdomain(hostname: string): SubdomainType | null {
     console.log('✅ Vercel main domain - route-based routing enabled');
     return SUBDOMAINS.MAIN;
   }
+
+  // Handle production domains
+  const parts = hostname.split('.');
+
   // Handle custom domains (syndik.ma and staging.syndik.ma)
   if (parts.length === 2 && parts[0] === 'syndik' && parts[1] === 'ma') {
     console.log('✅ Main production domain detected');
