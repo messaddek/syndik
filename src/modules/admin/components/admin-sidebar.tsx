@@ -105,18 +105,25 @@ export function AdminSidebar() {
       </SidebarContent>
 
       <SidebarFooter>
+        {' '}
         <div className='px-4 pb-2'>
           <Button
             variant='outline'
             size='sm'
-            onClick={() => (window.location.href = '/dashboard')}
+            onClick={() => {
+              // Navigate back to main app subdomain
+              const isDevelopment = process.env.NODE_ENV === 'development';
+              const appUrl = isDevelopment
+                ? 'http://app.localhost:3000/dashboard'
+                : 'https://app.syndik.ma/dashboard';
+              window.location.href = appUrl;
+            }}
             className='flex w-full items-center gap-2'
           >
             <Building2 className='h-4 w-4' />
             <span>{t('back_to_dashboard')}</span>
           </Button>
         </div>
-
         <SidebarMenu>
           {footerNavigation.map(item => {
             const Icon = item.icon;

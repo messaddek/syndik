@@ -27,7 +27,15 @@ function getQueryClient() {
 function getUrl() {
   const base = (() => {
     if (typeof window !== 'undefined') return '';
-    return process.env.NEXT_PUBLIC_BASE_URL;
+
+    // Use the main URL for API calls in SSR
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    if (isDevelopment) {
+      return process.env.NEXT_PUBLIC_DEV_MAIN_URL || 'http://localhost:3000';
+    }
+
+    // Production: Use main URL (all subdomains share the same API)
+    return process.env.NEXT_PUBLIC_MAIN_URL || 'https://syndik.ma';
   })();
   return `${base}/api/trpc`;
 }

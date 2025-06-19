@@ -53,13 +53,24 @@ export function DashboardSidebar() {
     { name: t('settings'), href: '/settings', icon: Settings },
     { name: t('help'), href: '/help', icon: HelpCircle },
   ];
-
   const handlePortalAccess = () => {
     router.push('/org-redirect?target=portal');
   };
-
   const handleAdminAccess = () => {
-    router.push('/admin');
+    // Use subdomain navigation for admin portal with fallback
+    if (typeof window !== 'undefined') {
+      const isDevelopment = process.env.NODE_ENV === 'development';
+
+      if (isDevelopment) {
+        // Fallback to route-based admin access for development without admin rights
+        router.push('/admin-dev');
+      } else {
+        window.location.href = 'https://admin.syndik.ma';
+      }
+    } else {
+      // Fallback for SSR
+      router.push('/admin-dev');
+    }
   };
   return (
     <Sidebar>
