@@ -11,21 +11,44 @@ export function LocaleDebugEnhanced() {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations('navigation');
-
   const [cookieLocale, setCookieLocale] = useState<string>('');
   const [localStorageLocale, setLocalStorageLocale] = useState<string>('');
+  const [browserUrl, setBrowserUrl] = useState<string>('');
+  const [subdomain, setSubdomain] = useState<string>('');
   const [navigationsCount, setNavigationsCount] = useState(0);
   const [localeHistory, setLocaleHistory] = useState<
-    Array<{ locale: string; pathname: string; timestamp: number }>
+    Array<{
+      locale: string;
+      pathname: string;
+      subdomain: string;
+      timestamp: number;
+    }>
   >([]);
-
   useEffect(() => {
+    // Detect subdomain first
+    const hostname = window.location.hostname;
+    const parts = hostname.split('.');
+    let detectedSubdomain = 'main';
+
+    if (parts.length > 2) {
+      // Extract subdomain (e.g., 'app' from 'app.syndik.ma')
+      detectedSubdomain = parts[0];
+    } else if (hostname === 'localhost' || hostname.startsWith('127.0.0.1')) {
+      // For local development, check if there's a subdomain pattern
+      if (hostname.includes('app.')) detectedSubdomain = 'app';
+      else if (hostname.includes('admin.')) detectedSubdomain = 'admin';
+      else detectedSubdomain = 'localhost';
+    }
+
+    setSubdomain(detectedSubdomain);
+
     // Track locale changes
     setLocaleHistory(prev => [
       ...prev.slice(-10), // Keep last 10 entries
       {
         locale,
         pathname,
+        subdomain: detectedSubdomain,
         timestamp: Date.now(),
       },
     ]);
@@ -44,20 +67,48 @@ export function LocaleDebugEnhanced() {
     } catch {
       setLocalStorageLocale('not available');
     }
+
+    // Track browser URL
+    setBrowserUrl(window.location.href);
   }, [locale, pathname]);
 
   useEffect(() => {
     // Track navigation count
     setNavigationsCount(prev => prev + 1);
   }, [pathname]);
-
   const testTranslation = () => {
     try {
-      return t('back_to_landing');
+      const result = t('backToLanding');
+      // Check if translation resolved or if we got the key back
+      if (result === 'backToLanding') {
+        return `Key not resolved: ${result}`;
+      }
+      return result;
     } catch (error) {
       return `Error: ${error}`;
     }
   };
+
+  const testMultipleTranslations = () => {
+    try {
+      const tests = [
+        { key: 'dashboard', expected: 'لوحة التحكم' },
+        { key: 'home', expected: 'الرئيسية' },
+        { key: 'backToLanding', expected: 'العودة للصفحة الرئيسية' },
+      ];
+
+      return tests
+        .map(test => {
+          const result = t(test.key);
+          const isResolved = result !== test.key;
+          return `${test.key}: ${isResolved ? '✅' : '❌'} ${result}`;
+        })
+        .join(' | ');
+    } catch (error) {
+      return `Error testing: ${error}`;
+    }
+  };
+
   if (
     process.env.NODE_ENV !== 'development' &&
     process.env.NODE_ENV !== 'production'
@@ -67,11 +118,13 @@ export function LocaleDebugEnhanced() {
 
   return (
     <div className='fixed right-4 bottom-4 z-50 max-w-sm rounded-md bg-black p-3 text-xs text-white opacity-90 shadow-lg'>
-      <div className='mb-2 font-bold'>🌐 Locale Debug</div>
-
+      <div className='mb-2 font-bold'>🌐 Locale Debug</div>{' '}
       <div className='space-y-1'>
         <div>
           Current Locale: <span className='text-green-400'>{locale}</span>
+        </div>
+        <div>
+          Subdomain: <span className='text-cyan-400'>{subdomain}</span>
         </div>
         <div>
           Pathname: <span className='text-blue-400'>{pathname}</span>
@@ -84,6 +137,9 @@ export function LocaleDebugEnhanced() {
           <span className='text-purple-400'>{localStorageLocale}</span>
         </div>
         <div>
+          Browser URL: <span className='text-teal-400'>{browserUrl}</span>
+        </div>
+        <div>
           Navigations:{' '}
           <span className='text-orange-400'>{navigationsCount}</span>
         </div>
@@ -91,28 +147,29 @@ export function LocaleDebugEnhanced() {
           Translation:{' '}
           <span className='text-pink-400'>{testTranslation()}</span>
         </div>
+        <div>
+          Multiple Translations Test:{' '}
+          <span className='text-pink-400'>{testMultipleTranslations()}</span>
+        </div>
       </div>
-
       <div className='mt-2 border-t border-gray-600 pt-2'>
-        <div className='mb-1 font-semibold'>History (last 5):</div>
+        <div className='mb-1 font-semibold'>History (last 5):</div>{' '}
         <div className='max-h-20 space-y-1 overflow-y-auto'>
           {localeHistory.slice(-5).map((entry, index) => (
             <div key={index} className='text-xs'>
               <span className='text-gray-400'>
                 {new Date(entry.timestamp).toLocaleTimeString()}
               </span>{' '}
-              {entry.locale} @ {entry.pathname}
+              {entry.locale} @ {entry.subdomain}:{entry.pathname}
             </div>
           ))}
         </div>
       </div>
-
       <div className='mt-2 border-t border-gray-600 pt-2'>
         <div className='text-xs text-gray-400'>
           Params: {JSON.stringify(params)}
         </div>
       </div>
-
       <div className='mt-2 flex gap-1'>
         <button
           onClick={() => router.refresh()}

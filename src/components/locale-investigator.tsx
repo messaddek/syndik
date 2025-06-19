@@ -89,14 +89,17 @@ export function LocaleInvestigator() {
       key: string
     ): TranslationResult => {
       try {
-        return { success: true, value: translationFn(key) };
+        const result = translationFn(key);
+        console.log(`🌐 Translation test: ${key} = "${result}"`);
+        return { success: true, value: result };
       } catch (error) {
+        console.error(`🚨 Translation failed for ${key}:`, error);
         return { success: false, error: String(error) };
       }
     };
 
     return {
-      navigation: getTranslation(tNavigation, 'back_to_landing'),
+      navigation: getTranslation(tNavigation, 'backToLanding'),
       common: getTranslation(tCommon, 'loading'),
       residents: getTranslation(tResidents, 'title'),
     };

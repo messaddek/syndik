@@ -172,8 +172,8 @@ export default clerkMiddleware(async (auth, req) => {
         if (pathname === '/') {
           const preferredLocale = getPreferredLocale(req);
           const adminPath = `/${preferredLocale}/admin`;
-          console.log('🚀 Admin Root Rewrite:', pathname, '→', adminPath);
-          return NextResponse.rewrite(new URL(adminPath, req.url));
+          console.log('🚀 Admin Root Redirect:', pathname, '→', adminPath);
+          return NextResponse.redirect(new URL(adminPath, req.url));
         }
 
         // For other paths, check if they're locale-based
@@ -197,29 +197,25 @@ export default clerkMiddleware(async (auth, req) => {
         }
       }
     } else if (currentSubdomain === SUBDOMAINS.APP) {
-      // App subdomain - handle dashboard and portal routes with proper i18n
-
-      // Hide /dashboard from URLs - rewrite root to dashboard with user's preferred locale
+      // App subdomain - handle dashboard and portal routes with proper i18n      // Hide /dashboard from URLs - redirect root to dashboard with user's preferred locale
       if (pathname === '/') {
         const preferredLocale = getPreferredLocale(req);
         console.log(
-          '🚀 App Root - Rewriting to dashboard with locale:',
+          '🚀 App Root - Redirecting to dashboard with locale:',
           preferredLocale
         );
-        return NextResponse.rewrite(
+        return NextResponse.redirect(
           new URL(`/${preferredLocale}/dashboard`, req.url)
         );
-      }
-
-      // Handle locale root paths (e.g., /en, /fr) and rewrite to dashboard
+      } // Handle locale root paths (e.g., /en, /fr) and redirect to dashboard
       const localeOnlyMatch = pathname.match(/^\/([a-z]{2})$/);
       if (localeOnlyMatch) {
         const [, locale] = localeOnlyMatch;
         const dashboardPath = `/${locale}/dashboard`;
         console.log(
-          `🚀 App Locale Root - Rewriting ${pathname} to ${dashboardPath}`
+          `🚀 App Locale Root - Redirecting ${pathname} to ${dashboardPath}`
         );
-        return NextResponse.rewrite(new URL(dashboardPath, req.url));
+        return NextResponse.redirect(new URL(dashboardPath, req.url));
       }
 
       // For all other routes on app subdomain, apply intl middleware
