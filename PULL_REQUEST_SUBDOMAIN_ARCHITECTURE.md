@@ -24,6 +24,22 @@ This PR implements a comprehensive subdomain-based architecture for the Syndik p
 - `src/trpc/client.tsx` - Updated API URL handling
 - `vercel.json` - Vercel deployment configuration
 
+### **Files Removed:**
+- `src/app/app/` - Cleaned up duplicate app folder structure
+
+### **Project Structure Cleanup:**
+```
+src/app/
+├── [locale]/           # Locale-based routing
+│   ├── (root)/        # Landing pages (unauthenticated)
+│   ├── (portal)/      # App portal (authenticated)
+│   ├── admin/         # Admin portal
+│   └── layout.tsx     # Locale layout with HTML/body
+├── api/               # API routes
+├── layout.tsx         # Root layout
+└── page.tsx           # Root redirect
+```
+
 ### **Key Components:**
 
 #### **1. Subdomain Detection (`subdomain-utils.ts`)**
