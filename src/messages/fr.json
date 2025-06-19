@@ -1681,7 +1681,8 @@
     "pricing": "Tarification",
     "faq": "FAQ",
     "terms": "Conditions",
-    "userGuide": "Guide de l'utilisateur"
+    "userGuide": "Guide de l'utilisateur",
+    "helpdesk": "Support client"
   },
   "notifications": {
     "title": "Gestion des notifications",
