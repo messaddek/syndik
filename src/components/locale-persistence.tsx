@@ -9,10 +9,21 @@ import { useEffect } from 'react';
  */
 export function LocalePersistence() {
   const locale = useLocale();
-
   useEffect(() => {
-    // Set locale cookie to persist user's language preference
-    document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
+    // Determine the correct domain for cross-subdomain cookies
+    const hostname = window.location.hostname;
+    const isStaging = hostname.includes('staging.syndik.ma');
+    const isProduction = hostname.includes('syndik.ma') && !isStaging;
+
+    let cookieDomain = '';
+    if (isStaging) {
+      cookieDomain = '; domain=.staging.syndik.ma';
+    } else if (isProduction) {
+      cookieDomain = '; domain=.syndik.ma';
+    }
+
+    // Set locale cookie to persist user's language preference across subdomains
+    document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax${cookieDomain}`;
 
     // Also set in localStorage as backup
     try {

@@ -6,8 +6,11 @@ import { routing } from '@/i18n/routing';
 import { isRtlLocale, type Locale } from '@/i18n/config';
 import { Almarai, Gabarito } from 'next/font/google';
 import { cn } from '@/lib/utils';
-import { LocaleDebug } from '@/components/locale-debug';
+import { LocaleDebugEnhanced } from '@/components/locale-debug-enhanced';
 import { LocalePersistence } from '@/components/locale-persistence';
+import { LocalePersistenceEnhanced } from '@/components/locale-persistence-enhanced';
+import { LocaleInvestigator } from '@/components/locale-investigator';
+import { CrossSubdomainTester } from '@/components/cross-subdomain-tester';
 
 import '../globals.css';
 import { LayoutProvider } from '@/components/layout-provider';
@@ -62,9 +65,12 @@ export default async function LocaleLayout({
         {' '}
         <NextIntlClientProvider locale={locale} messages={messages}>
           <LocalePersistence />
+          <LocalePersistenceEnhanced />
           <LayoutProvider>
             {children}
-            <LocaleDebug />
+            <LocaleDebugEnhanced />
+            <LocaleInvestigator />
+            <CrossSubdomainTester />
           </LayoutProvider>
         </NextIntlClientProvider>
       </body>

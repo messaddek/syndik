@@ -1,7 +1,8 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
 
 export function LocaleDebug() {
   const locale = useLocale();
