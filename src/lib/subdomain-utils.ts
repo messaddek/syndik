@@ -371,3 +371,11 @@ export function useCrossSubdomainNavigation() {
     supportsSubdomains,
   };
 }
+
+/**
+ * Get the landing page URL for the current environment
+ * This ensures we always point to the correct main domain
+ */
+export function getLandingUrl(): string {
+  return buildSubdomainUrl(SUBDOMAINS.MAIN, '/');
+}

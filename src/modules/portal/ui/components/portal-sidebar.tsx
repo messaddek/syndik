@@ -13,6 +13,7 @@ import {
   LayoutDashboard,
   Home,
   Shield,
+  ArrowLeft,
 } from 'lucide-react';
 import { GrAnnounce } from 'react-icons/gr';
 
@@ -33,6 +34,11 @@ import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { OrgSwitcher } from '@/components/org-switcher';
 import { useHelpdeskPermissions } from '@/modules/helpdesk/hooks/use-helpdesk-permissions';
+import {
+  getLandingUrl,
+  buildSubdomainUrl,
+  SUBDOMAINS,
+} from '@/lib/subdomain-utils';
 
 export function PortalSidebar() {
   const t = useTranslations();
@@ -105,6 +111,11 @@ export function PortalSidebar() {
     router.push('/org-redirect');
   };
 
+  const handleBackToLanding = () => {
+    const landingUrl = getLandingUrl();
+    window.location.href = landingUrl;
+  };
+
   return (
     <Sidebar>
       <SidebarHeader className='border-b p-4'>
@@ -131,6 +142,17 @@ export function PortalSidebar() {
           <LayoutDashboard className='h-4 w-4' />
           <span>{t('portal.accessDashboard')}</span>
         </Button>
+
+        {/* Back to Landing Button */}
+        <Button
+          variant='outline'
+          size='sm'
+          onClick={handleBackToLanding}
+          className='flex w-full items-center gap-2 text-gray-600 hover:text-gray-900'
+        >
+          <ArrowLeft className='h-4 w-4' />
+          <span>{t('navigation.backToLanding')}</span>
+        </Button>
       </SidebarHeader>
       <SidebarContent>
         {navigationItems.map(group => (
@@ -154,18 +176,18 @@ export function PortalSidebar() {
         ))}
       </SidebarContent>
       <SidebarFooter className='border-t p-4'>
+        {' '}
         {canAccessAdminPortal && (
           <div className='mb-3'>
             <Button
               onClick={() => {
-                // Use route-based navigation for admin portal in development
                 const isDevelopment = process.env.NODE_ENV === 'development';
 
                 if (isDevelopment) {
-                  // Use route-based admin access for development without admin rights
                   router.push('/admin-dev');
                 } else {
-                  window.location.href = 'https://admin.syndik.ma';
+                  const adminUrl = buildSubdomainUrl(SUBDOMAINS.ADMIN);
+                  window.location.href = adminUrl;
                 }
               }}
               className='flex w-full items-center gap-2 bg-orange-600 text-white hover:bg-orange-700'
