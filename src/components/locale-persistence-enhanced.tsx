@@ -16,13 +16,26 @@ export function LocalePersistenceEnhanced() {
   const previousLocale = useRef(locale);
   const isInitialized = useRef(false);
 
+  // Add immediate logging to verify component is rendered
+  console.log('🚀 LocalePersistenceEnhanced rendered:', { locale, pathname });
+
   useEffect(() => {
+    console.log('🔄 LocalePersistenceEnhanced useEffect triggered:', {
+      locale,
+      isInitialized: isInitialized.current,
+    });
+
     // Skip initial render to avoid SSR/hydration issues
     if (!isInitialized.current) {
       isInitialized.current = true;
       previousLocale.current = locale;
+      console.log(
+        '🏁 LocalePersistenceEnhanced initialized, skipping first render'
+      );
       return;
-    } // Set locale cookie with proper cross-subdomain options
+    }
+
+    // Set locale cookie with proper cross-subdomain options
     const hostname = window.location.hostname;
     const isStaging = hostname.includes('staging.syndik.ma');
     const isProduction = hostname.includes('syndik.ma') && !isStaging;

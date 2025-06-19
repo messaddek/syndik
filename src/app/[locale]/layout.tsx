@@ -11,6 +11,7 @@ import { LocalePersistence } from '@/components/locale-persistence';
 import { LocalePersistenceEnhanced } from '@/components/locale-persistence-enhanced';
 import { LocaleInvestigator } from '@/components/locale-investigator';
 import { CrossSubdomainTester } from '@/components/cross-subdomain-tester';
+import { SimpleTest } from '@/components/simple-test';
 
 import '../globals.css';
 import { LayoutProvider } from '@/components/layout-provider';
@@ -62,8 +63,8 @@ export default async function LocaleLayout({
           'antialiased'
         )}
       >
-        {' '}
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <SimpleTest />
           <LocalePersistence />
           <LocalePersistenceEnhanced />
           <LayoutProvider>
