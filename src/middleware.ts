@@ -38,6 +38,7 @@ export default clerkMiddleware(async (auth, req) => {
   const { hostname, pathname } = req.nextUrl;
   const currentSubdomain = getCurrentSubdomain(hostname);
   const isDevelopment = process.env.NODE_ENV === 'development';
+
   console.log('🌐 Middleware - Hostname:', hostname);
   console.log('🌐 Middleware - Pathname:', pathname);
   console.log('🌐 Middleware - Subdomain:', currentSubdomain);
@@ -45,27 +46,24 @@ export default clerkMiddleware(async (auth, req) => {
     '🌐 Middleware - Environment:',
     isDevelopment ? 'development' : 'production'
   );
+  // CRITICAL: Handle API routes first - skip all subdomain logic
+  if (pathname.startsWith('/api')) {
+    console.log('🔧 API Route - Skipping subdomain logic:', pathname);
+    // Only protect routes that are not public
+    if (!isPublicRoute(req)) {
+      await auth.protect();
+    }
+    return; // Early return for API routes
+  }
 
-  // Debug route detection
-  const isDashboardRoute =
-    pathname.startsWith('/dashboard') ||
-    pathname.match(/^\/[a-z]{2}\/dashboard/);
-  const isPortalRoute =
-    pathname.startsWith('/portal') || pathname.match(/^\/[a-z]{2}\/portal/);
-  const isAdminRoute =
-    pathname.startsWith('/admin') || pathname.match(/^\/[a-z]{2}\/admin/);
-
-  if (isDashboardRoute || isPortalRoute || isAdminRoute) {
-    console.log('🔍 Route Detection:', {
-      isDashboardRoute,
-      isPortalRoute,
-      isAdminRoute,
-      currentSubdomain,
-      shouldRedirect:
-        !isDevelopment &&
-        currentSubdomain !== SUBDOMAINS.APP &&
-        currentSubdomain !== SUBDOMAINS.ADMIN,
-    });
+  // Skip subdomain logic for static files and Next.js internals
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname.includes('.')
+  ) {
+    console.log('🔧 Static/Internal - Skipping subdomain logic:', pathname);
+    return; // Early return for static files
   }
 
   // DEVELOPMENT ONLY: Handle admin-dev routes (fallback when no admin subdomain access)
@@ -166,9 +164,7 @@ export default clerkMiddleware(async (auth, req) => {
           `🚀 App Locale Root - Rewriting ${pathname} to ${dashboardPath}`
         );
         return NextResponse.rewrite(new URL(dashboardPath, req.url));
-      }
-
-      // Allow all other routes to proceed normally
+      } // Allow all other routes to proceed normally
     } else if (
       currentSubdomain === SUBDOMAINS.MAIN ||
       currentSubdomain === null
@@ -181,6 +177,18 @@ export default clerkMiddleware(async (auth, req) => {
         pathname.startsWith('/portal') || pathname.match(/^\/[a-z]{2}\/portal/);
       const isOrgRoute =
         pathname.startsWith('/org-') || pathname.match(/^\/[a-z]{2}\/org-/);
+
+      // Debug route detection only for main domain redirects
+      if (isDashboardRoute || isPortalRoute || isOrgRoute) {
+        console.log('🔍 Main Domain Route Detection:', {
+          isDashboardRoute,
+          isPortalRoute,
+          isOrgRoute,
+          currentSubdomain,
+          willRedirect: true,
+        });
+      }
+
       if (isDashboardRoute || isPortalRoute || isOrgRoute) {
         const isStaging = hostname.includes('staging.syndik.ma');
         const appDomain = isStaging ? 'app.staging.syndik.ma' : 'app.syndik.ma';
@@ -217,7 +225,9 @@ export default clerkMiddleware(async (auth, req) => {
           );
           return NextResponse.redirect(new URL(appUrl));
         }
-      } // Main domain - redirect admin routes to admin subdomain
+      }
+
+      // Main domain - redirect admin routes to admin subdomain
       const isAdminRoute =
         pathname.startsWith('/admin') || pathname.match(/^\/[a-z]{2}\/admin/);
 
@@ -297,17 +307,9 @@ export default clerkMiddleware(async (auth, req) => {
     );
     return Response.redirect(url);
   }
-
   // Skip intl middleware for API routes only
   // Allow sign-in/sign-up to go through intl middleware for proper locale redirection
-  if (pathname.startsWith('/api')) {
-    // Only protect routes that are not public
-    if (!isPublicRoute(req)) {
-      await auth.protect();
-    }
-
-    return;
-  }
+  // NOTE: API routes are handled at the beginning of the middleware with early return
 
   // Apply internationalization for all other requests (excluding API routes)
   const response = intlMiddleware(req);
