@@ -15,6 +15,7 @@ export function LocaleDebugEnhanced() {
   const [localStorageLocale, setLocalStorageLocale] = useState<string>('');
   const [browserUrl, setBrowserUrl] = useState<string>('');
   const [subdomain, setSubdomain] = useState<string>('');
+  const [middlewareInfo, setMiddlewareInfo] = useState<string>('');
   const [navigationsCount, setNavigationsCount] = useState(0);
   const [localeHistory, setLocaleHistory] = useState<
     Array<{
@@ -40,7 +41,11 @@ export function LocaleDebugEnhanced() {
       else detectedSubdomain = 'localhost';
     }
 
-    setSubdomain(detectedSubdomain);
+    setSubdomain(detectedSubdomain); // Create middleware info
+    const shouldHaveLocalePrefix = detectedSubdomain !== 'main';
+    const hasLocaleInPath = pathname.match(/^\/[a-z]{2}(\/|$)/);
+    const middlewareAnalysis = `${detectedSubdomain} subdomain | ${hasLocaleInPath ? 'Has' : 'Missing'} locale prefix | Should ${shouldHaveLocalePrefix ? 'have' : 'not have'} prefix`;
+    setMiddlewareInfo(middlewareAnalysis);
 
     // Track locale changes
     setLocaleHistory(prev => [
@@ -79,13 +84,22 @@ export function LocaleDebugEnhanced() {
   const testTranslation = () => {
     try {
       const result = t('backToLanding');
-      // Check if translation resolved or if we got the key back
-      if (result === 'backToLanding') {
-        return `Key not resolved: ${result}`;
-      }
-      return result;
+      return `${result} (key: backToLanding)`;
     } catch (error) {
       return `Error: ${error}`;
+    }
+  };
+
+  const diagnoseTranslations = () => {
+    try {
+      // Test if useTranslations is working at all
+      const tFunction = useTranslations.toString();
+      const navigationResult = t('backToLanding');
+      const dashboardResult = t('dashboard');
+
+      return `nav:${navigationResult} | dash:${dashboardResult} | func:${tFunction.length > 0 ? 'ok' : 'fail'}`;
+    } catch (error) {
+      return `Diagnosis failed: ${error}`;
     }
   };
 
@@ -122,9 +136,12 @@ export function LocaleDebugEnhanced() {
       <div className='space-y-1'>
         <div>
           Current Locale: <span className='text-green-400'>{locale}</span>
-        </div>
+        </div>{' '}
         <div>
           Subdomain: <span className='text-cyan-400'>{subdomain}</span>
+        </div>
+        <div className='text-xs'>
+          Middleware: <span className='text-gray-300'>{middlewareInfo}</span>
         </div>
         <div>
           Pathname: <span className='text-blue-400'>{pathname}</span>
@@ -142,10 +159,14 @@ export function LocaleDebugEnhanced() {
         <div>
           Navigations:{' '}
           <span className='text-orange-400'>{navigationsCount}</span>
-        </div>
+        </div>{' '}
         <div>
           Translation:{' '}
           <span className='text-pink-400'>{testTranslation()}</span>
+        </div>
+        <div className='text-xs'>
+          Diagnosis:{' '}
+          <span className='text-gray-300'>{diagnoseTranslations()}</span>
         </div>
         <div>
           Multiple Translations Test:{' '}
