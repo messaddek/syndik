@@ -890,15 +890,193 @@
           "Check processing"
         ]
       }
-    }
-  },
-  "processingPayments": {
+    }  },  "processingPayments": {
     "title": "Processing Payments",
     "description": "Handle rent payments, late fees, and other charges efficiently",
+    "metadata": {
+      "readTime": "8 min read",
+      "audience": "Property Managers"
+    },
     "sections": {
       "overview": {
         "title": "Overview",
         "content": "Efficient payment processing ensures accurate record-keeping and timely collections."
+      },
+      "paymentMethods": {
+        "title": "Payment Methods",
+        "description": "Explore various payment methods available for processing tenant payments efficiently.",
+        "content": "Different methods available for processing payments.",
+        "methods": [
+          {
+            "title": "Bank Transfers",
+            "description": "Direct transfers from tenant bank accounts for reliable payments.",
+            "icon": "credit-card"
+          },
+          {
+            "title": "Credit Card Payments",
+            "description": "Accept credit and debit card payments with secure processing.",
+            "icon": "credit-card"
+          },
+          {
+            "title": "Cash Payments",
+            "description": "Process cash payments received in person with proper documentation.",
+            "icon": "dollar-sign"
+          },
+          {
+            "title": "Online Payment Portals",
+            "description": "Allow tenants to pay online through secure payment gateways.",
+            "icon": "smartphone"
+          }
+        ]
+      },
+      "manualPayments": {
+        "title": "Manual Payments",
+        "description": "Learn how to process payments manually through the system interface.",
+        "content": "Processing payments manually through the system.",
+        "steps": [
+          {
+            "title": "Navigate to Payment Section",
+            "content": "Access the payments module from the main dashboard"
+          },
+          {
+            "title": "Select Payment Type",
+            "content": "Choose the appropriate payment type from the dropdown"
+          },
+          {
+            "title": "Enter Payment Details",
+            "content": "Fill in all required payment information"
+          },
+          {
+            "title": "Verify Information",
+            "content": "Double-check all entered details for accuracy"
+          },
+          {
+            "title": "Submit Payment",
+            "content": "Complete the payment processing"
+          }
+        ]
+      },
+      "automatedProcessing": {
+        "title": "Automated Processing",
+        "description": "Set up automated payment processing to streamline operations and reduce manual work.",
+        "content": "Setting up automated payment processing systems.",
+        "features": [
+          {
+            "title": "Recurring Payment Setup",
+            "description": "Configure automatic monthly rent collection from tenant accounts."
+          },
+          {
+            "title": "Automatic Late Fee Calculation",
+            "description": "Apply late fees automatically based on your payment policies."
+          },
+          {
+            "title": "Payment Reminders",
+            "description": "Send automated reminders to tenants before payment due dates."
+          },
+          {
+            "title": "Banking Integration",
+            "description": "Connect with banking systems for seamless transaction processing."
+          }
+        ]
+      },
+      "paymentReconciliation": {
+        "title": "Payment Reconciliation",
+        "description": "Match payments with outstanding balances to maintain accurate financial records.",
+        "content": "Matching payments with outstanding balances.",
+        "steps": [
+          {
+            "title": "Import Bank Statements",
+            "description": "Upload bank statements to the system for reconciliation"
+          },
+          {
+            "title": "Match Transactions",
+            "description": "Automatically or manually match transactions with payments"
+          },
+          {
+            "title": "Resolve Discrepancies",
+            "description": "Investigate and resolve any mismatched transactions"
+          },
+          {
+            "title": "Generate Reports",
+            "description": "Create reconciliation reports for record-keeping"
+          }
+        ]
+      },
+      "securityCompliance": {
+        "title": "Security & Compliance",
+        "description": "Ensure secure and compliant payment processing following industry standards.",
+        "content": "Ensuring secure and compliant payment processing.",
+        "measures": [
+          {
+            "title": "PCI DSS Compliance",
+            "description": "Maintain Payment Card Industry Data Security Standards compliance."
+          },
+          {
+            "title": "Data Encryption",
+            "description": "All payment data is encrypted using industry-standard protocols."
+          },
+          {
+            "title": "Secure Transmission",
+            "description": "Payment information is transmitted through secure, encrypted channels."
+          },
+          {
+            "title": "Audit Trails",
+            "description": "Comprehensive logging of all payment transactions for accountability."
+          },
+          {
+            "title": "Access Controls",
+            "description": "Role-based access controls limit payment processing permissions."
+          }
+        ]
+      },
+      "troubleshooting": {
+        "issues": [
+          {
+            "problem": "Payment not showing in system",
+            "solution": "Check if the payment was processed during business hours and allow up to 24 hours for bank transfers to appear. Contact support if the payment still doesn't show after this period."
+          },
+          {
+            "problem": "Credit card payment declined",
+            "solution": "Verify card details are correct and the card has sufficient funds. Some banks may flag rental payments as suspicious - advise tenants to contact their bank if needed."
+          },
+          {
+            "problem": "Duplicate payment recorded",
+            "solution": "Check transaction timestamps and reference numbers. If duplicate exists, void one payment and issue refund if necessary. Always verify with bank records before taking action."
+          },
+          {
+            "problem": "Payment amount doesn't match rent due",
+            "solution": "Review payment allocation and check if partial payments or additional fees were included. Adjust payment application as needed or contact tenant for clarification."
+          }
+        ]
+      },
+      "bestPractices": {
+        "tips": [
+          "Always verify payment amounts before processing",
+          "Keep detailed records of all payment transactions",
+          "Set up automated payment reminders to reduce late payments",
+          "Regularly reconcile payments with bank statements",
+          "Provide clear payment instructions to tenants",
+          "Use secure payment processing methods only"
+        ]
+      },
+      "breadcrumb": {
+        "financialManagement": "Financial Management"
+      },
+      "sidebar": {
+        "relatedArticlesList": [
+          {
+            "title": "Managing Resident Accounts",
+            "href": "/user-guide/financial-management/managing-accounts"
+          },
+          {
+            "title": "Generating Financial Reports",
+            "href": "/user-guide/financial-management/generating-reports"
+          },
+          {
+            "title": "Late Fee Management",
+            "href": "/user-guide/financial-management/late-fees"
+          }
+        ]
       },
       "paymentTypes": {
         "title": "Payment Types",
@@ -1120,16 +1298,17 @@
           "Move-out instructions"
         ]
       }
-    }
-  },
-  "common": {
+    }  },  "common": {
     "tableOfContents": "Table of Contents",
     "relatedArticles": "Related Articles",
     "overview": "Overview",
     "nextSteps": "Next Steps",
     "popular": "Popular",
     "readTime": "min read",
-    "whatYoullLearn": "What you'll learn"
+    "whatYoullLearn": "What you'll learn",
+    "troubleshooting": "Troubleshooting",
+    "bestPractices": "Best Practices",
+    "tips": "Pro Tips"
   },
   "navigation": {
     "userGuide": "User Guide",
