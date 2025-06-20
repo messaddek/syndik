@@ -563,9 +563,9 @@ export const CreateB2BTicketDialog = ({
                   ? t('creating')
                   : t('create_b2b_ticket_button')}
               </Button>
-            </div>{' '}
+            </div>
           </form>
-        </Form>{' '}
+        </Form>
       </ResponsiveDialog>
     </Dialog>
   ) : (

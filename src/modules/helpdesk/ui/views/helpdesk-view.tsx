@@ -205,25 +205,21 @@ export function HelpdeskView({ initialFilters }: HelpdeskViewProps) {
                 <Plus className='mr-2 h-4 w-4' />
                 {t('create_b2b_ticket', { default: 'B2B Support' })}
               </Button>
-
-              {b2bDialogOpen && (
-                <CreateB2BTicketDialog
-                  open={b2bDialogOpen}
-                  onOpenChange={setB2BDialogOpen}
-                  onSuccess={() => {
-                    // Refresh tickets after creating a B2B ticket
-                    queryClient.invalidateQueries(
-                      trpc.helpdesk.getTickets.queryOptions({})
-                    );
-                    queryClient.invalidateQueries(
-                      trpc.helpdesk.getStats.queryOptions({})
-                    );
-                    // Close the dialog
-
-                    setB2BDialogOpen(false);
-                  }}
-                />
-              )}
+              <CreateB2BTicketDialog
+                open={b2bDialogOpen}
+                onOpenChange={setB2BDialogOpen}
+                onSuccess={() => {
+                  // Refresh tickets after creating a B2B ticket
+                  queryClient.invalidateQueries(
+                    trpc.helpdesk.getTickets.queryOptions({})
+                  );
+                  queryClient.invalidateQueries(
+                    trpc.helpdesk.getStats.queryOptions({})
+                  );
+                  // Close the dialog
+                  setB2BDialogOpen(false);
+                }}
+              />
             </>
           )}
         </div>
