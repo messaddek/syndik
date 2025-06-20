@@ -150,7 +150,7 @@ export function PortalSidebar() {
           onClick={handleBackToLanding}
           className='flex w-full items-center gap-2 text-gray-600 hover:text-gray-900'
         >
-          <ArrowLeft className='h-4 w-4' />
+          <ArrowLeft className='h-4 w-4 rtl:rotate-180' />
           <span>{t('navigation.backToLanding')}</span>
         </Button>
       </SidebarHeader>
