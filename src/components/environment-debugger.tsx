@@ -16,7 +16,7 @@ interface EnvironmentInfo {
   subdomain?: string | null;
 }
 
-export default function EnvironmentDebugger() {
+export const EnvironmentDebugger = () => {
   const [envInfo, setEnvInfo] = useState<EnvironmentInfo | null>(null);
   const [subdomain, setSubdomain] = useState<string | null>(null);
 
@@ -45,15 +45,15 @@ export default function EnvironmentDebugger() {
               <span className='font-medium'>Detected:</span> {envInfo.detected}
             </li>
             <li>
-              <span className='font-medium'>NODE_ENV:</span>{' '}
+              <span className='font-medium'>NODE_ENV:</span>
               {envInfo.NODE_ENV || 'undefined'}
             </li>
             <li>
-              <span className='font-medium'>VERCEL_ENV:</span>{' '}
+              <span className='font-medium'>VERCEL_ENV:</span>
               {envInfo.VERCEL_ENV || 'undefined'}
             </li>
             <li>
-              <span className='font-medium'>NEXT_PUBLIC_ENVIRONMENT:</span>{' '}
+              <span className='font-medium'>NEXT_PUBLIC_ENVIRONMENT:</span>
               {envInfo.NEXT_PUBLIC_ENVIRONMENT || 'undefined'}
             </li>
           </ul>
@@ -66,19 +66,19 @@ export default function EnvironmentDebugger() {
               <span className='font-medium'>Hostname:</span> {envInfo.hostname}
             </li>
             <li>
-              <span className='font-medium'>Subdomain:</span>{' '}
+              <span className='font-medium'>Subdomain:</span>
               {subdomain || 'none'}
             </li>
             <li>
-              <span className='font-medium'>Main URL:</span>{' '}
+              <span className='font-medium'>Main URL:</span>
               {envInfo.NEXT_PUBLIC_MAIN_URL || 'undefined'}
             </li>
             <li>
-              <span className='font-medium'>App URL:</span>{' '}
+              <span className='font-medium'>App URL:</span>
               {envInfo.NEXT_PUBLIC_APP_URL || 'undefined'}
             </li>
             <li>
-              <span className='font-medium'>Admin URL:</span>{' '}
+              <span className='font-medium'>Admin URL:</span>
               {envInfo.NEXT_PUBLIC_ADMIN_URL || 'undefined'}
             </li>
           </ul>
@@ -89,7 +89,7 @@ export default function EnvironmentDebugger() {
         <pre className='overflow-auto rounded bg-gray-100 p-2 text-xs dark:bg-gray-800'>
           {JSON.stringify(envInfo, null, 2)}
         </pre>
-      </div>{' '}
+      </div>
       <div className='mt-4 rounded bg-white p-4 dark:bg-gray-900'>
         <h3 className='mb-2 font-semibold'>Route Testing</h3>
         <div className='grid grid-cols-1 gap-2 text-sm md:grid-cols-3'>
@@ -115,4 +115,4 @@ export default function EnvironmentDebugger() {
       </div>
     </div>
   );
-}
+};

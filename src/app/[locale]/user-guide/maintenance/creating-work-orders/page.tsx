@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 
-export default function CreatingWorkOrdersPage() {
+const CreatingWorkOrdersPage = () => {
   return (
     <div className='container mx-auto max-w-4xl px-4 py-8'>
       <div className='mb-6'>
@@ -628,4 +628,5 @@ export default function CreatingWorkOrdersPage() {
       </div>
     </div>
   );
-}
+};
+export default CreatingWorkOrdersPage;

@@ -39,11 +39,11 @@ interface NotificationItemProps {
   onArchive: (id: string) => void;
 }
 
-function NotificationItem({
+const NotificationItem = ({
   notification,
   onMarkAsRead,
   onArchive,
-}: NotificationItemProps) {
+}: NotificationItemProps) => {
   const t = useTranslations('notifications.form');
 
   const getPriorityLabel = (priority: string) => {
@@ -142,7 +142,7 @@ interface NotificationDropdownProps {
   children?: React.ReactNode;
 }
 
-export function NotificationDropdown({ children }: NotificationDropdownProps) {
+export const NotificationDropdown = ({ children }: NotificationDropdownProps) => {
   const [activeTab, setActiveTab] = useState('all');
   const t = useTranslations('notifications.dropdown');
   const trpc = useTRPC();

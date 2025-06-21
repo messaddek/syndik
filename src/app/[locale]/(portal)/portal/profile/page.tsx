@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { ResidentProfile } from '@/modules/portal/ui/views/resident-profile';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
 
-export default function ProfilePage() {
+const ProfilePage = () => {
   return (
     <TRPCErrorBoundary>
       <Suspense fallback={<div>Loading...</div>}>
@@ -10,4 +10,5 @@ export default function ProfilePage() {
       </Suspense>
     </TRPCErrorBoundary>
   );
-}
+};
+export default ProfilePage;

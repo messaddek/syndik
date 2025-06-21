@@ -28,7 +28,7 @@ import { useTRPC } from '@/trpc/client';
 import { useConfirm } from '@/hooks/use-confirm';
 import { Link } from '@/i18n/routing';
 
-export function MeetingsContent() {
+export const MeetingsContent = () => {
   const t = useTranslations('meetings');
   const trpc = useTRPC();
   const queryClient = useQueryClient();
@@ -224,7 +224,7 @@ export function MeetingsContent() {
               {t('statistics.upcoming_meetings')}
             </CardTitle>
             <Clock className='text-muted-foreground h-4 w-4' />
-          </CardHeader>{' '}
+          </CardHeader>
           <CardContent>
             <div className='text-primary text-2xl font-bold'>
               {upcomingMeetings.length}
@@ -288,7 +288,7 @@ export function MeetingsContent() {
           <TabsTrigger value='upcoming'>{t('upcoming_tab')}</TabsTrigger>
           <TabsTrigger value='past'>{t('past_tab')}</TabsTrigger>
           <TabsTrigger value='all'>{t('all_tab')}</TabsTrigger>
-        </TabsList>{' '}
+        </TabsList>
         <TabsContent value='upcoming' className='space-y-4'>
           {upcomingMeetings.length === 0 ? (
             <Card>
@@ -361,7 +361,7 @@ export function MeetingsContent() {
                 <MeetingCard key={meeting.id} meeting={meeting} />
               ))}
             </div>
-          )}{' '}
+          )}
         </TabsContent>
       </Tabs>
 
@@ -377,3 +377,4 @@ export function MeetingsContent() {
     </div>
   );
 }
+

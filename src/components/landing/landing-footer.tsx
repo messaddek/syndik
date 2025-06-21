@@ -12,7 +12,7 @@ const gabarito = Gabarito({
   weight: ['400', '500', '600', '700', '800', '900'],
 });
 
-export function LandingFooter() {
+export const LandingFooter = () => {
   const tFooter = useTranslations('footer');
 
   return (

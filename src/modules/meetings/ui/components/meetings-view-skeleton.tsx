@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Calendar, MapPin, Users, Clock } from 'lucide-react';
 
-export function MeetingsViewSkeleton() {
+export const MeetingsViewSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header */}

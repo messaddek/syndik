@@ -41,11 +41,11 @@ interface TicketsListProps {
   selectedTicketId: string | null;
 }
 
-export function TicketsList({
+export const TicketsList = ({
   tickets,
   onSelectTicket,
   selectedTicketId,
-}: TicketsListProps) {
+}: TicketsListProps) => {
   const t = useTranslations('helpDesk');
 
   const getPriorityColor = (priority: TicketPriority) => {
@@ -137,9 +137,8 @@ export function TicketsList({
             </div>
             <p className='text-muted-foreground mb-3 line-clamp-2 text-sm'>
               {ticket.description}
-            </p>{' '}
+            </p>
             <div className='text-muted-foreground flex items-center justify-between text-xs'>
-              {' '}
               <div className='flex items-center space-x-3'>
                 <div className='flex items-center space-x-1'>
                   <User className='h-3 w-3' />
@@ -176,4 +175,4 @@ export function TicketsList({
       </div>
     </ScrollArea>
   );
-}
+};

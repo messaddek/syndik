@@ -38,7 +38,7 @@ interface TicketDetailsProps {
   onClose: () => void;
 }
 
-export function TicketDetails({ ticketId, onClose }: TicketDetailsProps) {
+export const TicketDetails = ({ ticketId, onClose }: TicketDetailsProps) => {
   const t = useTranslations('helpDesk');
   const [commentContent, setCommentContent] = useState('');
   const [isEditingStatus, setIsEditingStatus] = useState(false);
@@ -472,4 +472,4 @@ export function TicketDetails({ ticketId, onClose }: TicketDetailsProps) {
       </CardContent>
     </Card>
   );
-}
+};

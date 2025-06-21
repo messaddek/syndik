@@ -13,7 +13,7 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-export default function OrgSwitcherPage() {
+const OrgSwitcherPage = () => {
   const params = useParams();
   const locale = params.locale as string;
   const t = useTranslations('orgSwitcher');
@@ -116,4 +116,5 @@ export default function OrgSwitcherPage() {
       </div>
     </div>
   );
-}
+};
+export default OrgSwitcherPage;

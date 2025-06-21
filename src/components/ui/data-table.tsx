@@ -56,7 +56,7 @@ interface DataTableProps<TData, TValue> {
   showPagination?: boolean;
 }
 
-export function DataTable<TData, TValue>({
+export const DataTable = <TData, TValue>({
   columns,
   data,
   searchKey,
@@ -67,7 +67,7 @@ export function DataTable<TData, TValue>({
   onPageChange,
   onPageSizeChange,
   showPagination = true,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData, TValue>) => {
   const t = useTranslations('table');
   const locale = useLocale() as Locale;
   const isRtl = isRtlLocale(locale);

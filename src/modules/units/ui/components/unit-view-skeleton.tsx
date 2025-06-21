@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Home } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function UnitViewSkeleton() {
+export const UnitViewSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header */}

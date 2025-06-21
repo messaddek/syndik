@@ -31,13 +31,13 @@ interface AccountInitFormProps {
   defaultRole?: 'manager' | 'admin' | 'member';
 }
 
-export function AccountInitForm({
+export const AccountInitForm = ({
   onSubmit,
   isLoading,
   defaultName = '',
   defaultEmail = '',
   defaultRole = 'member',
-}: AccountInitFormProps) {
+}: AccountInitFormProps) => {
   const [name, setName] = useState(defaultName);
   const [email, setEmail] = useState(defaultEmail);
   const [role, setRole] = useState<'manager' | 'admin' | 'member'>(defaultRole);

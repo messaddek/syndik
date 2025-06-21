@@ -9,9 +9,7 @@ type BuildingsPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function BuildingsPage({
-  searchParams,
-}: BuildingsPageProps) {
+const BuildingsPage = async ({ searchParams }: BuildingsPageProps) => {
   const filters = await loadBuildingsSearchParams(await searchParams);
   const queryClient = getQueryClient();
 
@@ -34,4 +32,6 @@ export default async function BuildingsPage({
       </div>
     </TRPCErrorBoundary>
   );
-}
+};
+
+export default BuildingsPage;

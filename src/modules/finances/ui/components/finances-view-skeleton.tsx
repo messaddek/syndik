@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TrendingUp, TrendingDown, DollarSign } from 'lucide-react';
 
-export function FinancesViewSkeleton() {
+export const FinancesViewSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header */}

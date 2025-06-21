@@ -14,9 +14,7 @@ type HelpdeskPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function PortalHelpdeskPage({
-  searchParams,
-}: HelpdeskPageProps) {
+const PortalHelpdeskPage = async ({ searchParams }: HelpdeskPageProps) => {
   const filters = await loadHelpdeskSearchParams(await searchParams);
   const queryClient = getQueryClient();
   await Promise.all([
@@ -57,4 +55,6 @@ export default async function PortalHelpdeskPage({
       </Suspense>
     </TRPCErrorBoundary>
   );
-}
+};
+
+export default PortalHelpdeskPage;

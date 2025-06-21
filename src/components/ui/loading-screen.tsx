@@ -8,11 +8,11 @@ interface LoadingScreenProps {
   className?: string;
 }
 
-export function LoadingScreen({
+export const LoadingScreen = ({
   message = 'Loading...',
   progress,
   className = '',
-}: LoadingScreenProps) {
+}: LoadingScreenProps) => {
   return (
     <div
       className={`flex min-h-[200px] items-center justify-center ${className}`}
@@ -39,10 +39,10 @@ export function LoadingScreen({
 }
 
 // Full screen loading variant
-export function FullScreenLoading({
+export const FullScreenLoading = ({
   message = 'Loading...',
   progress,
-}: LoadingScreenProps) {
+}: LoadingScreenProps) => {
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-white'>
       <LoadingScreen message={message} progress={progress} />

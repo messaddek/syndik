@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { ChevronUp } from 'lucide-react';
 import { Button } from '../ui/button';
 
-export function BackToTop() {
+export const BackToTop = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   // Handle scroll for back-to-top button

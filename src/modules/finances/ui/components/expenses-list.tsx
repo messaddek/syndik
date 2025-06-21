@@ -20,7 +20,7 @@ import { useTranslations } from 'next-intl';
 import { EditExpenseDialog } from './edit-expense-dialog';
 import type { Expense } from '@/modules/expenses/types';
 
-export function ExpensesList() {
+export const ExpensesList = () => {
   const trpc = useTRPC();
   const t = useTranslations('finance');
   const queryClient = useQueryClient();
@@ -131,7 +131,7 @@ export function ExpensesList() {
                   • {format(new Date(expense.paidDate), 'MMM dd, yyyy')}
                   {expense.vendor && ` • ${expense.vendor}`}
                 </CardDescription>
-              </div>{' '}
+              </div>
               <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2'>
                 <Badge
                   className={`${getCategoryColor(expense.category)} whitespace-nowrap`}
@@ -143,7 +143,7 @@ export function ExpensesList() {
                 </div>
               </div>
             </div>
-          </CardHeader>{' '}
+          </CardHeader>
           <CardContent>
             <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
               <div className='min-w-0 flex-1 space-y-1'>
@@ -168,7 +168,7 @@ export function ExpensesList() {
                     </a>
                   </div>
                 )}
-              </div>{' '}
+              </div>
               <div className='flex shrink-0 gap-2'>
                 <Button
                   variant='outline'
@@ -208,3 +208,4 @@ export function ExpensesList() {
     </div>
   );
 }
+

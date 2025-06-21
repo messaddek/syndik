@@ -34,7 +34,7 @@ interface DatePickerProps {
   maxDate?: Date;
 }
 
-export function DatePicker({
+export const DatePicker = ({
   value,
   onChange,
   placeholder = 'Pick a date',
@@ -43,7 +43,7 @@ export function DatePicker({
   align = 'start',
   minDate = new Date('1900-01-01'),
   maxDate = new Date(),
-}: DatePickerProps) {
+}: DatePickerProps) => {
   const locale = useLocale() as Locale;
   const dateLocale = localeMap[locale];
 

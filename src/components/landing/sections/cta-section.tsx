@@ -14,7 +14,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
-export function CTASection() {
+export const CTASection = () => {
   const t = useTranslations('landing.cta');
   return (
     <div className='relative isolate overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700'>

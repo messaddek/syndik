@@ -21,7 +21,7 @@ const localeMap = {
   ar: ar,
 } as const;
 
-function Calendar({
+const Calendar = ({
   className,
   classNames,
   showOutsideDays = true,
@@ -32,7 +32,7 @@ function Calendar({
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>['variant'];
-}) {
+}) => {
   const locale = useLocale() as Locale;
   const dateLocale = localeMap[locale];
   const defaultClassNames = getDefaultClassNames();
@@ -195,12 +195,12 @@ function Calendar({
   );
 }
 
-function CalendarDayButton({
+const CalendarDayButton = ({
   className,
   day,
   modifiers,
   ...props
-}: React.ComponentProps<typeof DayButton>) {
+}: React.ComponentProps<typeof DayButton>) => {
   const locale = useLocale() as Locale;
   const defaultClassNames = getDefaultClassNames();
 

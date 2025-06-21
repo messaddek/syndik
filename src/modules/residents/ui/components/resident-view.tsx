@@ -35,7 +35,7 @@ interface ResidentViewProps {
   _searchParams?: Record<string, string | string[] | undefined>;
 }
 
-export function ResidentView({ id, _searchParams }: ResidentViewProps) {
+export const ResidentView = ({ id, _searchParams }: ResidentViewProps) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const trpc = useTRPC();
   const router = useRouter();
@@ -192,7 +192,7 @@ export function ResidentView({ id, _searchParams }: ResidentViewProps) {
                   (new Date().getTime() -
                     new Date(resident.moveInDate).getTime()) /
                     (1000 * 60 * 60 * 24)
-                )}{' '}
+                )}
                 days ago
               </p>
             </CardContent>
@@ -375,7 +375,7 @@ export function ResidentView({ id, _searchParams }: ResidentViewProps) {
                     </Link>
                   </div>
                   <p className='text-muted-foreground mt-1 text-xs'>
-                    Floor {unit.floor} • {unit.bedrooms} bed • {unit.bathrooms}{' '}
+                    Floor {unit.floor} • {unit.bedrooms} bed • {unit.bathrooms}
                     bath
                   </p>
                 </div>
@@ -407,7 +407,7 @@ export function ResidentView({ id, _searchParams }: ResidentViewProps) {
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
       >
-        {' '}
+        
         <ResidentForm
           resident={resident}
           onSuccess={handleUpdateResident}
@@ -419,3 +419,4 @@ export function ResidentView({ id, _searchParams }: ResidentViewProps) {
     </>
   );
 }
+

@@ -45,7 +45,7 @@ interface ColumnActionsProps {
   t: (key: string) => string;
 }
 
-function ColumnActions({ resident, onEdit, onDelete, t }: ColumnActionsProps) {
+const ColumnActions = ({ resident, onEdit, onDelete, t }: ColumnActionsProps) => {
   return (
     <div className='flex items-center space-x-1'>
       <ResidentInviteButton resident={resident} />

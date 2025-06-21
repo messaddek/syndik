@@ -35,7 +35,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function FinancialTrendChart() {
+export const FinancialTrendChart = () => {
   const trpc = useTRPC();
   const t = useTranslations('dashboard');
 
@@ -103,7 +103,7 @@ export function FinancialTrendChart() {
           >
             {netTrend >= 0 ? '+' : ''}
             {formatCurrency(netTrend)} {t('thisMonth')}
-          </span>{' '}
+          </span>
         </div>
       </div>
       <ChartContainer
@@ -120,7 +120,7 @@ export function FinancialTrendChart() {
             bottom: 8,
           }}
         >
-          <CartesianGrid vertical={false} />{' '}
+          <CartesianGrid vertical={false} />
           <XAxis
             dataKey='month'
             tickLine={false}
@@ -157,3 +157,4 @@ export function FinancialTrendChart() {
     </div>
   );
 }
+

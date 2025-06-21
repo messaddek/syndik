@@ -23,11 +23,11 @@ interface BuildingsTableViewProps {
   onDelete: (building: Building) => void;
 }
 
-export function BuildingsTableView({
+export const BuildingsTableView = ({
   buildings,
   onEdit,
   onDelete,
-}: BuildingsTableViewProps) {
+}: BuildingsTableViewProps) => {
   const t = useTranslations('buildings');
   const tCommon = useTranslations('common');
 

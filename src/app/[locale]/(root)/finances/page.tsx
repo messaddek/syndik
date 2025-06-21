@@ -5,7 +5,7 @@ import { FinancesViewSkeleton } from '@/modules/finances/ui/components/finances-
 import { PageHeader } from '@/components/page-header';
 import { useTranslations } from 'next-intl';
 
-export default function FinancesPage() {
+const FinancesPage = () => {
   const t = useTranslations('finance');
 
   return (
@@ -19,4 +19,5 @@ export default function FinancesPage() {
       </div>
     </TRPCErrorBoundary>
   );
-}
+};
+export default FinancesPage;

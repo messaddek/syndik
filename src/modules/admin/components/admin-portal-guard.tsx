@@ -8,7 +8,7 @@ interface AdminPortalGuardProps {
   children: React.ReactNode;
 }
 
-export function AdminPortalGuard({ children }: AdminPortalGuardProps) {
+export const AdminPortalGuard = ({ children }: AdminPortalGuardProps) => {
   const { isLoaded } = useAuth();
   const { canAccessAdminPortal } = useHelpdeskPermissions();
 

@@ -467,7 +467,7 @@ export const ResidentsView = () => {
                     units.map(unit => {
                       return (
                         <SelectItem key={unit.id} value={unit.id}>
-                          Unit {unit.unitNumber} - Building{' '}
+                          Unit {unit.unitNumber} - Building
                           {unit.building?.name || 'N/A'}
                         </SelectItem>
                       );
@@ -575,3 +575,4 @@ export const ResidentsView = () => {
     </div>
   );
 };
+

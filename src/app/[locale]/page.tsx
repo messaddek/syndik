@@ -11,7 +11,7 @@ import {
   PricingPreviewSection,
 } from '@/components/landing';
 
-export default function Home() {
+const Home = () => {
   return (
     <LandingLayout>
       <HeroSection />
@@ -25,4 +25,5 @@ export default function Home() {
       <CTASection />
     </LandingLayout>
   );
-}
+};
+export default Home;

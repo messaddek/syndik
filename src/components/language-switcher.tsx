@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config';
 import { ChevronDownIcon } from 'lucide-react';
 
-export function LanguageSwitcher() {
+export const LanguageSwitcher = () => {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();

@@ -25,7 +25,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function OccupancyTrendChart() {
+export const OccupancyTrendChart = () => {
   const t = useTranslations('dashboard');
   // Mock data for demonstration - replace with actual data when API is ready
   const mockData: OccupancyData[] = [
@@ -134,7 +134,7 @@ export function OccupancyTrendChart() {
           </div>
           <div className='text-muted-foreground text-xs sm:text-sm'>
             {t('averageRate')}
-          </div>{' '}
+          </div>
         </div>
       </div>
       <ChartContainer
@@ -151,7 +151,7 @@ export function OccupancyTrendChart() {
             bottom: 8,
           }}
         >
-          <CartesianGrid vertical={false} />{' '}
+          <CartesianGrid vertical={false} />
           <XAxis
             dataKey='month'
             tickLine={false}
@@ -177,3 +177,4 @@ export function OccupancyTrendChart() {
     </div>
   );
 }
+

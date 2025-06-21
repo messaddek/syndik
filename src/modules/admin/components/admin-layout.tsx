@@ -8,7 +8,7 @@ interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
-export function AdminLayout({ children }: AdminLayoutProps) {
+export const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <AdminPortalGuard>
       <SidebarProvider>

@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { useEffect, useState } from 'react';
 
-export function LocaleDebugEnhanced() {
+export const LocaleDebugEnhanced = () => {
   const locale = useLocale();
   const pathname = usePathname();
   const params = useParams();
@@ -132,11 +132,11 @@ export function LocaleDebugEnhanced() {
 
   return (
     <div className='fixed right-4 bottom-4 z-50 max-w-sm rounded-md bg-black p-3 text-xs text-white opacity-90 shadow-lg rtl:right-auto rtl:left-4'>
-      <div className='mb-2 font-bold'>🌐 Locale Debug</div>{' '}
+      <div className='mb-2 font-bold'>🌐 Locale Debug</div>
       <div className='space-y-1'>
         <div>
           Current Locale: <span className='text-green-400'>{locale}</span>
-        </div>{' '}
+        </div>
         <div>
           Subdomain: <span className='text-cyan-400'>{subdomain}</span>
         </div>
@@ -150,37 +150,37 @@ export function LocaleDebugEnhanced() {
           Cookie: <span className='text-yellow-400'>{cookieLocale}</span>
         </div>
         <div>
-          LocalStorage:{' '}
+          LocalStorage:
           <span className='text-purple-400'>{localStorageLocale}</span>
         </div>
         <div>
           Browser URL: <span className='text-teal-400'>{browserUrl}</span>
         </div>
         <div>
-          Navigations:{' '}
+          Navigations:
           <span className='text-orange-400'>{navigationsCount}</span>
-        </div>{' '}
+        </div>
         <div>
-          Translation:{' '}
+          Translation:
           <span className='text-pink-400'>{testTranslation()}</span>
         </div>
         <div className='text-xs'>
-          Diagnosis:{' '}
+          Diagnosis:
           <span className='text-gray-300'>{diagnoseTranslations()}</span>
         </div>
         <div>
-          Multiple Translations Test:{' '}
+          Multiple Translations Test:
           <span className='text-pink-400'>{testMultipleTranslations()}</span>
         </div>
       </div>
       <div className='mt-2 border-t border-gray-600 pt-2'>
-        <div className='mb-1 font-semibold'>History (last 5):</div>{' '}
+        <div className='mb-1 font-semibold'>History (last 5):</div>
         <div className='max-h-20 space-y-1 overflow-y-auto'>
           {localeHistory.slice(-5).map((entry, index) => (
             <div key={index} className='text-xs'>
               <span className='text-gray-400'>
                 {new Date(entry.timestamp).toLocaleTimeString()}
-              </span>{' '}
+              </span>
               {entry.locale} @ {entry.subdomain}:{entry.pathname}
             </div>
           ))}
@@ -211,3 +211,4 @@ export function LocaleDebugEnhanced() {
     </div>
   );
 }
+

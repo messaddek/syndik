@@ -6,7 +6,7 @@ import { Check } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
-export default function PricingPage() {
+const PricingPage = () => {
   const t = useTranslations('pricing');
 
   // Get features arrays from translations
@@ -189,4 +189,5 @@ export default function PricingPage() {
       </div>
     </LandingLayout>
   );
-}
+};
+export default PricingPage;

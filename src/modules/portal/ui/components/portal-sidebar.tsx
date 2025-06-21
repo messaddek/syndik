@@ -41,7 +41,7 @@ import {
   SUBDOMAINS,
 } from '@/lib/subdomain-utils';
 
-export function PortalSidebar() {
+export const PortalSidebar = () => {
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
@@ -174,7 +174,7 @@ export function PortalSidebar() {
           <SidebarGroup key={group.title}>
             <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
             <SidebarGroupContent>
-              {' '}
+              
               <SidebarMenu>
                 {group.items.map(item => (
                   <SidebarMenuItem key={item.title}>
@@ -194,10 +194,10 @@ export function PortalSidebar() {
         ))}
       </SidebarContent>
       <SidebarFooter className='border-t p-4'>
-        {' '}
+        
         {canAccessAdminPortal && (
           <div className='mb-3'>
-            {' '}
+            
             <Button
               onClick={() => {
                 if (isMobile) {
@@ -235,3 +235,4 @@ export function PortalSidebar() {
     </Sidebar>
   );
 }
+

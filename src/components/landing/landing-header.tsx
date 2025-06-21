@@ -18,7 +18,7 @@ const gabarito = Gabarito({
   weight: ['400', '500', '600', '700', '800', '900'],
 });
 
-export function LandingHeader() {
+export const LandingHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { isSignedIn } = useUser();

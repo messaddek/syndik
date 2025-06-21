@@ -81,7 +81,7 @@ const NotificationManagement = () => {
       />
       {/* Statistics Cards */}
       <div className='grid gap-4 md:grid-cols-3'>
-        {' '}
+        
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
             <CardTitle className='text-sm font-medium'>
@@ -134,7 +134,7 @@ const NotificationManagement = () => {
             </p>
           </CardContent>
         </Card>
-      </div>{' '}
+      </div>
       {/* Notifications List */}
       <Card>
         <CardHeader>
@@ -184,7 +184,7 @@ const NotificationManagement = () => {
                                 new Date(notification.createdAt),
                                 { addSuffix: true }
                               )}
-                            </span>{' '}
+                            </span>
                             <Badge
                               variant='secondary'
                               className={cn(
@@ -215,3 +215,4 @@ const NotificationManagement = () => {
 };
 
 export { NotificationManagement };
+

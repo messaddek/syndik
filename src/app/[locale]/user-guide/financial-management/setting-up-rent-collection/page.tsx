@@ -793,7 +793,7 @@ const SettingUpRentCollectionPage = () => {
                     </CardContent>
                   </Card>
                 </div>
-              </section>{' '}
+              </section>
               {/* Navigation */}
               <div className='flex items-center justify-between border-t pt-8'>
                 <Button
@@ -816,7 +816,7 @@ const SettingUpRentCollectionPage = () => {
               </div>
             </div>
           </div>
-        </div>{' '}
+        </div>
         {/* Sidebar */}
         <div className='lg:col-span-1'>
           <ArticleSidebar

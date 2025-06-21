@@ -33,13 +33,13 @@ interface DataTablePaginationProps<TData> {
   onPageSizeChange?: (pageSize: number) => void;
 }
 
-export function DataTablePagination<TData>({
+export const DataTablePagination = <TData,>({
   table,
   pageSizeOptions = [10, 20, 30, 40, 50],
   pagination,
   onPageChange,
   onPageSizeChange,
-}: DataTablePaginationProps<TData>) {
+}: DataTablePaginationProps<TData>) => {
   const tTable = useTranslations('table');
   const tPagination = useTranslations('pagination');
   const isServerSide = !!pagination;
@@ -188,4 +188,4 @@ export function DataTablePagination<TData>({
       </div>
     </div>
   );
-}
+};

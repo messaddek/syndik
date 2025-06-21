@@ -76,11 +76,11 @@ interface CreateTicketDialogProps {
   buildingId?: string;
 }
 
-export function CreateTicketDialog({
+export const CreateTicketDialog = ({
   onClose,
   buildingId,
   open = true,
-}: CreateTicketDialogProps & { open?: boolean }) {
+}: CreateTicketDialogProps & { open?: boolean }) => {
   const t = useTranslations('helpDesk');
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
@@ -411,7 +411,7 @@ export function CreateTicketDialog({
                 </FormItem>
               )}
             />
-          )}{' '}
+          )}
           {/* Resident selector - only for managers/admins */}
           {isSyndicateAdmin && (
             <>
@@ -432,9 +432,9 @@ export function CreateTicketDialog({
                             })}
                           />
                         </SelectTrigger>
-                      </FormControl>{' '}
+                      </FormControl>
                       <SelectContent>
-                        {' '}
+                        
                         {residents?.data?.map(resident => (
                           <SelectItem key={resident.id} value={resident.id}>
                             {resident.firstName} {resident.lastName}
@@ -510,10 +510,11 @@ export function CreateTicketDialog({
               {createTicketMutation.isPending
                 ? t('creating', { default: 'Creating...' })
                 : t('create_ticket', { default: 'Create Ticket' })}
-            </Button>{' '}
+            </Button>
           </DialogFooter>
         </form>
       </Form>
     </ResponsiveDialog>
   );
 }
+

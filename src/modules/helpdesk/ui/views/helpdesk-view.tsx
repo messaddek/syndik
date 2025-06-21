@@ -63,7 +63,7 @@ interface HelpdeskViewProps {
   };
 }
 
-export function HelpdeskView({ initialFilters }: HelpdeskViewProps) {
+export const HelpdeskView = ({ initialFilters }: HelpdeskViewProps) => {
   if (process.env.NODE_ENV === 'development') {
     console.log('[HELPDESK-CLIENT] HelpdeskView - Starting render', {
       initialFilters,
@@ -466,7 +466,7 @@ interface FiltersSectionProps {
   t: (key: string, options?: { default?: string }) => string;
 }
 
-function FiltersSection({ filters, setFilters, t }: FiltersSectionProps) {
+const FiltersSection = ({ filters, setFilters, t }: FiltersSectionProps) => {
   return (
     <Card>
       <CardHeader className='pb-4'>

@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
-export function AdminDashboardView() {
+export const AdminDashboardView = () => {
   const t = useTranslations('admin'); // Mock data - replace with real API calls
   const stats = {
     totalOrganizations: 157,

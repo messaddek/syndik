@@ -10,11 +10,11 @@ interface CreateIncomeDialogProps {
   onSuccess?: () => void;
 }
 
-export function CreateIncomeDialog({
+export const CreateIncomeDialog = ({
   open,
   onOpenChange,
   onSuccess,
-}: CreateIncomeDialogProps) {
+}: CreateIncomeDialogProps) => {
   const t = useTranslations('finance.createIncomeDialog');
 
   const handleSuccess = () => {
@@ -36,4 +36,4 @@ export function CreateIncomeDialog({
       <IncomeForm onSuccess={handleSuccess} onCancel={handleCancel} />
     </ResponsiveDialog>
   );
-}
+};

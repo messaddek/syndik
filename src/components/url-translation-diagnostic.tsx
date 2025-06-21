@@ -49,7 +49,7 @@ interface Diagnostics {
  * URL and Translation Diagnostic Component
  * Specifically to debug the Arabic translation issue
  */
-export function UrlTranslationDiagnostic() {
+export const UrlTranslationDiagnostic = () => {
   const locale = useLocale();
   const [diagnostics, setDiagnostics] = useState<Diagnostics | null>(null);
 
@@ -165,11 +165,11 @@ export function UrlTranslationDiagnostic() {
             Locale: <span className='text-white'>{diagnostics.locale}</span>
           </div>
           <div>
-            Full URL:{' '}
+            Full URL:
             <span className='text-white'>{diagnostics.urlInfo.fullUrl}</span>
           </div>
           <div>
-            Pathname:{' '}
+            Pathname:
             <span className='text-white'>{diagnostics.urlInfo.pathname}</span>
           </div>
         </div>
@@ -228,3 +228,4 @@ export function UrlTranslationDiagnostic() {
     </div>
   );
 }
+

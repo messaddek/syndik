@@ -13,7 +13,7 @@ import { useRouter } from '@/i18n/navigation';
 import { ModeToggle } from '@/components/mode-toggle';
 import { LanguageSwitcher } from '@/components/language-switcher';
 
-export function PortalNavbar() {
+export const PortalNavbar = () => {
   // Initialize real-time notifications
   useRealtimeNotifications();
   const router = useRouter();
@@ -30,7 +30,7 @@ export function PortalNavbar() {
 
       {/* Mobile Layout */}
       <div className='flex w-full items-center justify-between lg:hidden'>
-        {' '}
+        
         {/* Mobile Search - Icon Only */}
         <div className='max-w-[200px] flex-1'>
           <div className='relative'>
@@ -52,7 +52,7 @@ export function PortalNavbar() {
 
       {/* Desktop Layout */}
       <div className='hidden flex-1 items-center justify-between lg:flex'>
-        {' '}
+        
         {/* Desktop Search */}
         <div className='max-w-md flex-1'>
           <div className='relative'>
@@ -83,3 +83,4 @@ export function PortalNavbar() {
     </header>
   );
 }
+

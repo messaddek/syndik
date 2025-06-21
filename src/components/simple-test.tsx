@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 /**
  * Simple test component to verify rendering and logging
  */
-export function SimpleTest() {
+export const SimpleTest = () => {
   console.log('🎯 SimpleTest component rendered!');
 
   useEffect(() => {

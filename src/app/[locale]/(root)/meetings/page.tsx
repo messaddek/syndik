@@ -7,7 +7,7 @@ import { MeetingsContent } from '@/modules/meetings/ui/components/meetings-conte
 import { PageHeader } from '@/components/page-header';
 import { useTranslations } from 'next-intl';
 
-export default function MeetingsPage() {
+const MeetingsPage = () => {
   const t = useTranslations('meetings');
 
   return (
@@ -21,4 +21,5 @@ export default function MeetingsPage() {
       </div>
     </TRPCErrorBoundary>
   );
-}
+};
+export default MeetingsPage;

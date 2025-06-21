@@ -55,7 +55,7 @@ type SerializedResident = Omit<Resident, 'createdAt' | 'updatedAt'> & {
   updatedAt: string;
 };
 
-export function ResidentsList() {
+export const ResidentsList = () => {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingResident, setEditingResident] =
     useState<SerializedResident | null>(null);

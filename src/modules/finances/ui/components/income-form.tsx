@@ -41,7 +41,11 @@ interface IncomeFormProps {
   onCancel?: () => void;
 }
 
-export function IncomeForm({ income, onSuccess, onCancel }: IncomeFormProps) {
+export const IncomeForm = ({
+  income,
+  onSuccess,
+  onCancel,
+}: IncomeFormProps) => {
   const t = useTranslations('finance.createIncomeDialog');
   const tCommon = useTranslations('common');
   const trpc = useTRPC();
@@ -188,7 +192,7 @@ export function IncomeForm({ income, onSuccess, onCancel }: IncomeFormProps) {
                 <FormMessage />
               </FormItem>
             )}
-          />{' '}
+          />
           {/* Unit Selection */}
           <FormField
             control={form.control}
@@ -431,4 +435,4 @@ export function IncomeForm({ income, onSuccess, onCancel }: IncomeFormProps) {
       </form>
     </Form>
   );
-}
+};

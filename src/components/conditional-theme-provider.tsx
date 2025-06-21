@@ -22,9 +22,9 @@ const LIGHT_MODE_PATHS = [
   '/user-guide',
 ];
 
-export function ConditionalThemeProvider({
+export const ConditionalThemeProvider = ({
   children,
-}: ConditionalThemeProviderProps) {
+}: ConditionalThemeProviderProps) => {
   const pathname = usePathname();
 
   // Check if current path should use light mode only

@@ -524,7 +524,7 @@ const UnitsView = () => {
                   </div>
                 </div>
                 <CardDescription>
-                  {unit.building?.name ?? t('unknownBuilding')} - {t('floor')}{' '}
+                  {unit.building?.name ?? t('unknownBuilding')} - {t('floor')}
                   {unit.floor}
                 </CardDescription>
               </CardHeader>

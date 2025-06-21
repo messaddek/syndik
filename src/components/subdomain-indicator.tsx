@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getCurrentSubdomain, SUBDOMAINS } from '@/lib/subdomain-utils';
 import { Badge } from '@/components/ui/badge';
 
-export function SubdomainIndicator() {
+export const SubdomainIndicator = () => {
   const [subdomain, setSubdomain] = useState<string | null>(null);
   const [hostname, setHostname] = useState<string>('');
 

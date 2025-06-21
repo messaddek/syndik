@@ -36,11 +36,11 @@ interface CreateMeetingDialogProps {
   onSuccess?: () => void;
 }
 
-export function CreateMeetingDialog({
+export const CreateMeetingDialog = ({
   open,
   onOpenChange,
   onSuccess,
-}: CreateMeetingDialogProps) {
+}: CreateMeetingDialogProps) => {
   const t = useTranslations('meetings');
   const trpc = useTRPC();
   const queryClient = useQueryClient();

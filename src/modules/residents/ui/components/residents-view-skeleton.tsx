@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Filter, Plus, Search } from 'lucide-react';
 
-export function ResidentsViewSkeleton() {
+export const ResidentsViewSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header */}
@@ -83,7 +83,7 @@ export function ResidentsViewSkeleton() {
               <div className='grid grid-cols-8 items-center gap-4'>
                 <Skeleton className='h-4 w-4' /> {/* Checkbox */}
                 <div className='flex items-center space-x-2'>
-                  <Skeleton className='h-4 w-4 rounded-full' />{' '}
+                  <Skeleton className='h-4 w-4 rounded-full' />
                   {/* User icon */}
                   <Skeleton className='h-4 w-16' /> {/* First Name */}
                 </div>
@@ -100,9 +100,9 @@ export function ResidentsViewSkeleton() {
                   <Skeleton className='h-4 w-4' /> {/* Map icon */}
                   <Skeleton className='h-4 w-16' /> {/* Unit */}
                 </div>
-                <Skeleton className='h-5 w-16 rounded-full' />{' '}
+                <Skeleton className='h-5 w-16 rounded-full' />
                 {/* Type badge */}
-                <Skeleton className='h-5 w-12 rounded-full' />{' '}
+                <Skeleton className='h-5 w-12 rounded-full' />
                 {/* Status badge */}
               </div>
             </div>
@@ -124,3 +124,4 @@ export function ResidentsViewSkeleton() {
     </div>
   );
 }
+

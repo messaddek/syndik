@@ -26,7 +26,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from 'sonner';
 
-export function ProfileTab() {
+export const ProfileTab = () => {
   const t = useTranslations();
   const { user } = useUser();
   const trpc = useTRPC();
@@ -161,7 +161,7 @@ export function ProfileTab() {
         </CardTitle>
         <CardDescription>
           {t('settings.personalInformationDescription')}
-        </CardDescription>{' '}
+        </CardDescription>
       </CardHeader>
       <CardContent className='space-y-6'>
         <div className='rounded-lg border border-blue-200 bg-blue-50 p-4'>
@@ -178,7 +178,7 @@ export function ProfileTab() {
             <div>
               <h5 className='font-medium text-blue-800'>
                 {t('settings.accountSecurity')}
-              </h5>{' '}
+              </h5>
               <p className='mt-1 text-sm text-blue-700'>
                 {t('settings.clerkSecurityNote')}
               </p>
@@ -193,7 +193,7 @@ export function ProfileTab() {
               {currentUser.firstName[0]}
               {currentUser.lastName[0]}
             </AvatarFallback>
-          </Avatar>{' '}
+          </Avatar>
           <div className='space-x-2'>
             <Button variant='outline' size='sm' onClick={handlePhotoChange}>
               {t('settings.changePhoto')}
@@ -232,9 +232,9 @@ export function ProfileTab() {
                 setFormData(prev => ({ ...prev, lastName: e.target.value }))
               }
             />
-          </div>{' '}
+          </div>
           <div className='space-y-2'>
-            <Label htmlFor='email'>{t('common.email')}</Label>{' '}
+            <Label htmlFor='email'>{t('common.email')}</Label>
             <Input
               id='email'
               type='email'
@@ -245,9 +245,9 @@ export function ProfileTab() {
             <p className='text-muted-foreground text-xs'>
               {t('settings.clerkEmailNote')}
             </p>
-          </div>{' '}
+          </div>
           <div className='space-y-2'>
-            <Label htmlFor='phone'>{t('common.phone')}</Label>{' '}
+            <Label htmlFor='phone'>{t('common.phone')}</Label>
             <Input
               id='phone'
               value={displayData.phone}
@@ -309,4 +309,4 @@ export function ProfileTab() {
       </CardContent>
     </Card>
   );
-}
+};

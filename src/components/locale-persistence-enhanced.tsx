@@ -9,7 +9,7 @@ import { useEffect, useRef } from 'react';
  * Enhanced component that ensures locale persistence across navigation
  * and provides diagnostics for locale issues
  */
-export function LocalePersistenceEnhanced() {
+export const LocalePersistenceEnhanced = () => {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();

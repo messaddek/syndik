@@ -14,7 +14,7 @@ interface OrganizationGuardProps {
   children: React.ReactNode;
 }
 
-export function OrganizationGuard({ children }: OrganizationGuardProps) {
+export const OrganizationGuard = ({ children }: OrganizationGuardProps) => {
   const { organization, isLoaded: orgLoaded } = useOrganization();
   const { user, isLoaded: userLoaded } = useUser();
   const pathname = usePathname();

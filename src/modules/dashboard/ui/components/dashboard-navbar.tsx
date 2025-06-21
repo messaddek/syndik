@@ -36,7 +36,7 @@ import {
   OrganizationStatus,
 } from '@/modules/organizations';
 
-export function DashboardNavbar() {
+export const DashboardNavbar = () => {
   const { user, isLoaded } = useUser();
   const t = useTranslations('common');
   const [open, setOpen] = useState(false);

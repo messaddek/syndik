@@ -39,11 +39,11 @@ interface ResidentFormProps {
   onCancel?: () => void;
 }
 
-export function ResidentForm({
+export const ResidentForm = ({
   resident,
   onSuccess,
   onCancel,
-}: ResidentFormProps) {
+}: ResidentFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const t = useTranslations('residents.form');
 

@@ -7,7 +7,7 @@ import { useEffect } from 'react';
  * Component that ensures locale persistence by setting a cookie
  * This helps maintain locale across navigation and page reloads
  */
-export function LocalePersistence() {
+export const LocalePersistence = () => {
   const locale = useLocale();
 
   // Add immediate logging to verify component is rendered

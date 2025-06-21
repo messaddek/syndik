@@ -36,7 +36,7 @@ interface UnitViewProps {
   _searchParams?: Record<string, string | string[] | undefined>;
 }
 
-export function UnitView({ id, _searchParams }: UnitViewProps) {
+export const UnitView = ({ id, _searchParams }: UnitViewProps) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const t = useTranslations('units');
   const trpc = useTRPC();
@@ -140,7 +140,6 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
         {/* Header */}
         <div className='flex items-center justify-between'>
           <div className='flex items-center space-x-4'>
-            {' '}
             <Button variant='ghost' size='sm' asChild>
               <Link href='/units'>
                 <ArrowLeft className='mr-2 h-4 w-4' />
@@ -161,7 +160,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                 <div className='text-muted-foreground mt-1 flex items-center space-x-1'>
                   <MapPin className='h-4 w-4' />
                   <span>
-                    {building.name} -{' '}
+                    {building.name} -
                     {t('view.floorLabel', { floor: unit.floor })}
                   </span>
                 </div>
@@ -185,7 +184,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
               {t('view.delete')}
             </Button>
           </div>
-        </div>{' '}
+        </div>
         {/* Overview Cards */}
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           <Card>
@@ -213,7 +212,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
             <CardContent>
               <div className='text-2xl font-bold'>{unit.bedrooms}</div>
               <p className='text-muted-foreground text-xs'>
-                {unit.bathrooms}{' '}
+                {unit.bathrooms}
                 {unit.bathrooms !== 1
                   ? t('view.bathrooms')
                   : t('view.bathroom')}
@@ -254,7 +253,6 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
         {/* Unit Details */}
         <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
           <Card>
-            {' '}
             <CardHeader>
               <CardTitle>{t('view.unitInformation')}</CardTitle>
               <CardDescription>
@@ -263,7 +261,6 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
             </CardHeader>
             <CardContent className='space-y-4'>
               <div className='grid grid-cols-2 gap-4'>
-                {' '}
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
                     {t('form.unitNumber')}
@@ -302,7 +299,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                     {unit.area ? `${unit.area} m²` : t('view.areaNotSpecified')}
                   </p>
                 </div>
-              </div>{' '}
+              </div>
               {unit.description && (
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
@@ -334,7 +331,6 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
           </Card>
 
           <Card>
-            {' '}
             <CardHeader>
               <CardTitle>{t('portal.details.buildingTitle')}</CardTitle>
               <CardDescription>
@@ -385,7 +381,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                       <Link href={`/units?buildingId=${building.id}`}>
                         {t('view.viewAllUnits')}
                       </Link>
-                    </Button>{' '}
+                    </Button>
                   </div>
                 </>
               ) : (
@@ -399,7 +395,6 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
         {/* Residents */}
         {residents.length > 0 && (
           <Card>
-            {' '}
             <CardHeader>
               <CardTitle>{t('view.currentResidents')}</CardTitle>
               <CardDescription>
@@ -419,7 +414,6 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                             {resident.firstName} {resident.lastName}
                           </CardTitle>
                           <div className='flex space-x-1'>
-                            {' '}
                             <Badge
                               variant={
                                 resident.isOwner ? 'default' : 'secondary'
@@ -443,7 +437,6 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                         <CardDescription>{resident.email}</CardDescription>
                       </CardHeader>
                       <CardContent>
-                        {' '}
                         <div className='space-y-2 text-sm'>
                           <div className='flex justify-between'>
                             <span>{t('view.moveInDate')}:</span>
@@ -467,7 +460,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
               </div>
             </CardContent>
           </Card>
-        )}{' '}
+        )}
         {/* Financial Overview */}
         <Card>
           <CardHeader>
@@ -480,7 +473,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
                 }),
               })}
             </CardDescription>
-          </CardHeader>{' '}
+          </CardHeader>
           <CardContent>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
               <div className='text-center'>
@@ -519,7 +512,7 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
             </div>
           </CardContent>
         </Card>
-      </div>{' '}
+      </div>
       {/* Edit Dialog */}
       <ResponsiveDialog
         title={t('view.editTitle')}
@@ -527,7 +520,6 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
       >
-        {' '}
         <UnitForm
           unit={unit}
           onSuccess={handleUpdateUnit}
@@ -537,4 +529,4 @@ export function UnitView({ id, _searchParams }: UnitViewProps) {
       <ConfirmDialog />
     </>
   );
-}
+};

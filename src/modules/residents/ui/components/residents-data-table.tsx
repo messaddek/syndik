@@ -92,13 +92,13 @@ type ResidentsDataTableProps = {
   onPageSizeChange?: (pageSize: number) => void;
 };
 
-export function ResidentsDataTable({
+export const ResidentsDataTable = ({
   filters,
   onEdit,
   onDelete,
   onPageChange,
   onPageSizeChange,
-}: ResidentsDataTableProps) {
+}: ResidentsDataTableProps) => {
   // Initialize tRPC client
   const trpc = useTRPC();
   const t = useTranslations('residents');

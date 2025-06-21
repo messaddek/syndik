@@ -24,7 +24,7 @@ import {
   Users,
 } from 'lucide-react';
 
-export function PricingPreviewSection() {
+export const PricingPreviewSection = () => {
   const t = useTranslations('pricing');
   const [isYearly, setIsYearly] = useState(false);
 
@@ -103,7 +103,7 @@ export function PricingPreviewSection() {
           </h2>
           <p className='mx-auto mb-6 max-w-2xl text-xl leading-8 text-gray-600'>
             {t('description')}
-          </p>{' '}
+          </p>
           <div className='inline-flex items-center space-x-2 text-sm text-gray-500'>
             <CheckCircle className='h-4 w-4 text-green-500' />
             <span>{t('guarantees.support')}</span>
@@ -117,7 +117,7 @@ export function PricingPreviewSection() {
           {/* Billing Toggle */}
           <div className='mt-8 flex flex-col items-center space-y-4'>
             <div className='flex items-center space-x-4 rounded-full border border-gray-200 bg-white/80 p-1 shadow-sm backdrop-blur-sm'>
-              {' '}
+              
               <button
                 onClick={() => setIsYearly(false)}
                 className={cn(
@@ -140,25 +140,25 @@ export function PricingPreviewSection() {
               >
                 {t('billing.yearly')}
               </button>
-            </div>{' '}
+            </div>
             {/* Discount Notification for Monthly */}
             {!isYearly && (
               <div className='animate-pulse rounded-lg border border-green-200 bg-green-50/80 px-4 py-2 text-center shadow-sm backdrop-blur-sm'>
                 <p className='text-sm text-green-700'>
                   <span className='font-semibold'>
                     💰 {t('billing.discount.save')}
-                  </span>{' '}
+                  </span>
                   {t('billing.discount.message')}
                 </p>
               </div>
-            )}{' '}
+            )}
             {/* Yearly Savings Indicator */}
             {isYearly && (
               <div className='rounded-lg border border-green-200 bg-green-50/80 px-4 py-2 text-center shadow-sm backdrop-blur-sm'>
                 <p className='text-sm text-green-700'>
                   <span className='font-semibold'>
                     🎉 {t('billing.discount.saving')}
-                  </span>{' '}
+                  </span>
                   {t('billing.discount.yearlyMessage')}
                 </p>
               </div>
@@ -358,3 +358,4 @@ export function PricingPreviewSection() {
     </div>
   );
 }
+

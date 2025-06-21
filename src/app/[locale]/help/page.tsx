@@ -19,7 +19,7 @@ import {
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
-export default function HelpPage() {
+const HelpPage = () => {
   const t = useTranslations('help');
   const supportOptions = [
     {
@@ -112,7 +112,6 @@ export default function HelpPage() {
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-4xl text-center'>
-            {' '}
             <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
               {t('title')}
             </h1>
@@ -162,7 +161,6 @@ export default function HelpPage() {
       <div className='py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl'>
-            {' '}
             <div className='mb-12 text-center'>
               <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
                 {t('contactForm.title')}
@@ -240,7 +238,6 @@ export default function HelpPage() {
       {/* Resources Section */}
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-          {' '}
           <div className='mx-auto mb-16 max-w-2xl text-center'>
             <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
               {t('resources.title')}
@@ -273,7 +270,7 @@ export default function HelpPage() {
                         {item}
                       </li>
                     ))}
-                  </ul>{' '}
+                  </ul>
                   <Link href={resource.href}>
                     <Button variant='outline' className='w-full space-x-2'>
                       {resource.href === '/docs' &&
@@ -300,7 +297,7 @@ export default function HelpPage() {
           <div className='flex items-center gap-4'>
             <div className='flex-shrink-0'>
               <Phone className='h-8 w-8 text-red-600' />
-            </div>{' '}
+            </div>
             <div>
               <h3 className='text-lg font-semibold text-red-800'>
                 {t('emergency.title')}
@@ -323,4 +320,5 @@ export default function HelpPage() {
       </div>
     </LandingLayout>
   );
-}
+};
+export default HelpPage;

@@ -21,10 +21,10 @@ interface ResidentAccessGuardProps {
   fallback?: React.ReactNode;
 }
 
-export function ResidentAccessGuard({
+export const ResidentAccessGuard = ({
   children,
   fallback,
-}: ResidentAccessGuardProps) {
+}: ResidentAccessGuardProps) => {
   const trpc = useTRPC();
   const t = useTranslations('portal.access');
   const {
@@ -50,7 +50,7 @@ export function ResidentAccessGuard({
     return (
       <div className='flex min-h-[400px] items-center justify-center'>
         <div className='space-y-4 text-center'>
-          <Loader2 className='border-primary mx-auto h-8 w-8 animate-spin' />{' '}
+          <Loader2 className='border-primary mx-auto h-8 w-8 animate-spin' />
           <p className='text-muted-foreground'>{t('checkingAccess')}</p>
         </div>
       </div>
@@ -97,7 +97,7 @@ export function ResidentAccessGuard({
                   <div className='flex items-start space-x-3'>
                     <AlertTriangle className='mt-0.5 h-5 w-5 text-amber-500' />
                     <div className='text-sm'>
-                      {' '}
+                      
                       <p className='font-medium'>{t('contactManager')}</p>
                       <p className='text-muted-foreground'>
                         {t('contactManagerDescription')}
@@ -110,7 +110,7 @@ export function ResidentAccessGuard({
                   <div className='flex items-start space-x-3'>
                     <Mail className='mt-0.5 h-5 w-5 text-blue-500' />
                     <div className='text-sm'>
-                      {' '}
+                      
                       <p className='font-medium'>{t('haveInvitation')}</p>
                       <p className='text-muted-foreground'>
                         {t('haveInvitationDescription')}
@@ -119,14 +119,14 @@ export function ResidentAccessGuard({
                   </div>
                 </div>
               </>
-            )}{' '}
+            )}
             {accessInfo?.message && (
               <div className='bg-muted rounded-lg p-4'>
                 <p className='text-muted-foreground text-sm'>
                   {t('details')} {accessInfo.message}
                 </p>
               </div>
-            )}{' '}
+            )}
             <div className='flex justify-center pt-2'>
               <Button variant='outline' asChild>
                 <Link href='/dashboard'>{t('backToDashboard')}</Link>
@@ -139,4 +139,5 @@ export function ResidentAccessGuard({
   }
 
   return <>{children}</>;
-}
+};
+

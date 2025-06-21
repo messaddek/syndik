@@ -32,7 +32,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
-export function HeroSection() {
+export const HeroSection = () => {
   return (
     <div className='relative isolate px-6 pt-14 lg:px-8'>
       {/* Background gradient */}
@@ -51,7 +51,7 @@ export function HeroSection() {
       <div className='relative z-10 mx-auto max-w-2xl py-32 sm:py-48 lg:py-56'>
         <div className='text-center'>
           <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-            Manage Your Residential Syndicate{' '}
+            Manage Your Residential Syndicate
             <span className='text-primary'>Effortlessly</span>
           </h1>
           <p className='mt-6 text-lg leading-8 text-gray-600'>
@@ -89,7 +89,7 @@ export function HeroSection() {
   );
 }
 
-export function StatsSection() {
+export const StatsSection = () => {
   const stats = [
     {
       name: 'Residential Syndicates',
@@ -140,7 +140,7 @@ export function StatsSection() {
   );
 }
 
-export function FeaturesSection() {
+export const FeaturesSection = () => {
   const features = [
     {
       name: 'Building Management',
@@ -218,7 +218,7 @@ export function FeaturesSection() {
   );
 }
 
-export function HowItWorksSection() {
+export const HowItWorksSection = () => {
   const steps = [
     {
       step: '01',
@@ -296,7 +296,7 @@ export function HowItWorksSection() {
   );
 }
 
-export function BenefitsSection() {
+export const BenefitsSection = () => {
   const benefits = [
     {
       title: 'Save Time',
@@ -372,7 +372,7 @@ export function BenefitsSection() {
   );
 }
 
-export function SecuritySection() {
+export const SecuritySection = () => {
   const securityFeatures = [
     {
       title: 'End-to-End Encryption',
@@ -460,7 +460,7 @@ export function SecuritySection() {
   );
 }
 
-export function TestimonialsSection() {
+export const TestimonialsSection = () => {
   const testimonials = [
     {
       content:
@@ -550,7 +550,7 @@ export function TestimonialsSection() {
   );
 }
 
-export function PricingPreviewSection() {
+export const PricingPreviewSection = () => {
   const plans = [
     {
       name: 'Starter',
@@ -836,7 +836,7 @@ export function PricingPreviewSection() {
   );
 }
 
-export function CTASection() {
+export const CTASection = () => {
   return (
     <div className='relative isolate overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700'>
       {/* Background gradient */}
@@ -946,7 +946,7 @@ export function CTASection() {
               </span>
             </div>
             <p className='text-sm leading-relaxed text-blue-100'>
-              No credit card required • Cancel anytime • Money-back guarantee •{' '}
+              No credit card required • Cancel anytime • Money-back guarantee •
               <Link
                 href='/pricing'
                 className='font-medium underline transition-colors hover:text-yellow-300'
@@ -999,3 +999,4 @@ export function CTASection() {
     </div>
   );
 }
+

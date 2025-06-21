@@ -3,8 +3,7 @@ import { PortalDashboard } from '@/modules/portal/ui/views/portal-dashboard';
 import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function PortalPage() {
-   
+const PortalPage = () => {
   console.log('🏠 Portal Page - Rendering portal page');
 
   return (
@@ -14,9 +13,9 @@ export default function PortalPage() {
       </Suspense>
     </TRPCErrorBoundary>
   );
-}
+};
 
-function PortalDashboardSkeleton() {
+const PortalDashboardSkeleton = () => {
   return (
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
@@ -38,4 +37,5 @@ function PortalDashboardSkeleton() {
       </div>
     </div>
   );
-}
+};
+export default PortalPage;

@@ -117,11 +117,11 @@ const UnitManagementOrganizationPage = () => {
                             • {t('sections.overview.benefits.items.tracking')}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t('sections.overview.benefits.items.maintenance')}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.overview.benefits.items.communication'
                             )}
@@ -202,37 +202,37 @@ const UnitManagementOrganizationPage = () => {
                         </h4>
                         <ul className='space-y-1 text-sm'>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.essential.items.unitNumber'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.essential.items.floor'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.essential.items.unitType'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.essential.items.squareFootage'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.essential.items.bedrooms'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.essential.items.bathrooms'
                             )}
@@ -247,37 +247,37 @@ const UnitManagementOrganizationPage = () => {
                         </h4>
                         <ul className='space-y-1 text-sm'>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.optional.items.description'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.optional.items.balcony'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.optional.items.parking'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.optional.items.storage'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.optional.items.petPolicy'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.addingUnits.requiredInfo.optional.items.accessibility'
                             )}
@@ -401,25 +401,25 @@ const UnitManagementOrganizationPage = () => {
                         </p>
                         <ul className='mt-2 space-y-1 text-sm text-yellow-700'>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.unitNumbering.bestPractices.items.consistency'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.unitNumbering.bestPractices.items.avoidConfusion'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.unitNumbering.bestPractices.items.expansion'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.unitNumbering.bestPractices.items.accessibility'
                             )}
@@ -622,25 +622,25 @@ const UnitManagementOrganizationPage = () => {
                           </h4>
                           <ul className='space-y-1 text-sm text-gray-600'>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.floorPlans.management.formats.items.pdf'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.floorPlans.management.formats.items.images'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.floorPlans.management.formats.items.cad'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.floorPlans.management.formats.items.interactive'
                               )}
@@ -653,25 +653,25 @@ const UnitManagementOrganizationPage = () => {
                           </h4>
                           <ul className='space-y-1 text-sm text-gray-600'>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.floorPlans.management.benefits.items.marketing'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.floorPlans.management.benefits.items.maintenance'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.floorPlans.management.benefits.items.utilization'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.floorPlans.management.benefits.items.virtualTour'
                               )}
@@ -877,25 +877,25 @@ const UnitManagementOrganizationPage = () => {
                     <CardContent>
                       <ul className='space-y-2 text-sm'>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.bulkOperations.types.creation.items.import'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.bulkOperations.types.creation.items.template'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.bulkOperations.types.creation.items.pattern'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.bulkOperations.types.creation.items.automatic'
                           )}
@@ -913,25 +913,25 @@ const UnitManagementOrganizationPage = () => {
                     <CardContent>
                       <ul className='space-y-2 text-sm'>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.bulkOperations.types.updates.items.status'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.bulkOperations.types.updates.items.rent'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.bulkOperations.types.updates.items.amenity'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.bulkOperations.types.updates.items.category'
                           )}

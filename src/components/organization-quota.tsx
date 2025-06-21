@@ -14,10 +14,10 @@ interface OrganizationQuotaProps {
   className?: string;
 }
 
-export function OrganizationQuota({
+export const OrganizationQuota = ({
   showTitle = true,
   className = '',
-}: OrganizationQuotaProps) {
+}: OrganizationQuotaProps) => {
   const router = useRouter();
   const trpc = useTRPC();
   const t = useTranslations('organizations');
@@ -78,7 +78,7 @@ export function OrganizationQuota({
       )}
 
       <div className='space-y-2'>
-        {' '}
+        
         <div className='flex justify-between text-sm'>
           <span className='text-muted-foreground'>{t('used')}</span>
           <span className='font-medium'>
@@ -94,7 +94,7 @@ export function OrganizationQuota({
                 ? '[&>div]:bg-yellow-500'
                 : '[&>div]:bg-blue-500'
           }`}
-        />{' '}
+        />
         <div className='flex items-center justify-between'>
           <span
             className={`text-xs ${
@@ -136,7 +136,7 @@ export function OrganizationQuota({
               </Button>
             )}
           </div>
-        </div>{' '}
+        </div>
         {usage.remaining > 0 ? (
           <p className='text-muted-foreground text-xs'>
             {usage.remaining} {t('moreAvailable')}
@@ -148,3 +148,4 @@ export function OrganizationQuota({
     </div>
   );
 }
+

@@ -12,12 +12,12 @@ interface EditResidentDialogProps {
   resident?: Resident;
 }
 
-export function EditResidentDialog({
+export const EditResidentDialog = ({
   open,
   onOpenChange,
   onSuccess,
   resident,
-}: EditResidentDialogProps) {
+}: EditResidentDialogProps) => {
   const t = useTranslations('residents.form');
 
   const handleSuccess = () => {

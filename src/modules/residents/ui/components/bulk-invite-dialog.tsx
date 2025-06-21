@@ -23,7 +23,7 @@ interface BulkInviteDialogProps {
   children: React.ReactNode;
 }
 
-export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
+export const BulkInviteDialog = ({ children }: BulkInviteDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedResidents, setSelectedResidents] = useState<string[]>([]);
 
@@ -167,7 +167,6 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
         <div className='space-y-4'>
           {/* Summary */}
           <div className='bg-muted flex items-center justify-between rounded-lg p-3'>
-            {' '}
             <div className='flex items-center space-x-2'>
               <Mail className='text-muted-foreground h-4 w-4' />
               <span className='text-sm'>
@@ -184,7 +183,7 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
                 {selectedResidents.length} {t('bulkInvite.selected')}
               </Badge>
             )}
-          </div>{' '}
+          </div>
           {/* Loading state */}
           {isLoading && (
             <div className='flex items-center justify-center py-8'>
@@ -298,4 +297,4 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
       </DialogContent>
     </Dialog>
   );
-}
+};

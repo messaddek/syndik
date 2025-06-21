@@ -4,7 +4,7 @@ import { useLocale } from 'next-intl';
 import { useEffect } from 'react';
 import { isRtlLocale, type Locale } from '@/i18n/config';
 
-export function RTLHandler() {
+export const RTLHandler = () => {
   const locale = useLocale() as Locale;
   const isRtl = isRtlLocale(locale);
 

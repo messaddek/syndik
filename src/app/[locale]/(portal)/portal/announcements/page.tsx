@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function AnnouncementsPage() {
+const AnnouncementsPage = () => {
   const trpc = useTRPC();
 
   const { data: announcements, isLoading } = useQuery(
@@ -70,7 +70,7 @@ export default function AnnouncementsPage() {
                   </div>
                   {announcement.expiresAt && (
                     <div className='text-orange-600'>
-                      Expires:{' '}
+                      Expires:
                       {new Date(announcement.expiresAt).toLocaleDateString()}
                     </div>
                   )}
@@ -100,4 +100,6 @@ export default function AnnouncementsPage() {
       )}
     </div>
   );
-}
+};
+
+export default AnnouncementsPage;

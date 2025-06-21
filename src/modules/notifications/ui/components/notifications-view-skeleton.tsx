@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Bell, Users, Send, Eye } from 'lucide-react';
 
-export function NotificationsViewSkeleton() {
+export const NotificationsViewSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header */}

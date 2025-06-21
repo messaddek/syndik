@@ -29,7 +29,7 @@ import { Link } from '@/i18n/routing';
 import { toast } from 'sonner';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function ResidentProfile() {
+export const ResidentProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     phone: '',
@@ -361,7 +361,7 @@ export function ResidentProfile() {
   );
 }
 
-function ResidentProfileSkeleton() {
+const ResidentProfileSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header Skeleton */}

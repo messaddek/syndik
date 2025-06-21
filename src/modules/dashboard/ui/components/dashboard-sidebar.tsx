@@ -39,7 +39,7 @@ import {
   SUBDOMAINS,
 } from '@/lib/subdomain-utils';
 
-export function DashboardSidebar() {
+export const DashboardSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
@@ -99,7 +99,7 @@ export function DashboardSidebar() {
 
   return (
     <Sidebar>
-      {' '}
+      
       <SidebarHeader>
         <div
           className='flex cursor-pointer items-center space-x-2 px-4 py-2'
@@ -120,7 +120,7 @@ export function DashboardSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            {' '}
+            
             <SidebarMenu>
               {navigation.map(item => {
                 const Icon = item.icon;
@@ -152,7 +152,7 @@ export function DashboardSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-      </SidebarContent>{' '}
+      </SidebarContent>
       <SidebarFooter>
         <div className='border-t px-4 py-3'>
           <OrganizationQuota />
@@ -193,7 +193,7 @@ export function DashboardSidebar() {
               <span>Admin Portal</span>
             </Button>
           )}
-        </div>{' '}
+        </div>
         <SidebarMenu>
           {footerNavigation.map(item => {
             const Icon = item.icon;
@@ -223,3 +223,4 @@ export function DashboardSidebar() {
     </Sidebar>
   );
 }
+

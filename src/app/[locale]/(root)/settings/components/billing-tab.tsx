@@ -19,7 +19,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 
-export function BillingTab() {
+export const BillingTab = () => {
   // Mock billing info (would come from payment provider like Stripe)
   const billingInfo = {
     plan: 'Professional',

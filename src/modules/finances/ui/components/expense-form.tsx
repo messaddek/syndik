@@ -41,11 +41,11 @@ interface ExpenseFormProps {
   onCancel?: () => void;
 }
 
-export function ExpenseForm({
+export const ExpenseForm = ({
   expense,
   onSuccess,
   onCancel,
-}: ExpenseFormProps) {
+}: ExpenseFormProps) => {
   const t = useTranslations('finance.createExpenseDialog');
   const tCommon = useTranslations('common');
   const trpc = useTRPC();
@@ -275,7 +275,7 @@ export function ExpenseForm({
                   </SelectItem>
                   <SelectItem value='other'>
                     {t('categories.other')}
-                  </SelectItem>{' '}
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -407,3 +407,4 @@ export function ExpenseForm({
     </Form>
   );
 }
+

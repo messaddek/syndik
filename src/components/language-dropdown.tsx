@@ -12,7 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config';
 
-export function LanguageDropdown() {
+export const LanguageDropdown = () => {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();

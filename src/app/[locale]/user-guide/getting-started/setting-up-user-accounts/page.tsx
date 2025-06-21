@@ -407,7 +407,7 @@ const SettingUpUserAccountsPage = () => {
                     </CardContent>
                   </Card>
                 </div>
-              </section>{' '}
+              </section>
               {/* Navigation */}
               <div className='flex items-center justify-between border-t pt-8'>
                 <Button
@@ -506,7 +506,7 @@ const SettingUpUserAccountsPage = () => {
                   Join Community
                 </Button>
               </CardContent>
-            </Card>{' '}
+            </Card>
           </div>
         </div>
       </div>

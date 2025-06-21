@@ -12,12 +12,12 @@ interface EditIncomeDialogProps {
   onSuccess?: () => void;
 }
 
-export function EditIncomeDialog({
+export const EditIncomeDialog = ({
   income,
   open,
   onOpenChange,
   onSuccess,
-}: EditIncomeDialogProps) {
+}: EditIncomeDialogProps) => {
   const t = useTranslations('finance');
 
   const handleSuccess = () => {

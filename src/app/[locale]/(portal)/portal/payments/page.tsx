@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function PaymentsPage() {
+const PaymentsPage = () => {
   const trpc = useTRPC();
 
   const { data: dashboardData, isLoading } = useQuery(
@@ -56,7 +56,7 @@ export default function PaymentsPage() {
                 <div className='flex items-center gap-2 text-sm'>
                   <Calendar className='h-4 w-4' />
                   <span>
-                    Due:{' '}
+                    Due:
                     {dashboardData?.nextPayment?.dueDate
                       ? new Date(
                           dashboardData.nextPayment.dueDate
@@ -152,4 +152,5 @@ export default function PaymentsPage() {
       </Card>
     </div>
   );
-}
+};
+export default PaymentsPage;

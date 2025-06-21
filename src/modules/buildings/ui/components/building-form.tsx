@@ -32,11 +32,11 @@ interface BuildingFormProps {
   onCancel?: () => void;
 }
 
-export function BuildingForm({
+export const BuildingForm = ({
   building,
   onSuccess,
   onCancel,
-}: BuildingFormProps) {
+}: BuildingFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const t = useTranslations('buildings');
   const tCommon = useTranslations('common');

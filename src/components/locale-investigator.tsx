@@ -69,7 +69,7 @@ interface Investigation {
  * Advanced locale debugging and investigation tool
  * This component helps identify exactly when and why locale is lost
  */
-export function LocaleInvestigator() {
+export const LocaleInvestigator = () => {
   const locale = useLocale();
   const pathname = usePathname();
   const params = useParams();
@@ -310,25 +310,25 @@ export function LocaleInvestigator() {
         <div className='space-y-2'>
           <div className='grid grid-cols-2 gap-2 text-xs'>
             <div>
-              Current:{' '}
+              Current:
               <span className='text-blue-400'>
                 {currentInvestigation.locale}
               </span>
             </div>
             <div>
-              URL:{' '}
+              URL:
               <span className='text-green-400'>
                 {currentInvestigation.urlAnalysis.expectedLocale}
               </span>
             </div>
             <div>
-              Cookie:{' '}
+              Cookie:
               <span className='text-yellow-400'>
                 {currentInvestigation.storage.cookie}
               </span>
             </div>
             <div>
-              localStorage:{' '}
+              localStorage:
               <span className='text-purple-400'>
                 {currentInvestigation.storage.localStorage}
               </span>
@@ -355,22 +355,22 @@ export function LocaleInvestigator() {
                       key={namespace}
                       className={`ml-2 ${result.success ? 'text-green-400' : 'text-red-400'}`}
                     >
-                      {namespace}: {result.success ? '✅' : '❌'}{' '}
+                      {namespace}: {result.success ? '✅' : '❌'}
                       {result.success ? result.value : result.error}
                     </div>
                   )
                 )}
-              </div>{' '}
+              </div>
               <div>
                 <div className='font-semibold text-blue-400'>URL Analysis:</div>
                 <div className='ml-2 space-y-1'>
                   <div>Path: {currentInvestigation.pathname}</div>
                   <div>
-                    Segments:{' '}
+                    Segments:
                     {JSON.stringify(currentInvestigation.urlAnalysis.segments)}
                   </div>
                   <div>
-                    First segment is valid locale:{' '}
+                    First segment is valid locale:
                     {currentInvestigation.urlAnalysis.isValidLocale
                       ? '✅'
                       : '❌'}
@@ -383,28 +383,28 @@ export function LocaleInvestigator() {
                 </div>
                 <div className='ml-2 space-y-1'>
                   <div>
-                    Supported:{' '}
+                    Supported:
                     {JSON.stringify(
                       currentInvestigation.urlAnalysis.routingConfig
                         .supportedLocales
                     )}
                   </div>
                   <div>
-                    Default:{' '}
+                    Default:
                     {
                       currentInvestigation.urlAnalysis.routingConfig
                         .defaultLocale
                     }
                   </div>
                   <div>
-                    Locale Detection:{' '}
+                    Locale Detection:
                     {currentInvestigation.urlAnalysis.routingConfig
                       .localeDetection
                       ? '✅'
                       : '❌'}
-                  </div>{' '}
+                  </div>
                   <div>
-                    Prefix Mode:{' '}
+                    Prefix Mode:
                     {typeof currentInvestigation.urlAnalysis.routingConfig
                       .localePrefix === 'string'
                       ? currentInvestigation.urlAnalysis.routingConfig
@@ -422,19 +422,19 @@ export function LocaleInvestigator() {
                     Hostname: {currentInvestigation.subdomainAnalysis.hostname}
                   </div>
                   <div>
-                    App Subdomain:{' '}
+                    App Subdomain:
                     {currentInvestigation.subdomainAnalysis.isAppSubdomain
                       ? '✅'
                       : '❌'}
                   </div>
                   <div>
-                    Main Domain:{' '}
+                    Main Domain:
                     {currentInvestigation.subdomainAnalysis.isMainDomain
                       ? '✅'
                       : '❌'}
                   </div>
                   <div>
-                    Environment:{' '}
+                    Environment:
                     {currentInvestigation.subdomainAnalysis.isDevelopment
                       ? 'Dev'
                       : currentInvestigation.subdomainAnalysis.isStaging
@@ -442,14 +442,14 @@ export function LocaleInvestigator() {
                         : 'Production'}
                   </div>
                   <div>
-                    Cookie Domain:{' '}
+                    Cookie Domain:
                     {
                       currentInvestigation.subdomainAnalysis
                         .expectedCookieDomain
                     }
                   </div>
                   <div className='mt-1 text-xs text-gray-400'>
-                    All Cookies:{' '}
+                    All Cookies:
                     {currentInvestigation.storage.allCookies || 'none'}
                   </div>
                 </div>
@@ -461,7 +461,7 @@ export function LocaleInvestigator() {
                 <div className='ml-2 max-h-32 space-y-1 overflow-y-auto'>
                   {investigations.slice(-5).map((inv, index) => (
                     <div key={index} className='text-xs'>
-                      {new Date(inv.timestamp).toLocaleTimeString()}:{' '}
+                      {new Date(inv.timestamp).toLocaleTimeString()}:
                       {inv.locale} @ {inv.pathname}
                       {inv.urlAnalysis.mismatch && (
                         <span className='text-red-400'> ⚠️</span>
@@ -477,3 +477,4 @@ export function LocaleInvestigator() {
     </div>
   );
 }
+

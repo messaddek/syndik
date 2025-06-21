@@ -313,7 +313,7 @@ export const CreateB2BTicketDialog = ({
                     <FormMessage />
                   </FormItem>
                 )}
-              />{' '}
+              />
               <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
                 <FormField
                   control={form.control}
@@ -381,13 +381,13 @@ export const CreateB2BTicketDialog = ({
                   )}
                 />
               </div>
-            </div>{' '}
+            </div>
             {/* Business Impact */}
             <div className='space-y-4 rounded-lg border border-orange-200 bg-orange-50 p-6'>
               <h3 className='flex items-center gap-2 border-b border-orange-200 pb-2 text-lg font-semibold text-orange-900'>
                 <Building className='h-5 w-5 text-orange-600' />
                 Business Impact
-              </h3>{' '}
+              </h3>
               <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 <FormField
                   control={form.control}
@@ -463,12 +463,12 @@ export const CreateB2BTicketDialog = ({
                   </FormItem>
                 )}
               />
-            </div>{' '}
+            </div>
             {/* Syndicate Information */}
             <div className='space-y-4 rounded-lg border border-blue-200 bg-blue-50 p-6'>
               <h3 className='border-b border-blue-200 pb-2 text-lg font-semibold text-blue-900'>
                 Organization Information
-              </h3>{' '}
+              </h3>
               <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 <FormField
                   control={form.control}
@@ -594,7 +594,7 @@ export const CreateB2BTicketDialog = ({
                   )}
                 />
               </div>
-            </div>{' '}
+            </div>
             {/* Tags */}
             <div className='space-y-4 rounded-lg border border-green-200 bg-green-50 p-6'>
               <FormLabel className='block border-b border-green-200 pb-2 text-lg font-semibold text-green-900'>
@@ -634,7 +634,7 @@ export const CreateB2BTicketDialog = ({
                   ))}
                 </div>
               )}
-            </div>{' '}
+            </div>
             {/* Submit */}
             <div className='mt-6 flex justify-end gap-2 border-t border-gray-200 pt-6'>
               <Button
@@ -652,7 +652,7 @@ export const CreateB2BTicketDialog = ({
                 {createB2BTicket.isPending
                   ? t('creating')
                   : t('create_b2b_ticket_button')}
-              </Button>{' '}
+              </Button>
             </div>
           </form>
         </Form>
@@ -695,3 +695,4 @@ export const CreateB2BTicketDialog = ({
     </ResponsiveDialog>
   );
 };
+

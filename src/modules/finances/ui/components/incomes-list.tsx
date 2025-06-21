@@ -20,7 +20,7 @@ import { useTranslations } from 'next-intl';
 import { EditIncomeDialog } from './edit-income-dialog';
 import type { Income } from '@/modules/incomes/types';
 
-export function IncomesList() {
+export const IncomesList = () => {
   const trpc = useTRPC();
   const t = useTranslations('finance');
   const queryClient = useQueryClient();
@@ -124,7 +124,7 @@ export function IncomesList() {
                   )}
                   • {format(new Date(income.receivedDate), 'MMM dd, yyyy')}
                 </CardDescription>
-              </div>{' '}
+              </div>
               <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2'>
                 <Badge
                   className={`${getCategoryColor(income.category)} whitespace-nowrap`}
@@ -136,7 +136,7 @@ export function IncomesList() {
                 </div>
               </div>
             </div>
-          </CardHeader>{' '}
+          </CardHeader>
           <CardContent>
             <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
               <div className='min-w-0 flex-1 space-y-1'>
@@ -148,7 +148,7 @@ export function IncomesList() {
                     {income.notes}
                   </p>
                 )}
-              </div>{' '}
+              </div>
               <div className='flex shrink-0 gap-2'>
                 <Button
                   variant='outline'
@@ -186,3 +186,4 @@ export function IncomesList() {
     </div>
   );
 }
+

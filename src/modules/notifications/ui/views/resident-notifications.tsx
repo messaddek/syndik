@@ -48,11 +48,11 @@ interface NotificationItemProps {
   onArchive: (id: string) => void;
 }
 
-function NotificationItem({
+const NotificationItem = ({
   notification,
   onMarkAsRead,
   onArchive,
-}: NotificationItemProps) {
+}: NotificationItemProps) => {
   const t = useTranslations('notifications.resident');
   const tForm = useTranslations('notifications.form');
 
@@ -148,7 +148,7 @@ function NotificationItem({
         {notification.actionUrl && (
           <div className='mt-3'>
             <Button size='sm' variant='outline' asChild>
-              {' '}
+              
               <a
                 href={notification.actionUrl}
                 target='_blank'
@@ -164,7 +164,7 @@ function NotificationItem({
   );
 }
 
-export function ResidentNotifications() {
+export const ResidentNotifications = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
@@ -250,7 +250,7 @@ export function ResidentNotifications() {
 
   return (
     <div className='space-y-6'>
-      {' '}
+      
       <div className='flex items-center justify-between'>
         <div>
           <h1 className='text-3xl font-bold'>{t('title')}</h1>
@@ -319,7 +319,7 @@ export function ResidentNotifications() {
       </div>
       {/* Filters */}
       <Card>
-        {' '}
+        
         <CardHeader>
           <CardTitle className='flex items-center gap-2'>
             <Filter className='h-5 w-5' />
@@ -369,7 +369,7 @@ export function ResidentNotifications() {
                   <SelectValue
                     placeholder={t('filters.allPrioritiesPlaceholder')}
                   />
-                </SelectTrigger>{' '}
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value='all'>
                     {t('filters.allPriorities')}
@@ -396,7 +396,7 @@ export function ResidentNotifications() {
         onValueChange={setActiveTab}
         className='space-y-4'
       >
-        {' '}
+        
         <TabsList>
           <TabsTrigger value='all'>{t('allNotifications')}</TabsTrigger>
           <TabsTrigger value='unread' className='relative'>
@@ -409,7 +409,7 @@ export function ResidentNotifications() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value='all' className='space-y-4'>
-          {' '}
+          
           {isLoading ? (
             <div className='py-8 text-center'>
               <div className='text-muted-foreground'>{t('loading')}</div>
@@ -442,7 +442,7 @@ export function ResidentNotifications() {
           )}
         </TabsContent>
         <TabsContent value='unread' className='space-y-4'>
-          {' '}
+          
           {isLoading ? (
             <div className='py-8 text-center'>
               <div className='text-muted-foreground'>{t('loading')}</div>
@@ -482,3 +482,4 @@ export function ResidentNotifications() {
     </div>
   );
 }
+

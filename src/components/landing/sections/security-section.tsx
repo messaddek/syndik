@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { Lock, UserCheck, Shield, Database, Award, Globe } from 'lucide-react';
 
-export function SecuritySection() {
+export const SecuritySection = () => {
   const t = useTranslations('landing.security');
   const securityFeatures = [
     {
@@ -41,7 +41,7 @@ export function SecuritySection() {
   return (
     <div className='bg-gray-900 py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        {' '}
+        
         <div className='mx-auto max-w-2xl text-center'>
           <h2 className='text-base leading-7 font-semibold text-blue-400'>
             {t('subtitle')}
@@ -67,10 +67,10 @@ export function SecuritySection() {
               </p>
             </div>
           ))}
-        </div>{' '}
+        </div>
         <div className='mt-16 text-center'>
           <div className='inline-flex items-center space-x-6 rounded-lg bg-gray-800 px-6 py-4'>
-            <Shield className='h-8 w-8 text-blue-400' />{' '}
+            <Shield className='h-8 w-8 text-blue-400' />
             <div className='text-left'>
               <div className='text-sm font-medium text-white'>
                 {t('certificationLabel')}
@@ -85,3 +85,4 @@ export function SecuritySection() {
     </div>
   );
 }
+

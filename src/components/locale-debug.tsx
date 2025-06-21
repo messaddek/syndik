@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { usePathname } from '@/i18n/routing';
 
-export function LocaleDebug() {
+export const LocaleDebug = () => {
   const locale = useLocale();
   const pathname = usePathname();
   const params = useParams();

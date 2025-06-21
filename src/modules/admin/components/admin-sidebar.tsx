@@ -29,7 +29,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-export function AdminSidebar() {
+export const AdminSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations('admin');
@@ -60,7 +60,7 @@ export function AdminSidebar() {
 
   return (
     <Sidebar>
-      {' '}
+      
       <SidebarHeader>
         <div
           className='flex cursor-pointer items-center space-x-2 px-4 py-2'
@@ -86,7 +86,7 @@ export function AdminSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            {' '}
+            
             <SidebarMenu>
               {navigation.map(item => {
                 const Icon = item.icon;
@@ -117,7 +117,7 @@ export function AdminSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        {' '}
+        
         <div className='px-4 pb-2'>
           <Button
             variant='outline'
@@ -168,3 +168,4 @@ export function AdminSidebar() {
     </Sidebar>
   );
 }
+

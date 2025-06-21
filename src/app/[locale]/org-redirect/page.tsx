@@ -8,7 +8,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { LoadingScreen } from '@/components/ui/loading-screen';
 import type { Locale } from '@/i18n/config';
 
-export default function OrgRedirectPage() {
+const OrgRedirectPage = () => {
   const { user, isLoaded: userLoaded } = useUser();
   const { organization, isLoaded: orgLoaded } = useOrganization();
   const router = useRouter();
@@ -65,4 +65,5 @@ export default function OrgRedirectPage() {
       <LoadingScreen message={t('redirect.loading')} />
     </div>
   );
-}
+};
+export default OrgRedirectPage;

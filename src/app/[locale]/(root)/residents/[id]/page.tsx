@@ -9,10 +9,7 @@ type ResidentPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function ResidentPage({
-  params,
-  searchParams,
-}: ResidentPageProps) {
+const ResidentPage = async ({ params, searchParams }: ResidentPageProps) => {
   const { id } = await params;
   const awaitedSearchParams = await searchParams;
   const queryClient = getQueryClient();
@@ -43,4 +40,6 @@ export default async function ResidentPage({
       </div>
     </TRPCErrorBoundary>
   );
-}
+};
+
+export default ResidentPage;

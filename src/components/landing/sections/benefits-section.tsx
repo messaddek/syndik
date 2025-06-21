@@ -11,7 +11,7 @@ import {
 } from '../../ui/card';
 import { Badge } from '../../ui/badge';
 
-export function BenefitsSection() {
+export const BenefitsSection = () => {
   const t = useTranslations('landing.benefits');
   const benefits = [
     {
@@ -43,7 +43,7 @@ export function BenefitsSection() {
   return (
     <div className='bg-white py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        {' '}
+        
         <div className='mx-auto max-w-2xl text-center'>
           <h2 className='text-primary text-base leading-7 font-semibold'>
             {t('subtitle')}
@@ -83,3 +83,4 @@ export function BenefitsSection() {
     </div>
   );
 }
+

@@ -7,7 +7,7 @@ import { useState } from 'react';
  * Cross-subdomain locale testing tool
  * Specifically designed to test locale persistence between app.domain.com and domain.com
  */
-export function CrossSubdomainTester() {
+export const CrossSubdomainTester = () => {
   const locale = useLocale();
   const [testResults, setTestResults] = useState<string[]>([]);
 

@@ -18,7 +18,7 @@ import {
   Clock,
 } from 'lucide-react';
 
-export default function TermsPage() {
+const TermsPage = () => {
   const t = useTranslations('terms');
   const [activeSection, setActiveSection] = useState<string>('');
 
@@ -186,7 +186,6 @@ export default function TermsPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    {' '}
                     <nav className='space-y-2'>
                       {sections.map(section => (
                         <a
@@ -486,4 +485,6 @@ export default function TermsPage() {
       </div>
     </LandingLayout>
   );
-}
+};
+
+export default TermsPage;
