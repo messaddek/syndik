@@ -434,7 +434,9 @@
         "title": "نظرة عامة",
         "content": "إضافة عقارات جديدة إلى محفظتك مهمة أساسية في إدارة العقارات."
       }
-    }  },  "common": {
+    }
+  },
+  "common": {
     "tableOfContents": "جدول المحتويات",
     "relatedArticles": "مقالات ذات صلة",
     "overview": "نظرة عامة",
@@ -447,7 +449,9 @@
     "tips": "نصائح احترافية"
   },
   "navigation": {
-    "userGuide": "دليل المستخدم",    "gettingStarted": "البدء"  },
+    "userGuide": "دليل المستخدم",
+    "gettingStarted": "البدء"
+  },
   "processingPayments": {
     "title": "معالجة المدفوعات",
     "description": "إدارة مدفوعات الإيجار والرسوم والمصروفات بكفاءة",
@@ -635,7 +639,8 @@
             "href": "/user-guide/financial-management/late-fees"
           }
         ]
-      }    }
+      }
+    }
   },
   "sidebar": {
     "tableOfContents": "جدول المحتويات",

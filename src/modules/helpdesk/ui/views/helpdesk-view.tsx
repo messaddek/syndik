@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { useTRPC } from '@/trpc/client';
 import { Button } from '@/components/ui/button';
@@ -47,6 +47,7 @@ import type {
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useHelpdeskFilters } from '../../hooks/use-helpdesk-filters';
 import { useHelpdeskPermissions } from '../../hooks/use-helpdesk-permissions';
+import { PAGINATION } from '@/constants';
 
 interface HelpdeskViewProps {
   initialFilters?: {
@@ -78,7 +79,7 @@ export function HelpdeskView({ initialFilters }: HelpdeskViewProps) {
   const [activeTab, setActiveTab] = useState<TicketStatus | 'all'>('all');
   const [ticketTypeTab, setTicketTypeTab] = useState<
     'internal' | 'b2b' | 'all'
-  >('internal');
+  >('all');
   const { canCreateB2BTickets, canViewB2BTickets } = useHelpdeskPermissions();
   const trpc = useTRPC();
   const queryClient = useQueryClient();
@@ -88,21 +89,50 @@ export function HelpdeskView({ initialFilters }: HelpdeskViewProps) {
       filters,
     });
   }
-  const statsQueryStart = Date.now();
-  const { data: stats, isLoading: statsLoading } = useQuery(
-    trpc.helpdesk.getStats.queryOptions({
-      buildingId: filters.buildingId || undefined,
+  const _statsQueryStart = Date.now();
+  const ticketsQueryStart = Date.now();
+  // Get all tickets for the current ticket type tab (for stats calculation)
+  // This query excludes status filters to get all tickets for counting each status
+  const { data: allTicketsForStats, isLoading: _allTicketsLoading } = useQuery(
+    trpc.helpdesk.getAllTickets.queryOptions({
+      filters: {
+        buildingId: filters.buildingId || undefined,
+        // Don't include status filter here - we want all statuses for counting
+        priority:
+          filters.priority.length > 0
+            ? (filters.priority as ('low' | 'medium' | 'high' | 'urgent')[])
+            : undefined,
+        category:
+          filters.category.length > 0
+            ? (filters.category as (
+                | 'maintenance'
+                | 'complaint'
+                | 'inquiry'
+                | 'billing'
+                | 'security'
+                | 'parking'
+                | 'noise'
+                | 'cleaning'
+                | 'other'
+              )[])
+            : undefined,
+        ticketType: ticketTypeTab === 'all' ? 'all' : ticketTypeTab,
+      },
+      pagination: {
+        page: PAGINATION.DEFAULT_PAGE,
+        limit: PAGINATION.MAX_PAGE_SIZE, // Get all tickets for stats calculation
+      },
+      sortBy: filters.sortBy as
+        | 'createdAt'
+        | 'updatedAt'
+        | 'priority'
+        | 'status',
+      sortOrder: filters.sortOrder as 'asc' | 'desc',
     })
   );
-  if (process.env.NODE_ENV === 'development') {
-    console.log(
-      '[HELPDESK-CLIENT] Stats query completed in',
-      Date.now() - statsQueryStart,
-      'ms'
-    );
-  }
-  const ticketsQueryStart = Date.now();
-  const { data: tickets, isLoading: _ticketsLoading } = useQuery(
+
+  // Get paginated tickets for display (with all filters including status)
+  const { data: paginatedTickets, isLoading: _ticketsLoading } = useQuery(
     trpc.helpdesk.getAllTickets.queryOptions({
       filters: {
         buildingId: filters.buildingId || undefined,
@@ -133,7 +163,7 @@ export function HelpdeskView({ initialFilters }: HelpdeskViewProps) {
                 | 'other'
               )[])
             : undefined,
-        ticketType: ticketTypeTab,
+        ticketType: ticketTypeTab === 'all' ? 'all' : ticketTypeTab,
       },
       pagination: {
         page: filters.page,
@@ -146,16 +176,34 @@ export function HelpdeskView({ initialFilters }: HelpdeskViewProps) {
         | 'status',
       sortOrder: filters.sortOrder as 'asc' | 'desc',
     })
-  );
+  ); // Calculate stats from the all tickets data (excluding status filters)
+  const stats = useMemo(() => {
+    if (!allTicketsForStats?.tickets) return undefined;
 
+    const allTickets = allTicketsForStats.tickets;
+
+    return {
+      total: allTickets.length,
+      open: allTickets.filter(t => t.status === 'open').length,
+      inProgress: allTickets.filter(t => t.status === 'in_progress').length,
+      resolved: allTickets.filter(t => t.status === 'resolved').length,
+      closed: allTickets.filter(t => t.status === 'closed').length,
+      // Set default values for fields not returned by getAllTickets
+      avgResponseTime: 0,
+      avgResolutionTime: 0,
+      satisfactionScore: 0,
+    };
+  }, [allTicketsForStats?.tickets]);
+  const statsLoading = _allTicketsLoading;
   if (process.env.NODE_ENV === 'development') {
     console.log(
       '[HELPDESK-CLIENT] Tickets query completed in',
       Date.now() - ticketsQueryStart,
       'ms',
       {
-        ticketsCount: tickets?.tickets?.length || 0,
-        totalCount: tickets?.pagination?.total || 0,
+        paginatedTicketsCount: paginatedTickets?.tickets?.length || 0,
+        allTicketsCount: allTicketsForStats?.tickets?.length || 0,
+        totalCount: paginatedTickets?.pagination?.total || 0,
       }
     );
   }
@@ -200,7 +248,9 @@ export function HelpdeskView({ initialFilters }: HelpdeskViewProps) {
               <Button
                 variant='outline'
                 className='border-orange-300 bg-orange-100 text-orange-800 hover:bg-orange-200 hover:text-orange-900'
-                onClick={() => setB2BDialogOpen(true)}
+                onClick={() => {
+                  setB2BDialogOpen(true);
+                }}
               >
                 <Plus className='mr-2 h-4 w-4' />
                 {t('create_b2b_ticket', { default: 'B2B Support' })}
@@ -276,7 +326,9 @@ export function HelpdeskView({ initialFilters }: HelpdeskViewProps) {
                         className='flex items-center space-x-2'
                       >
                         <span>
-                          {t('all_tickets', { default: 'All Tickets' })}
+                          {t('all_tickets', {
+                            default: 'All Tickets',
+                          })}
                         </span>
                       </TabsTrigger>
                     </TabsList>
@@ -352,7 +404,7 @@ export function HelpdeskView({ initialFilters }: HelpdeskViewProps) {
                 </TabsList>
                 <div className='mt-4'>
                   <TicketsList
-                    tickets={(tickets?.tickets || []).map(t => ({
+                    tickets={(paginatedTickets?.tickets || []).map(t => ({
                       ...t,
                       // ...other fields...
                       tags: Array.isArray(t.tags) ? (t.tags as string[]) : [],
@@ -430,7 +482,7 @@ function FiltersSection({ filters, setFilters, t }: FiltersSectionProps) {
       </CardHeader>
       <CardContent className='space-y-4'>
         <div className='flex items-center space-x-4'>
-          <div className='flex-1'>
+          <div className='flex flex-1 flex-col gap-y-2'>
             <Label htmlFor='search'>{t('search', { default: 'Search' })}</Label>
             <div className='relative'>
               <Search className='text-muted-foreground absolute top-3 left-3 h-4 w-4' />
@@ -445,7 +497,7 @@ function FiltersSection({ filters, setFilters, t }: FiltersSectionProps) {
               />
             </div>
           </div>
-          <div className='w-48'>
+          <div className='flex w-48 flex-col gap-y-2'>
             <Label htmlFor='priority'>
               {t('priority', { default: 'Priority' })}
             </Label>
@@ -483,7 +535,7 @@ function FiltersSection({ filters, setFilters, t }: FiltersSectionProps) {
               </SelectContent>
             </Select>
           </div>
-          <div className='w-48'>
+          <div className='flex w-48 flex-col gap-y-2'>
             <Label htmlFor='category'>
               {t('category', { default: 'Category' })}
             </Label>

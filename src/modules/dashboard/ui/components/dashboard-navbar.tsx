@@ -168,7 +168,7 @@ export function DashboardNavbar() {
           >
             <Search className='h-4 w-4' />
             <span className='hidden xl:inline'>{t('navbarSearch')}</span>
-            <span className='xl:hidden'>Search</span>
+            <span className='xl:hidden'>{t('navbarSearchShort')}</span>
             <kbd className='bg-muted pointer-events-none absolute top-2.5 right-2 hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none xl:flex rtl:right-auto rtl:left-2'>
               <span className='text-xs'>⌘</span>K
             </kbd>

@@ -353,7 +353,9 @@
         "title": "Aperçu",
         "content": "La collecte automatisée améliore le flux de trésorerie."
       }
-    }  },  "processingPayments": {
+    }
+  },
+  "processingPayments": {
     "title": "Traitement des paiements",
     "description": "Gérez les paiements efficacement",
     "metadata": {
@@ -641,7 +643,9 @@
         "title": "Aperçu",
         "content": "Les modèles garantissent une communication cohérente."
       }
-    }  },  "common": {
+    }
+  },
+  "common": {
     "tableOfContents": "Table des matières",
     "relatedArticles": "Articles connexes",
     "overview": "Aperçu",

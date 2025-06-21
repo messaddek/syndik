@@ -890,7 +890,9 @@
           "Check processing"
         ]
       }
-    }  },  "processingPayments": {
+    }
+  },
+  "processingPayments": {
     "title": "Processing Payments",
     "description": "Handle rent payments, late fees, and other charges efficiently",
     "metadata": {
@@ -1298,7 +1300,9 @@
           "Move-out instructions"
         ]
       }
-    }  },  "common": {
+    }
+  },
+  "common": {
     "tableOfContents": "Table of Contents",
     "relatedArticles": "Related Articles",
     "overview": "Overview",
