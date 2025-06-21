@@ -6,5 +6,8 @@
   "edit": "Modifier",
   "delete": "Supprimer",
   "view": "Voir",
-  "openMenu": "Ouvrir le menu"
+  "openMenu": "Ouvrir le menu",
+  "selected": "Sélectionné",
+  "selectAll": "Tout sélectionner",
+  "of": "de"
 }

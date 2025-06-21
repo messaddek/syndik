@@ -34,6 +34,7 @@ export function EditIncomeDialog({
       onOpenChange={onOpenChange}
       title={`${t('buttons.edit')} ${t('tabs.incomes')}`}
       description='Update the income details below.'
+      className='sm:max-w-4xl'
     >
       <IncomeForm
         income={income}

@@ -28,9 +28,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { UserButton } from '@clerk/nextjs';
-import { Link, usePathname, useRouter } from '@/i18n/routing';
+import { usePathname, useRouter } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { OrgSwitcher } from '@/components/org-switcher';
 import { useHelpdeskPermissions } from '@/modules/helpdesk/hooks/use-helpdesk-permissions';
@@ -46,6 +47,15 @@ export function PortalSidebar() {
   const router = useRouter();
   const locale = useLocale();
   const { canAccessAdminPortal } = useHelpdeskPermissions();
+  const { isMobile, setOpenMobile } = useSidebar();
+
+  // Function to handle navigation and close sidebar on mobile
+  const handleNavigation = (href: string) => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+    router.push(href);
+  };
 
   const navigationItems = [
     {
@@ -107,11 +117,16 @@ export function PortalSidebar() {
       ],
     },
   ];
-
   const handleDashboardAccess = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
     router.push('/org-redirect');
   };
   const handleBackToLanding = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
     const landingUrl = getLandingUrl(locale);
     window.location.href = landingUrl;
   };
@@ -159,14 +174,17 @@ export function PortalSidebar() {
           <SidebarGroup key={group.title}>
             <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
             <SidebarGroupContent>
+              {' '}
               <SidebarMenu>
                 {group.items.map(item => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={pathname === item.url}>
-                      <Link href={item.url}>
-                        <item.icon className='h-4 w-4' />
-                        <span>{item.title}</span>
-                      </Link>
+                    <SidebarMenuButton
+                      isActive={pathname === item.url}
+                      className='cursor-pointer'
+                      onClick={() => handleNavigation(item.url)}
+                    >
+                      <item.icon className='h-4 w-4' />
+                      <span>{item.title}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -179,8 +197,12 @@ export function PortalSidebar() {
         {' '}
         {canAccessAdminPortal && (
           <div className='mb-3'>
+            {' '}
             <Button
               onClick={() => {
+                if (isMobile) {
+                  setOpenMobile(false);
+                }
                 const isDevelopment = process.env.NODE_ENV === 'development';
 
                 if (isDevelopment) {

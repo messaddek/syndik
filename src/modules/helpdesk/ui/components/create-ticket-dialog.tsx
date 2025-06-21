@@ -33,31 +33,43 @@ import { X } from 'lucide-react';
 import { toast } from 'sonner';
 import { useHelpdeskPermissions } from '../../hooks/use-helpdesk-permissions';
 
-const createTicketSchema = z.object({
-  title: z
-    .string()
-    .min(1, 'Title is required')
-    .max(200, 'Title must be less than 200 characters'),
-  description: z.string().min(1, 'Description is required'),
-  category: z.enum([
-    'maintenance',
-    'complaint',
-    'inquiry',
-    'billing',
-    'security',
-    'parking',
-    'noise',
-    'cleaning',
-    'other',
-  ]),
-  priority: z.enum(['low', 'medium', 'high', 'urgent']).default('medium'),
-  buildingId: z.string().uuid().optional(),
-  unitId: z.string().uuid().optional(),
-  residentId: z.string().uuid().optional(), // For managers creating tickets on behalf of residents
-  tags: z.array(z.string()).default([]),
-});
+const createTicketSchema = (t: (key: string) => string, isAdmin: boolean) => {
+  const base = z.object({
+    title: z
+      .string()
+      .min(1, t('validation.title_required'))
+      .max(200, t('validation.title_max_length')),
+    description: z.string().min(1, t('validation.description_required')),
+    category: z.enum([
+      'maintenance',
+      'complaint',
+      'inquiry',
+      'billing',
+      'security',
+      'parking',
+      'noise',
+      'cleaning',
+      'other',
+    ]),
+    priority: z.enum(['low', 'medium', 'high', 'urgent']).default('medium'),
+    buildingId: z.string().uuid().optional(),
+    unitId: z.string().uuid().optional(),
+    tags: z.array(z.string()).default([]),
+  });
 
-type CreateTicketForm = z.infer<typeof createTicketSchema>;
+  const residentField = isAdmin
+    ? {
+        residentId: z
+          .string()
+          .nonempty(t('validation.resident_required'))
+          .uuid(),
+      }
+    : { residentId: z.string().uuid().optional() };
+
+  return base.extend(residentField);
+};
+
+type CreateTicketForm = z.infer<ReturnType<typeof createTicketSchema>>;
 
 interface CreateTicketDialogProps {
   onClose: () => void;
@@ -77,16 +89,10 @@ export function CreateTicketDialog({
   const { isSyndicateAdmin } = useHelpdeskPermissions();
 
   // Dynamic schema based on user role
-  const dynamicSchema = useMemo(() => {
-    if (isSyndicateAdmin) {
-      // Managers must specify which resident the ticket is for
-      return createTicketSchema.extend({
-        residentId: z.string().uuid('Please select a resident'),
-      });
-    }
-    // Residents don't need to specify residentId
-    return createTicketSchema;
-  }, [isSyndicateAdmin]);
+  const dynamicSchema = useMemo(
+    () => createTicketSchema(t, isSyndicateAdmin),
+    [isSyndicateAdmin, t]
+  );
 
   const form = useForm({
     resolver: zodResolver(dynamicSchema),

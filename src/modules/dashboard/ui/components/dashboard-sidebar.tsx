@@ -15,7 +15,7 @@ import {
   Shield,
   ArrowLeft,
 } from 'lucide-react';
-import { Link, usePathname, useRouter } from '@/i18n/routing';
+import { usePathname, useRouter } from '@/i18n/routing';
 
 import {
   Sidebar,
@@ -27,6 +27,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -45,6 +46,15 @@ export function DashboardSidebar() {
   const t = useTranslations('navigation');
   const tCommon = useTranslations('common');
   const { canAccessAdminPortal } = useHelpdeskPermissions();
+  const { isMobile, setOpenMobile } = useSidebar();
+
+  // Function to handle navigation and close sidebar on mobile
+  const handleNavigation = (href: string) => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+    router.push(href);
+  };
 
   const navigation = [
     { name: t('dashboard'), href: '/dashboard', icon: BarChart3 },
@@ -61,9 +71,15 @@ export function DashboardSidebar() {
     { name: t('help'), href: '/help', icon: HelpCircle },
   ];
   const handlePortalAccess = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
     router.push('/org-redirect?target=portal');
   };
   const handleAdminAccess = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
     const isDevelopment = process.env.NODE_ENV === 'development';
 
     if (isDevelopment) {
@@ -74,14 +90,21 @@ export function DashboardSidebar() {
     }
   };
   const handleBackToLanding = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
     const landingUrl = getLandingUrl(locale);
     window.location.href = landingUrl;
   };
 
   return (
     <Sidebar>
+      {' '}
       <SidebarHeader>
-        <Link href='/' className='flex items-center space-x-2 px-4 py-2'>
+        <div
+          className='flex cursor-pointer items-center space-x-2 px-4 py-2'
+          onClick={() => handleNavigation('/')}
+        >
           <Image
             src='/logo.svg'
             alt={tCommon('logoAlt')}
@@ -92,11 +115,12 @@ export function DashboardSidebar() {
           <span className='text-lg font-semibold text-gray-900 dark:text-gray-200'>
             syndik.ma
           </span>
-        </Link>
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
+            {' '}
             <SidebarMenu>
               {navigation.map(item => {
                 const Icon = item.icon;
@@ -110,19 +134,17 @@ export function DashboardSidebar() {
                 return (
                   <SidebarMenuItem key={item.name}>
                     <SidebarMenuButton
-                      asChild
                       isActive={isActive}
                       className={cn(
-                        'transition-colors',
+                        'cursor-pointer transition-colors',
                         isActive
                           ? 'bg-blue-100 text-blue-700 hover:bg-blue-100'
                           : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                       )}
+                      onClick={() => handleNavigation(item.href)}
                     >
-                      <Link href={item.href}>
-                        <Icon className='h-4 w-4' />
-                        <span>{item.name}</span>
-                      </Link>
+                      <Icon className='h-4 w-4' />
+                      <span>{item.name}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
@@ -171,7 +193,7 @@ export function DashboardSidebar() {
               <span>Admin Portal</span>
             </Button>
           )}
-        </div>
+        </div>{' '}
         <SidebarMenu>
           {footerNavigation.map(item => {
             const Icon = item.icon;
@@ -181,19 +203,17 @@ export function DashboardSidebar() {
             return (
               <SidebarMenuItem key={item.name}>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive}
                   className={cn(
-                    'transition-colors',
+                    'cursor-pointer transition-colors',
                     isActive
                       ? 'bg-blue-100 text-blue-700 hover:bg-blue-100'
                       : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                   )}
+                  onClick={() => handleNavigation(item.href)}
                 >
-                  <Link href={item.href}>
-                    <Icon className='h-4 w-4' />
-                    <span>{item.name}</span>
-                  </Link>
+                  <Icon className='h-4 w-4' />
+                  <span>{item.name}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             );

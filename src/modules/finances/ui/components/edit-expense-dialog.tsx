@@ -28,13 +28,13 @@ export function EditExpenseDialog({
   const handleCancel = () => {
     onOpenChange(false);
   };
-
   return (
     <ResponsiveDialog
       open={open}
       onOpenChange={onOpenChange}
       title={`${t('buttons.edit')} ${t('tabs.expenses')}`}
       description='Update the expense details below.'
+      className='sm:max-w-4xl'
     >
       <ExpenseForm
         expense={expense}

@@ -25,13 +25,13 @@ export function CreateIncomeDialog({
   const handleCancel = () => {
     onOpenChange(false);
   };
-
   return (
     <ResponsiveDialog
       open={open}
       onOpenChange={onOpenChange}
       title={t('title')}
       description={t('description')}
+      className='sm:max-w-4xl'
     >
       <IncomeForm onSuccess={handleSuccess} onCancel={handleCancel} />
     </ResponsiveDialog>

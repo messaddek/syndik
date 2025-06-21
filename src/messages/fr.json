@@ -1121,6 +1121,7 @@
     "create": "Créer",
     "cancel": "Annuler",
     "delete": "Supprimer",
+    "update": "Mettre à jour",
     "edit": "Modifier",
     "add": "Ajouter",
     "search": "Rechercher",
@@ -1660,8 +1661,12 @@
     "category_integration_support": "Support d'Intégration",
     "category_training_request": "Demande de Formation",
     "validation": {
-      "title_required": "Le titre est requis",
-      "description_required": "La description est requise",
+      "title_required": "Le titre du problème est requis",
+      "title_max_length": "Le titre du problème doit contenir moins de 200 caractères",
+      "description_required": "La description du problème est requise",
+      "category_required": "La catégorie est requise",
+      "priority_required": "La priorité est requise",
+      "resident_required": "Veuillez sélectionner pour quel résident cette demande est destinée",
       "business_impact_required": "La description de l'impact commercial est requise",
       "affected_users_required": "Le nombre d'utilisateurs affectés est requis",
       "organization_name_required": "Le nom de l'organisation est requis",
@@ -2214,7 +2219,8 @@
     "showingPage": "Affichage de la page",
     "showingResults": "Affichage de {start} à {end} sur {total} résultats",
     "noResults": "Aucun résultat trouvé",
-    "rowsPerPage": "Lignes par page"
+    "rowsPerPage": "Lignes par page",
+    "perPage": "Par page"
   },
   "portal": {
     "title": "Portail résident",
@@ -2758,7 +2764,10 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "view": "Voir",
-    "openMenu": "Ouvrir le menu"
+    "openMenu": "Ouvrir le menu",
+    "selected": "Sélectionné",
+    "selectAll": "Tout sélectionner",
+    "of": "de"
   },
   "terms": {
     "title": "Conditions de service",

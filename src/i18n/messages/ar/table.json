@@ -6,5 +6,8 @@
   "edit": "تعديل",
   "delete": "حذف",
   "view": "عرض",
-  "openMenu": "فتح القائمة"
+  "openMenu": "فتح القائمة",
+  "selected": "المحدد",
+  "selectAll": "تحديد الكل",
+  "of": "من"
 }

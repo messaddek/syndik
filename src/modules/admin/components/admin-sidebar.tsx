@@ -12,7 +12,7 @@ import {
   UserCheck,
   AlertTriangle,
 } from 'lucide-react';
-import { Link, usePathname } from '@/i18n/routing';
+import { usePathname, useRouter } from '@/i18n/routing';
 
 import {
   Sidebar,
@@ -24,14 +24,25 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const t = useTranslations('admin');
   const tCommon = useTranslations('common');
+  const { isMobile, setOpenMobile } = useSidebar();
+
+  // Function to handle navigation and close sidebar on mobile
+  const handleNavigation = (href: string) => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+    router.push(href);
+  };
 
   const navigation = [
     { name: t('dashboard'), href: '/admin', icon: BarChart3 },
@@ -49,8 +60,12 @@ export function AdminSidebar() {
 
   return (
     <Sidebar>
+      {' '}
       <SidebarHeader>
-        <Link href='/admin' className='flex items-center space-x-2 px-4 py-2'>
+        <div
+          className='flex cursor-pointer items-center space-x-2 px-4 py-2'
+          onClick={() => handleNavigation('/admin')}
+        >
           <Image
             src='/logo.svg'
             alt={tCommon('logoAlt')}
@@ -66,12 +81,12 @@ export function AdminSidebar() {
               {t('admin_portal')}
             </div>
           </div>
-        </Link>
+        </div>
       </SidebarHeader>
-
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
+            {' '}
             <SidebarMenu>
               {navigation.map(item => {
                 const Icon = item.icon;
@@ -82,19 +97,17 @@ export function AdminSidebar() {
                 return (
                   <SidebarMenuItem key={item.name}>
                     <SidebarMenuButton
-                      asChild
                       isActive={isActive}
                       className={cn(
-                        'transition-colors',
+                        'cursor-pointer transition-colors',
                         isActive
                           ? 'bg-orange-100 text-orange-700 hover:bg-orange-100'
                           : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                       )}
+                      onClick={() => handleNavigation(item.href)}
                     >
-                      <Link href={item.href}>
-                        <Icon className='h-4 w-4' />
-                        <span>{item.name}</span>
-                      </Link>
+                      <Icon className='h-4 w-4' />
+                      <span>{item.name}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
@@ -103,7 +116,6 @@ export function AdminSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
       <SidebarFooter>
         {' '}
         <div className='px-4 pb-2'>
@@ -111,6 +123,9 @@ export function AdminSidebar() {
             variant='outline'
             size='sm'
             onClick={() => {
+              if (isMobile) {
+                setOpenMobile(false);
+              }
               // Navigate back to main app subdomain
               const isDevelopment = process.env.NODE_ENV === 'development';
               const appUrl = isDevelopment
@@ -133,19 +148,17 @@ export function AdminSidebar() {
             return (
               <SidebarMenuItem key={item.name}>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive}
                   className={cn(
-                    'transition-colors',
+                    'cursor-pointer transition-colors',
                     isActive
                       ? 'bg-orange-100 text-orange-700 hover:bg-orange-100'
                       : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                   )}
+                  onClick={() => handleNavigation(item.href)}
                 >
-                  <Link href={item.href}>
-                    <Icon className='h-4 w-4' />
-                    <span>{item.name}</span>
-                  </Link>
+                  <Icon className='h-4 w-4' />
+                  <span>{item.name}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             );
