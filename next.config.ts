@@ -5,6 +5,8 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // Note: Subdomain routing is now handled in middleware.ts
+  // Rewrites are removed to prevent conflicts
 };
 
 export default withNextIntl(nextConfig);

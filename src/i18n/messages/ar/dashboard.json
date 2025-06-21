@@ -5,6 +5,8 @@
   "totalManagedProperties": "إجمالي العقارات المُدارة",
   "units": "الوحدات",
   "occupancyRateText": "معدل الإشغال",
+  "currentRate": "المعدل الحالي",
+  "averageRate": "المعدل المتوسط",
   "residents": "السكان",
   "activeResidents": "السكان النشطون",
   "netIncome": "صافي الدخل",

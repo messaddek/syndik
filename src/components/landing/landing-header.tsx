@@ -69,7 +69,7 @@ export function LandingHeader() {
                 {item.name}
               </Link>
             ))}
-          </div>{' '}
+          </div>
           {/* CTA Buttons */}
           <div className='hidden items-center space-x-4 md:flex'>
             <LanguageDropdown />
@@ -80,7 +80,6 @@ export function LandingHeader() {
                   <Link href='/dashboard'>{t('dashboard')}</Link>
                 </Button>
                 <UserButton
-                  afterSignOutUrl='/'
                   appearance={{
                     elements: {
                       avatarBox: 'h-8 w-8',
@@ -136,7 +135,7 @@ export function LandingHeader() {
                 {/* Language Dropdown for Mobile */}
                 <div className='flex justify-center py-2'>
                   <LanguageDropdown />
-                </div>{' '}
+                </div>
                 {/* Support Dialog for Mobile */}
                 <div className='flex justify-center py-2'>
                   <SupportDialog />
@@ -153,7 +152,6 @@ export function LandingHeader() {
                     </Button>
                     <div className='flex items-center justify-center pt-2'>
                       <UserButton
-                        afterSignOutUrl='/'
                         appearance={{
                           elements: {
                             avatarBox: 'h-8 w-8',

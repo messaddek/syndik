@@ -51,7 +51,6 @@ export default function PricingPage() {
 
   return (
     <LandingLayout>
-      {' '}
       {/* Hero Section */}
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -74,7 +73,6 @@ export default function PricingPage() {
                 key={plan.name}
                 className={`relative ${plan.popular ? 'scale-105 shadow-lg ring-2 ring-blue-600' : ''}`}
               >
-                {' '}
                 {plan.popular && (
                   <div className='absolute -top-4 left-1/2 -translate-x-1/2'>
                     <Badge className='bg-primary text-white'>
@@ -119,7 +117,7 @@ export default function PricingPage() {
             ))}
           </div>
         </div>
-      </div>{' '}
+      </div>
       {/* Features Comparison */}
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -140,7 +138,7 @@ export default function PricingPage() {
             ))}
           </div>
         </div>
-      </div>{' '}
+      </div>
       {/* FAQ Section */}
       <div className='py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -162,7 +160,7 @@ export default function PricingPage() {
             </div>
           </div>
         </div>
-      </div>{' '}
+      </div>
       {/* CTA Section */}
       <div className='bg-primary py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>

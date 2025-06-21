@@ -58,7 +58,15 @@ export default async function LocaleLayout({
         )}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <LayoutProvider>{children}</LayoutProvider>
+          {/* <SimpleTest /> */}
+          {/* <LocalePersistence /> */}
+          {/* <LocalePersistenceEnhanced /> */}
+          <LayoutProvider>
+            {children}
+            {/* <LocaleDebugEnhanced /> */}
+            {/* <LocaleInvestigator /> */}
+            {/* <CrossSubdomainTester /> */}
+          </LayoutProvider>
         </NextIntlClientProvider>
       </body>
     </html>

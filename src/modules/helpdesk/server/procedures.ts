@@ -12,6 +12,9 @@ import {
   helpdeskCategories,
   accounts,
   buildings,
+  residents,
+  units,
+  users,
 } from '@/lib/schema';
 import { createB2BTicketSchema, ticketFilterSchema } from '../schema';
 import {
@@ -274,10 +277,8 @@ export const helpdeskRouter = createTRPCRouter({
                 .from(helpdeskTickets)
                 .leftJoin(
                   accounts,
-                  and(
-                    eq(accounts.userId, helpdeskTickets.authorId),
-                    eq(accounts.orgId, helpdeskTickets.orgId)
-                  )
+                  // For B2B tickets, join based on userId only since orgId might be different
+                  eq(accounts.userId, helpdeskTickets.authorId)
                 )
                 .leftJoin(
                   buildings,
@@ -424,10 +425,8 @@ export const helpdeskRouter = createTRPCRouter({
         .from(helpdeskTickets)
         .leftJoin(
           accounts,
-          and(
-            eq(accounts.userId, helpdeskTickets.authorId),
-            eq(accounts.orgId, helpdeskTickets.orgId)
-          )
+          // For B2B tickets, join based on userId only since orgId might be different
+          eq(accounts.userId, helpdeskTickets.authorId)
         )
         .leftJoin(buildings, eq(buildings.id, helpdeskTickets.buildingId))
         .where(
@@ -507,11 +506,115 @@ export const helpdeskRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const { orgId, userId } = ctx;
 
+      // Get user's role from accounts table
+      const userAccount = await db
+        .select({ role: accounts.role })
+        .from(accounts)
+        .where(and(eq(accounts.userId, userId), eq(accounts.orgId, orgId)))
+        .limit(1);
+
+      if (!userAccount.length) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'User account not found',
+        });
+      }
+
+      const userRole = userAccount[0].role; // Role-based ticket creation logic
+      let ticketAuthorId: string;
+      let internalNotes: string | null = null;
+
+      if (userRole === 'member') {
+        // Residents create tickets for themselves
+        ticketAuthorId = userId;
+
+        // Verify residentId is not provided (residents shouldn't specify this)
+        if (input.residentId) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'RESIDENTS_CANNOT_SPECIFY_RESIDENT_ID',
+          });
+        }
+
+        // Verify the member has access to resident portal (has a linked resident record)
+        const linkedResident = await db
+          .select({ residentId: users.residentId })
+          .from(users)
+          .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
+          .limit(1);
+
+        if (!linkedResident.length || !linkedResident[0].residentId) {
+          throw new TRPCError({
+            code: 'FORBIDDEN',
+            message: 'MEMBER_NO_RESIDENT_ACCESS',
+          });
+        }
+      } else if (userRole === 'admin' || userRole === 'manager') {
+        // Property managers can ONLY create tickets on behalf of residents, never for themselves
+        if (!input.residentId) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'MANAGERS_MUST_SPECIFY_RESIDENT',
+          });
+        }
+
+        // Verify the resident exists and belongs to this organization
+        const resident = await db
+          .select({ id: residents.id })
+          .from(residents)
+          .leftJoin(units, eq(residents.unitId, units.id))
+          .leftJoin(buildings, eq(units.buildingId, buildings.id))
+          .where(
+            and(eq(residents.id, input.residentId), eq(buildings.orgId, orgId))
+          )
+          .limit(1);
+
+        if (!resident.length) {
+          throw new TRPCError({
+            code: 'NOT_FOUND',
+            message: 'RESIDENT_NOT_FOUND',
+          });
+        }
+
+        // Look for a user account linked to this resident
+        const linkedUser = await db
+          .select({ userId: users.userId })
+          .from(users)
+          .where(
+            and(eq(users.residentId, input.residentId), eq(users.orgId, orgId))
+          )
+          .limit(1);
+
+        // Always use the linked user's ID if available
+        // If no linked user, the ticket will be created but noted as "on behalf of"
+        if (linkedUser.length > 0) {
+          ticketAuthorId = linkedUser[0].userId;
+        } else {
+          // Create ticket on behalf of resident who has no user account
+          // Use a special system ID or the manager's ID with clear audit trail
+          ticketAuthorId = userId; // Use manager's ID temporarily
+
+          // Get manager info for audit trail
+          const managerInfo = await db
+            .select({ name: accounts.name, email: accounts.email })
+            .from(accounts)
+            .where(and(eq(accounts.userId, userId), eq(accounts.orgId, orgId)))
+            .limit(1);
+
+          const managerName = managerInfo[0]?.name || 'Property Manager';
+          internalNotes = `Ticket created by ${managerName} on behalf of resident (no linked user account). Created at: ${new Date().toISOString()}`;
+        }
+      } else {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: 'INVALID_ROLE_FOR_TICKETS',
+        });
+      }
       const [ticket] = await db
         .insert(helpdeskTickets)
         .values({
           orgId,
-          authorId: userId,
+          authorId: ticketAuthorId,
           title: input.title,
           description: input.description,
           category: input.category,
@@ -521,6 +624,7 @@ export const helpdeskRouter = createTRPCRouter({
           residentId: input.residentId || null,
           tags: input.tags,
           attachments: input.attachments,
+          internalNotes, // Add audit trail notes
           status: 'open',
           lastResponseAt: new Date().toISOString(),
         })
@@ -988,7 +1092,6 @@ export const helpdeskRouter = createTRPCRouter({
       }[sortBy];
 
       const orderDirection = sortOrder === 'asc' ? asc : desc;
-
       const tickets = await db
         .select({
           id: helpdeskTickets.id,
@@ -1008,8 +1111,16 @@ export const helpdeskRouter = createTRPCRouter({
           updatedAt: helpdeskTickets.updatedAt,
           authorId: helpdeskTickets.authorId,
           buildingId: helpdeskTickets.buildingId,
+          // Author details from accounts table
+          authorName: accounts.name,
+          authorEmail: accounts.email,
+          // Building details
+          buildingName: buildings.name,
+          buildingAddress: buildings.address,
         })
         .from(helpdeskTickets)
+        .leftJoin(accounts, eq(accounts.userId, helpdeskTickets.authorId))
+        .leftJoin(buildings, eq(buildings.id, helpdeskTickets.buildingId))
         .where(and(...whereConditions))
         .orderBy(orderDirection(orderByField))
         .limit(pagination.limit)
@@ -1017,9 +1128,17 @@ export const helpdeskRouter = createTRPCRouter({
 
       const ticketsMapped = tickets.map(t => ({
         ...t,
-        author: { id: t.authorId, name: '', email: '' },
+        author: {
+          id: t.authorId,
+          name: t.authorName || 'Unknown User',
+          email: t.authorEmail || '',
+        },
         building: t.buildingId
-          ? { id: t.buildingId, name: '', address: '' }
+          ? {
+              id: t.buildingId,
+              name: t.buildingName || 'Unknown Building',
+              address: t.buildingAddress || '',
+            }
           : null,
       }));
 
@@ -1165,7 +1284,6 @@ export const helpdeskRouter = createTRPCRouter({
 
       const offset = (pagination.page - 1) * pagination.limit; // Build where conditions based on ticket type filter
       let whereConditions: SQL[] = [];
-
       if (filters.ticketType === 'internal') {
         whereConditions = [
           eq(helpdeskTickets.orgId, orgId),
@@ -1177,10 +1295,13 @@ export const helpdeskRouter = createTRPCRouter({
           eq(helpdeskTickets.ticketType, 'b2b'),
         ];
       } else {
-        // 'all' - show both for app owner, only internal for regular orgs
+        // 'all' - show different tickets based on org type
         if (orgId === 'app-owner-org') {
-          whereConditions = []; // No org filter for app owner to see all tickets
+          // App owner can see all tickets (both internal and B2B from all orgs)
+          whereConditions = [];
         } else {
+          // Regular orgs see only their internal tickets in "All"
+          // B2B tickets they create are managed centrally and visible in B2B tab
           whereConditions = [
             eq(helpdeskTickets.orgId, orgId),
             eq(helpdeskTickets.isB2B, false),
@@ -1223,7 +1344,6 @@ export const helpdeskRouter = createTRPCRouter({
       }[sortBy];
 
       const orderDirection = sortOrder === 'asc' ? asc : desc;
-
       const rawTickets = await db
         .select({
           id: helpdeskTickets.id,
@@ -1243,18 +1363,34 @@ export const helpdeskRouter = createTRPCRouter({
           updatedAt: helpdeskTickets.updatedAt,
           authorId: helpdeskTickets.authorId,
           buildingId: helpdeskTickets.buildingId,
+          // Author details from accounts table
+          authorName: accounts.name,
+          authorEmail: accounts.email,
+          // Building details
+          buildingName: buildings.name,
+          buildingAddress: buildings.address,
         })
         .from(helpdeskTickets)
-        .where(and(...whereConditions))
+        .leftJoin(accounts, eq(accounts.userId, helpdeskTickets.authorId))
+        .leftJoin(buildings, eq(buildings.id, helpdeskTickets.buildingId))
+        .where(whereConditions.length > 0 ? and(...whereConditions) : undefined)
         .orderBy(orderDirection(orderByField))
         .limit(pagination.limit)
         .offset(offset);
 
       const tickets = rawTickets.map(t => ({
         ...t,
-        author: { id: t.authorId, name: '', email: '' },
+        author: {
+          id: t.authorId,
+          name: t.authorName || 'Unknown User',
+          email: t.authorEmail || '',
+        },
         building: t.buildingId
-          ? { id: t.buildingId, name: '', address: '' }
+          ? {
+              id: t.buildingId,
+              name: t.buildingName || 'Unknown Building',
+              address: t.buildingAddress || '',
+            }
           : null,
       }));
 

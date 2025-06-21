@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import {
   Building2,
@@ -13,6 +13,7 @@ import {
   HelpCircle,
   Bell,
   Shield,
+  ArrowLeft,
 } from 'lucide-react';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 
@@ -31,10 +32,16 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { OrganizationQuota } from '@/components/organization-quota';
 import { useHelpdeskPermissions } from '@/modules/helpdesk/hooks/use-helpdesk-permissions';
+import {
+  getLandingUrl,
+  buildSubdomainUrl,
+  SUBDOMAINS,
+} from '@/lib/subdomain-utils';
 
 export function DashboardSidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
   const t = useTranslations('navigation');
   const tCommon = useTranslations('common');
   const { canAccessAdminPortal } = useHelpdeskPermissions();
@@ -53,14 +60,24 @@ export function DashboardSidebar() {
     { name: t('settings'), href: '/settings', icon: Settings },
     { name: t('help'), href: '/help', icon: HelpCircle },
   ];
-
   const handlePortalAccess = () => {
     router.push('/org-redirect?target=portal');
   };
-
   const handleAdminAccess = () => {
-    router.push('/admin');
+    const isDevelopment = process.env.NODE_ENV === 'development';
+
+    if (isDevelopment) {
+      router.push('/admin-dev');
+    } else {
+      const adminUrl = buildSubdomainUrl(SUBDOMAINS.ADMIN);
+      window.location.href = adminUrl;
+    }
   };
+  const handleBackToLanding = () => {
+    const landingUrl = getLandingUrl(locale);
+    window.location.href = landingUrl;
+  };
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -119,6 +136,18 @@ export function DashboardSidebar() {
           <OrganizationQuota />
         </div>
         <div className='space-y-2 px-4 pb-2'>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={handleBackToLanding}
+            className={cn(
+              'flex w-full items-center gap-2 text-gray-600 hover:text-gray-900'
+            )}
+          >
+            <ArrowLeft className='h-4 w-4 rtl:rotate-180' />
+            <span>{t('backToLanding')}</span>
+          </Button>
+
           <Button
             variant='outline'
             size='sm'

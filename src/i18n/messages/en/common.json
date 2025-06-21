@@ -7,6 +7,7 @@
   "add": "Add",
   "search": "Search",
   "navbarSearch": "Search buildings, units, residents...",
+  "navbarSearchShort": "Search...",
   "searchHint": "Start typing to search...",
   "loading": "Loading...",
   "error": "Error",
