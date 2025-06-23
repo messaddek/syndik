@@ -18,9 +18,9 @@ const PricingPage = () => {
     question: string;
     answer: string;
   }>;
-
   const plans = [
     {
+      id: 'starter',
       name: t('plans.starter.name'),
       description: t('plans.starter.description'),
       price: t('plans.starter.price'),
@@ -30,6 +30,7 @@ const PricingPage = () => {
       popular: false,
     },
     {
+      id: 'professional',
       name: t('plans.professional.name'),
       description: t('plans.professional.description'),
       price: t('plans.professional.price'),
@@ -39,6 +40,7 @@ const PricingPage = () => {
       popular: true,
     },
     {
+      id: 'enterprise',
       name: t('plans.enterprise.name'),
       description: t('plans.enterprise.description'),
       price: t('plans.enterprise.price'),
@@ -70,7 +72,7 @@ const PricingPage = () => {
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
             {plans.map(plan => (
               <Card
-                key={plan.name}
+                key={plan.id}
                 className={`relative ${plan.popular ? 'scale-105 shadow-lg ring-2 ring-blue-600' : ''}`}
               >
                 {plan.popular && (
@@ -102,7 +104,7 @@ const PricingPage = () => {
                     ))}
                   </ul>
                   <Link
-                    href={plan.name === 'Enterprise' ? '/contact' : '/sign-up'}
+                    href={plan.id === 'enterprise' ? '/contact' : '/sign-up'}
                     className='block'
                   >
                     <Button

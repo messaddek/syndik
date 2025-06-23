@@ -3413,8 +3413,7 @@
           "API access",
           "Advanced integrations"
         ],
-        "cta": "Start Free Trial",
-        "popular": "Most Popular"
+        "cta": "Start Free Trial"
       },
       "enterprise": {
         "name": "Enterprise",
@@ -3501,6 +3500,8 @@
     "cta": {
       "title": "Ready to Get Started?",
       "description": "Start your free trial today and see how Syndik can transform your syndicate management.",
+      "primaryButton": "Start Free Trial",
+      "secondaryButton": "Contact Sales",
       "buttons": {
         "startTrial": "Start Free Trial",
         "contactSales": "Contact Sales"
