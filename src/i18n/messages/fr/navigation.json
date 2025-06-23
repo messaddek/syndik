@@ -19,5 +19,7 @@
   "backToLanding": "Retour à l'accueil",
   "missingPayments": "Paiements manquants",
   "overview": "Aperçu",
-  "reports": "Rapports"
+  "reports": "Rapports",
+  "openMenu": "Ouvrir le menu",
+  "closeMenu": "Fermer le menu"
 }

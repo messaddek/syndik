@@ -3013,7 +3013,9 @@
     "helpdesk": "Customer Support",
     "backToLanding": "Back to Landing",
     "overview": "Overview",
-    "reports": "Reports"
+    "reports": "Reports",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "notifications": {
     "title": "Notification Management",
