@@ -42,7 +42,6 @@ export const LandingHeader = () => {
       document.body.style.overflow = 'unset';
     };
   }, [mobileMenuOpen]);
-
   const navigation = [
     { name: t('home'), href: '/' },
     { name: t('about'), href: '/about' },
@@ -56,7 +55,6 @@ export const LandingHeader = () => {
     <header className='fixed top-0 right-0 left-0 z-50 border-b bg-white/95 shadow-sm backdrop-blur-sm'>
       <nav className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8' aria-label='Top'>
         <div className='flex w-full items-center justify-between py-3 sm:py-2'>
-          {' '}
           {/* Logo */}
           <div className='flex items-center'>
             <Link href='/' className='flex items-center space-x-2'>
@@ -116,7 +114,7 @@ export const LandingHeader = () => {
                 </Button>
               </>
             )}
-          </div>{' '}
+          </div>
           {/* Mobile menu button */}
           <div className='flex items-center gap-2 md:hidden'>
             <Button
@@ -134,7 +132,7 @@ export const LandingHeader = () => {
               )}
             </Button>
           </div>
-        </div>{' '}
+        </div>
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className='animate-in slide-in-from-top-2 duration-300 md:hidden'>
