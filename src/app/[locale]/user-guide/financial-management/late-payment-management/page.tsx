@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 
-export default function LatePaymentManagementPage() {
+const LatePaymentManagementPage = () => {
   return (
     <div className='container mx-auto max-w-4xl px-4 py-8'>
       <div className='mb-6'>
@@ -566,4 +566,5 @@ export default function LatePaymentManagementPage() {
       </div>
     </div>
   );
-}
+};
+export default LatePaymentManagementPage;

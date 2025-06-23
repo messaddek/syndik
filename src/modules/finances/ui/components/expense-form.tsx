@@ -34,6 +34,7 @@ import type {
   UpdateExpense,
   Expense,
 } from '@/modules/expenses/types';
+import { formatDateToString, getTodayString } from '@/lib/date-utils';
 
 interface ExpenseFormProps {
   expense?: Expense;
@@ -41,11 +42,11 @@ interface ExpenseFormProps {
   onCancel?: () => void;
 }
 
-export function ExpenseForm({
+export const ExpenseForm = ({
   expense,
   onSuccess,
   onCancel,
-}: ExpenseFormProps) {
+}: ExpenseFormProps) => {
   const t = useTranslations('finance.createExpenseDialog');
   const tCommon = useTranslations('common');
   const trpc = useTRPC();
@@ -57,7 +58,6 @@ export function ExpenseForm({
     trpc.buildings.getAll.queryOptions({})
   );
   const buildings = buildingsData.data || [];
-
   const form = useForm<CreateExpense | UpdateExpense>({
     resolver: zodResolver(
       isEditing ? updateExpenseSchema : createExpenseSchema
@@ -79,7 +79,7 @@ export function ExpenseForm({
           vendor: expense.vendor || '',
           month: expense.month,
           year: expense.year,
-          paidDate: expense.paidDate.toISOString().split('T')[0],
+          paidDate: formatDateToString(new Date(expense.paidDate)),
           receiptUrl: expense.receiptUrl || '',
           notes: expense.notes || '',
         }
@@ -91,12 +91,11 @@ export function ExpenseForm({
           vendor: '',
           month: new Date().getMonth() + 1,
           year: new Date().getFullYear(),
-          paidDate: new Date().toISOString().split('T')[0],
+          paidDate: getTodayString(),
           receiptUrl: '',
           notes: '',
         },
   });
-
   const createExpense = useMutation(
     trpc.expenses.create.mutationOptions({
       onSuccess: () => {
@@ -104,8 +103,10 @@ export function ExpenseForm({
         form.reset();
         onSuccess?.();
       },
-      onError: _error => {
-        // Handle error
+      onError: (error: unknown) => {
+        const message =
+          error instanceof Error ? error.message : 'Failed to create expense';
+        console.error('Create expense error:', message);
       },
     })
   );
@@ -116,12 +117,13 @@ export function ExpenseForm({
         queryClient.invalidateQueries(trpc.expenses.getAll.queryOptions({}));
         onSuccess?.();
       },
-      onError: _error => {
-        // Handle error
+      onError: (error: unknown) => {
+        const message =
+          error instanceof Error ? error.message : 'Failed to update expense';
+        console.error('Update expense error:', message);
       },
     })
   );
-
   const onSubmit = async (data: CreateExpense | UpdateExpense) => {
     setIsSubmitting(true);
     try {
@@ -132,6 +134,7 @@ export function ExpenseForm({
         receiptUrl: data.receiptUrl || undefined,
         vendor: data.vendor || undefined,
       };
+
       if (isEditing) {
         await updateExpense.mutateAsync({
           id: expense.id,
@@ -140,6 +143,8 @@ export function ExpenseForm({
       } else {
         await createExpense.mutateAsync(submitData as CreateExpense);
       }
+    } catch (error) {
+      console.error('Form submission error:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -269,9 +274,7 @@ export function ExpenseForm({
                   <SelectItem value='professional_services'>
                     {t('categories.professionalServices')}
                   </SelectItem>
-                  <SelectItem value='other'>
-                    {t('categories.other')}
-                  </SelectItem>{' '}
+                  <SelectItem value='other'>{t('categories.other')}</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -402,4 +405,4 @@ export function ExpenseForm({
       </form>
     </Form>
   );
-}
+};

@@ -15,12 +15,12 @@ interface DataTableOnlySkeletonProps {
   showPagination?: boolean;
 }
 
-export function DataTableOnlySkeleton({
+export const DataTableOnlySkeleton = ({
   columnCount = 5,
   rowCount = 8,
   showColumnToggle = true,
   showPagination = true,
-}: DataTableOnlySkeletonProps) {
+}: DataTableOnlySkeletonProps) => {
   return (
     <div className='w-full space-y-4'>
       {/* Table controls - column toggle */}

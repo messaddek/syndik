@@ -1,0 +1,81 @@
+{
+  "title": "التقارير المالية",
+  "description": "إنشاء وتحميل التقارير المالية لممتلكاتك",
+  "quickStats": {
+    "reportsGenerated": "التقارير المُنشأة",
+    "lastGenerated": "آخر إنشاء",
+    "mostPopular": "الأكثر شيوعاً",
+    "thisMonth": "هذا الشهر",
+    "ago": "منذ",
+    "days": "أيام",
+    "ofAllReports": "من جميع التقارير"
+  },
+  "availableReports": {
+    "title": "التقارير المتاحة",
+    "description": "إنشاء تقارير مالية مفصلة للتحليل والامتثال",
+    "generateButton": "إنشاء التقرير"
+  },
+  "reports": {
+    "monthlySummary": {
+      "title": "الملخص المالي الشهري",
+      "description": "نظرة عامة على الإيرادات والمصروفات وصافي الربح"
+    },
+    "paymentStatus": {
+      "title": "تقرير حالة المدفوعات",
+      "description": "تتبع المدفوعات المفقودة ومعدلات التحصيل"
+    },
+    "expenseBreakdown": {
+      "title": "تفصيل المصروفات",
+      "description": "تحليل مفصل للمصروفات حسب الفئة"
+    },
+    "propertyPerformance": {
+      "title": "أداء الممتلكات",
+      "description": "الأداء المالي حسب المبنى/الوحدة"
+    },
+    "yearlyComparison": {
+      "title": "المقارنة السنوية",
+      "description": "مقارنة الأداء المالي عبر السنوات"
+    },
+    "taxReport": {
+      "title": "التقرير الضريبي",
+      "description": "الملخص الضريبي السنوي للامتثال"
+    }
+  },
+  "badges": {
+    "popular": "شائع",
+    "new": "جديد",
+    "recommended": "موصى به"
+  },
+  "recentReports": {
+    "title": "التقارير الحديثة",
+    "description": "تقاريرك المُنشأة حديثاً",
+    "noReports": "لم يتم إنشاء تقارير بعد",
+    "downloadAction": "تحميل"
+  },
+  "filters": {
+    "period": "الفترة",
+    "type": "نوع التقرير",
+    "building": "المبنى",
+    "allBuildings": "جميع المباني",
+    "currentMonth": "الشهر الحالي",
+    "lastMonth": "الشهر الماضي",
+    "currentQuarter": "الربع الحالي",
+    "currentYear": "السنة الحالية",
+    "lastYear": "السنة الماضية",
+    "customRange": "نطاق مخصص"
+  },
+  "generating": {
+    "title": "إنشاء التقرير...",
+    "description": "يرجى الانتظار بينما نحضر تقريرك",
+    "estimatedTime": "الوقت المقدر: {seconds} ثانية"
+  },
+  "success": {
+    "reportGenerated": "تم إنشاء التقرير بنجاح",
+    "downloadStarted": "بدأ التحميل"
+  },
+  "errors": {
+    "generateFailed": "فشل في إنشاء التقرير",
+    "downloadFailed": "فشل في تحميل التقرير",
+    "noData": "لا توجد بيانات متاحة للفترة المحددة"
+  }
+}

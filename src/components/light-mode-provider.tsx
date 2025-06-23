@@ -7,7 +7,7 @@ type LightModeProviderProps = {
   children: React.ReactNode;
 };
 
-export function LightModeProvider({ children }: LightModeProviderProps) {
+export const LightModeProvider = ({ children }: LightModeProviderProps) => {
   return (
     <NextThemesProvider
       attribute='class'

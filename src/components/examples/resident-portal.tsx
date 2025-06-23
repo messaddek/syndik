@@ -49,7 +49,7 @@ type MaintenanceRequestForm = z.infer<typeof maintenanceRequestSchema>;
  * - Notification management
  * - Real-time updates
  */
-export function ResidentPortal() {
+export const ResidentPortal = () => {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [showMaintenanceForm, setShowMaintenanceForm] = useState(false);
@@ -191,7 +191,7 @@ export function ResidentPortal() {
                   Unit {dashboard?.unit?.unitNumber}
                 </p>
                 <p className='text-sm text-gray-500'>
-                  {dashboard?.unit?.bedrooms} bed, {dashboard?.unit?.bathrooms}{' '}
+                  {dashboard?.unit?.bedrooms} bed, {dashboard?.unit?.bathrooms}
                   bath
                 </p>
               </div>
@@ -481,7 +481,8 @@ export function ResidentPortal() {
             </CardContent>
           </Card>
         </div>
-      )}{' '}
+      )}
     </div>
   );
 }
+

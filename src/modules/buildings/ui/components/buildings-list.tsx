@@ -19,7 +19,7 @@ import { CreateBuildingDialog } from './create-building-dialog';
 import { EditBuildingDialog } from './edit-building-dialog';
 import { useTranslations } from 'next-intl';
 
-export function BuildingsList() {
+export const BuildingsList = () => {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingBuilding, setEditingBuilding] = useState<Building | null>(null);
   const t = useTranslations('buildings');

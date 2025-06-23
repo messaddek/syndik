@@ -314,18 +314,16 @@ export const portalRouter = createTRPCRouter({
 
     console.log(
       `🔐 Checking resident access for user ${userId} in org ${orgId}`
-    );
-
-    // First, check if user is already linked
+    ); // First, check if user is already linked - ONLY use userId for lookup
     const [existingUser] = await db
       .select()
       .from(users)
-      .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
+      .where(eq(users.userId, userId))
       .limit(1);
 
-    if (existingUser?.residentId) {
+    if (existingUser?.residentId && existingUser.orgId === orgId) {
       console.log(
-        `✅ User already linked to resident ${existingUser.residentId}`
+        `✅ User already linked to resident ${existingUser.residentId} in current org`
       );
       return {
         hasAccess: true,
@@ -387,9 +385,11 @@ export const portalRouter = createTRPCRouter({
       ); // Create or update user record with resident link
       if (existingUser) {
         // Update existing user record
+        console.log(`🔄 Updating existing user record for userId: ${userId}`);
         await db
           .update(users)
           .set({
+            orgId: orgId, // Ensure orgId is set correctly
             residentId: matchingResident.id,
             name: `${matchingResident.firstName} ${matchingResident.lastName}`,
             email: matchingResident.email,
@@ -398,15 +398,63 @@ export const portalRouter = createTRPCRouter({
           })
           .where(eq(users.userId, userId));
       } else {
-        // Create new user record
-        await db.insert(users).values({
-          userId: userId,
-          orgId: orgId,
-          name: `${matchingResident.firstName} ${matchingResident.lastName}`,
-          email: matchingResident.email,
-          phone: matchingResident.phone,
-          residentId: matchingResident.id,
-        });
+        // Create new user record with error handling
+        console.log(`➕ Creating new user record for userId: ${userId}`);
+        try {
+          await db.insert(users).values({
+            userId: userId,
+            orgId: orgId,
+            name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+            email: matchingResident.email,
+            phone: matchingResident.phone,
+            residentId: matchingResident.id,
+          });
+          console.log(`✅ Successfully created new user record`);
+        } catch (insertError) {
+          // Handle duplicate key error (race condition)
+          console.log(
+            `⚠️ Insert failed, checking if it's a duplicate key error:`,
+            insertError
+          );
+
+          // Check if it's a duplicate key error
+          const errorMessage =
+            insertError instanceof Error
+              ? insertError.message
+              : String(insertError);
+          const isDuplicateKey =
+            errorMessage.includes('duplicate key') ||
+            errorMessage.includes('unique constraint') ||
+            errorMessage.includes('users_user_id_unique');
+
+          if (isDuplicateKey) {
+            console.log(
+              `⚠️ Duplicate key error detected, updating existing record instead`
+            );
+            // Try to update the existing record
+            await db
+              .update(users)
+              .set({
+                orgId: orgId, // Ensure orgId is set correctly
+                residentId: matchingResident.id,
+                name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+                email: matchingResident.email,
+                phone: matchingResident.phone,
+                updatedAt: new Date(),
+              })
+              .where(eq(users.userId, userId));
+            console.log(
+              `✅ Successfully updated existing user record after duplicate key error`
+            );
+          } else {
+            // Re-throw if it's not a duplicate key error
+            console.error(
+              `❌ Non-duplicate key error during insert:`,
+              insertError
+            );
+            throw insertError;
+          }
+        }
       }
 
       console.log(
@@ -681,10 +729,103 @@ export const portalRouter = createTRPCRouter({
           .from(notifications)
           .where(and(...conditions)),
       ]);
-
       return {
         notifications: notificationsList,
         total: total || 0,
       };
     }),
+
+  // Debug auto-linking procedure for troubleshooting
+  debugAutoLinking: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    console.log(
+      `🔍 Running auto-linking debug for user ${userId} in org ${orgId}`
+    );
+
+    try {
+      // Check user records
+      const userRecords = await db
+        .select()
+        .from(users)
+        .where(eq(users.userId, userId))
+        .limit(10);
+
+      // Get user's email from Clerk
+      const clerk = await clerkClient();
+      const clerkUser = await clerk.users.getUser(userId);
+      const userEmail = clerkUser.emailAddresses?.[0]?.emailAddress;
+      // Check for matching residents
+      const matchingResidents = userEmail
+        ? await db
+            .select()
+            .from(residents)
+            .where(
+              and(
+                eq(residents.email, userEmail),
+                eq(residents.orgId, orgId),
+                eq(residents.isActive, true)
+              )
+            )
+            .limit(5)
+        : [];
+      return {
+        userId,
+        orgId,
+        clerkEmail: userEmail,
+        userRecordsCount: userRecords.length,
+        userRecords: userRecords.map(u => ({
+          id: u.id,
+          userId: u.userId,
+          orgId: u.orgId,
+          email: u.email,
+          residentId: u.residentId,
+          createdAt: u.createdAt,
+          updatedAt: u.updatedAt,
+        })),
+        matchingResidentsCount: matchingResidents.length,
+        matchingResidents: matchingResidents.map(r => ({
+          id: r.id,
+          email: r.email,
+          name: `${r.firstName} ${r.lastName}`,
+          unitId: r.unitId,
+          orgId: r.orgId,
+          isActive: r.isActive,
+        })),
+        // Add fields expected by the UI
+        matchingResident:
+          matchingResidents.length > 0
+            ? {
+                id: matchingResidents[0].id,
+                email: matchingResidents[0].email,
+                name: `${matchingResidents[0].firstName} ${matchingResidents[0].lastName}`,
+                unitId: matchingResidents[0].unitId,
+                orgId: matchingResidents[0].orgId,
+                isActive: matchingResidents[0].isActive,
+              }
+            : null,
+        userInfo: {
+          orgId,
+          currentUserRecords: userRecords.map(u => ({
+            id: u.id,
+            userId: u.userId,
+            orgId: u.orgId,
+            email: u.email,
+            residentId: u.residentId,
+            createdAt: u.createdAt,
+            updatedAt: u.updatedAt,
+          })),
+        },
+      };
+    } catch (error) {
+      console.error(`❌ Error in debugAutoLinking:`, error);
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: `Failed to run auto-linking debug: ${errorMessage}`,
+        cause: error,
+      });
+    }
+  }),
 });

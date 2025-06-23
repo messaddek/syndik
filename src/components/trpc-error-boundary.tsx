@@ -48,7 +48,7 @@ export const DefaultErrorFallback = ({
           <pre className='bg-muted mt-2 overflow-auto rounded p-2 text-xs'>
             {error.message}
           </pre>
-        </details>{' '}
+        </details>
         <Button
           onClick={resetErrorBoundary}
           className='w-full'
@@ -79,3 +79,4 @@ export const TRPCErrorBoundary = ({
     </ErrorBoundary>
   );
 };
+

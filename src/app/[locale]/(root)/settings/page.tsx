@@ -6,7 +6,7 @@ import { DashboardSkeleton } from '@/modules/dashboard/ui/components/dashboard-s
 // Force dynamic rendering to avoid prerendering issues with auth context
 export const dynamic = 'force-dynamic';
 
-export default function SettingsPage() {
+const SettingsPage = () => {
   return (
     <TRPCErrorBoundary>
       <Suspense fallback={<DashboardSkeleton />}>
@@ -14,4 +14,5 @@ export default function SettingsPage() {
       </Suspense>
     </TRPCErrorBoundary>
   );
-}
+};
+export default SettingsPage;

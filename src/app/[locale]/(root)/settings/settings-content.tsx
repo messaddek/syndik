@@ -20,7 +20,7 @@ import {
   PreferencesTabSuspense,
 } from './components/tab-wrappers';
 
-export function SettingsContent() {
+export const SettingsContent = () => {
   const t = useTranslations();
   // URL state management for tabs
   const [currentTab, setCurrentTab] = useQueryState('tab', {
@@ -45,7 +45,7 @@ export function SettingsContent() {
         <div className='flex flex-col space-y-4 lg:flex-row lg:space-y-0 lg:space-x-8'>
           <aside className='w-full lg:w-1/5'>
             <TabsList className='bg-muted grid h-auto w-full grid-cols-3 gap-2 p-1 lg:h-auto lg:grid-cols-1 lg:flex-col'>
-              {' '}
+              
               <TabsTrigger
                 value='profile'
                 className='flex w-full items-center justify-start gap-2'
@@ -124,7 +124,7 @@ export function SettingsContent() {
             <TabsContent value='billing' className='space-y-6'>
               <BillingTabSuspense />
             </TabsContent>
-            {/* Preferences Tab */}{' '}
+            {/* Preferences Tab */}
             <TabsContent value='preferences' className='space-y-6'>
               <PreferencesTabSuspense />
             </TabsContent>

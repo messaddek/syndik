@@ -14,11 +14,11 @@ interface RoleGuardProps {
   redirectTo?: string;
 }
 
-export function RoleGuard({
+export const RoleGuard = ({
   children,
   allowedRoles,
   redirectTo,
-}: RoleGuardProps) {
+}: RoleGuardProps) => {
   const trpc = useTRPC();
   const router = useRouter();
   const pathname = usePathname();

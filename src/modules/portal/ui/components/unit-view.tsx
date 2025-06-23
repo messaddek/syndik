@@ -26,7 +26,7 @@ import {
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-export function UnitView() {
+export const UnitView = () => {
   const t = useTranslations('units.portal');
   const trpc = useTRPC();
 
@@ -73,7 +73,7 @@ export function UnitView() {
         <div className='flex items-center space-x-3'>
           <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100'>
             <Home className='text-primary h-5 w-5' />
-          </div>{' '}
+          </div>
           <div>
             <h1 className='text-2xl font-bold text-gray-900'>
               {t('title')} {unit?.unitNumber || t('values.notAvailable')}
@@ -89,7 +89,7 @@ export function UnitView() {
       </div>
       {/* Unit Overview Cards */}
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
-        {' '}
+        
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
             <CardTitle className='text-sm font-medium'>
@@ -159,14 +159,14 @@ export function UnitView() {
       <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
         {/* Unit Information */}
         <Card>
-          {' '}
+          
           <CardHeader>
             <CardTitle className='flex items-center gap-2'>
               <Home className='h-5 w-5' />
               {t('details.unitTitle')}
             </CardTitle>
             <CardDescription>{t('details.unitDescription')}</CardDescription>
-          </CardHeader>{' '}
+          </CardHeader>
           <CardContent className='space-y-4'>
             <div className='grid grid-cols-2 gap-4'>
               <div>
@@ -219,7 +219,7 @@ export function UnitView() {
                   {unit?.bathrooms ?? t('values.notAvailable')}
                 </p>
               </div>
-            </div>{' '}
+            </div>
             {unit?.description && (
               <div>
                 <label className='text-sm font-medium text-gray-500'>
@@ -265,13 +265,13 @@ export function UnitView() {
                 <div className='text-sm text-gray-700'>
                   <p>{building?.address || t('values.notAvailable')}</p>
                   <p>
-                    {building?.city || t('values.notAvailable')},{' '}
+                    {building?.city || t('values.notAvailable')},
                     {building?.postalCode || t('values.notAvailable')}
                   </p>
                   <p>{building?.country || 'Morocco'}</p>
                 </div>
               </div>
-            </div>{' '}
+            </div>
             <div>
               <label className='text-sm font-medium text-gray-500'>
                 {t('details.totalUnits')}
@@ -282,7 +282,7 @@ export function UnitView() {
                   {building?.totalUnits || 0} {t('totalUnits')}
                 </span>
               </div>
-            </div>{' '}
+            </div>
             {building?.description && (
               <div>
                 <label className='text-sm font-medium text-gray-500'>
@@ -295,7 +295,7 @@ export function UnitView() {
             )}
           </CardContent>
         </Card>
-      </div>{' '}
+      </div>
       {/* Resident Information */}
       <Card>
         <CardHeader>
@@ -328,7 +328,7 @@ export function UnitView() {
             </div>
             {resident?.phone && (
               <div>
-                {' '}
+                
                 <label className='text-sm font-medium text-gray-500'>
                   {t('resident.phone')}
                 </label>
@@ -337,7 +337,7 @@ export function UnitView() {
                   <span className='text-sm'>{resident.phone}</span>
                 </div>
               </div>
-            )}{' '}
+            )}
             <div className='space-x-2'>
               <label className='text-sm font-medium text-gray-500'>
                 {t('details.unitStatus')}
@@ -348,7 +348,7 @@ export function UnitView() {
               >
                 {resident?.isOwner ? t('status.owner') : t('status.tenant')}
               </Badge>
-            </div>{' '}
+            </div>
             <div>
               <label className='text-sm font-medium text-gray-500'>
                 {t('resident.moveInDate')}
@@ -364,7 +364,7 @@ export function UnitView() {
             </div>
             {resident?.moveOutDate && (
               <div>
-                {' '}
+                
                 <label className='text-sm font-medium text-gray-500'>
                   {t('resident.leaseEndDate')}
                 </label>
@@ -380,7 +380,7 @@ export function UnitView() {
 
           {resident?.emergencyContact && (
             <div className='mt-4 border-t pt-4'>
-              {' '}
+              
               <h4 className='mb-2 text-sm font-medium text-gray-900'>
                 {t('resident.emergencyContact')}
               </h4>
@@ -393,7 +393,7 @@ export function UnitView() {
                 </div>
                 {resident.emergencyPhone && (
                   <div>
-                    {' '}
+                    
                     <label className='text-sm font-medium text-gray-500'>
                       {t('resident.phone')}
                     </label>
@@ -421,7 +421,7 @@ export function UnitView() {
   );
 }
 
-function UnitViewSkeleton() {
+const UnitViewSkeleton = () => {
   return (
     <div className='space-y-6 p-6'>
       {/* Header Skeleton */}
@@ -494,3 +494,4 @@ function UnitViewSkeleton() {
     </div>
   );
 }
+

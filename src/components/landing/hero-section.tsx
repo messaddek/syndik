@@ -32,7 +32,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
-export function HeroSection() {
+export const HeroSection = () => {
   return (
     <div className='relative isolate px-6 pt-14 lg:px-8'>
       {/* Background gradient */}
@@ -51,7 +51,7 @@ export function HeroSection() {
       <div className='relative z-10 mx-auto max-w-2xl py-32 sm:py-48 lg:py-56'>
         <div className='text-center'>
           <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-            Manage Your Residential Syndicate{' '}
+            Manage Your Residential Syndicate
             <span className='text-primary'>Effortlessly</span>
           </h1>
           <p className='mt-6 text-lg leading-8 text-gray-600'>
@@ -62,8 +62,10 @@ export function HeroSection() {
           <div className='mt-10 flex items-center justify-center gap-x-6'>
             <Button size='lg' className='px-8' asChild>
               <Link href='/sign-up'>
-                Get Started Free
-                <ArrowRight className='ml-2 h-4 w-4' />
+                <div className='flex items-center gap-x-2'>
+                  Get Started Free
+                  <ArrowRight className='h-4 w-4' />
+                </div>
               </Link>
             </Button>
             <Button variant='outline' size='lg' className='px-8' asChild>
@@ -87,9 +89,9 @@ export function HeroSection() {
       </div>
     </div>
   );
-}
+};
 
-export function StatsSection() {
+export const StatsSection = () => {
   const stats = [
     {
       name: 'Residential Syndicates',
@@ -138,9 +140,9 @@ export function StatsSection() {
       </div>
     </div>
   );
-}
+};
 
-export function FeaturesSection() {
+export const FeaturesSection = () => {
   const features = [
     {
       name: 'Building Management',
@@ -216,9 +218,9 @@ export function FeaturesSection() {
       </div>
     </div>
   );
-}
+};
 
-export function HowItWorksSection() {
+export const HowItWorksSection = () => {
   const steps = [
     {
       step: '01',
@@ -294,9 +296,9 @@ export function HowItWorksSection() {
       </div>
     </div>
   );
-}
+};
 
-export function BenefitsSection() {
+export const BenefitsSection = () => {
   const benefits = [
     {
       title: 'Save Time',
@@ -370,9 +372,9 @@ export function BenefitsSection() {
       </div>
     </div>
   );
-}
+};
 
-export function SecuritySection() {
+export const SecuritySection = () => {
   const securityFeatures = [
     {
       title: 'End-to-End Encryption',
@@ -458,9 +460,9 @@ export function SecuritySection() {
       </div>
     </div>
   );
-}
+};
 
-export function TestimonialsSection() {
+export const TestimonialsSection = () => {
   const testimonials = [
     {
       content:
@@ -548,9 +550,9 @@ export function TestimonialsSection() {
       </div>
     </div>
   );
-}
+};
 
-export function PricingPreviewSection() {
+export const PricingPreviewSection = () => {
   const plans = [
     {
       name: 'Starter',
@@ -732,12 +734,12 @@ export function PricingPreviewSection() {
                 >
                   <Link
                     href='/sign-up'
-                    className='group flex items-center justify-center font-semibold'
+                    className='group flex items-center justify-center gap-x-2 font-semibold'
                   >
                     {plan.name === 'Enterprise'
                       ? 'Contact Sales'
                       : 'Start Free Trial'}
-                    <ChevronRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                    <ChevronRight className='h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180' />
                   </Link>
                 </Button>
 
@@ -834,9 +836,9 @@ export function PricingPreviewSection() {
       `}</style>
     </div>
   );
-}
+};
 
-export function CTASection() {
+export const CTASection = () => {
   return (
     <div className='relative isolate overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700'>
       {/* Background gradient */}
@@ -899,9 +901,9 @@ export function CTASection() {
               className='min-w-[200px] border-2 border-white/30 bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/20'
               asChild
             >
-              <Link href='/demo' className='group flex items-center'>
+              <Link href='/demo' className='group flex items-center gap-x-2'>
                 Watch Demo
-                <ChevronRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                <ChevronRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
               </Link>
             </Button>
           </div>
@@ -909,15 +911,15 @@ export function CTASection() {
           {/* Trust indicators */}
           <div className='mt-16 grid grid-cols-1 gap-8 text-center sm:grid-cols-3'>
             <div className='space-y-2 rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm'>
-              <div className='mb-2 flex items-center justify-center'>
-                <Clock className='mr-2 h-6 w-6 text-yellow-300' />
+              <div className='mb-2 flex items-center justify-center gap-x-2'>
+                <Clock className='h-6 w-6 text-yellow-300' />
                 <div className='text-2xl font-bold text-white'>14 Days</div>
               </div>
               <div className='text-sm text-blue-100'>Free Trial</div>
             </div>
             <div className='space-y-2 rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm'>
-              <div className='mb-2 flex items-center justify-center'>
-                <Shield className='mr-2 h-6 w-6 text-green-300' />
+              <div className='mb-2 flex items-center justify-center gap-x-2'>
+                <Shield className='h-6 w-6 text-green-300' />
                 <div className='text-2xl font-bold text-white'>
                   No Setup Fee
                 </div>
@@ -925,8 +927,8 @@ export function CTASection() {
               <div className='text-sm text-blue-100'>Get Started Instantly</div>
             </div>
             <div className='space-y-2 rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm'>
-              <div className='mb-2 flex items-center justify-center'>
-                <Bell className='mr-2 h-6 w-6 text-blue-300' />
+              <div className='mb-2 flex items-center justify-center gap-x-2'>
+                <Bell className='h-6 w-6 text-blue-300' />
                 <div className='text-2xl font-bold text-white'>
                   24/7 Support
                 </div>
@@ -946,7 +948,7 @@ export function CTASection() {
               </span>
             </div>
             <p className='text-sm leading-relaxed text-blue-100'>
-              No credit card required • Cancel anytime • Money-back guarantee •{' '}
+              No credit card required • Cancel anytime • Money-back guarantee •
               <Link
                 href='/pricing'
                 className='font-medium underline transition-colors hover:text-yellow-300'
@@ -998,4 +1000,4 @@ export function CTASection() {
       </div>
     </div>
   );
-}
+};

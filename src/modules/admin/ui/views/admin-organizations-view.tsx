@@ -42,7 +42,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { format } from 'date-fns';
 
-export function AdminOrganizationsView() {
+export const AdminOrganizationsView = () => {
   const t = useTranslations('admin');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');

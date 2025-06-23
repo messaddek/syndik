@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { CommandGroup, CommandItem } from '@/components/ui/command';
 import { Building2, Home, Users } from 'lucide-react';
 
-export function SearchResultsSkeleton() {
+export const SearchResultsSkeleton = () => {
   return (
     <>
       {/* Buildings skeleton */}
@@ -76,7 +76,7 @@ export function SearchResultsSkeleton() {
   );
 }
 
-export function SearchLoadingSkeleton() {
+export const SearchLoadingSkeleton = () => {
   return (
     <div className='flex items-center justify-center p-6'>
       <div className='flex items-center gap-2'>

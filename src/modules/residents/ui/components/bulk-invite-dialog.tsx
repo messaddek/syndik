@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { useTRPC } from '@/trpc/client';
 import { Button } from '@/components/ui/button';
 import {
@@ -22,12 +23,13 @@ interface BulkInviteDialogProps {
   children: React.ReactNode;
 }
 
-export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
+export const BulkInviteDialog = ({ children }: BulkInviteDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedResidents, setSelectedResidents] = useState<string[]>([]);
 
   const trpc = useTRPC();
   const queryClient = useQueryClient();
+  const t = useTranslations('residents');
 
   // Fetch uninvited residents
   const { data: uninvitedResidents = [], isLoading } = useQuery(
@@ -38,10 +40,9 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
     trpc.residents.bulkInviteToPortal.mutationOptions({
       onSuccess: data => {
         const { successCount, errorCount, failed } = data;
-
         if (successCount > 0) {
           toast.success(
-            `Successfully sent ${successCount} invitation${successCount > 1 ? 's' : ''}`
+            t('bulkInvite.successMessage', { count: successCount })
           );
         }
 
@@ -63,13 +64,19 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
               !f.error.includes('already member') &&
               !f.error.includes('already sent') &&
               !f.error.includes('Invalid email')
-          ); // Show specific error messages
+          );
+
+          // Show specific error messages
           if (alreadyMembers.length > 0) {
             const names = alreadyMembers
               .map(f => f.residentName || f.email)
               .join(', ');
             toast.warning(
-              `${alreadyMembers.length} resident${alreadyMembers.length > 1 ? 's are' : ' is'} already a member: ${names.length > 50 ? names.substring(0, 50) + '...' : names}`
+              t('bulkInvite.alreadyMember', {
+                count: alreadyMembers.length,
+                names:
+                  names.length > 50 ? names.substring(0, 50) + '...' : names,
+              })
             );
           }
 
@@ -78,22 +85,27 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
               .map(f => f.residentName || f.email)
               .join(', ');
             toast.warning(
-              `${alreadyInvited.length} resident${alreadyInvited.length > 1 ? 's' : ''} already ${alreadyInvited.length > 1 ? 'have' : 'has'} pending invitations: ${names.length > 50 ? names.substring(0, 50) + '...' : names}`
+              t('bulkInvite.alreadyInvitedDetailed', {
+                count: alreadyInvited.length,
+                names:
+                  names.length > 50 ? names.substring(0, 50) + '...' : names,
+              })
             );
           }
-
           if (invalidEmails.length > 0) {
             const names = invalidEmails
               .map(f => f.residentName || f.email)
               .join(', ');
             toast.error(
-              `${invalidEmails.length} resident${invalidEmails.length > 1 ? 's have' : ' has'} invalid email: ${names.length > 50 ? names.substring(0, 50) + '...' : names}`
+              t('bulkInvite.invalidEmails', {
+                names:
+                  names.length > 50 ? names.substring(0, 50) + '...' : names,
+              })
             );
           }
-
           if (otherErrors.length > 0) {
             toast.error(
-              `${otherErrors.length} invitation${otherErrors.length > 1 ? 's' : ''} failed for other reasons. Check console for details.`
+              t('bulkInvite.otherErrorsDetailed', { count: otherErrors.length })
             );
           }
         }
@@ -108,7 +120,7 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
         queryClient.invalidateQueries(trpc.residents.getAll.queryOptions({}));
       },
       onError: error => {
-        toast.error(`Failed to send invitations: ${error.message}`);
+        toast.error(t('bulkInvite.failedToSend', { message: error.message }));
       },
     })
   );
@@ -147,13 +159,9 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
       <DialogContent className='max-w-2xl'>
         <DialogHeader>
           <DialogTitle className='flex items-center space-x-2'>
-            <Users className='h-5 w-5' />
-            <span>Invite Residents to Portal</span>
+            <Users className='h-5 w-5' /> <span>{t('bulkInvite.title')}</span>
           </DialogTitle>
-          <DialogDescription>
-            Select residents to invite to the resident portal. They will receive
-            an email invitation to join.
-          </DialogDescription>
+          <DialogDescription>{t('bulkInvite.description')}</DialogDescription>
         </DialogHeader>
 
         <div className='space-y-4'>
@@ -162,40 +170,39 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
             <div className='flex items-center space-x-2'>
               <Mail className='text-muted-foreground h-4 w-4' />
               <span className='text-sm'>
-                {uninvitedResidents.length} resident
-                {uninvitedResidents.length !== 1 ? 's' : ''}
-                {uninvitedResidents.length > 0 ? ' not yet invited' : ''}
+                {t('bulkInvite.residentsCount', {
+                  count: uninvitedResidents.length,
+                })}
+                {uninvitedResidents.length > 0
+                  ? ' ' + t('bulkInvite.notYetInvited')
+                  : ''}
               </span>
             </div>
             {selectedResidents.length > 0 && (
               <Badge variant='secondary'>
-                {selectedResidents.length} selected
+                {selectedResidents.length} {t('bulkInvite.selected')}
               </Badge>
             )}
           </div>
-
           {/* Loading state */}
           {isLoading && (
             <div className='flex items-center justify-center py-8'>
               <Loader2 className='h-6 w-6 animate-spin' />
-              <span className='ml-2'>Loading residents...</span>
+              <span className='ml-2'>{t('bulkInvite.loadingResidents')}</span>
             </div>
           )}
-
           {/* No uninvited residents */}
           {!isLoading && uninvitedResidents.length === 0 && (
             <div className='py-8 text-center'>
               <Users className='text-muted-foreground mx-auto mb-4 h-12 w-12' />
               <p className='text-muted-foreground'>
-                All active residents have already been invited to the portal.
+                {t('bulkInvite.noUninvitedMessage')}
               </p>
             </div>
           )}
-
           {/* Residents list */}
           {!isLoading && uninvitedResidents.length > 0 && (
             <>
-              {' '}
               {/* Select all checkbox */}
               <div className='flex items-center space-x-2 rounded-lg border p-3'>
                 <Checkbox
@@ -203,7 +210,9 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
                   onCheckedChange={handleSelectAll}
                 />
                 <label className='text-sm font-medium'>
-                  {isAllSelected ? 'Deselect all' : 'Select all'}
+                  {isAllSelected
+                    ? t('bulkInvite.deselectAll')
+                    : t('bulkInvite.selectAll')}
                 </label>
               </div>
               {/* Residents list */}
@@ -257,7 +266,6 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
               </ScrollArea>
             </>
           )}
-
           {/* Actions */}
           {uninvitedResidents.length > 0 && (
             <div className='flex items-center justify-between pt-4'>
@@ -271,16 +279,16 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
                 }
               >
                 {bulkInviteMutation.isPending ? (
-                  <>
-                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                  <div className='flex items-center gap-x-2'>
+                    <Loader2 className='h-4 w-4 animate-spin' />
                     Sending...
-                  </>
+                  </div>
                 ) : (
-                  <>
-                    <Send className='mr-2 h-4 w-4' />
-                    Send {selectedResidents.length} Invitation
-                    {selectedResidents.length !== 1 ? 's' : ''}
-                  </>
+                  <div className='flex items-center gap-x-2'>
+                    <Send className='h-4 w-4' />
+                    {t('bulkInvite.sendInvitations')} (
+                    {selectedResidents.length})
+                  </div>
                 )}
               </Button>
             </div>
@@ -289,4 +297,4 @@ export function BulkInviteDialog({ children }: BulkInviteDialogProps) {
       </DialogContent>
     </Dialog>
   );
-}
+};

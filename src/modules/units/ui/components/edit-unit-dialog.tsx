@@ -12,12 +12,12 @@ interface EditUnitDialogProps {
   unit?: Unit;
 }
 
-export function EditUnitDialog({
+export const EditUnitDialog = ({
   open,
   onOpenChange,
   onSuccess,
   unit,
-}: EditUnitDialogProps) {
+}: EditUnitDialogProps) => {
   const t = useTranslations('units');
 
   const handleSuccess = () => {

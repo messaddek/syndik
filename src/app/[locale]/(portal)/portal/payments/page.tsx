@@ -7,9 +7,11 @@ import { CreditCard, Calendar, DollarSign, History } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useTranslations } from 'next-intl';
 
-export default function PaymentsPage() {
+const PaymentsPage = () => {
   const trpc = useTRPC();
+  const t = useTranslations('payments');
 
   const { data: dashboardData, isLoading } = useQuery(
     trpc.portal.getDashboardData.queryOptions()
@@ -22,19 +24,18 @@ export default function PaymentsPage() {
   return (
     <div className='space-y-6'>
       <div>
-        <h1 className='text-3xl font-bold'>Payments & Billing</h1>
-        <p className='text-muted-foreground mt-2'>
-          View your payment history and manage upcoming charges.
+        <h1 className='text-3xl font-bold dark:text-white'>{t('title')}</h1>
+        <p className='text-muted-foreground mt-2 dark:text-gray-400'>
+          {t('description')}
         </p>
       </div>
-
       <div className='grid gap-6 md:grid-cols-2'>
         {/* Next Payment */}
         <Card>
           <CardHeader>
-            <CardTitle className='flex items-center gap-2'>
+            <CardTitle className='flex items-center gap-2 dark:text-white'>
               <CreditCard className='h-5 w-5' />
-              Next Payment Due
+              {t('nextPayment.title')}
             </CardTitle>
           </CardHeader>
           <CardContent className='space-y-4'>
@@ -46,26 +47,26 @@ export default function PaymentsPage() {
             ) : (
               <>
                 <div>
-                  <div className='text-3xl font-bold'>
+                  <div className='text-3xl font-bold dark:text-white'>
                     ${dashboardData?.nextPayment?.amount?.toFixed(2) || '0.00'}
                   </div>
-                  <p className='text-muted-foreground text-sm'>
-                    Monthly syndicate fee
+                  <p className='text-muted-foreground text-sm dark:text-gray-400'>
+                    {t('nextPayment.monthlyFee')}
                   </p>
                 </div>
-                <div className='flex items-center gap-2 text-sm'>
+                <div className='flex items-center gap-2 text-sm dark:text-gray-300'>
                   <Calendar className='h-4 w-4' />
                   <span>
-                    Due:{' '}
+                    {t('nextPayment.dueDate')}:
                     {dashboardData?.nextPayment?.dueDate
                       ? new Date(
                           dashboardData.nextPayment.dueDate
                         ).toLocaleDateString()
-                      : 'Not available'}
+                      : t('nextPayment.notAvailable')}
                   </span>
                 </div>
                 <Button className='w-full' disabled>
-                  Pay Now (Coming Soon)
+                  {t('nextPayment.payNow')}
                 </Button>
               </>
             )}
@@ -75,81 +76,82 @@ export default function PaymentsPage() {
         {/* Unit Information */}
         <Card>
           <CardHeader>
-            <CardTitle className='flex items-center gap-2'>
+            <CardTitle className='flex items-center gap-2 dark:text-white'>
               <DollarSign className='h-5 w-5' />
-              Unit Details
+              {t('unitDetails.title')}
             </CardTitle>
           </CardHeader>
           <CardContent className='space-y-4'>
             {residentInfo?.unit ? (
               <div className='grid grid-cols-2 gap-4'>
                 <div>
-                  <p className='text-muted-foreground text-sm font-medium'>
-                    Unit Number
+                  <p className='text-muted-foreground text-sm font-medium dark:text-gray-400'>
+                    {t('unitDetails.unitNumber')}
                   </p>
-                  <p className='text-lg font-semibold'>
+                  <p className='text-lg font-semibold dark:text-white'>
                     {residentInfo.unit.unitNumber}
                   </p>
                 </div>
                 <div>
-                  <p className='text-muted-foreground text-sm font-medium'>
-                    Monthly Fee
+                  <p className='text-muted-foreground text-sm font-medium dark:text-gray-400'>
+                    {t('unitDetails.monthlyFee')}
                   </p>
-                  <p className='text-lg font-semibold'>
+                  <p className='text-lg font-semibold dark:text-white'>
                     ${residentInfo.unit.monthlyFee?.toFixed(2)}
                   </p>
                 </div>
                 <div>
-                  <p className='text-muted-foreground text-sm font-medium'>
-                    Area
+                  <p className='text-muted-foreground text-sm font-medium dark:text-gray-400'>
+                    {t('unitDetails.area')}
                   </p>
-                  <p className='text-lg font-semibold'>
+                  <p className='text-lg font-semibold dark:text-white'>
                     {residentInfo.unit.area || 'N/A'} m²
                   </p>
                 </div>
                 <div>
-                  <p className='text-muted-foreground text-sm font-medium'>
-                    Status
+                  <p className='text-muted-foreground text-sm font-medium dark:text-gray-400'>
+                    {t('unitDetails.status')}
                   </p>
                   <Badge
                     variant={
                       residentInfo.unit.isOccupied ? 'default' : 'secondary'
                     }
                   >
-                    {residentInfo.unit.isOccupied ? 'Occupied' : 'Vacant'}
+                    {residentInfo.unit.isOccupied
+                      ? t('unitDetails.occupied')
+                      : t('unitDetails.vacant')}
                   </Badge>
                 </div>
               </div>
             ) : (
-              <p className='text-muted-foreground'>
-                Unit information not available
+              <p className='text-muted-foreground dark:text-gray-400'>
+                {t('unitDetails.notAvailable')}
               </p>
             )}
           </CardContent>
         </Card>
       </div>
-
       {/* Payment History */}
       <Card>
         <CardHeader>
-          <CardTitle className='flex items-center gap-2'>
+          <CardTitle className='flex items-center gap-2 dark:text-white'>
             <History className='h-5 w-5' />
-            Payment History
+            {t('paymentHistory.title')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className='py-8 text-center'>
-            <History className='text-muted-foreground mx-auto mb-4 h-12 w-12' />
-            <h3 className='mb-2 text-lg font-semibold'>
-              Payment History Coming Soon
+            <History className='text-muted-foreground mx-auto mb-4 h-12 w-12 dark:text-gray-400' />
+            <h3 className='mb-2 text-lg font-semibold dark:text-white'>
+              {t('paymentHistory.comingSoon')}
             </h3>
-            <p className='text-muted-foreground'>
-              You&apos;ll be able to view your payment history, download
-              receipts, and track your billing status here.
+            <p className='text-muted-foreground dark:text-gray-400'>
+              {t('paymentHistory.description')}
             </p>
           </div>
         </CardContent>
       </Card>
     </div>
   );
-}
+};
+export default PaymentsPage;

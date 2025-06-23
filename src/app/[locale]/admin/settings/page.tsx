@@ -1,5 +1,6 @@
 import { AdminSettingsView } from '@/modules/admin/ui/views/admin-settings-view';
 
-export default function AdminSettingsPage() {
+const AdminSettingsPage = () => {
   return <AdminSettingsView />;
-}
+};
+export default AdminSettingsPage;

@@ -27,7 +27,7 @@ import {
  * - Mutations with optimistic updates
  * - Real-time data refresh
  */
-export function SyndicateDashboard() {
+export const SyndicateDashboard = () => {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [selectedBuilding, setSelectedBuilding] = useState<

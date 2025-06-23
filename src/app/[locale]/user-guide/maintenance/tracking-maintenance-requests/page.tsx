@@ -836,7 +836,7 @@ const TrackingMaintenanceRequestsPage = () => {
                   </section>
                 </div>
               </div>
-            </div>{' '}
+            </div>
             {/* Sidebar */}
             <div className='lg:col-span-1'>
               <ArticleSidebar

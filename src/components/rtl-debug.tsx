@@ -3,7 +3,7 @@
 import { useDirection } from '@/hooks/use-direction';
 import { useEffect, useState } from 'react';
 
-export function RTLDebug() {
+export const RTLDebug = () => {
   const { direction, isRtl, locale } = useDirection();
   const [htmlDir, setHtmlDir] = useState('');
   const [bodyClasses, setBodyClasses] = useState('');

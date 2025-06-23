@@ -6,5 +6,9 @@
   "edit": "Edit",
   "delete": "Delete",
   "view": "View",
-  "openMenu": "Open menu"
+  "openMenu": "Open menu",
+  "selected": "{count} of {total} row(s) selected",
+  "selectAll": "Select all",
+  "of": "of",
+  "selectedActions": "Actions ({count} selected)"
 }

@@ -16,7 +16,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Separator } from '@/components/ui/separator';
 import { Save, AlertTriangle } from 'lucide-react';
 
-export function AdminSettingsView() {
+export const AdminSettingsView = () => {
   const t = useTranslations('admin');
 
   return (

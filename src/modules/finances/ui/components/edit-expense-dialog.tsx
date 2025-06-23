@@ -12,12 +12,12 @@ interface EditExpenseDialogProps {
   onSuccess?: () => void;
 }
 
-export function EditExpenseDialog({
+export const EditExpenseDialog = ({
   expense,
   open,
   onOpenChange,
   onSuccess,
-}: EditExpenseDialogProps) {
+}: EditExpenseDialogProps) => {
   const t = useTranslations('finance');
 
   const handleSuccess = () => {
@@ -28,13 +28,13 @@ export function EditExpenseDialog({
   const handleCancel = () => {
     onOpenChange(false);
   };
-
   return (
     <ResponsiveDialog
       open={open}
       onOpenChange={onOpenChange}
       title={`${t('buttons.edit')} ${t('tabs.expenses')}`}
       description='Update the expense details below.'
+      className='sm:max-w-4xl'
     >
       <ExpenseForm
         expense={expense}

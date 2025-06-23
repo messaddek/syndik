@@ -19,7 +19,9 @@ interface NotificationProviderProps {
   children: React.ReactNode;
 }
 
-export function NotificationProvider({ children }: NotificationProviderProps) {
+export const NotificationProvider = ({
+  children,
+}: NotificationProviderProps) => {
   // Initialize real-time notifications
   useRealtimeNotifications();
 
@@ -40,7 +42,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
       {children}
     </NotificationContext.Provider>
   );
-}
+};
 
 export function useNotifications() {
   const context = useContext(NotificationContext);

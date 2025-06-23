@@ -1,0 +1,81 @@
+{
+  "title": "Financial Reports",
+  "description": "Generate and download financial reports for your properties",
+  "quickStats": {
+    "reportsGenerated": "Reports Generated",
+    "lastGenerated": "Last Generated",
+    "mostPopular": "Most Popular",
+    "thisMonth": "This month",
+    "ago": "ago",
+    "days": "days",
+    "ofAllReports": "of all reports"
+  },
+  "availableReports": {
+    "title": "Available Reports",
+    "description": "Generate detailed financial reports for analysis and compliance",
+    "generateButton": "Generate Report"
+  },
+  "reports": {
+    "monthlySummary": {
+      "title": "Monthly Financial Summary",
+      "description": "Income, expenses, and net profit overview"
+    },
+    "paymentStatus": {
+      "title": "Payment Status Report",
+      "description": "Track missing payments and collection rates"
+    },
+    "expenseBreakdown": {
+      "title": "Expense Breakdown",
+      "description": "Detailed analysis of expenses by category"
+    },
+    "propertyPerformance": {
+      "title": "Property Performance",
+      "description": "Financial performance by building/unit"
+    },
+    "yearlyComparison": {
+      "title": "Yearly Comparison",
+      "description": "Compare financial performance across years"
+    },
+    "taxReport": {
+      "title": "Tax Report",
+      "description": "Annual tax summary for compliance"
+    }
+  },
+  "badges": {
+    "popular": "Popular",
+    "new": "New",
+    "recommended": "Recommended"
+  },
+  "recentReports": {
+    "title": "Recent Reports",
+    "description": "Your recently generated reports",
+    "noReports": "No reports generated yet",
+    "downloadAction": "Download"
+  },
+  "filters": {
+    "period": "Period",
+    "type": "Report Type",
+    "building": "Building",
+    "allBuildings": "All Buildings",
+    "currentMonth": "Current Month",
+    "lastMonth": "Last Month",
+    "currentQuarter": "Current Quarter",
+    "currentYear": "Current Year",
+    "lastYear": "Last Year",
+    "customRange": "Custom Range"
+  },
+  "generating": {
+    "title": "Generating Report...",
+    "description": "Please wait while we prepare your report",
+    "estimatedTime": "Estimated time: {seconds} seconds"
+  },
+  "success": {
+    "reportGenerated": "Report generated successfully",
+    "downloadStarted": "Download started"
+  },
+  "errors": {
+    "generateFailed": "Failed to generate report",
+    "downloadFailed": "Failed to download report",
+    "noData": "No data available for the selected period"
+  }
+}

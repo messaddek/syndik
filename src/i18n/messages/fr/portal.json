@@ -85,6 +85,9 @@
     "haveInvitation": "Vous avez déjà une invitation ?",
     "haveInvitationDescription": "Vérifiez votre e-mail et suivez le lien d'invitation pour terminer le processus de configuration.",
     "details": "Détails :",
+    "refresh": "Actualiser",
+    "refreshSuccess": "Vérification d'accès actualisée",
+    "refreshError": "Échec de l'actualisation de l'accès",
     "backToDashboard": "Retour au tableau de bord"
   }
 }

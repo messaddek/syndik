@@ -8,5 +8,6 @@
   "showingPage": "عرض الصفحة",
   "showingResults": "عرض {start} إلى {end} من {total} نتيجة",
   "noResults": "لم يتم العثور على نتائج",
-  "rowsPerPage": "صفوف لكل صفحة"
+  "rowsPerPage": "صفوف لكل صفحة",
+  "perPage": "لكل صفحة"
 }

@@ -108,7 +108,7 @@ const IndividualMessagingPage = () => {
             </h2>
             <p className='mb-6 text-gray-700'>
               {t('sections.sendingMessages.description')}
-            </p>{' '}
+            </p>
             <div className='space-y-6'>
               {t
                 .raw('sections.sendingMessages.steps')
@@ -139,7 +139,7 @@ const IndividualMessagingPage = () => {
             </h2>
             <p className='mb-6 text-gray-700'>
               {t('sections.messageTypes.description')}
-            </p>{' '}
+            </p>
             <div className='grid gap-6 md:grid-cols-2'>
               {t
                 .raw('sections.messageTypes.types')
@@ -171,7 +171,7 @@ const IndividualMessagingPage = () => {
             </h2>
             <p className='mb-6 text-gray-700'>
               {t('sections.managingConversations.description')}
-            </p>{' '}
+            </p>
             <div className='space-y-4'>
               {t
                 .raw('sections.managingConversations.features')
@@ -201,7 +201,7 @@ const IndividualMessagingPage = () => {
             </h2>
             <p className='mb-6 text-gray-700'>
               {t('sections.messageSettings.description')}
-            </p>{' '}
+            </p>
             <div className='space-y-4'>
               {t
                 .raw('sections.messageSettings.settings')

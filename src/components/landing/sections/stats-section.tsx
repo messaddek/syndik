@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-export function StatsSection() {
+export const StatsSection = () => {
   const t = useTranslations('landing.stats');
   const stats = [
     {
@@ -30,7 +30,7 @@ export function StatsSection() {
   return (
     <div className='bg-white py-16 sm:py-20'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        {' '}
+        
         <div className='mx-auto max-w-2xl text-center'>
           <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
             {t('title')}
@@ -54,3 +54,4 @@ export function StatsSection() {
     </div>
   );
 }
+

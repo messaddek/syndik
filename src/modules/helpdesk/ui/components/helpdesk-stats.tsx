@@ -11,7 +11,7 @@ interface HelpdeskStatsProps {
   isLoading: boolean;
 }
 
-export function HelpdeskStats({ stats, isLoading }: HelpdeskStatsProps) {
+export const HelpdeskStats = ({ stats, isLoading }: HelpdeskStatsProps) => {
   const t = useTranslations('helpDesk');
 
   if (isLoading) {

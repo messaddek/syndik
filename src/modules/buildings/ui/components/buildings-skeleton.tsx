@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
-export function BuildingsListSkeleton() {
+export const BuildingsListSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header skeleton */}
@@ -53,7 +53,7 @@ export function BuildingsListSkeleton() {
   );
 }
 
-export function BuildingCardSkeleton() {
+export const BuildingCardSkeleton = () => {
   return (
     <Card className='transition-shadow hover:shadow-lg'>
       <CardHeader>

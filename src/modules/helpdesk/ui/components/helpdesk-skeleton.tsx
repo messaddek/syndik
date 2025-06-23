@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
-export function HelpdeskSkeleton() {
+export const HelpdeskSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header */}

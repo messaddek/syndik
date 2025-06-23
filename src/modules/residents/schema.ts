@@ -53,6 +53,7 @@ export const createResidentSchema = z.object({
   email: z.string().email('Valid email is required'),
   phone: z.string().optional(),
   isOwner: z.boolean(),
+  isActive: z.boolean(),
   moveInDate: z
     .string()
     .refine(date => !isNaN(Date.parse(date)), 'Invalid move-in date'),

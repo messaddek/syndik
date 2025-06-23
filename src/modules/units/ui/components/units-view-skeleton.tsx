@@ -27,7 +27,7 @@ export const UnitsViewSkeleton = () => {
               <div className='flex items-center justify-between'>
                 <Skeleton className='h-6 w-16' /> {/* Unit Number */}
                 <div className='flex items-center gap-2'>
-                  <Skeleton className='h-5 w-16 rounded-full' />{' '}
+                  <Skeleton className='h-5 w-16 rounded-full' />
                   {/* Status Badge */}
                   <div className='flex items-center'>
                     <MoreHorizontal className='h-4 w-4' />
@@ -86,3 +86,4 @@ export const UnitsViewSkeleton = () => {
     </>
   );
 };
+

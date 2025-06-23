@@ -744,11 +744,204 @@
       "nextSteps": "الخطوات التالية",
       "popular": "شائع",
       "readTime": "دقائق",
-      "whatYoullLearn": "ما ستتعلمه"
+      "whatYoullLearn": "ما ستتعلمه",
+      "troubleshooting": "استكشاف الأخطاء وإصلاحها",
+      "bestPractices": "أفضل الممارسات",
+      "tips": "نصائح احترافية"
     },
     "navigation": {
       "userGuide": "دليل المستخدم",
       "gettingStarted": "البدء"
+    },
+    "processingPayments": {
+      "title": "معالجة المدفوعات",
+      "description": "إدارة مدفوعات الإيجار والرسوم والمصروفات بكفاءة",
+      "metadata": {
+        "readTime": "8 دقائق قراءة",
+        "audience": "مديرو العقارات"
+      },
+      "sections": {
+        "overview": {
+          "title": "نظرة عامة",
+          "content": "المعالجة الفعالة للمدفوعات تضمن حفظ السجلات بدقة والتحصيل في الوقت المناسب."
+        },
+        "paymentMethods": {
+          "title": "طرق الدفع",
+          "description": "استكشف طرق الدفع المختلفة المتاحة لمعالجة مدفوعات المستأجرين بكفاءة.",
+          "content": "الطرق المختلفة المتاحة لمعالجة المدفوعات.",
+          "methods": [
+            {
+              "title": "التحويلات البنكية",
+              "description": "تحويلات مباشرة من حسابات المستأجرين البنكية للحصول على مدفوعات موثوقة.",
+              "icon": "credit-card"
+            },
+            {
+              "title": "مدفوعات بطاقة الائتمان",
+              "description": "قبول مدفوعات بطاقات الائتمان والخصم مع المعالجة الآمنة.",
+              "icon": "credit-card"
+            },
+            {
+              "title": "المدفوعات النقدية",
+              "description": "معالجة المدفوعات النقدية المستلمة شخصياً مع التوثيق المناسب.",
+              "icon": "dollar-sign"
+            },
+            {
+              "title": "بوابات الدفع الإلكترونية",
+              "description": "السماح للمستأجرين بالدفع عبر الإنترنت من خلال بوابات دفع آمنة.",
+              "icon": "smartphone"
+            }
+          ]
+        },
+        "manualPayments": {
+          "title": "المدفوعات اليدوية",
+          "description": "تعلم كيفية معالجة المدفوعات يدوياً من خلال واجهة النظام.",
+          "content": "معالجة المدفوعات يدوياً من خلال النظام.",
+          "steps": [
+            {
+              "title": "الانتقال إلى قسم المدفوعات",
+              "content": "الوصول إلى وحدة المدفوعات من لوحة التحكم الرئيسية"
+            },
+            {
+              "title": "اختيار نوع الدفع",
+              "content": "اختر نوع الدفع المناسب من القائمة المنسدلة"
+            },
+            {
+              "title": "إدخال تفاصيل الدفع",
+              "content": "املأ جميع معلومات الدفع المطلوبة"
+            },
+            {
+              "title": "التحقق من المعلومات",
+              "content": "راجع جميع التفاصيل المدخلة مرتين للتأكد من الدقة"
+            },
+            {
+              "title": "إرسال الدفع",
+              "content": "إكمال معالجة الدفع"
+            }
+          ]
+        },
+        "automatedProcessing": {
+          "title": "المعالجة الآلية",
+          "description": "إعداد معالجة آلية للمدفوعات لتبسيط العمليات وتقليل العمل اليدوي.",
+          "content": "إعداد أنظمة معالجة المدفوعات الآلية.",
+          "features": [
+            {
+              "title": "إعداد المدفوعات المتكررة",
+              "description": "تكوين تحصيل الإيجار الشهري التلقائي من حسابات المستأجرين."
+            },
+            {
+              "title": "حساب رسوم التأخير تلقائياً",
+              "description": "تطبيق رسوم التأخير تلقائياً بناءً على سياسات الدفع الخاصة بك."
+            },
+            {
+              "title": "تذكيرات الدفع",
+              "description": "إرسال تذكيرات آلية للمستأجرين قبل مواعيد الاستحقاق."
+            },
+            {
+              "title": "التكامل المصرفي",
+              "description": "الاتصال بالأنظمة المصرفية لمعالجة المعاملات بسلاسة."
+            }
+          ]
+        },
+        "paymentReconciliation": {
+          "title": "تسوية المدفوعات",
+          "description": "مطابقة المدفوعات مع الأرصدة المعلقة للحفاظ على السجلات المالية الدقيقة.",
+          "content": "مطابقة المدفوعات مع الأرصدة المعلقة.",
+          "steps": [
+            {
+              "title": "استيراد كشوف البنك",
+              "description": "رفع كشوف البنك إلى النظام للتسوية"
+            },
+            {
+              "title": "مطابقة المعاملات",
+              "description": "مطابقة المعاملات تلقائياً أو يدوياً مع المدفوعات"
+            },
+            {
+              "title": "حل التناقضات",
+              "description": "التحقق من وحل أي معاملات غير متطابقة"
+            },
+            {
+              "title": "إنتاج تقارير التسوية",
+              "description": "إنشاء تقارير التسوية لحفظ السجلات"
+            }
+          ]
+        },
+        "securityCompliance": {
+          "title": "الأمان والامتثال",
+          "description": "ضمان معالجة آمنة ومتوافقة للمدفوعات وفقاً لمعايير الصناعة.",
+          "content": "ضمان معالجة آمنة ومتوافقة للمدفوعات.",
+          "measures": [
+            {
+              "title": "امتثال PCI DSS",
+              "description": "الحفاظ على الامتثال لمعايير أمان بيانات صناعة بطاقات الدفع."
+            },
+            {
+              "title": "تشفير البيانات",
+              "description": "جميع بيانات الدفع مشفرة باستخدام بروتوكولات معيارية في الصناعة."
+            },
+            {
+              "title": "النقل الآمن",
+              "description": "يتم نقل معلومات الدفع عبر قنوات آمنة ومشفرة."
+            },
+            {
+              "title": "مسارات التدقيق",
+              "description": "تسجيل شامل لجميع معاملات الدفع للمساءلة."
+            },
+            {
+              "title": "ضوابط الوصول",
+              "description": "ضوابط الوصول القائمة على الأدوار تحد من صلاحيات معالجة المدفوعات."
+            }
+          ]
+        },
+        "troubleshooting": {
+          "issues": [
+            {
+              "problem": "الدفع لا يظهر في النظام",
+              "solution": "تحقق من معالجة الدفع خلال ساعات العمل واسمح بما يصل إلى 24 ساعة لظهور التحويلات البنكية. اتصل بالدعم إذا لم يظهر الدفع بعد هذه الفترة."
+            },
+            {
+              "problem": "رفض دفع بطاقة الائتمان",
+              "solution": "تحقق من صحة تفاصيل البطاقة وتوفر أموال كافية. قد تعتبر بعض البنوك مدفوعات الإيجار مشبوهة - انصح المستأجرين بالاتصال ببنكهم إذا لزم الأمر."
+            },
+            {
+              "problem": "تسجيل دفع مكرر",
+              "solution": "تحقق من طوابع وقت المعاملات وأرقام المرجع. إذا وجد تكرار، ألغِ دفعة واحدة وأصدر استرداداً إذا لزم الأمر. تحقق دائماً من السجلات البنكية قبل اتخاذ إجراء."
+            },
+            {
+              "problem": "مبلغ الدفع لا يطابق الإيجار المستحق",
+              "solution": "راجع توزيع المدفوعات وتحقق من تضمين مدفوعات جزئية أو رسوم إضافية. اضبط تطبيق الدفع حسب الحاجة أو اتصل بالمستأجر للتوضيح."
+            }
+          ]
+        },
+        "bestPractices": {
+          "tips": [
+            "تحقق دائماً من مبالغ الدفع قبل المعالجة",
+            "احتفظ بسجلات مفصلة لجميع معاملات الدفع",
+            "أعد تذكيرات دفع آلية لتقليل التأخير",
+            "اسوِّ المدفوعات بانتظام مع كشوف البنك",
+            "قدم تعليمات دفع واضحة للمستأجرين",
+            "استخدم طرق معالجة دفع آمنة فقط"
+          ]
+        },
+        "breadcrumb": {
+          "financialManagement": "الإدارة المالية"
+        },
+        "sidebar": {
+          "relatedArticlesList": [
+            {
+              "title": "إدارة حسابات السكان",
+              "href": "/user-guide/financial-management/managing-accounts"
+            },
+            {
+              "title": "إنتاج التقارير المالية",
+              "href": "/user-guide/financial-management/generating-reports"
+            },
+            {
+              "title": "إدارة رسوم التأخير",
+              "href": "/user-guide/financial-management/late-fees"
+            }
+          ]
+        }
+      }
     },
     "sidebar": {
       "tableOfContents": "جدول المحتويات",
@@ -917,10 +1110,12 @@
     "create": "إنشاء",
     "cancel": "إلغاء",
     "delete": "حذف",
+    "update": "تحديث",
     "edit": "تعديل",
     "add": "إضافة",
     "search": "بحث",
     "navbarSearch": "البحث في المباني والوحدات والسكان...",
+    "navbarSearchShort": "بحث...",
     "searchHint": "ابدأ بالكتابة للبحث...",
     "loading": "جاري التحميل...",
     "error": "خطأ",
@@ -957,6 +1152,8 @@
     "totalManagedProperties": "إجمالي العقارات المُدارة",
     "units": "الوحدات",
     "occupancyRateText": "معدل الإشغال",
+    "currentRate": "المعدل الحالي",
+    "averageRate": "المعدل المتوسط",
     "residents": "السكان",
     "activeResidents": "السكان النشطون",
     "netIncome": "صافي الدخل",
@@ -993,7 +1190,13 @@
       "expectedAmount": "المبلغ المتوقع",
       "overdue": "متأخر",
       "sendReminders": "إرسال تذكيرات",
-      "viewDetails": "عرض التفاصيل"
+      "sendingReminders": "جاري الإرسال...",
+      "viewDetails": "عرض التفاصيل",
+      "reminderSent": "تم إرسال تذكير الدفع إلى {buildingName} - الوحدة {unitNumber}",
+      "reminderError": "فشل في إرسال التذكير للوحدة {unitNumber}",
+      "allRemindersSent": "تم إرسال {count} تذكيرات دفع بنجاح",
+      "partialRemindersSent": "تم إرسال {success} تذكيرات، فشل {failed}",
+      "remindersError": "فشل في إرسال تذكيرات الدفع. يرجى المحاولة مرة أخرى."
     },
     "quickActionsItems": {
       "recordIncome": "تسجيل دخل"
@@ -1118,6 +1321,87 @@
         "title": "حذف المصروف",
         "description": "هل أنت متأكد من أنك تريد حذف سجل المصروف هذا؟ لا يمكن التراجع عن هذا الإجراء."
       }
+    }
+  },
+  "financeReports": {
+    "title": "التقارير المالية",
+    "description": "إنشاء وتحميل التقارير المالية لممتلكاتك",
+    "quickStats": {
+      "reportsGenerated": "التقارير المُنشأة",
+      "lastGenerated": "آخر إنشاء",
+      "mostPopular": "الأكثر شيوعاً",
+      "thisMonth": "هذا الشهر",
+      "ago": "منذ",
+      "days": "أيام",
+      "ofAllReports": "من جميع التقارير"
+    },
+    "availableReports": {
+      "title": "التقارير المتاحة",
+      "description": "إنشاء تقارير مالية مفصلة للتحليل والامتثال",
+      "generateButton": "إنشاء التقرير"
+    },
+    "reports": {
+      "monthlySummary": {
+        "title": "الملخص المالي الشهري",
+        "description": "نظرة عامة على الإيرادات والمصروفات وصافي الربح"
+      },
+      "paymentStatus": {
+        "title": "تقرير حالة المدفوعات",
+        "description": "تتبع المدفوعات المفقودة ومعدلات التحصيل"
+      },
+      "expenseBreakdown": {
+        "title": "تفصيل المصروفات",
+        "description": "تحليل مفصل للمصروفات حسب الفئة"
+      },
+      "propertyPerformance": {
+        "title": "أداء الممتلكات",
+        "description": "الأداء المالي حسب المبنى/الوحدة"
+      },
+      "yearlyComparison": {
+        "title": "المقارنة السنوية",
+        "description": "مقارنة الأداء المالي عبر السنوات"
+      },
+      "taxReport": {
+        "title": "التقرير الضريبي",
+        "description": "الملخص الضريبي السنوي للامتثال"
+      }
+    },
+    "badges": {
+      "popular": "شائع",
+      "new": "جديد",
+      "recommended": "موصى به"
+    },
+    "recentReports": {
+      "title": "التقارير الحديثة",
+      "description": "تقاريرك المُنشأة حديثاً",
+      "noReports": "لم يتم إنشاء تقارير بعد",
+      "downloadAction": "تحميل"
+    },
+    "filters": {
+      "period": "الفترة",
+      "type": "نوع التقرير",
+      "building": "المبنى",
+      "allBuildings": "جميع المباني",
+      "currentMonth": "الشهر الحالي",
+      "lastMonth": "الشهر الماضي",
+      "currentQuarter": "الربع الحالي",
+      "currentYear": "السنة الحالية",
+      "lastYear": "السنة الماضية",
+      "customRange": "نطاق مخصص"
+    },
+    "generating": {
+      "title": "إنشاء التقرير...",
+      "description": "يرجى الانتظار بينما نحضر تقريرك",
+      "estimatedTime": "الوقت المقدر: {seconds} ثانية"
+    },
+    "success": {
+      "reportGenerated": "تم إنشاء التقرير بنجاح",
+      "downloadStarted": "بدأ التحميل"
+    },
+    "errors": {
+      "generateFailed": "فشل في إنشاء التقرير",
+      "downloadFailed": "فشل في تحميل التقرير",
+      "noData": "لا توجد بيانات متاحة للفترة المحددة"
     }
   },
   "footer": {
@@ -1294,6 +1578,7 @@
     "title": "مكتب الدعم",
     "description": "إدارة التذاكر وطلبات الدعم",
     "create_ticket": "إنشاء تذكرة",
+    "create_b2b_ticket": "إنشاء تذكرة شركات",
     "filters": "الفلاتر",
     "advanced_filters": "فلاتر متقدمة",
     "search": "بحث",
@@ -1314,10 +1599,20 @@
     "all_categories": "كل الفئات",
     "tickets": "التذاكر",
     "tickets_description": "عرض وإدارة تذاكر الدعم",
+    "internal_tickets": "التذاكر الداخلية",
+    "b2b_tickets": "تذاكر الشركات",
+    "all_tickets": "جميع التذاكر",
     "no_ticket_selected": "لم يتم تحديد أي تذكرة",
     "select_ticket_to_view": "اختر تذكرة من القائمة لعرض التفاصيل",
     "create_new_ticket": "إنشاء تذكرة جديدة",
     "create_ticket_description": "املأ النموذج أدناه لإنشاء تذكرة دعم جديدة.",
+    "create_ticket_description_manager": "كمدير عقارات، يمكنك إنشاء تذاكر نيابة عن السكان. يرجى اختيار السكان الذين تريد إنشاء هذه التذكرة لهم.",
+    "manager_ticket_info": "ملاحظة: سيتم إنشاء هذه التذكرة نيابة عن السكان المحددين. سيتمكنون من عرضها والرد عليها من حسابهم.",
+    "RESIDENTS_CANNOT_SPECIFY_RESIDENT_ID": "لا يمكن للسكان تحديد أي مقيم عند إنشاء التذاكر",
+    "MEMBER_NO_RESIDENT_ACCESS": "ليس لديك حق الوصول إلى بوابة السكان ولا يمكنك إنشاء تذاكر",
+    "MANAGERS_MUST_SPECIFY_RESIDENT": "يجب على مديري العقارات تحديد المقيم الذي تخص التذكرة ولا يمكنهم إنشاء تذاكر لأنفسهم",
+    "RESIDENT_NOT_FOUND": "المقيم غير موجود في هذه المنظمة",
+    "INVALID_ROLE_FOR_TICKETS": "دورك لا يسمح بإنشاء التذاكر",
     "formTitleLabel": "المشكلة",
     "formDescriptionLabel": "الوصف",
     "title_placeholder": "وصف موجز للمشكلة",
@@ -1335,13 +1630,17 @@
     "avg_response_time": "متوسط زمن الاستجابة",
     "satisfaction_score": "معدل الرضا",
     "ticket_created": "تم إنشاء التذكرة بنجاح",
+    "ticket_updated": "تم تحديث التذكرة بنجاح",
     "error_creating_ticket": "حدث خطأ أثناء إنشاء التذكرة",
+    "error_updating_ticket": "حدث خطأ أثناء تحديث التذكرة",
     "creating": "جارٍ الإنشاء...",
     "select_category": "اختر الفئة",
     "select_priority": "اختر الأولوية",
     "building": "المبنى",
     "unit": "الوحدة",
     "select_unit": "اختر الوحدة (اختياري)",
+    "resident": "المقيم",
+    "select_resident": "اختر المقيم (مطلوب)",
     "tags": "الوسوم",
     "priority_low": "منخفضة",
     "priority_high": "مرتفعة",
@@ -1369,7 +1668,87 @@
     "sending": "جارٍ الإرسال...",
     "comment_sent": "تم إرسال التعليق بنجاح",
     "error_adding_comment": "حدث خطأ أثناء إضافة التعليق",
-    "no_comments": "لا توجد تعليقات حتى الآن"
+    "error_loading_ticket": "خطأ في تحميل التذكرة",
+    "no_comments": "لا توجد تعليقات حتى الآن",
+    "b2b_ticket_title": "إنشاء تذكرة دعم B2B",
+    "b2b_ticket_description": "إرسال تذكرة للحصول على الدعم من منصة Syndik",
+    "ticket_information": "معلومات التذكرة",
+    "title_required": "العنوان *",
+    "description_required": "الوصف *",
+    "business_impact": "التأثير التجاري *",
+    "business_impact_placeholder": "صف كيف تؤثر هذه المشكلة على عمليات عملك...",
+    "urgency_level": "مستوى الإلحاح",
+    "select_urgency": "اختر مستوى الإلحاح",
+    "urgency_low": "منخفض",
+    "urgency_medium": "متوسط",
+    "urgency_high": "مرتفع",
+    "urgency_critical": "حرج",
+    "organization_details": "تفاصيل المنظمة",
+    "organization_name": "اسم المنظمة",
+    "organization_size": "حجم المنظمة",
+    "select_organization_size": "اختر حجم المنظمة",
+    "size_small": "صغيرة (1-50 موظف)",
+    "size_medium": "متوسطة (51-200 موظف)",
+    "size_large": "كبيرة (201-1000 موظف)",
+    "size_enterprise": "مؤسسة (1000+ موظف)",
+    "contact_person": "شخص الاتصال",
+    "contact_person_placeholder": "جهة الاتصال الأساسية لهذه التذكرة",
+    "contact_email": "بريد الاتصال الإلكتروني",
+    "contact_phone": "هاتف الاتصال (اختياري)",
+    "department": "القسم",
+    "department_placeholder": "مثل: تقنية المعلومات، المالية، العمليات",
+    "technical_details": "التفاصيل التقنية",
+    "affected_systems": "الأنظمة المتأثرة",
+    "system_syndik_core": "منصة Syndik الأساسية",
+    "system_reporting": "التقارير والتحليلات",
+    "system_integrations": "التكاملات مع الأطراف الثالثة",
+    "system_mobile_app": "تطبيق الهاتف المحمول",
+    "system_api": "خدمات API",
+    "system_other": "أخرى",
+    "error_reproduction": "خطوات إعادة إنتاج الخطأ",
+    "error_reproduction_placeholder": "يرجى تقديم تعليمات خطوة بخطوة لإعادة إنتاج المشكلة...",
+    "expected_behavior": "السلوك المتوقع",
+    "expected_behavior_placeholder": "ما الذي يجب أن يحدث بدلاً من ذلك؟",
+    "environment_info": "معلومات البيئة",
+    "browser_version": "المتصفح/الإصدار",
+    "browser_version_placeholder": "مثل: Chrome 120، Safari 17، إلخ",
+    "operating_system": "نظام التشغيل",
+    "os_placeholder": "مثل: Windows 11، macOS 14، إلخ",
+    "additional_context": "سياق إضافي",
+    "screenshots_attachments": "لقطات الشاشة/المرفقات",
+    "preferred_contact": "طريقة الاتصال المفضلة",
+    "contact_email_option": "البريد الإلكتروني",
+    "contact_phone_option": "الهاتف",
+    "contact_both": "البريد الإلكتروني والهاتف",
+    "best_contact_time": "أفضل وقت للاتصال",
+    "time_morning": "الصباح (9-12 م)",
+    "time_afternoon": "بعد الظهر (12-5 م)",
+    "time_evening": "المساء (5-8 م)",
+    "time_anytime": "أي وقت",
+    "tags_section": "العلامات",
+    "add_tag_placeholder": "إضافة علامة...",
+    "create_b2b_ticket_button": "إنشاء تذكرة B2B",
+    "category_technical_issue": "مشكلة تقنية",
+    "category_feature_request": "طلب ميزة",
+    "category_billing_inquiry": "استفسار فوترة",
+    "category_account_management": "إدارة الحساب",
+    "category_performance_issue": "مشكلة في الأداء",
+    "category_security_concern": "مخاوف أمنية",
+    "category_integration_support": "دعم التكامل",
+    "category_training_request": "طلب تدريب",
+    "validation": {
+      "title_required": "عنوان المشكلة مطلوب",
+      "title_max_length": "يجب أن يكون عنوان المشكلة أقل من 200 حرف",
+      "description_required": "وصف المشكلة مطلوب",
+      "category_required": "الفئة مطلوبة",
+      "priority_required": "الأولوية مطلوبة",
+      "resident_required": "يرجى اختيار المقيم المخصص له هذا الطلب",
+      "business_impact_required": "وصف التأثير التجاري مطلوب",
+      "affected_users_required": "عدد المستخدمين المتأثرين مطلوب",
+      "organization_name_required": "اسم المنظمة مطلوب",
+      "contact_name_required": "اسم جهة الاتصال مطلوب",
+      "valid_email_required": "بريد إلكتروني صالح مطلوب"
+    }
   },
   "landing": {
     "hero": {
@@ -1643,11 +2022,86 @@
   },
   "meetings": {
     "title": "الاجتماعات",
-    "description": "جدولة وإدارة اجتماعات النقابة"
+    "description": "جدولة وإدارة اجتماعات النقابة",
+    "create_meeting": "جدولة اجتماع جديد",
+    "create_meeting_description": "إنشاء اجتماع جديد للنقابة. املأ التفاصيل أدناه.",
+    "building_label": "المبنى (اختياري)",
+    "building_placeholder": "اختر مبنى أو اتركه فارغاً للاجتماع العام",
+    "title_label": "عنوان الاجتماع",
+    "title_placeholder": "مثال: الاجتماع الشهري للنقابة",
+    "description_label": "الوصف (اختياري)",
+    "description_placeholder": "وصف موجز لغرض الاجتماع...",
+    "date_time_label": "التاريخ والوقت",
+    "location_label": "المكان (اختياري)",
+    "location_placeholder": "مثال: قاعة المجتمع",
+    "max_participants_label": "الحد الأقصى للمشاركين (اختياري)",
+    "max_participants_placeholder": "مثال: 50",
+    "agenda_label": "جدول الأعمال (اختياري)",
+    "agenda_placeholder": "جدول أعمال الاجتماع والمواضيع للمناقشة...",
+    "cancel": "إلغاء",
+    "schedule_meeting": "جدولة الاجتماع",
+    "scheduling": "جاري الجدولة...",
+    "completed": "مكتمل",
+    "upcoming": "قادم",
+    "agenda_title": "جدول الأعمال:",
+    "minutes_title": "محضر الاجتماع:",
+    "max_participants_text": "الحد الأقصى للمشاركين:",
+    "mark_complete": "تعيين كمكتمل",
+    "delete": "حذف",
+    "general_meeting": "اجتماع عام",
+    "unknown_building": "مبنى غير معروف",
+    "meetings_management": "إدارة الاجتماعات",
+    "schedule_meeting_button": "جدولة اجتماع",
+    "upcoming_tab": "القادمة",
+    "past_tab": "السابقة",
+    "all_tab": "الكل",
+    "no_upcoming_meetings": "لا توجد اجتماعات قادمة",
+    "no_upcoming_meetings_description": "جدول اجتماعك القادم لإبقاء السكان على اطلاع.",
+    "schedule_first_meeting": "جدولة الاجتماع الأول",
+    "no_past_meetings": "لا توجد اجتماعات سابقة",
+    "no_past_meetings_description": "ستظهر الاجتماعات السابقة هنا بمجرد اكتمالها.",
+    "no_meetings_found": "لم يتم العثور على اجتماعات",
+    "no_meetings_found_description": "ابدأ بجدولة اجتماعك الأول.",
+    "delete_meeting_title": "حذف الاجتماع",
+    "delete_meeting_description": "هل أنت متأكد من رغبتك في حذف هذا الاجتماع؟ لا يمكن التراجع عن هذا الإجراء.",
+    "statistics": {
+      "total_meetings": "إجمالي الاجتماعات",
+      "completed_meetings": "مكتملة",
+      "upcoming_meetings": "قادمة",
+      "this_month": "هذا الشهر"
+    }
   },
   "meta": {
     "readTime": "5 دقائق قراءة",
     "audience": "مديرو العقارات"
+  },
+  "missingPayments": {
+    "title": "المدفوعات المفقودة",
+    "description": "إدارة المدفوعات المفقودة وإرسال تذكيرات للسكان",
+    "filters": "المرشحات",
+    "month": "الشهر",
+    "year": "السنة",
+    "totalOverdue": "إجمالي المتأخرات",
+    "expectedAmount": "المبلغ المتوقع",
+    "period": "الفترة",
+    "missingPaymentsList": "قائمة المدفوعات المفقودة",
+    "allPaymentsReceived": "تم استلام جميع المدفوعات",
+    "unitsWithMissingPayments": "{count} وحدة بمدفوعات مفقودة",
+    "allPaymentsReceivedDescription": "جميع الوحدات دفعت رسومها لشهر {month} {year}. عمل رائع!",
+    "daysOverdue": "أيام متأخرة",
+    "overdue": "متأخر",
+    "sendReminder": "إرسال تذكير",
+    "sendAllReminders": "إرسال جميع التذكيرات",
+    "sendingReminders": "جاري إرسال التذكيرات...",
+    "reminderSent": "تم إرسال تذكير الدفع إلى {buildingName} - الوحدة {unitNumber}",
+    "reminderError": "فشل في إرسال التذكير للوحدة {unitNumber}",
+    "allRemindersSent": "تم إرسال {count} تذكيرات دفع بنجاح",
+    "partialRemindersSent": "تم إرسال {success} تذكيرات بنجاح، فشل {failed}",
+    "remindersError": "فشل في إرسال تذكيرات الدفع",
+    "addProjectContribution": "إضافة مساهمة مشروع",
+    "common": {
+      "dashboard": "لوحة التحكم"
+    }
   },
   "navigation": {
     "dashboard": "لوحة التحكم",
@@ -1666,7 +2120,13 @@
     "faq": "الأسئلة الشائعة",
     "terms": "الشروط",
     "userGuide": "دليل المستخدم",
-    "helpdesk": "خدمة العملاء"
+    "helpdesk": "خدمة العملاء",
+    "backToLanding": "العودة للصفحة الرئيسية",
+    "missingPayments": "المدفوعات المفقودة",
+    "overview": "نظرة عامة",
+    "reports": "التقارير",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة"
   },
   "notifications": {
     "title": "إدارة الإشعارات",
@@ -1873,7 +2333,35 @@
     "showingPage": "عرض الصفحة",
     "showingResults": "عرض {start} إلى {end} من {total} نتيجة",
     "noResults": "لم يتم العثور على نتائج",
-    "rowsPerPage": "صفوف لكل صفحة"
+    "rowsPerPage": "صفوف لكل صفحة",
+    "perPage": "لكل صفحة"
+  },
+  "payments": {
+    "title": "المدفوعات والفواتير",
+    "description": "عرض تاريخ الدفع وإدارة الرسوم المستقبلية.",
+    "nextPayment": {
+      "title": "الدفعة التالية المستحقة",
+      "amount": "المبلغ المستحق",
+      "monthlyFee": "رسم النقابة الشهري",
+      "dueDate": "تاريخ الاستحقاق",
+      "payNow": "ادفع الآن (قريباً)",
+      "notAvailable": "غير متوفر"
+    },
+    "unitDetails": {
+      "title": "تفاصيل الوحدة",
+      "unitNumber": "رقم الوحدة",
+      "monthlyFee": "الرسوم الشهرية",
+      "area": "المساحة",
+      "status": "الحالة",
+      "occupied": "مشغولة",
+      "vacant": "شاغرة",
+      "notAvailable": "معلومات الوحدة غير متوفرة"
+    },
+    "paymentHistory": {
+      "title": "تاريخ المدفوعات",
+      "comingSoon": "تاريخ المدفوعات قريباً",
+      "description": "ستتمكن من عرض تاريخ مدفوعاتك وتحميل الإيصالات وتتبع حالة الفواتير هنا."
+    }
   },
   "portal": {
     "title": "بوابة السكان",
@@ -1962,6 +2450,9 @@
       "haveInvitation": "لديك دعوة بالفعل؟",
       "haveInvitationDescription": "تحقق من بريدك الإلكتروني واتبع رابط الدعوة لإكمال عملية الإعداد.",
       "details": "التفاصيل:",
+      "refresh": "تحديث",
+      "refreshSuccess": "تم تحديث فحص الوصول",
+      "refreshError": "فشل في تحديث الوصول",
       "backToDashboard": "العودة إلى لوحة التحكم"
     }
   },
@@ -2033,8 +2524,7 @@
           "وصول API",
           "التكاملات المتقدمة"
         ],
-        "cta": "بدء التجربة المجانية",
-        "popular": "الأكثر شعبية"
+        "cta": "بدء التجربة المجانية"
       },
       "enterprise": {
         "name": "المؤسسات",
@@ -2121,6 +2611,8 @@
     "cta": {
       "title": "جاهز للبدء؟",
       "description": "ابدأ تجربتك المجانية اليوم واكتشف كيف يمكن لسينديك أن يحول إدارة نقابتك.",
+      "primaryButton": "بدء التجربة المجانية",
+      "secondaryButton": "اتصل بالمبيعات",
       "buttons": {
         "startTrial": "بدء التجربة المجانية",
         "contactSales": "اتصل بالمبيعات"
@@ -2275,6 +2767,12 @@
     "noResidentsFiltered": "لم يتم العثور على سكان للوحدة المحددة.",
     "totalResidents": "إجمالي السكان",
     "activeResidents": "السكان النشطون",
+    "bulkActions": {
+      "edit": "تحرير المحدد",
+      "delete": "حذف المحدد",
+      "activate": "تفعيل المحدد",
+      "deactivate": "إلغاء تفعيل المحدد"
+    },
     "allUnits": "جميع الوحدات",
     "clearFilter": "مسح المرشح",
     "filterByUnit": "تصفية حسب الوحدة:",
@@ -2311,6 +2809,8 @@
       "noUnitsAvailable": "لا توجد وحدات متاحة",
       "owner": "مالك",
       "ownerDescription": "ضع علامة إذا كان هذا الساكن مالك الوحدة",
+      "active": "الحالة النشطة",
+      "activeDescription": "ضع علامة إذا كان هذا الساكن نشطاً حالياً",
       "moveInDate": "تاريخ الانتقال",
       "moveInDatePlaceholder": "اختر تاريخ الانتقال",
       "moveOutDate": "تاريخ المغادرة",
@@ -2343,6 +2843,7 @@
       "invitationError": "فشل في إرسال الدعوة"
     },
     "status": {
+      "all": "الكل",
       "active": "نشط",
       "inactive": "غير نشط",
       "invited": "مدعو",
@@ -2360,11 +2861,21 @@
       "actions": "الإجراءات",
       "copyEmail": "نسخ البريد الإلكتروني",
       "editResident": "تحرير الساكن",
+      "activateResident": "تفعيل الساكن",
+      "deactivateResident": "إلغاء تفعيل الساكن",
       "deleteResident": "حذف الساكن"
     },
     "confirmDelete": {
       "title": "حذف الساكن",
       "description": "هل أنت متأكد من أنك تريد حذف هذا الساكن؟ لا يمكن التراجع عن هذا الإجراء."
+    },
+    "confirmDeactivate": {
+      "title": "إلغاء تنشيط الساكن",
+      "description": "هل أنت متأكد من أنك تريد إلغاء تنشيط هذا الساكن؟ لن يتمكن من الوصول إلى البوابة."
+    },
+    "confirmActivate": {
+      "title": "تنشيط الساكن",
+      "description": "هل أنت متأكد من أنك تريد تنشيط هذا الساكن؟ سيستعيد الوصول إلى البوابة."
     },
     "bulkInvite": {
       "title": "دعوة السكان بالجملة",
@@ -2376,7 +2887,21 @@
       "sendInvitations": "إرسال الدعوات",
       "successMessage": "تم إرسال {count} دعوة بنجاح",
       "partialSuccessMessage": "تم إرسال {successCount} دعوة بنجاح، فشل {errorCount}",
-      "allFailedMessage": "فشل في إرسال جميع الدعوات"
+      "allFailedMessage": "فشل في إرسال جميع الدعوات",
+      "alreadyInvited": "{count} ساكن لديهم دعوات معلقة بالفعل",
+      "otherErrors": "{count} دعوة فشلت لأسباب أخرى",
+      "failedToSend": "فشل في إرسال الدعوات",
+      "selectResidents": "يرجى تحديد ساكن واحد على الأقل للدعوة",
+      "sending": "جارٍ الإرسال...",
+      "alreadyMember": "{count, plural, =1 {ساكن واحد عضو} other {# سكان أعضاء}} بالفعل: {names}",
+      "alreadyInvitedDetailed": "{count, plural, =1 {ساكن واحد لديه} other {# سكان لديهم}} دعوات معلقة بالفعل: {names}",
+      "invalidEmails": "عناوين بريد إلكتروني غير صالحة: {names}",
+      "otherErrorsDetailed": "{count, plural, =1 {دعوة واحدة فشلت} other {# دعوات فشلت}} لأسباب أخرى. تحقق من وحدة التحكم للحصول على التفاصيل.",
+      "residentsCount": "{count, plural, =1 {ساكن واحد} other {# سكان}}",
+      "notYetInvited": "لم يتم دعوتهم بعد",
+      "selected": "محدد",
+      "noUninvitedMessage": "تم دعوة جميع السكان النشطين بالفعل إلى البوابة.",
+      "loadingResidents": "جارٍ تحميل السكان..."
     },
     "invite": {
       "dialogTitle": "دعوة إلى بوابة السكان",
@@ -2403,7 +2928,11 @@
     "edit": "تعديل",
     "delete": "حذف",
     "view": "عرض",
-    "openMenu": "فتح القائمة"
+    "openMenu": "فتح القائمة",
+    "selected": "{count} من {total} صف محدد",
+    "selectAll": "تحديد الكل",
+    "of": "من",
+    "selectedActions": "الإجراءات ({count} محدد)"
   },
   "terms": {
     "title": "شروط الخدمة",

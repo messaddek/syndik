@@ -10,7 +10,7 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <SidebarProvider>
       <DashboardSidebar />
@@ -30,4 +30,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </main>
     </SidebarProvider>
   );
-}
+};
+
+export default RootLayout;

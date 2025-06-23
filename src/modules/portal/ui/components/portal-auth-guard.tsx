@@ -7,7 +7,7 @@ import { useRouter } from '@/i18n/navigation';
 import { useEffect } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
+export const PortalAuthGuard = ({ children }: { children: React.ReactNode }) => {
   const { userId, orgId } = useAuth();
   const router = useRouter();
   const trpc = useTRPC();

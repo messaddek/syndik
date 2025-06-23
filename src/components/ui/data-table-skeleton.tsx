@@ -16,12 +16,12 @@ interface DataTableSkeletonProps {
   showPagination?: boolean;
 }
 
-export function DataTableSkeleton({
+export const DataTableSkeleton = ({
   columnCount = 5,
   rowCount = 8,
   showFilters = true,
   showPagination = true,
-}: DataTableSkeletonProps) {
+}: DataTableSkeletonProps) => {
   return (
     <div className='space-y-4'>
       {/* Header with title and action button */}
@@ -118,7 +118,7 @@ export function DataTableSkeleton({
   );
 }
 
-export function CardListSkeleton({ itemCount = 6 }: { itemCount?: number }) {
+export const CardListSkeleton = ({ itemCount = 6 }: { itemCount?: number }) => {
   return (
     <div className='space-y-6'>
       {/* Header */}

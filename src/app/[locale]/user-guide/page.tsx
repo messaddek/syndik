@@ -382,7 +382,7 @@ const UserGuidePage = () => {
                   );
                 })}
               </div>
-            </div>{' '}
+            </div>
             {/* Sidebar */}
             <div className='sticky top-24 h-fit space-y-6'>
               {/* Quick Navigation */}

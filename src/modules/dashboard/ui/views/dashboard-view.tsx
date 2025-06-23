@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -20,6 +21,7 @@ import {
   TrendingDown,
   Calendar,
   Mail,
+  AlertTriangle,
 } from 'lucide-react';
 import { BulkInviteDialog } from '@/modules/residents';
 import { CreateBuildingDialog } from '@/modules/buildings';
@@ -53,6 +55,7 @@ interface DashboardOverview {
 
 const DashboardView = () => {
   const trpc = useTRPC();
+  const router = useRouter();
   const t = useTranslations('dashboard');
 
   // Dialog states
@@ -306,7 +309,7 @@ const DashboardView = () => {
           <CardDescription>{t('quickActionsDescription')}</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
+          <div className='grid grid-cols-2 gap-4 md:grid-cols-5'>
             <Button
               variant='outline'
               className='flex h-20 w-full flex-col'
@@ -336,6 +339,14 @@ const DashboardView = () => {
             >
               <Calendar className='mb-2 h-6 w-6' />
               <span className='text-sm'>{t('scheduleMeeting')}</span>
+            </Button>
+            <Button
+              variant='outline'
+              className='flex h-20 w-full flex-col'
+              onClick={() => router.push('/missing-payments')}
+            >
+              <AlertTriangle className='mb-2 h-6 w-6' />
+              <span className='text-sm'>{t('missingPayments.title')}</span>
             </Button>
           </div>
         </CardContent>

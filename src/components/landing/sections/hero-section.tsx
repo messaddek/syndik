@@ -5,7 +5,7 @@ import { Link } from '@/i18n/routing';
 import { Button } from '../../ui/button';
 import { ArrowRight } from 'lucide-react';
 
-export function HeroSection() {
+export const HeroSection = () => {
   const t = useTranslations('landing.hero');
 
   return (
@@ -26,7 +26,7 @@ export function HeroSection() {
       <div className='relative z-10 mx-auto max-w-2xl py-32 sm:py-48 lg:py-56'>
         <div className='text-center'>
           <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-            {t('title')}{' '}
+            {t('title')}
             <span className='text-primary'>{t('titleHighlight')}</span>
           </h1>
           <p className='mt-6 text-lg leading-8 text-gray-600'>
@@ -61,3 +61,4 @@ export function HeroSection() {
     </div>
   );
 }
+

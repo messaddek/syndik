@@ -6,5 +6,9 @@
   "edit": "Modifier",
   "delete": "Supprimer",
   "view": "Voir",
-  "openMenu": "Ouvrir le menu"
+  "openMenu": "Ouvrir le menu",
+  "selected": "{count} sur {total} ligne(s) sélectionnée(s)",
+  "selectAll": "Tout sélectionner",
+  "of": "de",
+  "selectedActions": "Actions ({count} sélectionné(s))"
 }

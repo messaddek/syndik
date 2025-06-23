@@ -10,11 +10,11 @@ interface CreateBuildingDialogProps {
   onSuccess?: () => void;
 }
 
-export function CreateBuildingDialog({
+export const CreateBuildingDialog = ({
   open,
   onOpenChange,
   onSuccess,
-}: CreateBuildingDialogProps) {
+}: CreateBuildingDialogProps) => {
   const t = useTranslations('buildings');
 
   const handleSuccess = () => {

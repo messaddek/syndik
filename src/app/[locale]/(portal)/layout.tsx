@@ -10,13 +10,13 @@ import { TRPCErrorBoundary } from '@/components/trpc-error-boundary';
 import { OrganizationGuard, RoleGuard } from '@/modules/organizations';
 import { NotificationProvider } from '@/modules/notifications/providers/notification-provider';
 
-export default async function PortalLayout({
+const PortalLayout = async ({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: { locale: string };
-}) {
+}) => {
   const { userId, orgId } = await auth();
 
   // Server-side logging
@@ -49,4 +49,6 @@ export default async function PortalLayout({
       </SidebarProvider>
     </TRPCErrorBoundary>
   );
-}
+};
+
+export default PortalLayout;

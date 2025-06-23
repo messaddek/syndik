@@ -24,10 +24,10 @@ interface ResidentInviteButtonProps {
   disabled?: boolean;
 }
 
-export function ResidentInviteButton({
+export const ResidentInviteButton = ({
   resident,
   disabled = false,
-}: ResidentInviteButtonProps) {
+}: ResidentInviteButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState(resident.email);
 
@@ -76,7 +76,6 @@ export function ResidentInviteButton({
         </Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-md'>
-        {' '}
         <DialogHeader>
           <DialogTitle>{t('invite.dialogTitle')}</DialogTitle>
           <DialogDescription>
@@ -88,7 +87,6 @@ export function ResidentInviteButton({
         </DialogHeader>
         <div className='space-y-4'>
           <div className='space-y-2'>
-            {' '}
             <Label htmlFor='email'>{t('invite.emailLabel')}</Label>
             <Input
               id='email'
@@ -101,7 +99,6 @@ export function ResidentInviteButton({
           </div>
 
           <div className='flex justify-end space-x-2'>
-            {' '}
             <Button
               variant='outline'
               onClick={() => setIsOpen(false)}
@@ -114,15 +111,15 @@ export function ResidentInviteButton({
               disabled={inviteMutation.isPending || !email.trim()}
             >
               {inviteMutation.isPending ? (
-                <>
-                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                <div className='flex items-center gap-x-2'>
+                  <Loader2 className='h-4 w-4 animate-spin' />
                   {t('actions.sendInvitation')}...
-                </>
+                </div>
               ) : (
-                <>
-                  <Send className='mr-2 h-4 w-4' />
+                <div className='flex items-center gap-x-2'>
+                  <Send className='h-4 w-4' />
                   {t('invite.send')}
-                </>
+                </div>
               )}
             </Button>
           </div>
@@ -130,4 +127,4 @@ export function ResidentInviteButton({
       </DialogContent>
     </Dialog>
   );
-}
+};

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from './ui/card';
 import { Skeleton } from './ui/skeleton';
 
-export function FormSkeleton() {
+export const FormSkeleton = () => {
   return (
     <div className='space-y-6'>
       <div className='space-y-2'>
@@ -24,7 +24,7 @@ export function FormSkeleton() {
   );
 }
 
-export function TableSkeleton() {
+export const TableSkeleton = () => {
   return (
     <div className='space-y-4'>
       <div className='flex items-center justify-between'>

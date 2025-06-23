@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -31,49 +31,71 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { X } from 'lucide-react';
 import { toast } from 'sonner';
+import { useHelpdeskPermissions } from '../../hooks/use-helpdesk-permissions';
 
-const createTicketSchema = z.object({
-  title: z
-    .string()
-    .min(1, 'Title is required')
-    .max(200, 'Title must be less than 200 characters'),
-  description: z.string().min(1, 'Description is required'),
-  category: z.enum([
-    'maintenance',
-    'complaint',
-    'inquiry',
-    'billing',
-    'security',
-    'parking',
-    'noise',
-    'cleaning',
-    'other',
-  ]),
-  priority: z.enum(['low', 'medium', 'high', 'urgent']).default('medium'),
-  buildingId: z.string().uuid().optional(),
-  unitId: z.string().uuid().optional(),
-  tags: z.array(z.string()).default([]),
-});
+const createTicketSchema = (t: (key: string) => string, isAdmin: boolean) => {
+  const base = z.object({
+    title: z
+      .string()
+      .min(1, t('validation.title_required'))
+      .max(200, t('validation.title_max_length')),
+    description: z.string().min(1, t('validation.description_required')),
+    category: z.enum([
+      'maintenance',
+      'complaint',
+      'inquiry',
+      'billing',
+      'security',
+      'parking',
+      'noise',
+      'cleaning',
+      'other',
+    ]),
+    priority: z.enum(['low', 'medium', 'high', 'urgent']).default('medium'),
+    buildingId: z.string().uuid().optional(),
+    unitId: z.string().uuid().optional(),
+    tags: z.array(z.string()).default([]),
+  });
 
-type CreateTicketForm = z.infer<typeof createTicketSchema>;
+  const residentField = isAdmin
+    ? {
+        residentId: z
+          .string()
+          .nonempty(t('validation.resident_required'))
+          .uuid(),
+      }
+    : { residentId: z.string().uuid().optional() };
+
+  return base.extend(residentField);
+};
+
+type CreateTicketForm = z.infer<ReturnType<typeof createTicketSchema>>;
 
 interface CreateTicketDialogProps {
   onClose: () => void;
   buildingId?: string;
 }
 
-export function CreateTicketDialog({
+export const CreateTicketDialog = ({
   onClose,
   buildingId,
   open = true,
-}: CreateTicketDialogProps & { open?: boolean }) {
+}: CreateTicketDialogProps & { open?: boolean }) => {
   const t = useTranslations('helpDesk');
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
   const trpc = useTRPC();
   const queryClient = useQueryClient();
+  const { isSyndicateAdmin } = useHelpdeskPermissions();
+
+  // Dynamic schema based on user role
+  const dynamicSchema = useMemo(
+    () => createTicketSchema(t, isSyndicateAdmin),
+    [isSyndicateAdmin, t]
+  );
+
   const form = useForm({
-    resolver: zodResolver(createTicketSchema),
+    resolver: zodResolver(dynamicSchema),
     defaultValues: {
       title: '',
       description: '',
@@ -81,6 +103,7 @@ export function CreateTicketDialog({
       priority: 'medium' as const,
       buildingId: buildingId || undefined,
       unitId: undefined,
+      residentId: undefined,
       tags: [],
     },
   }); // Only load buildings if buildingId is not provided
@@ -94,7 +117,6 @@ export function CreateTicketDialog({
 
   // Watch the selected building ID for units filtering
   const selectedBuildingId = form.watch('buildingId');
-
   // Only load units when a building is selected
   const { data: units, isLoading: _unitsLoading } = useQuery({
     ...trpc.units.getAll.queryOptions({
@@ -103,6 +125,13 @@ export function CreateTicketDialog({
     }),
     enabled: Boolean(selectedBuildingId || buildingId), // Only load when building is selected
   });
+
+  // Load residents for managers to create tickets on behalf of residents
+  const { data: residents, isLoading: _residentsLoading } = useQuery({
+    ...trpc.residents.getAll.queryOptions({}),
+    enabled: isSyndicateAdmin, // Only load for managers/admins
+  });
+
   const createTicketMutation = useMutation(
     trpc.helpdesk.createTicket.mutationOptions({
       onSuccess: () => {
@@ -120,8 +149,18 @@ export function CreateTicketDialog({
         onClose();
       },
       onError: error => {
+        // Try to translate the error message if it's a known key, otherwise use the original message
+        const errorMessage = error.message;
+        let translatedMessage: string;
+
+        try {
+          translatedMessage = t(errorMessage, { default: errorMessage });
+        } catch {
+          translatedMessage = errorMessage;
+        }
+
         toast.error(
-          error.message ||
+          translatedMessage ||
             t('error_creating_ticket', { default: 'Error creating ticket' })
         );
       },
@@ -157,9 +196,17 @@ export function CreateTicketDialog({
       open={open}
       onOpenChange={() => onClose()}
       title={t('create_new_ticket', { default: 'Create New Ticket' })}
-      description={t('create_ticket_description', {
-        default: 'Fill out the form below to create a new support ticket.',
-      })}
+      description={
+        isSyndicateAdmin
+          ? t('create_ticket_description_manager', {
+              default:
+                'As a property manager, you can create tickets on behalf of residents. Please select which resident this ticket is for.',
+            })
+          : t('create_ticket_description', {
+              default:
+                'Fill out the form below to create a new support ticket.',
+            })
+      }
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
@@ -183,7 +230,6 @@ export function CreateTicketDialog({
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name='description'
@@ -206,7 +252,6 @@ export function CreateTicketDialog({
               </FormItem>
             )}
           />
-
           <div className='grid grid-cols-2 gap-4'>
             <FormField
               control={form.control}
@@ -305,7 +350,6 @@ export function CreateTicketDialog({
               )}
             />
           </div>
-
           {!buildingId && (
             <FormField
               control={form.control}
@@ -338,7 +382,6 @@ export function CreateTicketDialog({
               )}
             />
           )}
-
           {selectedBuildingId && filteredUnits.length > 0 && (
             <FormField
               control={form.control}
@@ -369,7 +412,53 @@ export function CreateTicketDialog({
               )}
             />
           )}
+          {/* Resident selector - only for managers/admins */}
+          {isSyndicateAdmin && (
+            <>
+              <FormField
+                control={form.control}
+                name='residentId'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {t('resident', { default: 'Resident' })} *
+                    </FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder={t('select_resident', {
+                              default: 'Select resident (required)',
+                            })}
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        
+                        {residents?.data?.map(resident => (
+                          <SelectItem key={resident.id} value={resident.id}>
+                            {resident.firstName} {resident.lastName}
+                            {resident.email && ` (${resident.email})`}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
+              {/* Information message for managers */}
+              <div className='rounded-md border border-blue-200 bg-blue-50 p-3'>
+                <p className='text-sm text-blue-800'>
+                  {t('manager_ticket_info', {
+                    default:
+                      'Note: This ticket will be created on behalf of the selected resident. They will be able to view and respond to it from their account.',
+                  })}
+                </p>
+              </div>
+            </>
+          )}
           {/* Tags */}
           <div>
             <Label htmlFor='tags'>{t('tags', { default: 'Tags' })}</Label>
@@ -413,7 +502,6 @@ export function CreateTicketDialog({
               </div>
             )}
           </div>
-
           <DialogFooter>
             <Button type='button' variant='outline' onClick={onClose}>
               {t('cancel', { default: 'Cancel' })}
@@ -422,10 +510,11 @@ export function CreateTicketDialog({
               {createTicketMutation.isPending
                 ? t('creating', { default: 'Creating...' })
                 : t('create_ticket', { default: 'Create Ticket' })}
-            </Button>{' '}
+            </Button>
           </DialogFooter>
         </form>
       </Form>
     </ResponsiveDialog>
   );
 }
+

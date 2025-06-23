@@ -1,5 +1,6 @@
 import { NotificationManagement } from '@/modules/notifications/ui/views/notification-management';
 
-export default function AdminNotificationsPage() {
+const AdminNotificationsPage = () => {
   return <NotificationManagement />;
-}
+};
+export default AdminNotificationsPage;

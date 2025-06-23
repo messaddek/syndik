@@ -1194,10 +1194,190 @@
     "processingPayments": {
       "title": "Processing Payments",
       "description": "Handle rent payments, late fees, and other charges efficiently",
+      "metadata": {
+        "readTime": "8 min read",
+        "audience": "Property Managers"
+      },
       "sections": {
         "overview": {
           "title": "Overview",
           "content": "Efficient payment processing ensures accurate record-keeping and timely collections."
+        },
+        "paymentMethods": {
+          "title": "Payment Methods",
+          "description": "Explore various payment methods available for processing tenant payments efficiently.",
+          "content": "Different methods available for processing payments.",
+          "methods": [
+            {
+              "title": "Bank Transfers",
+              "description": "Direct transfers from tenant bank accounts for reliable payments.",
+              "icon": "credit-card"
+            },
+            {
+              "title": "Credit Card Payments",
+              "description": "Accept credit and debit card payments with secure processing.",
+              "icon": "credit-card"
+            },
+            {
+              "title": "Cash Payments",
+              "description": "Process cash payments received in person with proper documentation.",
+              "icon": "dollar-sign"
+            },
+            {
+              "title": "Online Payment Portals",
+              "description": "Allow tenants to pay online through secure payment gateways.",
+              "icon": "smartphone"
+            }
+          ]
+        },
+        "manualPayments": {
+          "title": "Manual Payments",
+          "description": "Learn how to process payments manually through the system interface.",
+          "content": "Processing payments manually through the system.",
+          "steps": [
+            {
+              "title": "Navigate to Payment Section",
+              "content": "Access the payments module from the main dashboard"
+            },
+            {
+              "title": "Select Payment Type",
+              "content": "Choose the appropriate payment type from the dropdown"
+            },
+            {
+              "title": "Enter Payment Details",
+              "content": "Fill in all required payment information"
+            },
+            {
+              "title": "Verify Information",
+              "content": "Double-check all entered details for accuracy"
+            },
+            {
+              "title": "Submit Payment",
+              "content": "Complete the payment processing"
+            }
+          ]
+        },
+        "automatedProcessing": {
+          "title": "Automated Processing",
+          "description": "Set up automated payment processing to streamline operations and reduce manual work.",
+          "content": "Setting up automated payment processing systems.",
+          "features": [
+            {
+              "title": "Recurring Payment Setup",
+              "description": "Configure automatic monthly rent collection from tenant accounts."
+            },
+            {
+              "title": "Automatic Late Fee Calculation",
+              "description": "Apply late fees automatically based on your payment policies."
+            },
+            {
+              "title": "Payment Reminders",
+              "description": "Send automated reminders to tenants before payment due dates."
+            },
+            {
+              "title": "Banking Integration",
+              "description": "Connect with banking systems for seamless transaction processing."
+            }
+          ]
+        },
+        "paymentReconciliation": {
+          "title": "Payment Reconciliation",
+          "description": "Match payments with outstanding balances to maintain accurate financial records.",
+          "content": "Matching payments with outstanding balances.",
+          "steps": [
+            {
+              "title": "Import Bank Statements",
+              "description": "Upload bank statements to the system for reconciliation"
+            },
+            {
+              "title": "Match Transactions",
+              "description": "Automatically or manually match transactions with payments"
+            },
+            {
+              "title": "Resolve Discrepancies",
+              "description": "Investigate and resolve any mismatched transactions"
+            },
+            {
+              "title": "Generate Reports",
+              "description": "Create reconciliation reports for record-keeping"
+            }
+          ]
+        },
+        "securityCompliance": {
+          "title": "Security & Compliance",
+          "description": "Ensure secure and compliant payment processing following industry standards.",
+          "content": "Ensuring secure and compliant payment processing.",
+          "measures": [
+            {
+              "title": "PCI DSS Compliance",
+              "description": "Maintain Payment Card Industry Data Security Standards compliance."
+            },
+            {
+              "title": "Data Encryption",
+              "description": "All payment data is encrypted using industry-standard protocols."
+            },
+            {
+              "title": "Secure Transmission",
+              "description": "Payment information is transmitted through secure, encrypted channels."
+            },
+            {
+              "title": "Audit Trails",
+              "description": "Comprehensive logging of all payment transactions for accountability."
+            },
+            {
+              "title": "Access Controls",
+              "description": "Role-based access controls limit payment processing permissions."
+            }
+          ]
+        },
+        "troubleshooting": {
+          "issues": [
+            {
+              "problem": "Payment not showing in system",
+              "solution": "Check if the payment was processed during business hours and allow up to 24 hours for bank transfers to appear. Contact support if the payment still doesn't show after this period."
+            },
+            {
+              "problem": "Credit card payment declined",
+              "solution": "Verify card details are correct and the card has sufficient funds. Some banks may flag rental payments as suspicious - advise tenants to contact their bank if needed."
+            },
+            {
+              "problem": "Duplicate payment recorded",
+              "solution": "Check transaction timestamps and reference numbers. If duplicate exists, void one payment and issue refund if necessary. Always verify with bank records before taking action."
+            },
+            {
+              "problem": "Payment amount doesn't match rent due",
+              "solution": "Review payment allocation and check if partial payments or additional fees were included. Adjust payment application as needed or contact tenant for clarification."
+            }
+          ]
+        },
+        "bestPractices": {
+          "tips": [
+            "Always verify payment amounts before processing",
+            "Keep detailed records of all payment transactions",
+            "Set up automated payment reminders to reduce late payments",
+            "Regularly reconcile payments with bank statements",
+            "Provide clear payment instructions to tenants",
+            "Use secure payment processing methods only"
+          ]
+        },
+        "breadcrumb": {
+          "financialManagement": "Financial Management"
+        },
+        "sidebar": {
+          "relatedArticlesList": [
+            {
+              "title": "Managing Resident Accounts",
+              "href": "/user-guide/financial-management/managing-accounts"
+            },
+            {
+              "title": "Generating Financial Reports",
+              "href": "/user-guide/financial-management/generating-reports"
+            },
+            {
+              "title": "Late Fee Management",
+              "href": "/user-guide/financial-management/late-fees"
+            }
+          ]
         },
         "paymentTypes": {
           "title": "Payment Types",
@@ -1428,7 +1608,10 @@
       "nextSteps": "Next Steps",
       "popular": "Popular",
       "readTime": "min read",
-      "whatYoullLearn": "What you'll learn"
+      "whatYoullLearn": "What you'll learn",
+      "troubleshooting": "Troubleshooting",
+      "bestPractices": "Best Practices",
+      "tips": "Pro Tips"
     },
     "navigation": {
       "userGuide": "User Guide",
@@ -1601,10 +1784,12 @@
     "create": "Create",
     "cancel": "Cancel",
     "delete": "Delete",
+    "update": "Update",
     "edit": "Edit",
     "add": "Add",
     "search": "Search",
     "navbarSearch": "Search buildings, units, residents...",
+    "navbarSearchShort": "Search...",
     "searchHint": "Start typing to search...",
     "loading": "Loading...",
     "error": "Error",
@@ -1641,6 +1826,8 @@
     "totalManagedProperties": "Total Managed Properties",
     "units": "Units",
     "occupancyRateText": "Occupancy Rate",
+    "currentRate": "Current Rate",
+    "averageRate": "Average Rate",
     "residents": "Residents",
     "activeResidents": "Active Residents",
     "netIncome": "Net Income",
@@ -1677,7 +1864,13 @@
       "expectedAmount": "Expected amount",
       "overdue": "overdue",
       "sendReminders": "Send Reminders",
-      "viewDetails": "View Details"
+      "sendingReminders": "Sending...",
+      "viewDetails": "View Details",
+      "reminderSent": "Payment reminder sent to {buildingName} - Unit {unitNumber}",
+      "reminderError": "Failed to send reminder to Unit {unitNumber}",
+      "allRemindersSent": "Successfully sent {count} payment reminders",
+      "partialRemindersSent": "Sent {success} reminders, {failed} failed",
+      "remindersError": "Failed to send payment reminders. Please try again."
     },
     "quickActionsItems": {
       "recordIncome": "Record Income"
@@ -1717,7 +1910,10 @@
       "totalExpenses": "Total Expenses",
       "netIncome": "Net Income",
       "thisMonth": "This Month",
-      "transactions": "Transactions"
+      "transactions": "Transactions",
+      "missingPayments": "Missing Payments",
+      "unitsOverdue": "units overdue",
+      "allPaid": "all paid"
     },
     "tabs": {
       "incomes": "Incomes",
@@ -1996,7 +2192,109 @@
       }
     },
     "incomesList": {
-      "period": "Period"
+      "period": "Period",
+      "general": "General",
+      "unknownBuilding": "Unknown Building",
+      "noRecords": "No Income Records",
+      "noRecordsDescription": "No income records have been added yet. Click the 'Add Income' button to get started."
+    },
+    "expensesList": {
+      "period": "Period",
+      "general": "General",
+      "unknownBuilding": "Unknown Building",
+      "noRecords": "No Expense Records",
+      "noRecordsDescription": "No expense records have been added yet. Click the 'Add Expense' button to get started."
+    },
+    "confirmDialog": {
+      "deleteIncome": {
+        "title": "Delete Income Record",
+        "description": "Are you sure you want to delete this income record? This action cannot be undone."
+      },
+      "deleteExpense": {
+        "title": "Delete Expense Record",
+        "description": "Are you sure you want to delete this expense record? This action cannot be undone."
+      }
+    }
+  },
+  "financeReports": {
+    "title": "Financial Reports",
+    "description": "Generate and download financial reports for your properties",
+    "quickStats": {
+      "reportsGenerated": "Reports Generated",
+      "lastGenerated": "Last Generated",
+      "mostPopular": "Most Popular",
+      "thisMonth": "This month",
+      "ago": "ago",
+      "days": "days",
+      "ofAllReports": "of all reports"
+    },
+    "availableReports": {
+      "title": "Available Reports",
+      "description": "Generate detailed financial reports for analysis and compliance",
+      "generateButton": "Generate Report"
+    },
+    "reports": {
+      "monthlySummary": {
+        "title": "Monthly Financial Summary",
+        "description": "Income, expenses, and net profit overview"
+      },
+      "paymentStatus": {
+        "title": "Payment Status Report",
+        "description": "Track missing payments and collection rates"
+      },
+      "expenseBreakdown": {
+        "title": "Expense Breakdown",
+        "description": "Detailed analysis of expenses by category"
+      },
+      "propertyPerformance": {
+        "title": "Property Performance",
+        "description": "Financial performance by building/unit"
+      },
+      "yearlyComparison": {
+        "title": "Yearly Comparison",
+        "description": "Compare financial performance across years"
+      },
+      "taxReport": {
+        "title": "Tax Report",
+        "description": "Annual tax summary for compliance"
+      }
+    },
+    "badges": {
+      "popular": "Popular",
+      "new": "New",
+      "recommended": "Recommended"
+    },
+    "recentReports": {
+      "title": "Recent Reports",
+      "description": "Your recently generated reports",
+      "noReports": "No reports generated yet",
+      "downloadAction": "Download"
+    },
+    "filters": {
+      "period": "Period",
+      "type": "Report Type",
+      "building": "Building",
+      "allBuildings": "All Buildings",
+      "currentMonth": "Current Month",
+      "lastMonth": "Last Month",
+      "currentQuarter": "Current Quarter",
+      "currentYear": "Current Year",
+      "lastYear": "Last Year",
+      "customRange": "Custom Range"
+    },
+    "generating": {
+      "title": "Generating Report...",
+      "description": "Please wait while we prepare your report",
+      "estimatedTime": "Estimated time: {seconds} seconds"
+    },
+    "success": {
+      "reportGenerated": "Report generated successfully",
+      "downloadStarted": "Download started"
+    },
+    "errors": {
+      "generateFailed": "Failed to generate report",
+      "downloadFailed": "Failed to download report",
+      "noData": "No data available for the selected period"
     }
   },
   "footer": {
@@ -2173,6 +2471,7 @@
     "title": "Helpdesk",
     "description": "Manage support tickets and requests",
     "create_ticket": "Create Ticket",
+    "create_b2b_ticket": "Create B2B Ticket",
     "filters": "Filters",
     "advanced_filters": "Advanced Filters",
     "search": "Search",
@@ -2193,10 +2492,20 @@
     "all_categories": "All Categories",
     "tickets": "Tickets",
     "tickets_description": "View and manage support tickets",
+    "internal_tickets": "Internal Tickets",
+    "b2b_tickets": "B2B Tickets",
+    "all_tickets": "All Tickets",
     "no_ticket_selected": "No Ticket Selected",
     "select_ticket_to_view": "Select a ticket from the list to view details",
     "create_new_ticket": "Create New Ticket",
     "create_ticket_description": "Fill out the form below to create a new support ticket.",
+    "create_ticket_description_manager": "As a property manager, you can create tickets on behalf of residents. Please select which resident this ticket is for.",
+    "manager_ticket_info": "Note: This ticket will be created on behalf of the selected resident. They will be able to view and respond to it from their account.",
+    "RESIDENTS_CANNOT_SPECIFY_RESIDENT_ID": "Residents cannot specify which resident when creating tickets",
+    "MEMBER_NO_RESIDENT_ACCESS": "You don't have access to the resident portal and cannot create tickets",
+    "MANAGERS_MUST_SPECIFY_RESIDENT": "Property managers must specify which resident this ticket is for and cannot create tickets for themselves",
+    "RESIDENT_NOT_FOUND": "Resident not found in this organization",
+    "INVALID_ROLE_FOR_TICKETS": "Your role does not allow creating tickets",
     "formTitleLabel": "Problem",
     "formDescriptionLabel": "Description",
     "title_placeholder": "Brief description of the issue",
@@ -2214,13 +2523,17 @@
     "avg_response_time": "Average Response Time",
     "satisfaction_score": "Satisfaction Score",
     "ticket_created": "Ticket created successfully",
+    "ticket_updated": "Ticket updated successfully",
     "error_creating_ticket": "Error creating ticket",
+    "error_updating_ticket": "Error updating ticket",
     "creating": "Creating...",
     "select_category": "Select category",
     "select_priority": "Select priority",
     "building": "Building",
     "unit": "Unit",
     "select_unit": "Select unit (optional)",
+    "resident": "Resident",
+    "select_resident": "Select resident (required)",
     "tags": "Tags",
     "priority_low": "Low",
     "priority_high": "High",
@@ -2248,7 +2561,87 @@
     "sending": "Sending...",
     "comment_sent": "Comment sent successfully",
     "error_adding_comment": "Error while adding comment",
-    "no_comments": "No comments yet"
+    "error_loading_ticket": "Error loading ticket",
+    "no_comments": "No comments yet",
+    "b2b_ticket_title": "Create B2B Support Ticket",
+    "b2b_ticket_description": "Submit a ticket for support with the Syndik platform",
+    "ticket_information": "Ticket Information",
+    "title_required": "Title *",
+    "description_required": "Description *",
+    "business_impact": "Business Impact *",
+    "business_impact_placeholder": "Describe how this issue affects your business operations...",
+    "urgency_level": "Urgency Level",
+    "select_urgency": "Select urgency level",
+    "urgency_low": "Low",
+    "urgency_medium": "Medium",
+    "urgency_high": "High",
+    "urgency_critical": "Critical",
+    "organization_details": "Organization Details",
+    "organization_name": "Organization Name",
+    "organization_size": "Organization Size",
+    "select_organization_size": "Select organization size",
+    "size_small": "Small (1-50 employees)",
+    "size_medium": "Medium (51-200 employees)",
+    "size_large": "Large (201-1000 employees)",
+    "size_enterprise": "Enterprise (1000+ employees)",
+    "contact_person": "Contact Person",
+    "contact_person_placeholder": "Primary contact for this ticket",
+    "contact_email": "Contact Email",
+    "contact_phone": "Contact Phone (Optional)",
+    "department": "Department",
+    "department_placeholder": "e.g., IT, Finance, Operations",
+    "technical_details": "Technical Details",
+    "affected_systems": "Affected Systems",
+    "system_syndik_core": "Syndik Core Platform",
+    "system_reporting": "Reporting & Analytics",
+    "system_integrations": "Third-party Integrations",
+    "system_mobile_app": "Mobile Application",
+    "system_api": "API Services",
+    "system_other": "Other",
+    "error_reproduction": "Error Reproduction Steps",
+    "error_reproduction_placeholder": "Please provide step-by-step instructions to reproduce the issue...",
+    "expected_behavior": "Expected Behavior",
+    "expected_behavior_placeholder": "What should happen instead?",
+    "environment_info": "Environment Information",
+    "browser_version": "Browser/Version",
+    "browser_version_placeholder": "e.g., Chrome 120, Safari 17, etc.",
+    "operating_system": "Operating System",
+    "os_placeholder": "e.g., Windows 11, macOS 14, etc.",
+    "additional_context": "Additional Context",
+    "screenshots_attachments": "Screenshots/Attachments",
+    "preferred_contact": "Preferred Contact Method",
+    "contact_email_option": "Email",
+    "contact_phone_option": "Phone",
+    "contact_both": "Both Email and Phone",
+    "best_contact_time": "Best Time to Contact",
+    "time_morning": "Morning (9-12 PM)",
+    "time_afternoon": "Afternoon (12-5 PM)",
+    "time_evening": "Evening (5-8 PM)",
+    "time_anytime": "Anytime",
+    "tags_section": "Tags",
+    "add_tag_placeholder": "Add a tag...",
+    "create_b2b_ticket_button": "Create B2B Ticket",
+    "category_technical_issue": "Technical Issue",
+    "category_feature_request": "Feature Request",
+    "category_billing_inquiry": "Billing Inquiry",
+    "category_account_management": "Account Management",
+    "category_performance_issue": "Performance Issue",
+    "category_security_concern": "Security Concern",
+    "category_integration_support": "Integration Support",
+    "category_training_request": "Training Request",
+    "validation": {
+      "title_required": "Issue title is required",
+      "title_max_length": "Issue title must be less than 200 characters",
+      "description_required": "Issue description is required",
+      "category_required": "Category is required",
+      "priority_required": "Priority is required",
+      "resident_required": "Please select which resident this ticket is for",
+      "business_impact_required": "Business impact description is required",
+      "affected_users_required": "Number of affected users is required",
+      "organization_name_required": "Organization name is required",
+      "contact_name_required": "Contact name is required",
+      "valid_email_required": "Valid email is required"
+    }
   },
   "landing": {
     "hero": {
@@ -2518,11 +2911,86 @@
   },
   "meetings": {
     "title": "Meetings",
-    "description": "Schedule and manage syndicate meetings"
+    "description": "Schedule and manage syndicate meetings",
+    "create_meeting": "Schedule New Meeting",
+    "create_meeting_description": "Create a new meeting for your syndicate. Fill in the details below.",
+    "building_label": "Building (Optional)",
+    "building_placeholder": "Select building or leave empty for general meeting",
+    "title_label": "Meeting Title",
+    "title_placeholder": "e.g., Monthly Syndicate Meeting",
+    "description_label": "Description (Optional)",
+    "description_placeholder": "Brief description of the meeting purpose...",
+    "date_time_label": "Date & Time",
+    "location_label": "Location (Optional)",
+    "location_placeholder": "e.g., Community Room",
+    "max_participants_label": "Max Participants (Optional)",
+    "max_participants_placeholder": "e.g., 50",
+    "agenda_label": "Agenda (Optional)",
+    "agenda_placeholder": "Meeting agenda and topics to discuss...",
+    "cancel": "Cancel",
+    "schedule_meeting": "Schedule Meeting",
+    "scheduling": "Scheduling...",
+    "completed": "Completed",
+    "upcoming": "Upcoming",
+    "agenda_title": "Agenda:",
+    "minutes_title": "Minutes:",
+    "max_participants_text": "Max participants:",
+    "mark_complete": "Mark Complete",
+    "delete": "Delete",
+    "general_meeting": "General Meeting",
+    "unknown_building": "Unknown Building",
+    "meetings_management": "Meetings Management",
+    "schedule_meeting_button": "Schedule Meeting",
+    "upcoming_tab": "Upcoming",
+    "past_tab": "Past",
+    "all_tab": "All",
+    "no_upcoming_meetings": "No upcoming meetings",
+    "no_upcoming_meetings_description": "Schedule your next meeting to keep residents informed.",
+    "schedule_first_meeting": "Schedule First Meeting",
+    "no_past_meetings": "No past meetings",
+    "no_past_meetings_description": "Past meetings will appear here once they are completed.",
+    "no_meetings_found": "No meetings found",
+    "no_meetings_found_description": "Start by scheduling your first meeting.",
+    "delete_meeting_title": "Delete Meeting",
+    "delete_meeting_description": "Are you sure you want to delete this meeting? This action cannot be undone.",
+    "statistics": {
+      "total_meetings": "Total Meetings",
+      "completed_meetings": "Completed",
+      "upcoming_meetings": "Upcoming",
+      "this_month": "This Month"
+    }
   },
   "meta": {
     "readTime": "5 min read",
     "audience": "Property Managers"
+  },
+  "missingPayments": {
+    "title": "Missing Payments",
+    "description": "Manage missing payments and send reminders to residents",
+    "filters": "Filters",
+    "month": "Month",
+    "year": "Year",
+    "totalOverdue": "Total Overdue",
+    "expectedAmount": "Expected Amount",
+    "period": "Period",
+    "missingPaymentsList": "Missing Payments List",
+    "allPaymentsReceived": "All Payments Received",
+    "unitsWithMissingPayments": "{count} units with missing payments",
+    "allPaymentsReceivedDescription": "All units have paid their fees for {month} {year}. Great work!",
+    "daysOverdue": "days overdue",
+    "overdue": "overdue",
+    "sendReminder": "Send Reminder",
+    "sendAllReminders": "Send All Reminders",
+    "sendingReminders": "Sending Reminders...",
+    "reminderSent": "Payment reminder sent to {buildingName} - Unit {unitNumber}",
+    "reminderError": "Failed to send reminder to Unit {unitNumber}",
+    "allRemindersSent": "Successfully sent {count} payment reminders",
+    "partialRemindersSent": "Sent {success} reminders successfully, {failed} failed",
+    "remindersError": "Failed to send payment reminders",
+    "addProjectContribution": "Add Project Contribution",
+    "common": {
+      "dashboard": "Dashboard"
+    }
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -2531,6 +2999,7 @@
     "units": "Units",
     "residents": "Residents",
     "finances": "Finances",
+    "missingPayments": "Missing Payments",
     "meetings": "Meetings",
     "notifications": "Notifications",
     "settings": "Settings",
@@ -2541,7 +3010,12 @@
     "faq": "FAQ",
     "terms": "Terms",
     "userGuide": "User Guide",
-    "helpdesk": "Customer Support"
+    "helpdesk": "Customer Support",
+    "backToLanding": "Back to Landing",
+    "overview": "Overview",
+    "reports": "Reports",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "notifications": {
     "title": "Notification Management",
@@ -2748,7 +3222,35 @@
     "showingPage": "Showing page",
     "showingResults": "Showing {start} to {end} of {total} results",
     "noResults": "No results found",
-    "rowsPerPage": "Rows per page"
+    "rowsPerPage": "Rows per page",
+    "perPage": "Per page"
+  },
+  "payments": {
+    "title": "Payments & Billing",
+    "description": "View your payment history and manage upcoming charges.",
+    "nextPayment": {
+      "title": "Next Payment Due",
+      "amount": "Amount Due",
+      "monthlyFee": "Monthly syndicate fee",
+      "dueDate": "Due",
+      "payNow": "Pay Now (Coming Soon)",
+      "notAvailable": "Not available"
+    },
+    "unitDetails": {
+      "title": "Unit Details",
+      "unitNumber": "Unit Number",
+      "monthlyFee": "Monthly Fee",
+      "area": "Area",
+      "status": "Status",
+      "occupied": "Occupied",
+      "vacant": "Vacant",
+      "notAvailable": "Unit information not available"
+    },
+    "paymentHistory": {
+      "title": "Payment History",
+      "comingSoon": "Payment History Coming Soon",
+      "description": "You'll be able to view your payment history, download receipts, and track your billing status here."
+    }
   },
   "portal": {
     "title": "Resident Portal",
@@ -2837,6 +3339,9 @@
       "haveInvitation": "Already have an invitation?",
       "haveInvitationDescription": "Check your email and follow the invitation link to complete the setup process.",
       "details": "Details:",
+      "refresh": "Refresh",
+      "refreshSuccess": "Access check refreshed",
+      "refreshError": "Failed to refresh access",
       "backToDashboard": "Back to Dashboard"
     }
   },
@@ -2908,8 +3413,7 @@
           "API access",
           "Advanced integrations"
         ],
-        "cta": "Start Free Trial",
-        "popular": "Most Popular"
+        "cta": "Start Free Trial"
       },
       "enterprise": {
         "name": "Enterprise",
@@ -2996,6 +3500,8 @@
     "cta": {
       "title": "Ready to Get Started?",
       "description": "Start your free trial today and see how Syndik can transform your syndicate management.",
+      "primaryButton": "Start Free Trial",
+      "secondaryButton": "Contact Sales",
       "buttons": {
         "startTrial": "Start Free Trial",
         "contactSales": "Contact Sales"
@@ -3150,6 +3656,12 @@
     "noResidentsFiltered": "No residents found for the selected unit.",
     "totalResidents": "Total Residents",
     "activeResidents": "Active Residents",
+    "bulkActions": {
+      "edit": "Edit Selected",
+      "delete": "Delete Selected",
+      "activate": "Activate Selected",
+      "deactivate": "Deactivate Selected"
+    },
     "allUnits": "All units",
     "clearFilter": "Clear Filter",
     "filterByUnit": "Filter by Unit:",
@@ -3186,6 +3698,8 @@
       "noUnitsAvailable": "No units available",
       "owner": "Owner",
       "ownerDescription": "Check if this resident is the owner of the unit",
+      "active": "Active Status",
+      "activeDescription": "Check if this resident is currently active",
       "moveInDate": "Move In Date",
       "moveInDatePlaceholder": "Select move in date",
       "moveOutDate": "Move Out Date",
@@ -3218,6 +3732,7 @@
       "invitationError": "Failed to send invitation"
     },
     "status": {
+      "all": "All",
       "active": "Active",
       "inactive": "Inactive",
       "invited": "Invited",
@@ -3235,11 +3750,21 @@
       "actions": "Actions",
       "copyEmail": "Copy email",
       "editResident": "Edit resident",
+      "activateResident": "Activate resident",
+      "deactivateResident": "Deactivate resident",
       "deleteResident": "Delete resident"
     },
     "confirmDelete": {
       "title": "Delete Resident",
       "description": "Are you sure you want to delete this resident? This action cannot be undone."
+    },
+    "confirmDeactivate": {
+      "title": "Deactivate Resident",
+      "description": "Are you sure you want to deactivate this resident? They will no longer have access to the portal."
+    },
+    "confirmActivate": {
+      "title": "Activate Resident",
+      "description": "Are you sure you want to activate this resident? They will regain access to the portal."
     },
     "bulkInvite": {
       "title": "Bulk Invite Residents",
@@ -3251,7 +3776,21 @@
       "sendInvitations": "Send Invitations",
       "successMessage": "Successfully sent {count} invitation(s)",
       "partialSuccessMessage": "Sent {successCount} invitations successfully, {errorCount} failed",
-      "allFailedMessage": "Failed to send all invitations"
+      "allFailedMessage": "Failed to send all invitations",
+      "alreadyInvited": "{count} resident(s) already have pending invitations",
+      "otherErrors": "{count} invitation(s) failed for other reasons",
+      "failedToSend": "Failed to send invitations",
+      "selectResidents": "Please select at least one resident to invite",
+      "sending": "Sending...",
+      "alreadyMember": "{count, plural, =1 {# resident is} other {# residents are}} already a member: {names}",
+      "alreadyInvitedDetailed": "{count, plural, =1 {# resident already has} other {# residents already have}} pending invitations: {names}",
+      "invalidEmails": "Invalid email addresses: {names}",
+      "otherErrorsDetailed": "{count, plural, =1 {# invitation failed} other {# invitations failed}} for other reasons. Check console for details.",
+      "residentsCount": "{count, plural, =1 {# resident} other {# residents}}",
+      "notYetInvited": "not yet invited",
+      "selected": "selected",
+      "noUninvitedMessage": "All active residents have already been invited to the portal.",
+      "loadingResidents": "Loading residents..."
     },
     "invite": {
       "dialogTitle": "Invite to Resident Portal",
@@ -3278,7 +3817,11 @@
     "edit": "Edit",
     "delete": "Delete",
     "view": "View",
-    "openMenu": "Open menu"
+    "openMenu": "Open menu",
+    "selected": "{count} of {total} row(s) selected",
+    "selectAll": "Select all",
+    "of": "of",
+    "selectedActions": "Actions ({count} selected)"
   },
   "terms": {
     "title": "Terms of Service",

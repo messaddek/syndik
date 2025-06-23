@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Settings, User, Building, Shield, Bell } from 'lucide-react';
 
-export function SettingsViewSkeleton() {
+export const SettingsViewSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header */}

@@ -12,11 +12,11 @@ const gabarito = Gabarito({
   weight: ['400', '500', '600', '700', '800', '900'],
 });
 
-export function LandingFooter() {
+export const LandingFooter = () => {
   const tFooter = useTranslations('footer');
 
   return (
-    <footer className='relative overflow-hidden border-t bg-gray-800 text-white'>
+    <footer className='relative overflow-hidden bg-gray-800 text-white'>
       {/* Background gradient */}
       <div
         className='pointer-events-none absolute inset-x-0 -top-40 -z-50 transform-gpu overflow-hidden blur-3xl sm:-top-80'
@@ -234,4 +234,4 @@ export function LandingFooter() {
       </div>
     </footer>
   );
-}
+};

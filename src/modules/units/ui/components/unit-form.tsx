@@ -33,7 +33,7 @@ interface UnitFormProps {
   onCancel?: () => void;
 }
 
-export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
+export const UnitForm = ({ unit, onSuccess, onCancel }: UnitFormProps) => {
   const t = useTranslations('units');
   const tCommon = useTranslations('common');
   const trpc = useTRPC();
@@ -113,7 +113,7 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
-        {' '}
+        
         <FormField
           control={form.control}
           name='buildingId'
@@ -139,7 +139,7 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
           )}
         />
         <div className='grid grid-cols-2 gap-4'>
-          {' '}
+          
           <FormField
             control={form.control}
             name='unitNumber'
@@ -176,7 +176,7 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
           />
         </div>
         <div className='grid grid-cols-2 gap-4'>
-          {' '}
+          
           <FormField
             control={form.control}
             name='bedrooms'
@@ -215,7 +215,7 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
           />
         </div>
         <div className='grid grid-cols-2 gap-4'>
-          {' '}
+          
           <FormField
             control={form.control}
             name='area'
@@ -259,7 +259,7 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
               </FormItem>
             )}
           />
-        </div>{' '}
+        </div>
         <FormField
           control={form.control}
           name='description'
@@ -295,3 +295,4 @@ export function UnitForm({ unit, onSuccess, onCancel }: UnitFormProps) {
     </Form>
   );
 }
+

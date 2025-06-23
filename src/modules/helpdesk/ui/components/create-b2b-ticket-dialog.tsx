@@ -4,6 +4,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useTranslations } from 'next-intl';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import {
@@ -25,9 +26,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { X, Plus, AlertTriangle, Building, Users } from 'lucide-react';
+import { X, Plus, AlertTriangle, Building, Users, Loader2 } from 'lucide-react';
 import { useTRPC } from '@/trpc/client';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useUser } from '@clerk/nextjs';
 import { toast } from 'sonner';
 
 // B2B Ticket Creation Schema with proper defaults
@@ -98,14 +100,32 @@ const urgencyColors = {
   critical: 'bg-red-100 text-red-800',
 };
 
-export function CreateB2BTicketDialog({
+export const CreateB2BTicketDialog = ({
   children,
   onSuccess,
   trigger,
   open: isOpen,
   onOpenChange,
-}: CreateB2BTicketDialogProps) {
+}: CreateB2BTicketDialogProps) => {
+  const t = useTranslations('helpDesk');
   const [internalOpen, setInternalOpen] = React.useState(false);
+  const [currentTag, setCurrentTag] = React.useState('');
+  const trpc = useTRPC();
+  const { user } = useUser();
+  const queryClient = useQueryClient();
+
+  // Fetch organization and account data to prefill form
+  const { data: account, isLoading: accountLoading } = useQuery(
+    trpc.accounts.getCurrentAccount.queryOptions()
+  );
+
+  const { data: organization, isLoading: organizationLoading } = useQuery(
+    trpc.organizations.getCurrentOrganization.queryOptions()
+  );
+
+  const { data: statistics, isLoading: statisticsLoading } = useQuery(
+    trpc.organizations.getStatistics.queryOptions()
+  );
 
   // Use external state if provided, otherwise use internal state
   const open = isOpen !== undefined ? isOpen : internalOpen;
@@ -116,34 +136,101 @@ export function CreateB2BTicketDialog({
       setInternalOpen(value);
     }
   };
-  const [currentTag, setCurrentTag] = React.useState('');
-  const trpc = useTRPC();
 
   const form = useForm<B2BTicketForm>({
     resolver: zodResolver(b2bTicketSchema),
     defaultValues: {
+      title: '',
+      description: '',
+      category: 'technical_issue',
       priority: 'medium',
       urgencyLevel: 'medium',
+      affectedUsers: 1,
+      businessImpact: '',
       tags: [],
       syndicateInfo: {
+        organizationName: '',
         organizationSize: 'medium',
+        contactName: '',
+        contactEmail: '',
+        contactPhone: '',
+        subscriptionTier: 'professional',
       },
     },
   });
 
+  // Update form when data loads from tRPC
+  React.useEffect(() => {
+    if (!accountLoading && !organizationLoading && !statisticsLoading) {
+      // Calculate organization size based on units
+      const units = statistics?.totalUnits || 0;
+      let orgSize: 'small' | 'medium' | 'large' | 'enterprise' = 'medium';
+      if (units <= 10) orgSize = 'small';
+      else if (units <= 50) orgSize = 'medium';
+      else if (units <= 200) orgSize = 'large';
+      else orgSize = 'enterprise';
+
+      // Get user's full name
+      const fullName =
+        user?.fullName ||
+        `${user?.firstName || ''} ${user?.lastName || ''}`.trim();
+
+      // Update form with real data
+      form.reset({
+        title: 'Payment Processing Issues in Resident Portal',
+        description:
+          'Several residents are reporting difficulties when trying to make online payments through the resident portal. The payment form appears to freeze after entering credit card information, and transactions are not being processed successfully.',
+        category: 'technical_issue',
+        priority: 'medium',
+        urgencyLevel: 'medium',
+        affectedUsers: statistics?.totalResidents || 15,
+        businessImpact:
+          'This issue is preventing residents from making their monthly payments online, forcing them to use alternative payment methods and causing delays in rent collection.',
+        tags: ['payment', 'portal', 'urgent'],
+        syndicateInfo: {
+          organizationName:
+            organization?.name ||
+            account?.organizationName ||
+            'My Organization',
+          organizationSize: orgSize,
+          contactName: fullName || 'Contact Name',
+          contactEmail:
+            user?.emailAddresses?.[0]?.emailAddress ||
+            account?.email ||
+            'contact@organization.com',
+          contactPhone:
+            user?.phoneNumbers?.[0]?.phoneNumber || '+33 1 23 45 67 89',
+          subscriptionTier: 'professional',
+        },
+      });
+    }
+  }, [
+    user,
+    account,
+    organization,
+    statistics,
+    accountLoading,
+    organizationLoading,
+    statisticsLoading,
+    form,
+  ]);
   const createB2BTicket = useMutation(
     trpc.helpdesk.createB2BTicket.mutationOptions({
       onSuccess: () => {
-        toast.success('B2B support ticket created successfully');
+        toast.success(t('ticket_created'));
         form.reset();
         setOpen(false);
+
+        // Invalidate queries to refresh the tickets list
+        queryClient.invalidateQueries(
+          trpc.helpdesk.getAllTickets.queryOptions({})
+        );
+
         onSuccess?.();
       },
       onError: (error: unknown) => {
         const message =
-          error instanceof Error
-            ? error.message
-            : 'Failed to create B2B ticket';
+          error instanceof Error ? error.message : t('error_creating_ticket');
         toast.error(message);
       },
     })
@@ -170,26 +257,30 @@ export function CreateB2BTicketDialog({
       currentTags.filter(tag => tag !== tagToRemove)
     );
   };
-  return children || trigger ? (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{children || trigger}</DialogTrigger>
-      <ResponsiveDialog
-        open={open}
-        onOpenChange={setOpen}
-        title={
-          <div className='flex items-center gap-2'>
-            <AlertTriangle className='h-5 w-5 text-orange-500' />
-            Create B2B Support Ticket
+  const FormContent = () => {
+    // Show loading state while fetching data
+    if (accountLoading || organizationLoading || statisticsLoading) {
+      return (
+        <div className='flex min-h-[400px] items-center justify-center'>
+          <div className='space-y-4 text-center'>
+            <Loader2 className='text-primary mx-auto h-8 w-8 animate-spin' />
+            <p className='text-muted-foreground text-sm'>
+              Loading organization information...
+            </p>
           </div>
-        }
-        description='Submit a ticket for support with the Syndik platform'
-      >
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-            {/* Basic Information */}
-            <div className='space-y-4'>
-              <h3 className='text-lg font-semibold'>Ticket Information</h3>
+        </div>
+      );
+    }
 
+    return (
+      <div className='max-h-[70vh] overflow-y-auto px-1'>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+            {/* Basic Information */}
+            <div className='space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-6'>
+              <h3 className='border-b border-gray-200 pb-2 text-lg font-semibold text-gray-900'>
+                {t('ticket_information')}
+              </h3>
               <FormField
                 control={form.control}
                 name='title'
@@ -206,7 +297,6 @@ export function CreateB2BTicketDialog({
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name='description'
@@ -224,8 +314,7 @@ export function CreateB2BTicketDialog({
                   </FormItem>
                 )}
               />
-
-              <div className='grid grid-cols-2 gap-4'>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
                 <FormField
                   control={form.control}
                   name='category'
@@ -294,13 +383,12 @@ export function CreateB2BTicketDialog({
               </div>
             </div>
             {/* Business Impact */}
-            <div className='space-y-4'>
-              <h3 className='flex items-center gap-2 text-lg font-semibold'>
-                <Building className='h-5 w-5' />
+            <div className='space-y-4 rounded-lg border border-orange-200 bg-orange-50 p-6'>
+              <h3 className='flex items-center gap-2 border-b border-orange-200 pb-2 text-lg font-semibold text-orange-900'>
+                <Building className='h-5 w-5 text-orange-600' />
                 Business Impact
               </h3>
-
-              <div className='grid grid-cols-2 gap-4'>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 <FormField
                   control={form.control}
                   name='urgencyLevel'
@@ -349,7 +437,6 @@ export function CreateB2BTicketDialog({
                       <FormControl>
                         <Input
                           type='number'
-                          min='1'
                           placeholder='Number of affected users'
                           {...field}
                         />
@@ -359,7 +446,6 @@ export function CreateB2BTicketDialog({
                   )}
                 />
               </div>
-
               <FormField
                 control={form.control}
                 name='businessImpact'
@@ -379,12 +465,11 @@ export function CreateB2BTicketDialog({
               />
             </div>
             {/* Syndicate Information */}
-            <div className='space-y-4'>
-              <h3 className='text-lg font-semibold'>
+            <div className='space-y-4 rounded-lg border border-blue-200 bg-blue-50 p-6'>
+              <h3 className='border-b border-blue-200 pb-2 text-lg font-semibold text-blue-900'>
                 Organization Information
               </h3>
-
-              <div className='grid grid-cols-2 gap-4'>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 <FormField
                   control={form.control}
                   name='syndicateInfo.organizationName'
@@ -392,7 +477,10 @@ export function CreateB2BTicketDialog({
                     <FormItem>
                       <FormLabel>Organization Name *</FormLabel>
                       <FormControl>
-                        <Input placeholder='Your syndicate name' {...field} />
+                        <Input
+                          placeholder='Your organization name'
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -416,16 +504,16 @@ export function CreateB2BTicketDialog({
                         </FormControl>
                         <SelectContent>
                           <SelectItem value='small'>
-                            Small (1-50 units)
+                            Small (1-10 units)
                           </SelectItem>
                           <SelectItem value='medium'>
-                            Medium (51-200 units)
+                            Medium (11-50 units)
                           </SelectItem>
                           <SelectItem value='large'>
-                            Large (201-500 units)
+                            Large (51-200 units)
                           </SelectItem>
                           <SelectItem value='enterprise'>
-                            Enterprise (500+ units)
+                            Enterprise (200+ units)
                           </SelectItem>
                         </SelectContent>
                       </Select>
@@ -434,8 +522,7 @@ export function CreateB2BTicketDialog({
                   )}
                 />
               </div>
-
-              <div className='grid grid-cols-2 gap-4'>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
                 <FormField
                   control={form.control}
                   name='syndicateInfo.contactName'
@@ -462,7 +549,7 @@ export function CreateB2BTicketDialog({
                       <FormControl>
                         <Input
                           type='email'
-                          placeholder='contact@syndicate.com'
+                          placeholder='contact@example.com'
                           {...field}
                         />
                       </FormControl>
@@ -471,7 +558,6 @@ export function CreateB2BTicketDialog({
                   )}
                 />
               </div>
-
               <div className='grid grid-cols-2 gap-4'>
                 <FormField
                   control={form.control}
@@ -480,7 +566,11 @@ export function CreateB2BTicketDialog({
                     <FormItem>
                       <FormLabel>Contact Phone</FormLabel>
                       <FormControl>
-                        <Input placeholder='Optional phone number' {...field} />
+                        <Input
+                          type='tel'
+                          placeholder='+1 (555) 123-4567'
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -494,7 +584,10 @@ export function CreateB2BTicketDialog({
                     <FormItem>
                       <FormLabel>Subscription Tier</FormLabel>
                       <FormControl>
-                        <Input placeholder='e.g., Pro, Enterprise' {...field} />
+                        <Input
+                          placeholder='e.g., Basic, Premium, Enterprise'
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -503,8 +596,10 @@ export function CreateB2BTicketDialog({
               </div>
             </div>
             {/* Tags */}
-            <div className='space-y-4'>
-              <FormLabel>Tags (Optional)</FormLabel>
+            <div className='space-y-4 rounded-lg border border-green-200 bg-green-50 p-6'>
+              <FormLabel className='block border-b border-green-200 pb-2 text-lg font-semibold text-green-900'>
+                Tags (Optional)
+              </FormLabel>
               <div className='flex gap-2'>
                 <Input
                   placeholder='Add a tag'
@@ -517,40 +612,37 @@ export function CreateB2BTicketDialog({
                     }
                   }}
                 />
-                <Button type='button' size='sm' onClick={addTag}>
+                <Button type='button' variant='outline' onClick={addTag}>
                   <Plus className='h-4 w-4' />
                 </Button>
               </div>
 
               {form.watch('tags').length > 0 && (
                 <div className='flex flex-wrap gap-2'>
-                  {form.watch('tags').map(tag => (
+                  {form.watch('tags').map((tag, index) => (
                     <Badge
-                      key={tag}
+                      key={index}
                       variant='secondary'
                       className='flex items-center gap-1'
                     >
                       {tag}
-                      <button
-                        type='button'
+                      <X
+                        className='h-3 w-3 cursor-pointer'
                         onClick={() => removeTag(tag)}
-                        className='ml-1 hover:text-red-500'
-                      >
-                        <X className='h-3 w-3' />
-                      </button>
+                      />
                     </Badge>
                   ))}
                 </div>
               )}
             </div>
             {/* Submit */}
-            <div className='flex justify-end gap-2 pt-4'>
+            <div className='mt-6 flex justify-end gap-2 border-t border-gray-200 pt-6'>
               <Button
                 type='button'
                 variant='outline'
                 onClick={() => setOpen(false)}
               >
-                Cancel
+                {t('cancel')}
               </Button>
               <Button
                 type='submit'
@@ -558,12 +650,32 @@ export function CreateB2BTicketDialog({
                 className='bg-orange-600 hover:bg-orange-700'
               >
                 {createB2BTicket.isPending
-                  ? 'Creating...'
-                  : 'Create B2B Ticket'}
+                  ? t('creating')
+                  : t('create_b2b_ticket_button')}
               </Button>
-            </div>{' '}
+            </div>
           </form>
-        </Form>{' '}
+        </Form>
+      </div>
+    );
+  };
+
+  return children || trigger ? (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{children || trigger}</DialogTrigger>
+      <ResponsiveDialog
+        open={open}
+        onOpenChange={setOpen}
+        title={
+          <div className='flex items-center gap-2'>
+            <AlertTriangle className='h-5 w-5 text-orange-500' />
+            {t('b2b_ticket_title')}
+          </div>
+        }
+        description={t('b2b_ticket_description')}
+        className='sm:max-w-4xl'
+      >
+        <FormContent />
       </ResponsiveDialog>
     </Dialog>
   ) : (
@@ -573,38 +685,14 @@ export function CreateB2BTicketDialog({
       title={
         <div className='flex items-center gap-2'>
           <AlertTriangle className='h-5 w-5 text-orange-500' />
-          Create B2B Support Ticket
+          {t('b2b_ticket_title')}
         </div>
       }
-      description='Submit a ticket for support with the Syndik platform'
+      description={t('b2b_ticket_description')}
+      className='sm:max-w-4xl'
     >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-          {/* Form content */}
-          {/* Duplicate content to avoid space issues when trying to replace entire form content */}
-          <div className='space-y-4'>
-            {/* Submit */}
-            <div className='flex justify-end gap-2 pt-4'>
-              <Button
-                type='button'
-                variant='outline'
-                onClick={() => setOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                type='submit'
-                disabled={createB2BTicket.isPending}
-                className='bg-orange-600 hover:bg-orange-700'
-              >
-                {createB2BTicket.isPending
-                  ? 'Creating...'
-                  : 'Create B2B Ticket'}
-              </Button>
-            </div>
-          </div>
-        </form>
-      </Form>
+      <FormContent />
     </ResponsiveDialog>
   );
-}
+};
+

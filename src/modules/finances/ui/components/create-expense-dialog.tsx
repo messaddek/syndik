@@ -10,11 +10,11 @@ interface CreateExpenseDialogProps {
   onSuccess?: () => void;
 }
 
-export function CreateExpenseDialog({
+export const CreateExpenseDialog = ({
   open,
   onOpenChange,
   onSuccess,
-}: CreateExpenseDialogProps) {
+}: CreateExpenseDialogProps) => {
   const t = useTranslations('finance.createExpenseDialog');
 
   const handleSuccess = () => {
@@ -25,15 +25,15 @@ export function CreateExpenseDialog({
   const handleCancel = () => {
     onOpenChange(false);
   };
-
   return (
     <ResponsiveDialog
       open={open}
       onOpenChange={onOpenChange}
       title={t('title')}
       description={t('description')}
+      className='sm:max-w-4xl'
     >
       <ExpenseForm onSuccess={handleSuccess} onCancel={handleCancel} />
     </ResponsiveDialog>
   );
-}
+};

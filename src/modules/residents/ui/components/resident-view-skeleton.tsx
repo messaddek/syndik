@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { ArrowLeft, User, Calendar, Mail, MapPin } from 'lucide-react';
 
-export function ResidentViewSkeleton() {
+export const ResidentViewSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header */}

@@ -10,11 +10,11 @@ interface CreateUnitDialogProps {
   onSuccess?: () => void;
 }
 
-export function CreateUnitDialog({
+export const CreateUnitDialog = ({
   open,
   onOpenChange,
   onSuccess,
-}: CreateUnitDialogProps) {
+}: CreateUnitDialogProps) => {
   const t = useTranslations('units');
 
   const handleSuccess = () => {

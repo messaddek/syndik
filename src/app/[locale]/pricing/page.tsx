@@ -6,7 +6,7 @@ import { Check } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
-export default function PricingPage() {
+const PricingPage = () => {
   const t = useTranslations('pricing');
 
   // Get features arrays from translations
@@ -18,9 +18,9 @@ export default function PricingPage() {
     question: string;
     answer: string;
   }>;
-
   const plans = [
     {
+      id: 'starter',
       name: t('plans.starter.name'),
       description: t('plans.starter.description'),
       price: t('plans.starter.price'),
@@ -30,6 +30,7 @@ export default function PricingPage() {
       popular: false,
     },
     {
+      id: 'professional',
       name: t('plans.professional.name'),
       description: t('plans.professional.description'),
       price: t('plans.professional.price'),
@@ -39,6 +40,7 @@ export default function PricingPage() {
       popular: true,
     },
     {
+      id: 'enterprise',
       name: t('plans.enterprise.name'),
       description: t('plans.enterprise.description'),
       price: t('plans.enterprise.price'),
@@ -51,7 +53,6 @@ export default function PricingPage() {
 
   return (
     <LandingLayout>
-      {' '}
       {/* Hero Section */}
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -71,10 +72,9 @@ export default function PricingPage() {
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
             {plans.map(plan => (
               <Card
-                key={plan.name}
+                key={plan.id}
                 className={`relative ${plan.popular ? 'scale-105 shadow-lg ring-2 ring-blue-600' : ''}`}
               >
-                {' '}
                 {plan.popular && (
                   <div className='absolute -top-4 left-1/2 -translate-x-1/2'>
                     <Badge className='bg-primary text-white'>
@@ -104,7 +104,7 @@ export default function PricingPage() {
                     ))}
                   </ul>
                   <Link
-                    href={plan.name === 'Enterprise' ? '/contact' : '/sign-up'}
+                    href={plan.id === 'enterprise' ? '/contact' : '/sign-up'}
                     className='block'
                   >
                     <Button
@@ -119,7 +119,7 @@ export default function PricingPage() {
             ))}
           </div>
         </div>
-      </div>{' '}
+      </div>
       {/* Features Comparison */}
       <div className='bg-gray-50 py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -140,7 +140,7 @@ export default function PricingPage() {
             ))}
           </div>
         </div>
-      </div>{' '}
+      </div>
       {/* FAQ Section */}
       <div className='py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -162,7 +162,7 @@ export default function PricingPage() {
             </div>
           </div>
         </div>
-      </div>{' '}
+      </div>
       {/* CTA Section */}
       <div className='bg-primary py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -191,4 +191,5 @@ export default function PricingPage() {
       </div>
     </LandingLayout>
   );
-}
+};
+export default PricingPage;

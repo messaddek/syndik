@@ -85,6 +85,9 @@
     "haveInvitation": "Already have an invitation?",
     "haveInvitationDescription": "Check your email and follow the invitation link to complete the setup process.",
     "details": "Details:",
+    "refresh": "Refresh",
+    "refreshSuccess": "Access check refreshed",
+    "refreshError": "Failed to refresh access",
     "backToDashboard": "Back to Dashboard"
   }
 }
