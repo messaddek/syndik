@@ -1,17 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { usePathname } from '@/i18n/routing';
-import {
-  Menu,
-  X,
-  Globe2,
-  HelpCircle,
-  LayoutDashboard,
-  User,
-} from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useUser, UserButton } from '@clerk/nextjs';
 import { Button } from '../ui/button';
 import { cn } from '../../lib/utils';
@@ -31,7 +24,24 @@ export const LandingHeader = () => {
   const { isSignedIn } = useUser();
   const t = useTranslations('navigation');
   const tCommon = useTranslations('common');
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
+  // Prevent background scrolling when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup function to restore scroll when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
   const navigation = [
     { name: t('home'), href: '/' },
     { name: t('about'), href: '/about' },
@@ -43,21 +53,20 @@ export const LandingHeader = () => {
 
   return (
     <header className='fixed top-0 right-0 left-0 z-50 border-b bg-white/95 shadow-sm backdrop-blur-sm'>
-      <nav className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8' aria-label='Top'>
-        <div className='flex min-h-[56px] w-full items-center justify-between py-2'>
+      <nav className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8' aria-label='Top'>
+        <div className='flex w-full items-center justify-between py-3 sm:py-2'>
           {/* Logo */}
-          <div className='flex min-w-0 items-center'>
-            <Link href='/' className='flex min-w-0 items-center space-x-2'>
+          <div className='flex items-center'>
+            <Link href='/' className='flex items-center space-x-2'>
               <Image
                 src='/logo.svg'
                 alt='Syndik Logo'
                 width={40}
                 height={40}
-                className='size-10'
+                className='size-8 sm:size-10' // 32px on mobile, 40px on sm+
               />
               <span
-                className={`truncate text-base font-bold text-gray-900 ${gabarito.className}`}
-                style={{ maxWidth: 110 }}
+                className={`text-sm font-bold text-gray-900 sm:text-base ${gabarito.className}`}
               >
                 syndik.ma
               </span>
@@ -88,7 +97,6 @@ export const LandingHeader = () => {
                   <Link href='/dashboard'>{t('dashboard')}</Link>
                 </Button>
                 <UserButton
-                  afterSignOutUrl='/'
                   appearance={{
                     elements: {
                       avatarBox: 'h-8 w-8',
@@ -108,12 +116,14 @@ export const LandingHeader = () => {
             )}
           </div>
           {/* Mobile menu button */}
-          <div className='md:hidden'>
+          <div className='flex items-center gap-2 md:hidden'>
             <Button
               variant='ghost'
               size='sm'
-              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              className='p-2'
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? t('closeMenu') : t('openMenu')}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? (
                 <X className='h-6 w-6' />
@@ -125,108 +135,80 @@ export const LandingHeader = () => {
         </div>
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className='animate-in slide-in-from-top-5 duration-200 md:hidden'>
-            <div className='space-y-1 pt-2 pb-3'>
-              {navigation.map(item => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    'hover:text-primary block px-3 py-2 text-base font-medium transition-colors',
-                    pathname === item.href ? 'text-primary' : 'text-gray-600'
-                  )}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className='space-y-2 px-3 py-2'>
-                {/* Language Dropdown for Mobile, with label */}
-                <div className='flex items-center gap-2 py-2'>
-                  <Globe2 className='h-5 w-5' />
-                  <span>{t('language')}</span>
-                  <div className='flex-1'>
-                    <LanguageDropdown />
-                  </div>
+          <div className='animate-in slide-in-from-top-2 duration-300 md:hidden'>
+            <div className='border-t bg-white/95 shadow-lg backdrop-blur-sm'>
+              {/* Navigation Links */}
+              <div className='space-y-1 px-4 py-3'>
+                {navigation.map(item => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      'block rounded-lg px-4 py-3 text-base font-medium transition-all duration-200',
+                      'hover:text-primary hover:bg-gray-50 active:bg-gray-100',
+                      pathname === item.href
+                        ? 'text-primary bg-primary/5 border-primary/20 border'
+                        : 'text-gray-700'
+                    )}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div className='mx-4 border-t border-gray-200'></div>
+
+              {/* Actions Section */}
+              <div className='space-y-3 px-4 py-4'>
+                {/* Language and Support Row */}
+                <div className='flex items-center justify-center gap-4 pb-2'>
+                  <LanguageDropdown />
+                  <SupportDialog />
                 </div>
-                {/* Support Dialog for Mobile, with label */}
-                <div className='flex items-center gap-2 py-2'>
-                  <HelpCircle className='h-5 w-5' />
-                  <span>{t('support') || 'Support'}</span>
-                  <div className='flex-1'>
-                    <SupportDialog />
-                  </div>
-                </div>
+
+                {/* Auth Buttons */}
                 {isSignedIn ? (
-                  <>
+                  <div className='space-y-3'>
                     <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex w-full items-center justify-start gap-2'
+                      variant='outline'
+                      size='lg'
+                      className='w-full'
                       asChild
                     >
-                      <Link href='/dashboard'>
-                        <LayoutDashboard className='h-5 w-5' />
-                        <span>{t('dashboard')}</span>
-                      </Link>
+                      <Link href='/dashboard'>{t('dashboard')}</Link>
                     </Button>
-                    <div className='flex items-center justify-start gap-2 pt-2'>
-                      <User className='h-5 w-5' />
-                      <span>{t('account') || 'Account'}</span>
+                    <div className='flex items-center justify-center pt-2'>
                       <UserButton
-                        afterSignOutUrl='/'
                         appearance={{
                           elements: {
-                            avatarBox: 'h-8 w-8',
+                            avatarBox: 'h-10 w-10',
                           },
                         }}
                       />
                     </div>
-                  </>
+                  </div>
                 ) : (
-                  <>
+                  <div className='space-y-3'>
                     <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex w-full items-center justify-start gap-2'
+                      variant='outline'
+                      size='lg'
+                      className='w-full'
                       asChild
                     >
-                      <Link href='/sign-in'>
-                        <User className='h-5 w-5' />
-                        <span>{tCommon('signIn')}</span>
-                      </Link>
+                      <Link href='/sign-in'>{tCommon('signIn')}</Link>
                     </Button>
-                    <Button
-                      size='sm'
-                      className='flex w-full items-center justify-start gap-2'
-                      asChild
-                    >
-                      <Link href='/sign-up'>
-                        <User className='h-5 w-5' />
-                        <span>{tCommon('getStarted')}</span>
-                      </Link>
+                    <Button size='lg' className='w-full' asChild>
+                      <Link href='/sign-up'>{tCommon('getStarted')}</Link>
                     </Button>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
           </div>
         )}
       </nav>
-      <style jsx global>{`
-        /* Responsive tweaks for landscape mobile */
-        @media (max-width: 900px) and (orientation: landscape) {
-          header[role='banner'] .md\\:flex {
-            display: none !important;
-          }
-          header[role='banner'] nav > div:first-child {
-            min-width: 0 !important;
-          }
-          header[role='banner'] .min-w-0 {
-            min-width: 0 !important;
-          }
-        }
-      `}</style>
     </header>
   );
 };

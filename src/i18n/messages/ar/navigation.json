@@ -19,5 +19,7 @@
   "backToLanding": "العودة للصفحة الرئيسية",
   "missingPayments": "المدفوعات المفقودة",
   "overview": "نظرة عامة",
-  "reports": "التقارير"
+  "reports": "التقارير",
+  "openMenu": "فتح القائمة",
+  "closeMenu": "إغلاق القائمة"
 }

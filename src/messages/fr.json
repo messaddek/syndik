@@ -2130,7 +2130,9 @@
     "backToLanding": "Retour à l'accueil",
     "missingPayments": "Paiements manquants",
     "overview": "Aperçu",
-    "reports": "Rapports"
+    "reports": "Rapports",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "notifications": {
     "title": "Gestion des notifications",
@@ -2528,8 +2530,7 @@
           "Accès API",
           "Intégrations avancées"
         ],
-        "cta": "Essai Gratuit",
-        "popular": "Le Plus Populaire"
+        "cta": "Essai Gratuit"
       },
       "enterprise": {
         "name": "Entreprise",
@@ -2616,6 +2617,8 @@
     "cta": {
       "title": "Prêt à Commencer ?",
       "description": "Commencez votre essai gratuit aujourd'hui et découvrez comment Syndik peut transformer la gestion de votre syndicat.",
+      "primaryButton": "Essai Gratuit",
+      "secondaryButton": "Contacter les Ventes",
       "buttons": {
         "startTrial": "Essai Gratuit",
         "contactSales": "Contacter les Ventes"
