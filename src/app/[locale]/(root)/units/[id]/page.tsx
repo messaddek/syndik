@@ -9,10 +9,7 @@ type UnitPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function UnitPage({
-  params,
-  searchParams,
-}: UnitPageProps) {
+const UnitPage = async ({ params, searchParams }: UnitPageProps) => {
   const { id } = await params;
   const awaitedSearchParams = await searchParams;
   const queryClient = getQueryClient();
@@ -41,4 +38,6 @@ export default async function UnitPage({
       </div>
     </TRPCErrorBoundary>
   );
-}
+};
+
+export default UnitPage;

@@ -22,6 +22,7 @@ const buttonVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
+        xs: 'h-7 rounded px-2 gap-1 text-xs has-[>svg]:px-1.5',
         default: 'h-9 px-4 py-2 has-[>svg]:px-3',
         sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
         lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
@@ -35,7 +36,7 @@ const buttonVariants = cva(
   }
 );
 
-function Button({
+const Button = ({
   className,
   variant,
   size,
@@ -44,7 +45,7 @@ function Button({
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
-  }) {
+  }) => {
   const Comp = asChild ? Slot : 'button';
 
   return (

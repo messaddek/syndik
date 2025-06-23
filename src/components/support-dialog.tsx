@@ -39,7 +39,7 @@ interface SupportDialogProps {
   className?: string;
 }
 
-export function SupportDialog({ trigger, className }: SupportDialogProps) {
+export const SupportDialog = ({ trigger, className }: SupportDialogProps) => {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const isMobile = useIsMobile();
@@ -124,7 +124,7 @@ export function SupportDialog({ trigger, className }: SupportDialogProps) {
     <div className='space-y-6'>
       {/* Main Support Sections */}
       <div>
-        {' '}
+        
         <h3 className='mb-4 text-lg font-semibold'>{t('getHelp')}</h3>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
           {supportSections.map(section => (
@@ -160,7 +160,7 @@ export function SupportDialog({ trigger, className }: SupportDialogProps) {
 
       {/* Quick Actions */}
       <div>
-        {' '}
+        
         <h3 className='text-muted-foreground mb-3 text-sm font-medium'>
           {t('quickActions')}
         </h3>
@@ -196,7 +196,7 @@ export function SupportDialog({ trigger, className }: SupportDialogProps) {
 
       {/* Contact Methods */}
       <div className='border-t pt-4'>
-        {' '}
+        
         <h3 className='text-muted-foreground mb-3 text-sm font-medium'>
           {t('directContact')}
         </h3>
@@ -242,7 +242,7 @@ export function SupportDialog({ trigger, className }: SupportDialogProps) {
         <DialogTrigger asChild>{trigger || defaultTrigger}</DialogTrigger>
         <DialogContent className='sm:max-w-[600px]'>
           <DialogHeader>
-            {' '}
+            
             <DialogTitle className='flex items-center gap-2'>
               <HelpCircle className='h-5 w-5' />
               {t('supportCenter')}
@@ -260,7 +260,7 @@ export function SupportDialog({ trigger, className }: SupportDialogProps) {
       <DrawerTrigger asChild>{trigger || defaultTrigger}</DrawerTrigger>
       <DrawerContent className='max-h-[90vh]'>
         <DrawerHeader>
-          {' '}
+          
           <DrawerTitle className='flex items-center gap-2'>
             <HelpCircle className='h-5 w-5' />
             {t('supportCenter')}
@@ -274,3 +274,4 @@ export function SupportDialog({ trigger, className }: SupportDialogProps) {
     </Drawer>
   );
 }
+

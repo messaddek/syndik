@@ -5,6 +5,8 @@
   "totalManagedProperties": "Total Managed Properties",
   "units": "Units",
   "occupancyRateText": "Occupancy Rate",
+  "currentRate": "Current Rate",
+  "averageRate": "Average Rate",
   "residents": "Residents",
   "activeResidents": "Active Residents",
   "netIncome": "Net Income",
@@ -41,7 +43,13 @@
     "expectedAmount": "Expected amount",
     "overdue": "overdue",
     "sendReminders": "Send Reminders",
-    "viewDetails": "View Details"
+    "sendingReminders": "Sending...",
+    "viewDetails": "View Details",
+    "reminderSent": "Payment reminder sent to {buildingName} - Unit {unitNumber}",
+    "reminderError": "Failed to send reminder to Unit {unitNumber}",
+    "allRemindersSent": "Successfully sent {count} payment reminders",
+    "partialRemindersSent": "Sent {success} reminders, {failed} failed",
+    "remindersError": "Failed to send payment reminders. Please try again."
   },
   "quickActionsItems": {
     "recordIncome": "Record Income"

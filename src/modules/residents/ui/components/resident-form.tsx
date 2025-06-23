@@ -39,17 +39,16 @@ interface ResidentFormProps {
   onCancel?: () => void;
 }
 
-export function ResidentForm({
+export const ResidentForm = ({
   resident,
   onSuccess,
   onCancel,
-}: ResidentFormProps) {
+}: ResidentFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const t = useTranslations('residents.form');
 
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-
   // Create dynamic schema with translated messages
   const createFormSchema = () =>
     z.object({
@@ -59,6 +58,7 @@ export function ResidentForm({
       email: z.string().email(t('validation.emailRequired')),
       phone: z.string().optional(),
       isOwner: z.boolean(),
+      isActive: z.boolean(),
       moveInDate: z
         .string()
         .refine(
@@ -112,6 +112,7 @@ export function ResidentForm({
       email: resident?.email || '',
       phone: resident?.phone || '',
       isOwner: resident?.isOwner ?? false,
+      isActive: resident?.isActive ?? true,
       moveInDate: resident?.moveInDate || '',
       moveOutDate: resident?.moveOutDate || '',
       emergencyContact: resident?.emergencyContact || '',
@@ -267,6 +268,25 @@ export function ResidentForm({
           )}
         />
 
+        <FormField
+          control={form.control}
+          name='isActive'
+          render={({ field }) => (
+            <FormItem className='flex flex-row items-start space-y-0 space-x-3'>
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <div className='space-y-1 leading-none'>
+                <FormLabel>{t('active')}</FormLabel>
+                <FormDescription>{t('activeDescription')}</FormDescription>
+              </div>
+            </FormItem>
+          )}
+        />
+
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
           <FormField
             control={form.control}
@@ -378,4 +398,4 @@ export function ResidentForm({
       </form>
     </Form>
   );
-}
+};

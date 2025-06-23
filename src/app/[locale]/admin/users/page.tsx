@@ -1,5 +1,6 @@
 import { AdminUsersView } from '@/modules/admin/ui/views/admin-users-view';
 
-export default function AdminUsersPage() {
+const AdminUsersPage = () => {
   return <AdminUsersView />;
-}
+};
+export default AdminUsersPage;

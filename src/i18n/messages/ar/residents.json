@@ -10,6 +10,12 @@
   "noResidentsFiltered": "لم يتم العثور على سكان للوحدة المحددة.",
   "totalResidents": "إجمالي السكان",
   "activeResidents": "السكان النشطون",
+  "bulkActions": {
+    "edit": "تحرير المحدد",
+    "delete": "حذف المحدد",
+    "activate": "تفعيل المحدد",
+    "deactivate": "إلغاء تفعيل المحدد"
+  },
   "allUnits": "جميع الوحدات",
   "clearFilter": "مسح المرشح",
   "filterByUnit": "تصفية حسب الوحدة:",
@@ -46,6 +52,8 @@
     "noUnitsAvailable": "لا توجد وحدات متاحة",
     "owner": "مالك",
     "ownerDescription": "ضع علامة إذا كان هذا الساكن مالك الوحدة",
+    "active": "الحالة النشطة",
+    "activeDescription": "ضع علامة إذا كان هذا الساكن نشطاً حالياً",
     "moveInDate": "تاريخ الانتقال",
     "moveInDatePlaceholder": "اختر تاريخ الانتقال",
     "moveOutDate": "تاريخ المغادرة",
@@ -78,6 +86,7 @@
     "invitationError": "فشل في إرسال الدعوة"
   },
   "status": {
+    "all": "الكل",
     "active": "نشط",
     "inactive": "غير نشط",
     "invited": "مدعو",
@@ -95,11 +104,21 @@
     "actions": "الإجراءات",
     "copyEmail": "نسخ البريد الإلكتروني",
     "editResident": "تحرير الساكن",
+    "activateResident": "تفعيل الساكن",
+    "deactivateResident": "إلغاء تفعيل الساكن",
     "deleteResident": "حذف الساكن"
   },
   "confirmDelete": {
     "title": "حذف الساكن",
     "description": "هل أنت متأكد من أنك تريد حذف هذا الساكن؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+  "confirmDeactivate": {
+    "title": "إلغاء تنشيط الساكن",
+    "description": "هل أنت متأكد من أنك تريد إلغاء تنشيط هذا الساكن؟ لن يتمكن من الوصول إلى البوابة."
+  },
+  "confirmActivate": {
+    "title": "تنشيط الساكن",
+    "description": "هل أنت متأكد من أنك تريد تنشيط هذا الساكن؟ سيستعيد الوصول إلى البوابة."
   },
   "bulkInvite": {
     "title": "دعوة السكان بالجملة",
@@ -111,7 +130,21 @@
     "sendInvitations": "إرسال الدعوات",
     "successMessage": "تم إرسال {count} دعوة بنجاح",
     "partialSuccessMessage": "تم إرسال {successCount} دعوة بنجاح، فشل {errorCount}",
-    "allFailedMessage": "فشل في إرسال جميع الدعوات"
+    "allFailedMessage": "فشل في إرسال جميع الدعوات",
+    "alreadyInvited": "{count} ساكن لديهم دعوات معلقة بالفعل",
+    "otherErrors": "{count} دعوة فشلت لأسباب أخرى",
+    "failedToSend": "فشل في إرسال الدعوات",
+    "selectResidents": "يرجى تحديد ساكن واحد على الأقل للدعوة",
+    "sending": "جارٍ الإرسال...",
+    "alreadyMember": "{count, plural, =1 {ساكن واحد عضو} other {# سكان أعضاء}} بالفعل: {names}",
+    "alreadyInvitedDetailed": "{count, plural, =1 {ساكن واحد لديه} other {# سكان لديهم}} دعوات معلقة بالفعل: {names}",
+    "invalidEmails": "عناوين بريد إلكتروني غير صالحة: {names}",
+    "otherErrorsDetailed": "{count, plural, =1 {دعوة واحدة فشلت} other {# دعوات فشلت}} لأسباب أخرى. تحقق من وحدة التحكم للحصول على التفاصيل.",
+    "residentsCount": "{count, plural, =1 {ساكن واحد} other {# سكان}}",
+    "notYetInvited": "لم يتم دعوتهم بعد",
+    "selected": "محدد",
+    "noUninvitedMessage": "تم دعوة جميع السكان النشطين بالفعل إلى البوابة.",
+    "loadingResidents": "جارٍ تحميل السكان..."
   },
   "invite": {
     "dialogTitle": "دعوة إلى بوابة السكان",

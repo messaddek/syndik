@@ -26,7 +26,7 @@ import {
 import { Link } from '@/i18n/routing';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function PortalDashboard() {
+export const PortalDashboard = () => {
   const t = useTranslations();
   const trpc = useTRPC();
 
@@ -63,7 +63,7 @@ export function PortalDashboard() {
             {t('common.welcome')}, {resident.firstName}!
           </h1>
           <p className='text-muted-foreground'>{t('portal.welcomeMessage')}</p>
-        </div>{' '}
+        </div>
         <Badge variant='secondary' className='text-sm'>
           {resident?.isOwner
             ? t('residents.ownerStatus')
@@ -84,7 +84,7 @@ export function PortalDashboard() {
               ${dashboardData?.nextPayment?.amount?.toFixed(2) || '0.00'}
             </div>
             <p className='text-muted-foreground text-xs'>
-              {t('portal.due')}{' '}
+              {t('portal.due')}
               {dashboardData?.nextPayment?.dueDate
                 ? new Date(
                     dashboardData.nextPayment.dueDate
@@ -226,7 +226,7 @@ export function PortalDashboard() {
             <CardDescription>
               {t('portal.profileInformationDescription')}
             </CardDescription>
-          </CardHeader>{' '}
+          </CardHeader>
           <CardContent className='space-y-4'>
             <div className='space-y-3'>
               <div className='flex items-center gap-3'>
@@ -255,7 +255,7 @@ export function PortalDashboard() {
                 <MapPin className='text-muted-foreground h-4 w-4' />
                 <div>
                   <p className='text-sm font-medium'>
-                    {t('portal.movedIn')}{' '}
+                    {t('portal.movedIn')}
                     {new Date(resident?.moveInDate || '').toLocaleDateString()}
                   </p>
                   <p className='text-muted-foreground text-xs'>
@@ -327,7 +327,7 @@ export function PortalDashboard() {
   );
 }
 
-function PortalDashboardSkeleton() {
+const PortalDashboardSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header Skeleton */}
@@ -376,3 +376,4 @@ function PortalDashboardSkeleton() {
     </div>
   );
 }
+

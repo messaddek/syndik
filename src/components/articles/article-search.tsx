@@ -240,7 +240,7 @@ export const ArticleSearch = ({
                             </div>
                             <div className='ml-4 flex shrink-0 items-center gap-1 text-sm text-gray-500'>
                               <Clock className='h-3 w-3' />
-                              {article.readTime}{' '}
+                              {article.readTime}
                               {getMinuteText(article.readTime)}
                             </div>
                           </div>
@@ -292,3 +292,4 @@ export const ArticleSearch = ({
     </div>
   );
 };
+

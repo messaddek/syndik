@@ -7,7 +7,7 @@ import { Mail, Send } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
-export function Newsletter() {
+export const Newsletter = () => {
   const [email, setEmail] = useState('');
   const [isSubscribing, setIsSubscribing] = useState(false);
   const tFooter = useTranslations('footer');
@@ -66,7 +66,7 @@ export function Newsletter() {
           </Button>
         </form>
         <p className='mt-3 text-xs text-blue-200'>
-          {tFooter('newsletter.disclaimer')}{' '}
+          {tFooter('newsletter.disclaimer')}
           <Link href='/privacy' className='underline hover:text-white'>
             {tFooter('newsletter.privacyPolicy')}
           </Link>
@@ -75,3 +75,4 @@ export function Newsletter() {
     </div>
   );
 }
+

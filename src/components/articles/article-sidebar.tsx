@@ -143,7 +143,7 @@ export const ArticleSidebar = ({
                   href={article.href}
                   className='block rounded-lg border p-3 transition-all hover:border-gray-300 hover:bg-gray-50 hover:shadow-sm'
                 >
-                  <div className='flex items-start justify-between'>
+                  <div className='flex items-start justify-between gap-x-2'>
                     <div className='min-w-0 flex-1'>
                       <h4 className='mb-1 text-sm font-medium text-gray-900'>
                         {article.title}
@@ -161,7 +161,7 @@ export const ArticleSidebar = ({
                         )}
                       </div>
                     </div>
-                    <ExternalLink className='ml-2 h-4 w-4 shrink-0 text-gray-400' />
+                    <ExternalLink className='h-4 w-4 shrink-0 text-gray-400' />
                   </div>
                 </Link>
               ))}

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import {
@@ -35,11 +36,12 @@ interface CreateMeetingDialogProps {
   onSuccess?: () => void;
 }
 
-export function CreateMeetingDialog({
+export const CreateMeetingDialog = ({
   open,
   onOpenChange,
   onSuccess,
-}: CreateMeetingDialogProps) {
+}: CreateMeetingDialogProps) => {
+  const t = useTranslations('meetings');
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -91,8 +93,8 @@ export function CreateMeetingDialog({
 
   return (
     <ResponsiveDialog
-      title='Schedule New Meeting'
-      description='Create a new meeting for your syndicate. Fill in the details below.'
+      title={t('create_meeting')}
+      description={t('create_meeting_description')}
       open={open ?? false}
       onOpenChange={onOpenChange ?? (() => {})}
     >
@@ -103,11 +105,11 @@ export function CreateMeetingDialog({
             name='buildingId'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Building (Optional)</FormLabel>
+                <FormLabel>{t('building_label')}</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder='Select building or leave empty for general meeting' />
+                      <SelectValue placeholder={t('building_placeholder')} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -128,12 +130,9 @@ export function CreateMeetingDialog({
             name='title'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Meeting Title</FormLabel>
+                <FormLabel>{t('title_label')}</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder='e.g., Monthly Syndicate Meeting'
-                    {...field}
-                  />
+                  <Input placeholder={t('title_placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -145,10 +144,10 @@ export function CreateMeetingDialog({
             name='description'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description (Optional)</FormLabel>
+                <FormLabel>{t('description_label')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder='Brief description of the meeting purpose...'
+                    placeholder={t('description_placeholder')}
                     className='resize-none'
                     {...field}
                   />
@@ -164,7 +163,7 @@ export function CreateMeetingDialog({
               name='scheduledDate'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date & Time</FormLabel>
+                  <FormLabel>{t('date_time_label')}</FormLabel>
                   <FormControl>
                     <Input
                       type='datetime-local'
@@ -182,9 +181,9 @@ export function CreateMeetingDialog({
               name='location'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Location (Optional)</FormLabel>
+                  <FormLabel>{t('location_label')}</FormLabel>
                   <FormControl>
-                    <Input placeholder='e.g., Community Room' {...field} />
+                    <Input placeholder={t('location_placeholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -197,9 +196,12 @@ export function CreateMeetingDialog({
             name='maxParticipants'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Max Participants (Optional)</FormLabel>
+                <FormLabel>{t('max_participants_label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='e.g., 50' {...field} />
+                  <Input
+                    placeholder={t('max_participants_placeholder')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -211,10 +213,10 @@ export function CreateMeetingDialog({
             name='agenda'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Agenda (Optional)</FormLabel>
+                <FormLabel>{t('agenda_label')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder='Meeting agenda and topics to discuss...'
+                    placeholder={t('agenda_placeholder')}
                     className='resize-none'
                     rows={4}
                     {...field}
@@ -231,10 +233,10 @@ export function CreateMeetingDialog({
               variant='outline'
               onClick={() => onOpenChange?.(false)}
             >
-              Cancel
+              {t('cancel')}
             </Button>
             <Button type='submit' disabled={isSubmitting}>
-              {isSubmitting ? 'Scheduling...' : 'Schedule Meeting'}
+              {isSubmitting ? t('scheduling') : t('schedule_meeting')}
             </Button>
           </div>
         </form>

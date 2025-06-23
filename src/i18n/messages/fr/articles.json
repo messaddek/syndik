@@ -358,10 +358,190 @@
   "processingPayments": {
     "title": "Traitement des paiements",
     "description": "Gérez les paiements efficacement",
+    "metadata": {
+      "readTime": "8 min de lecture",
+      "audience": "Gestionnaires immobiliers"
+    },
     "sections": {
       "overview": {
         "title": "Aperçu",
         "content": "Un traitement efficace garantit des registres précis."
+      },
+      "paymentMethods": {
+        "title": "Méthodes de paiement",
+        "description": "Explorez les différentes méthodes de paiement disponibles pour traiter efficacement les paiements des locataires.",
+        "content": "Différentes méthodes disponibles pour traiter les paiements.",
+        "methods": [
+          {
+            "title": "Virements bancaires",
+            "description": "Transferts directs depuis les comptes bancaires des locataires pour des paiements fiables.",
+            "icon": "credit-card"
+          },
+          {
+            "title": "Paiements par carte de crédit",
+            "description": "Acceptez les paiements par carte de crédit et de débit avec un traitement sécurisé.",
+            "icon": "credit-card"
+          },
+          {
+            "title": "Paiements en espèces",
+            "description": "Traitez les paiements en espèces reçus en personne avec une documentation appropriée.",
+            "icon": "dollar-sign"
+          },
+          {
+            "title": "Portails de paiement en ligne",
+            "description": "Permettez aux locataires de payer en ligne via des passerelles de paiement sécurisées.",
+            "icon": "smartphone"
+          }
+        ]
+      },
+      "manualPayments": {
+        "title": "Paiements manuels",
+        "description": "Apprenez à traiter manuellement les paiements via l'interface du système.",
+        "content": "Traitement manuel des paiements via le système.",
+        "steps": [
+          {
+            "title": "Accéder à la section paiements",
+            "content": "Accédez au module de paiements depuis le tableau de bord principal"
+          },
+          {
+            "title": "Sélectionner le type de paiement",
+            "content": "Choisissez le type de paiement approprié dans la liste déroulante"
+          },
+          {
+            "title": "Saisir les détails du paiement",
+            "content": "Remplissez toutes les informations de paiement requises"
+          },
+          {
+            "title": "Vérifier les informations",
+            "content": "Vérifiez deux fois tous les détails saisis pour plus de précision"
+          },
+          {
+            "title": "Soumettre le paiement",
+            "content": "Terminez le traitement du paiement"
+          }
+        ]
+      },
+      "automatedProcessing": {
+        "title": "Traitement automatisé",
+        "description": "Configurez le traitement automatique des paiements pour rationaliser les opérations et réduire le travail manuel.",
+        "content": "Configuration des systèmes de traitement automatique.",
+        "features": [
+          {
+            "title": "Configuration des paiements récurrents",
+            "description": "Configurez la collecte automatique des loyers mensuels à partir des comptes des locataires."
+          },
+          {
+            "title": "Calcul automatique des frais de retard",
+            "description": "Appliquez automatiquement les frais de retard basés sur vos politiques de paiement."
+          },
+          {
+            "title": "Rappels de paiement",
+            "description": "Envoyez des rappels automatisés aux locataires avant les dates d'échéance."
+          },
+          {
+            "title": "Intégration bancaire",
+            "description": "Connectez-vous aux systèmes bancaires pour un traitement transparent des transactions."
+          }
+        ]
+      },
+      "paymentReconciliation": {
+        "title": "Rapprochement des paiements",
+        "description": "Faites correspondre les paiements avec les soldes en attente pour maintenir des dossiers financiers précis.",
+        "content": "Correspondance des paiements avec les soldes en attente.",
+        "steps": [
+          {
+            "title": "Importer les relevés bancaires",
+            "description": "Téléchargez les relevés bancaires dans le système pour le rapprochement"
+          },
+          {
+            "title": "Faire correspondre les transactions",
+            "description": "Faites correspondre automatiquement ou manuellement les transactions avec les paiements"
+          },
+          {
+            "title": "Résoudre les écarts",
+            "description": "Enquêtez et résolvez toute transaction non correspondante"
+          },
+          {
+            "title": "Générer des rapports",
+            "description": "Créez des rapports de rapprochement pour la tenue de registres"
+          }
+        ]
+      },
+      "securityCompliance": {
+        "title": "Sécurité et conformité",
+        "description": "Assurez un traitement sécurisé et conforme des paiements en suivant les normes de l'industrie.",
+        "content": "Assurer un traitement sécurisé et conforme.",
+        "measures": [
+          {
+            "title": "Conformité PCI DSS",
+            "description": "Maintenez la conformité aux normes de sécurité des données de l'industrie des cartes de paiement."
+          },
+          {
+            "title": "Chiffrement des données",
+            "description": "Toutes les données de paiement sont chiffrées à l'aide de protocoles standard de l'industrie."
+          },
+          {
+            "title": "Transmission sécurisée",
+            "description": "Les informations de paiement sont transmises via des canaux sécurisés et chiffrés."
+          },
+          {
+            "title": "Pistes d'audit",
+            "description": "Journalisation complète de toutes les transactions de paiement pour la responsabilité."
+          },
+          {
+            "title": "Contrôles d'accès",
+            "description": "Les contrôles d'accès basés sur les rôles limitent les autorisations de traitement des paiements."
+          }
+        ]
+      },
+      "troubleshooting": {
+        "issues": [
+          {
+            "problem": "Le paiement n'apparaît pas dans le système",
+            "solution": "Vérifiez si le paiement a été traité pendant les heures d'ouverture et accordez jusqu'à 24 heures pour que les virements bancaires apparaissent. Contactez le support si le paiement n'apparaît toujours pas après cette période."
+          },
+          {
+            "problem": "Paiement par carte de crédit refusé",
+            "solution": "Vérifiez que les détails de la carte sont corrects et que la carte dispose de fonds suffisants. Certaines banques peuvent signaler les paiements de loyer comme suspects - conseillez aux locataires de contacter leur banque si nécessaire."
+          },
+          {
+            "problem": "Paiement en double enregistré",
+            "solution": "Vérifiez les horodatages et les numéros de référence des transactions. Si un doublon existe, annulez un paiement et émettez un remboursement si nécessaire. Vérifiez toujours avec les registres bancaires avant d'agir."
+          },
+          {
+            "problem": "Le montant du paiement ne correspond pas au loyer dû",
+            "solution": "Révisez l'allocation des paiements et vérifiez si des paiements partiels ou des frais supplémentaires ont été inclus. Ajustez l'application du paiement selon les besoins ou contactez le locataire pour clarification."
+          }
+        ]
+      },
+      "bestPractices": {
+        "tips": [
+          "Vérifiez toujours les montants des paiements avant le traitement",
+          "Conservez des registres détaillés de toutes les transactions de paiement",
+          "Configurez des rappels de paiement automatisés pour réduire les retards",
+          "Rapprochez régulièrement les paiements avec les relevés bancaires",
+          "Fournissez des instructions de paiement claires aux locataires",
+          "Utilisez uniquement des méthodes de traitement de paiement sécurisées"
+        ]
+      },
+      "breadcrumb": {
+        "financialManagement": "Gestion financière"
+      },
+      "sidebar": {
+        "relatedArticlesList": [
+          {
+            "title": "Gestion des comptes résidents",
+            "href": "/user-guide/financial-management/managing-accounts"
+          },
+          {
+            "title": "Génération de rapports financiers",
+            "href": "/user-guide/financial-management/generating-reports"
+          },
+          {
+            "title": "Gestion des frais de retard",
+            "href": "/user-guide/financial-management/late-fees"
+          }
+        ]
       }
     }
   },
@@ -472,7 +652,10 @@
     "nextSteps": "Étapes suivantes",
     "popular": "Populaire",
     "readTime": "min",
-    "whatYoullLearn": "Ce que vous apprendrez"
+    "whatYoullLearn": "Ce que vous apprendrez",
+    "troubleshooting": "Dépannage",
+    "bestPractices": "Meilleures pratiques",
+    "tips": "Conseils pro"
   },
   "navigation": {
     "userGuide": "Guide d'utilisation",

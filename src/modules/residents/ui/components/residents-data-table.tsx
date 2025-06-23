@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -92,13 +91,13 @@ type ResidentsDataTableProps = {
   onPageSizeChange?: (pageSize: number) => void;
 };
 
-export function ResidentsDataTable({
+export const ResidentsDataTable = ({
   filters,
   onEdit,
   onDelete,
   onPageChange,
   onPageSizeChange,
-}: ResidentsDataTableProps) {
+}: ResidentsDataTableProps) => {
   // Initialize tRPC client
   const trpc = useTRPC();
   const t = useTranslations('residents');
@@ -133,32 +132,9 @@ export function ResidentsDataTable({
       ),
     })) as ResidentWithUnit[];
   }, [residentsData, units]);
-
   // Column definitions
   const columns = useMemo(
     (): ColumnDef<ResidentWithUnit>[] => [
-      {
-        id: 'select',
-        header: ({ table }) => (
-          <Checkbox
-            checked={
-              table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && 'indeterminate')
-            }
-            onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
-            aria-label='Select all'
-          />
-        ),
-        cell: ({ row }) => (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={value => row.toggleSelected(!!value)}
-            aria-label='Select row'
-          />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-      },
       {
         accessorKey: 'firstName',
         header: ({ column }) => {
@@ -168,9 +144,10 @@ export function ResidentsDataTable({
               onClick={() =>
                 column.toggleSorting(column.getIsSorted() === 'asc')
               }
+              className='flex items-center gap-x-2'
             >
               {t('columns.firstName')}
-              <ArrowUpDown className='ml-2 h-4 w-4' />
+              <ArrowUpDown className='h-4 w-4' />
             </Button>
           );
         },
@@ -193,9 +170,10 @@ export function ResidentsDataTable({
               onClick={() =>
                 column.toggleSorting(column.getIsSorted() === 'asc')
               }
+              className='flex items-center gap-x-2'
             >
               {t('columns.lastName')}
-              <ArrowUpDown className='ml-2 h-4 w-4' />
+              <ArrowUpDown className='h-4 w-4' />
             </Button>
           );
         },
@@ -209,9 +187,10 @@ export function ResidentsDataTable({
               onClick={() =>
                 column.toggleSorting(column.getIsSorted() === 'asc')
               }
+              className='flex items-center gap-x-2'
             >
               {t('columns.email')}
-              <ArrowUpDown className='ml-2 h-4 w-4' />
+              <ArrowUpDown className='h-4 w-4' />
             </Button>
           );
         },
@@ -299,9 +278,10 @@ export function ResidentsDataTable({
               onClick={() =>
                 column.toggleSorting(column.getIsSorted() === 'asc')
               }
+              className='flex items-center gap-x-2'
             >
               {t('columns.moveInDate')}
-              <ArrowUpDown className='ml-2 h-4 w-4' />
+              <ArrowUpDown className='h-4 w-4' />
             </Button>
           );
         },
@@ -336,15 +316,19 @@ export function ResidentsDataTable({
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => onEdit(resident)}>
-                    <Edit className='mr-2 h-4 w-4' />
-                    {t('columns.editResident')}
+                    <div className='flex items-center gap-x-2'>
+                      <Edit className='h-4 w-4' />
+                      {t('columns.editResident')}
+                    </div>
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => onDelete(resident.id)}
                     className='text-destructive'
                   >
-                    <Trash2 className='mr-2 h-4 w-4' />
-                    {t('columns.deleteResident')}
+                    <div className='flex items-center gap-x-2'>
+                      <Trash2 className='h-4 w-4' />
+                      {t('columns.deleteResident')}
+                    </div>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -355,19 +339,47 @@ export function ResidentsDataTable({
     ],
     [t, onEdit, onDelete]
   );
-
   if (residentsLoading) {
     return <DataTableOnlySkeleton />;
   }
+
+  // Define bulk actions
+  const bulkActions = [
+    {
+      label: t('bulkEdit'),
+      icon: <Edit className='h-4 w-4' />,
+      onClick: (selectedRows: ResidentWithUnit[]) => {
+        // For now, edit the first selected resident
+        // In a real app, you might open a bulk edit dialog
+        if (selectedRows.length > 0) {
+          onEdit(selectedRows[0]);
+        }
+      },
+    },
+    {
+      label: t('bulkDelete'),
+      icon: <Trash2 className='h-4 w-4' />,
+      variant: 'destructive' as const,
+      onClick: (selectedRows: ResidentWithUnit[]) => {
+        // For now, delete the first selected resident
+        // In a real app, you might show a confirmation dialog for bulk delete
+        if (selectedRows.length > 0) {
+          onDelete(selectedRows[0].id);
+        }
+      },
+    },
+  ];
 
   return (
     <DataTable
       columns={columns}
       data={residentsWithUnits}
       showSearch={false}
+      showCheckboxes={true}
+      bulkActions={bulkActions}
       pagination={(residentsData as unknown as ResidentQueryResult)?.pagination}
       onPageChange={onPageChange}
       onPageSizeChange={onPageSizeChange}
     />
   );
-}
+};

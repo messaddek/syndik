@@ -34,6 +34,7 @@ import type {
   UpdateIncome,
   Income,
 } from '@/modules/incomes/types';
+import { formatDateToString, getTodayString } from '@/lib/date-utils';
 
 interface IncomeFormProps {
   income?: Income;
@@ -41,7 +42,11 @@ interface IncomeFormProps {
   onCancel?: () => void;
 }
 
-export function IncomeForm({ income, onSuccess, onCancel }: IncomeFormProps) {
+export const IncomeForm = ({
+  income,
+  onSuccess,
+  onCancel,
+}: IncomeFormProps) => {
   const t = useTranslations('finance.createIncomeDialog');
   const tCommon = useTranslations('common');
   const trpc = useTRPC();
@@ -71,7 +76,7 @@ export function IncomeForm({ income, onSuccess, onCancel }: IncomeFormProps) {
             | 'other',
           month: income.month,
           year: income.year,
-          receivedDate: income.receivedDate.toISOString().split('T')[0],
+          receivedDate: formatDateToString(income.receivedDate),
           notes: income.notes || '',
         }
       : {
@@ -82,7 +87,7 @@ export function IncomeForm({ income, onSuccess, onCancel }: IncomeFormProps) {
           category: 'monthly_fees',
           month: new Date().getMonth() + 1,
           year: new Date().getFullYear(),
-          receivedDate: new Date().toISOString().split('T')[0],
+          receivedDate: getTodayString(),
           notes: '',
         },
   });
@@ -210,9 +215,9 @@ export function IncomeForm({ income, onSuccess, onCancel }: IncomeFormProps) {
                       </span>
                     )}
                 </FormLabel>
-                {showUnitField ? (
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
+                <FormControl>
+                  {showUnitField ? (
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger>
                         <SelectValue
                           placeholder={
@@ -222,30 +227,30 @@ export function IncomeForm({ income, onSuccess, onCancel }: IncomeFormProps) {
                           }
                         />
                       </SelectTrigger>
-                    </FormControl>{' '}
-                    <SelectContent>
-                      {availableUnits.length === 0 ? (
-                        <div className='text-muted-foreground px-2 py-1.5 text-sm'>
-                          {t('fields.noUnitsInBuilding')}
-                        </div>
-                      ) : (
-                        availableUnits.map(unit => (
-                          <SelectItem key={unit.id} value={unit.id}>
-                            Unit {unit.unitNumber} - Floor {unit.floor}
-                          </SelectItem>
-                        ))
-                      )}
-                    </SelectContent>
-                  </Select>
-                ) : (
-                  <div className='border-input bg-muted text-muted-foreground flex h-10 w-full items-center rounded-md border px-3 py-2 text-sm'>
-                    {!selectedBuildingId
-                      ? t('fields.unitDisabledBuilding')
-                      : form.watch('category') !== 'monthly_fees'
-                        ? t('fields.unitDisabledCategory')
-                        : t('fields.unitPlaceholder')}
-                  </div>
-                )}
+                      <SelectContent>
+                        {availableUnits.length === 0 ? (
+                          <div className='text-muted-foreground px-2 py-1.5 text-sm'>
+                            {t('fields.noUnitsInBuilding')}
+                          </div>
+                        ) : (
+                          availableUnits.map(unit => (
+                            <SelectItem key={unit.id} value={unit.id}>
+                              Unit {unit.unitNumber} - Floor {unit.floor}
+                            </SelectItem>
+                          ))
+                        )}
+                      </SelectContent>
+                    </Select>
+                  ) : (
+                    <div className='border-input bg-muted text-muted-foreground flex h-10 w-full items-center rounded-md border px-3 py-2 text-sm'>
+                      {!selectedBuildingId
+                        ? t('fields.unitDisabledBuilding')
+                        : form.watch('category') !== 'monthly_fees'
+                          ? t('fields.unitDisabledCategory')
+                          : t('fields.unitPlaceholder')}
+                    </div>
+                  )}
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -431,4 +436,4 @@ export function IncomeForm({ income, onSuccess, onCancel }: IncomeFormProps) {
       </form>
     </Form>
   );
-}
+};

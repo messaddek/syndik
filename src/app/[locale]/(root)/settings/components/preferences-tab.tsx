@@ -28,7 +28,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
 
-export function PreferencesTab() {
+export const PreferencesTab = () => {
   const [preferences, setPreferences] = useState({
     language: 'en',
     timezone: 'europe/paris',

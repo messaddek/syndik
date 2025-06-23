@@ -29,7 +29,7 @@ interface NotificationPreferences {
   };
 }
 
-export function NotificationSettings() {
+export const NotificationSettings = () => {
   const [preferences, setPreferences] = useState<NotificationPreferences>({
     emailNotifications: true,
     pushNotifications: true,

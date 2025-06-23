@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { ArrowLeft, Building2, Home, Users, MapPin } from 'lucide-react';
 import { useDirection } from '@/hooks/use-direction';
 
-export function BuildingViewSkeleton() {
+export const BuildingViewSkeleton = () => {
   const isRtl = useDirection();
 
   return (

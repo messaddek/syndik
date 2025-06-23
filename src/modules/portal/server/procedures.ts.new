@@ -1,0 +1,974 @@
+import { eq, and, gte, or, isNull, count } from 'drizzle-orm';
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  orgProtectedProcedure,
+} from '@/trpc/init';
+import { accounts, users } from '@/modules/accounts/schema';
+import { residents } from '@/modules/residents/schema';
+import { units } from '@/modules/units/schema';
+import { buildings } from '@/modules/buildings/schema';
+import { meetings } from '@/modules/meetings/schema';
+import { announcements } from '@/modules/announcements/schema';
+import { notifications } from '@/modules/notifications/schema';
+import { residentSetupSchema, residentProfileUpdateSchema } from '../schema';
+import { TRPCError } from '@trpc/server';
+import { clerkClient } from '@clerk/nextjs/server';
+import { z } from 'zod';
+
+// Helper function to detect duplicate key errors in various formats
+function isDuplicateKeyError(error: unknown): boolean {
+  if (!error) return false;
+  
+  // Convert error to string to handle various error shapes
+  const errorStr = String(error);
+  const errorMessage = error instanceof Error ? error.message : errorStr;
+  
+  // Check common duplicate key error patterns
+  const duplicateKeyPhrases = [
+    'duplicate key',
+    'UNIQUE constraint',
+    'unique violation',
+    'uniqueness constraint',
+    'already exists',
+    'users_user_id_unique',
+    'violates unique constraint',
+  ];
+  
+  return duplicateKeyPhrases.some(phrase => 
+    errorMessage.toLowerCase().includes(phrase.toLowerCase())
+  );
+}
+
+export const portalRouter = createTRPCRouter({
+  // Setup resident account (member role)
+  setupResidentAccount: protectedProcedure
+    .input(residentSetupSchema)
+    .mutation(async ({ ctx, input }) => {
+      const { db, userId, orgId } = ctx;
+
+      if (!orgId) {
+        throw new Error('Organization is required');
+      }
+
+      // Check if account already exists
+      const existingAccount = await db
+        .select()
+        .from(accounts)
+        .where(and(eq(accounts.userId, userId), eq(accounts.orgId, orgId)))
+        .limit(1);
+
+      let account;
+      if (existingAccount.length === 0) {
+        // Create new account with member role
+        [account] = await db
+          .insert(accounts)
+          .values({
+            userId,
+            orgId,
+            name: input.name,
+            email: input.email,
+            role: 'member',
+          })
+          .returning();
+      } else {
+        account = existingAccount[0];
+      }
+
+      // Check if resident record exists for this unit
+      const existingResident = await db
+        .select()
+        .from(residents)
+        .where(
+          and(
+            eq(residents.unitId, input.unitId),
+            eq(residents.email, input.email),
+            eq(residents.orgId, orgId)
+          )
+        )
+        .limit(1);
+
+      if (existingResident.length === 0) {
+        throw new Error(
+          'No resident record found for this unit and email. Please contact building management.'
+        );
+      }
+
+      const resident = existingResident[0];
+
+      // Create or update user record
+      const existingUser = await db
+        .select()
+        .from(users)
+        .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
+        .limit(1);
+
+      let user;
+      if (existingUser.length === 0) {
+        [user] = await db
+          .insert(users)
+          .values({
+            userId,
+            orgId,
+            name: input.name,
+            email: input.email,
+            phone: input.phone || null,
+            residentId: resident.id,
+          })
+          .returning();
+      } else {
+        [user] = await db
+          .update(users)
+          .set({
+            name: input.name,
+            phone: input.phone || null,
+            residentId: resident.id,
+            updatedAt: new Date(),
+          })
+          .where(and(eq(users.userId, userId), eq(users.orgId, orgId)))
+          .returning();
+      }
+
+      return { account, user, resident };
+    }),
+    
+  // Get current resident's info
+  getCurrentResident: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    console.log('🏠 getCurrentResident - UserId:', userId, 'OrgId:', orgId);
+
+    // Get user record (only filter by userId)
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.userId, userId)) // FIXED: Only filter by userId
+      .limit(1);
+
+    console.log('🏠 getCurrentResident - User record:', user);
+
+    if (!user || !user.residentId) {
+      throw new Error('Resident not found');
+    }
+
+    // Get resident info with unit and building details
+    const residentInfo = await db
+      .select({
+        resident: residents,
+        unit: units,
+        building: buildings,
+      })
+      .from(residents)
+      .leftJoin(units, eq(residents.unitId, units.id))
+      .leftJoin(buildings, eq(units.buildingId, buildings.id))
+      .where(and(eq(residents.id, user.residentId), eq(residents.orgId, orgId)))
+      .limit(1);
+
+    console.log('🏠 getCurrentResident - Resident info:', residentInfo);
+
+    if (residentInfo.length === 0) {
+      throw new Error('Resident information not found');
+    }
+
+    const result = {
+      user,
+      ...residentInfo[0],
+    };
+
+    console.log('🏠 getCurrentResident - Final result:', result);
+
+    return result;
+  }),
+  
+  // Update profile
+  updateProfile: orgProtectedProcedure
+    .input(residentProfileUpdateSchema)
+    .mutation(async ({ ctx, input }) => {
+      const { db, userId, orgId } = ctx;
+
+      const [updatedUser] = await db
+        .update(users)
+        .set({
+          name: input.name,
+          phone: input.phone,
+          updatedAt: new Date(),
+        })
+        .where(eq(users.userId, userId)) // FIXED: Only filter by userId
+        .returning();
+
+      return updatedUser;
+    }),
+    
+  // Get available units for setup
+  getAvailableUnits: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, orgId } = ctx;
+
+    const availableUnits = await db
+      .select({
+        unit: units,
+        building: buildings,
+      })
+      .from(units)
+      .leftJoin(buildings, eq(units.buildingId, buildings.id))
+      .where(eq(units.orgId, orgId));
+
+    return availableUnits;
+  }),
+  
+  // Get dashboard data for resident
+  getDashboardData: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    // Get user and resident info (only filter by userId)
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.userId, userId)) // FIXED: Only filter by userId
+      .limit(1);
+
+    if (!user || !user.residentId) {
+      throw new Error('Resident not found');
+    }
+
+    // Get unit monthly fee for next payment calculation
+    const residentInfo = await db
+      .select({
+        resident: residents,
+        unit: units,
+      })
+      .from(residents)
+      .leftJoin(units, eq(residents.unitId, units.id))
+      .where(eq(residents.id, user.residentId))
+      .limit(1);
+
+    const currentDate = new Date();
+    const nextMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      1
+    );
+
+    // Get upcoming meetings
+    const upcomingMeetings = await db
+      .select()
+      .from(meetings)
+      .where(
+        and(
+          eq(meetings.orgId, orgId),
+          eq(meetings.isCompleted, false),
+          gte(meetings.scheduledDate, currentDate)
+        )
+      )
+      .orderBy(meetings.scheduledDate)
+      .limit(1);
+
+    // Get recent announcements count
+    const recentAnnouncements = await db
+      .select()
+      .from(announcements)
+      .where(
+        and(
+          eq(announcements.orgId, orgId),
+          eq(announcements.isPublished, true),
+          or(
+            isNull(announcements.expiresAt),
+            gte(announcements.expiresAt, currentDate)
+          ),
+          gte(
+            announcements.publishedAt,
+            new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000)
+          ) // Last 7 days
+        )
+      );
+
+    // Calculate next payment info
+    const monthlyFee = residentInfo[0]?.unit?.monthlyFee || 0;
+
+    return {
+      nextPayment: {
+        amount: monthlyFee,
+        dueDate: nextMonth,
+      },
+      upcomingMeeting: upcomingMeetings[0] || null,
+      announcementsCount: recentAnnouncements.length,
+      residentStatus: {
+        isActive: residentInfo[0]?.resident?.isActive || false,
+        isOwner: residentInfo[0]?.resident?.isOwner || false,
+      },
+    };
+  }),
+  
+  // Get resident profile for the current user (enhanced version for linking)
+  getResidentProfile: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    // Get user with resident link (only filter by userId)
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.userId, userId)) // FIXED: Only filter by userId
+      .limit(1);
+
+    if (!user?.residentId) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+        message: 'User is not linked to a resident record',
+      });
+    }
+
+    // Get full resident profile with unit/building info
+    const [residentProfile] = await db
+      .select({
+        resident: residents,
+        unit: units,
+        building: buildings,
+      })
+      .from(residents)
+      .leftJoin(units, eq(residents.unitId, units.id))
+      .leftJoin(buildings, eq(units.buildingId, buildings.id))
+      .where(eq(residents.id, user.residentId)) // No need to check orgId, resident ID is unique
+      .limit(1);
+
+    if (!residentProfile) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Resident profile not found',
+      });
+    }
+
+    return residentProfile;
+  }),
+  
+  // Check if current user has resident access (with auto-linking)
+  hasResidentAccess: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    // First check if user already has access
+    const [existingUser] = await db
+      .select()
+      .from(users)
+      .where(eq(users.userId, userId)) // FIXED: Search by userId only, not orgId
+      .limit(1);
+
+    console.log(
+      `🔍 hasResidentAccess - User lookup:`,
+      existingUser
+        ? {
+            userId,
+            orgId,
+            userName: existingUser.name,
+            userEmail: existingUser.email,
+            residentId: existingUser.residentId,
+            isLinked: !!existingUser.residentId,
+          }
+        : { userId, orgId, userExists: false }
+    );
+
+    if (existingUser?.residentId) {
+      return {
+        hasAccess: true,
+        residentId: existingUser.residentId,
+        autoLinked: false,
+        message: 'Already linked',
+      };
+    }
+
+    // If not linked, attempt auto-linking by email
+    console.log(`🔗 Attempting auto-link for user ${userId}`);
+
+    try {
+      // Get user's email from Clerk
+      const clerk = await clerkClient();
+      const clerkUser = await clerk.users.getUser(userId);
+      const userEmail = clerkUser.emailAddresses?.[0]?.emailAddress;
+
+      if (!userEmail) {
+        console.log(`❌ No email found for user ${userId}`);
+        return {
+          hasAccess: false,
+          residentId: null,
+          autoLinked: false,
+          message: 'No email address found',
+          error: 'NO_EMAIL',
+        };
+      }
+
+      console.log(`📧 User email: ${userEmail}`);
+      console.log(`🏢 Organization ID: ${orgId}`);
+
+      // Find matching resident by email
+      const [matchingResident] = await db
+        .select()
+        .from(residents)
+        .where(
+          and(
+            eq(residents.email, userEmail),
+            eq(residents.orgId, orgId),
+            eq(residents.isActive, true)
+          )
+        )
+        .limit(1);
+
+      console.log(`🔍 Resident search result:`, {
+        found: !!matchingResident,
+        searchEmail: userEmail,
+        searchOrgId: orgId,
+        residentId: matchingResident?.id,
+        residentName: matchingResident
+          ? `${matchingResident.firstName} ${matchingResident.lastName}`
+          : null,
+      });
+
+      if (!matchingResident) {
+        console.log(`❌ No matching resident found for email ${userEmail}`);
+        return {
+          hasAccess: false,
+          residentId: null,
+          autoLinked: false,
+          message: `No resident record found for email: ${userEmail}`,
+          userEmail,
+          error: 'NO_RESIDENT_MATCH',
+        };
+      }
+
+      console.log(
+        `👤 Found matching resident: ${matchingResident.firstName} ${matchingResident.lastName} (${matchingResident.id})`
+      );
+
+      try {
+        if (existingUser) {
+          // Update existing user record - FIXED: Only update by userId, ensure orgId is set
+          console.log(`🔄 Updating existing user: ${userId}`);
+          
+          const updateResult = await db
+            .update(users)
+            .set({
+              orgId, // Ensure orgId is set or updated
+              residentId: matchingResident.id,
+              name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+              email: matchingResident.email,
+              phone: matchingResident.phone,
+              updatedAt: new Date(),
+            })
+            .where(eq(users.userId, userId)) // FIXED: Only filter by userId
+            .returning();
+          
+          console.log(`✅ Update result:`, updateResult);
+          console.log(`✅ Rows updated: ${updateResult.length}`);
+          
+          if (updateResult.length === 0) {
+            console.warn(`⚠️ Update did not affect any rows for userId: ${userId}`);
+            console.log(`🔍 Verifying user exists...`);
+            
+            // Double-check if the user exists
+            const checkResult = await db
+              .select()
+              .from(users)
+              .where(eq(users.userId, userId))
+              .limit(1);
+              
+            if (checkResult.length === 0) {
+              console.error(`❌ User not found after update attempt. Creating new record.`);
+              await db.insert(users).values({
+                userId: userId,
+                orgId: orgId,
+                name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+                email: matchingResident.email,
+                phone: matchingResident.phone,
+                residentId: matchingResident.id,
+              });
+            } else {
+              console.error(`❌ User exists but update failed. Manual fix required.`);
+            }
+          }
+        } else {
+          // Create new user record with resilient handling
+          console.log(`🆕 Creating new user: ${userId}`);
+          try {
+            await db.insert(users).values({
+              userId: userId,
+              orgId: orgId,
+              name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+              email: matchingResident.email,
+              phone: matchingResident.phone,
+              residentId: matchingResident.id,
+            });
+            console.log(`✅ New user created`);
+          } catch (insertError) {
+            // Handle duplicate key errors 
+            if (isDuplicateKeyError(insertError)) {
+              console.log(`⚠️ Duplicate key detected, attempting update instead`);
+              // Try to update instead
+              await db
+                .update(users)
+                .set({
+                  orgId, // Ensure orgId is set or updated 
+                  residentId: matchingResident.id,
+                  name: `${matchingResident.firstName} ${matchingResident.lastName}`,
+                  email: matchingResident.email,
+                  phone: matchingResident.phone,
+                  updatedAt: new Date(),
+                })
+                .where(eq(users.userId, userId));
+              
+              console.log(`✅ Updated existing user after insert failure`);
+            } else {
+              // If it's not a duplicate key error, rethrow
+              console.error(`❌ Insert failed with non-duplicate error:`, insertError);
+              throw insertError;
+            }
+          }
+        }
+      } catch (dbError) {
+        console.error(`❌ Database operation failed:`, dbError);
+        console.error(`❌ Error details:`, { 
+          message: dbError instanceof Error ? dbError.message : String(dbError),
+          stack: dbError instanceof Error ? dbError.stack : undefined,
+          isDuplicateKey: isDuplicateKeyError(dbError)
+        });
+        throw dbError;
+      }
+      
+      // Verify the update worked
+      const [verifiedUser] = await db
+        .select()
+        .from(users)
+        .where(eq(users.userId, userId)) // FIXED: Only check userId
+        .limit(1);
+        
+      console.log(`🔍 Post-linking verification:`, {
+        userExists: !!verifiedUser,
+        residentId: verifiedUser?.residentId,
+        residentIdMatch: verifiedUser?.residentId === matchingResident.id
+      });
+      
+      if (!verifiedUser || !verifiedUser.residentId) {
+        throw new Error(`Auto-linking verification failed: residentId not set`);
+      }
+
+      return {
+        hasAccess: true,
+        residentId: matchingResident.id,
+        autoLinked: true,
+        message: `Successfully linked to ${matchingResident.firstName} ${matchingResident.lastName}`,
+        residentName: `${matchingResident.firstName} ${matchingResident.lastName}`,
+      };
+    } catch (error) {
+      console.error(`❌ Auto-linking failed for user ${userId}:`, error);
+      console.error(`❌ Error details:`, {
+        errorMessage: error instanceof Error ? error.message : 'Unknown error',
+        errorStack: error instanceof Error ? error.stack : undefined,
+        userId,
+        orgId,
+      });
+      return {
+        hasAccess: false,
+        residentId: null,
+        autoLinked: false,
+        message: 'Auto-linking failed',
+        error: 'AUTO_LINK_FAILED',
+        debugInfo: error instanceof Error ? error.message : 'Unknown error',
+      };
+    }
+  }),
+
+  // Update resident profile (limited fields)
+  updateResidentProfile: orgProtectedProcedure
+    .input(
+      z.object({
+        phone: z.string().optional().nullable(),
+        emergencyContact: z.string().optional().nullable(),
+        emergencyPhone: z.string().optional().nullable(),
+        notes: z.string().optional().nullable(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { db, userId, orgId } = ctx;
+
+      // Get user with resident link
+      const [user] = await db
+        .select()
+        .from(users)
+        .where(eq(users.userId, userId)) // FIXED: Only filter by userId
+        .limit(1);
+
+      if (!user?.residentId) {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: 'User is not linked to a resident record',
+        });
+      }
+
+      // Update resident record
+      const [updatedResident] = await db
+        .update(residents)
+        .set({
+          ...input,
+          updatedAt: new Date(),
+        })
+        .where(eq(residents.id, user.residentId))
+        .returning();
+
+      return updatedResident;
+    }),
+
+  // Get resident dashboard data
+  getResidentDashboard: protectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    if (!orgId) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Organization access required',
+      });
+    }
+
+    // Get resident info linked to user
+    const user = await db
+      .select({
+        resident: residents,
+        unit: units,
+        building: buildings,
+      })
+      .from(users)
+      .leftJoin(residents, eq(users.residentId, residents.id))
+      .leftJoin(units, eq(residents.unitId, units.id))
+      .leftJoin(buildings, eq(units.buildingId, buildings.id))
+      .where(eq(users.userId, userId)) // FIXED: Only filter by userId
+      .limit(1);
+
+    if (!user.length || !user[0].resident) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Resident profile not found',
+      });
+    }
+
+    const residentData = user[0];
+
+    // Get recent announcements
+    const recentAnnouncements = await db
+      .select()
+      .from(announcements)
+      .where(
+        and(
+          eq(announcements.orgId, orgId),
+          eq(announcements.isPublished, true),
+          or(
+            isNull(announcements.buildingId),
+            residentData.unit?.buildingId
+              ? eq(announcements.buildingId, residentData.unit.buildingId)
+              : isNull(announcements.buildingId)
+          )
+        )
+      )
+      .orderBy(announcements.publishedAt)
+      .limit(5);
+
+    // Get upcoming meetings
+    const upcomingMeetings = await db
+      .select()
+      .from(meetings)
+      .where(
+        and(
+          eq(meetings.orgId, orgId),
+          gte(meetings.scheduledDate, new Date()),
+          or(
+            isNull(meetings.buildingId),
+            residentData.unit?.buildingId
+              ? eq(meetings.buildingId, residentData.unit.buildingId)
+              : isNull(meetings.buildingId)
+          )
+        )
+      )
+      .orderBy(meetings.scheduledDate)
+      .limit(3);
+
+    // Get recent notifications
+    const recentNotifications = await db
+      .select()
+      .from(notifications)
+      .where(
+        and(
+          eq(notifications.orgId, orgId),
+          eq(notifications.recipientId, userId),
+          eq(notifications.isRead, false)
+        )
+      )
+      .orderBy(notifications.createdAt)
+      .limit(5);
+
+    return {
+      residentData,
+      announcements: recentAnnouncements,
+      meetings: upcomingMeetings,
+      notifications: recentNotifications,
+    };
+  }),
+
+  // Get announcements for resident
+  getResidentAnnouncements: orgProtectedProcedure
+    .input(
+      z.object({
+        page: z.number().default(1),
+        limit: z.number().default(10),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { db, userId, orgId } = ctx;
+      const { page, limit } = input;
+      const offset = (page - 1) * limit;
+
+      // Get user with resident link
+      const [user] = await db
+        .select()
+        .from(users)
+        .where(eq(users.userId, userId)) // FIXED: Only filter by userId
+        .limit(1);
+
+      if (!user?.residentId) {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: 'User is not linked to a resident record',
+        });
+      }
+
+      // Get resident's building
+      const [resident] = await db
+        .select({
+          building: {
+            id: buildings.id,
+          },
+        })
+        .from(residents)
+        .leftJoin(units, eq(residents.unitId, units.id))
+        .leftJoin(buildings, eq(units.buildingId, buildings.id))
+        .where(eq(residents.id, user.residentId))
+        .limit(1);
+
+      // Get announcements for this building or general announcements
+      const announcementsPromise = db
+        .select()
+        .from(announcements)
+        .where(
+          and(
+            eq(announcements.orgId, orgId),
+            eq(announcements.isPublished, true),
+            or(
+              isNull(announcements.buildingId),
+              resident?.building?.id
+                ? eq(announcements.buildingId, resident.building.id)
+                : isNull(announcements.buildingId)
+            )
+          )
+        )
+        .orderBy(announcements.publishedAt)
+        .offset(offset)
+        .limit(limit);
+
+      // Get count
+      const countPromise = db
+        .select({ count: count() })
+        .from(announcements)
+        .where(
+          and(
+            eq(announcements.orgId, orgId),
+            eq(announcements.isPublished, true),
+            or(
+              isNull(announcements.buildingId),
+              resident?.building?.id
+                ? eq(announcements.buildingId, resident.building.id)
+                : isNull(announcements.buildingId)
+            )
+          )
+        );
+
+      // Wait for both queries
+      const [announcementsList, [{ count: total }]] = await Promise.all([
+        announcementsPromise,
+        countPromise,
+      ]);
+
+      return {
+        announcements: announcementsList,
+        pagination: {
+          page,
+          limit,
+          total,
+          pages: Math.ceil(total / limit),
+        },
+      };
+    }),
+
+  // Get meetings for resident
+  getResidentMeetings: orgProtectedProcedure
+    .input(
+      z.object({
+        page: z.number().default(1),
+        limit: z.number().default(10),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { db, userId, orgId } = ctx;
+      const { page, limit } = input;
+      const offset = (page - 1) * limit;
+
+      // Get user with resident link
+      const [user] = await db
+        .select()
+        .from(users)
+        .where(eq(users.userId, userId)) // FIXED: Only filter by userId
+        .limit(1);
+
+      if (!user?.residentId) {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: 'User is not linked to a resident record',
+        });
+      }
+
+      // Get resident's building
+      const [resident] = await db
+        .select({
+          building: {
+            id: buildings.id,
+          },
+        })
+        .from(residents)
+        .leftJoin(units, eq(residents.unitId, units.id))
+        .leftJoin(buildings, eq(units.buildingId, buildings.id))
+        .where(eq(residents.id, user.residentId))
+        .limit(1);
+
+      // Get meetings for this building or general meetings
+      const meetingsPromise = db
+        .select()
+        .from(meetings)
+        .where(
+          and(
+            eq(meetings.orgId, orgId),
+            or(
+              isNull(meetings.buildingId),
+              resident?.building?.id
+                ? eq(meetings.buildingId, resident.building.id)
+                : isNull(meetings.buildingId)
+            )
+          )
+        )
+        .orderBy(meetings.scheduledDate)
+        .offset(offset)
+        .limit(limit);
+
+      // Get count
+      const countPromise = db
+        .select({ count: count() })
+        .from(meetings)
+        .where(
+          and(
+            eq(meetings.orgId, orgId),
+            or(
+              isNull(meetings.buildingId),
+              resident?.building?.id
+                ? eq(meetings.buildingId, resident.building.id)
+                : isNull(meetings.buildingId)
+            )
+          )
+        );
+
+      // Wait for both queries
+      const [meetingsList, [{ count: total }]] = await Promise.all([
+        meetingsPromise,
+        countPromise,
+      ]);
+
+      return {
+        meetings: meetingsList,
+        pagination: {
+          page,
+          limit,
+          total,
+          pages: Math.ceil(total / limit),
+        },
+      };
+    }),
+
+  // Debug auto-linking process
+  debugAutoLinking: orgProtectedProcedure.query(async ({ ctx }) => {
+    const { db, userId, orgId } = ctx;
+
+    try {
+      // Get user's email from Clerk
+      const clerk = await clerkClient();
+      const clerkUser = await clerk.users.getUser(userId);
+      const userEmail = clerkUser.emailAddresses?.[0]?.emailAddress;
+
+      // Get all residents in the organization
+      const allResidents = await db
+        .select({
+          id: residents.id,
+          firstName: residents.firstName,
+          lastName: residents.lastName,
+          email: residents.email,
+          isActive: residents.isActive,
+        })
+        .from(residents)
+        .where(eq(residents.orgId, orgId));
+
+      // Get current user record (only filter by userId)
+      const currentUser = await db
+        .select()
+        .from(users)
+        .where(eq(users.userId, userId))
+        .limit(1);
+        
+      // Get user history - check if there were previous entries
+      const userHistory = await db
+        .select({
+          id: users.id,
+          residentId: users.residentId,
+          createdAt: users.createdAt,
+          updatedAt: users.updatedAt,
+        })
+        .from(users)
+        .where(eq(users.email, userEmail || ''))
+        .limit(5);
+      
+      // Generate diagnostic information about what resident would match
+      const matchingResident = allResidents.find(
+        r => r.email === userEmail && r.isActive
+      );
+      
+      return {
+        userInfo: {
+          userId,
+          orgId,
+          clerkEmail: userEmail,
+          hasUserRecord: currentUser.length > 0,
+          currentUserRecord: currentUser[0] || null,
+          previousUserRecords: userHistory,
+        },
+        residents: allResidents,
+        matchingResident: matchingResident,
+        sqlQueries: {
+          updateUserQuery: "UPDATE users SET resident_id = ?, org_id = ?, updated_at = ? WHERE user_id = ?",
+          expectedParams: matchingResident 
+            ? { residentId: matchingResident.id, orgId, userId }
+            : null,
+        },
+        totalResidents: allResidents.length,
+        activeResidents: allResidents.filter(r => r.isActive).length,
+      };
+    } catch (error) {
+      console.error('Debug auto-linking failed:', error);
+      return {
+        error: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined,
+        userInfo: { userId, orgId },
+        residents: [],
+        matchingResident: null,
+        totalResidents: 0,
+        activeResidents: 0,
+      };
+    }
+  }),
+});

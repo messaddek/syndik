@@ -5,15 +5,17 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Home } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function UnitViewSkeleton() {
+export const UnitViewSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Header */}
       <div className='flex items-center justify-between'>
         <div className='flex items-center space-x-4'>
           <Button variant='ghost' size='sm' disabled>
-            <ArrowLeft className='mr-2 h-4 w-4' />
-            Back to Units
+            <div className='flex items-center gap-x-2'>
+              <ArrowLeft className='h-4 w-4' />
+              Back to Units
+            </div>
           </Button>
           <div>
             <div className='flex items-center space-x-2'>
@@ -170,4 +172,4 @@ export function UnitViewSkeleton() {
       </Card>
     </div>
   );
-}
+};

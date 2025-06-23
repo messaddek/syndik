@@ -19,7 +19,7 @@ import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
 
-export function SecurityTab() {
+export const SecurityTab = () => {
   const { user } = useUser();
   const trpc = useTRPC();
   const queryClient = useQueryClient();
@@ -280,7 +280,7 @@ export function SecurityTab() {
             <div>
               <h5 className='font-medium text-yellow-800'>Security Status</h5>
               <p className='mt-1 text-sm text-yellow-700'>
-                Your account is secure. Last login:{' '}
+                Your account is secure. Last login:
                 {new Date(lastLogin).toLocaleString()}
               </p>
             </div>

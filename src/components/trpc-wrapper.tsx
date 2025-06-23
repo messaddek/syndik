@@ -16,11 +16,11 @@ interface TRPCWrapperProps {
  * Universal wrapper component for tRPC queries with error boundaries and suspense
  * Provides consistent error handling and loading states across the app
  */
-export function TRPCWrapper({
+export const TRPCWrapper = ({
   children,
   fallback,
   errorFallback,
-}: TRPCWrapperProps) {
+}: TRPCWrapperProps) => {
   return (
     <TRPCErrorBoundary fallback={errorFallback}>
       <Suspense fallback={fallback}>{children}</Suspense>

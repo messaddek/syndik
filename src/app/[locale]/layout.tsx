@@ -30,14 +30,11 @@ interface LocaleLayoutProps {
   params: Promise<{ locale: string }>;
 }
 
-export function generateStaticParams() {
+export const generateStaticParams = () => {
   return routing.locales.map(locale => ({ locale }));
-}
+};
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: LocaleLayoutProps) {
+const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
@@ -58,9 +55,19 @@ export default async function LocaleLayout({
         )}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <LayoutProvider>{children}</LayoutProvider>
+          {/* <SimpleTest /> */}
+          {/* <LocalePersistence /> */}
+          {/* <LocalePersistenceEnhanced /> */}
+          <LayoutProvider>
+            {children}
+            {/* <LocaleDebugEnhanced /> */}
+            {/* <LocaleInvestigator /> */}
+            {/* <CrossSubdomainTester /> */}
+          </LayoutProvider>
         </NextIntlClientProvider>
       </body>
     </html>
   );
-}
+};
+
+export default LocaleLayout;

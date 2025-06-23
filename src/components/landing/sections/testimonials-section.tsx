@@ -5,7 +5,7 @@ import { Star } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '../../ui/card';
 import { Avatar, AvatarFallback } from '../../ui/avatar';
 
-export function TestimonialsSection() {
+export const TestimonialsSection = () => {
   const t = useTranslations('landing.testimonials');
   const testimonials = [
     {
@@ -40,7 +40,7 @@ export function TestimonialsSection() {
   return (
     <div className='bg-white py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        {' '}
+        
         <div className='mx-auto max-w-2xl text-center'>
           <h2 className='text-primary text-base leading-7 font-semibold'>
             {t('subtitle')}
@@ -92,3 +92,4 @@ export function TestimonialsSection() {
     </div>
   );
 }
+

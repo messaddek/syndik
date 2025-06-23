@@ -8,7 +8,7 @@ import { rtlClassMap } from '@/lib/rtl-utils';
 import { type Locale } from '@/i18n/config';
 import { cn } from '@/lib/utils';
 
-export function RTLDemo() {
+export const RTLDemo = () => {
   const locale = useLocale() as Locale;
 
   return (
@@ -26,7 +26,7 @@ export function RTLDemo() {
             This text should align to the end of the reading direction.
           </p>
         </div>
-        {/* Margin/padding demo */}{' '}
+        {/* Margin/padding demo */}
         <div
           className={cn(
             'rounded bg-gray-100 p-4',
@@ -38,14 +38,14 @@ export function RTLDemo() {
         </div>
         {/* Button with icon demo */}
         <div className='flex gap-2'>
-          {' '}
+          
           <Button
             variant='outline'
             className={cn('flex items-center', 'gap-2')}
           >
             <ChevronLeft className='h-4 w-4' />
             <span>Previous</span>
-          </Button>{' '}
+          </Button>
           <Button
             variant='outline'
             className={cn('flex items-center', 'gap-2')}
@@ -63,3 +63,4 @@ export function RTLDemo() {
     </Card>
   );
 }
+

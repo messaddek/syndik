@@ -16,7 +16,7 @@ import {
   Phone,
 } from 'lucide-react';
 
-export default function PrivacyPage() {
+const PrivacyPage = () => {
   const t = useTranslations('privacy');
   const [activeSection, setActiveSection] = useState<string>('');
 
@@ -196,7 +196,6 @@ export default function PrivacyPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    {' '}
                     <nav className='space-y-2'>
                       {sections.map(section => (
                         <a
@@ -647,4 +646,5 @@ export default function PrivacyPage() {
       </div>
     </LandingLayout>
   );
-}
+};
+export default PrivacyPage;

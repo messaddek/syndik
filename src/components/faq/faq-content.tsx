@@ -36,7 +36,7 @@ interface FAQCategory {
   items: FAQItem[];
 }
 
-export function FAQContent() {
+export const FAQContent = () => {
   const [commandQuery, setCommandQuery] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -298,7 +298,7 @@ export function FAQContent() {
             <X className='size-4' />
           </Button>
         )}
-      </div>{' '}
+      </div>
       {/* Command Menu Dialog */}
       <CommandResponsiveDialog
         open={open}
@@ -469,3 +469,4 @@ export function FAQContent() {
     </div>
   );
 }
+

@@ -31,10 +31,10 @@ interface NotificationFormProps {
   onCancel?: () => void;
 }
 
-export function NotificationForm({
+export const NotificationForm = ({
   onSuccess,
   onCancel,
-}: NotificationFormProps) {
+}: NotificationFormProps) => {
   const t = useTranslations('notifications.form');
   const trpc = useTRPC();
   const queryClient = useQueryClient();

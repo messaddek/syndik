@@ -20,11 +20,11 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 
-export function DashboardSkeleton() {
+export const DashboardSkeleton = () => {
   const t = useTranslations('dashboard');
   return (
     <div className='space-y-6'>
-      {/* Overview Cards */}{' '}
+      {/* Overview Cards */}
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
         {[
           { icon: Building2, label: t('buildings') },
@@ -104,7 +104,7 @@ export function DashboardSkeleton() {
             </div>
           </CardContent>
         </Card>
-      </div>{' '}
+      </div>
       {/* Financial Summary */}
       <div className='grid grid-cols-1 gap-6 lg:grid-cols-3'>
         {/* Financial Summary Card */}
@@ -256,7 +256,7 @@ export function DashboardSkeleton() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {' '}
+          
           <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
             {[
               { icon: Building2, label: t('addBuilding') },
@@ -278,3 +278,4 @@ export function DashboardSkeleton() {
     </div>
   );
 }
+

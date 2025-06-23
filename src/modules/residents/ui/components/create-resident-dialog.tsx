@@ -10,11 +10,11 @@ interface CreateResidentDialogProps {
   onSuccess?: () => void;
 }
 
-export function CreateResidentDialog({
+export const CreateResidentDialog = ({
   open,
   onOpenChange,
   onSuccess,
-}: CreateResidentDialogProps) {
+}: CreateResidentDialogProps) => {
   const t = useTranslations('residents.form');
 
   const handleSuccess = () => {

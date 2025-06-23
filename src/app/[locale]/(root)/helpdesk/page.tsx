@@ -9,9 +9,7 @@ type HelpdeskPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function HelpdeskPage({
-  searchParams,
-}: HelpdeskPageProps) {
+const HelpdeskPage = async ({ searchParams }: HelpdeskPageProps) => {
   const startTime = Date.now();
 
   if (process.env.NODE_ENV === 'development') {
@@ -101,4 +99,6 @@ export default async function HelpdeskPage({
       </div>
     </TRPCErrorBoundary>
   );
-}
+};
+
+export default HelpdeskPage;

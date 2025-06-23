@@ -35,7 +35,7 @@ interface BuildingViewProps {
   _searchParams?: Record<string, string | string[] | undefined>;
 }
 
-export function BuildingView({ id, _searchParams }: BuildingViewProps) {
+export const BuildingView = ({ id, _searchParams }: BuildingViewProps) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const trpc = useTRPC();
   const router = useRouter();
@@ -258,7 +258,7 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                   </p>
                   <p className='text-sm'>{building.postalCode}</p>
                 </div>
-              </div>{' '}
+              </div>
               {building.description && (
                 <div>
                   <p className='text-muted-foreground text-sm font-medium'>
@@ -266,7 +266,7 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
                   </p>
                   <p className='text-sm'>{building.description}</p>
                 </div>
-              )}{' '}
+              )}
               <div>
                 <p className='text-muted-foreground text-sm font-medium'>
                   {t('created')}
@@ -396,3 +396,4 @@ export function BuildingView({ id, _searchParams }: BuildingViewProps) {
     </>
   );
 }
+

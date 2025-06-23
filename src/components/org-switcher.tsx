@@ -15,11 +15,11 @@ interface OrgSwitcherProps {
   showCreateOrganization?: boolean;
 }
 
-export function OrgSwitcher({
+export const OrgSwitcher = ({
   appearance = 'navbar',
   hidePersonal = true,
   showCreateOrganization = true,
-}: OrgSwitcherProps) {
+}: OrgSwitcherProps) => {
   const { isLoaded, organization } = useOrganization();
   const { elements } = useClerkAppearance(appearance);
   const [mounted, setMounted] = useState(false);
@@ -135,7 +135,7 @@ export function OrgSwitcher({
       <div
         className={`org-switcher-wrapper ${mounted && resolvedTheme === 'dark' ? 'dark-theme' : 'light-theme'}`}
       >
-        {' '}
+        
         <OrganizationSwitcher
           hidePersonal={hidePersonal}
           afterSelectOrganizationUrl={`/${locale}/org-redirect`}
@@ -171,3 +171,4 @@ export function OrgSwitcher({
     </div>
   );
 }
+

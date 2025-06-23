@@ -39,7 +39,7 @@ import { z } from 'zod';
 
 type FormData = z.infer<typeof residentSetupSchema>;
 
-export function ResidentSetupForm() {
+export const ResidentSetupForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const trpc = useTRPC();
@@ -84,7 +84,7 @@ export function ResidentSetupForm() {
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8'>
       <Card className='w-full max-w-md'>
-        {' '}
+        
         <CardHeader className='text-center'>
           <div className='mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100'>
             <Home className='text-primary h-6 w-6' />
@@ -102,7 +102,7 @@ export function ResidentSetupForm() {
                 name='name'
                 render={({ field }) => (
                   <FormItem>
-                    {' '}
+                    
                     <FormLabel className='flex items-center gap-2'>
                       <User className='h-4 w-4' />
                       {t('fullName')}
@@ -122,7 +122,7 @@ export function ResidentSetupForm() {
                 name='email'
                 render={({ field }) => (
                   <FormItem>
-                    {' '}
+                    
                     <FormLabel className='flex items-center gap-2'>
                       <Mail className='h-4 w-4' />
                       {t('emailAddress')}
@@ -140,13 +140,13 @@ export function ResidentSetupForm() {
                     </p>
                   </FormItem>
                 )}
-              />{' '}
+              />
               <FormField
                 control={form.control}
                 name='phone'
                 render={({ field }) => (
                   <FormItem>
-                    {' '}
+                    
                     <FormLabel className='flex items-center gap-2'>
                       <Phone className='h-4 w-4' />
                       {t('phoneNumber')}
@@ -166,7 +166,7 @@ export function ResidentSetupForm() {
                 name='unitId'
                 render={({ field }) => (
                   <FormItem>
-                    {' '}
+                    
                     <FormLabel className='flex items-center gap-2'>
                       <MapPin className='h-4 w-4' />
                       {t('yourUnit')}
@@ -175,12 +175,12 @@ export function ResidentSetupForm() {
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
-                      {' '}
+                      
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder={t('selectUnit')} />
                         </SelectTrigger>
-                      </FormControl>{' '}
+                      </FormControl>
                       <SelectContent>
                         {unitsLoading ? (
                           <SelectItem value='loading' disabled>
@@ -200,14 +200,14 @@ export function ResidentSetupForm() {
                           ))
                         )}
                       </SelectContent>
-                    </Select>{' '}
+                    </Select>
                     <FormMessage />
                     <p className='text-muted-foreground text-xs'>
                       {t('unitNote')}
                     </p>
                   </FormItem>
                 )}
-              />{' '}
+              />
               <Button
                 type='submit'
                 className='w-full'
@@ -222,3 +222,4 @@ export function ResidentSetupForm() {
     </div>
   );
 }
+

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
@@ -38,13 +38,29 @@ interface TicketDetailsProps {
   onClose: () => void;
 }
 
-export function TicketDetails({ ticketId, onClose }: TicketDetailsProps) {
+export const TicketDetails = ({ ticketId, onClose }: TicketDetailsProps) => {
   const t = useTranslations('helpDesk');
   const [commentContent, setCommentContent] = useState('');
   const [isEditingStatus, setIsEditingStatus] = useState(false);
   const [isEditingPriority, setIsEditingPriority] = useState(false);
   const trpc = useTRPC();
   const queryClient = useQueryClient();
+
+  // Handle escape key to cancel editing
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsEditingStatus(false);
+        setIsEditingPriority(false);
+      }
+    };
+
+    if (isEditingStatus || isEditingPriority) {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [isEditingStatus, isEditingPriority]);
+
   const {
     data: ticket,
     isLoading,
@@ -197,30 +213,46 @@ export function TicketDetails({ ticketId, onClose }: TicketDetailsProps) {
             </CardTitle>
             <div className='mt-2 flex items-center space-x-2'>
               {isEditingStatus ? (
-                <Select
-                  value={ticket.status}
-                  onValueChange={value =>
-                    handleStatusUpdate(value as TicketStatus)
-                  }
-                >
-                  <SelectTrigger className='w-32'>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value='open'>
-                      {t('status_open', { default: 'Open' })}
-                    </SelectItem>
-                    <SelectItem value='in_progress'>
-                      {t('status_in_progress', { default: 'In Progress' })}
-                    </SelectItem>
-                    <SelectItem value='resolved'>
-                      {t('status_resolved', { default: 'Resolved' })}
-                    </SelectItem>
-                    <SelectItem value='closed'>
-                      {t('status_closed', { default: 'Closed' })}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
+                <div className='flex items-center space-x-2'>
+                  <Select
+                    value={ticket.status}
+                    onValueChange={value =>
+                      handleStatusUpdate(value as TicketStatus)
+                    }
+                    onOpenChange={open => {
+                      if (!open) {
+                        // Cancel editing when select closes without selection
+                        setIsEditingStatus(false);
+                      }
+                    }}
+                  >
+                    <SelectTrigger className='w-32' size='xs'>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value='open'>
+                        {t('status_open', { default: 'Open' })}
+                      </SelectItem>
+                      <SelectItem value='in_progress'>
+                        {t('status_in_progress', { default: 'In Progress' })}
+                      </SelectItem>
+                      <SelectItem value='resolved'>
+                        {t('status_resolved', { default: 'Resolved' })}
+                      </SelectItem>
+                      <SelectItem value='closed'>
+                        {t('status_closed', { default: 'Closed' })}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    variant='ghost'
+                    size='sm'
+                    onClick={() => setIsEditingStatus(false)}
+                    className='h-8 w-8 p-0'
+                  >
+                    <X className='h-4 w-4' />
+                  </Button>
+                </div>
               ) : (
                 <Badge
                   className={cn(
@@ -235,32 +267,47 @@ export function TicketDetails({ ticketId, onClose }: TicketDetailsProps) {
                   <Edit className='ml-1 h-3 w-3' />
                 </Badge>
               )}
-
               {isEditingPriority ? (
-                <Select
-                  value={ticket.priority}
-                  onValueChange={value =>
-                    handlePriorityUpdate(value as TicketPriority)
-                  }
-                >
-                  <SelectTrigger className='w-32'>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value='low'>
-                      {t('priority_low', { default: 'Low' })}
-                    </SelectItem>
-                    <SelectItem value='medium'>
-                      {t('priority_medium', { default: 'Medium' })}
-                    </SelectItem>
-                    <SelectItem value='high'>
-                      {t('priority_high', { default: 'High' })}
-                    </SelectItem>
-                    <SelectItem value='urgent'>
-                      {t('priority_urgent', { default: 'Urgent' })}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
+                <div className='flex items-center space-x-2'>
+                  <Select
+                    value={ticket.priority}
+                    onValueChange={value =>
+                      handlePriorityUpdate(value as TicketPriority)
+                    }
+                    onOpenChange={open => {
+                      if (!open) {
+                        // Cancel editing when select closes without selection
+                        setIsEditingPriority(false);
+                      }
+                    }}
+                  >
+                    <SelectTrigger className='w-32' size='xs'>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value='low'>
+                        {t('priority_low', { default: 'Low' })}
+                      </SelectItem>
+                      <SelectItem value='medium'>
+                        {t('priority_medium', { default: 'Medium' })}
+                      </SelectItem>
+                      <SelectItem value='high'>
+                        {t('priority_high', { default: 'High' })}
+                      </SelectItem>
+                      <SelectItem value='urgent'>
+                        {t('priority_urgent', { default: 'Urgent' })}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    variant='ghost'
+                    size='sm'
+                    onClick={() => setIsEditingPriority(false)}
+                    className='h-8 w-8 p-0'
+                  >
+                    <X className='h-4 w-4' />
+                  </Button>
+                </div>
               ) : (
                 <Badge
                   className={cn(
@@ -286,7 +333,6 @@ export function TicketDetails({ ticketId, onClose }: TicketDetailsProps) {
       <CardContent className='space-y-4'>
         {/* Ticket Info */}
         <div className='grid grid-cols-1 gap-3 text-sm'>
-          {' '}
           <div className='flex items-center space-x-2'>
             <User className='text-muted-foreground h-4 w-4' />
             <span className='text-muted-foreground'>
@@ -304,7 +350,7 @@ export function TicketDetails({ ticketId, onClose }: TicketDetailsProps) {
             <span>
               {format(new Date(ticket.createdAt), 'MMM dd, yyyy HH:mm')}
             </span>
-          </div>{' '}
+          </div>
           {ticket.building && (
             <div className='flex items-center space-x-2'>
               <Building className='text-muted-foreground h-4 w-4' />
@@ -426,4 +472,4 @@ export function TicketDetails({ ticketId, onClose }: TicketDetailsProps) {
       </CardContent>
     </Card>
   );
-}
+};

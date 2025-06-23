@@ -1,0 +1,27 @@
+{
+  "title": "Payments & Billing",
+  "description": "View your payment history and manage upcoming charges.",
+  "nextPayment": {
+    "title": "Next Payment Due",
+    "amount": "Amount Due",
+    "monthlyFee": "Monthly syndicate fee",
+    "dueDate": "Due",
+    "payNow": "Pay Now (Coming Soon)",
+    "notAvailable": "Not available"
+  },
+  "unitDetails": {
+    "title": "Unit Details",
+    "unitNumber": "Unit Number",
+    "monthlyFee": "Monthly Fee",
+    "area": "Area",
+    "status": "Status",
+    "occupied": "Occupied",
+    "vacant": "Vacant",
+    "notAvailable": "Unit information not available"
+  },
+  "paymentHistory": {
+    "title": "Payment History",
+    "comingSoon": "Payment History Coming Soon",
+    "description": "You'll be able to view your payment history, download receipts, and track your billing status here."
+  }
+}

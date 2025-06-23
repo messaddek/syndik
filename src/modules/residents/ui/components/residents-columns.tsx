@@ -3,7 +3,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,7 +44,12 @@ interface ColumnActionsProps {
   t: (key: string) => string;
 }
 
-function ColumnActions({ resident, onEdit, onDelete, t }: ColumnActionsProps) {
+const ColumnActions = ({
+  resident,
+  onEdit,
+  onDelete,
+  t,
+}: ColumnActionsProps) => {
   return (
     <div className='flex items-center space-x-1'>
       <ResidentInviteButton resident={resident} />
@@ -65,21 +69,25 @@ function ColumnActions({ resident, onEdit, onDelete, t }: ColumnActionsProps) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => onEdit(resident)}>
-            <Edit className='mr-2 h-4 w-4' />
-            {t('columns.editResident')}
+            <div className='flex items-center gap-x-2'>
+              <Edit className='h-4 w-4' />
+              {t('columns.editResident')}
+            </div>
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => onDelete(resident.id)}
             className='text-destructive'
           >
-            <Trash2 className='mr-2 h-4 w-4' />
-            {t('columns.deleteResident')}
+            <div className='flex items-center gap-x-2'>
+              <Trash2 className='h-4 w-4' />
+              {t('columns.deleteResident')}
+            </div>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
   );
-}
+};
 
 export function createResidentsColumns(
   onEdit: (resident: ResidentWithUnit) => void,
@@ -88,37 +96,16 @@ export function createResidentsColumns(
 ): ColumnDef<ResidentWithUnit>[] {
   return [
     {
-      id: 'select',
-      header: ({ table }) => (
-        <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && 'indeterminate')
-          }
-          onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
-          aria-label='Select all'
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={value => row.toggleSelected(!!value)}
-          aria-label='Select row'
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-    },
-    {
       accessorKey: 'firstName',
       header: ({ column }) => {
         return (
           <Button
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+            className='flex items-center gap-x-2'
           >
             {t('columns.firstName')}
-            <ArrowUpDown className='ml-2 h-4 w-4' />
+            <ArrowUpDown className='h-4 w-4' />
           </Button>
         );
       },
@@ -139,9 +126,10 @@ export function createResidentsColumns(
           <Button
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+            className='flex items-center gap-x-2'
           >
             {t('columns.lastName')}
-            <ArrowUpDown className='ml-2 h-4 w-4' />
+            <ArrowUpDown className='h-4 w-4' />
           </Button>
         );
       },
@@ -153,9 +141,10 @@ export function createResidentsColumns(
           <Button
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+            className='flex items-center gap-x-2'
           >
             {t('columns.email')}
-            <ArrowUpDown className='ml-2 h-4 w-4' />
+            <ArrowUpDown className='h-4 w-4' />
           </Button>
         );
       },
@@ -241,9 +230,10 @@ export function createResidentsColumns(
           <Button
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+            className='flex items-center gap-x-2'
           >
             {t('columns.moveInDate')}
-            <ArrowUpDown className='ml-2 h-4 w-4' />
+            <ArrowUpDown className='h-4 w-4' />
           </Button>
         );
       },

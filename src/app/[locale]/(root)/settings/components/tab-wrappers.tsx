@@ -10,7 +10,7 @@ import { NotificationSettings } from '@/modules/notifications/ui/views/notificat
 import { Loader2 } from 'lucide-react';
 
 // Individual tab skeleton
-function TabSkeleton() {
+const TabSkeleton = () => {
   return (
     <div className='flex min-h-[400px] items-center justify-center'>
       <Loader2 className='h-8 w-8 animate-spin' />
@@ -19,7 +19,7 @@ function TabSkeleton() {
 }
 
 // Profile tab with Suspense
-export function ProfileTabSuspense() {
+export const ProfileTabSuspense = () => {
   return (
     <Suspense fallback={<TabSkeleton />}>
       <ProfileTab />
@@ -28,7 +28,7 @@ export function ProfileTabSuspense() {
 }
 
 // Syndicate tab with Suspense
-export function SyndicateTabSuspense() {
+export const SyndicateTabSuspense = () => {
   return (
     <Suspense fallback={<TabSkeleton />}>
       <SyndicateTab />
@@ -37,7 +37,7 @@ export function SyndicateTabSuspense() {
 }
 
 // Notifications tab with Suspense
-export function NotificationsTabSuspense() {
+export const NotificationsTabSuspense = () => {
   return (
     <Suspense fallback={<TabSkeleton />}>
       <NotificationSettings />
@@ -46,7 +46,7 @@ export function NotificationsTabSuspense() {
 }
 
 // Security tab with Suspense
-export function SecurityTabSuspense() {
+export const SecurityTabSuspense = () => {
   return (
     <Suspense fallback={<TabSkeleton />}>
       <SecurityTab />
@@ -55,7 +55,7 @@ export function SecurityTabSuspense() {
 }
 
 // Billing tab with Suspense (no loading needed as it's all static/mock data)
-export function BillingTabSuspense() {
+export const BillingTabSuspense = () => {
   return (
     <Suspense fallback={<TabSkeleton />}>
       <BillingTab />
@@ -64,7 +64,7 @@ export function BillingTabSuspense() {
 }
 
 // Preferences tab with Suspense (no loading needed as it's mostly static)
-export function PreferencesTabSuspense() {
+export const PreferencesTabSuspense = () => {
   return (
     <Suspense fallback={<TabSkeleton />}>
       <PreferencesTab />

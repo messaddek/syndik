@@ -23,7 +23,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DataTable } from '@/components/ui/data-table';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -46,6 +45,8 @@ import {
   Mail,
   Phone,
   MapPin,
+  UserX,
+  UserPlus,
 } from 'lucide-react';
 import { CreateResidentDialog } from '../components/create-resident-dialog';
 import { EditResidentDialog } from '../components/edit-resident-dialog';
@@ -102,11 +103,22 @@ export const ResidentsView = () => {
     useState<ResidentWithUnit | null>(null);
 
   const t = useTranslations('residents');
-
-  // Confirmation dialog
-  const [ConfirmDialog, confirm] = useConfirm(
+  // Confirmation dialogs
+  const [DeleteConfirmDialog, confirmDelete] = useConfirm(
     t('confirmDelete.title'),
     t('confirmDelete.description'),
+    true
+  );
+
+  const [DeactivateConfirmDialog, confirmDeactivate] = useConfirm(
+    t('confirmDeactivate.title'),
+    t('confirmDeactivate.description'),
+    true
+  );
+
+  const [ActivateConfirmDialog, confirmActivate] = useConfirm(
+    t('confirmActivate.title'),
+    t('confirmActivate.description'),
     true
   ); // URL state management with nuqs
   const [filters, setFilters] = useResidentsFilters();
@@ -122,13 +134,13 @@ export const ResidentsView = () => {
     })
   );
   const units = useMemo(() => unitsData?.data || [], [unitsData?.data]);
-
   // Fetch residents data
   const queryOptions = trpc.residents.getAll.queryOptions({
     ...filters,
     search: debouncedSearch || undefined,
     isOwner: filters.isOwner ?? undefined,
-    isActive: filters.isActive ?? undefined,
+    isActive:
+      filters.isActive === 'all' ? undefined : filters.isActive === 'active',
   });
   const {
     data: residentsData,
@@ -146,20 +158,138 @@ export const ResidentsView = () => {
     })
   );
 
+  // Update mutation for toggling active status
+  const updateResident = useMutation(
+    trpc.residents.update.mutationOptions({
+      onSuccess: () => {
+        queryClient.invalidateQueries(trpc.residents.getAll.queryOptions({}));
+        queryClient.invalidateQueries({ queryKey: [['search', 'global']] });
+      },
+    })
+  );
+
   // Event handlers
   const handleEdit = useCallback((resident: ResidentWithUnit) => {
     setEditingResident(resident);
   }, []);
-
   const handleDelete = useCallback(
     async (id: string) => {
-      const confirmed = await confirm();
+      const confirmed = await confirmDelete();
       if (confirmed) {
         await deleteResident.mutateAsync({ id });
       }
     },
-    [confirm, deleteResident]
-  ); // Transform data to include unit information
+    [confirmDelete, deleteResident]
+  );
+  const handleToggleActive = useCallback(
+    async (resident: ResidentWithUnit) => {
+      const confirmed = resident.isActive
+        ? await confirmDeactivate()
+        : await confirmActivate();
+      if (confirmed) {
+        await updateResident.mutateAsync({
+          id: resident.id,
+          data: { isActive: !resident.isActive },
+        });
+      }
+    },
+    [confirmDeactivate, confirmActivate, updateResident]
+  );
+
+  const handleBulkEdit = useCallback(
+    (selectedResidents: ResidentWithUnit[]) => {
+      // Bulk edit logic - for now just log the selected residents
+      console.log('Bulk edit:', selectedResidents);
+      // In the future, this could open a bulk edit dialog
+    },
+    []
+  );
+  // Bulk delete handler
+  const handleBulkDelete = useCallback(
+    async (selectedResidents: ResidentWithUnit[]) => {
+      const confirmed = await confirmDelete();
+      if (confirmed) {
+        // Bulk delete logic
+        console.log('Bulk delete:', selectedResidents);
+        // In the future, implement actual bulk delete
+        for (const resident of selectedResidents) {
+          await deleteResident.mutateAsync({ id: resident.id });
+        }
+      }
+    },
+    [confirmDelete, deleteResident]
+  );
+
+  const handleBulkActivate = useCallback(
+    async (selectedResidents: ResidentWithUnit[]) => {
+      const confirmed = await confirmActivate();
+      if (confirmed) {
+        for (const resident of selectedResidents) {
+          await updateResident.mutateAsync({
+            id: resident.id,
+            data: { isActive: true },
+          });
+        }
+      }
+    },
+    [confirmActivate, updateResident]
+  );
+
+  const handleBulkDeactivate = useCallback(
+    async (selectedResidents: ResidentWithUnit[]) => {
+      const confirmed = await confirmDeactivate();
+      if (confirmed) {
+        for (const resident of selectedResidents) {
+          await updateResident.mutateAsync({
+            id: resident.id,
+            data: { isActive: false },
+          });
+        }
+      }
+    },
+    [confirmDeactivate, updateResident]
+  );
+  const bulkActions = useMemo(
+    () => [
+      {
+        label: t('bulkActions.edit'),
+        icon: <Edit className='h-4 w-4' />,
+        onClick: handleBulkEdit,
+        variant: 'default' as const,
+      },
+      {
+        label: t('bulkActions.activate'),
+        icon: <UserPlus className='h-4 w-4' />,
+        onClick: handleBulkActivate,
+        variant: 'default' as const,
+        disabled: (selectedRows: ResidentWithUnit[]) =>
+          selectedRows.every(r => r.isActive),
+      },
+      {
+        label: t('bulkActions.deactivate'),
+        icon: <UserX className='h-4 w-4' />,
+        onClick: handleBulkDeactivate,
+        variant: 'default' as const,
+        disabled: (selectedRows: ResidentWithUnit[]) =>
+          selectedRows.every(r => !r.isActive),
+      },
+      {
+        label: t('bulkActions.delete'),
+        icon: <Trash2 className='h-4 w-4' />,
+        onClick: handleBulkDelete,
+        variant: 'destructive' as const,
+      },
+    ],
+    [
+      t,
+      handleBulkEdit,
+      handleBulkActivate,
+      handleBulkDeactivate,
+      handleBulkDelete,
+    ]
+  );
+
+  // Transform data to include unit information
   const residentsWithUnits = useMemo(() => {
     const typedResidentsData = residentsData as ResidentQueryResult | undefined;
     if (!typedResidentsData?.data || !Array.isArray(units)) return [];
@@ -174,37 +304,15 @@ export const ResidentsView = () => {
   const columns = useMemo(
     (): ColumnDef<ResidentWithUnit>[] => [
       {
-        id: 'select',
-        header: ({ table }) => (
-          <Checkbox
-            checked={
-              table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && 'indeterminate')
-            }
-            onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
-            aria-label='Select all'
-          />
-        ),
-        cell: ({ row }) => (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={value => row.toggleSelected(!!value)}
-            aria-label='Select row'
-            className='mr-0 ml-2 rtl:mr-2 rtl:ml-0'
-          />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-      },
-      {
         accessorKey: 'firstName',
         header: ({ column }) => (
           <Button
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+            className='flex items-center gap-x-2'
           >
             {t('columns.firstName')}
-            <ArrowUpDown className='ml-2 h-4 w-4' />
+            <ArrowUpDown className='h-4 w-4' />
           </Button>
         ),
         cell: ({ row }) => (
@@ -223,9 +331,10 @@ export const ResidentsView = () => {
           <Button
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+            className='flex items-center gap-x-2'
           >
             {t('columns.lastName')}
-            <ArrowUpDown className='ml-2 h-4 w-4' />
+            <ArrowUpDown className='h-4 w-4' />
           </Button>
         ),
       },
@@ -235,9 +344,10 @@ export const ResidentsView = () => {
           <Button
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+            className='flex items-center gap-x-2'
           >
             {t('columns.email')}
-            <ArrowUpDown className='ml-2 h-4 w-4' />
+            <ArrowUpDown className='h-4 w-4' />
           </Button>
         ),
         cell: ({ row }) => (
@@ -289,15 +399,15 @@ export const ResidentsView = () => {
           return (
             <Badge variant={isOwner ? 'default' : 'secondary'}>
               {isOwner ? (
-                <>
-                  <UserCheck className='mr-1 h-3 w-3' />
+                <div className='flex items-center gap-x-2'>
+                  <UserCheck className='h-3 w-3' />
                   {t('ownerStatus')}
-                </>
+                </div>
               ) : (
-                <>
-                  <User className='mr-1 h-3 w-3' />
+                <div className='flex items-center gap-x-2'>
+                  <User className='h-3 w-3' />
                   {t('tenantStatus')}
-                </>
+                </div>
               )}
             </Badge>
           );
@@ -321,9 +431,10 @@ export const ResidentsView = () => {
           <Button
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+            className='flex items-center gap-x-2'
           >
             {t('columns.moveInDate')}
-            <ArrowUpDown className='ml-2 h-4 w-4' />
+            <ArrowUpDown className='h-4 w-4' />
           </Button>
         ),
         cell: ({ row }) => {
@@ -357,15 +468,34 @@ export const ResidentsView = () => {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => handleEdit(resident)}>
-                    <Edit className='mr-2 h-4 w-4' />
-                    {t('columns.editResident')}
+                    <div className='flex items-center gap-x-2'>
+                      <Edit className='h-4 w-4' />
+                      {t('columns.editResident')}
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => handleToggleActive(resident)}
+                  >
+                    {resident.isActive ? (
+                      <div className='flex items-center gap-x-2'>
+                        <UserX className='h-4 w-4' />
+                        {t('columns.deactivateResident')}
+                      </div>
+                    ) : (
+                      <div className='flex items-center gap-x-2'>
+                        <UserPlus className='h-4 w-4' />
+                        {t('columns.activateResident')}
+                      </div>
+                    )}
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => handleDelete(resident.id)}
                     className='text-destructive'
                   >
-                    <Trash2 className='mr-2 h-4 w-4' />
-                    {t('columns.deleteResident')}
+                    <div className='flex items-center gap-x-2'>
+                      <Trash2 className='h-4 w-4' />
+                      {t('columns.deleteResident')}
+                    </div>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -374,28 +504,28 @@ export const ResidentsView = () => {
         },
       },
     ],
-    [t, handleEdit, handleDelete]
+    [t, handleEdit, handleDelete, handleToggleActive]
   );
 
   const handleSuccess = () => {
     setIsCreateDialogOpen(false);
     setEditingResident(null);
   };
-
   const clearFilters = () => {
     setFilters({
       search: '',
       unitId: '',
       isOwner: null,
-      isActive: true,
+      isActive: 'all',
     });
   };
-
   const hasActiveFilters = !!(
     filters.search ||
     filters.unitId ||
-    filters.isOwner !== null
+    filters.isOwner !== null ||
+    filters.isActive !== 'all'
   );
+
   return (
     <div className='space-y-6'>
       {/* Header */}
@@ -403,14 +533,13 @@ export const ResidentsView = () => {
         title={t('title')}
         description={t('subtitle')}
         ctaButtonContent={
-          <>
+          <div className='flex items-center gap-x-2'>
             <Plus className='h-4 w-4' />
             {t('addNew')}
-          </>
+          </div>
         }
         ctaButtonCallback={() => setIsCreateDialogOpen(true)}
       />
-
       {/* Filters */}
       <Card>
         <CardHeader>
@@ -467,7 +596,7 @@ export const ResidentsView = () => {
                     units.map(unit => {
                       return (
                         <SelectItem key={unit.id} value={unit.id}>
-                          Unit {unit.unitNumber} - Building{' '}
+                          Unit {unit.unitNumber} - Building
                           {unit.building?.name || 'N/A'}
                         </SelectItem>
                       );
@@ -507,10 +636,10 @@ export const ResidentsView = () => {
             <div className='space-y-2'>
               <Label htmlFor='status'>{t('columns.status')}</Label>
               <Select
-                value={filters.isActive ? 'active' : 'inactive'}
+                value={filters.isActive}
                 onValueChange={value =>
                   setFilters({
-                    isActive: value === 'active',
+                    isActive: value,
                     page: 1,
                   })
                 }
@@ -519,6 +648,7 @@ export const ResidentsView = () => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value='all'>{t('status.all')}</SelectItem>
                   <SelectItem value='active'>{t('status.active')}</SelectItem>
                   <SelectItem value='inactive'>
                     {t('status.inactive')}
@@ -534,8 +664,10 @@ export const ResidentsView = () => {
                 {t('filtersApplied')}
               </p>
               <Button variant='outline' size='sm' onClick={clearFilters}>
-                <X className='mr-2 h-4 w-4' />
-                {t('clearFilters')}
+                <div className='flex items-center gap-x-2'>
+                  <X className='h-4 w-4' />
+                  {t('clearFilters')}
+                </div>
               </Button>
             </div>
           )}
@@ -554,6 +686,8 @@ export const ResidentsView = () => {
         }
         onPageChange={page => setFilters({ page })}
         onPageSizeChange={pageSize => setFilters({ pageSize, page: 1 })}
+        showCheckboxes
+        bulkActions={bulkActions}
       />
       {/* Dialogs */}
       <CreateResidentDialog
@@ -571,7 +705,9 @@ export const ResidentsView = () => {
         onSuccess={handleSuccess}
         resident={editingResident || undefined}
       />
-      <ConfirmDialog />
+      <DeleteConfirmDialog />
+      <DeactivateConfirmDialog />
+      <ActivateConfirmDialog />
     </div>
   );
 };

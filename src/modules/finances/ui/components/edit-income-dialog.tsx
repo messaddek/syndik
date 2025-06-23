@@ -12,12 +12,12 @@ interface EditIncomeDialogProps {
   onSuccess?: () => void;
 }
 
-export function EditIncomeDialog({
+export const EditIncomeDialog = ({
   income,
   open,
   onOpenChange,
   onSuccess,
-}: EditIncomeDialogProps) {
+}: EditIncomeDialogProps) => {
   const t = useTranslations('finance');
 
   const handleSuccess = () => {
@@ -34,6 +34,7 @@ export function EditIncomeDialog({
       onOpenChange={onOpenChange}
       title={`${t('buttons.edit')} ${t('tabs.incomes')}`}
       description='Update the income details below.'
+      className='sm:max-w-4xl'
     >
       <IncomeForm
         income={income}

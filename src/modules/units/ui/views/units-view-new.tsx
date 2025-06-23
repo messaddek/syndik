@@ -456,8 +456,10 @@ const UnitsView = () => {
                 {pagination?.total || 0} {t('title').toLowerCase()} found
               </p>
               <Button variant='outline' size='sm' onClick={clearFilters}>
-                <X className='mr-2 h-4 w-4' />
-                {t('clearFilters')}
+                <div className='flex items-center gap-x-2'>
+                  <X className='h-4 w-4' />
+                  {t('clearFilters')}
+                </div>
               </Button>
             </div>
           )}
@@ -524,7 +526,7 @@ const UnitsView = () => {
                   </div>
                 </div>
                 <CardDescription>
-                  {unit.building?.name ?? t('unknownBuilding')} - {t('floor')}{' '}
+                  {unit.building?.name ?? t('unknownBuilding')} - {t('floor')}
                   {unit.floor}
                 </CardDescription>
               </CardHeader>

@@ -30,7 +30,7 @@ import {
 import { Search, Eye, MessageSquare, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 
-export function AdminB2BTicketsView() {
+export const AdminB2BTicketsView = () => {
   const t = useTranslations('admin');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -319,4 +319,4 @@ export function AdminB2BTicketsView() {
       </Card>
     </div>
   );
-}
+};

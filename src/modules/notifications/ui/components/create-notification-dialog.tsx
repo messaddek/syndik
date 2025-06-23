@@ -10,11 +10,11 @@ interface CreateNotificationDialogProps {
   onSuccess?: () => void;
 }
 
-export function CreateNotificationDialog({
+export const CreateNotificationDialog = ({
   open,
   onOpenChange,
   onSuccess,
-}: CreateNotificationDialogProps) {
+}: CreateNotificationDialogProps) => {
   const t = useTranslations('notifications.form');
 
   const handleSuccess = () => {

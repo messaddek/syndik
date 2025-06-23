@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
-export function DashboardOverviewSkeleton() {
+export const DashboardOverviewSkeleton = () => {
   return (
     <div className='space-y-6'>
       {/* Overview Cards */}
@@ -85,7 +85,7 @@ export function DashboardOverviewSkeleton() {
   );
 }
 
-export function DashboardCardSkeleton() {
+export const DashboardCardSkeleton = () => {
   return (
     <Card>
       <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
@@ -100,7 +100,7 @@ export function DashboardCardSkeleton() {
   );
 }
 
-export function ActivityListSkeleton() {
+export const ActivityListSkeleton = () => {
   return (
     <div className='space-y-3'>
       {[1, 2, 3, 4, 5].map(i => (

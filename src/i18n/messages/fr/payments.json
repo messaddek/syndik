@@ -1,0 +1,27 @@
+{
+  "title": "Paiements et Facturation",
+  "description": "Consultez votre historique de paiements et gérez les frais à venir.",
+  "nextPayment": {
+    "title": "Prochain Paiement Dû",
+    "amount": "Montant Dû",
+    "monthlyFee": "Frais de syndic mensuel",
+    "dueDate": "Échéance",
+    "payNow": "Payer Maintenant (Bientôt)",
+    "notAvailable": "Non disponible"
+  },
+  "unitDetails": {
+    "title": "Détails de l'Unité",
+    "unitNumber": "Numéro d'Unité",
+    "monthlyFee": "Frais Mensuels",
+    "area": "Superficie",
+    "status": "Statut",
+    "occupied": "Occupée",
+    "vacant": "Vacante",
+    "notAvailable": "Informations de l'unité non disponibles"
+  },
+  "paymentHistory": {
+    "title": "Historique des Paiements",
+    "comingSoon": "Historique des Paiements Bientôt",
+    "description": "Vous pourrez consulter votre historique de paiements, télécharger des reçus et suivre le statut de vos factures ici."
+  }
+}

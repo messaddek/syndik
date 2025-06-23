@@ -143,7 +143,7 @@ export const PopularArticles: React.FC<PopularArticlesProps> = ({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        {' '}
+        
         <div className='space-y-3'>
           {popularArticles.map((article: PopularArticle, index: number) => {
             const staticData =
@@ -199,3 +199,4 @@ export const PopularArticles: React.FC<PopularArticlesProps> = ({
 };
 
 export default PopularArticles;
+

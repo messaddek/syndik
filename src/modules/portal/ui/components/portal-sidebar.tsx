@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import {
   CreditCard,
@@ -13,6 +13,7 @@ import {
   LayoutDashboard,
   Home,
   Shield,
+  ArrowLeft,
 } from 'lucide-react';
 import { GrAnnounce } from 'react-icons/gr';
 
@@ -27,18 +28,34 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { UserButton } from '@clerk/nextjs';
-import { Link, usePathname, useRouter } from '@/i18n/routing';
+import { usePathname, useRouter } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { OrgSwitcher } from '@/components/org-switcher';
 import { useHelpdeskPermissions } from '@/modules/helpdesk/hooks/use-helpdesk-permissions';
+import {
+  getLandingUrl,
+  buildSubdomainUrl,
+  SUBDOMAINS,
+} from '@/lib/subdomain-utils';
 
-export function PortalSidebar() {
+export const PortalSidebar = () => {
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
   const { canAccessAdminPortal } = useHelpdeskPermissions();
+  const { isMobile, setOpenMobile } = useSidebar();
+
+  // Function to handle navigation and close sidebar on mobile
+  const handleNavigation = (href: string) => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+    router.push(href);
+  };
 
   const navigationItems = [
     {
@@ -100,9 +117,18 @@ export function PortalSidebar() {
       ],
     },
   ];
-
   const handleDashboardAccess = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
     router.push('/org-redirect');
+  };
+  const handleBackToLanding = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+    const landingUrl = getLandingUrl(locale);
+    window.location.href = landingUrl;
   };
 
   return (
@@ -131,20 +157,34 @@ export function PortalSidebar() {
           <LayoutDashboard className='h-4 w-4' />
           <span>{t('portal.accessDashboard')}</span>
         </Button>
+
+        {/* Back to Landing Button */}
+        <Button
+          variant='outline'
+          size='sm'
+          onClick={handleBackToLanding}
+          className='flex w-full items-center gap-2 text-gray-600 hover:text-gray-900'
+        >
+          <ArrowLeft className='h-4 w-4 rtl:rotate-180' />
+          <span>{t('navigation.backToLanding')}</span>
+        </Button>
       </SidebarHeader>
       <SidebarContent>
         {navigationItems.map(group => (
           <SidebarGroup key={group.title}>
             <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
             <SidebarGroupContent>
+              
               <SidebarMenu>
                 {group.items.map(item => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={pathname === item.url}>
-                      <Link href={item.url}>
-                        <item.icon className='h-4 w-4' />
-                        <span>{item.title}</span>
-                      </Link>
+                    <SidebarMenuButton
+                      isActive={pathname === item.url}
+                      className='cursor-pointer'
+                      onClick={() => handleNavigation(item.url)}
+                    >
+                      <item.icon className='h-4 w-4' />
+                      <span>{item.title}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -152,12 +192,26 @@ export function PortalSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
-      </SidebarContent>{' '}
+      </SidebarContent>
       <SidebarFooter className='border-t p-4'>
+        
         {canAccessAdminPortal && (
           <div className='mb-3'>
+            
             <Button
-              onClick={() => router.push('/admin')}
+              onClick={() => {
+                if (isMobile) {
+                  setOpenMobile(false);
+                }
+                const isDevelopment = process.env.NODE_ENV === 'development';
+
+                if (isDevelopment) {
+                  router.push('/admin-dev');
+                } else {
+                  const adminUrl = buildSubdomainUrl(SUBDOMAINS.ADMIN);
+                  window.location.href = adminUrl;
+                }
+              }}
               className='flex w-full items-center gap-2 bg-orange-600 text-white hover:bg-orange-700'
               size='sm'
             >
@@ -166,9 +220,8 @@ export function PortalSidebar() {
             </Button>
           </div>
         )}
-
         <div className='flex items-center gap-3'>
-          <UserButton afterSignOutUrl='/' />
+          <UserButton />
           <div className='min-w-0 flex-1'>
             <p className='truncate text-sm font-medium'>
               {t('portal.residentAccount')}
@@ -182,3 +235,4 @@ export function PortalSidebar() {
     </Sidebar>
   );
 }
+

@@ -37,7 +37,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { format } from 'date-fns';
 
-export function AdminUsersView() {
+export const AdminUsersView = () => {
   const t = useTranslations('admin');
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');

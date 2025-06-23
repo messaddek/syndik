@@ -27,15 +27,29 @@ function getQueryClient() {
 function getUrl() {
   const base = (() => {
     if (typeof window !== 'undefined') return '';
-    return process.env.NEXT_PUBLIC_BASE_URL;
+
+    // Use the appropriate main URL for API calls in SSR
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    if (isDevelopment) {
+      return process.env.NEXT_PUBLIC_DEV_MAIN_URL || 'http://localhost:3000';
+    }
+
+    // Production/Staging: Use the correct main URL based on environment
+    const environment = process.env.NEXT_PUBLIC_ENVIRONMENT;
+    const mainUrl = process.env.NEXT_PUBLIC_MAIN_URL;
+
+    if (environment === 'staging' && mainUrl) {
+      return mainUrl; // https://staging.syndik.ma
+    }
+
+    // Default to production URL
+    return mainUrl || 'https://syndik.ma';
   })();
   return `${base}/api/trpc`;
 }
-export function TRPCReactProvider(
-  props: Readonly<{
+export const TRPCReactProvider = (props: Readonly<{
     children: React.ReactNode;
-  }>
-) {
+  }>) => {
   // NOTE: Avoid useState when initializing the query client if you don't
   //       have a suspense boundary between this and the code that may
   //       suspend because React will throw away the client on the initial

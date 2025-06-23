@@ -85,6 +85,9 @@
     "haveInvitation": "لديك دعوة بالفعل؟",
     "haveInvitationDescription": "تحقق من بريدك الإلكتروني واتبع رابط الدعوة لإكمال عملية الإعداد.",
     "details": "التفاصيل:",
+    "refresh": "تحديث",
+    "refreshSuccess": "تم تحديث فحص الوصول",
+    "refreshError": "فشل في تحديث الوصول",
     "backToDashboard": "العودة إلى لوحة التحكم"
   }
 }

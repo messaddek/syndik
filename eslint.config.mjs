@@ -13,7 +13,6 @@ const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     rules: {
-      // Strict unused variables - this will show red squiggles in VS Code
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -23,20 +22,37 @@ const eslintConfig = [
           destructuredArrayIgnorePattern: '^_',
         },
       ],
-
-      // Turn off the base rule to avoid conflicts
       'no-unused-vars': 'off',
-
-      // Additional strict rules that will show as errors in editor
       'react-hooks/exhaustive-deps': 'error',
       'no-console': 'off',
       'prefer-const': 'error',
       'no-var': 'error',
-
-      // These rules help catch common issues
       'react/jsx-no-undef': 'error',
       'react/jsx-uses-react': 'error',
       'react/jsx-uses-vars': 'error',
+
+      // Prefer arrow functions for React components (all must be arrow functions)
+      'react/function-component-definition': [
+        'error',
+        {
+          namedComponents: 'arrow-function',
+          unnamedComponents: 'arrow-function',
+          function: 'arrow-function',
+          functions: 'arrow-function',
+        },
+      ],
+
+      // Only ban: {' '}
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: "JSXExpressionContainer > Literal[value=' ']",
+          message:
+            "Unnecessary {' '} detected in JSX. Use natural spacing or Tailwind classes instead.",
+        },
+      ],
+      'react/no-unescaped-entities': 'off',
+      'react/jsx-curly-spacing': 'off',
     },
   },
 ];

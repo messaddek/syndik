@@ -10,6 +10,12 @@
   "noResidentsFiltered": "No residents found for the selected unit.",
   "totalResidents": "Total Residents",
   "activeResidents": "Active Residents",
+  "bulkActions": {
+    "edit": "Edit Selected",
+    "delete": "Delete Selected",
+    "activate": "Activate Selected",
+    "deactivate": "Deactivate Selected"
+  },
   "allUnits": "All units",
   "clearFilter": "Clear Filter",
   "filterByUnit": "Filter by Unit:",
@@ -46,6 +52,8 @@
     "noUnitsAvailable": "No units available",
     "owner": "Owner",
     "ownerDescription": "Check if this resident is the owner of the unit",
+    "active": "Active Status",
+    "activeDescription": "Check if this resident is currently active",
     "moveInDate": "Move In Date",
     "moveInDatePlaceholder": "Select move in date",
     "moveOutDate": "Move Out Date",
@@ -78,6 +86,7 @@
     "invitationError": "Failed to send invitation"
   },
   "status": {
+    "all": "All",
     "active": "Active",
     "inactive": "Inactive",
     "invited": "Invited",
@@ -95,11 +104,21 @@
     "actions": "Actions",
     "copyEmail": "Copy email",
     "editResident": "Edit resident",
+    "activateResident": "Activate resident",
+    "deactivateResident": "Deactivate resident",
     "deleteResident": "Delete resident"
   },
   "confirmDelete": {
     "title": "Delete Resident",
     "description": "Are you sure you want to delete this resident? This action cannot be undone."
+  },
+  "confirmDeactivate": {
+    "title": "Deactivate Resident",
+    "description": "Are you sure you want to deactivate this resident? They will no longer have access to the portal."
+  },
+  "confirmActivate": {
+    "title": "Activate Resident",
+    "description": "Are you sure you want to activate this resident? They will regain access to the portal."
   },
   "bulkInvite": {
     "title": "Bulk Invite Residents",
@@ -111,7 +130,21 @@
     "sendInvitations": "Send Invitations",
     "successMessage": "Successfully sent {count} invitation(s)",
     "partialSuccessMessage": "Sent {successCount} invitations successfully, {errorCount} failed",
-    "allFailedMessage": "Failed to send all invitations"
+    "allFailedMessage": "Failed to send all invitations",
+    "alreadyInvited": "{count} resident(s) already have pending invitations",
+    "otherErrors": "{count} invitation(s) failed for other reasons",
+    "failedToSend": "Failed to send invitations",
+    "selectResidents": "Please select at least one resident to invite",
+    "sending": "Sending...",
+    "alreadyMember": "{count, plural, =1 {# resident is} other {# residents are}} already a member: {names}",
+    "alreadyInvitedDetailed": "{count, plural, =1 {# resident already has} other {# residents already have}} pending invitations: {names}",
+    "invalidEmails": "Invalid email addresses: {names}",
+    "otherErrorsDetailed": "{count, plural, =1 {# invitation failed} other {# invitations failed}} for other reasons. Check console for details.",
+    "residentsCount": "{count, plural, =1 {# resident} other {# residents}}",
+    "notYetInvited": "not yet invited",
+    "selected": "selected",
+    "noUninvitedMessage": "All active residents have already been invited to the portal.",
+    "loadingResidents": "Loading residents..."
   },
   "invite": {
     "dialogTitle": "Invite to Resident Portal",

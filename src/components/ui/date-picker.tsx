@@ -14,6 +14,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
+import { formatDateToString } from '@/lib/date-utils';
 import { type Locale } from '@/i18n/config';
 
 // Locale mapping for date-fns
@@ -34,7 +35,7 @@ interface DatePickerProps {
   maxDate?: Date;
 }
 
-export function DatePicker({
+export const DatePicker = ({
   value,
   onChange,
   placeholder = 'Pick a date',
@@ -43,7 +44,7 @@ export function DatePicker({
   align = 'start',
   minDate = new Date('1900-01-01'),
   maxDate = new Date(),
-}: DatePickerProps) {
+}: DatePickerProps) => {
   const locale = useLocale() as Locale;
   const dateLocale = localeMap[locale];
 
@@ -72,12 +73,18 @@ export function DatePicker({
           mode='single'
           selected={value ? new Date(value) : undefined}
           onSelect={date => {
-            onChange?.(date ? date.toISOString().split('T')[0] : '');
+            if (date) {
+              // Format date properly to avoid timezone issues
+              onChange?.(formatDateToString(date));
+            } else {
+              onChange?.('');
+            }
           }}
+          weekStartsOn={1} // Start week on Monday
           disabled={date => date > maxDate || date < minDate}
           initialFocus
         />
       </PopoverContent>
     </Popover>
   );
-}
+};

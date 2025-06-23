@@ -1,10 +1,11 @@
 import { LandingLayout } from '@/components/landing/landing-layout';
 import { FAQContent } from '@/components/faq/faq-content';
 
-export default function FAQPage() {
+const FAQPage = () => {
   return (
     <LandingLayout>
       <FAQContent />
     </LandingLayout>
   );
-}
+};
+export default FAQPage;

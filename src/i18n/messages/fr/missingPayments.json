@@ -1,0 +1,28 @@
+{
+  "title": "Paiements Manqués",
+  "description": "Gérer les paiements manqués et envoyer des rappels aux résidents",
+  "filters": "Filtres",
+  "month": "Mois",
+  "year": "Année",
+  "totalOverdue": "Total en Retard",
+  "expectedAmount": "Montant Attendu",
+  "period": "Période",
+  "missingPaymentsList": "Liste des Paiements Manqués",
+  "allPaymentsReceived": "Tous les Paiements Reçus",
+  "unitsWithMissingPayments": "{count} unités avec des paiements manqués",
+  "allPaymentsReceivedDescription": "Toutes les unités ont payé leurs frais pour {month} {year}. Excellent travail !",
+  "daysOverdue": "jours de retard",
+  "overdue": "en retard",
+  "sendReminder": "Envoyer un Rappel",
+  "sendAllReminders": "Envoyer Tous les Rappels",
+  "sendingReminders": "Envoi des Rappels...",
+  "reminderSent": "Rappel de paiement envoyé à {buildingName} - Unité {unitNumber}",
+  "reminderError": "Échec de l'envoi du rappel à l'Unité {unitNumber}",
+  "allRemindersSent": "Envoyé avec succès {count} rappels de paiement",
+  "partialRemindersSent": "Envoyé {success} rappels avec succès, {failed} ont échoué",
+  "remindersError": "Échec de l'envoi des rappels de paiement",
+  "addProjectContribution": "Ajouter une Contribution de Projet",
+  "common": {
+    "dashboard": "Tableau de Bord"
+  }
+}

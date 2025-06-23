@@ -8,5 +8,6 @@
   "showingPage": "Affichage de la page",
   "showingResults": "Affichage de {start} à {end} sur {total} résultats",
   "noResults": "Aucun résultat trouvé",
-  "rowsPerPage": "Lignes par page"
+  "rowsPerPage": "Lignes par page",
+  "perPage": "Par page"
 }

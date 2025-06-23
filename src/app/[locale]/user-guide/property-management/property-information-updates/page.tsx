@@ -120,15 +120,15 @@ const PropertyInformationUpdatesPage = () => {
                             • {t('sections.overview.importance.items.accuracy')}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t('sections.overview.importance.items.compliance')}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t('sections.overview.importance.items.efficiency')}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.overview.importance.items.communication'
                             )}
@@ -242,27 +242,27 @@ const PropertyInformationUpdatesPage = () => {
                     <CardContent>
                       <ul className='space-y-2 text-sm'>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.contactDetails.management.items.company'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.contactDetails.management.items.manager'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t('sections.contactDetails.management.items.phone')}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t('sections.contactDetails.management.items.email')}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t('sections.contactDetails.management.items.hours')}
                         </li>
                       </ul>
@@ -277,31 +277,31 @@ const PropertyInformationUpdatesPage = () => {
                     <CardContent>
                       <ul className='space-y-2 text-sm'>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.contactDetails.emergency.items.maintenanceHotline'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.contactDetails.emergency.items.afterHours'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.contactDetails.emergency.items.security'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.contactDetails.emergency.items.utilities'
                           )}
                         </li>
                         <li>
-                          •{' '}
+                          •
                           {t(
                             'sections.contactDetails.emergency.items.procedures'
                           )}
@@ -339,25 +339,25 @@ const PropertyInformationUpdatesPage = () => {
                         </h4>
                         <ul className='space-y-1 text-sm text-gray-600'>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.rent.items.baseRent'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.rent.items.increases'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.rent.items.schedule'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.rent.items.penalties'
                             )}
@@ -372,25 +372,25 @@ const PropertyInformationUpdatesPage = () => {
                         </h4>
                         <ul className='space-y-1 text-sm text-gray-600'>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.fees.items.application'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.fees.items.security'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.fees.items.pet'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.fees.items.parking'
                             )}
@@ -405,25 +405,25 @@ const PropertyInformationUpdatesPage = () => {
                         </h4>
                         <ul className='space-y-1 text-sm text-gray-600'>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.utilities.items.included'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.utilities.items.separate'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.utilities.items.allocation'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.financialSettings.configuration.utilities.items.billing'
                             )}
@@ -573,31 +573,31 @@ const PropertyInformationUpdatesPage = () => {
                           </h4>
                           <ul className='space-y-1 text-sm text-gray-600'>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.residential.items.petPolicy'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.residential.items.smoking'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.residential.items.noise'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.residential.items.guests'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.residential.items.subletting'
                               )}
@@ -612,31 +612,31 @@ const PropertyInformationUpdatesPage = () => {
                           </h4>
                           <ul className='space-y-1 text-sm text-gray-600'>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.operational.items.maintenance'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.operational.items.access'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.operational.items.parking'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.operational.items.common'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.policiesRules.categories.operational.items.emergency'
                               )}
@@ -672,25 +672,25 @@ const PropertyInformationUpdatesPage = () => {
                         </h4>
                         <ul className='space-y-1 text-sm'>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.bulkUpdates.operations.financial.items.rentAdjustments'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.bulkUpdates.operations.financial.items.feeUpdates'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.bulkUpdates.operations.financial.items.depositChanges'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.bulkUpdates.operations.financial.items.utilityRates'
                             )}
@@ -705,25 +705,25 @@ const PropertyInformationUpdatesPage = () => {
                         </h4>
                         <ul className='space-y-1 text-sm'>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.bulkUpdates.operations.administrative.items.contactInfo'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.bulkUpdates.operations.administrative.items.policies'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.bulkUpdates.operations.administrative.items.amenities'
                             )}
                           </li>
                           <li>
-                            •{' '}
+                            •
                             {t(
                               'sections.bulkUpdates.operations.administrative.items.descriptions'
                             )}

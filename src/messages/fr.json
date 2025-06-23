@@ -651,10 +651,190 @@
     "processingPayments": {
       "title": "Traitement des paiements",
       "description": "Gérez les paiements efficacement",
+      "metadata": {
+        "readTime": "8 min de lecture",
+        "audience": "Gestionnaires immobiliers"
+      },
       "sections": {
         "overview": {
           "title": "Aperçu",
           "content": "Un traitement efficace garantit des registres précis."
+        },
+        "paymentMethods": {
+          "title": "Méthodes de paiement",
+          "description": "Explorez les différentes méthodes de paiement disponibles pour traiter efficacement les paiements des locataires.",
+          "content": "Différentes méthodes disponibles pour traiter les paiements.",
+          "methods": [
+            {
+              "title": "Virements bancaires",
+              "description": "Transferts directs depuis les comptes bancaires des locataires pour des paiements fiables.",
+              "icon": "credit-card"
+            },
+            {
+              "title": "Paiements par carte de crédit",
+              "description": "Acceptez les paiements par carte de crédit et de débit avec un traitement sécurisé.",
+              "icon": "credit-card"
+            },
+            {
+              "title": "Paiements en espèces",
+              "description": "Traitez les paiements en espèces reçus en personne avec une documentation appropriée.",
+              "icon": "dollar-sign"
+            },
+            {
+              "title": "Portails de paiement en ligne",
+              "description": "Permettez aux locataires de payer en ligne via des passerelles de paiement sécurisées.",
+              "icon": "smartphone"
+            }
+          ]
+        },
+        "manualPayments": {
+          "title": "Paiements manuels",
+          "description": "Apprenez à traiter manuellement les paiements via l'interface du système.",
+          "content": "Traitement manuel des paiements via le système.",
+          "steps": [
+            {
+              "title": "Accéder à la section paiements",
+              "content": "Accédez au module de paiements depuis le tableau de bord principal"
+            },
+            {
+              "title": "Sélectionner le type de paiement",
+              "content": "Choisissez le type de paiement approprié dans la liste déroulante"
+            },
+            {
+              "title": "Saisir les détails du paiement",
+              "content": "Remplissez toutes les informations de paiement requises"
+            },
+            {
+              "title": "Vérifier les informations",
+              "content": "Vérifiez deux fois tous les détails saisis pour plus de précision"
+            },
+            {
+              "title": "Soumettre le paiement",
+              "content": "Terminez le traitement du paiement"
+            }
+          ]
+        },
+        "automatedProcessing": {
+          "title": "Traitement automatisé",
+          "description": "Configurez le traitement automatique des paiements pour rationaliser les opérations et réduire le travail manuel.",
+          "content": "Configuration des systèmes de traitement automatique.",
+          "features": [
+            {
+              "title": "Configuration des paiements récurrents",
+              "description": "Configurez la collecte automatique des loyers mensuels à partir des comptes des locataires."
+            },
+            {
+              "title": "Calcul automatique des frais de retard",
+              "description": "Appliquez automatiquement les frais de retard basés sur vos politiques de paiement."
+            },
+            {
+              "title": "Rappels de paiement",
+              "description": "Envoyez des rappels automatisés aux locataires avant les dates d'échéance."
+            },
+            {
+              "title": "Intégration bancaire",
+              "description": "Connectez-vous aux systèmes bancaires pour un traitement transparent des transactions."
+            }
+          ]
+        },
+        "paymentReconciliation": {
+          "title": "Rapprochement des paiements",
+          "description": "Faites correspondre les paiements avec les soldes en attente pour maintenir des dossiers financiers précis.",
+          "content": "Correspondance des paiements avec les soldes en attente.",
+          "steps": [
+            {
+              "title": "Importer les relevés bancaires",
+              "description": "Téléchargez les relevés bancaires dans le système pour le rapprochement"
+            },
+            {
+              "title": "Faire correspondre les transactions",
+              "description": "Faites correspondre automatiquement ou manuellement les transactions avec les paiements"
+            },
+            {
+              "title": "Résoudre les écarts",
+              "description": "Enquêtez et résolvez toute transaction non correspondante"
+            },
+            {
+              "title": "Générer des rapports",
+              "description": "Créez des rapports de rapprochement pour la tenue de registres"
+            }
+          ]
+        },
+        "securityCompliance": {
+          "title": "Sécurité et conformité",
+          "description": "Assurez un traitement sécurisé et conforme des paiements en suivant les normes de l'industrie.",
+          "content": "Assurer un traitement sécurisé et conforme.",
+          "measures": [
+            {
+              "title": "Conformité PCI DSS",
+              "description": "Maintenez la conformité aux normes de sécurité des données de l'industrie des cartes de paiement."
+            },
+            {
+              "title": "Chiffrement des données",
+              "description": "Toutes les données de paiement sont chiffrées à l'aide de protocoles standard de l'industrie."
+            },
+            {
+              "title": "Transmission sécurisée",
+              "description": "Les informations de paiement sont transmises via des canaux sécurisés et chiffrés."
+            },
+            {
+              "title": "Pistes d'audit",
+              "description": "Journalisation complète de toutes les transactions de paiement pour la responsabilité."
+            },
+            {
+              "title": "Contrôles d'accès",
+              "description": "Les contrôles d'accès basés sur les rôles limitent les autorisations de traitement des paiements."
+            }
+          ]
+        },
+        "troubleshooting": {
+          "issues": [
+            {
+              "problem": "Le paiement n'apparaît pas dans le système",
+              "solution": "Vérifiez si le paiement a été traité pendant les heures d'ouverture et accordez jusqu'à 24 heures pour que les virements bancaires apparaissent. Contactez le support si le paiement n'apparaît toujours pas après cette période."
+            },
+            {
+              "problem": "Paiement par carte de crédit refusé",
+              "solution": "Vérifiez que les détails de la carte sont corrects et que la carte dispose de fonds suffisants. Certaines banques peuvent signaler les paiements de loyer comme suspects - conseillez aux locataires de contacter leur banque si nécessaire."
+            },
+            {
+              "problem": "Paiement en double enregistré",
+              "solution": "Vérifiez les horodatages et les numéros de référence des transactions. Si un doublon existe, annulez un paiement et émettez un remboursement si nécessaire. Vérifiez toujours avec les registres bancaires avant d'agir."
+            },
+            {
+              "problem": "Le montant du paiement ne correspond pas au loyer dû",
+              "solution": "Révisez l'allocation des paiements et vérifiez si des paiements partiels ou des frais supplémentaires ont été inclus. Ajustez l'application du paiement selon les besoins ou contactez le locataire pour clarification."
+            }
+          ]
+        },
+        "bestPractices": {
+          "tips": [
+            "Vérifiez toujours les montants des paiements avant le traitement",
+            "Conservez des registres détaillés de toutes les transactions de paiement",
+            "Configurez des rappels de paiement automatisés pour réduire les retards",
+            "Rapprochez régulièrement les paiements avec les relevés bancaires",
+            "Fournissez des instructions de paiement claires aux locataires",
+            "Utilisez uniquement des méthodes de traitement de paiement sécurisées"
+          ]
+        },
+        "breadcrumb": {
+          "financialManagement": "Gestion financière"
+        },
+        "sidebar": {
+          "relatedArticlesList": [
+            {
+              "title": "Gestion des comptes résidents",
+              "href": "/user-guide/financial-management/managing-accounts"
+            },
+            {
+              "title": "Génération de rapports financiers",
+              "href": "/user-guide/financial-management/generating-reports"
+            },
+            {
+              "title": "Gestion des frais de retard",
+              "href": "/user-guide/financial-management/late-fees"
+            }
+          ]
         }
       }
     },
@@ -765,7 +945,10 @@
       "nextSteps": "Étapes suivantes",
       "popular": "Populaire",
       "readTime": "min",
-      "whatYoullLearn": "Ce que vous apprendrez"
+      "whatYoullLearn": "Ce que vous apprendrez",
+      "troubleshooting": "Dépannage",
+      "bestPractices": "Meilleures pratiques",
+      "tips": "Conseils pro"
     },
     "navigation": {
       "userGuide": "Guide d'utilisation",
@@ -938,10 +1121,12 @@
     "create": "Créer",
     "cancel": "Annuler",
     "delete": "Supprimer",
+    "update": "Mettre à jour",
     "edit": "Modifier",
     "add": "Ajouter",
     "search": "Rechercher",
     "navbarSearch": "Rechercher des bâtiments, unités, résidents...",
+    "navbarSearchShort": "Rechercher...",
     "searchHint": "Commencez à taper pour rechercher...",
     "loading": "Chargement...",
     "error": "Erreur",
@@ -978,6 +1163,8 @@
     "totalManagedProperties": "Total des Propriétés Gérées",
     "units": "Unités",
     "occupancyRateText": "Taux d'Occupation",
+    "currentRate": "Taux Actuel",
+    "averageRate": "Taux Moyen",
     "residents": "Résidents",
     "activeResidents": "Résidents Actifs",
     "netIncome": "Revenu Net",
@@ -1014,7 +1201,13 @@
       "expectedAmount": "Montant attendu",
       "overdue": "en retard",
       "sendReminders": "Envoyer des Rappels",
-      "viewDetails": "Voir les Détails"
+      "sendingReminders": "Envoi en cours...",
+      "viewDetails": "Voir les Détails",
+      "reminderSent": "Rappel de paiement envoyé à {buildingName} - Unité {unitNumber}",
+      "reminderError": "Échec de l'envoi du rappel à l'Unité {unitNumber}",
+      "allRemindersSent": "{count} rappels de paiement envoyés avec succès",
+      "partialRemindersSent": "{success} rappels envoyés, {failed} ont échoué",
+      "remindersError": "Échec de l'envoi des rappels de paiement. Veuillez réessayer."
     },
     "quickActionsItems": {
       "recordIncome": "Enregistrer un Revenu"
@@ -1139,6 +1332,87 @@
         "title": "Supprimer la Dépense",
         "description": "Êtes-vous sûr de vouloir supprimer cet enregistrement de dépense? Cette action ne peut pas être annulée."
       }
+    }
+  },
+  "financeReports": {
+    "title": "Rapports Financiers",
+    "description": "Générer et télécharger des rapports financiers pour vos propriétés",
+    "quickStats": {
+      "reportsGenerated": "Rapports Générés",
+      "lastGenerated": "Dernier Généré",
+      "mostPopular": "Plus Populaire",
+      "thisMonth": "Ce mois-ci",
+      "ago": "il y a",
+      "days": "jours",
+      "ofAllReports": "de tous les rapports"
+    },
+    "availableReports": {
+      "title": "Rapports Disponibles",
+      "description": "Générer des rapports financiers détaillés pour l'analyse et la conformité",
+      "generateButton": "Générer le Rapport"
+    },
+    "reports": {
+      "monthlySummary": {
+        "title": "Résumé Financier Mensuel",
+        "description": "Aperçu des revenus, dépenses et bénéfices nets"
+      },
+      "paymentStatus": {
+        "title": "Rapport de Statut des Paiements",
+        "description": "Suivre les paiements manqués et les taux de recouvrement"
+      },
+      "expenseBreakdown": {
+        "title": "Répartition des Dépenses",
+        "description": "Analyse détaillée des dépenses par catégorie"
+      },
+      "propertyPerformance": {
+        "title": "Performance des Propriétés",
+        "description": "Performance financière par bâtiment/unité"
+      },
+      "yearlyComparison": {
+        "title": "Comparaison Annuelle",
+        "description": "Comparer les performances financières entre les années"
+      },
+      "taxReport": {
+        "title": "Rapport Fiscal",
+        "description": "Résumé fiscal annuel pour la conformité"
+      }
+    },
+    "badges": {
+      "popular": "Populaire",
+      "new": "Nouveau",
+      "recommended": "Recommandé"
+    },
+    "recentReports": {
+      "title": "Rapports Récents",
+      "description": "Vos rapports récemment générés",
+      "noReports": "Aucun rapport généré encore",
+      "downloadAction": "Télécharger"
+    },
+    "filters": {
+      "period": "Période",
+      "type": "Type de Rapport",
+      "building": "Bâtiment",
+      "allBuildings": "Tous les Bâtiments",
+      "currentMonth": "Mois Actuel",
+      "lastMonth": "Mois Dernier",
+      "currentQuarter": "Trimestre Actuel",
+      "currentYear": "Année Actuelle",
+      "lastYear": "Année Dernière",
+      "customRange": "Plage Personnalisée"
+    },
+    "generating": {
+      "title": "Génération du Rapport...",
+      "description": "Veuillez patienter pendant que nous préparons votre rapport",
+      "estimatedTime": "Temps estimé: {seconds} secondes"
+    },
+    "success": {
+      "reportGenerated": "Rapport généré avec succès",
+      "downloadStarted": "Téléchargement démarré"
+    },
+    "errors": {
+      "generateFailed": "Échec de la génération du rapport",
+      "downloadFailed": "Échec du téléchargement du rapport",
+      "noData": "Aucune donnée disponible pour la période sélectionnée"
     }
   },
   "footer": {
@@ -1315,6 +1589,7 @@
     "title": "Centre d'assistance",
     "description": "Gérez vos tickets d'assistance et vos demandes",
     "create_ticket": "Créer un ticket",
+    "create_b2b_ticket": "Créer un ticket B2B",
     "filters": "Filtres",
     "advanced_filters": "Filtres avancés",
     "search": "Rechercher",
@@ -1335,10 +1610,20 @@
     "all_categories": "Toutes les catégories",
     "tickets": "Tickets",
     "tickets_description": "Consultez et gérez vos tickets d'assistance",
+    "internal_tickets": "Tickets internes",
+    "b2b_tickets": "Tickets B2B",
+    "all_tickets": "Tous les tickets",
     "no_ticket_selected": "Aucun ticket sélectionné",
     "select_ticket_to_view": "Sélectionnez un ticket pour voir les détails",
     "create_new_ticket": "Créer un nouveau ticket",
     "create_ticket_description": "Remplissez le formulaire ci-dessous pour créer un nouveau ticket d'assistance.",
+    "create_ticket_description_manager": "En tant que gestionnaire immobilier, vous pouvez créer des tickets au nom des résidents. Veuillez sélectionner pour quel résident ce ticket est destiné.",
+    "manager_ticket_info": "Note : Ce ticket sera créé au nom du résident sélectionné. Il pourra le consulter et y répondre depuis son compte.",
+    "RESIDENTS_CANNOT_SPECIFY_RESIDENT_ID": "Les résidents ne peuvent pas spécifier quel résident lors de la création de tickets",
+    "MEMBER_NO_RESIDENT_ACCESS": "Vous n'avez pas accès au portail des résidents et ne pouvez pas créer de tickets",
+    "MANAGERS_MUST_SPECIFY_RESIDENT": "Les gestionnaires immobiliers doivent spécifier pour quel résident ce ticket est destiné et ne peuvent pas créer de tickets pour eux-mêmes",
+    "RESIDENT_NOT_FOUND": "Résident introuvable dans cette organisation",
+    "INVALID_ROLE_FOR_TICKETS": "Votre rôle ne permet pas de créer des tickets",
     "formTitleLabel": "Problème",
     "formDescriptionLabel": "Description",
     "title_placeholder": "Brève description du problème",
@@ -1356,13 +1641,17 @@
     "avg_response_time": "Temps moyen de réponse",
     "satisfaction_score": "Score de satisfaction",
     "ticket_created": "Ticket créé avec succès",
+    "ticket_updated": "Ticket mis à jour avec succès",
     "error_creating_ticket": "Erreur lors de la création du ticket",
+    "error_updating_ticket": "Erreur lors de la mise à jour du ticket",
     "creating": "Création en cours...",
     "select_category": "Sélectionner une catégorie",
     "select_priority": "Sélectionner une priorité",
     "building": "Bâtiment",
     "unit": "Unité",
     "select_unit": "Sélectionner une unité (optionnel)",
+    "resident": "Résident",
+    "select_resident": "Sélectionner un résident (requis)",
     "tags": "Tags",
     "priority_low": "Faible",
     "priority_high": "Élevée",
@@ -1390,7 +1679,87 @@
     "sending": "Envoi en cours...",
     "comment_sent": "Commentaire envoyé avec succès",
     "error_adding_comment": "Erreur lors de l'ajout du commentaire",
-    "no_comments": "Aucun commentaire pour le moment"
+    "error_loading_ticket": "Erreur lors du chargement du ticket",
+    "no_comments": "Aucun commentaire pour le moment",
+    "b2b_ticket_title": "Créer un Ticket de Support B2B",
+    "b2b_ticket_description": "Soumettre un ticket pour le support de la plateforme Syndik",
+    "ticket_information": "Informations du Ticket",
+    "title_required": "Titre *",
+    "description_required": "Description *",
+    "business_impact": "Impact Business *",
+    "business_impact_placeholder": "Décrivez comment ce problème affecte vos opérations commerciales...",
+    "urgency_level": "Niveau d'Urgence",
+    "select_urgency": "Sélectionner le niveau d'urgence",
+    "urgency_low": "Faible",
+    "urgency_medium": "Moyen",
+    "urgency_high": "Élevé",
+    "urgency_critical": "Critique",
+    "organization_details": "Détails de l'Organisation",
+    "organization_name": "Nom de l'Organisation",
+    "organization_size": "Taille de l'Organisation",
+    "select_organization_size": "Sélectionner la taille de l'organisation",
+    "size_small": "Petite (1-50 employés)",
+    "size_medium": "Moyenne (51-200 employés)",
+    "size_large": "Grande (201-1000 employés)",
+    "size_enterprise": "Entreprise (1000+ employés)",
+    "contact_person": "Personne de Contact",
+    "contact_person_placeholder": "Contact principal pour ce ticket",
+    "contact_email": "Email de Contact",
+    "contact_phone": "Téléphone de Contact (Optionnel)",
+    "department": "Département",
+    "department_placeholder": "ex: IT, Finance, Opérations",
+    "technical_details": "Détails Techniques",
+    "affected_systems": "Systèmes Affectés",
+    "system_syndik_core": "Plateforme Syndik Core",
+    "system_reporting": "Rapports et Analyses",
+    "system_integrations": "Intégrations Tierces",
+    "system_mobile_app": "Application Mobile",
+    "system_api": "Services API",
+    "system_other": "Autre",
+    "error_reproduction": "Étapes de Reproduction de l'Erreur",
+    "error_reproduction_placeholder": "Veuillez fournir des instructions étape par étape pour reproduire le problème...",
+    "expected_behavior": "Comportement Attendu",
+    "expected_behavior_placeholder": "Que devrait-il se passer à la place?",
+    "environment_info": "Informations d'Environnement",
+    "browser_version": "Navigateur/Version",
+    "browser_version_placeholder": "ex: Chrome 120, Safari 17, etc.",
+    "operating_system": "Système d'Exploitation",
+    "os_placeholder": "ex: Windows 11, macOS 14, etc.",
+    "additional_context": "Contexte Supplémentaire",
+    "screenshots_attachments": "Captures d'Écran/Pièces Jointes",
+    "preferred_contact": "Méthode de Contact Préférée",
+    "contact_email_option": "Email",
+    "contact_phone_option": "Téléphone",
+    "contact_both": "Email et Téléphone",
+    "best_contact_time": "Meilleur Moment pour Contacter",
+    "time_morning": "Matin (9h-12h)",
+    "time_afternoon": "Après-midi (12h-17h)",
+    "time_evening": "Soir (17h-20h)",
+    "time_anytime": "N'importe quand",
+    "tags_section": "Étiquettes",
+    "add_tag_placeholder": "Ajouter une étiquette...",
+    "create_b2b_ticket_button": "Créer un Ticket B2B",
+    "category_technical_issue": "Problème Technique",
+    "category_feature_request": "Demande de Fonctionnalité",
+    "category_billing_inquiry": "Demande de Facturation",
+    "category_account_management": "Gestion de Compte",
+    "category_performance_issue": "Problème de Performance",
+    "category_security_concern": "Préoccupation de Sécurité",
+    "category_integration_support": "Support d'Intégration",
+    "category_training_request": "Demande de Formation",
+    "validation": {
+      "title_required": "Le titre du problème est requis",
+      "title_max_length": "Le titre du problème doit contenir moins de 200 caractères",
+      "description_required": "La description du problème est requise",
+      "category_required": "La catégorie est requise",
+      "priority_required": "La priorité est requise",
+      "resident_required": "Veuillez sélectionner pour quel résident cette demande est destinée",
+      "business_impact_required": "La description de l'impact commercial est requise",
+      "affected_users_required": "Le nombre d'utilisateurs affectés est requis",
+      "organization_name_required": "Le nom de l'organisation est requis",
+      "contact_name_required": "Le nom du contact est requis",
+      "valid_email_required": "Une adresse e-mail valide est requise"
+    }
   },
   "landing": {
     "hero": {
@@ -1659,11 +2028,86 @@
   },
   "meetings": {
     "title": "Réunions",
-    "description": "Planifier et gérer les réunions du syndicat"
+    "description": "Planifier et gérer les réunions du syndicat",
+    "create_meeting": "Programmer une nouvelle réunion",
+    "create_meeting_description": "Créez une nouvelle réunion pour votre syndicat. Remplissez les détails ci-dessous.",
+    "building_label": "Bâtiment (Optionnel)",
+    "building_placeholder": "Sélectionnez un bâtiment ou laissez vide pour une réunion générale",
+    "title_label": "Titre de la réunion",
+    "title_placeholder": "ex. Réunion mensuelle du syndicat",
+    "description_label": "Description (Optionnel)",
+    "description_placeholder": "Brève description de l'objectif de la réunion...",
+    "date_time_label": "Date et heure",
+    "location_label": "Lieu (Optionnel)",
+    "location_placeholder": "ex. Salle communautaire",
+    "max_participants_label": "Participants maximum (Optionnel)",
+    "max_participants_placeholder": "ex. 50",
+    "agenda_label": "Ordre du jour (Optionnel)",
+    "agenda_placeholder": "Ordre du jour et sujets à discuter...",
+    "cancel": "Annuler",
+    "schedule_meeting": "Programmer la réunion",
+    "scheduling": "Programmation...",
+    "completed": "Terminée",
+    "upcoming": "À venir",
+    "agenda_title": "Ordre du jour :",
+    "minutes_title": "Procès-verbal :",
+    "max_participants_text": "Participants maximum :",
+    "mark_complete": "Marquer comme terminée",
+    "delete": "Supprimer",
+    "general_meeting": "Réunion générale",
+    "unknown_building": "Bâtiment inconnu",
+    "meetings_management": "Gestion des réunions",
+    "schedule_meeting_button": "Programmer une réunion",
+    "upcoming_tab": "À venir",
+    "past_tab": "Passées",
+    "all_tab": "Toutes",
+    "no_upcoming_meetings": "Aucune réunion à venir",
+    "no_upcoming_meetings_description": "Programmez votre prochaine réunion pour tenir les résidents informés.",
+    "schedule_first_meeting": "Programmer la première réunion",
+    "no_past_meetings": "Aucune réunion passée",
+    "no_past_meetings_description": "Les réunions passées apparaîtront ici une fois terminées.",
+    "no_meetings_found": "Aucune réunion trouvée",
+    "no_meetings_found_description": "Commencez par programmer votre première réunion.",
+    "delete_meeting_title": "Supprimer la réunion",
+    "delete_meeting_description": "Êtes-vous sûr de vouloir supprimer cette réunion ? Cette action ne peut pas être annulée.",
+    "statistics": {
+      "total_meetings": "Total des réunions",
+      "completed_meetings": "Terminées",
+      "upcoming_meetings": "À venir",
+      "this_month": "Ce mois"
+    }
   },
   "meta": {
     "readTime": "5 min de lecture",
     "audience": "Gestionnaires immobiliers"
+  },
+  "missingPayments": {
+    "title": "Paiements Manqués",
+    "description": "Gérer les paiements manqués et envoyer des rappels aux résidents",
+    "filters": "Filtres",
+    "month": "Mois",
+    "year": "Année",
+    "totalOverdue": "Total en Retard",
+    "expectedAmount": "Montant Attendu",
+    "period": "Période",
+    "missingPaymentsList": "Liste des Paiements Manqués",
+    "allPaymentsReceived": "Tous les Paiements Reçus",
+    "unitsWithMissingPayments": "{count} unités avec des paiements manqués",
+    "allPaymentsReceivedDescription": "Toutes les unités ont payé leurs frais pour {month} {year}. Excellent travail !",
+    "daysOverdue": "jours de retard",
+    "overdue": "en retard",
+    "sendReminder": "Envoyer un Rappel",
+    "sendAllReminders": "Envoyer Tous les Rappels",
+    "sendingReminders": "Envoi des Rappels...",
+    "reminderSent": "Rappel de paiement envoyé à {buildingName} - Unité {unitNumber}",
+    "reminderError": "Échec de l'envoi du rappel à l'Unité {unitNumber}",
+    "allRemindersSent": "Envoyé avec succès {count} rappels de paiement",
+    "partialRemindersSent": "Envoyé {success} rappels avec succès, {failed} ont échoué",
+    "remindersError": "Échec de l'envoi des rappels de paiement",
+    "addProjectContribution": "Ajouter une Contribution de Projet",
+    "common": {
+      "dashboard": "Tableau de Bord"
+    }
   },
   "navigation": {
     "dashboard": "Tableau de bord",
@@ -1681,7 +2125,12 @@
     "pricing": "Tarification",
     "faq": "FAQ",
     "terms": "Conditions",
-    "userGuide": "Guide de l'utilisateur"
+    "userGuide": "Guide de l'utilisateur",
+    "helpdesk": "Support client",
+    "backToLanding": "Retour à l'accueil",
+    "missingPayments": "Paiements manquants",
+    "overview": "Aperçu",
+    "reports": "Rapports"
   },
   "notifications": {
     "title": "Gestion des notifications",
@@ -1888,7 +2337,35 @@
     "showingPage": "Affichage de la page",
     "showingResults": "Affichage de {start} à {end} sur {total} résultats",
     "noResults": "Aucun résultat trouvé",
-    "rowsPerPage": "Lignes par page"
+    "rowsPerPage": "Lignes par page",
+    "perPage": "Par page"
+  },
+  "payments": {
+    "title": "Paiements et Facturation",
+    "description": "Consultez votre historique de paiements et gérez les frais à venir.",
+    "nextPayment": {
+      "title": "Prochain Paiement Dû",
+      "amount": "Montant Dû",
+      "monthlyFee": "Frais de syndic mensuel",
+      "dueDate": "Échéance",
+      "payNow": "Payer Maintenant (Bientôt)",
+      "notAvailable": "Non disponible"
+    },
+    "unitDetails": {
+      "title": "Détails de l'Unité",
+      "unitNumber": "Numéro d'Unité",
+      "monthlyFee": "Frais Mensuels",
+      "area": "Superficie",
+      "status": "Statut",
+      "occupied": "Occupée",
+      "vacant": "Vacante",
+      "notAvailable": "Informations de l'unité non disponibles"
+    },
+    "paymentHistory": {
+      "title": "Historique des Paiements",
+      "comingSoon": "Historique des Paiements Bientôt",
+      "description": "Vous pourrez consulter votre historique de paiements, télécharger des reçus et suivre le statut de vos factures ici."
+    }
   },
   "portal": {
     "title": "Portail résident",
@@ -1977,6 +2454,9 @@
       "haveInvitation": "Vous avez déjà une invitation ?",
       "haveInvitationDescription": "Vérifiez votre e-mail et suivez le lien d'invitation pour terminer le processus de configuration.",
       "details": "Détails :",
+      "refresh": "Actualiser",
+      "refreshSuccess": "Vérification d'accès actualisée",
+      "refreshError": "Échec de l'actualisation de l'accès",
       "backToDashboard": "Retour au tableau de bord"
     }
   },
@@ -2290,6 +2770,12 @@
     "noResidentsFiltered": "Aucun résident trouvé pour le logement sélectionné.",
     "totalResidents": "Total des résidents",
     "activeResidents": "Résidents actifs",
+    "bulkActions": {
+      "edit": "Modifier sélectionnés",
+      "delete": "Supprimer sélectionnés",
+      "activate": "Activer sélectionnés",
+      "deactivate": "Désactiver sélectionnés"
+    },
     "allUnits": "Toutes les unités",
     "clearFilter": "Effacer le filtre",
     "filterByUnit": "Filtrer par unité :",
@@ -2326,6 +2812,8 @@
       "noUnitsAvailable": "Aucune unité disponible",
       "owner": "Propriétaire",
       "ownerDescription": "Cochez si ce résident est propriétaire du logement",
+      "active": "Statut actif",
+      "activeDescription": "Cochez si ce résident est actuellement actif",
       "moveInDate": "Date d'emménagement",
       "moveInDatePlaceholder": "Sélectionner la date d'emménagement",
       "moveOutDate": "Date de déménagement",
@@ -2358,6 +2846,7 @@
       "invitationError": "Échec de l'envoi de l'invitation"
     },
     "status": {
+      "all": "Tous",
       "active": "Actif",
       "inactive": "Inactif",
       "invited": "Invité",
@@ -2375,11 +2864,21 @@
       "actions": "Actions",
       "copyEmail": "Copier l'e-mail",
       "editResident": "Modifier le résident",
+      "activateResident": "Activer le résident",
+      "deactivateResident": "Désactiver le résident",
       "deleteResident": "Supprimer le résident"
     },
     "confirmDelete": {
       "title": "Supprimer le résident",
       "description": "Êtes-vous sûr de vouloir supprimer ce résident ? Cette action ne peut pas être annulée."
+    },
+    "confirmDeactivate": {
+      "title": "Désactiver le résident",
+      "description": "Êtes-vous sûr de vouloir désactiver ce résident ? Il n'aura plus accès au portail."
+    },
+    "confirmActivate": {
+      "title": "Activer le résident",
+      "description": "Êtes-vous sûr de vouloir activer ce résident ? Il retrouvera l'accès au portail."
     },
     "bulkInvite": {
       "title": "Invitation en masse des résidents",
@@ -2391,7 +2890,21 @@
       "sendInvitations": "Envoyer les invitations",
       "successMessage": "{count} invitation(s) envoyée(s) avec succès",
       "partialSuccessMessage": "{successCount} invitations envoyées avec succès, {errorCount} ont échoué",
-      "allFailedMessage": "Échec de l'envoi de toutes les invitations"
+      "allFailedMessage": "Échec de l'envoi de toutes les invitations",
+      "alreadyInvited": "{count} résident(s) ont déjà des invitations en attente",
+      "otherErrors": "{count} invitation(s) ont échoué pour d'autres raisons",
+      "failedToSend": "Échec de l'envoi des invitations",
+      "selectResidents": "Veuillez sélectionner au moins un résident à inviter",
+      "sending": "Envoi en cours...",
+      "alreadyMember": "{count, plural, =1 {# résident est} other {# résidents sont}} déjà membre(s) : {names}",
+      "alreadyInvitedDetailed": "{count, plural, =1 {# résident a} other {# résidents ont}} déjà des invitations en attente : {names}",
+      "invalidEmails": "Adresses e-mail invalides : {names}",
+      "otherErrorsDetailed": "{count, plural, =1 {# invitation a échoué} other {# invitations ont échoué}} pour d'autres raisons. Vérifiez la console pour plus de détails.",
+      "residentsCount": "{count, plural, =1 {# résident} other {# résidents}}",
+      "notYetInvited": "pas encore invité(s)",
+      "selected": "sélectionné(s)",
+      "noUninvitedMessage": "Tous les résidents actifs ont déjà été invités au portail.",
+      "loadingResidents": "Chargement des résidents..."
     },
     "invite": {
       "dialogTitle": "Inviter au portail des résidents",
@@ -2418,7 +2931,11 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "view": "Voir",
-    "openMenu": "Ouvrir le menu"
+    "openMenu": "Ouvrir le menu",
+    "selected": "{count} sur {total} ligne(s) sélectionnée(s)",
+    "selectAll": "Tout sélectionner",
+    "of": "de",
+    "selectedActions": "Actions ({count} sélectionné(s))"
   },
   "terms": {
     "title": "Conditions de service",

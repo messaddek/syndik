@@ -6,5 +6,9 @@
   "edit": "تعديل",
   "delete": "حذف",
   "view": "عرض",
-  "openMenu": "فتح القائمة"
+  "openMenu": "فتح القائمة",
+  "selected": "{count} من {total} صف محدد",
+  "selectAll": "تحديد الكل",
+  "of": "من",
+  "selectedActions": "الإجراءات ({count} محدد)"
 }

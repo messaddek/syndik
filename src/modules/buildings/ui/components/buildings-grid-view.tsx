@@ -29,11 +29,11 @@ interface BuildingsGridViewProps {
   onDelete: (building: Building) => void;
 }
 
-export function BuildingsGridView({
+export const BuildingsGridView = ({
   buildings,
   onEdit,
   onDelete,
-}: BuildingsGridViewProps) {
+}: BuildingsGridViewProps) => {
   const t = useTranslations('buildings');
   const tCommon = useTranslations('common');
   const router = useRouter();
@@ -108,7 +108,7 @@ export function BuildingsGridView({
                   </div>
                   <p className='line-clamp-2 text-sm text-gray-600'>
                     {building.description || t('description')}
-                  </p>{' '}
+                  </p>
                   <div className='flex space-x-2 pt-2'>
                     <Button
                       variant='outline'
@@ -142,3 +142,4 @@ export function BuildingsGridView({
     </>
   );
 }
+

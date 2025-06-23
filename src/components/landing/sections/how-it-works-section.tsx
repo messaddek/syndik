@@ -9,7 +9,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 
-export function HowItWorksSection() {
+export const HowItWorksSection = () => {
   const t = useTranslations('landing.howItWorks');
   const steps = [
     {
@@ -41,7 +41,7 @@ export function HowItWorksSection() {
   return (
     <div className='bg-gray-50 py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        {' '}
+        
         <div className='mx-auto max-w-2xl text-center'>
           <h2 className='text-primary text-base leading-7 font-semibold'>
             {t('subtitle')}
@@ -83,3 +83,4 @@ export function HowItWorksSection() {
     </div>
   );
 }
+

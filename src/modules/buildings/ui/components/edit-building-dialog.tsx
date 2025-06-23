@@ -12,12 +12,12 @@ interface EditBuildingDialogProps {
   onSuccess?: () => void;
 }
 
-export function EditBuildingDialog({
+export const EditBuildingDialog = ({
   building,
   open,
   onOpenChange,
   onSuccess,
-}: EditBuildingDialogProps) {
+}: EditBuildingDialogProps) => {
   const t = useTranslations('buildings');
 
   const handleSuccess = () => {

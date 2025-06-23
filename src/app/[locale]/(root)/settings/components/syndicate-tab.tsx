@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/select';
 import { toast } from 'sonner';
 
-export function SyndicateTab() {
+export const SyndicateTab = () => {
   const trpc = useTRPC();
 
   // Fetch real data from tRPC

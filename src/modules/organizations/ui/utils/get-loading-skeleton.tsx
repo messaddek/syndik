@@ -18,7 +18,7 @@ import { SettingsViewSkeleton } from '@/components/settings-view-skeleton';
  * @param pathname - The current pathname from usePathname()
  * @returns React component for the appropriate skeleton
  */
-export function getLoadingSkeleton(pathname: string) {
+export const getLoadingSkeleton = (pathname: string) => {
   const pathSegments = pathname.split('/').filter(Boolean);
   const basePath = `/${pathSegments.slice(0, 2).join('/')}`;
 
@@ -89,4 +89,4 @@ export function getLoadingSkeleton(pathname: string) {
       <Skeleton className='h-64' />
     </div>
   );
-}
+};

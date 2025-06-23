@@ -11,15 +11,16 @@ import { Toaster } from 'sonner';
 import { useClerkLocalization } from '@/hooks/use-clerk-localization';
 import { useLocale } from 'next-intl';
 import type { Locale } from '@/i18n/config';
+import { getSignOutRedirectUrl } from '@/lib/auth-utils';
 
 // Inner component that uses theme
 const InnerLayoutProvider = ({ children }: { children: React.ReactNode }) => {
   const { resolvedTheme } = useTheme();
   const locale = useLocale() as Locale;
   const clerkLocalization = useClerkLocalization();
-
   return (
     <ClerkProvider
+      afterSignOutUrl={getSignOutRedirectUrl()}
       localization={clerkLocalization} // Use custom localization with residence terminology
       appearance={{
         baseTheme: resolvedTheme === 'dark' ? dark : undefined,

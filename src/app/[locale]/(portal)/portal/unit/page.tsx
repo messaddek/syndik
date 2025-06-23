@@ -1,9 +1,10 @@
 import { ResidentAccessGuard, UnitView } from '@/modules/portal';
 
-export default function UnitPage() {
+const UnitPage = () => {
   return (
     <ResidentAccessGuard>
       <UnitView />
     </ResidentAccessGuard>
   );
-}
+};
+export default UnitPage;

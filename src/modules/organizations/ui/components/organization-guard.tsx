@@ -14,22 +14,24 @@ interface OrganizationGuardProps {
   children: React.ReactNode;
 }
 
-export function OrganizationGuard({ children }: OrganizationGuardProps) {
+export const OrganizationGuard = ({ children }: OrganizationGuardProps) => {
   const { organization, isLoaded: orgLoaded } = useOrganization();
   const { user, isLoaded: userLoaded } = useUser();
   const pathname = usePathname();
   const trpc = useTRPC();
-  const queryClient = useQueryClient();
-
-  // Determine default role based on current route
+  const queryClient = useQueryClient(); // Determine default role based on current route
   const isPortalRoute = pathname.startsWith('/portal');
-  const defaultRole = isPortalRoute ? 'member' : 'manager';
+  const defaultRole = isPortalRoute
+    ? ('member' as const)
+    : ('manager' as const);
+  const allowedRoles: ('manager' | 'admin' | 'member')[] = isPortalRoute
+    ? ['member']
+    : ['manager', 'admin'];
 
   console.log('🛡️ OrganizationGuard - Pathname:', pathname);
-
   console.log('🛡️ OrganizationGuard - Is portal route:', isPortalRoute);
-
   console.log('🛡️ OrganizationGuard - Default role:', defaultRole);
+  console.log('🛡️ OrganizationGuard - Allowed roles:', allowedRoles);
 
   // Check if user has an account
   const { data: account, isLoading: accountLoading } = useQuery(
@@ -46,6 +48,13 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
         );
         queryClient.invalidateQueries(
           trpc.dashboard.getOverview.queryOptions()
+        );
+        // Also invalidate portal resident access queries for proper guard refresh
+        queryClient.invalidateQueries(
+          trpc.portal.hasResidentAccess.queryOptions()
+        );
+        console.log(
+          '✅ OrganizationGuard - Account initialized, invalidated all relevant queries'
         );
       },
       onError: () => {
@@ -102,6 +111,8 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
               defaultName={defaultName}
               defaultEmail={defaultEmail}
               defaultRole={defaultRole}
+              isPortalAccess={isPortalRoute}
+              allowedRoles={allowedRoles}
             />
           </div>
         </div>
@@ -111,4 +122,4 @@ export function OrganizationGuard({ children }: OrganizationGuardProps) {
 
   // User has both organization and account, show the app
   return <>{children}</>;
-}
+};

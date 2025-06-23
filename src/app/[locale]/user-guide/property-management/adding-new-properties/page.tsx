@@ -258,25 +258,25 @@ const AddingNewPropertiesPage = () => {
                           </h4>
                           <ul className='space-y-2 text-sm text-gray-600'>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.propertyDetails.specifications.physical.items.totalArea'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.propertyDetails.specifications.physical.items.buildingHeight'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.propertyDetails.specifications.physical.items.floors'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.propertyDetails.specifications.physical.items.parking'
                               )}
@@ -291,25 +291,25 @@ const AddingNewPropertiesPage = () => {
                           </h4>
                           <ul className='space-y-2 text-sm text-gray-600'>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.propertyDetails.specifications.amenities.items.elevator'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.propertyDetails.specifications.amenities.items.gym'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.propertyDetails.specifications.amenities.items.pool'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.propertyDetails.specifications.amenities.items.security'
                               )}
@@ -350,19 +350,19 @@ const AddingNewPropertiesPage = () => {
                           </p>
                           <ul className='space-y-1 text-sm text-blue-600'>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.unitsSetup.methods.individual.pros.control'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.unitsSetup.methods.individual.pros.customization'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.unitsSetup.methods.individual.pros.accuracy'
                               )}
@@ -378,17 +378,17 @@ const AddingNewPropertiesPage = () => {
                           </p>
                           <ul className='space-y-1 text-sm text-green-600'>
                             <li>
-                              •{' '}
+                              •
                               {t('sections.unitsSetup.methods.bulk.pros.speed')}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.unitsSetup.methods.bulk.pros.consistency'
                               )}
                             </li>
                             <li>
-                              •{' '}
+                              •
                               {t(
                                 'sections.unitsSetup.methods.bulk.pros.efficiency'
                               )}
