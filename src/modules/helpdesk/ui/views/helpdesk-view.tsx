@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useTRPC } from '@/trpc/client';
 import { Button } from '@/components/ui/button';
@@ -47,7 +47,6 @@ import type {
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useHelpdeskFilters } from '../../hooks/use-helpdesk-filters';
 import { useHelpdeskPermissions } from '../../hooks/use-helpdesk-permissions';
-import { PAGINATION } from '@/constants';
 
 interface HelpdeskViewProps {
   initialFilters?: {
@@ -83,68 +82,37 @@ export const HelpdeskView = ({ initialFilters }: HelpdeskViewProps) => {
   const { canCreateB2BTickets, canViewB2BTickets } = useHelpdeskPermissions();
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-
   if (process.env.NODE_ENV === 'development') {
     console.log('[HELPDESK-CLIENT] HelpdeskView - Current filters', {
       filters,
     });
   }
-  const _statsQueryStart = Date.now();
-  const ticketsQueryStart = Date.now();
-  // Get all tickets for the current ticket type tab (for stats calculation)
-  // This query excludes status filters to get all tickets for counting each status
-  const { data: allTicketsForStats, isLoading: _allTicketsLoading } = useQuery(
-    trpc.helpdesk.getAllTickets.queryOptions({
-      filters: {
-        buildingId: filters.buildingId || undefined,
-        // Don't include status filter here - we want all statuses for counting
-        priority:
-          filters.priority.length > 0
-            ? (filters.priority as ('low' | 'medium' | 'high' | 'urgent')[])
-            : undefined,
-        category:
-          filters.category.length > 0
-            ? (filters.category as (
-                | 'maintenance'
-                | 'complaint'
-                | 'inquiry'
-                | 'billing'
-                | 'security'
-                | 'parking'
-                | 'noise'
-                | 'cleaning'
-                | 'other'
-              )[])
-            : undefined,
-        ticketType: ticketTypeTab === 'all' ? 'all' : ticketTypeTab,
-      },
-      pagination: {
-        page: PAGINATION.DEFAULT_PAGE,
-        limit: PAGINATION.MAX_PAGE_SIZE, // Get all tickets for stats calculation
-      },
-      sortBy: filters.sortBy as
-        | 'createdAt'
-        | 'updatedAt'
-        | 'priority'
-        | 'status',
-      sortOrder: filters.sortOrder as 'asc' | 'desc',
-    })
-  );
 
-  // Get paginated tickets for display (with all filters including status)
-  const { data: paginatedTickets, isLoading: _ticketsLoading } = useQuery(
-    trpc.helpdesk.getAllTickets.queryOptions({
+  // Get stats using the dedicated stats endpoint
+  const { data: statsData, isLoading: statsLoading } = useQuery({
+    ...trpc.helpdesk.getStats.queryOptions({
+      buildingId: filters.buildingId || undefined,
+    }),
+    staleTime: 30000,
+    gcTime: 60000,
+  });
+
+  // Get paginated tickets for display
+  const { data: paginatedTickets, isLoading: _ticketsLoading } = useQuery({
+    ...trpc.helpdesk.getAllTickets.queryOptions({
       filters: {
         buildingId: filters.buildingId || undefined,
         status:
-          filters.status.length > 0
-            ? (filters.status as (
-                | 'open'
-                | 'in_progress'
-                | 'resolved'
-                | 'closed'
-              )[])
-            : undefined,
+          activeTab !== 'all'
+            ? [activeTab as TicketStatus]
+            : filters.status.length > 0
+              ? (filters.status as (
+                  | 'open'
+                  | 'in_progress'
+                  | 'resolved'
+                  | 'closed'
+                )[])
+              : undefined,
         priority:
           filters.priority.length > 0
             ? (filters.priority as ('low' | 'medium' | 'high' | 'urgent')[])
@@ -175,37 +143,22 @@ export const HelpdeskView = ({ initialFilters }: HelpdeskViewProps) => {
         | 'priority'
         | 'status',
       sortOrder: filters.sortOrder as 'asc' | 'desc',
-    })
-  ); // Calculate stats from the all tickets data (excluding status filters)
-  const stats = useMemo(() => {
-    if (!allTicketsForStats?.tickets) return undefined;
+    }),
+    staleTime: 15000,
+    gcTime: 30000,
+  });
+  // Use stats from the dedicated endpoint
+  const stats = statsData;
 
-    const allTickets = allTicketsForStats.tickets;
-
-    return {
-      total: allTickets.length,
-      open: allTickets.filter(t => t.status === 'open').length,
-      inProgress: allTickets.filter(t => t.status === 'in_progress').length,
-      resolved: allTickets.filter(t => t.status === 'resolved').length,
-      closed: allTickets.filter(t => t.status === 'closed').length,
-      // Set default values for fields not returned by getAllTickets
-      avgResponseTime: 0,
-      avgResolutionTime: 0,
-      satisfactionScore: 0,
-    };
-  }, [allTicketsForStats?.tickets]);
-  const statsLoading = _allTicketsLoading;
   if (process.env.NODE_ENV === 'development') {
-    console.log(
-      '[HELPDESK-CLIENT] Tickets query completed in',
-      Date.now() - ticketsQueryStart,
-      'ms',
-      {
-        paginatedTicketsCount: paginatedTickets?.tickets?.length || 0,
-        allTicketsCount: allTicketsForStats?.tickets?.length || 0,
-        totalCount: paginatedTickets?.pagination?.total || 0,
-      }
-    );
+    console.log('[HELPDESK-CLIENT] HelpdeskView - Tickets data', {
+      ticketsCount: paginatedTickets?.tickets?.length,
+      statsTotal: stats?.total,
+      tickets: paginatedTickets?.tickets?.map(t => ({
+        id: t.id,
+        title: t.title,
+      })),
+    });
   }
 
   const handleTabChange = (value: string) => {
@@ -404,14 +357,20 @@ export const HelpdeskView = ({ initialFilters }: HelpdeskViewProps) => {
                 </TabsList>
                 <div className='mt-4'>
                   <TicketsList
-                    tickets={(paginatedTickets?.tickets || []).map(t => ({
-                      ...t,
-                      // ...other fields...
-                      tags: Array.isArray(t.tags) ? (t.tags as string[]) : [],
-                      attachments: Array.isArray(t.attachments)
-                        ? (t.attachments as TicketAttachment[])
-                        : [],
-                    }))}
+                    tickets={(paginatedTickets?.tickets || [])
+                      // Remove duplicates by ID (in case server returns duplicates)
+                      .filter(
+                        (ticket, index, arr) =>
+                          arr.findIndex(t => t.id === ticket.id) === index
+                      )
+                      .map(t => ({
+                        ...t,
+                        // ...other fields...
+                        tags: Array.isArray(t.tags) ? (t.tags as string[]) : [],
+                        attachments: Array.isArray(t.attachments)
+                          ? (t.attachments as TicketAttachment[])
+                          : [],
+                      }))}
                     onSelectTicket={setSelectedTicketId}
                     selectedTicketId={selectedTicketId}
                   />
@@ -449,7 +408,7 @@ export const HelpdeskView = ({ initialFilters }: HelpdeskViewProps) => {
       </div>
     </div>
   );
-}
+};
 
 // Static Filters Component - Not affected by loading states
 interface FiltersSectionProps {
@@ -592,4 +551,4 @@ const FiltersSection = ({ filters, setFilters, t }: FiltersSectionProps) => {
       </CardContent>
     </Card>
   );
-}
+};

@@ -14,6 +14,7 @@ import {
   Home,
   Shield,
   ArrowLeft,
+  HelpCircle,
 } from 'lucide-react';
 import { GrAnnounce } from 'react-icons/gr';
 
@@ -30,7 +31,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { UserButton } from '@clerk/nextjs';
+import { UserButton, useUser } from '@clerk/nextjs';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { OrgSwitcher } from '@/components/org-switcher';
@@ -48,6 +49,7 @@ export const PortalSidebar = () => {
   const locale = useLocale();
   const { canAccessAdminPortal } = useHelpdeskPermissions();
   const { isMobile, setOpenMobile } = useSidebar();
+  const { user, isLoaded } = useUser();
 
   // Function to handle navigation and close sidebar on mobile
   const handleNavigation = (href: string) => {
@@ -102,6 +104,11 @@ export const PortalSidebar = () => {
           title: t('portal.meetings'),
           url: '/portal/meetings',
           icon: Calendar,
+        },
+        {
+          title: t('portal.helpdesk'),
+          url: '/portal/helpdesk',
+          icon: HelpCircle,
         },
       ],
     },
@@ -174,7 +181,6 @@ export const PortalSidebar = () => {
           <SidebarGroup key={group.title}>
             <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
             <SidebarGroupContent>
-              
               <SidebarMenu>
                 {group.items.map(item => (
                   <SidebarMenuItem key={item.title}>
@@ -194,10 +200,8 @@ export const PortalSidebar = () => {
         ))}
       </SidebarContent>
       <SidebarFooter className='border-t p-4'>
-        
         {canAccessAdminPortal && (
           <div className='mb-3'>
-            
             <Button
               onClick={() => {
                 if (isMobile) {
@@ -221,18 +225,22 @@ export const PortalSidebar = () => {
           </div>
         )}
         <div className='flex items-center gap-3'>
-          <UserButton />
+          {isLoaded && user ? (
+            <UserButton userProfileMode='modal' />
+          ) : (
+            <div className='h-8 w-8 rounded-full bg-gray-200' />
+          )}
           <div className='min-w-0 flex-1'>
             <p className='truncate text-sm font-medium'>
-              {t('portal.residentAccount')}
+              {user?.fullName || t('portal.residentAccount')}
             </p>
             <p className='text-muted-foreground text-xs'>
-              {t('portal.portalAccess')}
+              {user?.emailAddresses[0]?.emailAddress ??
+                t('portal.portalAccess')}
             </p>
           </div>
         </div>
       </SidebarFooter>
     </Sidebar>
   );
-}
-
+};

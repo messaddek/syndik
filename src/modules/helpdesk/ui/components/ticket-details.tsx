@@ -366,7 +366,11 @@ export const TicketDetails = ({ ticketId, onClose }: TicketDetailsProps) => {
               <span className='text-muted-foreground'>
                 {t('unit', { default: 'Unit' })}:
               </span>
-              <span>{ticket.unitId}</span>
+              <span>
+                {ticket.unitNumber
+                  ? `${ticket.unitNumber}${ticket.unitFloor ? ` (Floor ${ticket.unitFloor})` : ''}`
+                  : ticket.unitId}
+              </span>
             </div>
           )}
         </div>

@@ -417,10 +417,12 @@ export const helpdeskRouter = createTRPCRouter({
           updatedAt: helpdeskTickets.updatedAt,
           // User details
           authorName: accounts.name,
-          authorEmail: accounts.email,
-          // Building details
+          authorEmail: accounts.email, // Building details
           buildingName: buildings.name,
           buildingAddress: buildings.address,
+          // Unit details
+          unitNumber: units.unitNumber,
+          unitFloor: units.floor,
         })
         .from(helpdeskTickets)
         .leftJoin(
@@ -429,6 +431,7 @@ export const helpdeskRouter = createTRPCRouter({
           eq(accounts.userId, helpdeskTickets.authorId)
         )
         .leftJoin(buildings, eq(buildings.id, helpdeskTickets.buildingId))
+        .leftJoin(units, eq(units.id, helpdeskTickets.unitId))
         .where(
           and(
             eq(helpdeskTickets.id, input.id),
@@ -483,8 +486,7 @@ export const helpdeskRouter = createTRPCRouter({
           id: ticket.authorId,
           name: ticket.authorName || 'Unknown User',
           email: ticket.authorEmail || '',
-        },
-        // Enhanced building information
+        }, // Enhanced building information
         building: ticket.buildingId
           ? {
               id: ticket.buildingId,
@@ -492,6 +494,9 @@ export const helpdeskRouter = createTRPCRouter({
               address: ticket.buildingAddress || '',
             }
           : null,
+        // Unit information
+        unitNumber: ticket.unitNumber,
+        unitFloor: ticket.unitFloor,
         // Comments
         comments: comments.map(comment => ({
           ...comment,
