@@ -11,15 +11,18 @@ type ResidentsPageProps = {
 
 const ResidentsPage = async ({ searchParams }: ResidentsPageProps) => {
   const queryClient = getQueryClient();
-
   const filters = await loadResidentsSearchParams(searchParams);
 
+  // Convert string 'isActive' to boolean for API
+  const apiFilters = {
+    ...filters,
+    isOwner: filters.isOwner ?? undefined,
+    isActive:
+      filters.isActive === 'all' ? undefined : filters.isActive === 'true',
+  };
+
   void queryClient.prefetchQuery(
-    trpc.residents.getAll.queryOptions({
-      ...filters,
-      isOwner: filters.isOwner ?? undefined,
-      isActive: filters.isActive ?? undefined,
-    })
+    trpc.residents.getAll.queryOptions(apiFilters)
   );
 
   return (

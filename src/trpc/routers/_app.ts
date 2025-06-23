@@ -14,6 +14,7 @@ import { notificationsRouter } from '../../modules/notifications/server/procedur
 import { portalRouter } from '../../modules/portal/server/procedures';
 import { articlesRouter } from '../../modules/articles/server/procedures';
 import { helpdeskRouter } from '../../modules/helpdesk/server/procedures';
+import { reportsRouter } from '../../modules/reports/server/procedures';
 import { createTRPCRouter } from '@/trpc/init';
 
 export const appRouter = createTRPCRouter({
@@ -33,6 +34,7 @@ export const appRouter = createTRPCRouter({
   portal: portalRouter,
   articles: articlesRouter,
   helpdesk: helpdeskRouter,
+  reports: reportsRouter,
 });
 
 export type AppRouter = typeof appRouter;

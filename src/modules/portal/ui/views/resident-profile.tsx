@@ -111,8 +111,10 @@ export const ResidentProfile = () => {
         <div className='flex items-center space-x-4'>
           <Button variant='ghost' size='sm' asChild>
             <Link href='/portal'>
-              <ArrowLeft className='mr-2 h-4 w-4' />
-              Back to Dashboard
+              <div className='flex items-center gap-x-2'>
+                <ArrowLeft className='h-4 w-4' />
+                Back to Dashboard
+              </div>
             </Link>
           </Button>
           <div>
@@ -124,8 +126,10 @@ export const ResidentProfile = () => {
         </div>
         {!isEditing ? (
           <Button onClick={() => setIsEditing(true)}>
-            <User className='mr-2 h-4 w-4' />
-            Edit Profile
+            <div className='flex items-center gap-x-2'>
+              <User className='h-4 w-4' />
+              Edit Profile
+            </div>
           </Button>
         ) : (
           <div className='flex space-x-2'>
@@ -134,15 +138,15 @@ export const ResidentProfile = () => {
             </Button>
             <Button onClick={handleSave} disabled={updateMutation.isPending}>
               {updateMutation.isPending ? (
-                <>
-                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                <div className='flex items-center gap-x-2'>
+                  <Loader2 className='h-4 w-4 animate-spin' />
                   Saving...
-                </>
+                </div>
               ) : (
-                <>
-                  <Save className='mr-2 h-4 w-4' />
+                <div className='flex items-center gap-x-2'>
+                  <Save className='h-4 w-4' />
                   Save Changes
-                </>
+                </div>
               )}
             </Button>
           </div>
@@ -359,7 +363,7 @@ export const ResidentProfile = () => {
       </div>
     </div>
   );
-}
+};
 
 const ResidentProfileSkeleton = () => {
   return (
@@ -394,4 +398,4 @@ const ResidentProfileSkeleton = () => {
       </div>
     </div>
   );
-}
+};

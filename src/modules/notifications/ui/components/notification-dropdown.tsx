@@ -19,10 +19,10 @@ import { Notification } from '@/lib/schema';
 import { useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 const priorityColors = {
-  low: 'bg-gray-100 text-gray-700',
-  normal: 'bg-blue-100 text-blue-700',
-  high: 'bg-orange-100 text-orange-700',
-  urgent: 'bg-red-100 text-red-700',
+  low: 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
+  normal: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300',
+  high: 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300',
+  urgent: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300',
 };
 
 const categoryIcons = {
@@ -53,18 +53,19 @@ const NotificationItem = ({
   return (
     <div
       className={cn(
-        'group hover:bg-muted/50 relative flex gap-3 p-3 transition-colors',
-        !notification.isRead && 'bg-blue-50/50'
+        'group hover:bg-muted/50 relative flex gap-3 p-3 transition-colors dark:hover:bg-gray-800/50',
+        !notification.isRead && 'bg-blue-50/50 dark:bg-blue-950/30'
       )}
     >
       {/* Priority indicator */}
       <div
         className={cn(
           'mt-1 h-2 w-2 shrink-0 rounded-full',
-          notification.priority === 'urgent' && 'bg-red-500',
-          notification.priority === 'high' && 'bg-orange-500',
-          notification.priority === 'normal' && 'bg-blue-500',
-          notification.priority === 'low' && 'bg-gray-500'
+          notification.priority === 'urgent' && 'bg-red-500 dark:bg-red-400',
+          notification.priority === 'high' &&
+            'bg-orange-500 dark:bg-orange-400',
+          notification.priority === 'normal' && 'bg-blue-500 dark:bg-blue-400',
+          notification.priority === 'low' && 'bg-gray-500 dark:bg-gray-400'
         )}
       />
 
@@ -81,18 +82,18 @@ const NotificationItem = ({
               </span>
               <h4
                 className={cn(
-                  'truncate text-sm font-medium',
+                  'truncate text-sm font-medium dark:text-white',
                   !notification.isRead && 'font-semibold'
                 )}
               >
                 {notification.title}
               </h4>
             </div>
-            <p className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
+            <p className='text-muted-foreground mt-1 line-clamp-2 text-sm dark:text-gray-400'>
               {notification.message}
             </p>
             <div className='mt-2 flex items-center gap-2'>
-              <span className='text-muted-foreground text-xs'>
+              <span className='text-muted-foreground text-xs dark:text-gray-400'>
                 {formatDistanceToNow(new Date(notification.createdAt), {
                   addSuffix: true,
                 })}
@@ -117,7 +118,7 @@ const NotificationItem = ({
               <Button
                 size='sm'
                 variant='ghost'
-                className='h-7 w-7 p-0'
+                className='h-7 w-7 p-0 dark:hover:bg-gray-700'
                 onClick={() => onMarkAsRead(notification.id)}
               >
                 <Check className='h-3 w-3' />
@@ -126,7 +127,7 @@ const NotificationItem = ({
             <Button
               size='sm'
               variant='ghost'
-              className='h-7 w-7 p-0'
+              className='h-7 w-7 p-0 dark:hover:bg-gray-700'
               onClick={() => onArchive(notification.id)}
             >
               <Archive className='h-3 w-3' />
@@ -136,13 +137,15 @@ const NotificationItem = ({
       </div>
     </div>
   );
-}
+};
 
 interface NotificationDropdownProps {
   children?: React.ReactNode;
 }
 
-export const NotificationDropdown = ({ children }: NotificationDropdownProps) => {
+export const NotificationDropdown = ({
+  children,
+}: NotificationDropdownProps) => {
   const [activeTab, setActiveTab] = useState('all');
   const t = useTranslations('notifications.dropdown');
   const trpc = useTRPC();
@@ -224,10 +227,13 @@ export const NotificationDropdown = ({ children }: NotificationDropdownProps) =>
           </Button>
         )}
       </PopoverTrigger>
-      <PopoverContent className='w-96 p-0' align='end'>
-        <div className='p-4'>
+      <PopoverContent
+        className='bg-background border-border w-96 p-0 dark:border-gray-700'
+        align='end'
+      >
+        <div className='border-border border-b-0 p-4 dark:border-gray-700'>
           <div className='flex items-center justify-between'>
-            <h3 className='font-semibold'>{t('title')}</h3>
+            <h3 className='font-semibold dark:text-white'>{t('title')}</h3>
             <div className='flex items-center gap-2'>
               {unreadCount && unreadCount.total > 0 && (
                 <Button
@@ -235,6 +241,7 @@ export const NotificationDropdown = ({ children }: NotificationDropdownProps) =>
                   variant='ghost'
                   onClick={() => markAllAsReadMutation.mutate({})}
                   disabled={markAllAsReadMutation.isPending}
+                  className='dark:hover:bg-gray-700'
                 >
                   <Check className='mr-1 h-3 w-3' />
                   {t('markAllRead')}
@@ -244,6 +251,7 @@ export const NotificationDropdown = ({ children }: NotificationDropdownProps) =>
                 size='sm'
                 variant='ghost'
                 onClick={() => router.push('/portal/notifications/settings')}
+                className='dark:hover:bg-gray-700'
               >
                 <Settings className='h-3 w-3' />
               </Button>
@@ -251,13 +259,24 @@ export const NotificationDropdown = ({ children }: NotificationDropdownProps) =>
           </div>
         </div>
         <Tabs value={activeTab} onValueChange={setActiveTab} className='w-full'>
-          <div className='px-4'>
-            <TabsList className='grid w-full grid-cols-2'>
-              <TabsTrigger value='all'>{t('all')}</TabsTrigger>
-              <TabsTrigger value='unread' className='relative'>
+          <div className='px-4 pb-2'>
+            <TabsList className='bg-muted grid w-full grid-cols-2 dark:bg-gray-800'>
+              <TabsTrigger
+                value='all'
+                className='data-[state=active]:bg-background dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white'
+              >
+                {t('all')}
+              </TabsTrigger>
+              <TabsTrigger
+                value='unread'
+                className='data-[state=active]:bg-background relative dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white'
+              >
                 {t('unread')}
                 {unreadCount && unreadCount.total > 0 && (
-                  <Badge variant='secondary' className='ml-1 h-4 text-xs'>
+                  <Badge
+                    variant='secondary'
+                    className='ml-1 h-4 text-xs dark:bg-gray-600 dark:text-gray-200'
+                  >
                     {unreadCount.total}
                   </Badge>
                 )}
@@ -265,20 +284,20 @@ export const NotificationDropdown = ({ children }: NotificationDropdownProps) =>
             </TabsList>
           </div>
           <TabsContent value='all' className='m-0'>
-            <ScrollArea className='h-96'>
+            <ScrollArea className='bg-background h-96 dark:bg-gray-900'>
               {isLoading ? (
-                <div className='text-muted-foreground p-4 text-center text-sm'>
+                <div className='text-muted-foreground p-4 text-center text-sm dark:text-gray-400'>
                   {t('loading')}
                 </div>
               ) : notifications.length === 0 ? (
                 <div className='p-8 text-center'>
-                  <Bell className='text-muted-foreground mx-auto mb-2 h-8 w-8' />
-                  <p className='text-muted-foreground text-sm'>
+                  <Bell className='text-muted-foreground mx-auto mb-2 h-8 w-8 dark:text-gray-400' />
+                  <p className='text-muted-foreground text-sm dark:text-gray-400'>
                     {t('emptyTitle')}
                   </p>
                 </div>
               ) : (
-                <div className='divide-y'>
+                <div className='divide-border divide-y dark:divide-gray-700'>
                   {notifications.map(notification => (
                     <NotificationItem
                       key={notification.id}
@@ -296,23 +315,23 @@ export const NotificationDropdown = ({ children }: NotificationDropdownProps) =>
             </ScrollArea>
           </TabsContent>
           <TabsContent value='unread' className='m-0'>
-            <ScrollArea className='h-96'>
+            <ScrollArea className='bg-background h-96 dark:bg-gray-900'>
               {isLoading ? (
-                <div className='text-muted-foreground p-4 text-center text-sm'>
+                <div className='text-muted-foreground p-4 text-center text-sm dark:text-gray-400'>
                   {t('loading')}
                 </div>
               ) : notifications.filter(n => !n.isRead).length === 0 ? (
                 <div className='p-8 text-center'>
-                  <Check className='mx-auto mb-2 h-8 w-8 text-green-500' />
-                  <p className='text-muted-foreground text-sm'>
+                  <Check className='mx-auto mb-2 h-8 w-8 text-green-500 dark:text-green-400' />
+                  <p className='text-muted-foreground text-sm dark:text-gray-400'>
                     {t('allCaughtUp')}
                   </p>
-                  <p className='text-muted-foreground mt-1 text-xs'>
+                  <p className='text-muted-foreground mt-1 text-xs dark:text-gray-400'>
                     {t('noUnreadNotifications')}
                   </p>
                 </div>
               ) : (
-                <div className='divide-y'>
+                <div className='divide-border divide-y dark:divide-gray-700'>
                   {notifications
                     .filter(n => !n.isRead)
                     .map(notification => (
@@ -333,8 +352,13 @@ export const NotificationDropdown = ({ children }: NotificationDropdownProps) =>
           </TabsContent>
         </Tabs>
         {notifications.length > 0 && (
-          <div className='border-t p-3'>
-            <Button variant='ghost' className='w-full' size='sm'>
+          <div className='border-border border-t p-3 dark:border-gray-700'>
+            <Button
+              variant='ghost'
+              className='w-full dark:hover:bg-gray-800'
+              size='sm'
+              onClick={() => router.push('/portal/notifications')}
+            >
               {t('viewAllNotifications')}
             </Button>
           </div>
@@ -342,4 +366,4 @@ export const NotificationDropdown = ({ children }: NotificationDropdownProps) =>
       </PopoverContent>
     </Popover>
   );
-}
+};

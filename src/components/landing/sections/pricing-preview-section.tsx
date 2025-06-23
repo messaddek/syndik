@@ -117,7 +117,6 @@ export const PricingPreviewSection = () => {
           {/* Billing Toggle */}
           <div className='mt-8 flex flex-col items-center space-y-4'>
             <div className='flex items-center space-x-4 rounded-full border border-gray-200 bg-white/80 p-1 shadow-sm backdrop-blur-sm'>
-              
               <button
                 onClick={() => setIsYearly(false)}
                 className={cn(
@@ -258,12 +257,12 @@ export const PricingPreviewSection = () => {
                 >
                   <Link
                     href='/sign-up'
-                    className='group flex items-center justify-center font-semibold'
+                    className='group flex items-center justify-center gap-x-2 font-semibold'
                   >
                     {plan.name === 'Enterprise'
                       ? t('buttons.contactSales')
                       : t('buttons.startTrial')}
-                    <ChevronRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180' />
+                    <ChevronRight className='h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180' />
                   </Link>
                 </Button>
                 {plan.name !== 'Enterprise' && (
@@ -357,5 +356,4 @@ export const PricingPreviewSection = () => {
       `}</style>
     </div>
   );
-}
-
+};

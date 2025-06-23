@@ -34,6 +34,7 @@ import type {
   UpdateIncome,
   Income,
 } from '@/modules/incomes/types';
+import { formatDateToString, getTodayString } from '@/lib/date-utils';
 
 interface IncomeFormProps {
   income?: Income;
@@ -75,7 +76,7 @@ export const IncomeForm = ({
             | 'other',
           month: income.month,
           year: income.year,
-          receivedDate: income.receivedDate.toISOString().split('T')[0],
+          receivedDate: formatDateToString(income.receivedDate),
           notes: income.notes || '',
         }
       : {
@@ -86,7 +87,7 @@ export const IncomeForm = ({
           category: 'monthly_fees',
           month: new Date().getMonth() + 1,
           year: new Date().getFullYear(),
-          receivedDate: new Date().toISOString().split('T')[0],
+          receivedDate: getTodayString(),
           notes: '',
         },
   });

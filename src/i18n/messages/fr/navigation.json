@@ -16,5 +16,8 @@
   "terms": "Conditions",
   "userGuide": "Guide de l'utilisateur",
   "helpdesk": "Support client",
-  "backToLanding": "Retour à l'accueil"
+  "backToLanding": "Retour à l'accueil",
+  "missingPayments": "Paiements manquants",
+  "overview": "Aperçu",
+  "reports": "Rapports"
 }

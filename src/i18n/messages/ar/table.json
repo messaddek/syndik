@@ -7,7 +7,8 @@
   "delete": "حذف",
   "view": "عرض",
   "openMenu": "فتح القائمة",
-  "selected": "المحدد",
+  "selected": "{count} من {total} صف محدد",
   "selectAll": "تحديد الكل",
-  "of": "من"
+  "of": "من",
+  "selectedActions": "الإجراءات ({count} محدد)"
 }

@@ -1,0 +1,28 @@
+{
+  "title": "المدفوعات المفقودة",
+  "description": "إدارة المدفوعات المفقودة وإرسال تذكيرات للسكان",
+  "filters": "المرشحات",
+  "month": "الشهر",
+  "year": "السنة",
+  "totalOverdue": "إجمالي المتأخرات",
+  "expectedAmount": "المبلغ المتوقع",
+  "period": "الفترة",
+  "missingPaymentsList": "قائمة المدفوعات المفقودة",
+  "allPaymentsReceived": "تم استلام جميع المدفوعات",
+  "unitsWithMissingPayments": "{count} وحدة بمدفوعات مفقودة",
+  "allPaymentsReceivedDescription": "جميع الوحدات دفعت رسومها لشهر {month} {year}. عمل رائع!",
+  "daysOverdue": "أيام متأخرة",
+  "overdue": "متأخر",
+  "sendReminder": "إرسال تذكير",
+  "sendAllReminders": "إرسال جميع التذكيرات",
+  "sendingReminders": "جاري إرسال التذكيرات...",
+  "reminderSent": "تم إرسال تذكير الدفع إلى {buildingName} - الوحدة {unitNumber}",
+  "reminderError": "فشل في إرسال التذكير للوحدة {unitNumber}",
+  "allRemindersSent": "تم إرسال {count} تذكيرات دفع بنجاح",
+  "partialRemindersSent": "تم إرسال {success} تذكيرات بنجاح، فشل {failed}",
+  "remindersError": "فشل في إرسال تذكيرات الدفع",
+  "addProjectContribution": "إضافة مساهمة مشروع",
+  "common": {
+    "dashboard": "لوحة التحكم"
+  }
+}

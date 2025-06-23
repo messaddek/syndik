@@ -485,7 +485,6 @@ export const notificationsRouter = createTRPCRouter({
         .orderBy(desc(notifications.createdAt))
         .limit(pageSize)
         .offset(offset);
-
       return {
         data: notificationList,
         pagination: {
@@ -495,5 +494,48 @@ export const notificationsRouter = createTRPCRouter({
           totalPages: Math.ceil(Number(total) / pageSize),
         },
       };
+    }),
+
+  // Create payment reminder notification
+  createPaymentReminder: orgProtectedProcedure
+    .input(
+      z.object({
+        residentId: z.string(),
+        unitId: z.string(),
+        amount: z.number().positive(),
+        dueDate: z.date(),
+        unitNumber: z.string(),
+        buildingName: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { db, orgId } = ctx;
+      const { residentId, amount, dueDate, unitNumber, buildingName } = input;
+
+      // Create the payment reminder notification
+      const [newNotification] = await db
+        .insert(notifications)
+        .values({
+          orgId,
+          residentId,
+          userId: null, // Will be delivered to the user linked to this resident
+          type: 'payment_due',
+          title: 'Payment Reminder',
+          message: `Your monthly payment of $${amount.toFixed(2)} for ${buildingName} - Unit ${unitNumber} is overdue. Please make your payment as soon as possible to avoid late fees.`,
+          category: 'financial',
+          priority: 'high',
+          metadata: {
+            amount: amount.toString(),
+            dueDate: dueDate.toISOString(),
+            unitId: input.unitId,
+            unitNumber,
+            buildingName,
+          },
+          actionUrl: '/portal/payments',
+          expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Expires in 30 days
+        })
+        .returning();
+
+      return newNotification;
     }),
 });

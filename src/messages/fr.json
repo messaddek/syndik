@@ -1201,7 +1201,13 @@
       "expectedAmount": "Montant attendu",
       "overdue": "en retard",
       "sendReminders": "Envoyer des Rappels",
-      "viewDetails": "Voir les Détails"
+      "sendingReminders": "Envoi en cours...",
+      "viewDetails": "Voir les Détails",
+      "reminderSent": "Rappel de paiement envoyé à {buildingName} - Unité {unitNumber}",
+      "reminderError": "Échec de l'envoi du rappel à l'Unité {unitNumber}",
+      "allRemindersSent": "{count} rappels de paiement envoyés avec succès",
+      "partialRemindersSent": "{success} rappels envoyés, {failed} ont échoué",
+      "remindersError": "Échec de l'envoi des rappels de paiement. Veuillez réessayer."
     },
     "quickActionsItems": {
       "recordIncome": "Enregistrer un Revenu"
@@ -1326,6 +1332,87 @@
         "title": "Supprimer la Dépense",
         "description": "Êtes-vous sûr de vouloir supprimer cet enregistrement de dépense? Cette action ne peut pas être annulée."
       }
+    }
+  },
+  "financeReports": {
+    "title": "Rapports Financiers",
+    "description": "Générer et télécharger des rapports financiers pour vos propriétés",
+    "quickStats": {
+      "reportsGenerated": "Rapports Générés",
+      "lastGenerated": "Dernier Généré",
+      "mostPopular": "Plus Populaire",
+      "thisMonth": "Ce mois-ci",
+      "ago": "il y a",
+      "days": "jours",
+      "ofAllReports": "de tous les rapports"
+    },
+    "availableReports": {
+      "title": "Rapports Disponibles",
+      "description": "Générer des rapports financiers détaillés pour l'analyse et la conformité",
+      "generateButton": "Générer le Rapport"
+    },
+    "reports": {
+      "monthlySummary": {
+        "title": "Résumé Financier Mensuel",
+        "description": "Aperçu des revenus, dépenses et bénéfices nets"
+      },
+      "paymentStatus": {
+        "title": "Rapport de Statut des Paiements",
+        "description": "Suivre les paiements manqués et les taux de recouvrement"
+      },
+      "expenseBreakdown": {
+        "title": "Répartition des Dépenses",
+        "description": "Analyse détaillée des dépenses par catégorie"
+      },
+      "propertyPerformance": {
+        "title": "Performance des Propriétés",
+        "description": "Performance financière par bâtiment/unité"
+      },
+      "yearlyComparison": {
+        "title": "Comparaison Annuelle",
+        "description": "Comparer les performances financières entre les années"
+      },
+      "taxReport": {
+        "title": "Rapport Fiscal",
+        "description": "Résumé fiscal annuel pour la conformité"
+      }
+    },
+    "badges": {
+      "popular": "Populaire",
+      "new": "Nouveau",
+      "recommended": "Recommandé"
+    },
+    "recentReports": {
+      "title": "Rapports Récents",
+      "description": "Vos rapports récemment générés",
+      "noReports": "Aucun rapport généré encore",
+      "downloadAction": "Télécharger"
+    },
+    "filters": {
+      "period": "Période",
+      "type": "Type de Rapport",
+      "building": "Bâtiment",
+      "allBuildings": "Tous les Bâtiments",
+      "currentMonth": "Mois Actuel",
+      "lastMonth": "Mois Dernier",
+      "currentQuarter": "Trimestre Actuel",
+      "currentYear": "Année Actuelle",
+      "lastYear": "Année Dernière",
+      "customRange": "Plage Personnalisée"
+    },
+    "generating": {
+      "title": "Génération du Rapport...",
+      "description": "Veuillez patienter pendant que nous préparons votre rapport",
+      "estimatedTime": "Temps estimé: {seconds} secondes"
+    },
+    "success": {
+      "reportGenerated": "Rapport généré avec succès",
+      "downloadStarted": "Téléchargement démarré"
+    },
+    "errors": {
+      "generateFailed": "Échec de la génération du rapport",
+      "downloadFailed": "Échec du téléchargement du rapport",
+      "noData": "Aucune donnée disponible pour la période sélectionnée"
     }
   },
   "footer": {
@@ -1994,6 +2081,34 @@
     "readTime": "5 min de lecture",
     "audience": "Gestionnaires immobiliers"
   },
+  "missingPayments": {
+    "title": "Paiements Manqués",
+    "description": "Gérer les paiements manqués et envoyer des rappels aux résidents",
+    "filters": "Filtres",
+    "month": "Mois",
+    "year": "Année",
+    "totalOverdue": "Total en Retard",
+    "expectedAmount": "Montant Attendu",
+    "period": "Période",
+    "missingPaymentsList": "Liste des Paiements Manqués",
+    "allPaymentsReceived": "Tous les Paiements Reçus",
+    "unitsWithMissingPayments": "{count} unités avec des paiements manqués",
+    "allPaymentsReceivedDescription": "Toutes les unités ont payé leurs frais pour {month} {year}. Excellent travail !",
+    "daysOverdue": "jours de retard",
+    "overdue": "en retard",
+    "sendReminder": "Envoyer un Rappel",
+    "sendAllReminders": "Envoyer Tous les Rappels",
+    "sendingReminders": "Envoi des Rappels...",
+    "reminderSent": "Rappel de paiement envoyé à {buildingName} - Unité {unitNumber}",
+    "reminderError": "Échec de l'envoi du rappel à l'Unité {unitNumber}",
+    "allRemindersSent": "Envoyé avec succès {count} rappels de paiement",
+    "partialRemindersSent": "Envoyé {success} rappels avec succès, {failed} ont échoué",
+    "remindersError": "Échec de l'envoi des rappels de paiement",
+    "addProjectContribution": "Ajouter une Contribution de Projet",
+    "common": {
+      "dashboard": "Tableau de Bord"
+    }
+  },
   "navigation": {
     "dashboard": "Tableau de bord",
     "announcements": "Annonces",
@@ -2012,7 +2127,10 @@
     "terms": "Conditions",
     "userGuide": "Guide de l'utilisateur",
     "helpdesk": "Support client",
-    "backToLanding": "Retour à l'accueil"
+    "backToLanding": "Retour à l'accueil",
+    "missingPayments": "Paiements manquants",
+    "overview": "Aperçu",
+    "reports": "Rapports"
   },
   "notifications": {
     "title": "Gestion des notifications",
@@ -2222,6 +2340,33 @@
     "rowsPerPage": "Lignes par page",
     "perPage": "Par page"
   },
+  "payments": {
+    "title": "Paiements et Facturation",
+    "description": "Consultez votre historique de paiements et gérez les frais à venir.",
+    "nextPayment": {
+      "title": "Prochain Paiement Dû",
+      "amount": "Montant Dû",
+      "monthlyFee": "Frais de syndic mensuel",
+      "dueDate": "Échéance",
+      "payNow": "Payer Maintenant (Bientôt)",
+      "notAvailable": "Non disponible"
+    },
+    "unitDetails": {
+      "title": "Détails de l'Unité",
+      "unitNumber": "Numéro d'Unité",
+      "monthlyFee": "Frais Mensuels",
+      "area": "Superficie",
+      "status": "Statut",
+      "occupied": "Occupée",
+      "vacant": "Vacante",
+      "notAvailable": "Informations de l'unité non disponibles"
+    },
+    "paymentHistory": {
+      "title": "Historique des Paiements",
+      "comingSoon": "Historique des Paiements Bientôt",
+      "description": "Vous pourrez consulter votre historique de paiements, télécharger des reçus et suivre le statut de vos factures ici."
+    }
+  },
   "portal": {
     "title": "Portail résident",
     "overview": "Aperçu",
@@ -2309,6 +2454,9 @@
       "haveInvitation": "Vous avez déjà une invitation ?",
       "haveInvitationDescription": "Vérifiez votre e-mail et suivez le lien d'invitation pour terminer le processus de configuration.",
       "details": "Détails :",
+      "refresh": "Actualiser",
+      "refreshSuccess": "Vérification d'accès actualisée",
+      "refreshError": "Échec de l'actualisation de l'accès",
       "backToDashboard": "Retour au tableau de bord"
     }
   },
@@ -2622,6 +2770,12 @@
     "noResidentsFiltered": "Aucun résident trouvé pour le logement sélectionné.",
     "totalResidents": "Total des résidents",
     "activeResidents": "Résidents actifs",
+    "bulkActions": {
+      "edit": "Modifier sélectionnés",
+      "delete": "Supprimer sélectionnés",
+      "activate": "Activer sélectionnés",
+      "deactivate": "Désactiver sélectionnés"
+    },
     "allUnits": "Toutes les unités",
     "clearFilter": "Effacer le filtre",
     "filterByUnit": "Filtrer par unité :",
@@ -2658,6 +2812,8 @@
       "noUnitsAvailable": "Aucune unité disponible",
       "owner": "Propriétaire",
       "ownerDescription": "Cochez si ce résident est propriétaire du logement",
+      "active": "Statut actif",
+      "activeDescription": "Cochez si ce résident est actuellement actif",
       "moveInDate": "Date d'emménagement",
       "moveInDatePlaceholder": "Sélectionner la date d'emménagement",
       "moveOutDate": "Date de déménagement",
@@ -2690,6 +2846,7 @@
       "invitationError": "Échec de l'envoi de l'invitation"
     },
     "status": {
+      "all": "Tous",
       "active": "Actif",
       "inactive": "Inactif",
       "invited": "Invité",
@@ -2707,11 +2864,21 @@
       "actions": "Actions",
       "copyEmail": "Copier l'e-mail",
       "editResident": "Modifier le résident",
+      "activateResident": "Activer le résident",
+      "deactivateResident": "Désactiver le résident",
       "deleteResident": "Supprimer le résident"
     },
     "confirmDelete": {
       "title": "Supprimer le résident",
       "description": "Êtes-vous sûr de vouloir supprimer ce résident ? Cette action ne peut pas être annulée."
+    },
+    "confirmDeactivate": {
+      "title": "Désactiver le résident",
+      "description": "Êtes-vous sûr de vouloir désactiver ce résident ? Il n'aura plus accès au portail."
+    },
+    "confirmActivate": {
+      "title": "Activer le résident",
+      "description": "Êtes-vous sûr de vouloir activer ce résident ? Il retrouvera l'accès au portail."
     },
     "bulkInvite": {
       "title": "Invitation en masse des résidents",
@@ -2765,9 +2932,10 @@
     "delete": "Supprimer",
     "view": "Voir",
     "openMenu": "Ouvrir le menu",
-    "selected": "Sélectionné",
+    "selected": "{count} sur {total} ligne(s) sélectionnée(s)",
     "selectAll": "Tout sélectionner",
-    "of": "de"
+    "of": "de",
+    "selectedActions": "Actions ({count} sélectionné(s))"
   },
   "terms": {
     "title": "Conditions de service",

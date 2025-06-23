@@ -10,6 +10,12 @@
   "noResidentsFiltered": "Aucun résident trouvé pour le logement sélectionné.",
   "totalResidents": "Total des résidents",
   "activeResidents": "Résidents actifs",
+  "bulkActions": {
+    "edit": "Modifier sélectionnés",
+    "delete": "Supprimer sélectionnés",
+    "activate": "Activer sélectionnés",
+    "deactivate": "Désactiver sélectionnés"
+  },
   "allUnits": "Toutes les unités",
   "clearFilter": "Effacer le filtre",
   "filterByUnit": "Filtrer par unité :",
@@ -46,6 +52,8 @@
     "noUnitsAvailable": "Aucune unité disponible",
     "owner": "Propriétaire",
     "ownerDescription": "Cochez si ce résident est propriétaire du logement",
+    "active": "Statut actif",
+    "activeDescription": "Cochez si ce résident est actuellement actif",
     "moveInDate": "Date d'emménagement",
     "moveInDatePlaceholder": "Sélectionner la date d'emménagement",
     "moveOutDate": "Date de déménagement",
@@ -78,6 +86,7 @@
     "invitationError": "Échec de l'envoi de l'invitation"
   },
   "status": {
+    "all": "Tous",
     "active": "Actif",
     "inactive": "Inactif",
     "invited": "Invité",
@@ -95,11 +104,21 @@
     "actions": "Actions",
     "copyEmail": "Copier l'e-mail",
     "editResident": "Modifier le résident",
+    "activateResident": "Activer le résident",
+    "deactivateResident": "Désactiver le résident",
     "deleteResident": "Supprimer le résident"
   },
   "confirmDelete": {
     "title": "Supprimer le résident",
     "description": "Êtes-vous sûr de vouloir supprimer ce résident ? Cette action ne peut pas être annulée."
+  },
+  "confirmDeactivate": {
+    "title": "Désactiver le résident",
+    "description": "Êtes-vous sûr de vouloir désactiver ce résident ? Il n'aura plus accès au portail."
+  },
+  "confirmActivate": {
+    "title": "Activer le résident",
+    "description": "Êtes-vous sûr de vouloir activer ce résident ? Il retrouvera l'accès au portail."
   },
   "bulkInvite": {
     "title": "Invitation en masse des résidents",

@@ -43,7 +43,13 @@
     "expectedAmount": "المبلغ المتوقع",
     "overdue": "متأخر",
     "sendReminders": "إرسال تذكيرات",
-    "viewDetails": "عرض التفاصيل"
+    "sendingReminders": "جاري الإرسال...",
+    "viewDetails": "عرض التفاصيل",
+    "reminderSent": "تم إرسال تذكير الدفع إلى {buildingName} - الوحدة {unitNumber}",
+    "reminderError": "فشل في إرسال التذكير للوحدة {unitNumber}",
+    "allRemindersSent": "تم إرسال {count} تذكيرات دفع بنجاح",
+    "partialRemindersSent": "تم إرسال {success} تذكيرات، فشل {failed}",
+    "remindersError": "فشل في إرسال تذكيرات الدفع. يرجى المحاولة مرة أخرى."
   },
   "quickActionsItems": {
     "recordIncome": "تسجيل دخل"

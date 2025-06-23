@@ -1190,7 +1190,13 @@
       "expectedAmount": "المبلغ المتوقع",
       "overdue": "متأخر",
       "sendReminders": "إرسال تذكيرات",
-      "viewDetails": "عرض التفاصيل"
+      "sendingReminders": "جاري الإرسال...",
+      "viewDetails": "عرض التفاصيل",
+      "reminderSent": "تم إرسال تذكير الدفع إلى {buildingName} - الوحدة {unitNumber}",
+      "reminderError": "فشل في إرسال التذكير للوحدة {unitNumber}",
+      "allRemindersSent": "تم إرسال {count} تذكيرات دفع بنجاح",
+      "partialRemindersSent": "تم إرسال {success} تذكيرات، فشل {failed}",
+      "remindersError": "فشل في إرسال تذكيرات الدفع. يرجى المحاولة مرة أخرى."
     },
     "quickActionsItems": {
       "recordIncome": "تسجيل دخل"
@@ -1315,6 +1321,87 @@
         "title": "حذف المصروف",
         "description": "هل أنت متأكد من أنك تريد حذف سجل المصروف هذا؟ لا يمكن التراجع عن هذا الإجراء."
       }
+    }
+  },
+  "financeReports": {
+    "title": "التقارير المالية",
+    "description": "إنشاء وتحميل التقارير المالية لممتلكاتك",
+    "quickStats": {
+      "reportsGenerated": "التقارير المُنشأة",
+      "lastGenerated": "آخر إنشاء",
+      "mostPopular": "الأكثر شيوعاً",
+      "thisMonth": "هذا الشهر",
+      "ago": "منذ",
+      "days": "أيام",
+      "ofAllReports": "من جميع التقارير"
+    },
+    "availableReports": {
+      "title": "التقارير المتاحة",
+      "description": "إنشاء تقارير مالية مفصلة للتحليل والامتثال",
+      "generateButton": "إنشاء التقرير"
+    },
+    "reports": {
+      "monthlySummary": {
+        "title": "الملخص المالي الشهري",
+        "description": "نظرة عامة على الإيرادات والمصروفات وصافي الربح"
+      },
+      "paymentStatus": {
+        "title": "تقرير حالة المدفوعات",
+        "description": "تتبع المدفوعات المفقودة ومعدلات التحصيل"
+      },
+      "expenseBreakdown": {
+        "title": "تفصيل المصروفات",
+        "description": "تحليل مفصل للمصروفات حسب الفئة"
+      },
+      "propertyPerformance": {
+        "title": "أداء الممتلكات",
+        "description": "الأداء المالي حسب المبنى/الوحدة"
+      },
+      "yearlyComparison": {
+        "title": "المقارنة السنوية",
+        "description": "مقارنة الأداء المالي عبر السنوات"
+      },
+      "taxReport": {
+        "title": "التقرير الضريبي",
+        "description": "الملخص الضريبي السنوي للامتثال"
+      }
+    },
+    "badges": {
+      "popular": "شائع",
+      "new": "جديد",
+      "recommended": "موصى به"
+    },
+    "recentReports": {
+      "title": "التقارير الحديثة",
+      "description": "تقاريرك المُنشأة حديثاً",
+      "noReports": "لم يتم إنشاء تقارير بعد",
+      "downloadAction": "تحميل"
+    },
+    "filters": {
+      "period": "الفترة",
+      "type": "نوع التقرير",
+      "building": "المبنى",
+      "allBuildings": "جميع المباني",
+      "currentMonth": "الشهر الحالي",
+      "lastMonth": "الشهر الماضي",
+      "currentQuarter": "الربع الحالي",
+      "currentYear": "السنة الحالية",
+      "lastYear": "السنة الماضية",
+      "customRange": "نطاق مخصص"
+    },
+    "generating": {
+      "title": "إنشاء التقرير...",
+      "description": "يرجى الانتظار بينما نحضر تقريرك",
+      "estimatedTime": "الوقت المقدر: {seconds} ثانية"
+    },
+    "success": {
+      "reportGenerated": "تم إنشاء التقرير بنجاح",
+      "downloadStarted": "بدأ التحميل"
+    },
+    "errors": {
+      "generateFailed": "فشل في إنشاء التقرير",
+      "downloadFailed": "فشل في تحميل التقرير",
+      "noData": "لا توجد بيانات متاحة للفترة المحددة"
     }
   },
   "footer": {
@@ -1988,6 +2075,34 @@
     "readTime": "5 دقائق قراءة",
     "audience": "مديرو العقارات"
   },
+  "missingPayments": {
+    "title": "المدفوعات المفقودة",
+    "description": "إدارة المدفوعات المفقودة وإرسال تذكيرات للسكان",
+    "filters": "المرشحات",
+    "month": "الشهر",
+    "year": "السنة",
+    "totalOverdue": "إجمالي المتأخرات",
+    "expectedAmount": "المبلغ المتوقع",
+    "period": "الفترة",
+    "missingPaymentsList": "قائمة المدفوعات المفقودة",
+    "allPaymentsReceived": "تم استلام جميع المدفوعات",
+    "unitsWithMissingPayments": "{count} وحدة بمدفوعات مفقودة",
+    "allPaymentsReceivedDescription": "جميع الوحدات دفعت رسومها لشهر {month} {year}. عمل رائع!",
+    "daysOverdue": "أيام متأخرة",
+    "overdue": "متأخر",
+    "sendReminder": "إرسال تذكير",
+    "sendAllReminders": "إرسال جميع التذكيرات",
+    "sendingReminders": "جاري إرسال التذكيرات...",
+    "reminderSent": "تم إرسال تذكير الدفع إلى {buildingName} - الوحدة {unitNumber}",
+    "reminderError": "فشل في إرسال التذكير للوحدة {unitNumber}",
+    "allRemindersSent": "تم إرسال {count} تذكيرات دفع بنجاح",
+    "partialRemindersSent": "تم إرسال {success} تذكيرات بنجاح، فشل {failed}",
+    "remindersError": "فشل في إرسال تذكيرات الدفع",
+    "addProjectContribution": "إضافة مساهمة مشروع",
+    "common": {
+      "dashboard": "لوحة التحكم"
+    }
+  },
   "navigation": {
     "dashboard": "لوحة التحكم",
     "announcements": "الإعلانات",
@@ -2006,7 +2121,10 @@
     "terms": "الشروط",
     "userGuide": "دليل المستخدم",
     "helpdesk": "خدمة العملاء",
-    "backToLanding": "العودة للصفحة الرئيسية"
+    "backToLanding": "العودة للصفحة الرئيسية",
+    "missingPayments": "المدفوعات المفقودة",
+    "overview": "نظرة عامة",
+    "reports": "التقارير"
   },
   "notifications": {
     "title": "إدارة الإشعارات",
@@ -2216,6 +2334,33 @@
     "rowsPerPage": "صفوف لكل صفحة",
     "perPage": "لكل صفحة"
   },
+  "payments": {
+    "title": "المدفوعات والفواتير",
+    "description": "عرض تاريخ الدفع وإدارة الرسوم المستقبلية.",
+    "nextPayment": {
+      "title": "الدفعة التالية المستحقة",
+      "amount": "المبلغ المستحق",
+      "monthlyFee": "رسم النقابة الشهري",
+      "dueDate": "تاريخ الاستحقاق",
+      "payNow": "ادفع الآن (قريباً)",
+      "notAvailable": "غير متوفر"
+    },
+    "unitDetails": {
+      "title": "تفاصيل الوحدة",
+      "unitNumber": "رقم الوحدة",
+      "monthlyFee": "الرسوم الشهرية",
+      "area": "المساحة",
+      "status": "الحالة",
+      "occupied": "مشغولة",
+      "vacant": "شاغرة",
+      "notAvailable": "معلومات الوحدة غير متوفرة"
+    },
+    "paymentHistory": {
+      "title": "تاريخ المدفوعات",
+      "comingSoon": "تاريخ المدفوعات قريباً",
+      "description": "ستتمكن من عرض تاريخ مدفوعاتك وتحميل الإيصالات وتتبع حالة الفواتير هنا."
+    }
+  },
   "portal": {
     "title": "بوابة السكان",
     "overview": "نظرة عامة",
@@ -2303,6 +2448,9 @@
       "haveInvitation": "لديك دعوة بالفعل؟",
       "haveInvitationDescription": "تحقق من بريدك الإلكتروني واتبع رابط الدعوة لإكمال عملية الإعداد.",
       "details": "التفاصيل:",
+      "refresh": "تحديث",
+      "refreshSuccess": "تم تحديث فحص الوصول",
+      "refreshError": "فشل في تحديث الوصول",
       "backToDashboard": "العودة إلى لوحة التحكم"
     }
   },
@@ -2616,6 +2764,12 @@
     "noResidentsFiltered": "لم يتم العثور على سكان للوحدة المحددة.",
     "totalResidents": "إجمالي السكان",
     "activeResidents": "السكان النشطون",
+    "bulkActions": {
+      "edit": "تحرير المحدد",
+      "delete": "حذف المحدد",
+      "activate": "تفعيل المحدد",
+      "deactivate": "إلغاء تفعيل المحدد"
+    },
     "allUnits": "جميع الوحدات",
     "clearFilter": "مسح المرشح",
     "filterByUnit": "تصفية حسب الوحدة:",
@@ -2652,6 +2806,8 @@
       "noUnitsAvailable": "لا توجد وحدات متاحة",
       "owner": "مالك",
       "ownerDescription": "ضع علامة إذا كان هذا الساكن مالك الوحدة",
+      "active": "الحالة النشطة",
+      "activeDescription": "ضع علامة إذا كان هذا الساكن نشطاً حالياً",
       "moveInDate": "تاريخ الانتقال",
       "moveInDatePlaceholder": "اختر تاريخ الانتقال",
       "moveOutDate": "تاريخ المغادرة",
@@ -2684,6 +2840,7 @@
       "invitationError": "فشل في إرسال الدعوة"
     },
     "status": {
+      "all": "الكل",
       "active": "نشط",
       "inactive": "غير نشط",
       "invited": "مدعو",
@@ -2701,11 +2858,21 @@
       "actions": "الإجراءات",
       "copyEmail": "نسخ البريد الإلكتروني",
       "editResident": "تحرير الساكن",
+      "activateResident": "تفعيل الساكن",
+      "deactivateResident": "إلغاء تفعيل الساكن",
       "deleteResident": "حذف الساكن"
     },
     "confirmDelete": {
       "title": "حذف الساكن",
       "description": "هل أنت متأكد من أنك تريد حذف هذا الساكن؟ لا يمكن التراجع عن هذا الإجراء."
+    },
+    "confirmDeactivate": {
+      "title": "إلغاء تنشيط الساكن",
+      "description": "هل أنت متأكد من أنك تريد إلغاء تنشيط هذا الساكن؟ لن يتمكن من الوصول إلى البوابة."
+    },
+    "confirmActivate": {
+      "title": "تنشيط الساكن",
+      "description": "هل أنت متأكد من أنك تريد تنشيط هذا الساكن؟ سيستعيد الوصول إلى البوابة."
     },
     "bulkInvite": {
       "title": "دعوة السكان بالجملة",
@@ -2759,9 +2926,10 @@
     "delete": "حذف",
     "view": "عرض",
     "openMenu": "فتح القائمة",
-    "selected": "المحدد",
+    "selected": "{count} من {total} صف محدد",
     "selectAll": "تحديد الكل",
-    "of": "من"
+    "of": "من",
+    "selectedActions": "الإجراءات ({count} محدد)"
   },
   "terms": {
     "title": "شروط الخدمة",

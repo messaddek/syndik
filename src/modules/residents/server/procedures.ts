@@ -254,27 +254,106 @@ export const residentsRouter = createTRPCRouter({
       }
 
       const emailToInvite = input.email || resident.email;
-
       try {
         // Create Clerk organization invitation with resident metadata
         const clerk = await clerkClient();
-        const invitation =
-          await clerk.organizations.createOrganizationInvitation({
-            organizationId: orgId,
-            emailAddress: emailToInvite,
-            role: 'org:member',
-            publicMetadata: {
-              residentId: input.residentId,
-              invitationType: 'resident_portal',
-            },
-          });
 
-        return {
-          invitationId: invitation.id,
-          emailAddress: emailToInvite,
-          residentName: `${resident.firstName} ${resident.lastName}`,
-        };
-      } catch (error) {
+        // First, check if the organization exists and we have permission
+        try {
+          const organization = await clerk.organizations.getOrganization({
+            organizationId: orgId,
+          });
+          console.log('Organization found:', organization.name);
+        } catch (orgError) {
+          console.error('Error fetching organization:', orgError);
+          throw new TRPCError({
+            code: 'NOT_FOUND',
+            message: 'Organization not found or insufficient permissions',
+          });
+        }
+
+        // Try creating the invitation with proper error handling
+        try {
+          const invitation =
+            await clerk.organizations.createOrganizationInvitation({
+              organizationId: orgId,
+              emailAddress: emailToInvite,
+              role: 'org:member',
+              publicMetadata: {
+                residentId: input.residentId,
+                invitationType: 'resident_portal',
+              },
+            });
+
+          return {
+            invitationId: invitation.id,
+            emailAddress: emailToInvite,
+            residentName: `${resident.firstName} ${resident.lastName}`,
+          };
+        } catch (orgInviteError: unknown) {
+          console.error('Organization invitation failed:', orgInviteError);
+
+          // Handle specific Clerk errors and try fallback
+          if (
+            orgInviteError &&
+            typeof orgInviteError === 'object' &&
+            'status' in orgInviteError
+          ) {
+            const clerkError = orgInviteError as {
+              status: number;
+              message?: string;
+            };
+
+            if (clerkError.status === 403) {
+              console.log('403 error - trying fallback invitation method...');
+
+              // Fallback: Create a simple user invitation (not organization-specific)
+              try {
+                const userInvitation = await clerk.invitations.createInvitation(
+                  {
+                    emailAddress: emailToInvite,
+                    publicMetadata: {
+                      residentId: input.residentId,
+                      invitationType: 'resident_portal',
+                      orgId: orgId,
+                    },
+                    redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/sign-up?resident=${input.residentId}`,
+                  }
+                );
+
+                return {
+                  invitationId: userInvitation.id,
+                  emailAddress: emailToInvite,
+                  residentName: `${resident.firstName} ${resident.lastName}`,
+                  fallbackMethod: true,
+                };
+              } catch (fallbackError) {
+                console.error(
+                  'Fallback invitation also failed:',
+                  fallbackError
+                );
+                throw new TRPCError({
+                  code: 'FORBIDDEN',
+                  message:
+                    'Unable to send invitations. Please check your Clerk configuration.',
+                });
+              }
+            }
+
+            if (clerkError.status === 422) {
+              throw new TRPCError({
+                code: 'BAD_REQUEST',
+                message: 'Invalid email address or invitation already exists.',
+              });
+            }
+          }
+
+          // Re-throw the original error if we can't handle it
+          throw orgInviteError;
+        }
+      } catch (error: unknown) {
+        console.error('Error sending invitation:', error);
+
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
           message: 'Failed to send invitation',

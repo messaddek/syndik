@@ -1,0 +1,81 @@
+{
+  "title": "Rapports Financiers",
+  "description": "Générer et télécharger des rapports financiers pour vos propriétés",
+  "quickStats": {
+    "reportsGenerated": "Rapports Générés",
+    "lastGenerated": "Dernier Généré",
+    "mostPopular": "Plus Populaire",
+    "thisMonth": "Ce mois-ci",
+    "ago": "il y a",
+    "days": "jours",
+    "ofAllReports": "de tous les rapports"
+  },
+  "availableReports": {
+    "title": "Rapports Disponibles",
+    "description": "Générer des rapports financiers détaillés pour l'analyse et la conformité",
+    "generateButton": "Générer le Rapport"
+  },
+  "reports": {
+    "monthlySummary": {
+      "title": "Résumé Financier Mensuel",
+      "description": "Aperçu des revenus, dépenses et bénéfices nets"
+    },
+    "paymentStatus": {
+      "title": "Rapport de Statut des Paiements",
+      "description": "Suivre les paiements manqués et les taux de recouvrement"
+    },
+    "expenseBreakdown": {
+      "title": "Répartition des Dépenses",
+      "description": "Analyse détaillée des dépenses par catégorie"
+    },
+    "propertyPerformance": {
+      "title": "Performance des Propriétés",
+      "description": "Performance financière par bâtiment/unité"
+    },
+    "yearlyComparison": {
+      "title": "Comparaison Annuelle",
+      "description": "Comparer les performances financières entre les années"
+    },
+    "taxReport": {
+      "title": "Rapport Fiscal",
+      "description": "Résumé fiscal annuel pour la conformité"
+    }
+  },
+  "badges": {
+    "popular": "Populaire",
+    "new": "Nouveau",
+    "recommended": "Recommandé"
+  },
+  "recentReports": {
+    "title": "Rapports Récents",
+    "description": "Vos rapports récemment générés",
+    "noReports": "Aucun rapport généré encore",
+    "downloadAction": "Télécharger"
+  },
+  "filters": {
+    "period": "Période",
+    "type": "Type de Rapport",
+    "building": "Bâtiment",
+    "allBuildings": "Tous les Bâtiments",
+    "currentMonth": "Mois Actuel",
+    "lastMonth": "Mois Dernier",
+    "currentQuarter": "Trimestre Actuel",
+    "currentYear": "Année Actuelle",
+    "lastYear": "Année Dernière",
+    "customRange": "Plage Personnalisée"
+  },
+  "generating": {
+    "title": "Génération du Rapport...",
+    "description": "Veuillez patienter pendant que nous préparons votre rapport",
+    "estimatedTime": "Temps estimé: {seconds} secondes"
+  },
+  "success": {
+    "reportGenerated": "Rapport généré avec succès",
+    "downloadStarted": "Téléchargement démarré"
+  },
+  "errors": {
+    "generateFailed": "Échec de la génération du rapport",
+    "downloadFailed": "Échec du téléchargement du rapport",
+    "noData": "Aucune donnée disponible pour la période sélectionnée"
+  }
+}

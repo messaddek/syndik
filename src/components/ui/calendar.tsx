@@ -36,10 +36,10 @@ const Calendar = ({
   const locale = useLocale() as Locale;
   const dateLocale = localeMap[locale];
   const defaultClassNames = getDefaultClassNames();
-
   return (
     <DayPicker
       locale={dateLocale}
+      weekStartsOn={1} // Start week on Monday
       showOutsideDays={showOutsideDays}
       className={cn(
         'bg-background group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
@@ -193,7 +193,7 @@ const Calendar = ({
       {...props}
     />
   );
-}
+};
 
 const CalendarDayButton = ({
   className,
@@ -232,6 +232,6 @@ const CalendarDayButton = ({
       {...props}
     />
   );
-}
+};
 
 export { Calendar, CalendarDayButton };

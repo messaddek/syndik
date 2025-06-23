@@ -1,0 +1,28 @@
+{
+  "title": "Missing Payments",
+  "description": "Manage missing payments and send reminders to residents",
+  "filters": "Filters",
+  "month": "Month",
+  "year": "Year",
+  "totalOverdue": "Total Overdue",
+  "expectedAmount": "Expected Amount",
+  "period": "Period",
+  "missingPaymentsList": "Missing Payments List",
+  "allPaymentsReceived": "All Payments Received",
+  "unitsWithMissingPayments": "{count} units with missing payments",
+  "allPaymentsReceivedDescription": "All units have paid their fees for {month} {year}. Great work!",
+  "daysOverdue": "days overdue",
+  "overdue": "overdue",
+  "sendReminder": "Send Reminder",
+  "sendAllReminders": "Send All Reminders",
+  "sendingReminders": "Sending Reminders...",
+  "reminderSent": "Payment reminder sent to {buildingName} - Unit {unitNumber}",
+  "reminderError": "Failed to send reminder to Unit {unitNumber}",
+  "allRemindersSent": "Successfully sent {count} payment reminders",
+  "partialRemindersSent": "Sent {success} reminders successfully, {failed} failed",
+  "remindersError": "Failed to send payment reminders",
+  "addProjectContribution": "Add Project Contribution",
+  "common": {
+    "dashboard": "Dashboard"
+  }
+}

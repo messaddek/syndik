@@ -11,6 +11,7 @@ export * from '../modules/notifications/schema';
 export * from '../modules/portal/schema';
 export * from '../modules/articles/schema';
 export * from '../modules/helpdesk/schema';
+export * from '../modules/reports/schema';
 
 // Define all relations here to avoid circular imports
 import { relations } from 'drizzle-orm';

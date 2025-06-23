@@ -5,6 +5,7 @@
   "units": "Units",
   "residents": "Residents",
   "finances": "Finances",
+  "missingPayments": "Missing Payments",
   "meetings": "Meetings",
   "notifications": "Notifications",
   "settings": "Settings",
@@ -16,5 +17,7 @@
   "terms": "Terms",
   "userGuide": "User Guide",
   "helpdesk": "Customer Support",
-  "backToLanding": "Back to Landing"
+  "backToLanding": "Back to Landing",
+  "overview": "Overview",
+  "reports": "Reports"
 }

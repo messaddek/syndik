@@ -226,8 +226,10 @@ const HelpPage = () => {
                   />
                 </div>
                 <Button className='w-full'>
-                  {t('contactForm.submitButton')}
-                  <ArrowRight className='ml-2 h-4 w-4' />
+                  <div className='flex items-center gap-x-2'>
+                    {t('contactForm.submitButton')}
+                    <ArrowRight className='h-4 w-4' />
+                  </div>
                 </Button>
               </CardContent>
             </Card>

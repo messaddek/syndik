@@ -43,7 +43,13 @@
     "expectedAmount": "Montant attendu",
     "overdue": "en retard",
     "sendReminders": "Envoyer des Rappels",
-    "viewDetails": "Voir les Détails"
+    "sendingReminders": "Envoi en cours...",
+    "viewDetails": "Voir les Détails",
+    "reminderSent": "Rappel de paiement envoyé à {buildingName} - Unité {unitNumber}",
+    "reminderError": "Échec de l'envoi du rappel à l'Unité {unitNumber}",
+    "allRemindersSent": "{count} rappels de paiement envoyés avec succès",
+    "partialRemindersSent": "{success} rappels envoyés, {failed} ont échoué",
+    "remindersError": "Échec de l'envoi des rappels de paiement. Veuillez réessayer."
   },
   "quickActionsItems": {
     "recordIncome": "Enregistrer un Revenu"

@@ -62,8 +62,10 @@ export const HeroSection = () => {
           <div className='mt-10 flex items-center justify-center gap-x-6'>
             <Button size='lg' className='px-8' asChild>
               <Link href='/sign-up'>
-                Get Started Free
-                <ArrowRight className='ml-2 h-4 w-4' />
+                <div className='flex items-center gap-x-2'>
+                  Get Started Free
+                  <ArrowRight className='h-4 w-4' />
+                </div>
               </Link>
             </Button>
             <Button variant='outline' size='lg' className='px-8' asChild>
@@ -87,7 +89,7 @@ export const HeroSection = () => {
       </div>
     </div>
   );
-}
+};
 
 export const StatsSection = () => {
   const stats = [
@@ -138,7 +140,7 @@ export const StatsSection = () => {
       </div>
     </div>
   );
-}
+};
 
 export const FeaturesSection = () => {
   const features = [
@@ -216,7 +218,7 @@ export const FeaturesSection = () => {
       </div>
     </div>
   );
-}
+};
 
 export const HowItWorksSection = () => {
   const steps = [
@@ -294,7 +296,7 @@ export const HowItWorksSection = () => {
       </div>
     </div>
   );
-}
+};
 
 export const BenefitsSection = () => {
   const benefits = [
@@ -370,7 +372,7 @@ export const BenefitsSection = () => {
       </div>
     </div>
   );
-}
+};
 
 export const SecuritySection = () => {
   const securityFeatures = [
@@ -458,7 +460,7 @@ export const SecuritySection = () => {
       </div>
     </div>
   );
-}
+};
 
 export const TestimonialsSection = () => {
   const testimonials = [
@@ -548,7 +550,7 @@ export const TestimonialsSection = () => {
       </div>
     </div>
   );
-}
+};
 
 export const PricingPreviewSection = () => {
   const plans = [
@@ -732,12 +734,12 @@ export const PricingPreviewSection = () => {
                 >
                   <Link
                     href='/sign-up'
-                    className='group flex items-center justify-center font-semibold'
+                    className='group flex items-center justify-center gap-x-2 font-semibold'
                   >
                     {plan.name === 'Enterprise'
                       ? 'Contact Sales'
                       : 'Start Free Trial'}
-                    <ChevronRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                    <ChevronRight className='h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180' />
                   </Link>
                 </Button>
 
@@ -834,7 +836,7 @@ export const PricingPreviewSection = () => {
       `}</style>
     </div>
   );
-}
+};
 
 export const CTASection = () => {
   return (
@@ -899,9 +901,9 @@ export const CTASection = () => {
               className='min-w-[200px] border-2 border-white/30 bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/20'
               asChild
             >
-              <Link href='/demo' className='group flex items-center'>
+              <Link href='/demo' className='group flex items-center gap-x-2'>
                 Watch Demo
-                <ChevronRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                <ChevronRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
               </Link>
             </Button>
           </div>
@@ -909,15 +911,15 @@ export const CTASection = () => {
           {/* Trust indicators */}
           <div className='mt-16 grid grid-cols-1 gap-8 text-center sm:grid-cols-3'>
             <div className='space-y-2 rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm'>
-              <div className='mb-2 flex items-center justify-center'>
-                <Clock className='mr-2 h-6 w-6 text-yellow-300' />
+              <div className='mb-2 flex items-center justify-center gap-x-2'>
+                <Clock className='h-6 w-6 text-yellow-300' />
                 <div className='text-2xl font-bold text-white'>14 Days</div>
               </div>
               <div className='text-sm text-blue-100'>Free Trial</div>
             </div>
             <div className='space-y-2 rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm'>
-              <div className='mb-2 flex items-center justify-center'>
-                <Shield className='mr-2 h-6 w-6 text-green-300' />
+              <div className='mb-2 flex items-center justify-center gap-x-2'>
+                <Shield className='h-6 w-6 text-green-300' />
                 <div className='text-2xl font-bold text-white'>
                   No Setup Fee
                 </div>
@@ -925,8 +927,8 @@ export const CTASection = () => {
               <div className='text-sm text-blue-100'>Get Started Instantly</div>
             </div>
             <div className='space-y-2 rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm'>
-              <div className='mb-2 flex items-center justify-center'>
-                <Bell className='mr-2 h-6 w-6 text-blue-300' />
+              <div className='mb-2 flex items-center justify-center gap-x-2'>
+                <Bell className='h-6 w-6 text-blue-300' />
                 <div className='text-2xl font-bold text-white'>
                   24/7 Support
                 </div>
@@ -998,5 +1000,4 @@ export const CTASection = () => {
       </div>
     </div>
   );
-}
-
+};

@@ -23,7 +23,10 @@
     "totalExpenses": "Total Expenses",
     "netIncome": "Net Income",
     "thisMonth": "This Month",
-    "transactions": "Transactions"
+    "transactions": "Transactions",
+    "missingPayments": "Missing Payments",
+    "unitsOverdue": "units overdue",
+    "allPaid": "all paid"
   },
   "tabs": {
     "incomes": "Incomes",

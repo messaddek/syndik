@@ -12,8 +12,10 @@ export const UnitViewSkeleton = () => {
       <div className='flex items-center justify-between'>
         <div className='flex items-center space-x-4'>
           <Button variant='ghost' size='sm' disabled>
-            <ArrowLeft className='mr-2 h-4 w-4' />
-            Back to Units
+            <div className='flex items-center gap-x-2'>
+              <ArrowLeft className='h-4 w-4' />
+              Back to Units
+            </div>
           </Button>
           <div>
             <div className='flex items-center space-x-2'>
@@ -170,4 +172,4 @@ export const UnitViewSkeleton = () => {
       </Card>
     </div>
   );
-}
+};

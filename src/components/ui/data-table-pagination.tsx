@@ -16,7 +16,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { isRtlLocale, Locale } from '@/i18n/config';
+import { cn } from '@/lib/utils';
 
 interface PaginationInfo {
   page: number;
@@ -31,6 +33,7 @@ interface DataTablePaginationProps<TData> {
   pagination?: PaginationInfo;
   onPageChange?: (page: number) => void;
   onPageSizeChange?: (pageSize: number) => void;
+  showCheckboxes?: boolean;
 }
 
 export const DataTablePagination = <TData,>({
@@ -39,9 +42,12 @@ export const DataTablePagination = <TData,>({
   pagination,
   onPageChange,
   onPageSizeChange,
+  showCheckboxes = false,
 }: DataTablePaginationProps<TData>) => {
   const tTable = useTranslations('table');
   const tPagination = useTranslations('pagination');
+  const locale = useLocale() as Locale;
+  const isRtl = isRtlLocale(locale);
   const isServerSide = !!pagination;
 
   const currentPage = isServerSide
@@ -107,14 +113,16 @@ export const DataTablePagination = <TData,>({
 
   return (
     <div className='flex flex-col gap-4 px-2 sm:flex-row sm:items-center sm:justify-between'>
-      <div className='text-muted-foreground text-sm'>
-        <span className='hidden sm:inline'>
-          {tTable('selected', { count: selectedRows, total: totalRows })}
-        </span>
-        <span className='sm:hidden'>
-          {selectedRows} {tTable('of')} {totalRows} {tTable('selected')}
-        </span>
-      </div>
+      {showCheckboxes && (
+        <div className='text-muted-foreground text-sm'>
+          <span className='hidden sm:inline'>
+            {tTable('selected', { count: selectedRows, total: totalRows })}
+          </span>
+          <span className='sm:hidden'>
+            {selectedRows} {tTable('of')} {totalRows} {tTable('selected')}
+          </span>
+        </div>
+      )}
       <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:space-x-6 lg:space-x-8'>
         <div className='flex items-center space-x-2'>
           <p className='text-sm font-medium'>
@@ -155,7 +163,9 @@ export const DataTablePagination = <TData,>({
             disabled={!canPreviousPage}
           >
             <span className='sr-only'>{tPagination('first')}</span>
-            <ChevronsLeft className='h-4 w-4' />
+            <ChevronsLeft
+              className={cn('h-4 w-4', isRtl && 'rtl:rotate-180')}
+            />
           </Button>
           <Button
             variant='outline'
@@ -164,7 +174,7 @@ export const DataTablePagination = <TData,>({
             disabled={!canPreviousPage}
           >
             <span className='sr-only'>{tPagination('previous')}</span>
-            <ChevronLeft className='h-4 w-4' />
+            <ChevronLeft className={cn('h-4 w-4', isRtl && 'rtl:rotate-180')} />
           </Button>
           <Button
             variant='outline'
@@ -173,7 +183,9 @@ export const DataTablePagination = <TData,>({
             disabled={!canNextPage}
           >
             <span className='sr-only'>{tPagination('next')}</span>
-            <ChevronRight className='h-4 w-4' />
+            <ChevronRight
+              className={cn('h-4 w-4', isRtl && 'rtl:rotate-180')}
+            />
           </Button>
           <Button
             variant='outline'
@@ -182,7 +194,9 @@ export const DataTablePagination = <TData,>({
             disabled={!canNextPage}
           >
             <span className='sr-only'>{tPagination('last')}</span>
-            <ChevronsRight className='h-4 w-4' />
+            <ChevronsRight
+              className={cn('h-4 w-4', isRtl && 'rtl:rotate-180')}
+            />
           </Button>
         </div>
       </div>

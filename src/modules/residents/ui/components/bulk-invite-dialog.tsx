@@ -279,16 +279,16 @@ export const BulkInviteDialog = ({ children }: BulkInviteDialogProps) => {
                 }
               >
                 {bulkInviteMutation.isPending ? (
-                  <>
-                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                  <div className='flex items-center gap-x-2'>
+                    <Loader2 className='h-4 w-4 animate-spin' />
                     Sending...
-                  </>
+                  </div>
                 ) : (
-                  <>
-                    <Send className='mr-2 h-4 w-4' />
+                  <div className='flex items-center gap-x-2'>
+                    <Send className='h-4 w-4' />
                     {t('bulkInvite.sendInvitations')} (
                     {selectedResidents.length})
-                  </>
+                  </div>
                 )}
               </Button>
             </div>

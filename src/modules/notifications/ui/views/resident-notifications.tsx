@@ -28,10 +28,10 @@ import { Notification } from '../../schema';
 import { useTranslations } from 'next-intl';
 
 const priorityColors = {
-  low: 'bg-gray-100 text-gray-700',
-  normal: 'bg-blue-100 text-blue-700',
-  high: 'bg-orange-100 text-orange-700',
-  urgent: 'bg-red-100 text-red-700',
+  low: 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
+  normal: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300',
+  high: 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300',
+  urgent: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300',
 };
 
 const categoryIcons = {
@@ -68,8 +68,9 @@ const NotificationItem = ({
   return (
     <Card
       className={cn(
-        'transition-all hover:shadow-md',
-        !notification.isRead && 'border-blue-200 bg-blue-50/50'
+        'transition-all hover:shadow-md dark:hover:shadow-lg',
+        !notification.isRead &&
+          'border-blue-200 bg-blue-50/50 dark:border-blue-800 dark:bg-blue-950/30'
       )}
     >
       <CardHeader className='pb-3'>
@@ -86,17 +87,17 @@ const NotificationItem = ({
               <div className='mb-1 flex items-center gap-2'>
                 <CardTitle
                   className={cn(
-                    'truncate text-lg',
+                    'truncate text-lg dark:text-white',
                     !notification.isRead && 'font-bold'
                   )}
                 >
                   {notification.title}
                 </CardTitle>
                 {!notification.isRead && (
-                  <div className='h-2 w-2 shrink-0 rounded-full bg-blue-500' />
+                  <div className='h-2 w-2 shrink-0 rounded-full bg-blue-500 dark:bg-blue-400' />
                 )}
               </div>
-              <div className='text-muted-foreground flex items-center gap-2 text-sm'>
+              <div className='text-muted-foreground flex items-center gap-2 text-sm dark:text-gray-400'>
                 <span>
                   {formatDistanceToNow(new Date(notification.createdAt), {
                     addSuffix: true,
@@ -125,7 +126,7 @@ const NotificationItem = ({
                 size='sm'
                 variant='ghost'
                 onClick={() => onMarkAsRead(notification.id)}
-                className='h-8 w-8 p-0'
+                className='h-8 w-8 p-0 dark:hover:bg-gray-700'
               >
                 <Check className='h-4 w-4' />
               </Button>
@@ -134,7 +135,7 @@ const NotificationItem = ({
               size='sm'
               variant='ghost'
               onClick={() => onArchive(notification.id)}
-              className='h-8 w-8 p-0'
+              className='h-8 w-8 p-0 dark:hover:bg-gray-700'
             >
               <Archive className='h-4 w-4' />
             </Button>
@@ -142,13 +143,12 @@ const NotificationItem = ({
         </div>
       </CardHeader>
       <CardContent className='pt-0'>
-        <CardDescription className='text-sm leading-relaxed'>
+        <CardDescription className='text-sm leading-relaxed dark:text-gray-400'>
           {notification.message}
         </CardDescription>
         {notification.actionUrl && (
           <div className='mt-3'>
             <Button size='sm' variant='outline' asChild>
-              
               <a
                 href={notification.actionUrl}
                 target='_blank'
@@ -162,7 +162,7 @@ const NotificationItem = ({
       </CardContent>
     </Card>
   );
-}
+};
 
 export const ResidentNotifications = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -250,11 +250,12 @@ export const ResidentNotifications = () => {
 
   return (
     <div className='space-y-6'>
-      
       <div className='flex items-center justify-between'>
         <div>
-          <h1 className='text-3xl font-bold'>{t('title')}</h1>
-          <p className='text-muted-foreground mt-2'>{t('description')}</p>
+          <h1 className='text-3xl font-bold dark:text-white'>{t('title')}</h1>
+          <p className='text-muted-foreground mt-2 dark:text-gray-400'>
+            {t('description')}
+          </p>
         </div>
         <div className='flex items-center gap-2'>
           {unreadCount && unreadCount.total > 0 && (
@@ -276,17 +277,23 @@ export const ResidentNotifications = () => {
       <div className='grid gap-4 md:grid-cols-4'>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Total</CardTitle>
-            <Bell className='text-muted-foreground h-4 w-4' />
+            <CardTitle className='text-sm font-medium dark:text-white'>
+              Total
+            </CardTitle>
+            <Bell className='text-muted-foreground h-4 w-4 dark:text-gray-400' />
           </CardHeader>
           <CardContent>
-            <div className='text-2xl font-bold'>{notifications.length}</div>
+            <div className='text-2xl font-bold dark:text-white'>
+              {notifications.length}
+            </div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Unread</CardTitle>
-            <div className='h-2 w-2 rounded-full bg-blue-500' />
+            <CardTitle className='text-sm font-medium dark:text-white'>
+              Unread
+            </CardTitle>
+            <div className='h-2 w-2 rounded-full bg-blue-500 dark:bg-blue-400' />
           </CardHeader>
           <CardContent>
             <div className='text-primary text-2xl font-bold'>
@@ -296,22 +303,26 @@ export const ResidentNotifications = () => {
         </Card>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Urgent</CardTitle>
-            <div className='h-2 w-2 rounded-full bg-red-500' />
+            <CardTitle className='text-sm font-medium dark:text-white'>
+              Urgent
+            </CardTitle>
+            <div className='h-2 w-2 rounded-full bg-red-500 dark:bg-red-400' />
           </CardHeader>
           <CardContent>
-            <div className='text-2xl font-bold text-red-600'>
+            <div className='text-2xl font-bold text-red-600 dark:text-red-400'>
               {notifications.filter(n => n.priority === 'urgent').length}
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Financial</CardTitle>
+            <CardTitle className='text-sm font-medium dark:text-white'>
+              Financial
+            </CardTitle>
             <div className='text-lg'>💰</div>
           </CardHeader>
           <CardContent>
-            <div className='text-2xl font-bold'>
+            <div className='text-2xl font-bold dark:text-white'>
               {notifications.filter(n => n.category === 'financial').length}
             </div>
           </CardContent>
@@ -319,9 +330,8 @@ export const ResidentNotifications = () => {
       </div>
       {/* Filters */}
       <Card>
-        
         <CardHeader>
-          <CardTitle className='flex items-center gap-2'>
+          <CardTitle className='flex items-center gap-2 dark:text-white'>
             <Filter className='h-5 w-5' />
             {t('filters.category')} & {t('filters.priority')}
           </CardTitle>
@@ -329,7 +339,7 @@ export const ResidentNotifications = () => {
         <CardContent>
           <div className='flex gap-4'>
             <div className='space-y-2'>
-              <label className='text-sm font-medium'>
+              <label className='text-sm font-medium dark:text-white'>
                 {t('filters.category')}
               </label>
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
@@ -361,7 +371,7 @@ export const ResidentNotifications = () => {
               </Select>
             </div>
             <div className='space-y-2'>
-              <label className='text-sm font-medium'>
+              <label className='text-sm font-medium dark:text-white'>
                 {t('filters.priority')}
               </label>
               <Select value={priorityFilter} onValueChange={setPriorityFilter}>
@@ -396,30 +406,35 @@ export const ResidentNotifications = () => {
         onValueChange={setActiveTab}
         className='space-y-4'
       >
-        
         <TabsList>
           <TabsTrigger value='all'>{t('allNotifications')}</TabsTrigger>
           <TabsTrigger value='unread' className='relative'>
             {t('unreadNotifications')}
             {unreadCount && unreadCount.total > 0 && (
-              <Badge variant='secondary' className='ml-2 h-4 text-xs'>
+              <Badge
+                variant='secondary'
+                className='ml-2 h-4 text-xs dark:bg-gray-600 dark:text-gray-200'
+              >
                 {unreadCount.total}
               </Badge>
             )}
           </TabsTrigger>
         </TabsList>
         <TabsContent value='all' className='space-y-4'>
-          
           {isLoading ? (
             <div className='py-8 text-center'>
-              <div className='text-muted-foreground'>{t('loading')}</div>
+              <div className='text-muted-foreground dark:text-gray-400'>
+                {t('loading')}
+              </div>
             </div>
           ) : notifications.length === 0 ? (
             <Card>
               <CardContent className='py-8 text-center'>
-                <Bell className='text-muted-foreground mx-auto mb-2 h-8 w-8' />
-                <p className='text-muted-foreground'>{t('emptyState.title')}</p>
-                <p className='text-muted-foreground mt-1 text-sm'>
+                <Bell className='text-muted-foreground mx-auto mb-2 h-8 w-8 dark:text-gray-400' />
+                <p className='text-muted-foreground dark:text-gray-400'>
+                  {t('emptyState.title')}
+                </p>
+                <p className='text-muted-foreground mt-1 text-sm dark:text-gray-400'>
                   {t('emptyState.description')}
                 </p>
               </CardContent>
@@ -442,19 +457,20 @@ export const ResidentNotifications = () => {
           )}
         </TabsContent>
         <TabsContent value='unread' className='space-y-4'>
-          
           {isLoading ? (
             <div className='py-8 text-center'>
-              <div className='text-muted-foreground'>{t('loading')}</div>
+              <div className='text-muted-foreground dark:text-gray-400'>
+                {t('loading')}
+              </div>
             </div>
           ) : notifications.filter(n => !n.isRead).length === 0 ? (
             <Card>
               <CardContent className='py-8 text-center'>
-                <Check className='mx-auto mb-2 h-8 w-8 text-green-500' />
-                <p className='text-muted-foreground'>
+                <Check className='mx-auto mb-2 h-8 w-8 text-green-500 dark:text-green-400' />
+                <p className='text-muted-foreground dark:text-gray-400'>
                   {t('emptyState.unreadTitle')}
                 </p>
-                <p className='text-muted-foreground mt-1 text-sm'>
+                <p className='text-muted-foreground mt-1 text-sm dark:text-gray-400'>
                   {t('emptyState.unreadDescription')}
                 </p>
               </CardContent>
@@ -481,5 +497,4 @@ export const ResidentNotifications = () => {
       </Tabs>
     </div>
   );
-}
-
+};

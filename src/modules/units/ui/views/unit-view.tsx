@@ -142,8 +142,10 @@ export const UnitView = ({ id, _searchParams }: UnitViewProps) => {
           <div className='flex items-center space-x-4'>
             <Button variant='ghost' size='sm' asChild>
               <Link href='/units'>
-                <ArrowLeft className='mr-2 h-4 w-4' />
-                {t('backToUnits')}
+                <div className='flex items-center gap-x-2'>
+                  <ArrowLeft className='h-4 w-4' />
+                  {t('backToUnits')}
+                </div>
               </Link>
             </Button>
             <div>
@@ -176,12 +178,16 @@ export const UnitView = ({ id, _searchParams }: UnitViewProps) => {
               {unit.isOccupied ? t('markVacant') : t('markOccupied')}
             </Button>
             <Button variant='outline' onClick={() => setIsEditDialogOpen(true)}>
-              <Edit className='mr-2 h-4 w-4' />
-              {t('view.edit')}
+              <div className='flex items-center gap-x-2'>
+                <Edit className='h-4 w-4' />
+                {t('view.edit')}
+              </div>
             </Button>
             <Button variant='destructive' onClick={handleDeleteUnit}>
-              <Trash2 className='mr-2 h-4 w-4' />
-              {t('view.delete')}
+              <div className='flex items-center gap-x-2'>
+                <Trash2 className='h-4 w-4' />
+                {t('view.delete')}
+              </div>
             </Button>
           </div>
         </div>

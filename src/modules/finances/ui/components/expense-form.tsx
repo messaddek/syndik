@@ -34,6 +34,7 @@ import type {
   UpdateExpense,
   Expense,
 } from '@/modules/expenses/types';
+import { formatDateToString, getTodayString } from '@/lib/date-utils';
 
 interface ExpenseFormProps {
   expense?: Expense;
@@ -78,7 +79,7 @@ export const ExpenseForm = ({
           vendor: expense.vendor || '',
           month: expense.month,
           year: expense.year,
-          paidDate: new Date(expense.paidDate).toISOString().split('T')[0],
+          paidDate: formatDateToString(new Date(expense.paidDate)),
           receiptUrl: expense.receiptUrl || '',
           notes: expense.notes || '',
         }
@@ -90,7 +91,7 @@ export const ExpenseForm = ({
           vendor: '',
           month: new Date().getMonth() + 1,
           year: new Date().getFullYear(),
-          paidDate: new Date().toISOString().split('T')[0],
+          paidDate: getTodayString(),
           receiptUrl: '',
           notes: '',
         },
@@ -273,9 +274,7 @@ export const ExpenseForm = ({
                   <SelectItem value='professional_services'>
                     {t('categories.professionalServices')}
                   </SelectItem>
-                  <SelectItem value='other'>
-                    {t('categories.other')}
-                  </SelectItem>
+                  <SelectItem value='other'>{t('categories.other')}</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -406,5 +405,4 @@ export const ExpenseForm = ({
       </form>
     </Form>
   );
-}
-
+};

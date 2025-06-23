@@ -25,6 +25,7 @@ import {
 } from '@/components/ui/select';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from 'sonner';
+import { formatDateToString } from '@/lib/date-utils';
 
 export const ProfileTab = () => {
   const t = useTranslations();
@@ -150,7 +151,9 @@ export const ProfileTab = () => {
       formData.role ||
       (account?.role === 'admin' ? 'Administrator' : 'Syndicate Manager'),
     avatar: user?.imageUrl || '',
-    joinDate: account?.createdAt?.toISOString().split('T')[0] || '2024-01-01',
+    joinDate: account?.createdAt
+      ? formatDateToString(account.createdAt)
+      : '2024-01-01',
   };
   return (
     <Card>

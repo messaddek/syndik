@@ -29,6 +29,7 @@ import { useState } from 'react';
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import { ResidentForm } from './resident-form';
 import { useConfirm } from '@/hooks/use-confirm';
+import { getTodayString } from '@/lib/date-utils';
 
 interface ResidentViewProps {
   id: string;
@@ -98,9 +99,8 @@ export const ResidentView = ({ id, _searchParams }: ResidentViewProps) => {
       deleteMutation.mutate({ id });
     }
   };
-
   const handleMoveOut = () => {
-    const moveOutDate = new Date().toISOString().split('T')[0];
+    const moveOutDate = getTodayString();
     moveOutMutation.mutate({ id, moveOutDate });
   };
 
@@ -120,8 +120,10 @@ export const ResidentView = ({ id, _searchParams }: ResidentViewProps) => {
           <div className='flex items-center space-x-4'>
             <Button variant='ghost' size='sm' asChild>
               <Link href='/residents'>
-                <ArrowLeft className='mr-2 h-4 w-4' />
-                Back to Residents
+                <div className='flex items-center gap-x-2'>
+                  <ArrowLeft className='h-4 w-4' />
+                  Back to Residents
+                </div>
               </Link>
             </Button>
             <div>
@@ -159,8 +161,10 @@ export const ResidentView = ({ id, _searchParams }: ResidentViewProps) => {
           </div>
           <div className='flex items-center space-x-2'>
             <Button variant='outline' onClick={() => setIsEditDialogOpen(true)}>
-              <Edit className='mr-2 h-4 w-4' />
-              Edit
+              <div className='flex items-center gap-x-2'>
+                <Edit className='h-4 w-4' />
+                Edit
+              </div>
             </Button>
             {resident.isActive && (
               <Button variant='outline' onClick={handleMoveOut}>
@@ -168,8 +172,10 @@ export const ResidentView = ({ id, _searchParams }: ResidentViewProps) => {
               </Button>
             )}
             <Button variant='destructive' onClick={handleDeleteResident}>
-              <Trash2 className='mr-2 h-4 w-4' />
-              Delete
+              <div className='flex items-center gap-x-2'>
+                <Trash2 className='h-4 w-4' />
+                Delete
+              </div>
             </Button>
           </div>
         </div>
@@ -407,7 +413,6 @@ export const ResidentView = ({ id, _searchParams }: ResidentViewProps) => {
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
       >
-        
         <ResidentForm
           resident={resident}
           onSuccess={handleUpdateResident}
@@ -418,5 +423,4 @@ export const ResidentView = ({ id, _searchParams }: ResidentViewProps) => {
       <ConfirmDialog />
     </>
   );
-}
-
+};

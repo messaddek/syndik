@@ -16,5 +16,8 @@
   "terms": "الشروط",
   "userGuide": "دليل المستخدم",
   "helpdesk": "خدمة العملاء",
-  "backToLanding": "العودة للصفحة الرئيسية"
+  "backToLanding": "العودة للصفحة الرئيسية",
+  "missingPayments": "المدفوعات المفقودة",
+  "overview": "نظرة عامة",
+  "reports": "التقارير"
 }

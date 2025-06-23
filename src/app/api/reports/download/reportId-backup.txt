@@ -1,0 +1,8 @@
+This is a backup of the [reportId] route.ts file that was created earlier.
+The [id] route has been updated with the same functionality.
+You can delete the [reportId] folder manually.
+
+Original file path: src/app/api/reports/download/[reportId]/route.ts
+
+This file contained the enhanced download functionality with reportData support,
+which has now been integrated into the [id] route.

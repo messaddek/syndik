@@ -17,7 +17,9 @@ export const residentsFilterSearchParams = {
   search: parseAsString.withDefault('').withOptions({ clearOnDefault: true }),
   unitId: parseAsString.withDefault('').withOptions({ clearOnDefault: true }),
   isOwner: parseAsBoolean.withOptions({ clearOnDefault: true }),
-  isActive: parseAsBoolean.withOptions({ clearOnDefault: true }),
+  isActive: parseAsString
+    .withDefault('all')
+    .withOptions({ clearOnDefault: true }),
   sortBy: parseAsStringEnum([
     RESIDENT_SORT_FIELDS.FIRST_NAME,
     RESIDENT_SORT_FIELDS.LAST_NAME,
